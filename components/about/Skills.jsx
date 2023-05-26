@@ -5,21 +5,31 @@ const Skills = () => {
     {
       id: 1,
       colClass: "left",
-      title: "Programming Skills",
+      title: "Music Production Skills",
       progress: [
         {
           id: 1,
-          skillName: "WordPress",
+          skillName: "Composition",
           skillValue: "95",
         },
         {
           id: 2,
-          skillName: "JavaScript",
-          skillValue: "80",
+          skillName: "Production",
+          skillValue: "90",
         },
         {
           id: 3,
-          skillName: "Angular",
+          skillName: "Arranging",
+          skillValue: "90",
+        },
+        {
+          id: 4,
+          skillName: "Mixing",
+          skillValue: "85",
+        },
+        {
+          id: 5,
+          skillName: "Mastering",
           skillValue: "90",
         },
       ],
@@ -27,22 +37,32 @@ const Skills = () => {
     {
       id: 2,
       colClass: "right",
-      title: "Language Skills",
+      title: "Versatility & Adaptability",
       progress: [
         {
           id: 1,
-          skillName: "English",
-          skillValue: "90",
+          skillName: "Film Scoring",
+          skillValue: "95",
         },
         {
           id: 2,
-          skillName: "Russian",
-          skillValue: "90",
+          skillName: "Video Game Music",
+          skillValue: "85",
         },
         {
           id: 3,
-          skillName: "Arabic",
-          skillValue: "85",
+          skillName: "Advertising Jingles",
+          skillValue: "90",
+        },
+        {
+          id: 4,
+          skillName: "Pop Music Production",
+          skillValue: "90",
+        },
+        {
+          id: 5,
+          skillName: "Electronic Music Production",
+          skillValue: "95",
         },
       ],
     },
@@ -59,7 +79,7 @@ const Skills = () => {
             {item?.progress?.map((skill) => (
               <div
                 className="progress_inner"
-                data-value={item.skillValue}
+                data-value={skill.skillValue}
                 key={skill.id}
               >
                 <span>

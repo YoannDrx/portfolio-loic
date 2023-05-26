@@ -31,7 +31,7 @@ const AboutMain = () => {
           {/* End personal info */}
 
           <div className="tokyo_tm_button" data-position="left">
-            <a href="/img/cv.pdf" download>
+            <a href="/img/cv_loic_ghanem.pdf" download>
               <span>Download CV</span>
             </a>
           </div>

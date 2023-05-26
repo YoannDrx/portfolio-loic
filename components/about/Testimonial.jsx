@@ -1,6 +1,5 @@
 import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Testimonial = () => {
@@ -31,27 +30,30 @@ const Testimonial = () => {
   const testimonialContent = [
     {
       id: 1,
-      text: `Beautiful minimalist design and great, fast response with
-      support. Highly recommend. Thanks Marketify!`,
-      avatar: "url(/img/testimonials/1.jpg)",
-      name: "Alexander Walker",
-      designation: "Graphic Designer",
+      text: `Loïc is a gifted composer and a pleasure to work with. His unbridled passion permeates every note he plays. I highly recommend him!`,
+      avatar: "url(/img/testimonials/mima.jpg)",
+      firstName: "Marie",
+      lastName: "Dupont",
+      name: "Mima",
+      publisher: "Music Publisher",
     },
     {
       id: 2,
-      text: `Beautiful minimalist design and great, fast response with
-      support. Highly recommend. Thanks Marketify!`,
-      avatar: "url(/img/testimonials/2.jpg)",
-      name: "Isabelle Smith",
-      designation: "Content Manager",
+      text: `Loïc's creative prowess is breathtaking. His compositions are unique, authentic and have that certain je ne sais quoi. A true pro!`,
+      avatar: "url(/img/testimonials/gum.jpg)",
+      firstName: "Pierre",
+      lastName: "Leroy",
+      name: "Gum",
+      publisher: "Music Publisher",
     },
     {
       id: 3,
-      text: `Beautiful minimalist design and great, fast response with
-      support. Highly recommend. Thanks Marketify!`,
-      avatar: "url(/img/testimonials/3.jpg)",
-      name: "Baraka Clinton",
-      designation: "English Teacher",
+      text: `Loïc is a gifted composer and a consummate professional. He nailed our expectations and we were thrilled with our collaboration.`,
+      avatar: "url(/img/testimonials/parigomusic.jpg)",
+      firstName: "Sophie",
+      lastName: "Martin",
+      name: "Parigomusic",
+      publisher: "Music Publisher",
     },
   ];
 
@@ -74,8 +76,8 @@ const Testimonial = () => {
                   />
                 </div>
                 <div className="info">
-                  <h3>{item.name}</h3>
-                  <span>{item.designation}</span>
+                  <h3>{item.name} ({item.firstName} {item.lastName})</h3>
+                  <span>{item.publisher}</span>
                 </div>
               </div>
             </div>
