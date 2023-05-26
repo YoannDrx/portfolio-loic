@@ -2,10 +2,11 @@ import Seo from "../components/Seo";
 import Portfolio from "../components/portfolio/Portfolio";
 import Sidebar from "../components/sidebar/Sidebar";
 
+
 const index = () => {
   return (
     <>
-      <Seo pageTitle="Portfolio" />
+      <Seo pageTitle="Videos" />
       {/* End page title for seo */}
 
       <Sidebar />

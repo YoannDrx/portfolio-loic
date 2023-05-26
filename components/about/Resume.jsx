@@ -5,7 +5,7 @@ const Resume = () => {
         {
             id: 1,
             colClass: "right",
-            title: "Experience",
+            title: "Musician Experience",
             resume: [
                 {
                     id: 1,
@@ -28,7 +28,7 @@ const Resume = () => {
                     year: "2017 - 2019",
                     institute: "Confront",
                     degree: "Producer and Guitarist",
-                    style: "Electronic/Metal Music",
+                    style: "Electronic / Metal",
                     link: "Listening Link",
                 },
                 {

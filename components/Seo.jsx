@@ -5,7 +5,7 @@ const Seo = ({ pageTitle }) => {
     <Head>
       <title>
         {pageTitle &&
-          `${pageTitle} || Tokyo - Personal Portfolio React Nextjs Template}`}
+          `${pageTitle} || Loïc Ghanem Music`}
       </title>
     </Head>
   );
