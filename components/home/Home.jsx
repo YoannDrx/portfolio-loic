@@ -8,6 +8,7 @@ const Home = () => {
       <div className="tokyo_tm_home">
         <div className="home_content">
           <div className="avatar">
+            {/* 1920 x 1114 */}
             <div
               className="image avatar_img"
               style={{
@@ -22,10 +23,8 @@ const Home = () => {
             <h4 className="typer">
               <Typed
                 strings={[
-                  "Compositeur",
-                  "Producteur",
-                  "Ingénieur du son",
-                  "Beatmaker",
+                  "music composer",
+                  "music producer",
                 ]}
                 loop
                 typeSpeed={80}
@@ -33,7 +32,7 @@ const Home = () => {
             </h4>
 
             <p className="job">
-              Compositeur basé à Paris. Je sonorise tous vos projets, je suis spécialisé dans la composition de musiques de films, de jeux vidéos et de publicités.
+            Composer based in Paris. I bring your projects to life with sound, specializing in composing music for films, video games, and commercials. Elevate your narratives with my unique soundscapes.
             </p>
             {/* END JOB */}
             <Social />
