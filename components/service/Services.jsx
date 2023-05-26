@@ -75,8 +75,8 @@ const Services = () => {
                 <div className="descriptions">{singleData?.descriptions}</div>
                 {/* END DESCRIPTION */}
                 <div className="news_share">
-                  <span>Share:</span>
-                  <ShareSocial />
+                  {/* <span>Share:</span>
+                  <ShareSocial /> */}
                   {/* END SOCIAL SHARE */}
                 </div>
                 {/* END NEWS SHARE */}

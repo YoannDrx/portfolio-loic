@@ -1,192 +1,122 @@
 module.exports = [
-  {
-    id: 1,
-    no: "01",
-    title: "Web Design",
-    text: `Web development is the most famous job in the world and it is very
-    interesting...`,
-    largeImg: "/img/news/1.jpg",
-    largeTitle: "Web Design a new tool that enables direct video hosting",
-    poster: "ALEX WATSON",
-    date: "07 APRIL 2021",
-    descriptions: (
-      <>
-        <p>
-          Most photographers love to shoot the unusual, and you don’t get much
-          more unusual than These Unprecedented Times. Right now everything
-          counts as out of the ordinary. There are a number of remarkable things
-          about these lockdown days that are worth photographing now so we can
-          remember them when it is all over.
-        </p>
-        <p>
-          Pretend everything is new and that you haven’t seen it before, and
-          then you will be free to notice the leading lines, the places where
-          one edge meets another in delightful geometric harmony, and how the
-          ordinary things in the kitchen are transformed when the light is on or
-          off.
-        </p>
-        <p>
-          The trick here is to look slowly, and then look again. Take the time
-          to look in detail and to look at the same thing from different angles,
-          with different light, long lenses and wide lenses. Then move to the
-          left a bit. You may never feel the need to leave the house again.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 2,
-    no: "02",
-    title: "Content Writing",
-    text: `Web development is the most famous job in the world and it is very
-    interesting...`,
-    largeImg: "/img/news/2.jpg",
-    largeTitle: "Content Writing a new tool that enables direct video hosting",
-    poster: "TAHINA AMAI",
-    date: "05 APRIL 2021",
-    descriptions: (
-      <>
-        <p>
-          Most photographers love to shoot the unusual, and you don’t get much
-          more unusual than These Unprecedented Times. Right now everything
-          counts as out of the ordinary. There are a number of remarkable things
-          about these lockdown days that are worth photographing now so we can
-          remember them when it is all over.
-        </p>
-        <p>
-          The trick here is to look slowly, and then look again. Take the time
-          to look in detail and to look at the same thing from different angles,
-          with different light, long lenses and wide lenses. Then move to the
-          left a bit. You may never feel the need to leave the house again.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 3,
-    no: "03",
-    title: "Brand Identity",
-    text: `Web development is the most famous job in the world and it is very
-    interesting...`,
-    largeImg: "/img/news/3.jpg",
-    largeTitle: "Brand Identity a new tool that enables direct video hosting",
-    poster: "NIRO AKTA",
-    date: "15 APRIL 2021",
-    descriptions: (
-      <>
-        <p>
-          Most photographers love to shoot the unusual, and you don’t get much
-          more unusual than These Unprecedented Times. Right now everything
-          counts as out of the ordinary. There are a number of remarkable things
-          about these lockdown days that are worth photographing now so we can
-          remember them when it is all over.
-        </p>
-        <p>
-          Pretend everything is new and that you haven’t seen it before, and
-          then you will be free to notice the leading lines, the places where
-          one edge meets another in delightful geometric harmony, and how the
-          ordinary things in the kitchen are transformed when the light is on or
-          off.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 4,
-    no: "04",
-    title: "Live Chat",
-    text: `Web development is the most famous job in the world and it is very
-    interesting...`,
-    largeImg: "/img/news/4.jpg",
-    largeTitle: "Live Chat a new tool that enables direct video hosting",
-    poster: "SHIKA VAIL",
-    date: "12 APRIL 2021",
-    descriptions: (
-      <>
-        <p>
-          Most photographers love to shoot the unusual, and you don’t get much
-          more unusual than These Unprecedented Times. Right now everything
-          counts as out of the ordinary. There are a number of remarkable things
-          about these lockdown days that are worth photographing now so we can
-          remember them when it is all over.
-        </p>
-        <p>
-          Pretend everything is new and that you haven’t seen it before, and
-          then you will be free to notice the leading lines, the places where
-          one edge meets another in delightful geometric harmony, and how the
-          ordinary things in the kitchen are transformed when the light is on or
-          off.
-        </p>
-        <p>
-          The trick here is to look slowly, and then look again. Take the time
-          to look in detail and to look at the same thing from different angles,
-          with different light, long lenses and wide lenses. Then move to the
-          left a bit. You may never feel the need to leave the house again.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 5,
-    no: "05",
-    title: "After Effects",
-    text: `Web development is the most famous job in the world and it is very
-    interesting...`,
-    largeImg: "/img/news/1.jpg",
-    largeTitle: "After Effects a new tool that enables direct video hosting",
-    poster: "JIJA ZORIA",
-    date: "05 APRIL 2021",
-    descriptions: (
-      <>
-        <p>
-          Pretend everything is new and that you haven’t seen it before, and
-          then you will be free to notice the leading lines, the places where
-          one edge meets another in delightful geometric harmony, and how the
-          ordinary things in the kitchen are transformed when the light is on or
-          off.
-        </p>
-        <p>
-          The trick here is to look slowly, and then look again. Take the time
-          to look in detail and to look at the same thing from different angles,
-          with different light, long lenses and wide lenses. Then move to the
-          left a bit. You may never feel the need to leave the house again.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 6,
-    no: "06",
-    title: "Mobile App",
-    text: `Web development is the most famous job in the world and it is very
-    interesting...`,
-    largeImg: "/img/news/2.jpg",
-    largeTitle: "Mobile App a new tool that enables direct video hosting",
-    poster: "HASAN ALI",
-    date: "09 APRIL 2021",
-    descriptions: (
-      <>
-        <p>
-          Most photographers love to shoot the unusual, and you don’t get much
-          more unusual than These Unprecedented Times. Right now everything
-          counts as out of the ordinary. There are a number of remarkable things
-          about these lockdown days that are worth photographing now so we can
-          remember them when it is all over.
-        </p>
-        <p>
-          Pretend everything is new and that you haven’t seen it before, and
-          then you will be free to notice the leading lines, the places where
-          one edge meets another in delightful geometric harmony, and how the
-          ordinary things in the kitchen are transformed when the light is on or
-          off.
-        </p>
-        <p>
-          The trick here is to look slowly, and then look again. Take the time
-          to look in detail and to look at the same thing from different angles,
-          with different light, long lenses and wide lenses. Then move to the
-          left a bit. You may never feel the need to leave the house again.
-        </p>
-      </>
-    ),
-  },
+    {
+        id: 1,
+        no: "01",
+        title: "Composition",
+        text: `The creation of original, captivating melodies is Loïc's speciality. Discover more...`,
+        largeImg: "/img/services/composition.jpg",
+        largeTitle: "Composition: Crafting Unique and Captivating Melodies",
+        poster: "Anna Deploy - Blog writer",
+        date: "22 May 2023",
+        descriptions: (
+            <>
+                <p>
+                    Loïc Ghanem, a professional composer, has a deep passion for creating unique and captivating melodies. His expertise spans various genres, ensuring a wide range of possibilities
+                    for your project.
+                </p>
+                <p>
+                    Loïc approaches each project with a fresh perspective, dedicating time and effort to understand your needs and preferences. This attention to detail allows him to create
+                    compositions that are truly bespoke and aligned with your creative vision.
+                </p>
+            </>
+        ),
+    },
+    {
+        id: 2,
+        no: "02",
+        title: "Sound Design",
+        text: `Immerse your audience in a unique auditory experience with Loïc's sound design services. Discover more...`,
+        largeImg: "/img/services/sounddesign.jpg",
+        largeTitle: "Sound Design: Creating Immersive Auditory Experiences",
+        poster: "Anna Deploy - Blog writer",
+        date: "22 May 2023",
+        descriptions: (
+            <>
+                <p>
+                    With sound design, the smallest details can have a huge impact on the experience of your audience. Loïc is well-versed in the art of manipulating audio to create immersive
+                    environments and enhance narrative storytelling.
+                </p>
+                <p>
+                    From subtle ambient noise to dynamic sound effects, each element is carefully considered and meticulously crafted. Let Loïc&apos;s sound design services bring your project to life.
+                </p>
+            </>
+        ),
+    },
+    {
+        id: 3,
+        no: "03",
+        title: "Music Production",
+        text: `From concept to final mix, Loïc offers comprehensive music production services. Discover more...`,
+        largeImg: "/img/services/musicproduction.jpg",
+        largeTitle: "Music Production: From Concept to Final Mix",
+        poster: "Anna Deploy - Blog writer",
+        date: "22 May 2023",
+        descriptions: (
+            <>
+                <p>
+                    Loïc&apos;s music production services encompass every stage of the process. With a deep understanding of music theory, a keen ear for detail, and proficiency in the latest
+                    production software, he is equipped to bring your musical ideas to fruition.
+                </p>
+                <p>Whether you need help with arranging, recording, mixing, or mastering, Loïc provides a comprehensive solution tailored to your project&apos;s needs.</p>
+            </>
+        ),
+    },
+    // Add more service data as needed
+    {
+        id: 4,
+        no: "04",
+        title: "Arranging",
+        text: `Enhance your compositions with Loïc's expertise in arranging. Discover more...`,
+        largeImg: "/img/services/arranging.jpg",
+        largeTitle: "Arranging: Enhancing Your Compositions",
+        poster: "Anna Deploy - Blog writer",
+        date: "22 May 2023",
+        descriptions: (
+            <>
+                <p>
+                    Loïc's arranging skills will add depth and complexity to your music. With his extensive knowledge of orchestration and harmony, he will craft arrangements that bring out the best
+                    in your compositions.
+                </p>
+                <p>Whether you have a fully formed composition or a simple melody, Loïc can transform it into a rich, fully realized piece of music.</p>
+            </>
+        ),
+    },
+    {
+        id: 5,
+        no: "05",
+        title: "Mixing",
+        text: `Loïc's mixing services ensure your music sounds balanced and polished. Discover more...`,
+        largeImg: "/img/services/mixing.jpg",
+        largeTitle: "Mixing: Polishing Your Music to Perfection",
+        poster: "Anna Deploy - Blog writer",
+        date: "22 May 2023",
+        descriptions: (
+            <>
+                <p>
+                    Mixing is a critical step in the music production process, and one that Loïc excels in. He will balance the elements of your track, ensuring that no instrument or voice is too loud
+                    or too soft.
+                </p>
+                <p>His mixing techniques will also add depth and dimension to your music, creating a soundscape that is rich and engaging.</p>
+            </>
+        ),
+    },
+    {
+        id: 6,
+        no: "06",
+        title: "Mastering",
+        text: `Give your music the final polish it needs with Loïc's mastering services. Discover more...`,
+        largeImg: "/img/services/mastering.jpg",
+        largeTitle: "Mastering: The Final Touch for Your Music",
+        poster: "Anna Deploy - Blog writer",
+        date: "22 May 2023",
+        descriptions: (
+            <>
+                <p>
+                    Mastering is the final step in the music production process, and it&apos;s one that Loïc takes very seriously. He will ensure your tracks are ready for distribution, optimizing
+                    them for all playback systems.
+                </p>
+                <p>Loïc&apos;s mastering services will give your music the final polish it needs, ensuring it sounds professional and stands up against other commercial releases.</p>
+            </>
+        ),
+    },
 ];
