@@ -59,7 +59,7 @@ const index = () => {
       </div>
       {/* End funfacts */}
 
-      <div className="tokyo_tm_pricing">
+      {/* <div className="tokyo_tm_pricing">
         <div className="container">
           <div className="tokyo_section_title">
             <h3>Pricing</h3>
@@ -70,7 +70,7 @@ const index = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* End pricing */}
 
       {/* /SERVICE */}
