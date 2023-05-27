@@ -6,8 +6,12 @@ module.exports = [
     title: "Ambient Guitar",
     // 1200 x 709
     img: "/img/albums/1.jpg",
-    poster: "ALEX WATSON",
+    poster: "Loïc Ghanem",
     date: "07 APRIL 2021",
+    style:"",
+    listenlLink:"",
+    collabName:"",
+    collabLink:"",
     descriptions: (
       <>
         <div className="descriptions">
@@ -60,7 +64,7 @@ module.exports = [
     title: "Sony announced two new full frame cameras with zero fanfare",
     // 12000 x 700
     img: "/img/albums/2.jpg",
-    poster: "TAHINA AMAI",
+    poster: "Loïc Ghanem",
     date: "05 APRIL 2021",
     descriptions: (
       <>
@@ -113,7 +117,7 @@ module.exports = [
     title: "Why every photographer should shoot film, even in 2022",
     // 1200 x 675
     img: "/img/albums/3.jpg",
-    poster: "NIRO AKTA",
+    poster: "Loïc Ghanem",
     date: "15 APRIL 2021",
     descriptions: (
       <>
@@ -165,7 +169,7 @@ module.exports = [
     title: "Stay creative in lockdown with these fun photo projects",
     // 1200 x 800
     img: "/img/albums/4.jpg",
-    poster: "SHIKA VAIL",
+    poster: "Loïc Ghanem",
     date: "12 APRIL 2021",
     descriptions: (
       <>
@@ -231,7 +235,7 @@ module.exports = [
     title: "Ambient Guitar",
     // 1200 x 709
     img: "/img/albums/5.jpg",
-    poster: "ALEX WATSON",
+    poster: "Loïc Ghanem",
     date: "07 APRIL 2021",
     descriptions: (
       <>
@@ -285,7 +289,7 @@ module.exports = [
     title: "Sony announced two new full frame cameras with zero fanfare",
     // 12000 x 700
     img: "/img/albums/6.jpg",
-    poster: "TAHINA AMAI",
+    poster: "Loïc Ghanem",
     date: "05 APRIL 2021",
     descriptions: (
       <>
@@ -338,7 +342,7 @@ module.exports = [
     title: "Why every photographer should shoot film, even in 2022",
     // 1200 x 675
     img: "/img/albums/7.jpg",
-    poster: "NIRO AKTA",
+    poster: "Loïc Ghanem",
     date: "15 APRIL 2021",
     descriptions: (
       <>
@@ -390,7 +394,7 @@ module.exports = [
     title: "Stay creative in lockdown with these fun photo projects",
     // 1200 x 800
     img: "/img/albums/8.jpg",
-    poster: "SHIKA VAIL",
+    poster: "Loïc Ghanem",
     date: "12 APRIL 2021",
     descriptions: (
       <>
