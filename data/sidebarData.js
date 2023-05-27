@@ -19,15 +19,15 @@ module.exports = [
   },
   {
     id: 4,
-    icon: "/img/svg/paper.svg",
+    icon: "/img/svg/album.png",
     menuName: "Albums",
     routePath: "/albums",
   },
   {
     id: 5,
-    icon: "/img/svg/briefcase.svg",
-    menuName: "Portfolio",
-    routePath: "/portfolio",
+    icon: "/img/svg/camera.png",
+    menuName: "Videos",
+    routePath: "/videos",
   },
   {
     id: 6,

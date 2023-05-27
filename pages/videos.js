@@ -1,5 +1,5 @@
 import Seo from "../components/Seo";
-import Portfolio from "../components/portfolio/Portfolio";
+import Portfolio from "../components/videos/Videos";
 import Sidebar from "../components/sidebar/Sidebar";
 
 
