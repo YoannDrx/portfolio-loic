@@ -81,7 +81,7 @@ module.exports = [
     },
     {
         id: 11,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/11.jpg",
         type: "Film",
         videoId: "8ZoVAyS2hhA",
         title: "Skandal Trailer - Télé 5",
@@ -89,7 +89,7 @@ module.exports = [
     },
     {
         id: 12,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/12.jpg",
         type: "Advertisement",
         videoId: "eVH2sgsMNj8",
         title: "BBC Click live in Dundee - Minecraft",
@@ -97,7 +97,7 @@ module.exports = [
     },
     {
         id: 13,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/13.jpg",
         type: "Film",
         videoId: "r5v33Ws6nMA",
         title: "KiKA Die Jungs WG Abenteuer Amsterdam",
@@ -105,7 +105,7 @@ module.exports = [
     },
     {
         id: 14,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/14.jpg",
         type: "Film",
         videoId: "R8ogOf2vDEU",
         title: "The way of the warrior WEC 6h of Fuji 2014",
@@ -113,7 +113,7 @@ module.exports = [
     },
     {
         id: 15,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/15.jpg",
         type: "Static Youtube",
         videoId: "H8HRNHxWN-g",
         title: "Funérailles, résurrection et traque d'un paladin - Opus 22",
@@ -121,7 +121,7 @@ module.exports = [
     },
     {
         id: 16,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/16.jpg",
         type: "Static Youtube",
         videoId: "T5BjS0uNgYY",
         title: "Chill Trap instrumental 5",
@@ -129,7 +129,7 @@ module.exports = [
     },
     {
         id: 17,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/17.jpg",
         type: "Static Youtube",
         videoId: "JnTsW7rqAEw",
         title: "Chill Trap instrumental 4",
@@ -137,7 +137,7 @@ module.exports = [
     },
     {
         id: 18,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/18.jpg",
         type: "Static Youtube",
         videoId: "x7Ln_wNl9mk",
         title: "Metalcore Instrumental XV",
@@ -145,7 +145,7 @@ module.exports = [
     },
     {
         id: 19,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/19.jpg",
         type: "Static Youtube",
         videoId: "_POxXH8Q6VY",
         title: "Metalcore Instrumental XVI",
@@ -153,7 +153,7 @@ module.exports = [
     },
     {
         id: 20,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/20.jpg",
         type: "Advertisement",
         videoId: "50AaHS_UEo4",
         title: "Participation aux Audi talents awards 2016",
@@ -161,7 +161,7 @@ module.exports = [
     },
     {
         id: 21,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/21.jpg",
         type: "Static Youtube",
         videoId: "V6dMBidFv00",
         title: "The ambient electro song",
@@ -169,7 +169,7 @@ module.exports = [
     },
     {
         id: 22,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/22.jpg",
         type: "Static Youtube",
         videoId: "U8Ebjje7A88",
         title: "Broadway Avenue - Loïc Ghanem Feat Marty Degenne",
@@ -177,7 +177,7 @@ module.exports = [
     },
     {
         id: 23,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/23.jpg",
         type: "Static Youtube",
         videoId: "smvWLIWPmec",
         title: '"Missing your smile" Loïc Ghanem Feat Marty Degenne',
@@ -185,7 +185,7 @@ module.exports = [
     },
     {
         id: 24,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/24.jpg",
         type: "Static Youtube",
         videoId: "u-X3SLpTmlk",
         title: '" I\'ll never find love in Paris... " Loïc Ghanem',
@@ -193,7 +193,7 @@ module.exports = [
     },
     {
         id: 25,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/25.jpg",
         type: "Static Youtube",
         videoId: "XQEFjQIxVCA",
         title: "Le lac des cygnes / Swan lake , Recomposed by Loïc Ghanem",
@@ -201,7 +201,7 @@ module.exports = [
     },
     {
         id: 26,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/26.jpg",
         type: "Static Youtube",
         videoId: "PUpABO2J4jY",
         title: '" Ascension , triomphe et mort d\'un chevalier " Loïc Ghanem',
@@ -209,7 +209,7 @@ module.exports = [
     },
     {
         id: 27,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/27.jpg",
         type: "Static Youtube",
         videoId: "MTW-ZitsXVA",
         title: "Loïc Ghanem composer & producer Showreel",
