@@ -33,7 +33,7 @@ module.exports = [
     },
     {
         id: 5,
-        img: "/img/portfolio/.jpg",
+        img: "/img/portfolio/5.jpg",
         type: "Advertisement",
         videoId: "sqOX5VMDdIw",
         title: "BBC NFL Super Bowl trailer 2022",
@@ -41,7 +41,7 @@ module.exports = [
     },
     {
         id: 6,
-        img: "",
+        img: "/img/portfolio/6.jpg",
         type: "Advertisement",
         videoId: "PlZRG4VK47w",
         title: "MOTDx - In the Making",
@@ -49,7 +49,7 @@ module.exports = [
     },
     {
         id: 7,
-        img: "",
+        img: "/img/portfolio/7.jpg",
         type: "Advertisement",
         videoId: "_qEenFpYqCk",
         title: "NHL In the room",
@@ -57,7 +57,7 @@ module.exports = [
     },
     {
         id: 8,
-        img: "",
+        img: "/img/portfolio/8.jpg",
         type: "Advertisement",
         videoId: "AtAHFqjEgO8",
         title: "NBA Countdown",
@@ -65,7 +65,7 @@ module.exports = [
     },
     {
         id: 9,
-        img: "",
+        img: "/img/portfolio/9.jpg",
         type: "Advertisement",
         videoId: "eyQct5QSWNc",
         title: "ESPN 30 for 30",
@@ -73,7 +73,7 @@ module.exports = [
     },
     {
         id: 10,
-        img: "",
+        img: "/img/portfolio/10.jpg",
         type: "Film",
         videoId: "ck0HeLPAOSU",
         title: "WWE RAW - Aleister Black Trailer",
@@ -81,7 +81,7 @@ module.exports = [
     },
     {
         id: 11,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Film",
         videoId: "8ZoVAyS2hhA",
         title: "Skandal Trailer - Télé 5",
@@ -89,7 +89,7 @@ module.exports = [
     },
     {
         id: 12,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Advertisement",
         videoId: "eVH2sgsMNj8",
         title: "BBC Click live in Dundee - Minecraft",
@@ -97,7 +97,7 @@ module.exports = [
     },
     {
         id: 13,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Film",
         videoId: "r5v33Ws6nMA",
         title: "KiKA Die Jungs WG Abenteuer Amsterdam",
@@ -105,7 +105,7 @@ module.exports = [
     },
     {
         id: 14,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Film",
         videoId: "R8ogOf2vDEU",
         title: "The way of the warrior WEC 6h of Fuji 2014",
@@ -113,7 +113,7 @@ module.exports = [
     },
     {
         id: 15,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "H8HRNHxWN-g",
         title: "Funérailles, résurrection et traque d'un paladin - Opus 22",
@@ -121,7 +121,7 @@ module.exports = [
     },
     {
         id: 16,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "T5BjS0uNgYY",
         title: "Chill Trap instrumental 5",
@@ -129,7 +129,7 @@ module.exports = [
     },
     {
         id: 17,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "JnTsW7rqAEw",
         title: "Chill Trap instrumental 4",
@@ -137,7 +137,7 @@ module.exports = [
     },
     {
         id: 18,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "x7Ln_wNl9mk",
         title: "Metalcore Instrumental XV",
@@ -145,7 +145,7 @@ module.exports = [
     },
     {
         id: 19,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "_POxXH8Q6VY",
         title: "Metalcore Instrumental XVI",
@@ -153,7 +153,7 @@ module.exports = [
     },
     {
         id: 20,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Advertisement",
         videoId: "50AaHS_UEo4",
         title: "Participation aux Audi talents awards 2016",
@@ -161,7 +161,7 @@ module.exports = [
     },
     {
         id: 21,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "V6dMBidFv00",
         title: "The ambient electro song",
@@ -169,7 +169,7 @@ module.exports = [
     },
     {
         id: 22,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "U8Ebjje7A88",
         title: "Broadway Avenue - Loïc Ghanem Feat Marty Degenne",
@@ -177,7 +177,7 @@ module.exports = [
     },
     {
         id: 23,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "smvWLIWPmec",
         title: '"Missing your smile" Loïc Ghanem Feat Marty Degenne',
@@ -185,7 +185,7 @@ module.exports = [
     },
     {
         id: 24,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "u-X3SLpTmlk",
         title: '" I\'ll never find love in Paris... " Loïc Ghanem',
@@ -193,7 +193,7 @@ module.exports = [
     },
     {
         id: 25,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "XQEFjQIxVCA",
         title: "Le lac des cygnes / Swan lake , Recomposed by Loïc Ghanem",
@@ -201,7 +201,7 @@ module.exports = [
     },
     {
         id: 26,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "PUpABO2J4jY",
         title: '" Ascension , triomphe et mort d\'un chevalier " Loïc Ghanem',
@@ -209,7 +209,7 @@ module.exports = [
     },
     {
         id: 27,
-        img: "",
+        img: "/img/portfolio/.jpg",
         type: "Static Youtube",
         videoId: "MTW-ZitsXVA",
         title: "Loïc Ghanem composer & producer Showreel",
