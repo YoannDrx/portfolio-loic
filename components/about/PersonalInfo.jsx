@@ -27,11 +27,6 @@ const PersonalInfo = () => {
                 },
                 {
                   id: 3,
-                  name: "Nationality",
-                  content: "French",
-              },
-                {
-                  id: 4,
                   name: "Spoken Languages",
                   content: "English, French",
               },
@@ -48,11 +43,6 @@ const PersonalInfo = () => {
                 },
                 {
                     id: 2,
-                    name: "Freelance",
-                    content: "Available",
-                },
-                {
-                    id: 3,
                     name: "Interests",
                     content: "Music, Cinema, Video Games",
                 },

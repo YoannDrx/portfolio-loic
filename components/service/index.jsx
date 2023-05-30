@@ -3,6 +3,7 @@ import FunFact from "./FunFact";
 import Partners from "./Partners";
 import Pricing from "./Pricing";
 import Services from "./Services";
+import Skills from "../about/Skills";
 
 const index = () => {
   return (
@@ -31,7 +32,17 @@ const index = () => {
       </div>
       {/* End .container */}
 
-      <div className="tokyo_tm_partners">
+      <div className="tokyo_tm_progressbox">
+                <div className="container">
+                    <div className="in">
+                        <Skills />
+                    </div>
+                    {/* End in */}
+                </div>
+                {/* End .container */}
+            </div>
+
+      {/* <div className="tokyo_tm_partners">
         <div className="container">
           <div className="tokyo_section_title">
             <h3>Partners</h3>
@@ -42,10 +53,10 @@ const index = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* End partners */}
 
-      <div className="tokyo_tm_facts">
+      {/* <div className="tokyo_tm_facts">
         <div className="container">
           <div className="tokyo_section_title">
             <h3>Fun Facts</h3>
@@ -56,7 +67,7 @@ const index = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* End funfacts */}
 
       {/* <div className="tokyo_tm_pricing">
