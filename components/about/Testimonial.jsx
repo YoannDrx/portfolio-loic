@@ -1,6 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css"; 
+
 
 const Testimonial = () => {
     var settings = {
@@ -10,7 +12,8 @@ const Testimonial = () => {
         speed: 500,
         slidesToShow: 2,
         slidesToScroll: 1,
-        autoplay: false,
+        autoplay: true,
+        arrows: true,
         responsive: [
             {
                 breakpoint: 991,
