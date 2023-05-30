@@ -87,6 +87,17 @@ const Sidebar = () => {
           </div>
           {/* END MENU */}
 
+          <div className="soundcloud-player" dangerouslySetInnerHTML={{ __html: `
+            <iframe 
+                width="100%" 
+                height="400" 
+                scrolling="no" 
+                frameborder="yes" 
+                allow="autoplay" 
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1440693976&color=%238c7b67&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+            </iframe>
+          ` }} />
+
           <CopyRight />
           {/* END COPYRIGHT */}
         </div>

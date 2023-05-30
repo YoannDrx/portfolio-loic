@@ -8,7 +8,7 @@ module.exports = [
         poster: "Loïc Ghanem",
         date: "May 2022",
         style: "Hip-Hop/RnB",
-        listenlLink: "",
+        listenLink: "https://fanlink.to/Voyager1MakeMeFeel",
         collabName: "Quincy Thompson, Novine, Tim Moyo, Julaiah, Lou.C",
         collabLink: "",
         descriptions: (
@@ -31,7 +31,7 @@ module.exports = [
         poster: "Loïc Ghanem",
         date: "May 2022",
         style: "",
-        listenlLink: "",
+        listenLink: "",
         collabName: "",
         collabLink: "",
         descriptions: (
@@ -72,7 +72,7 @@ module.exports = [
       poster: "Loïc Ghanem",
       date: "January 2022",
       style: "Bass Music",
-      listenlLink: "",
+      listenLink: "https://fanlink.to/Voyager1BassMusic",
       collabName: "Olynda, Lou.C, Twild",
       collabLink: "",
       descriptions: (
@@ -128,7 +128,7 @@ module.exports = [
       poster: "Loïc Ghanem",
       date: "May 2021",
       style: "Hip-Hop",
-      listenlLink: "",
+      listenLink: "https://fanlink.to/Voyager1GetTrapped",
       collabName: "Lou.C",
       collabLink: "",
       descriptions: (
@@ -148,7 +148,7 @@ module.exports = [
     poster: "Loïc Ghanem",
     date: "April 2021",
     style: "Pop Punk",
-    listenlLink: "https://fanlink.to/PopPunk",
+    listenLink: "https://fanlink.to/PopPunk",
     collabName: "Dory-Loup, Fran Darras",
     collabLink: "",
     descriptions: (

@@ -90,7 +90,7 @@ const Albums = () => {
                                 <h3 className="title">{singleData?.title}</h3>
                                 <div className="news_share">
                                     <span>
-                                        <a href="ttps://www.youtube.com/@LoicGhanem/videos" target="_blank" rel="noopener noreferrer" style={{ color: "lightgreen", textDecoration: "none" }}>
+                                        <a href={singleData?.listenLink} target="_blank" rel="noopener noreferrer" style={{ color: "lightgreen", textDecoration: "none" }}>
                                             Listen to this album here
                                         </a>
                                     </span>
