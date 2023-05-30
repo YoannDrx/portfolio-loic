@@ -20,7 +20,7 @@ const Sidebar = () => {
               <Image
                 width={140}
                 height={20}
-                src="/img/logo/dark.png"
+                src="/img/logo/logo-loic-music.png"
                 alt="brand"
               />
             </Link>
@@ -53,7 +53,7 @@ const Sidebar = () => {
               <Image
                 width={135}
                 height={20}
-                src="/img/logo/dark.png"
+                src="/img/logo/logo-loic-music.png"
                 alt="brand"
               />
             </Link>
