@@ -67,18 +67,16 @@ const Videos = () => {
                         <Tab onClick={() => setSelectedTab("All")}>All</Tab>
                         <Tab onClick={() => setSelectedTab("Film")}>Film</Tab>
                         <Tab onClick={() => setSelectedTab("Advertisement")}>Advertisement</Tab>
-                        <Tab onClick={() => setSelectedTab("Corporate")}>Corporate</Tab>
                         <Tab onClick={() => setSelectedTab("Live")}>Video clip</Tab>
-                        <Tab onClick={() => setSelectedTab("Static Youtube")}>Static Youtube</Tab>
+                        <Tab onClick={() => setSelectedTab("Music Video")}>Music Video</Tab>
                     </TabList>
 
                     <div className="list_wrapper">
                         <TabPanel>{renderVideoList("All")}</TabPanel>
                         <TabPanel>{renderVideoList("Film")}</TabPanel>
                         <TabPanel>{renderVideoList("Advertisement")}</TabPanel>
-                        <TabPanel>{renderVideoList("Corporate")}</TabPanel>
                         <TabPanel>{renderVideoList("Live")}</TabPanel>
-                        <TabPanel>{renderVideoList("Static Youtube")}</TabPanel>
+                        <TabPanel>{renderVideoList("Music Video")}</TabPanel>
                     </div>
                 </Tabs>
             </Gallery>
