@@ -5,11 +5,15 @@ import CopyRight from "../CopyRight";
 import { isActiveLink } from "../../utilis/linkActiveChecker";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useMediaQuery } from 'react-responsive'
+
 
 const Sidebar = () => {
     const router = useRouter();
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
+    const isDesktop = useMediaQuery({ minWidth: 992 })
+
 
     return (
         <>
@@ -64,12 +68,12 @@ const Sidebar = () => {
                             __html: `
             <iframe 
                 width="100%" 
-                height="300" 
+                height="${isDesktop ? '400' : '300'}" 
                 scrolling="no" 
-                frameborder="yes" 
+                frameborder="no" 
                 allow="autoplay" 
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1440693976&color=%238c7b67&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false">
-            </iframe>
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1440693976&color=%238c7b67&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=${isDesktop}">
+                </iframe>
           `,
                         }}
                     />

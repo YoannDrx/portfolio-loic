@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaLightbulb, FaMoon, FaSun } from "react-icons/fa";
 import { useTheme } from "next-themes";
 
 const ThemeSwitch = () => {
@@ -23,7 +23,7 @@ const ThemeSwitch = () => {
           setTheme(resolvedTheme === "dark" ? "light" : "dark");
         }}
       >
-        {resolvedTheme === "dark" ? <FaSun /> : <FaMoon />}
+        {resolvedTheme === "dark" ? <FaLightbulb /> : <FaMoon />}
       </label>
     </>
   );
