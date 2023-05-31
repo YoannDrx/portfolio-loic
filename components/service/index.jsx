@@ -1,48 +1,43 @@
 import React from "react";
-import FunFact from "./FunFact";
-import Partners from "./Partners";
-import Pricing from "./Pricing";
 import Services from "./Services";
 import Skills from "../about/Skills";
 
 const index = () => {
-  return (
-    <>
-      {/* SERVICE */}
+    return (
+        <>
+            {/* SERVICE */}
 
-      <div className="container">
-        <div className="tokyo_tm_services">
-          <div className="tokyo_tm_title">
-            <div className="title_flex">
-              <div className="left">
-                <span>Services</span>
-                <h3>What I Do</h3>
-              </div>
+            <div className="container">
+                <div className="tokyo_tm_services">
+                    <div className="tokyo_tm_title">
+                        <div className="title_flex">
+                            <div className="left">
+                                <span>Services</span>
+                                <h3>What I Do</h3>
+                            </div>
+                        </div>
+                    </div>
+                    {/* End tokyo_tm_title */}
+
+                    <div className="list">
+                        <ul>
+                            <Services />
+                        </ul>
+                    </div>
+                    {/* End list */}
+                </div>
             </div>
-          </div>
-          {/* End tokyo_tm_title */}
+            {/* End .container */}
 
-          <div className="list">
-            <ul>
-              <Services />
-            </ul>
-          </div>
-          {/* End list */}
-        </div>
-      </div>
-      {/* End .container */}
-
-      <div className="tokyo_tm_progressbox">
+            {/* <div className="tokyo_tm_progressbox">
                 <div className="container">
                     <div className="in">
                         <Skills />
                     </div>
-                    {/* End in */}
                 </div>
-                {/* End .container */}
-            </div>
+            </div> */}
 
-      {/* <div className="tokyo_tm_partners">
+            {/* <div className="tokyo_tm_partners">
         <div className="container">
           <div className="tokyo_section_title">
             <h3>Partners</h3>
@@ -54,9 +49,9 @@ const index = () => {
           </div>
         </div>
       </div> */}
-      {/* End partners */}
+            {/* End partners */}
 
-      {/* <div className="tokyo_tm_facts">
+            {/* <div className="tokyo_tm_facts">
         <div className="container">
           <div className="tokyo_section_title">
             <h3>Fun Facts</h3>
@@ -68,9 +63,9 @@ const index = () => {
           </div>
         </div>
       </div> */}
-      {/* End funfacts */}
+            {/* End funfacts */}
 
-      {/* <div className="tokyo_tm_pricing">
+            {/* <div className="tokyo_tm_pricing">
         <div className="container">
           <div className="tokyo_section_title">
             <h3>Pricing</h3>
@@ -82,11 +77,11 @@ const index = () => {
           </div>
         </div>
       </div> */}
-      {/* End pricing */}
+            {/* End pricing */}
 
-      {/* /SERVICE */}
-    </>
-  );
+            {/* /SERVICE */}
+        </>
+    );
 };
 
 export default index;

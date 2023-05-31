@@ -3,7 +3,7 @@ import React from "react";
 const Intro = () => {
     const introContent = {
         // 1920 x 1114
-        image: "/img/slider/2.jpg",
+        image: "/img/slider/loic-back.jpg",
         name: "Loïc Ghanem",
         designation: "Music Composer, Music Producer",
         text: (

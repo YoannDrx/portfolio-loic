@@ -27,7 +27,7 @@ const PersonalInfo = () => {
                 },
                 {
                   id: 3,
-                  name: "Spoken Languages",
+                  name: "Languages",
                   content: "English, French",
               },
             ],
