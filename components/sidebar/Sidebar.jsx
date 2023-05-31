@@ -46,7 +46,7 @@ const Sidebar = () => {
       {/* Header */}
 
       {/* START LEFT MENU CONTENT */}
-      <div className={click ? "leftpart active" : "leftpart"}>
+      <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: 'auto' }}>
         <div className="leftpart_inner">
           <div className="logo">
             <Link className="navbar-brand" href="/">
