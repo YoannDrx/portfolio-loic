@@ -5,15 +5,13 @@ import CopyRight from "../CopyRight";
 import { isActiveLink } from "../../utilis/linkActiveChecker";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useMediaQuery } from 'react-responsive'
-
+import { useMediaQuery } from "react-responsive";
 
 const Sidebar = () => {
     const router = useRouter();
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
-    const isDesktop = useMediaQuery({ minWidth: 992 })
-
+    const isDesktop = useMediaQuery({ minWidth: 992 });
 
     return (
         <>
@@ -39,7 +37,7 @@ const Sidebar = () => {
             {/* Header */}
 
             {/* START LEFT MENU CONTENT */}
-            <div className={click ? "leftpart active" : "leftpart"}>
+            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop ? "visible" : "auto" }}>
                 <div className="leftpart_inner">
                     <div className="logo">
                         <Link className="navbar-brand" href="/">
@@ -63,12 +61,12 @@ const Sidebar = () => {
                     {/* END MENU */}
 
                     <div
-                        className="soundcloud-player"
+                        className={`soundcloud-player`}
                         dangerouslySetInnerHTML={{
                             __html: `
             <iframe 
                 width="100%" 
-                height="${isDesktop ? '400' : '300'}" 
+                height="${isDesktop ? "400" : "300"}" 
                 scrolling="no" 
                 frameborder="no" 
                 allow="autoplay" 
