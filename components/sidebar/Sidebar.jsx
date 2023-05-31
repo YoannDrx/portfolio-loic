@@ -35,7 +35,7 @@ const Sidebar = () => {
             {/* Header */}
 
             {/* START LEFT MENU CONTENT */}
-            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: "auto" }}>
+            <div className={click ? "leftpart active" : "leftpart"}>
                 <div className="leftpart_inner">
                     <div className="logo">
                         <Link className="navbar-brand" href="/">
@@ -68,7 +68,7 @@ const Sidebar = () => {
                 scrolling="no" 
                 frameborder="yes" 
                 allow="autoplay" 
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1440693976&color=%238c7b67&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1440693976&color=%238c7b67&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false">
             </iframe>
           `,
                         }}
