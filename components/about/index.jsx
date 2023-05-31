@@ -39,15 +39,13 @@ const AboutMain = () => {
             </div>
             {/* End .container */}
 
-            <div className="tokyo_tm_progressbox">
+            {/* <div className="tokyo_tm_progressbox">
                 <div className="container">
                     <div className="in">
                         <Skills />
                     </div>
-                    {/* End in */}
                 </div>
-                {/* End .container */}
-            </div>
+            </div> */}
             {/* End tokyo_tm_progressbox */}
 
             {/* <div className="tokyo_tm_skillbox">

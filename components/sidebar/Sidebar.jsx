@@ -12,6 +12,8 @@ const Sidebar = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     const isDesktop = useMediaQuery({ minWidth: 992 });
+    const [isShortScreen, setIsShortScreen] = useState(false);
+
 
     useEffect(() => {
         if (click) {
@@ -19,7 +21,35 @@ const Sidebar = () => {
         } else {
             document.body.classList.remove('no-scroll');
         }
+
+        const handleResize = () => {
+            if (window.innerHeight < 820) {
+                setIsShortScreen(true);
+            } else {
+                setIsShortScreen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, [click]);
+
+    useEffect(() => {
+        const handleRouteChange = () => {
+            document.body.classList.remove('no-scroll');
+        };
+
+        router.events.on('routeChangeStart', handleRouteChange);
+
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange);
+        };
+    }, [router]);
+
 
     return (
         <>
@@ -45,7 +75,7 @@ const Sidebar = () => {
             {/* Header */}
 
             {/* START LEFT MENU CONTENT */}
-            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop ? "visible" : "auto", paddingBottom: isDesktop ? "" : "200px", paddingTop: isDesktop ? "" : "200px" }}>
+            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop && !isShortScreen ? "visible" : "auto", paddingBottom: isDesktop && !isShortScreen ? "" : "400", paddingTop: isDesktop && !isShortScreen ? "" : "400px" }}>
                 <div className="leftpart_inner">
                     <div className="logo">
                         <Link className="navbar-brand" href="/">

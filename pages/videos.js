@@ -1,6 +1,5 @@
 import Seo from "../components/Seo";
 import Portfolio from "../components/videos/Videos";
-import Sidebar from "../components/sidebar/Sidebar";
 
 
 const index = () => {
@@ -9,7 +8,6 @@ const index = () => {
       <Seo pageTitle="Videos" />
       {/* End page title for seo */}
 
-      <Sidebar />
       {/* END LEFT MENU CONTENT */}
 
       {/* START RIGHT PART CONTENT */}

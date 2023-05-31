@@ -67,7 +67,6 @@ const Videos = () => {
                         <Tab onClick={() => setSelectedTab("All")}>All</Tab>
                         <Tab onClick={() => setSelectedTab("Film")}>Film</Tab>
                         <Tab onClick={() => setSelectedTab("Advertisement")}>Advertisement</Tab>
-                        <Tab onClick={() => setSelectedTab("Live")}>Video clip</Tab>
                         <Tab onClick={() => setSelectedTab("Music Video")}>Music Video</Tab>
                     </TabList>
 
@@ -75,7 +74,6 @@ const Videos = () => {
                         <TabPanel>{renderVideoList("All")}</TabPanel>
                         <TabPanel>{renderVideoList("Film")}</TabPanel>
                         <TabPanel>{renderVideoList("Advertisement")}</TabPanel>
-                        <TabPanel>{renderVideoList("Live")}</TabPanel>
                         <TabPanel>{renderVideoList("Music Video")}</TabPanel>
                     </div>
                 </Tabs>
