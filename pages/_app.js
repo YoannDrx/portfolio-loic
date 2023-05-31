@@ -8,6 +8,10 @@ import "aos/dist/aos.css";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "next-themes";
 import ThemeSwitch from "../components/switch/ThemeSwitch";
+import Sidebar from "../components/sidebar/Sidebar";
+import Head from "next/head";
+
+
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -21,8 +25,12 @@ export default function App({ Component, pageProps }) {
   return (
     <div className="tokyo_tm_all_wrap">
       <ThemeProvider attribute="class">
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
         {router.asPath !== "/" ? <ThemeSwitch /> : ""}
         {/* End themeSwicher */}
+        <Sidebar />
         <Component {...pageProps} />
         {/* Main next component pageprops */}
       </ThemeProvider>
