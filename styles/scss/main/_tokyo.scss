@@ -16,6 +16,7 @@
 11) TOKYO 404
 
 
+
 /*---------------------------------------------------*/
 /*	01)	TOKYO BASE
 /*---------------------------------------------------*/
@@ -273,7 +274,7 @@ h6 {
   max-width: 150px;
 }
 .tokyo_tm_all_wrap .leftpart .menu {
-  padding: 30px 0px 10px 0px;
+  padding: 50px 0px 40px 0px;
   width: 100%;
   float: left;
 }
@@ -2216,4 +2217,12 @@ body.modal {
   input {
     cursor: pointer;
   }
+}
+
+// Classe perso 
+
+.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }

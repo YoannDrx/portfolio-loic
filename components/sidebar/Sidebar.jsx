@@ -4,7 +4,7 @@ import sidebarData from "../../data/sidebarData";
 import CopyRight from "../CopyRight";
 import { isActiveLink } from "../../utilis/linkActiveChecker";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const Sidebar = () => {
@@ -12,6 +12,14 @@ const Sidebar = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     const isDesktop = useMediaQuery({ minWidth: 992 });
+
+    useEffect(() => {
+        if (click) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
+    }, [click]);
 
     return (
         <>
@@ -37,7 +45,7 @@ const Sidebar = () => {
             {/* Header */}
 
             {/* START LEFT MENU CONTENT */}
-            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop ? "visible" : "auto" }}>
+            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop ? "visible" : "auto", paddingBottom: isDesktop ? "" : "200px", paddingTop: isDesktop ? "" : "200px" }}>
                 <div className="leftpart_inner">
                     <div className="logo">
                         <Link className="navbar-brand" href="/">
