@@ -23,7 +23,7 @@ const Sidebar = () => {
         }
 
         const handleResize = () => {
-            if (window.innerHeight < 820) {
+            if (window.innerHeight < 750) {
                 setIsShortScreen(true);
             } else {
                 setIsShortScreen(false);
@@ -75,7 +75,7 @@ const Sidebar = () => {
             {/* Header */}
 
             {/* START LEFT MENU CONTENT */}
-            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop && !isShortScreen ? "visible" : "auto", paddingBottom: isDesktop && !isShortScreen ? "" : "400", paddingTop: isDesktop && !isShortScreen ? "" : "400px" }}>
+            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop && !isShortScreen ? "visible" : "auto", paddingBottom: isDesktop && !isShortScreen ? "" : "400", paddingTop: isDesktop && !isShortScreen ? "" : "00px" }}>
                 <div className="leftpart_inner">
                     <div className="logo">
                         <Link className="navbar-brand" href="/">
