@@ -36,13 +36,11 @@ const Albums = () => {
                             </div>
                             {/* END IMAGE */}
                             <div className="details">
-                                <div className="extra">
+
                                     <p className="date">
                                         By <a href="#">{item.poster}</a>
                                         <span>{item.date}</span>
                                     </p>
-                                </div>
-                                {/* END EXTRA */}
 
                                 <h3 className="title">{item.title}</h3>
                                 <div className="tokyo_tm_read_more">
