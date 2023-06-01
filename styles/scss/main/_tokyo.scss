@@ -989,21 +989,42 @@ ul.react-tabs__tab-list {
 .tokyo_tm_news {
   width: 100%;
   height: auto;
-  clear: both;
-  float: left;
   padding: 100px 0px 45px 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
+
 .tokyo_tm_news ul {
-  margin: 0px 0px 0px -50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   list-style-type: none;
+  margin: 0;
+  padding: 0;
+  grid-gap: 50px;
+  justify-content: center;
+  align-items: center;
 }
+
 .tokyo_tm_news ul li {
-  margin: 0px 0px 45px 0px;
-  float: left;
-  width: 50%;
-  padding-left: 50px;
-  @media screen and (max-width: 576px) {
-    margin: 0px 0px 40px 0px;
+  background: lightgreen;
+  box-shadow: 0 0 20px #dfdfdf;
+  cursor: pointer;
+  height: auto;
+  max-width: 260px;
+  margin: 0 auto;  /* This will center the entire grid */
+
+}
+
+@media (max-width: 900px) {
+  .tokyo_tm_news ul {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .tokyo_tm_news ul {
+    grid-template-columns: 100%;
   }
 }
 .tokyo_tm_news ul li .list_inner {
@@ -1015,6 +1036,7 @@ ul.react-tabs__tab-list {
   background: #fff;
   box-shadow: 0 0 20px #dfdfdf;
   cursor: pointer;
+  
 }
 .tokyo_tm_news ul li .image {
   position: relative;
@@ -1033,9 +1055,8 @@ ul.react-tabs__tab-list {
   left: 0px;
   right: 0px;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
-  transition: all 0.3s ease-in-out;
 }
 .tokyo_tm_news ul li .list_inner:hover .main {
   transform: scale(1.1) translateZ(0);

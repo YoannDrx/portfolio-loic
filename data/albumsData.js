@@ -29,7 +29,7 @@ module.exports = [
         title: "Ambient Guitar",
         img: "/img/albums/1.jpg",
         poster: "Loïc Ghanem",
-        date: "September 2020",
+        date: "Sept 2020",
         style: "Ambient Guitar",
         listenLink: "https://fanlink.to/ambientguitar",
         collabName: "Michel-Yves Kochmann",
@@ -51,7 +51,7 @@ module.exports = [
         title: "Bass Music",
         img: "/img/albums/2.jpg",
         poster: "Loïc Ghanem",
-        date: "January 2022",
+        date: "Jan 2022",
         style: "Bass Music",
         listenLink: "https://fanlink.to/Voyager1BassMusic",
         collabName: "Olynda, Lou.C, Twild",
@@ -74,7 +74,7 @@ module.exports = [
         // 1200 x 675
         img: "/img/albums/3.jpg",
         poster: "Loïc Ghanem",
-        date: "15 APRIL 2021",
+        date: "Apr 2021",
         descriptions: (
             <>
                 <div className="descriptions">
@@ -131,7 +131,7 @@ module.exports = [
         title: "Pop Punk",
         img: "/img/albums/5.jpg",
         poster: "Loïc Ghanem",
-        date: "April 2021",
+        date: "Apr 2021",
         style: "Pop Punk",
         listenLink: "https://fanlink.to/PopPunk",
         collabName: "Dory-Loup, Fran Darras",
@@ -176,7 +176,7 @@ module.exports = [
         // 1200 x 675
         img: "/img/albums/7.jpg",
         poster: "Loïc Ghanem",
-        date: "15 APRIL 2021",
+        date: "Apr 2021",
         descriptions: (
             <>
                 <div className="descriptions">
