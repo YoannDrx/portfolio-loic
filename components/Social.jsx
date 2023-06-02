@@ -11,6 +11,8 @@ const SocialShare = [
   },
   { iconName: "soundcloud", link: "https://soundcloud.com/loic-ghanem" },
   { iconName: "linkedin", link: "https://www.linkedin.com/in/lo%C3%AFc-ghanem/" },
+  { iconName: "soundbetter-logo", link: "https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1" },
+
 
 ];
 const Social = () => {
