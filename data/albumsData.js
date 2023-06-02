@@ -7,6 +7,7 @@ module.exports = [
         img: "/img/albums/mmf.jpg",
         poster: "Loïc Ghanem",
         date: "May 2022",
+        sortedDate : "05-2022",
         style: "Hip-Hop/RnB",
         listenLink: "https://fanlink.to/Voyager1MakeMeFeel",
         collabName: "Quincy Thompson, Novine, Tim Moyo, Julaiah, Lou.C",
@@ -30,6 +31,7 @@ module.exports = [
         img: "/img/albums/1.jpg",
         poster: "Loïc Ghanem",
         date: "Sept 2020",
+        sortedDate : "09-2020",
         style: "Ambient Guitar",
         listenLink: "https://fanlink.to/ambientguitar",
         collabName: "Michel-Yves Kochmann",
@@ -52,6 +54,7 @@ module.exports = [
         img: "/img/albums/2.jpg",
         poster: "Loïc Ghanem",
         date: "Jan 2022",
+        sortedDate : "01-2022",
         style: "Bass Music",
         listenLink: "https://fanlink.to/Voyager1BassMusic",
         collabName: "Olynda, Lou.C, Twild",
@@ -75,6 +78,7 @@ module.exports = [
         img: "/img/albums/3.jpg",
         poster: "Loïc Ghanem",
         date: "Apr 2021",
+        sortedDate : "04-2021",
         descriptions: (
             <>
                 <div className="descriptions">
@@ -110,6 +114,7 @@ module.exports = [
         img: "/img/albums/4.jpg",
         poster: "Loïc Ghanem",
         date: "May 2021",
+        sortedDate : "05-2021",
         style: "Hip-Hop",
         listenLink: "https://fanlink.to/Voyager1GetTrapped",
         collabName: "Lou.C",
@@ -132,6 +137,7 @@ module.exports = [
         img: "/img/albums/5.jpg",
         poster: "Loïc Ghanem",
         date: "Apr 2021",
+        sortedDate : "04-2021",
         style: "Pop Punk",
         listenLink: "https://fanlink.to/PopPunk",
         collabName: "Dory-Loup, Fran Darras",
@@ -154,6 +160,7 @@ module.exports = [
         img: "/img/albums/6.jpg",
         poster: "Loïc Ghanem",
         date: "July 2020",
+        sortedDate : "07-2020",
         style: "Hardcore",
         listenLink: "https://fanlink.to/hardcoreLoicghanem",
         collabName: "Terence Langlois",
@@ -177,6 +184,7 @@ module.exports = [
         img: "/img/albums/7.jpg",
         poster: "Loïc Ghanem",
         date: "Apr 2021",
+        sortedDate : "04-2021",
         descriptions: (
             <>
                 <div className="descriptions">
@@ -212,6 +220,7 @@ module.exports = [
         img: "/img/albums/8.jpg",
         poster: "Loïc Ghanem",
         date: "July 2020",
+        sortedDate : "07-2020",
         style: "Metalcore/Speed Metal",
         listenLink: "https://fanlink.to/FastMetal",
         collabName: "Sham Makdessi, Terence Langlois, Aaron Matts",
@@ -234,6 +243,7 @@ module.exports = [
         img: "/img/albums/9.jpg",
         poster: "Loïc Ghanem",
         date: "June 2020",
+        sortedDate : "06-2020",
         style: "Metalcore",
         listenLink: "https://fanlink.to/Kick-assMetalJacket",
         collabName: "Terence Langlois",

@@ -20,10 +20,16 @@ const Albums = () => {
         handleblogsData(id);
     };
 
+    const sortedAlbumsData = [...albumsData].sort((a, b) => {
+        const aDate = new Date(a.sortedDate.split("-").reverse().join("/"));
+        const bDate = new Date(b.sortedDate.split("-").reverse().join("/"));
+        return bDate - aDate;
+    });
+
     return (
         <>
             <ul>
-                {albumsData.map((item) => (
+                {sortedAlbumsData.map((item) => (
                     <li key={item.id}>
                         <div className="list_inner" onClick={() => handleModle(item?.id)}>
                             <div className="image">

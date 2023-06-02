@@ -1012,6 +1012,7 @@ ul.react-tabs__tab-list {
   cursor: pointer;
   height: auto;
   max-width: 260px;
+  min-width: 260px;
   margin: 0 auto;  /* This will center the entire grid */
 
 }
@@ -1064,8 +1065,7 @@ ul.react-tabs__tab-list {
 .tokyo_tm_news ul li .details {
   width: 100%;
   float: left;
-  padding: 25px 40px 20px;
-  padding-top: 25px;
+  padding: 10px 10px 0px;
   @media screen and (max-width: 767px) {
     padding: 30px 25px 25px;
   }
