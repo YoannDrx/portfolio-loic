@@ -265,12 +265,14 @@ h6 {
   padding: 0px 100px;
   background-color: #fff;
   border-right: 1px solid #f9f9f9;
+  padding-bottom: 100px;
+    padding-top: 100px;
 }
 .tokyo_tm_all_wrap .leftpart_inner {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .tokyo_tm_all_wrap .leftpart img {
@@ -545,7 +547,7 @@ h6 {
 .tokyo_tm_about .description_inner {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 .tokyo_tm_about .description .left {
   width: 55%;
@@ -1597,8 +1599,10 @@ body.modal {
     width: 290px;
     padding: 0 40px;
     background: #fefefe;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
     padding-top: 100px;
+    display: flex;
+    flex-direction: column;
   }
   .tokyo_tm_section {
     padding-left: 290px;
