@@ -40,13 +40,7 @@ const Videos = () => {
                                         })
                                     }
                                 />
-                                <ReactTooltip
-                                    id={video.title}
-                                    place="bottom"
-                                    type="light"
-                                    effect="float"
-                                    className="tooltip-wrapper"
-                                >
+                                <ReactTooltip id={video.title} place="bottom" type="light" effect="float" className="tooltip-wrapper">
                                     <div>
                                         <h5>{video.title}</h5>
                                         <span>{video.type}</span>
@@ -65,16 +59,16 @@ const Videos = () => {
                 <Tabs>
                     <TabList>
                         <Tab onClick={() => setSelectedTab("All")}>All</Tab>
-                        <Tab onClick={() => setSelectedTab("Film")}>Film</Tab>
-                        <Tab onClick={() => setSelectedTab("Advertisement")}>Advertisement</Tab>
-                        <Tab onClick={() => setSelectedTab("Music Video")}>Music Video</Tab>
+                        <Tab onClick={() => setSelectedTab("Sync")}>Sync</Tab>
+                        <Tab onClick={() => setSelectedTab("OriginalMusic")}>Original Music</Tab>
+                        <Tab onClick={() => setSelectedTab("MusicToPicture")}>Music to Picture</Tab>
                     </TabList>
 
                     <div className="list_wrapper">
                         <TabPanel>{renderVideoList("All")}</TabPanel>
-                        <TabPanel>{renderVideoList("Film")}</TabPanel>
-                        <TabPanel>{renderVideoList("Advertisement")}</TabPanel>
-                        <TabPanel>{renderVideoList("Music Video")}</TabPanel>
+                        <TabPanel>{renderVideoList("Sync")}</TabPanel>
+                        <TabPanel>{renderVideoList("OriginalMusic")}</TabPanel>
+                        <TabPanel>{renderVideoList("MusicToPicture")}</TabPanel>
                     </div>
                 </Tabs>
             </Gallery>
