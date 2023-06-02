@@ -77,36 +77,35 @@ const Sidebar = () => {
                 className={click ? "leftpart active" : "leftpart"}
                 style={{
                     overflowY: isDesktop && !isShortScreen ? "visible" : "scroll",
-                    paddingBottom: isDesktop && !isShortScreen ? "" : "10vh",
-                    paddingTop: isDesktop && !isShortScreen ? "" : "40vh",
                 }}
             >
                 <div className="leftpart_inner">
-                    <div className="logo">
-                        <Link className="navbar-brand" href="/">
-                            <Image width={135} height={20} src="/img/logo/logo-loic-music.png" alt="brand" />
-                        </Link>
-                    </div>
-                    {/* END LOGO */}
+                    <div className="content">
+                        <div className="logo">
+                            <Link className="navbar-brand" href="/">
+                                <Image width={135} height={20} src="/img/logo/logo-loic-music.png" alt="brand" />
+                            </Link>
+                        </div>
+                        {/* END LOGO */}
 
-                    <div className="menu">
-                        <ul>
-                            {sidebarData.map((item) => (
-                                <li key={item.id} onClick={handleClick}>
-                                    <Link className={`${isActiveLink(item.routePath, router.asPath) ? "active " : ""}`} href={item.routePath}>
-                                        <Image width={15} height={15} className="svg" src={item.icon} alt="homerun" />
-                                        <span className="menu_content">{item.menuName}</span>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    {/* END MENU */}
+                        <div className="menu menucontent">
+                            <ul>
+                                {sidebarData.map((item) => (
+                                    <li key={item.id} onClick={handleClick}>
+                                        <Link className={`${isActiveLink(item.routePath, router.asPath) ? "active " : ""}`} href={item.routePath}>
+                                            <Image width={15} height={15} className="svg" src={item.icon} alt="homerun" />
+                                            <span className="menu_content">{item.menuName}</span>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        {/* END MENU */}
 
-                    <div
-                        className={`soundcloud-player`}
-                        dangerouslySetInnerHTML={{
-                            __html: `
+                        <div
+                            className={`soundcloud-player`}
+                            dangerouslySetInnerHTML={{
+                                __html: `
             <iframe 
                 width="100%" 
                 height="${isDesktop ? "400" : "300"}" 
@@ -116,11 +115,12 @@ const Sidebar = () => {
                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1440693976&color=%238c7b67&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=${isDesktop}">
                 </iframe>
           `,
-                        }}
-                    />
+                            }}
+                        />
 
-                    {/* END COPYRIGHT */}
-                    <CopyRight />
+                        {/* END COPYRIGHT */}
+                        <CopyRight />
+                    </div>
                 </div>
             </div>
             {/* END LEFT MENU CONTENT */}
