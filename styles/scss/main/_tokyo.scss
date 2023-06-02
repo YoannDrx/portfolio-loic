@@ -265,7 +265,7 @@ h6 {
     padding: 0px 100px;
     background-color: #fff;
     border-right: 1px solid #f9f9f9;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
     padding-top: 100px;
 }
 .tokyo_tm_all_wrap .leftpart_inner {
@@ -331,6 +331,8 @@ h6 {
 .tokyo_tm_all_wrap .leftpart .copyright {
     width: 100%;
     float: left;
+    margin-bottom: 50px;
+
 }
 .tokyo_tm_all_wrap .leftpart .copyright p {
     font-size: 15px;
@@ -1601,6 +1603,8 @@ body.modal {
         padding-top: 100px;
         display: flex;
         flex-direction: column;
+
+        
     }
     .tokyo_tm_section {
         padding-left: 290px;
