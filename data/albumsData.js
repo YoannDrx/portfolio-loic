@@ -258,7 +258,7 @@ module.exports = [
         ),
     },
     {
-        id: 11,
+        id: 12,
         title: "Death Metal",
         img: "/img/albums/12.jpg",
         poster: "Loïc Ghanem",
