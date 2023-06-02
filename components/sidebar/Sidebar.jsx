@@ -14,12 +14,11 @@ const Sidebar = () => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     const [isShortScreen, setIsShortScreen] = useState(false);
 
-
     useEffect(() => {
         if (click) {
-            document.body.classList.add('no-scroll');
+            document.body.classList.add("no-scroll");
         } else {
-            document.body.classList.remove('no-scroll');
+            document.body.classList.remove("no-scroll");
         }
 
         const handleResize = () => {
@@ -30,26 +29,25 @@ const Sidebar = () => {
             }
         };
 
-        window.addEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
         handleResize();
 
         return () => {
-            window.removeEventListener('resize', handleResize);
+            window.removeEventListener("resize", handleResize);
         };
     }, [click]);
 
     useEffect(() => {
         const handleRouteChange = () => {
-            document.body.classList.remove('no-scroll');
+            document.body.classList.remove("no-scroll");
         };
 
-        router.events.on('routeChangeStart', handleRouteChange);
+        router.events.on("routeChangeStart", handleRouteChange);
 
         return () => {
-            router.events.off('routeChangeStart', handleRouteChange);
+            router.events.off("routeChangeStart", handleRouteChange);
         };
     }, [router]);
-
 
     return (
         <>
@@ -75,7 +73,14 @@ const Sidebar = () => {
             {/* Header */}
 
             {/* START LEFT MENU CONTENT */}
-            <div className={click ? "leftpart active" : "leftpart"} style={{ overflowY: isDesktop && !isShortScreen ? "visible" : "auto", paddingBottom: isDesktop && !isShortScreen ? "" : "400", paddingTop: isDesktop && !isShortScreen ? "" : "400px" }}>
+            <div
+                className={click ? "leftpart active" : "leftpart"}
+                style={{
+                    overflowY: isDesktop && !isShortScreen ? "visible" : "scroll",
+                    paddingBottom: isDesktop && !isShortScreen ? "" : "10vh",
+                    paddingTop: isDesktop && !isShortScreen ? "" : "40vh",
+                }}
+            >
                 <div className="leftpart_inner">
                     <div className="logo">
                         <Link className="navbar-brand" href="/">
