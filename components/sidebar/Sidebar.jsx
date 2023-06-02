@@ -55,7 +55,7 @@ const Sidebar = () => {
                 <div className="header-inner">
                     <div className="logo">
                         <Link className="navbar-brand" href="/">
-                            <Image width={140} height={20} src="/img/logo/logo-loic-music.png" alt="brand" />
+                            <Image width={270} height={40} src="/img/logo/logo-loic-music.svg" alt="brand" />
                         </Link>
                     </div>
                     {/* End logo */}
@@ -81,9 +81,9 @@ const Sidebar = () => {
             >
                 <div className="leftpart_inner">
                     <div className="content">
-                        <div className="logo">
+                        <div className="logo shadow">
                             <Link className="navbar-brand" href="/">
-                                <Image width={135} height={20} src="/img/logo/logo-loic-music.png" alt="brand" />
+                                <Image width={270} height={40} src="/img/logo/logo-loic-music.svg" alt="brand" />
                             </Link>
                         </div>
                         {/* END LOGO */}
