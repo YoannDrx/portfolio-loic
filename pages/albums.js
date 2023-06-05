@@ -19,8 +19,8 @@ const index = () => {
                   <div className="tokyo_tm_title">
                     <div className="title_flex">
                       <div className="left">
-                        <span>Hot tracks</span>
-                        <h3>Latest Albums</h3>
+                        <span>Latest</span>
+                        <h3> Albums</h3>
                       </div>
                     </div>
                   </div>
