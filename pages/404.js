@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Seo from "../components/Seo";
+import CopyRight from "../components/CopyRight";
 
 const NotFound = () => {
   return (
@@ -11,29 +12,14 @@ const NotFound = () => {
       <div className="not-found-wrapper">
         <div className="leftpart">
           <div className="leftpart_inner">
-            <div className="logo">
-              <Link className="navbar-brand" href="/">
-                <Image
-                  width={126}
-                  height={22}
-                  src="/img/logo/dark.png"
-                  alt="brand"
-                />
-              </Link>
-            </div>
+          <div className="logo">
+                        <Link className="navbar-brand" href="/">
+                            <Image width={270} height={40} src="/img/logo/logo-loic-music.svg" alt="brand" />
+                        </Link>
+                    </div>
             {/* END LOGO */}
-            <div className="copyright">
-              <p>
-                &copy; 2021 Tokyo <br /> Created by
-                <a
-                  href="https://themeforest.net/user/ib-themes"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Ib-Themes
-                </a>
-              </p>
-            </div>
+            <CopyRight />
+
             {/* END COPYRIGHT */}
           </div>
         </div>
