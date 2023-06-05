@@ -18,11 +18,18 @@ const Videos = () => {
     const [isOpenYoutube, setOpenYoutube] = useState({ isOpen: false, videoId: null });
     const [selectedTab, setSelectedTab] = useState("All");
 
-    const renderVideoList = (type) => (
-        <ul className="portfolio_list" data-aos="fade-right" data-aos-duration="1200">
-            {videoData
-                .filter((video) => type === "All" || video.type === type)
-                .map((video) => (
+    const renderVideoList = (type) => {
+        const sortedVideos = [...videoData]
+        .filter((video) => type === "All" || video.type === type)
+        .sort((a, b) => {
+            const aDate = a.date.split("/").reverse().join("-");
+            const bDate = b.date.split("/").reverse().join("-");
+            return new Date(bDate) - new Date(aDate);
+        });
+    
+        return (
+            <ul className="portfolio_list" data-aos="fade-right" data-aos-duration="1200">
+                {sortedVideos.map((video) => (
                     <li key={video.id}>
                         <div className="inner">
                             <div className="entry tokyo_tm_portfolio_animation_wrap">
@@ -50,8 +57,9 @@ const Videos = () => {
                         </div>
                     </li>
                 ))}
-        </ul>
-    );
+            </ul>
+        );
+    };
 
     return (
         <>

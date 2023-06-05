@@ -6,6 +6,7 @@ module.exports = [
         videoId: "dvYrXiWiK4M",
         title: "Budapest Symphony Orchestra",
         detail: "OriginalMusic",
+        date: "24/04/2023",
     },
     {
         id: 2,
@@ -14,6 +15,7 @@ module.exports = [
         videoId: "wmkNjkDRuUs",
         title: "Burger King",
         detail: "Sync",
+        date: "16/11/2022",
     },
     {
         id: 3,
@@ -22,6 +24,7 @@ module.exports = [
         videoId: "5j-6MppOV5o",
         title: "Bangkok breaking",
         detail: "MusicToPicture",
+        date: "16/11/2022",
     },
     {
         id: 4,
@@ -30,6 +33,7 @@ module.exports = [
         videoId: "_UoOO4WT898",
         title: "Lululemon SP21",
         detail: "MusicToPicture",
+        date:"20/03/2022"
     },
     {
         id: 5,
@@ -38,6 +42,7 @@ module.exports = [
         videoId: "sqOX5VMDdIw",
         title: "BBC NFL Super Bowl trailer 2022",
         detail: "Sync",
+        date:"25/02/2022"
     },
     {
         id: 6,
@@ -46,6 +51,7 @@ module.exports = [
         videoId: "PlZRG4VK47w",
         title: "MOTDx - In the Making",
         detail: "Sync",
+        date:"06/10/2021"
     },
     {
         id: 7,
@@ -54,6 +60,7 @@ module.exports = [
         videoId: "_qEenFpYqCk",
         title: "NHL In the room",
         detail: "Sync",
+        date:"06/10/2021"
     },
     {
         id: 8,
@@ -62,6 +69,7 @@ module.exports = [
         videoId: "AtAHFqjEgO8",
         title: "NBA Countdown",
         detail: "Sync",
+        date:"05/10/2021"
     },
     {
         id: 9,
@@ -70,6 +78,7 @@ module.exports = [
         videoId: "eyQct5QSWNc",
         title: "ESPN 30 for 30",
         detail: "Sync",
+        date:"09/05/2020"
     },
     {
         id: 10,
@@ -78,6 +87,7 @@ module.exports = [
         videoId: "ck0HeLPAOSU",
         title: "WWE RAW - Aleister Black Trailer",
         detail: "Sync",
+        date:"13/03/2020"
     },
     {
         id: 11,
@@ -86,6 +96,7 @@ module.exports = [
         videoId: "8ZoVAyS2hhA",
         title: "Skandal Trailer - Télé 5",
         detail: "MusicToPicture",
+        date:"01/03/2020"
     },
     {
         id: 12,
@@ -94,6 +105,7 @@ module.exports = [
         videoId: "eVH2sgsMNj8",
         title: "BBC Click live in Dundee - Minecraft",
         detail: "Sync",
+        date:"01/03/2020"
     },
     {
         id: 13,
@@ -102,6 +114,7 @@ module.exports = [
         videoId: "r5v33Ws6nMA",
         title: "KiKA Die Jungs WG Abenteuer Amsterdam",
         detail: "MusicToPicture",
+        date:"01/03/2020"
     },
     {
         id: 14,
@@ -110,6 +123,7 @@ module.exports = [
         videoId: "R8ogOf2vDEU",
         title: "The way of the warrior WEC 6h of Fuji 2014",
         detail: "MusicToPicture",
+        date:"01/03/2020"
     },
     {
         id: 15,
@@ -117,7 +131,8 @@ module.exports = [
         type: "OriginalMusic",
         videoId: "H8HRNHxWN-g",
         title: "Funérailles, résurrection et traque d'un paladin - Opus 22",
-        detail: "",
+        detail: "OriginalMusic",
+        date:"20/03/2018"
     },
     {
         id: 16,
@@ -126,6 +141,7 @@ module.exports = [
         videoId: "T5BjS0uNgYY",
         title: "Chill Trap instrumental 5",
         detail: "OriginalMusic",
+        date:"01/03/2018"
     },
     {
         id: 17,
@@ -134,6 +150,7 @@ module.exports = [
         videoId: "JnTsW7rqAEw",
         title: "Chill Trap instrumental 4",
         detail: "OriginalMusic",
+        date:"28/02/2018"
     },
     {
         id: 18,
@@ -142,6 +159,7 @@ module.exports = [
         videoId: "x7Ln_wNl9mk",
         title: "Metalcore Instrumental XV",
         detail: "OriginalMusic",
+        date:"12/01/2018"
     },
     {
         id: 19,
@@ -150,6 +168,7 @@ module.exports = [
         videoId: "_POxXH8Q6VY",
         title: "Metalcore Instrumental XVI",
         detail: "OriginalMusic",
+        date:"12/01/2018"
     },
     {
         id: 20,
@@ -158,6 +177,7 @@ module.exports = [
         videoId: "50AaHS_UEo4",
         title: "Participation aux Audi talents awards 2016",
         detail: "Sync",
+        date:"01/06/2016"
     },
     {
         id: 21,
@@ -166,6 +186,7 @@ module.exports = [
         videoId: "V6dMBidFv00",
         title: "The ambient electro song",
         detail: "OriginalMusic",
+        date:"20/12/2015"
     },
     {
         id: 22,
@@ -174,6 +195,7 @@ module.exports = [
         videoId: "U8Ebjje7A88",
         title: "Broadway Avenue - Loïc Ghanem Feat Marty Degenne",
         detail: "OriginalMusic",
+        date:"16/07/2015"
     },
     {
         id: 23,
@@ -182,6 +204,7 @@ module.exports = [
         videoId: "smvWLIWPmec",
         title: '"Missing your smile" Loïc Ghanem Feat Marty Degenne',
         detail: "OriginalMusic",
+        date:"14/04/2015"
     },
     {
         id: 24,
@@ -190,6 +213,7 @@ module.exports = [
         videoId: "u-X3SLpTmlk",
         title: '" I\'ll never find love in Paris... " Loïc Ghanem',
         detail: "OriginalMusic",
+        date:"11/03/2015"
     },
     {
         id: 25,
@@ -198,6 +222,7 @@ module.exports = [
         videoId: "XQEFjQIxVCA",
         title: "Le lac des cygnes / Swan lake , Recomposed by Loïc Ghanem",
         detail: "OriginalMusic",
+        date:"27/01/2015"
     },
     {
         id: 26,
@@ -206,6 +231,7 @@ module.exports = [
         videoId: "PUpABO2J4jY",
         title: '" Ascension , triomphe et mort d\'un chevalier " Loïc Ghanem',
         detail: "OriginalMusic",
+        date:"01/11/2014"
     },
     {
         id: 27,
@@ -214,5 +240,43 @@ module.exports = [
         videoId: "MTW-ZitsXVA",
         title: "Loïc Ghanem composer & producer Showreel",
         detail: "OriginalMusic",
+        date:"19/10/2014"
     },
+    {
+        id: 28,
+        img: "/img/portfolio/28.jpg",
+        type: "OriginalMusic",
+        videoId: "NulC3-rQX24",
+        title: "RISE OF THE NORTHSTAR - Protect Ya Chest (OFFICIAL)",
+        detail: "OriginalMusic",
+        date:"20/02/2011"
+    },
+    {
+        id: 29,
+        img: "/img/portfolio/29.jpg",
+        type: "OriginalMusic",
+        videoId: "8m4W1IuVRco",
+        title: "CONFRONT - Me Against Myself - (OFFICIAL)",
+        detail: "OriginalMusic",
+        date:"16/01/2013"
+    },
+    {
+        id: 30,
+        img: "/img/portfolio/30.jpg",
+        type: "OriginalMusic",
+        videoId: "8m4W1IuVRco",
+        title: "Early Seasons - Redemption (Official Music Video)",
+        detail: "OriginalMusic",
+        date:"16/01/2013"
+    },
+    {
+        id: 32,
+        img: "/img/portfolio/31.jpg",
+        type: "OriginalMusic",
+        videoId: "aPJUTPMEukM",
+        title: "Voyager1 - New Horizon (official video)",
+        detail: "OriginalMusic",
+        date:"28/02/2022"
+    },
+    
 ];
