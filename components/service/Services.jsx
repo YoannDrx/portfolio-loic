@@ -53,12 +53,13 @@ const Services = () => {
           <div className="box_inner">
             <div className="description_wrap scrollable">
               <div className="image">
-                <div
+                <img src={singleData?.largeImg} alt="Image" />
+                {/* <div
                   className="main"
                   style={{
                     backgroundImage: `url(${singleData?.largeImg})`,
                   }}
-                ></div>
+                ></div> */}
               </div>
               {/* END IMAGE */}
               <div className="details">

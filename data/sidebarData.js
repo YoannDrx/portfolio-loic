@@ -29,10 +29,4 @@ module.exports = [
     menuName: "Videos",
     routePath: "/videos",
   },
-  {
-    id: 6,
-    icon: "/img/svg/mail.svg",
-    menuName: "Contact",
-    routePath: "/contact",
-  },
 ];

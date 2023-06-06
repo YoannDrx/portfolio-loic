@@ -108,11 +108,11 @@ const Sidebar = () => {
                                 __html: `
             <iframe 
                 width="100%" 
-                height="${isDesktop ? "400" : "300"}" 
+                height="500" 
                 scrolling="no" 
                 frameborder="no" 
                 allow="autoplay" 
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1440693976&color=%238c7b67&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=${isDesktop}">
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1342377886%3Fsecret_token%3Ds-0WB6x1mRFeB&color=%23070a17&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
                 </iframe>
           `,
                             }}

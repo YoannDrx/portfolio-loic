@@ -44,22 +44,6 @@ const NotFound = () => {
           </div>
         </div>
         {/* END RIGHT PART */}
-
-        <footer className="footer-wrapper">
-          <div className="copyright">
-            <p>
-              &copy; 2021 Tokyo Created by
-              <a
-                href="https://themeforest.net/user/ib-themes"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Ib-Themes
-              </a>
-            </p>
-          </div>
-          {/* END COPYRIGHT */}
-        </footer>
       </div>
     </>
   );
