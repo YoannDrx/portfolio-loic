@@ -264,7 +264,7 @@ module.exports = [
         id: 30,
         img: "/img/portfolio/30.jpg",
         type: "OriginalMusic",
-        videoId: "8m4W1IuVRco",
+        videoId: "o8c9h2Vzrhw",
         title: "Early Seasons - Redemption (Official Music Video)",
         detail: "OriginalMusic",
         date:"16/01/2013"

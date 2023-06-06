@@ -18,26 +18,45 @@ const Videos = () => {
     const [isOpenYoutube, setOpenYoutube] = useState({ isOpen: false, videoId: null });
     const [selectedTab, setSelectedTab] = useState("All");
 
+
     const renderVideoList = (type) => {
         const sortedVideos = [...videoData]
-        .filter((video) => type === "All" || video.type === type)
-        .sort((a, b) => {
-            const aDate = a.date.split("/").reverse().join("-");
-            const bDate = b.date.split("/").reverse().join("-");
-            return new Date(bDate) - new Date(aDate);
-        });
-    
+            .filter((video) => type === "All" || video.type === type)
+            .sort((a, b) => {
+                const aDate = a.date.split("/").reverse().join("-");
+                const bDate = b.date.split("/").reverse().join("-");
+                return new Date(bDate) - new Date(aDate);
+            });
+
         return (
             <ul className="portfolio_list" data-aos="fade-right" data-aos-duration="1200">
                 {sortedVideos.map((video) => (
                     <li key={video.id}>
                         <div className="inner">
-                            <div className="entry tokyo_tm_portfolio_animation_wrap">
-                                <Image
+                            <div className="entry ">
+                                {/* <Image
                                     width={300}
                                     height={300}
                                     src={video.img}
                                     alt={video.title}
+                                    data-tip
+                                    data-for={video.title}
+                                    onClick={() =>
+                                        setOpenYoutube({
+                                            isOpen: true,
+                                            videoId: video.videoId,
+                                        })
+                                    }
+                                /> */}
+                                <iframe
+                                    width="300"
+                                    height="300"
+                                    src={`https://www.youtube.com/embed/${video.videoId}?autoplay=0`}
+                                    title={video.title}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    playsinline
                                     data-tip
                                     data-for={video.title}
                                     onClick={() =>
