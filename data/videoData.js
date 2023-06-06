@@ -20,19 +20,19 @@ module.exports = [
     {
         id: 3,
         img: "/img/portfolio/3.jpg",
-        type: "MusicToPicture",
+        type: "Sync",
         videoId: "5j-6MppOV5o",
         title: "Bangkok breaking",
-        detail: "MusicToPicture",
+        detail: "Sync",
         date: "16/11/2022",
     },
     {
         id: 4,
         img: "/img/portfolio/4.jpg",
-        type: "MusicToPicture",
+        type: "Sync",
         videoId: "_UoOO4WT898",
         title: "Lululemon SP21",
-        detail: "MusicToPicture",
+        detail: "Sync",
         date:"20/03/2022"
     },
     {
@@ -92,10 +92,10 @@ module.exports = [
     {
         id: 11,
         img: "/img/portfolio/11.jpg",
-        type: "MusicToPicture",
+        type: "Sync",
         videoId: "8ZoVAyS2hhA",
         title: "Skandal Trailer - Télé 5",
-        detail: "MusicToPicture",
+        detail: "Sync",
         date:"01/03/2020"
     },
     {
@@ -110,19 +110,19 @@ module.exports = [
     {
         id: 13,
         img: "/img/portfolio/13.jpg",
-        type: "MusicToPicture",
+        type: "Sync",
         videoId: "r5v33Ws6nMA",
         title: "KiKA Die Jungs WG Abenteuer Amsterdam",
-        detail: "MusicToPicture",
+        detail: "Sync",
         date:"01/03/2020"
     },
     {
         id: 14,
         img: "/img/portfolio/14.jpg",
-        type: "MusicToPicture",
+        type: "Sync",
         videoId: "R8ogOf2vDEU",
         title: "The way of the warrior WEC 6h of Fuji 2014",
-        detail: "MusicToPicture",
+        detail: "Sync",
         date:"01/03/2020"
     },
     {
@@ -173,10 +173,10 @@ module.exports = [
     {
         id: 20,
         img: "/img/portfolio/20.jpg",
-        type: "Sync",
+        type: "MusicToPicture",
         videoId: "50AaHS_UEo4",
         title: "Participation aux Audi talents awards 2016",
-        detail: "Sync",
+        detail: "MusicToPicture",
         date:"01/06/2016"
     },
     {
@@ -236,11 +236,11 @@ module.exports = [
     {
         id: 27,
         img: "/img/portfolio/27.jpg",
-        type: "OriginalMusic",
+        type: "MusicToPicture",
         videoId: "MTW-ZitsXVA",
         title: "Loïc Ghanem composer & producer Showreel",
-        detail: "OriginalMusic",
-        date:"19/10/2014"
+        detail: "MusicToPicture",
+        date:"19/10/2030"
     },
     {
         id: 28,
@@ -278,5 +278,130 @@ module.exports = [
         detail: "OriginalMusic",
         date:"28/02/2022"
     },
-    
+    {
+        id: 33,
+        img: "/img/portfolio/33.jpg",
+        type: "MusicToPicture",
+        videoId: "pEsOy8evN-g",
+        title: "Je suis un boss FEAT Amin, Seb la frite, Olivier kissita",
+        detail: "MusicToPicture",
+        date:"11/02/2015"
+    },
+    {
+        id: 34,
+        img: "/img/portfolio/34.jpg",
+        type: "MusicToPicture",
+        videoId: "SGVoPDU_rZs",
+        title: "Je suis un frère - Feat Avner (Road to sayian)- Short film",
+        detail: "MusicToPicture",
+        date:"15/09/2014"
+    },
+    {
+        id: 35,
+        img: "/img/portfolio/35.jpg",
+        type: "MusicToPicture",
+        videoId: "tWWUE6vYyXg",
+        title: "UN DE PERDU... - Short film",
+        detail: "MusicToPicture",
+        date:"07/05/2015"
+    },
+    {
+        id: 36,
+        img: "/img/portfolio/36.jpg",
+        type: "MusicToPicture",
+        videoId: "X4WbGEepi9A",
+        title: "Duracell - Short film",
+        detail: "MusicToPicture",
+        date:"17/03/2014"
+    },
+    {
+        id: 37,
+        img: "/img/portfolio/37.jpg",
+        type: "MusicToPicture",
+        videoId: "U0gND4eUqyA",
+        title: "EARLY SEASONS Teaser - Surrender Music Video",
+        detail: "MusicToPicture",
+        date:"05/08/2011"
+    },
+    {
+        id: 38,
+        img: "/img/portfolio/38.jpg",
+        type: "MusicToPicture",
+        videoId: "bboa0jURwZM",
+        title: "Early Seasons - Redemption Music Video TEASER",
+        detail: "MusicToPicture",
+        date:"13/01/2014"
+    },
+    {
+        id: 39,
+        img: "/img/portfolio/39.jpg",
+        type: "MusicToPicture",
+        videoId: "WQom2e0o4KI",
+        title: "[ HIVER 2020 ] SARAH ELOLA + BÉRÉNICE DUPUIS",
+        detail: "MusicToPicture",
+        date:"17/11/2019"
+    },
+    {
+        id: 40,
+        img: "/img/portfolio/40.jpg",
+        type: "MusicToPicture",
+        videoId: "YySkQXL6le8",
+        title: "FEUILLE DE ROUTE (court-métrage)",
+        detail: "MusicToPicture",
+        date:"16/09/2017"
+    },
+    {
+        id: 41,
+        img: "/img/portfolio/41.jpg",
+        type: "Sync",
+        videoId: "rZ8vqBICHjo",
+        title: "MACCAS MAGIC BUS | Official Series Trailer",
+        detail: "Sync",
+        date:"26/05/2023"
+    },
+    {
+        id: 42,
+        img: "/img/portfolio/42.jpg",
+        type: "Sync",
+        videoId: "qK-3RO1JFp8",
+        title: "Harriet the Spy: Season 1 - 5 Things You Didn't Know With the Cast (2021) Lacey Chabert, Jane Lynch",
+        detail: "Sync",
+        date:"29/11/2021"
+    },
+    {
+        id: 43,
+        img: "/img/portfolio/43.jpg",
+        type: "Sync",
+        videoId: "EcbNnLC07Iw",
+        title: "Raven Lyn Shines in This Hot New Video | INTIMATES | Sports Illustrated Swimsuit",
+        detail: "Sync",
+        date:"02/03/2019"
+    },
+    {
+        id: 44,
+        img: "/img/portfolio/44.jpg",
+        type: "Sync",
+        videoId: "KIlENe3JXfw",
+        title: "Super Crush KO Review | Kotaku",
+        detail: "Sync",
+        date:"16/01/2020"
+    },
+    {
+        id: 45,
+        img: "/img/portfolio/45.jpg",
+        type: "OriginalMusic",
+        videoId: "_B-8cHjcsac",
+        title: "Mother (Feat Novine)",
+        detail: "OriginalMusic",
+        date:"01/06/2023"
+    },
+    {
+        id: 46,
+        img: "/img/portfolio/46.jpg",
+        type: "OriginalMusic",
+        videoId: "MAdqQ70o2I8",
+        title: "Early Seasons - Future (Official Music Video)",
+        detail: "OriginalMusic",
+        date:"01/06/2023"
+    },
 ];
