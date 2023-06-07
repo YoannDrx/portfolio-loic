@@ -108,15 +108,6 @@ module.exports = [
         date:"01/03/2020"
     },
     {
-        id: 13,
-        img: "/img/portfolio/13.jpg",
-        type: "Sync",
-        videoId: "r5v33Ws6nMA",
-        title: "KiKA Die Jungs WG Abenteuer Amsterdam",
-        detail: "Sync",
-        date:"01/03/2020"
-    },
-    {
         id: 14,
         img: "/img/portfolio/14.jpg",
         type: "Sync",
@@ -135,42 +126,6 @@ module.exports = [
         date:"20/03/2018"
     },
     {
-        id: 16,
-        img: "/img/portfolio/16.jpg",
-        type: "OriginalMusic",
-        videoId: "T5BjS0uNgYY",
-        title: "Chill Trap instrumental 5",
-        detail: "OriginalMusic",
-        date:"01/03/2018"
-    },
-    {
-        id: 17,
-        img: "/img/portfolio/17.jpg",
-        type: "OriginalMusic",
-        videoId: "JnTsW7rqAEw",
-        title: "Chill Trap instrumental 4",
-        detail: "OriginalMusic",
-        date:"28/02/2018"
-    },
-    {
-        id: 18,
-        img: "/img/portfolio/18.jpg",
-        type: "OriginalMusic",
-        videoId: "x7Ln_wNl9mk",
-        title: "Metalcore Instrumental XV",
-        detail: "OriginalMusic",
-        date:"12/01/2018"
-    },
-    {
-        id: 19,
-        img: "/img/portfolio/19.jpg",
-        type: "OriginalMusic",
-        videoId: "_POxXH8Q6VY",
-        title: "Metalcore Instrumental XVI",
-        detail: "OriginalMusic",
-        date:"12/01/2018"
-    },
-    {
         id: 20,
         img: "/img/portfolio/20.jpg",
         type: "MusicToPicture",
@@ -180,33 +135,6 @@ module.exports = [
         date:"01/06/2016"
     },
     {
-        id: 21,
-        img: "/img/portfolio/21.jpg",
-        type: "OriginalMusic",
-        videoId: "V6dMBidFv00",
-        title: "The ambient electro song",
-        detail: "OriginalMusic",
-        date:"20/12/2015"
-    },
-    {
-        id: 22,
-        img: "/img/portfolio/22.jpg",
-        type: "OriginalMusic",
-        videoId: "U8Ebjje7A88",
-        title: "Broadway Avenue - Loïc Ghanem Feat Marty Degenne",
-        detail: "OriginalMusic",
-        date:"16/07/2015"
-    },
-    {
-        id: 23,
-        img: "/img/portfolio/23.jpg",
-        type: "OriginalMusic",
-        videoId: "smvWLIWPmec",
-        title: '"Missing your smile" Loïc Ghanem Feat Marty Degenne',
-        detail: "OriginalMusic",
-        date:"14/04/2015"
-    },
-    {
         id: 24,
         img: "/img/portfolio/24.jpg",
         type: "OriginalMusic",
@@ -214,15 +142,6 @@ module.exports = [
         title: '" I\'ll never find love in Paris... " Loïc Ghanem',
         detail: "OriginalMusic",
         date:"11/03/2015"
-    },
-    {
-        id: 25,
-        img: "/img/portfolio/25.jpg",
-        type: "OriginalMusic",
-        videoId: "XQEFjQIxVCA",
-        title: "Le lac des cygnes / Swan lake , Recomposed by Loïc Ghanem",
-        detail: "OriginalMusic",
-        date:"27/01/2015"
     },
     {
         id: 26,
@@ -351,15 +270,6 @@ module.exports = [
         date:"16/09/2017"
     },
     {
-        id: 41,
-        img: "/img/portfolio/41.jpg",
-        type: "Sync",
-        videoId: "rZ8vqBICHjo",
-        title: "MACCAS MAGIC BUS | Official Series Trailer",
-        detail: "Sync",
-        date:"26/05/2023"
-    },
-    {
         id: 42,
         img: "/img/portfolio/42.jpg",
         type: "Sync",
@@ -402,6 +312,6 @@ module.exports = [
         videoId: "MAdqQ70o2I8",
         title: "Early Seasons - Future (Official Music Video)",
         detail: "OriginalMusic",
-        date:"01/06/2023"
+        date:"01/06/01"
     },
 ];

@@ -16,13 +16,13 @@ const ReactTooltip = dynamic(() => import("react-tooltip"), {
 
 const Videos = () => {
     const [isOpenYoutube, setOpenYoutube] = useState({ isOpen: false, videoId: null });
-    const [selectedTab, setSelectedTab] = useState("All");
+    const [selectedTab, setSelectedTab] = useState("Sync");
 
 
     const renderVideoList = (type) => {
         const sortedVideos = [...videoData]
-            .filter((video) => type === "All" || video.type === type)
-            .sort((a, b) => {
+        .filter((video) => video.type === type)
+        .sort((a, b) => {
                 const aDate = a.date.split("/").reverse().join("-");
                 const bDate = b.date.split("/").reverse().join("-");
                 return new Date(bDate) - new Date(aDate);
@@ -82,17 +82,15 @@ const Videos = () => {
 
     return (
         <>
-            <Gallery>
+             <Gallery>
                 <Tabs>
                     <TabList>
-                        <Tab onClick={() => setSelectedTab("All")}>All</Tab>
                         <Tab onClick={() => setSelectedTab("Sync")}>Sync</Tab>
                         <Tab onClick={() => setSelectedTab("OriginalMusic")}>Original Music</Tab>
                         <Tab onClick={() => setSelectedTab("MusicToPicture")}>Music to Picture</Tab>
                     </TabList>
 
                     <div className="list_wrapper">
-                        <TabPanel>{renderVideoList("All")}</TabPanel>
                         <TabPanel>{renderVideoList("Sync")}</TabPanel>
                         <TabPanel>{renderVideoList("OriginalMusic")}</TabPanel>
                         <TabPanel>{renderVideoList("MusicToPicture")}</TabPanel>
