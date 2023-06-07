@@ -52,7 +52,7 @@ const Services = () => {
           {/* END CLOSE ICON */}
           <div className="box_inner">
             <div className="description_wrap scrollable">
-              <div className="image">
+              <div className="image-service">
                 <img src={singleData?.largeImg} alt="Image" />
                 {/* <div
                   className="main"
