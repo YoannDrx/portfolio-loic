@@ -296,15 +296,16 @@ module.exports = [
         detail: "Sync",
         date:"16/01/2020"
     },
-    {
-        id: 45,
-        img: "/img/portfolio/45.jpg",
-        type: "OriginalMusic",
-        videoId: "_B-8cHjcsac",
-        title: "Mother (Feat Novine)",
-        detail: "OriginalMusic",
-        date:"01/06/2023"
-    },
+    // TODO : reactivé quand la vidéo sera dispo
+    // {
+    //     id: 45,
+    //     img: "/img/portfolio/45.jpg",
+    //     type: "OriginalMusic",
+    //     videoId: "_B-8cHjcsac",
+    //     title: "Mother (Feat Novine)",
+    //     detail: "OriginalMusic",
+    //     date:"01/06/2023"
+    // },
     {
         id: 46,
         img: "/img/portfolio/46.jpg",
