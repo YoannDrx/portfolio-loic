@@ -18,7 +18,7 @@ export default function Document() {
                 <meta name="description" content="Loïc Ghanem Music - Composer & Producer" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="robots" content="noindex, follow" />
-                <link rel="icon" href="https://www.yodev.com/favicon.ico" />
+                <link rel="icon" href="https://www.yodev.fr/favicon.ico" />
             </Head>
             <body>
                 <Main />
