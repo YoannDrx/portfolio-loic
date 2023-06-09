@@ -108,7 +108,7 @@ const Sidebar = () => {
                                 __html: `
             <iframe 
                 width="100%" 
-                height="500" 
+                height="550" 
                 scrolling="no" 
                 frameborder="no" 
                 allow="autoplay" 
