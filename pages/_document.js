@@ -13,6 +13,8 @@ export default function Document() {
           rel="stylesheet"
         />
         <meta property="og:image" content="/img/og-loic.png" />
+        <meta property="og:title" content="Loïc Ghanem Music - Composer & Producer" />
+        <meta property="og:description" content="Découvrez la musique de Loïc Ghanem, compositeur et producteur." />
         <meta name="description" content="Loïc Ghanem Music - Composer & Producer" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="robots" content="noindex, follow" />
