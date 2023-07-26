@@ -9,8 +9,8 @@ module.exports = [
 		date: "June 2023",
 		sortedDate: "06-2023",
 		style: "All Music Genres",
-		listenLink: "https://soundcloud.com/voyager-one-one/super-villian-feat-devmo",
-		collabName: "Quincy Thompson, Novine, Tim Moyo, Julaiah, Lou.C",
+		listenLink: "https://fanlink.to/TheQueens",
+		collabName: "Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala ",
 		collabLink: "",
 		descriptions: (
 			<>
@@ -20,23 +20,36 @@ module.exports = [
 						bears an audacious exploration of timeless music genres. Seamlessly intertwining elements of
 						punk rock with the pulsating beats of drill music, the album marks a bold departure from the
 						norm. This eclectic sonic masterpiece was brought to life with the collaboration of notable
-						international artists - Quincy Thompson, Novine, Tim Moyo, Julaiah, and Lou.C, adding their
+						international artists - <span className="collab-name">Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala</span>, adding their
 						unique flavors to the mix.
 					</p>
 					<p className="bigger">
 						The visually striking album cover, emblazoned with the image of the queens, gives a hint to the
 						powerful music contained within. Every track is a testament to the versatility of music,
 						breaking boundaries while paying homage to different music styles. The album is not just a
-						testament to Ghanem&apos;s versatility as an artist, but also to the limitless possibilities of
-						musical collaboration and transformation. Released under the Montmorency Music Agency, MYMA,
+						testament to Loïc&apos;s versatility as an artist, but also to the limitless possibilities of
+						musical collaboration and transformation.
 					</p>
 					<p className="bigger">
 						"The Queens" serves as a captivating journey through the varied landscape of music, leaving
 						listeners eager for the next twist or turn. It&apos;s not just an album; it's an audacious voyage
 						into the heart of what makes music timeless and continually fascinating. Listen to "The Queens"
 						and allow its revolutionary blend of punk rock, drill music, and other genres to sweep you off
-						your feet The album was released under the label <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
+						your feet. The album was released under the label <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
 					</p>
+					<p className="bigger tracklist-title">Tracklist:</p>
+					<ul className=" bigger tracklist">
+						<li>1. Mother - Novine - 04:28</li>
+						<li>2. Like A Lightning - Kinnie Lane - 02:44</li>
+						<li>3. Supervillain - Voyager1, Lou.C, Devmo - 03:29</li>
+						<li>4. Paper Plane - Voyager1, Meganne - 03:37</li>
+						<li>5. Nature - Lina Stalyte - 04:31</li>
+						<li>6. Forget My Name - London Mars - 02:31</li>
+						<li>7. I'll Be Fine - Extra Special - 03:29</li>
+						<li>8. Watch Me Dance - Emy Smith - 02:22</li>
+						<li>9. Sky Is The Limit - Yulia - 02:55</li>
+						<li>10. Don't Like This Game - Magdala - 04:37</li>
+					</ul>
 				</div>
 			</>
 		),
