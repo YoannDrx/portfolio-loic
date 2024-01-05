@@ -43,8 +43,7 @@ const Services = () => {
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
+        closeTimeoutMS={500}>
         <div className="tokyo_tm_modalbox_news">
           <button className="close-modal" onClick={() => setIsOpen(false)}>
             <img src="/img/svg/cancel.svg" alt="close icon" />
@@ -65,7 +64,7 @@ const Services = () => {
               <div className="details">
                 <div className="extra">
                   <p className="date">
-                    By <a href="#">{singleData?.poster}</a>
+                    <a href="#">{singleData?.poster}</a>
                     <span>{singleData?.date}</span>
                   </p>
                 </div>
