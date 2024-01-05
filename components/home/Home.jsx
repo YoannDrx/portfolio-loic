@@ -30,9 +30,14 @@ const Home = () => {
             </p>
             <p className="job">
               Nominated in 2023 for Best Rock and Hip-Hop Songs at the{" "}
-              <a href={"https://pmamusic.com/events/mark-awards/"}>Los Angeles Mark Awards</a>, winning in the Rock category !
-              Also nominated for the Rock category at the{" "}
-              <a href={"https://www.productionmusicawards.com/nominations-2023/"}>London Music Production Awards</a>.
+              <a href={"https://pmamusic.com/events/mark-awards/"} target="_blank" rel="noopener noreferrer">
+                Los Angeles Mark Awards
+              </a>
+              , winning in the Rock category ! Also nominated for the Rock category at the{" "}
+              <a href={"https://www.productionmusicawards.com/nominations-2023/"} target="_blank" rel="noopener noreferrer">
+                London Music Production Awards
+              </a>
+              .
             </p>
 
             {/* END JOB */}
