@@ -1,7 +1,6 @@
 import React from "react";
 import Typed from "react-typed";
 import Social from "../Social";
-import Link from "next/link";
 
 const Home = () => {
   return (
@@ -38,6 +37,12 @@ const Home = () => {
                 London Music Production Awards
               </a>
               .
+            </p>
+            <p style={{ marginBottom: "20px" }}>
+              Check out my last video{" "}
+              <a href="https://www.youtube.com/watch?v=sG9J5pcNco4" className="last-video">
+                "Dark Industry"
+              </a>
             </p>
 
             {/* END JOB */}

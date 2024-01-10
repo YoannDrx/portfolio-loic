@@ -69,14 +69,13 @@ const AboutMain = () => {
             <img
               src="/img/about/PMA-2023-Rock-nomination.jpg"
               alt="Production Music Awards Nomination"
-              style={{ width: "100%", height: "auto" }}
+              style={{ width: "60%", height: "auto" }}
             />
           </div>
 
           <div
             className="award_section"
-            // style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "20px" }}
-          >
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "20px" }}>
             <div className="award_text">
               <h4 className="award_title">The Mark Awards</h4>
               <p>
@@ -95,7 +94,7 @@ const AboutMain = () => {
                 </a>
               </p>
             </div>
-            <img src="/img/about/Marks-Awards.jpg" alt="Mark Awards" style={{ width: "100%", height: "auto" }} />
+            <img src="/img/about/Marks-Awards.jpg" alt="Mark Awards" style={{ width: "60%", height: "auto" }} />
           </div>
         </div>
       </div>

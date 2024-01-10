@@ -2306,3 +2306,12 @@ body.modal {
   float: left;
   padding: 10px 0px;
 }
+
+.last-video {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: #1ed760;
+  }
+}
