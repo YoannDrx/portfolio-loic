@@ -41,7 +41,7 @@ const Home = () => {
             <p style={{ marginBottom: "20px" }}>
               Check out my last video{" "}
               <a href="https://www.youtube.com/watch?v=sG9J5pcNco4" className="last-video">
-                "Dark Industry"
+                &quot;Dark Industry&quot;
               </a>
             </p>
 
