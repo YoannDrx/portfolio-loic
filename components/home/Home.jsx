@@ -22,7 +22,7 @@ const Home = () => {
             <h4 className="typer">
               <Typed strings={["music composer", "music producer"]} loop typeSpeed={80} />
             </h4>
-
+            {/* 
             <p className="job">
               Composer based in Paris. I bring your projects to life with sound, specializing in composing music for films, video
               games, and commercials. Elevate your narratives with my unique soundscapes.
@@ -43,8 +43,41 @@ const Home = () => {
               <a href="https://www.youtube.com/watch?v=sG9J5pcNco4" className="last-video">
                 &quot;Dark Industry&quot;
               </a>
+            </p> */}
+            <p className="job">
+              Composer based in Paris. I bring your projects to life with sound, specializing in composing music for films, video
+              games, and commercials. Elevate your narratives with my unique soundscapes.
             </p>
-
+            <p className="job">
+              Winner of the Best Rock Song at the{" "}
+              <a
+                href="https://pmamusic.com/events/mark-awards/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover-green">
+                Los Angeles Mark Awards in 2023
+              </a>
+              . Also nominated for Best Hip-Hop Song at the same awards, showcasing versatility across genres. Further nominated
+              for the Rock category at the{" "}
+              <a
+                href="https://www.productionmusicawards.com/nominations-2023/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover-green">
+                London Music Production Awards
+              </a>
+              , affirming my commitment to excellence in music production.
+            </p>
+            <p style={{ marginBottom: "20px" }}>
+              Check out my last video{" "}
+              <a
+                href="https://www.youtube.com/watch?v=sG9J5pcNco4"
+                className="hover-green"
+                target="_blank"
+                rel="noopener noreferrer">
+                "Dark Industry"
+              </a>
+            </p>
             {/* END JOB */}
             <Social />
           </div>
