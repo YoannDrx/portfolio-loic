@@ -305,12 +305,12 @@ module.exports = [
   },
   {
     id: 12,
-    title: "Death Metal",
+    title: "Metalcore",
     img: "/img/albums/11.jpg",
     poster: "Loïc Ghanem",
     date: "Mar 2019",
     sortedDate: "03-2019",
-    style: "Death Metal",
+    style: "Metalcore",
     listenLink: "https://fanlink.tv/Deathmetal",
     collabName: "Terence, Aaron",
     collabLink: "",
@@ -318,9 +318,9 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Death Metal" is a potent blend of death metal and deathcore, released in March 2019. This album features
-            collaborations with <span className="hover-green">Terence</span> and <span className="hover-green">Aaron</span> on
-            several tracks. Signed under my artist name, this album was produced for publishing and released under the label{" "}
+            "Metalcore" is a potent blend of metal and hardcore, released in March 2019. This album features collaborations with{" "}
+            <span className="hover-green">Terence</span> and <span className="hover-green">Aaron</span> on several tracks. Signed
+            under my artist name, this album was produced for publishing and released under the label{" "}
             <span className="hover-green">Justement</span> and the publisher{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
