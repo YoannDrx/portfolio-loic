@@ -9,7 +9,7 @@ module.exports = [
     date: "June 2023",
     sortedDate: "06-2023",
     style: "All Music Genres",
-    listenLink: "https://fanlink.to/TheQueens",
+    listenLink: "https://fanlink.tv/TheQueens",
     collabName:
       "Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala ",
     collabLink: "",
@@ -65,7 +65,7 @@ module.exports = [
     date: "May 2022",
     sortedDate: "05-2022",
     style: "Hip-Hop/RnB",
-    listenLink: "https://fanlink.to/Voyager1MakeMeFeel",
+    listenLink: "https://fanlink.tv/Voyager1MakeMeFeel",
     collabName: "Quincy Thompson, Novine, Tim Moyo, Julaiah, Lou.C",
     collabLink: "",
     descriptions: (
@@ -91,7 +91,7 @@ module.exports = [
     date: "Sept 2020",
     sortedDate: "09-2020",
     style: "Ambient Guitar",
-    listenLink: "https://fanlink.to/ambientguitar",
+    listenLink: "https://fanlink.tv/ambientguitar",
     collabName: "Michel-Yves Kochmann",
     collabLink: "",
     descriptions: (
@@ -116,7 +116,7 @@ module.exports = [
     date: "Jan 2022",
     sortedDate: "01-2022",
     style: "Bass Music",
-    listenLink: "https://fanlink.to/Voyager1BassMusic",
+    listenLink: "https://fanlink.tv/Voyager1BassMusic",
     collabName: "Olynda, Lou.C, Twild",
     collabLink: "",
     descriptions: (
@@ -141,7 +141,7 @@ module.exports = [
     date: "Apr 2020",
     sortedDate: "04-2020",
     style: "Cyberpunk",
-    listenLink: "https://fanlink.to/cyberpunkLoicGhanem",
+    listenLink: "https://fanlink.tv/cyberpunkLoicGhanem",
     collabName: "",
     collabLink: "",
     descriptions: (
@@ -165,7 +165,7 @@ module.exports = [
     date: "May 2021",
     sortedDate: "05-2021",
     style: "Hip-Hop",
-    listenLink: "https://fanlink.to/Voyager1GetTrapped",
+    listenLink: "https://fanlink.tv/Voyager1GetTrapped",
     collabName: "Lou.C",
     collabLink: "",
     descriptions: (
@@ -190,7 +190,7 @@ module.exports = [
     date: "Apr 2021",
     sortedDate: "04-2021",
     style: "Pop Punk",
-    listenLink: "https://fanlink.to/PopPunk",
+    listenLink: "https://fanlink.tv/PopPunk",
     collabName: "Dory-Loup, Fran Darras",
     collabLink: "",
     descriptions: (
@@ -214,7 +214,7 @@ module.exports = [
     date: "July 2020",
     sortedDate: "07-2020",
     style: "Hardcore",
-    listenLink: "https://fanlink.to/hardcoreLoicghanem",
+    listenLink: "https://fanlink.tv/hardcoreLoicghanem",
     collabName: "Terence Langlois",
     collabLink: "",
     descriptions: (
@@ -238,7 +238,7 @@ module.exports = [
     date: "Oct 2019",
     sortedDate: "10-2019",
     style: "Synthwave",
-    listenLink: "https://fanlink.to/loicghanemsynthwave",
+    listenLink: "https://fanlink.tv/loicghanemsynthwave",
     collabName: "",
     collabLink: "",
     descriptions: (
@@ -262,7 +262,7 @@ module.exports = [
     date: "July 2020",
     sortedDate: "07-2020",
     style: "Metalcore/Speed Metal",
-    listenLink: "https://fanlink.to/FastMetal",
+    listenLink: "https://fanlink.tv/FastMetal",
     collabName: "Sham Makdessi, Terence Langlois, Aaron Matts",
     collabLink: "",
     descriptions: (
@@ -287,7 +287,7 @@ module.exports = [
     date: "June 2020",
     sortedDate: "06-2020",
     style: "Metalcore",
-    listenLink: "https://fanlink.to/Kick-assMetalJacket",
+    listenLink: "https://fanlink.tv/Kick-assMetalJacket",
     collabName: "Terence Langlois",
     collabLink: "",
     descriptions: (
@@ -311,7 +311,7 @@ module.exports = [
     date: "Mar 2019",
     sortedDate: "03-2019",
     style: "Death Metal",
-    listenLink: "https://fanlink.to/Deathmetal",
+    listenLink: "https://fanlink.tv/Deathmetal",
     collabName: "Terence, Aaron",
     collabLink: "",
     descriptions: (
@@ -336,7 +336,7 @@ module.exports = [
     date: "Mar 2019",
     sortedDate: "03-2019",
     style: "Death Metal",
-    listenLink: "https://fanlink.to/Deathmetal",
+    listenLink: "https://fanlink.tv/Deathmetal",
     collabName: "Terence, Aaron",
     collabLink: "",
     descriptions: (
@@ -361,7 +361,7 @@ module.exports = [
     date: "Feb 2024",
     sortedDate: "02-2024",
     style: "Metalcore",
-    listenLink: "https://fanlink.to/Metalcore2",
+    listenLink: "https://fanlink.tv/Metalcore2",
     collabName: "Terence, Aaron",
     collabLink: "",
     descriptions: (
