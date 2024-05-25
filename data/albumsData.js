@@ -381,4 +381,32 @@ module.exports = [
       </>
     ),
   },
+  {
+    id: 15,
+    title: "Dystopia",
+    img: "/img/albums/dystopia.jpg",
+    poster: "Loïc Ghanem",
+    date: "Jun 2024",
+    sortedDate: "06-2024",
+    style: "Cinematic Metal Ambient",
+    listenLink: "https://fanlink.tv/LoicGhanemDystopia",
+    collabName: "",
+    collabLink: "",
+    descriptions: (
+      <>
+        <div className="descriptions">
+          <p className="bigger">
+            &apos;Dystopia&apos; marque un tournant audacieux dans le monde du metal avec une fusion unique de cinematic metal et
+            d&apos;ambient, créé et interprété par Loïc Ghanem. Sorti sous le label prestigieux{" "}
+            <a href="https://www.cezamemusic.com/infinity-scores-label-141693.html/">Infinity Scores</a>, fondé par{" "}
+            <span className="hover-green">Gabriel Saban</span>, reconnu pour son influence significative dans l&apos;industrie,
+            cet album est publié par <a href="https://www.cezamemusic.com/"> Cezame Music Agency</a>. Sans collaboration
+            extérieure, Loïc Ghanem démontre son talent multiforme en prenant en charge tous les aspects de la création.
+            &apos;Dystopia&apos; est une œuvre essentielle pour les amateurs de métal recherchant des sonorités profondes et
+            immersives, mêlant force et finesse pour une expérience musicale épique.
+          </p>
+        </div>
+      </>
+    ),
+  },
 ];
