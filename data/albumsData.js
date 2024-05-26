@@ -396,14 +396,14 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            &apos;Dystopia&apos; marque un tournant audacieux dans le monde du metal avec une fusion unique de cinematic metal et
-            d&apos;ambient, créé et interprété par Loïc Ghanem. Sorti sous le label prestigieux{" "}
-            <a href="https://www.cezamemusic.com/infinity-scores-label-141693.html/">Infinity Scores</a>, fondé par{" "}
-            <span className="hover-green">Gabriel Saban</span>, reconnu pour son influence significative dans l&apos;industrie,
-            cet album est publié par <a href="https://www.cezamemusic.com/"> Cezame Music Agency</a>. Sans collaboration
-            extérieure, Loïc Ghanem démontre son talent multiforme en prenant en charge tous les aspects de la création.
-            &apos;Dystopia&apos; est une œuvre essentielle pour les amateurs de métal recherchant des sonorités profondes et
-            immersives, mêlant force et finesse pour une expérience musicale épique.
+            &apos;Dystopia&apos; marks a bold turning point in the metal world with a unique fusion of cinematic metal and
+            ambient, created and performed by Loïc Ghanem. Released under the prestigious{" "}
+            <a href="https://www.cezamemusic.com/infinity-scores-label-141693.html/">Infinity Scores</a> label, founded by{" "}
+            <span className="hover-green">Gabriel Saban</span>, known for his significant influence in the industry, this album is
+            published by <a href="https://www.cezamemusic.com/">Cezame Music Agency</a>. Without external collaboration, Loïc
+            Ghanem demonstrates his multifaceted talent by handling all aspects of creation. &apos;Dystopia&apos; is an essential
+            work for metal enthusiasts seeking deep and immersive sounds, blending strength and finesse for an epic musical
+            experience.
           </p>
         </div>
       </>
