@@ -77,9 +77,11 @@ const AboutMain = () => {
                 </a>
               </p>
             </div>
-            <img
-              src="/img/about/PMA-2024-Metal-nomination.jpg"
+            <Image
+              src={"/img/about/PMA-2024-Metal-nomination.jpg"}
               alt="Production Music Awards 2024 Metal Nomination"
+              width={800}
+              height={450}
               style={{ width: "60%", height: "auto" }}
             />
           </div>
@@ -106,9 +108,12 @@ const AboutMain = () => {
                 </a>
               </p>
             </div>
-            <img
+
+            <Image
               src="/img/about/PMA-2023-Rock-nomination.jpg"
               alt="Production Music Awards Nomination"
+              width={800}
+              height={450}
               style={{ width: "60%", height: "auto" }}
             />
           </div>
@@ -135,7 +140,13 @@ const AboutMain = () => {
                 </a>
               </p>
             </div>
-            <img src="/img/about/Marks-Awards.jpg" alt="Mark Awards" style={{ width: "60%", height: "auto" }} />
+            <Image
+              src="/img/about/Marks-Awards.jpg"
+              alt="Mark Awards"
+              width={800}
+              height={450}
+              style={{ width: "60%", height: "auto" }}
+            />
           </div>
         </div>
       </div>

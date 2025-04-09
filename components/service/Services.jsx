@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import servicesData from "../../data/servicesData";
 import ShareSocial from "../social-share/ShareSocial";
+import Image from "next/image";
 
 Modal.setAppElement("#__next");
 
@@ -43,16 +44,31 @@ const Services = () => {
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
-        closeTimeoutMS={500}>
+        closeTimeoutMS={500}
+      >
         <div className="tokyo_tm_modalbox_news">
           <button className="close-modal" onClick={() => setIsOpen(false)}>
-            <img src="/img/svg/cancel.svg" alt="close icon" />
+            <Image
+              src="/img/svg/cancel.svg"
+              alt="close icon"
+              width={24}
+              height={24}
+              className="svg"
+              style={{ width: "100%", height: "auto" }}
+            />
           </button>
           {/* END CLOSE ICON */}
           <div className="box_inner">
             <div className="description_wrap scrollable">
               <div className="image-service">
-                <img src={singleData?.largeImg} alt="Image" />
+                <Image
+                  className="full_size"
+                  src={singleData?.largeImg}
+                  alt=""
+                  width={1920}
+                  height={1114}
+                  style={{ width: "100%", height: "auto" }}
+                />
                 {/* <div
                   className="main"
                   style={{

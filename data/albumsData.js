@@ -385,7 +385,7 @@ module.exports = [
   {
     id: 15,
     title: "Dystopia",
-    img: "/img/albums/dystopia.jpg",
+    img: "/img/albums/dystopia.png",
     poster: "Loïc Ghanem",
     date: "Jun 2024",
     sortedDate: "06-2024",

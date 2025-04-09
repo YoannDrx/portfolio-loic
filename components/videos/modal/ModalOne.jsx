@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Social from "../../Social";
 
 const ModalOne = () => {
@@ -5,7 +6,14 @@ const ModalOne = () => {
     <div className="box_inner">
       <div className="description_wrap scrollable">
         <div className="image">
-          <img src="/img/thumbs/4-3.jpg" alt="tumb" />
+          <Image
+            className="full_size"
+            src="/img/thumbs/4-3.jpg"
+            alt="thumb"
+            width={1920}
+            height={1114}
+            style={{ width: "100%", height: "auto" }}
+          />
           <div
             className="main"
             style={{
@@ -22,18 +30,13 @@ const ModalOne = () => {
         <div className="main_details">
           <div className="textbox">
             <p>
-              We live in a world where we need to move quickly and iterate on
-              our ideas as flexibly as possible. Building mockups strikes the
-              ideal balance between true-life representation of the end product
-              and ease of modification.
+              We live in a world where we need to move quickly and iterate on our ideas as flexibly as possible. Building mockups
+              strikes the ideal balance between true-life representation of the end product and ease of modification.
             </p>
             <p>
-              Mockups are useful both for the creative phase of the project -
-              for instance when you&lsquo;re trying to figure out your user
-              flows or the proper visual hierarchy - and the production phase
-              when they will represent the target product. Making mockups a part
-              of your creative and development process allows you to quickly and
-              easily ideate.
+              Mockups are useful both for the creative phase of the project - for instance when you&lsquo;re trying to figure out
+              your user flows or the proper visual hierarchy - and the production phase when they will represent the target
+              product. Making mockups a part of your creative and development process allows you to quickly and easily ideate.
             </p>
           </div>
           <div className="detailbox">
