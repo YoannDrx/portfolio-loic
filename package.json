@@ -14,7 +14,7 @@
     "aos": "^2.3.4",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
-    "next": "13.1.1",
+    "next": "^15.2.5",
     "next-share": "^0.19.0",
     "next-themes": "^0.2.1",
     "photoswipe": "^5.3.4",
