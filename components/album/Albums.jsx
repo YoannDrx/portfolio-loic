@@ -33,13 +33,14 @@ const Albums = () => {
         {sortedAlbumsData.map((item) => (
           <li key={item.id}>
             <div className="list_inner" onClick={() => handleModle(item?.id)}>
-              <div className="image">
-                <div
-                  className="main "
-                  style={{
-                    backgroundImage: `url(${item.img})`,
-                  }}></div>
-              </div>
+              <Image
+                className="full_size"
+                src={item.img}
+                alt=""
+                width={1920}
+                height={1114}
+                style={{ width: "100%", height: "auto" }}
+              />
               {/* END IMAGE */}
               <div className="details">
                 <p className="date">
@@ -69,7 +70,8 @@ const Albums = () => {
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
-        closeTimeoutMS={500}>
+        closeTimeoutMS={500}
+      >
         <div className="tokyo_tm_modalbox_news">
           <button className="close-modal" onClick={() => setIsOpen(false)}>
             <Image width={45} height={45} src="/img/svg/cancel.svg" alt="close icon" />
@@ -79,7 +81,14 @@ const Albums = () => {
           <div className="box_inner">
             <div className="description_wrap scrollable">
               {/* FULL SIZE IMG */}
-              <img src={singleData?.img} alt="" />
+              <Image
+                className="full_size"
+                src={singleData?.img}
+                alt=""
+                width={1920}
+                height={1114}
+                style={{ width: "100%", height: "auto" }}
+              />
               {/* <div className="image">
                 <div
                   className="main"
@@ -104,7 +113,8 @@ const Albums = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ fontSize: 28 }}
-                      className="hover-green">
+                      className="hover-green"
+                    >
                       <FaMusic />
                       {"  "}Listen to this album here
                     </a>

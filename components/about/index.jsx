@@ -47,7 +47,49 @@ const AboutMain = () => {
         <div className="news_content">
           <div
             className="award_section"
-            style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "20px" }}>
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginBottom: "20px",
+            }}
+          >
+            <div className="award_text">
+              <h4 className="award_title">Production Music Awards 2024</h4>
+              <p>Honored with a double nomination in the brand-new Metal category:</p>
+              <ul style={{ marginTop: "10px", marginBottom: "10px", paddingLeft: "20px" }}>
+                <li>
+                  <strong>&quot;Sparkle in the Dark&quot;</strong> from the album <em>Dystopia</em>, released by{" "}
+                  <strong>Infinity Scores</strong> and published by <strong>Cezame Agency</strong>
+                </li>
+                <li>
+                  <strong>&quot;Revenge&quot; feat. Aaron Matts</strong> from the album <em>Metalcore2</em>, released by{" "}
+                  <strong>Justement Music</strong> and published by <strong>MYMA</strong>
+                </li>
+              </ul>
+              <p>
+                This recognition at the PMA 2024 highlights my continued exploration of metal music and my collaborations with top
+                vocalists.
+              </p>
+              <p>
+                <a href="https://www.productionmusicawards.com/" target="_blank" rel="noopener noreferrer">
+                  Learn more
+                </a>
+              </p>
+            </div>
+            <Image
+              src={"/img/about/PMA-2024-Metal-nomination.jpg"}
+              alt="Production Music Awards 2024 Metal Nomination"
+              width={800}
+              height={450}
+              style={{ width: "60%", height: "auto" }}
+            />
+          </div>
+
+          <div
+            className="award_section"
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "20px" }}
+          >
             <div className="award_text">
               <h4 className="award_title">The Production Music Awards</h4>
               <p>
@@ -66,16 +108,20 @@ const AboutMain = () => {
                 </a>
               </p>
             </div>
-            <img
+
+            <Image
               src="/img/about/PMA-2023-Rock-nomination.jpg"
               alt="Production Music Awards Nomination"
+              width={800}
+              height={450}
               style={{ width: "60%", height: "auto" }}
             />
           </div>
 
           <div
             className="award_section"
-            style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "20px" }}>
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "20px" }}
+          >
             <div className="award_text">
               <h4 className="award_title">The Mark Awards</h4>
               <p>
@@ -94,7 +140,13 @@ const AboutMain = () => {
                 </a>
               </p>
             </div>
-            <img src="/img/about/Marks-Awards.jpg" alt="Mark Awards" style={{ width: "60%", height: "auto" }} />
+            <Image
+              src="/img/about/Marks-Awards.jpg"
+              alt="Mark Awards"
+              width={800}
+              height={450}
+              style={{ width: "60%", height: "auto" }}
+            />
           </div>
         </div>
       </div>
@@ -134,7 +186,8 @@ const AboutMain = () => {
               href={"https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1"}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "lightgreen", textDecoration: "none" }}>
+              style={{ color: "lightgreen", textDecoration: "none" }}
+            >
               Check out the SoundBetter reviews
             </a>
           </div>

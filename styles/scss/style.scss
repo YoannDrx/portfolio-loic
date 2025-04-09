@@ -1,11 +1,11 @@
-@import "typographpy/typography";
+@use "typographpy/typography";
 
 // Main CSS
-@import "main/preview";
-@import "main/about";
-@import "main/testimonial";
-@import "main/service";
-@import "main/tokyo";
-@import "main/humberger";
-@import "main/dark";
-@import "node_modules/react-modal-video/scss/modal-video.scss";
+@use "main/preview";
+@use "main/about";
+@use "main/testimonial";
+@use "main/service";
+@use "main/tokyo";
+@use "main/humberger";
+@use "main/dark";
+@use "node_modules/react-modal-video/scss/modal-video.scss";
