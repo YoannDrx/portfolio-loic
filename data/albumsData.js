@@ -17,10 +17,10 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "The Queens" is an ambitious and contemporary album. Crafted by Loïc Ghanem in June 2023, it bears an audacious
-            exploration of timeless music genres. Seamlessly intertwining elements of punk rock with the pulsating beats of drill
-            music, the album marks a bold departure from the norm. This eclectic sonic masterpiece was brought to life with the
-            collaboration of notable international artists -{" "}
+            <em>&apos;The Queens&apos;</em> is an ambitious and contemporary album. Crafted by Loïc Ghanem in June 2023, it bears
+            an audacious exploration of timeless music genres. Seamlessly intertwining elements of punk rock with the pulsating
+            beats of drill music, the album marks a bold departure from the norm. This eclectic sonic masterpiece was brought to
+            life with the collaboration of notable international artists -{" "}
             <span className="hover-green">
               Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia,
               Magdala
@@ -34,10 +34,10 @@ module.exports = [
             limitless possibilities of musical collaboration and transformation.
           </p>
           <p className="bigger">
-            "The Queens" serves as a captivating journey through the varied landscape of music, leaving listeners eager for the
-            next twist or turn. It&apos;s not just an album; it's an audacious voyage into the heart of what makes music timeless
-            and continually fascinating. Listen to "The Queens" and allow its revolutionary blend of punk rock, drill music, and
-            other genres to sweep you off your feet. The album was released under the label{" "}
+            <em>&apos;The Queens&apos;</em> serves as a captivating journey through the varied landscape of music, leaving
+            listeners eager for the next twist or turn. It&apos;s not just an album; it&apos;s an audacious voyage into the heart
+            of what makes music timeless and continually fascinating. Listen to &quot;The Queens&quot; and allow its revolutionary
+            blend of punk rock, drill music, and other genres to sweep you off your feet. The album was released under the label{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
           <p className="bigger tracklist-title">Tracklist:</p>
@@ -48,10 +48,10 @@ module.exports = [
             <li>4. Paper Plane - Voyager1, Meganne - 03:37</li>
             <li>5. Nature - Lina Stalyte - 04:31</li>
             <li>6. Forget My Name - London Mars - 02:31</li>
-            <li>7. I'll Be Fine - Extra Special - 03:29</li>
+            <li>7. I&apos;ll Be Fine - Extra Special - 03:29</li>
             <li>8. Watch Me Dance - Emy Smith - 02:22</li>
             <li>9. Sky Is The Limit - Yulia - 02:55</li>
-            <li>10. Don't Like This Game - Magdala - 04:37</li>
+            <li>10. Don&apos;t Like This Game - Magdala - 04:37</li>
           </ul>
         </div>
       </>
@@ -72,8 +72,8 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Make Me Feel" is a vibrant blend of Hip-Hop and RnB, released in May 2022. This album showcases my collaboration with
-            international artists such as <span className="hover-green">Quincy Thompson</span>,{" "}
+            <em>&apos;Make Me Feel&apos;</em> is a vibrant blend of Hip-Hop and RnB, released in May 2022. This album showcases my
+            collaboration with international artists such as <span className="hover-green">Quincy Thompson</span>,{" "}
             <span className="hover-green">Novine</span>,<span className="hover-green">Tim Moyo</span>,{" "}
             <span className="hover-green">Julaiah</span>, and <span className="hover-green">Lou.C</span>. Signed under my artist
             name, Voyager1, this album is also intended for publishing. The album was released under the label{" "}
@@ -98,8 +98,8 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Ambient Guitar" is a soulful blend of ambient sounds and melodious guitar tunes. Released in September 2020, this
-            album is a collaborative effort with renowned artist
+            <em>&apos;Ambient Guitar&apos;</em> is a soulful blend of ambient sounds and melodious guitar tunes. Released in
+            September 2020, this album is a collaborative effort with renowned artist
             <span className="hover-green">Michel-Yves Kochmann</span>. Signed under my artist name, Voyager1, this album was aimed
             primarily for publishing. The album was released under the label Montmorency{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
@@ -123,11 +123,11 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Bass Music" is a diverse mix of future house, bass house, DnB, psy trance, and G-house, released in January 2022.
-            This album features collaborations with <span className="hover-green">Olynda, Lou.C, and Twild</span>, and features{" "}
-            <span className="hover-green">Lou.C, Marty Degenne, and Magdala</span>. Like my other works, this album is signed
-            under my artist name, Voyager1, and is also intended for publishing. The album was released under the label Justement
-            Music and the publisher <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
+            <em>&apos;Bass Music&apos;</em> is a diverse mix of future house, bass house, DnB, psy trance, and G-house, released
+            in January 2022. This album features collaborations with <span className="hover-green">Olynda, Lou.C, and Twild</span>
+            , and features <span className="hover-green">Lou.C, Marty Degenne, and Magdala</span>. Like my other works, this album
+            is signed under my artist name, Voyager1, and is also intended for publishing. The album was released under the label
+            Justement Music and the publisher <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
         </div>
       </>
@@ -148,9 +148,9 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Cyberpunk" is an immersive blend of futuristic, cinematic electronic music, reminiscent of Blade Runner, released in
-            April 2020. This project, whilst primarily a publishing album, bears a deeply personal touch, making it stand out as a
-            potential soundtrack for video games. The album was released under the label{" "}
+            <em>&apos;Cyberpunk&apos;</em> is an immersive blend of futuristic, cinematic electronic music, reminiscent of Blade
+            Runner, released in April 2020. This project, whilst primarily a publishing album, bears a deeply personal touch,
+            making it stand out as a potential soundtrack for video games. The album was released under the label{" "}
             <a href="https://www.superpitch.co/">Superpitch</a>.
           </p>
         </div>
@@ -172,8 +172,8 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Get Trapped" is a unique blend of Hip-Hop, Trap, RnB, and LoFi, released in May 2021. This album features
-            collaborations with <span className="hover-green">Lou.C</span> and features{" "}
+            <em>&apos;Get Trapped&apos;</em> is a unique blend of Hip-Hop, Trap, RnB, and LoFi, released in May 2021. This album
+            features collaborations with <span className="hover-green">Lou.C</span> and features{" "}
             <span className="hover-green">Novine, Stige, Loris Geisen, and Lou.C</span>. Signed under my artist name, Voyager1,
             this album is also intended for publishing. The album was released under the label{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
@@ -197,10 +197,11 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Pop Punk" is a lively blend of pop and punk, released in April 2021. This album features collaborations with{" "}
-            <span className="hover-green">Dory-Loup</span> and <span className="hover-green">Fran Darras</span>. Signed under my
-            artist name, Voyager1, this album is also intended for publishing. The album was released under the label Justement
-            Music and the publisher <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
+            <em>&apos;Pop Punk&apos;</em> is a lively blend of pop and punk, released in April 2021. This album features
+            collaborations with <span className="hover-green">Dory-Loup</span> and{" "}
+            <span className="hover-green">Fran Darras</span>. Signed under my artist name, Voyager1, this album is also intended
+            for publishing. The album was released under the label Justement Music and the publisher{" "}
+            <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
         </div>
       </>
@@ -209,7 +210,7 @@ module.exports = [
   {
     id: 8,
     title: "Hardcore",
-    img: "/img/albums/6.jpg",
+    img: "/img/albums/hardcore.png",
     poster: "Loïc Ghanem",
     date: "July 2020",
     sortedDate: "07-2020",
@@ -221,10 +222,10 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Hardcore" is an intense blend of powerful beats and rhythm, released in July 2020. This album highlights my
-            collaboration with <span className="hover-green">Terence Langlois</span>, who masterfully arranged the drums, adding
-            an extra layer of intensity to the compositions. The project was a part of the label Stereoscopic and published by{" "}
-            <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
+            <em>&apos;Hardcore&apos;</em> is an intense blend of powerful beats and rhythm, released in July 2020. This album
+            highlights my collaboration with <span className="hover-green">Terence Langlois</span>, who masterfully arranged the
+            drums, adding an extra layer of intensity to the compositions. The project was a part of the label Stereoscopic and
+            published by <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
         </div>
       </>
@@ -233,7 +234,7 @@ module.exports = [
   {
     id: 9,
     title: "Synthwave",
-    img: "/img/albums/7.jpg",
+    img: "/img/albums/synthwave.png",
     poster: "Loïc Ghanem",
     date: "Oct 2019",
     sortedDate: "10-2019",
@@ -245,9 +246,9 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Synthwave" is a nostalgic blend of '80s revival electro, released in October 2019. This album is an homage to the
-            Synthwave genre, reflecting its iconic style. The album was produced for publishing and released under the label{" "}
-            <span className="hover-green">Stereoscopic</span> and published by{" "}
+            <em>&apos;Synthwave&apos;</em> is a nostalgic blend of &apos;80s revival electro, released in October 2019. This album
+            is an homage to the Synthwave genre, reflecting its iconic style. The album was produced for publishing and released
+            under the label <span className="hover-green">Stereoscopic</span> and published by{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
         </div>
@@ -269,8 +270,8 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Fast Metal" is a high-energy fusion of Metalcore and Speed Metal, released in July 2020. This album encapsulates my
-            collaboration with talented artists such as <span className="hover-green">Sham Makdessi</span>,{" "}
+            <em>&apos;Fast Metal&apos;</em> is a high-energy fusion of Metalcore and Speed Metal, released in July 2020. This
+            album encapsulates my collaboration with talented artists such as <span className="hover-green">Sham Makdessi</span>,{" "}
             <span className="hover-green">Terence Langlois</span>, who brilliantly arranged the drums, and a featured performance
             by <span className="hover-green">Aaron Matts</span>. This album was part of the label Justement and published by{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
@@ -294,10 +295,10 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Kick-ass Metal Jacket" is a powerful blend of Metalcore, released in June 2020. This album marks another
-            collaboration with <span className="hover-green">Terence Langlois</span>, who skillfully arranged the drums, adding a
-            distinct energy to the compositions. The album was part of the Superpitch label and was intended primarily for
-            publishing.
+            <em>&apos;Kick-ass Metal Jacket&apos;</em> is a powerful blend of Metalcore, released in June 2020. This album marks
+            another collaboration with <span className="hover-green">Terence Langlois</span>, who skillfully arranged the drums,
+            adding a distinct energy to the compositions. The album was part of the Superpitch label and was intended primarily
+            for publishing.
           </p>
         </div>
       </>
@@ -306,21 +307,21 @@ module.exports = [
   {
     id: 12,
     title: "Metalcore",
-    img: "/img/albums/11.jpg",
+    img: "/img/albums/12.jpg",
     poster: "Loïc Ghanem",
     date: "Mar 2019",
     sortedDate: "03-2019",
     style: "Metalcore",
-    listenLink: "https://fanlink.tv/Deathmetal",
+    listenLink: "https://fanlink.tv/Metalcore",
     collabName: "Terence, Aaron",
     collabLink: "",
     descriptions: (
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Metalcore" is a potent blend of metal and hardcore, released in March 2019. This album features collaborations with{" "}
-            <span className="hover-green">Terence</span> and <span className="hover-green">Aaron</span> on several tracks. Signed
-            under my artist name, this album was produced for publishing and released under the label{" "}
+            <em>&apos;Metalcore&apos;</em> is a potent blend of metal and hardcore, released in March 2019. This album features
+            collaborations with <span className="hover-green">Terence</span> and <span className="hover-green">Aaron</span> on
+            several tracks. Signed under my artist name, this album was produced for publishing and released under the label{" "}
             <span className="hover-green">Justement</span> and the publisher{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
@@ -331,7 +332,7 @@ module.exports = [
   {
     id: 13,
     title: "Death Metal",
-    img: "/img/albums/12.jpg",
+    img: "/img/albums/11.jpg",
     poster: "Loïc Ghanem",
     date: "Mar 2019",
     sortedDate: "03-2019",
@@ -343,10 +344,10 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            "Death Metal" is a potent blend of death metal and deathcore, released in March 2019. This album features
-            collaborations with <span className="hover-green">Terence</span> and <span className="hover-green">Aaron</span> on
-            several tracks. Signed under my artist name, this album was produced for publishing and released under the label{" "}
-            <span className="hover-green">Justement</span> and the publisher{" "}
+            <em>&apos;Death Metal&apos;</em> is a potent blend of death metal and deathcore, released in March 2019. This album
+            features collaborations with <span className="hover-green">Terence</span> and{" "}
+            <span className="hover-green">Aaron</span> on several tracks. Signed under my artist name, this album was produced for
+            publishing and released under the label <span className="hover-green">Justement</span> and the publisher{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
           </p>
         </div>
@@ -368,11 +369,11 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            &apos;Metalcore II&apos; is an electrifying addition to the Metalcore genre, released under the Justement Music label
-            by Montmorency Music Agency (MYMA) in February 2024. This album sees the return of Loïc Ghanem&apos;s dynamic
-            collaboration with industry talents; featuring <span className="hover-green">Aaron Matts</span> on vocals for two
-            tracks and <span className="hover-green">Terence Langlois</span> on drum arrangements. It stands as a testament to the
-            evolving sound of Metalcore, showcasing intricate compositions and powerful vocal performances. A must-listen for
+            <em>&apos;Metalcore II&apos;</em> is an electrifying addition to the Metalcore genre, released under the Justement
+            Music label by Montmorency Music Agency (MYMA) in February 2024. This album sees the return of Loïc Ghanem&apos;s
+            dynamic collaboration with industry talents; featuring <span className="hover-green">Aaron Matts</span> on vocals for
+            two tracks and <span className="hover-green">Terence Langlois</span> on drum arrangements. It stands as a testament to
+            the evolving sound of Metalcore, showcasing intricate compositions and powerful vocal performances. A must-listen for
             enthusiasts looking to dive deep into the genre&apos;s latest innovations.
             <span className="hover-green">Justement</span> and the publisher{" "}
             <a href="https://myma-music.com/">Montmorency Music Agency, MYMA</a>.
@@ -396,14 +397,41 @@ module.exports = [
       <>
         <div className="descriptions">
           <p className="bigger">
-            &apos;Dystopia&apos; marks a bold turning point in the metal world with a unique fusion of cinematic metal and
-            ambient, created and performed by Loïc Ghanem. Released under the prestigious{" "}
+            <em>&apos;Dystopia&apos;</em> marks a bold turning point in the metal world with a unique fusion of cinematic metal
+            and ambient, created and performed by Loïc Ghanem. Released under the prestigious{" "}
             <a href="https://www.cezamemusic.com/infinity-scores-label-141693.html/">Infinity Scores</a> label, founded by{" "}
             <span className="hover-green">Gabriel Saban</span>, known for his significant influence in the industry, this album is
             published by <a href="https://www.cezamemusic.com/">Cezame Music Agency</a>. Without external collaboration, Loïc
             Ghanem demonstrates his multifaceted talent by handling all aspects of creation. &apos;Dystopia&apos; is an essential
             work for metal enthusiasts seeking deep and immersive sounds, blending strength and finesse for an epic musical
             experience.
+          </p>
+        </div>
+      </>
+    ),
+  },
+  {
+    id: 16,
+    title: "Terra",
+    img: "/img/albums/terra.png",
+    poster: "Loïc Ghanem",
+    date: "Jan 2025",
+    sortedDate: "01-2025",
+    style: "Ambient Orchestral",
+    listenLink: "https://fanlink.tv/LoicGhanemTerra",
+    collabName: "",
+    collabLink: "",
+    descriptions: (
+      <>
+        <div className="descriptions">
+          <p className="bigger">
+            <em>&quot;Terra&quot;</em> is an ambient orchestral album crafted for visuals revolving around nature, wildlife,
+            flora, and environmental themes. Composed by <strong>Loïc Ghanem</strong>, the album is released under the{" "}
+            <a href="https://www.cezamemusic.com/infinity-scores-label-141693.html/">Infinity Scores</a> label and published by{" "}
+            <a href="https://www.cezamemusic.com/">Cezame Music Agency</a>.
+            <br />
+            With <em>Terra</em>, Loïc delivers an immersive and contemplative sonic journey designed to enhance ecological and
+            nature-driven storytelling.
           </p>
         </div>
       </>

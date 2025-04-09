@@ -13,7 +13,8 @@ const Home = () => {
               className="image avatar_img"
               style={{
                 backgroundImage: "url(/img/slider/loic-studio-front.jpg)",
-              }}></div>
+              }}
+            ></div>
             {/* END AVATAR IMAGE */}
           </div>
           {/* END AVATAR */}
@@ -32,28 +33,48 @@ const Home = () => {
                 href="https://pmamusic.com/events/mark-awards/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-green">
+                className="hover-green"
+              >
                 Los Angeles Mark Awards in 2023
               </a>
-              . Also nominated for Best Hip-Hop Song at the same awards, showcasing versatility across genres. Further nominated
-              for the Rock category at the{" "}
-              <a
-                href="https://www.productionmusicawards.com/nominations-2023/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover-green">
-                London Music Production Awards
-              </a>
-              , affirming my commitment to excellence in music production.
+              .
+              <br />
+              <p style={{ marginTop: 10 }}>Also nominated for:</p>
+              <ul style={{ marginTop: "5px", marginBottom: "5px", paddingLeft: "20px" }}>
+                <li>
+                  Best Hip-Hop Song at the{" "}
+                  <a
+                    href="https://pmamusic.com/events/mark-awards/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover-green"
+                  >
+                    Los Angeles Mark Awards in 2023
+                  </a>
+                </li>
+                <li>
+                  Best Metal Song at the{" "}
+                  <a
+                    href="https://www.productionmusicawards.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover-green"
+                  >
+                    London Music Production Awards in 2024
+                  </a>
+                </li>
+              </ul>
+              These nominations reflect my versatility across genres and my commitment to excellence in music production.
             </p>
             <p style={{ marginBottom: "20px" }}>
               Check out my last video{" "}
               <a
-                href="https://www.youtube.com/watch?v=sG9J5pcNco4"
+                href="https://www.youtube.com/watch?v=_B-8cHjcsac"
                 className="hover-green"
                 target="_blank"
-                rel="noopener noreferrer">
-                &quot;Dark Industry&quot;
+                rel="noopener noreferrer"
+              >
+                &quot;Mother (Feat Novine)&quot;
               </a>
             </p>
             {/* END JOB */}
