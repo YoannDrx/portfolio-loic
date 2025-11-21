@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './tailwind/base.css';
+@import './tailwind/components.css';
+@import './tailwind/utilities.css';
+@import './tailwind/animations.css';
+
+/* Variables CSS */
+:root {
+  --background: 248 248 248;
+  --foreground: 0 0 0;
+}
+
+.dark {
+  --background: 10 10 15;
+  --foreground: 255 255 255;
+}
+
+/* Font Variables */
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+  font-family: var(--font-inter);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}

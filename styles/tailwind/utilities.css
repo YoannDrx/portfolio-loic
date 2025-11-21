@@ -1,0 +1,39 @@
+@layer utilities {
+  /* Text Gradients */
+  .text-gradient-neon {
+    @apply bg-gradient-to-r from-neon-cyan via-neon-magenta to-neon-purple bg-clip-text text-transparent;
+  }
+
+  /* Glow Effects */
+  .glow-cyan {
+    @apply shadow-[0_0_20px_rgba(0,240,255,0.5)];
+  }
+
+  .glow-magenta {
+    @apply shadow-[0_0_20px_rgba(255,0,110,0.5)];
+  }
+
+  .glow-purple {
+    @apply shadow-[0_0_20px_rgba(139,92,246,0.5)];
+  }
+
+  /* Hover Glow */
+  .hover-glow-cyan {
+    @apply transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.8)];
+  }
+
+  /* Grid Layouts */
+  .grid-albums {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .grid-services {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  /* Glassmorphism */
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
