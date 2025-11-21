@@ -2,10 +2,10 @@ import React from "react";
 import Modal from "react-modal";
 import Testimonial from "./Testimonial";
 import Intro from "./Intro";
-import KnowledgeInterest from "./KnowledgeInterest";
+import _KnowledgeInterest from "./KnowledgeInterest";
 import PersonalInfo from "./PersonalInfo";
 import Resume from "./Resume";
-import Skills from "./Skills";
+import _Skills from "./Skills";
 import Image from "next/image";
 
 Modal.setAppElement("#__next");

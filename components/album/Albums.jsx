@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Modal from "react-modal";
 import albumsData from "../../data/albumsData";
-import ShareSocial from "../social-share/ShareSocial";
+import _ShareSocial from "../social-share/ShareSocial";
 import { FaMusic } from "react-icons/fa";
 
 Modal.setAppElement("#__next");

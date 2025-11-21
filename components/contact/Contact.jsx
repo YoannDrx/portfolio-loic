@@ -17,7 +17,7 @@ const Contact = () => {
         "8MVfTcZq0ja5jXXH1"
       )
       .then(
-        (result) => {
+        (_result) => {
           toast.success("Message Sent Successfully!", {
             position: "top-right",
             autoClose: 2000,
@@ -29,7 +29,7 @@ const Contact = () => {
           });
           document.getElementById("myForm").reset();
         },
-        (error) => {
+        (_error) => {
           toast.error("Ops Message Not Sent!", {
             position: "top-right",
             autoClose: 2000,

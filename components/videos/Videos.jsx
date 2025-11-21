@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Gallery, Item } from "react-photoswipe-gallery";
+import { Gallery, _Item } from "react-photoswipe-gallery";
 import "photoswipe/dist/photoswipe.css";
 import ModalVideo from "react-modal-video";
 import Modal from "react-modal";
 import dynamic from "next/dynamic";
-import Image from "next/image";
+import _Image from "next/image";
 import videoData from "../../data/videoData";
 
 Modal.setAppElement("#__next");
@@ -16,7 +16,7 @@ const ReactTooltip = dynamic(() => import("react-tooltip"), {
 
 const Videos = () => {
     const [isOpenYoutube, setOpenYoutube] = useState({ isOpen: false, videoId: null });
-    const [selectedTab, setSelectedTab] = useState("Sync");
+    const [_selectedTab, _setSelectedTab] = useState("Sync");
 
 
     const renderVideoList = (type) => {
@@ -85,9 +85,9 @@ const Videos = () => {
              <Gallery>
                 <Tabs>
                     <TabList>
-                        <Tab onClick={() => setSelectedTab("Sync")}>Sync</Tab>
-                        <Tab onClick={() => setSelectedTab("OriginalMusic")}>Original Music</Tab>
-                        <Tab onClick={() => setSelectedTab("MusicToPicture")}>Music to Picture</Tab>
+                        <Tab onClick={() => _setSelectedTab("Sync")}>Sync</Tab>
+                        <Tab onClick={() => _setSelectedTab("OriginalMusic")}>Original Music</Tab>
+                        <Tab onClick={() => _setSelectedTab("MusicToPicture")}>Music to Picture</Tab>
                     </TabList>
 
                     <div className="list_wrapper">

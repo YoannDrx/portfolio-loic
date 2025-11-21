@@ -67,7 +67,7 @@ export default function LatestVideos() {
                 'NBA',
                 'NHL',
                 'National Geographic',
-              ].map((platform, index) => (
+              ].map((platform) => (
                 <div
                   key={platform}
                   className="px-6 py-3 bg-white/5 border border-white/10 rounded-lg hover:border-neon-cyan/50 hover:bg-neon-cyan/5 transition-all duration-300"

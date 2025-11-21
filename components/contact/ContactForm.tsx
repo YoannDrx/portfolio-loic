@@ -37,7 +37,7 @@ export default function ContactForm() {
       });
 
       form.current.reset();
-    } catch (error) {
+    } catch {
       toast.error(t('error'), {
         position: 'top-right',
         autoClose: 3000,

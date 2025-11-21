@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaLightbulb, FaMoon, FaSun } from "react-icons/fa";
+import { FaLightbulb, FaMoon, _FaSun } from "react-icons/fa";
 import { useTheme } from "next-themes";
 
 const ThemeSwitch = () => {

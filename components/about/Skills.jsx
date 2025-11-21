@@ -90,7 +90,7 @@ const Skills = () => {
                   <div className="bar">
                     <div
                       className="bar_in"
-                      style={{ width: skill?.skillValue + "%" }}
+                      style={{ width: `${skill?.skillValue  }%` }}
                     />
                   </div>
                 </div>
