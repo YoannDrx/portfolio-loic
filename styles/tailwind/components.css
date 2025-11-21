@@ -22,6 +22,11 @@
     mask-composite: exclude;
   }
 
+  /* Subtle Glass Card */
+  .glass-card-subtle {
+    @apply relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-lg;
+  }
+
   /* Neon Button */
   .neon-button {
     @apply relative overflow-hidden rounded-lg border border-neon-cyan bg-transparent px-8 py-3 font-semibold text-neon-cyan transition-all duration-300;

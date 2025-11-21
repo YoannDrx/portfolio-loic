@@ -1,0 +1,314 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "services": "Services",
+    "albums": "Albums",
+    "videos": "Vidéos",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Loïc Ghanem",
+    "subtitle": "Compositeur & Producteur Musical",
+    "description": "Compositeur et producteur musical passionné, créant des univers sonores uniques pour vos projets audiovisuels depuis",
+    "yearsExperience": "plus de {years} ans",
+    "stats": {
+      "albums": "Albums",
+      "audiovisualProjects": "Projets Audiovisuels",
+      "collaborations": "Collaborations"
+    },
+    "cta": {
+      "listenAlbums": "Écouter mes albums",
+      "workTogether": "Travailler ensemble"
+    },
+    "scroll": "Scroll",
+    "featuredAlbums": {
+      "title": "Derniers Albums",
+      "description": "Découvrez mes dernières créations musicales couvrant différents genres, du Metal au Hip-Hop en passant par l'Ambient et l'Electronic.",
+      "viewAll": "Voir tous les albums ({count})"
+    },
+    "latestVideos": {
+      "badge": "Sync Placements",
+      "title": "Dernières Vidéos",
+      "description": "Mes compositions utilisées dans des productions professionnelles : sports, TV, publicités et plus encore.",
+      "viewAll": "Voir toutes les vidéos ({count})",
+      "notablePlacements": "Placements Notables"
+    }
+  },
+  "about": {
+    "pageTitle": "À Propos",
+    "pageDescription": "Compositeur et producteur musical passionné, créant des univers sonores uniques pour vos projets audiovisuels depuis plus de 15 ans.",
+    "title": "Compositeur Musical, Producteur Musical",
+    "intro": "Hello !",
+    "bio": {
+      "paragraph1": "Je suis Loïc Ghanem, compositeur et producteur musical basé à Paris, passionné par la création de paysages sonores narratifs. Mon parcours dans le monde de la musique a commencé dès mon plus jeune âge, et depuis plus d'une décennie, c'est devenu ma vocation et ma profession.",
+      "paragraph2": "De la création de morceaux originaux à la composition de musiques pour médias visuels et l'édition musicale, j'ai apporté ma signature sonore à divers projets, les enrichissant de profondeur et d'émotion. L'une de mes forces réside dans ma capacité à transformer une idée brute en une expérience auditive complète. Mon travail n'existe pas simplement en arrière-plan ; il amplifie l'histoire, définit le ton et enrichit l'expérience du spectateur.",
+      "paragraph3": "Je suis fier de livrer des paysages sonores uniques, contemporains et engageants qui résonnent et créent des impressions durables. En exploitant ma compréhension approfondie des mécanismes complexes de la production musicale et du sound design, j'excelle à créer des compositions qui nécessitent un entretien minimal, tout en offrant des performances impeccables dans le temps.",
+      "paragraph4": "Je vous invite à explorer mon portfolio et à vous immerger dans les divers univers musicaux que j'ai eu le plaisir de créer. J'ai hâte de collaborer avec vous sur votre prochain projet, en l'élevant avec ma musique."
+    },
+    "contactInfo": {
+      "title": "Informations de Contact",
+      "address": "Adresse",
+      "location": "Paris, France",
+      "email": "Email",
+      "languages": "Langues",
+      "languageList": "Anglais, Français"
+    },
+    "achievements": {
+      "title": "Réalisations",
+      "albums": "Albums Produits",
+      "projects": "Projets Audiovisuels",
+      "years": "Années d'Expérience"
+    },
+    "skills": {
+      "title": "Expertises & Compétences",
+      "composition": {
+        "title": "Composition",
+        "items": ["Metal", "Hip-Hop", "Ambient", "Electronic", "Orchestral"]
+      },
+      "production": {
+        "title": "Production",
+        "items": ["Mixing", "Mastering", "Sound Design", "Arrangement"]
+      },
+      "vocalProduction": {
+        "title": "Production Vocale",
+        "items": ["Direction", "Enregistrement", "Editing", "Traitement"]
+      },
+      "postProduction": {
+        "title": "Post-Production",
+        "items": ["Musique de Film", "Musique TV", "Publicités", "Audio pour Jeux"]
+      }
+    },
+    "awards": {
+      "title": "Dernières Récompenses & Nominations",
+      "subtitle": "Découvrez mes prix récents et réalisations musicales.",
+      "learnMore": "En savoir plus",
+      "visitWebsite": "Visiter le site officiel",
+      "pma2024": {
+        "year": "2024",
+        "title": "Production Music Awards",
+        "category": "Double Nomination - Metal",
+        "work": "\"Sparkle in the Dark\" & \"Revenge\" feat. Aaron Matts",
+        "album": "Albums : Dystopia & Metalcore2",
+        "description": "Honoré d'une double nomination dans la toute nouvelle catégorie Metal aux Production Music Awards 2024.",
+        "detail1": "\"Sparkle in the Dark\" de l'album Dystopia, sorti par Infinity Scores et publié par Cezame Agency",
+        "detail2": "\"Revenge\" feat. Aaron Matts de l'album Metalcore2, sorti par Justement Music et publié par MYMA",
+        "detail3": "Cette reconnaissance aux PMA 2024 souligne le pouvoir et l'énergie de mes compositions Metal, mon engagement envers la qualité de production, et ma passion pour repousser les limites de la musique de production moderne."
+      },
+      "pma2023": {
+        "year": "2023",
+        "title": "Production Music Awards",
+        "category": "Nomination - Electronic",
+        "work": "\"La Fontaine\" feat. Flovry",
+        "album": "Album : Electronic Chill",
+        "description": "Nominé dans la catégorie Electronic aux Production Music Awards 2023.",
+        "detail1": "\"La Fontaine\" feat. Flovry de l'album Electronic Chill, sorti par Infinity Scores et publié par Cezame Music Agency",
+        "detail2": "Cette nomination reconnaît mon approche innovante de la musique électronique, fusionnant des textures atmosphériques avec des rythmes contemporains.",
+        "detail3": "Cette reconnaissance valide ma capacité à créer des paysages sonores électroniques émotionnellement résonnants qui captent les auditeurs tout en servant parfaitement les besoins de musique de production."
+      },
+      "mark": {
+        "year": "2017",
+        "title": "Mark Awards",
+        "category": "Finaliste - Original Music",
+        "work": "Live at Bataclan w/ Rise of the Northstar",
+        "album": "Performance Live",
+        "description": "Finaliste aux Mark Awards pour la performance live au Bataclan avec Rise of the Northstar.",
+        "detail1": "Performance mémorable au mythique Bataclan de Paris avec Rise of the Northstar, fusionnant l'intensité du metal avec des éléments hip-hop.",
+        "detail2": "Cette performance live a présenté l'énergie brute et la présence scénique qui définissent mon approche de la musique live et de la performance.",
+        "detail3": "Être finaliste aux Mark Awards reconnaît l'impact et l'innovation de ce spectacle live, démontrant ma polyvalence en tant que musicien et performeur."
+      }
+    },
+    "timeline": {
+      "title": "Parcours Professionnel"
+    },
+    "musicianExperience": {
+      "title": "Expérience Musicale en Groupe",
+      "subtitle": "Mon parcours à travers différents projets musicaux et groupes au fil des années.",
+      "listenHere": "Écouter ici",
+      "voyager1": {
+        "period": "2017 - Présent",
+        "role": "Producteur",
+        "genre": "Hip-Hop et Bass Music",
+        "description": "Projet Actuel"
+      },
+      "earlySeasons": {
+        "period": "2008 - 2017",
+        "role": "Guitariste, Compositeur",
+        "genre": "Metal / Metalcore",
+        "description": "Formation Metal Française"
+      },
+      "confront": {
+        "period": "2010 - 2014",
+        "role": "Guitariste",
+        "genre": "Hardcore / Metal",
+        "description": "Groupe Hardcore Parisien"
+      },
+      "riseOfTheNorthstar": {
+        "period": "2012 - 2017",
+        "role": "Guitariste Live",
+        "genre": "Hip-Hop Metal",
+        "description": "Tournées Internationales"
+      }
+    },
+    "labelsPublishers": {
+      "title": "Labels & Éditeurs",
+      "labels": "Labels",
+      "publishers": "Éditeurs"
+    },
+    "cta": {
+      "title": "Prêt à créer ensemble ?",
+      "description": "Discutons de votre projet et découvrez comment je peux donner vie à votre vision musicale.",
+      "contactMe": "Contactez-moi",
+      "viewAlbums": "Voir mes albums",
+      "downloadCV": "Télécharger CV"
+    }
+  },
+  "services": {
+    "pageTitle": "Services",
+    "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
+    "seeMore": "En savoir plus",
+    "writtenBy": "Écrit par",
+    "cta": {
+      "title": "Prêt à démarrer votre projet ?",
+      "description": "Contactez-moi pour discuter de votre vision musicale et découvrir comment je peux donner vie à vos idées.",
+      "button": "Contactez-moi",
+      "discuss": "Discutons de votre projet"
+    },
+    "composition": {
+      "title": "Composition",
+      "description": "Création de musiques originales sur mesure pour vos projets de film, TV, publicités et jeux vidéo.",
+      "largeTitle": "Composition : Créer des Mélodies Uniques et Captivantes",
+      "fullDescription": "En tant que compositeur professionnel, j'ai une passion profonde pour la création de mélodies uniques et captivantes. Mon expertise couvre divers genres, garantissant un large éventail de possibilités pour votre projet. J'aborde chaque projet avec une perspective fraîche, consacrant du temps et des efforts à comprendre vos besoins et préférences. Cette attention aux détails me permet de créer des compositions véritablement sur mesure et alignées avec votre vision créative.",
+      "details": {
+        "intro": "Je crée des **musiques originales** pour donner vie à vos projets audiovisuels. Que ce soit pour un film, une série TV, une publicité ou un jeu vidéo, je compose des bandes originales qui racontent votre histoire.",
+        "approach": "Mon approche allie **sensibilité artistique** et **vision narrative**, en créant des univers sonores uniques adaptés à chaque projet, du Metal au Hip-Hop, en passant par l'Ambient et l'Electronic.",
+        "services": ["Composition orchestrale et hybride", "Thèmes musicaux sur mesure", "Direction artistique sonore", "Adaptation tous genres musicaux"]
+      }
+    },
+    "production": {
+      "title": "Production",
+      "description": "Production musicale complète de A à Z, de l'arrangement à la post-production.",
+      "largeTitle": "Production Musicale : Du Concept au Mix Final",
+      "fullDescription": "Mes services de production musicale englobent chaque étape du processus. Avec une compréhension approfondie de la théorie musicale, une oreille attentive aux détails, et une maîtrise des derniers logiciels de production, je suis équipé pour concrétiser vos idées musicales. Que vous ayez besoin d'aide pour l'arrangement, l'enregistrement, le mixage ou le mastering, je fournis une solution complète adaptée aux besoins de votre projet.",
+      "details": {
+        "intro": "Je prends en charge la **production complète** de vos projets musicaux, de la conception à la réalisation finale. Mon expertise couvre tous les aspects de la production moderne.",
+        "approach": "Avec un studio équipé des dernières technologies et une connaissance approfondie de multiples genres musicaux, je transforme vos idées en productions professionnelles prêtes pour la diffusion.",
+        "services": ["Production multi-genres (Metal, Hip-Hop, Electronic, Ambient)", "Programmation et sound design", "Enregistrement et direction artistique", "Mastering pour tous supports"]
+      }
+    },
+    "arranging": {
+      "title": "Arranging",
+      "description": "Arrangements orchestraux et instrumentaux pour sublimer vos compositions.",
+      "largeTitle": "Arrangement : Sublimer Vos Compositions",
+      "fullDescription": "Mes compétences en arrangement ajouteront profondeur et complexité à votre musique. Avec ma connaissance approfondie de l'orchestration et de l'harmonie, je créerai des arrangements qui révèlent le meilleur de vos compositions. Que vous ayez une composition complète ou une simple mélodie, je peux la transformer en un morceau riche et pleinement réalisé.",
+      "details": {
+        "intro": "L'**arrangement** est l'art de structurer et d'habiller une composition pour en révéler tout le potentiel. Je travaille sur l'orchestration, l'harmonie et la texture sonore pour créer des arrangements riches et cohérents.",
+        "approach": "De l'orchestration symphonique aux arrangements électroniques modernes, je maîtrise une large palette de techniques pour donner vie à vos idées musicales.",
+        "services": ["Orchestration symphonique et moderne", "Arrangements pour ensembles acoustiques", "Réharmonisation et adaptation", "Création de textures hybrides"]
+      }
+    },
+    "vocalProducer": {
+      "title": "Vocal Producer",
+      "description": "Direction et production vocale pour des performances exceptionnelles.",
+      "largeTitle": "Production Vocale : Sublimer Vos Performances Vocales",
+      "fullDescription": "En tant que producteur vocal, je me spécialise dans l'extraction du meilleur d'une performance de chanteur. J'assiste les chanteurs avec leurs mélodies vocales, m'assurant qu'ils livrent la meilleure performance possible pour leurs enregistrements. J'offre des services spécialisés tels que la correction, le mixage et l'arrangement des voix. Je suis compétent en correction de hauteur, en comping vocal, et je peux améliorer les performances en utilisant des effets et des outils de traitement. Mon travail est de faire briller la voix, en m'assurant qu'elle s'intègre parfaitement dans le mix et contribue efficacement au ressenti et au message global de la chanson.",
+      "details": {
+        "intro": "En tant que **vocal producer**, je guide les artistes pour capturer les meilleures performances vocales. Mon rôle est d'extraire l'émotion et la puissance de chaque voix.",
+        "approach": "De la préproduction à l'enregistrement, j'accompagne les chanteurs dans leur processus créatif, en apportant une direction artistique précise et bienveillante.",
+        "services": ["Direction artistique vocale", "Préparation et coaching avant session", "Enregistrement et editing vocal", "Traitement et production des voix"]
+      }
+    },
+    "mixing": {
+      "title": "Mixing",
+      "description": "Mixage professionnel pour un son équilibré et percutant.",
+      "largeTitle": "Mixage : Peaufiner Votre Musique à la Perfection",
+      "fullDescription": "Le mixage est une étape critique du processus de production musicale, et c'est un domaine dans lequel j'excelle. Je vais équilibrer les éléments de votre morceau, m'assurant qu'aucun instrument ou voix n'est trop fort ou trop doux. Mes techniques de mixage ajouteront également profondeur et dimension à votre musique, créant un paysage sonore riche et engageant.",
+      "details": {
+        "intro": "Le **mixage** est l'étape cruciale qui transforme des pistes brutes en une production cohérente et professionnelle. Je balance, équilibre et façonne chaque élément pour créer un mix impactant.",
+        "approach": "Avec une approche analytique et créative, j'optimise la clarté, la profondeur et la dynamique de vos morceaux pour qu'ils sonnent parfaitement sur tous les supports d'écoute.",
+        "services": ["Mixage stéréo et surround", "Traitement dynamique et fréquentiel", "Spatialisation et effets créatifs", "Optimisation pour streaming et broadcast"]
+      }
+    },
+    "mastering": {
+      "title": "Mastering",
+      "description": "Mastering de haute qualité pour une finalisation optimale de vos productions.",
+      "largeTitle": "Mastering : La Touche Finale pour Votre Musique",
+      "fullDescription": "Le mastering est la dernière étape du processus de production musicale, et c'est une étape que je prends très au sérieux. Je m'assurerai que vos morceaux sont prêts pour la distribution, en les optimisant pour tous les systèmes de lecture. Mes services de mastering donneront à votre musique le polish final dont elle a besoin, garantissant qu'elle sonne professionnelle et rivalise avec les autres sorties commerciales.",
+      "details": {
+        "intro": "Le **mastering** est la touche finale qui donne à votre musique son éclat professionnel. Je prépare vos morceaux pour la diffusion en optimisant le niveau, la balance spectrale et la cohérence entre les pistes.",
+        "approach": "Mon approche du mastering garantit que votre musique sonne de manière optimale sur tous les systèmes d'écoute, des écouteurs aux systèmes hi-fi, en respectant les standards de l'industrie.",
+        "services": ["Mastering pour tous formats (streaming, CD, vinyl)", "Optimisation spectrale et dynamique", "Cohérence entre les morceaux d'un album", "Préparation pour distribution digitale"]
+      }
+    }
+  },
+  "albums": {
+    "pageTitle": "Albums & Projets",
+    "pageDescription": "Découvrez ma discographie complète, des productions Metal et Metalcore aux créations Hip-Hop, Electronic et Ambient.",
+    "filterAll": "Tous les Albums",
+    "sortBy": "Trier par",
+    "sortNewest": "Plus récent",
+    "sortOldest": "Plus ancien",
+    "listen": "Écouter",
+    "collaboration": "En collaboration avec",
+    "releaseDate": "Date de sortie",
+    "genre": "Genre"
+  },
+  "videos": {
+    "pageTitle": "Projets Vidéo",
+    "pageDescription": "Explorez ma musique en action à travers des projets audiovisuels, synchronisations et compositions originales.",
+    "filterAll": "Tous les types",
+    "filterOriginalMusic": "Musique Originale",
+    "filterSync": "Synchronisation",
+    "filterMusicToPicture": "Music to Picture",
+    "watchOn": "Voir sur",
+    "date": "Date"
+  },
+  "contact": {
+    "pageTitle": "Contact",
+    "pageDescription": "Discutons de votre projet musical. Je suis toujours enthousiaste à l'idée de collaborer sur de nouvelles créations.",
+    "getInTouch": "Prenons Contact",
+    "description": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous. Remplissez le formulaire ci-dessous et je vous répondrai dans les plus brefs délais.",
+    "form": {
+      "name": "Nom",
+      "namePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "subject": "Sujet",
+      "subjectPlaceholder": "Sujet de votre message",
+      "message": "Message",
+      "messagePlaceholder": "Parlez-moi de votre projet...",
+      "submit": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès !",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "info": {
+      "title": "Informations de Contact",
+      "email": "Email",
+      "phone": "Téléphone",
+      "location": "Localisation",
+      "locationValue": "Paris, France",
+      "social": "Réseaux Sociaux",
+      "availability": "Je réponds généralement sous 24-48 heures. Pour les projets urgents, n'hésitez pas à me contacter par téléphone."
+    },
+    "cta": {
+      "text": "Vous préférez découvrir mes services avant de me contacter ?",
+      "button": "Voir mes services"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} Loïc Ghanem. Tous droits réservés.",
+    "quickLinks": "Liens Rapides",
+    "followMe": "Suivez-moi",
+    "tagline": "Compositeur & Producteur Musical basé à Paris"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "close": "Fermer",
+    "readMore": "Lire la suite",
+    "learnMore": "En savoir plus",
+    "viewAll": "Tout voir",
+    "backToHome": "Retour à l'accueil"
+  }
+}
