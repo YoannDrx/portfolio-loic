@@ -43,7 +43,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                     src="/img/slider/loic-studio-front.jpg"
                     alt="Loïc Ghanem in studio"
                     fill
-                    className="object-cover object-center"
+                    className="object-cover"
+                    style={{ objectPosition: "50% 35%" }}
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent" />
