@@ -1,8 +1,6 @@
 import Aos from "aos";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "../styles/scss/style.scss";
 import "aos/dist/aos.css";
 import { useRouter } from "next/router";
