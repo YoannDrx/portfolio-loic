@@ -166,6 +166,10 @@
   "services": {
     "pageTitle": "Services",
     "pageDescription": "From composition to post-production, I support you at every stage of your musical project with expertise and passion.",
+    "noServices": "No services available at the moment",
+    "totalServices": "Services",
+    "satisfaction": "Client Satisfaction",
+    "availability": "Availability",
     "seeMore": "See more",
     "writtenBy": "Written by",
     "cta": {

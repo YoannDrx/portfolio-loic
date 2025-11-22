@@ -4,11 +4,10 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Providers } from '../providers';
-import Navbar from '@/components/navigation/Navbar';
-import Footer from '@/components/navigation/Footer';
-import ScrollProgress from '@/components/ui/ScrollProgress';
+import { LayoutContent } from './layout-content';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   title: {
     default: 'Loïc Ghanem | Music Composer & Producer',
     template: '%s | Loïc Ghanem',
@@ -81,7 +80,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as unknown as string)) {
+  if (!routing.locales.includes(locale as 'en' | 'fr')) {
     notFound();
   }
 
@@ -95,10 +94,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <Providers>
-        <ScrollProgress />
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <LayoutContent>{children}</LayoutContent>
       </Providers>
     </NextIntlClientProvider>
   );

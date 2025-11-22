@@ -166,6 +166,10 @@
   "services": {
     "pageTitle": "Services",
     "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
+    "noServices": "Aucun service disponible pour le moment",
+    "totalServices": "Services",
+    "satisfaction": "Satisfaction Client",
+    "availability": "Disponibilité",
     "seeMore": "En savoir plus",
     "writtenBy": "Écrit par",
     "cta": {

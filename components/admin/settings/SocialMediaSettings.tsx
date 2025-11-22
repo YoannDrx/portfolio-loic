@@ -1,0 +1,62 @@
+"use client";
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Share2 } from "lucide-react";
+
+interface SocialMediaSettingsProps {
+  settings: any;
+  onChange: (field: string, value: any) => void;
+}
+
+const socialPlatforms = [
+  { key: "socialYoutube", label: "YouTube", placeholder: "https://youtube.com/@loicghanem" },
+  { key: "socialInstagram", label: "Instagram", placeholder: "https://instagram.com/loicghanem" },
+  { key: "socialFacebook", label: "Facebook", placeholder: "https://facebook.com/loicghanem" },
+  { key: "socialTwitter", label: "Twitter / X", placeholder: "https://twitter.com/loicghanem" },
+  { key: "socialLinkedin", label: "LinkedIn", placeholder: "https://linkedin.com/in/loicghanem" },
+  { key: "socialSoundcloud", label: "SoundCloud", placeholder: "https://soundcloud.com/loicghanem" },
+  { key: "socialSpotify", label: "Spotify", placeholder: "https://open.spotify.com/artist/..." },
+  { key: "socialAppleMusic", label: "Apple Music", placeholder: "https://music.apple.com/..." },
+  { key: "socialBandcamp", label: "Bandcamp", placeholder: "https://loicghanem.bandcamp.com" },
+  { key: "socialTiktok", label: "TikTok", placeholder: "https://tiktok.com/@loicghanem" },
+];
+
+export function SocialMediaSettings({ settings, onChange }: SocialMediaSettingsProps) {
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Share2 className="h-5 w-5" />
+            Réseaux Sociaux
+          </CardTitle>
+          <CardDescription>
+            Liens vers vos profils sur les réseaux sociaux
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {socialPlatforms.map((platform) => (
+              <div key={platform.key} className="space-y-2">
+                <Label htmlFor={platform.key}>{platform.label}</Label>
+                <Input
+                  id={platform.key}
+                  type="url"
+                  value={settings[platform.key] || ""}
+                  onChange={(e) => onChange(platform.key, e.target.value)}
+                  placeholder={platform.placeholder}
+                />
+              </div>
+            ))}
+          </div>
+
+          <p className="text-sm text-muted-foreground mt-4">
+            💡 Laissez vide les champs des réseaux que vous n'utilisez pas.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

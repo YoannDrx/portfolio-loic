@@ -1,48 +1,119 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
-import { albumsData } from '@/data/albumsData';
+import { Link } from '@/i18n/routing';
+import { headers } from 'next/headers';
+import { prisma } from '@/lib/prisma';
+import { auth } from '@/lib/auth';
 import { GlassCard, GlassCardContent } from '@/components/ui/GlassCard';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { Calendar, Disc, ExternalLink, Users, ArrowLeft } from 'lucide-react';
+import { Calendar, Disc, ExternalLink, Users, ArrowLeft, Eye } from 'lucide-react';
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
+  searchParams: Promise<{ preview?: string }>;
 }
 
 export async function generateStaticParams() {
-  return albumsData.map((album) => ({
-    id: album.id.toString(),
-  }));
+  const albums = await prisma.album.findMany({
+    where: { published: true },
+    select: { id: true },
+  });
+
+  const locales = ['fr', 'en'];
+
+  // Générer les combinaisons locale + id
+  return albums.flatMap((album) =>
+    locales.map((locale) => ({
+      locale,
+      id: album.id,
+    }))
+  );
 }
+
+// Configuration du rendu
+export const dynamicParams = true; // Permettre les params non pré-générés
+export const revalidate = 3600; // Revalider toutes les heures en production
 
 export async function generateMetadata({ params }: PageProps) {
   const { id } = await params;
-  const album = albumsData.find((a) => a.id.toString() === id);
 
-  if (!album) {
+  try {
+    const album = await prisma.album.findUnique({
+      where: { id },
+      select: {
+        title: true,
+        style: true,
+        date: true,
+      },
+    });
+
+    if (!album) {
+      return {
+        title: 'Album non trouvé',
+      };
+    }
+
     return {
-      title: 'Album non trouvé',
+      title: `${album.title} | Loïc Ghanem`,
+      description: `Album ${album.style} sorti en ${album.date}`,
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Album | Loïc Ghanem',
     };
   }
-
-  return {
-    title: `${album.title} | Loïc Ghanem`,
-    description: `Album ${album.style} sorti en ${album.date}`,
-  };
 }
 
-export default async function AlbumDetailPage({ params }: PageProps) {
-  const { id } = await params;
-  const album = albumsData.find((a) => a.id.toString() === id);
+export default async function AlbumDetailPage({ params, searchParams }: PageProps) {
+  const { id, locale } = await params;
+  const { preview } = await searchParams;
+  const isPreview = preview === 'true';
+
+  // Si mode preview, vérifier l'authentification
+  let isAdmin = false;
+  if (isPreview) {
+    try {
+      const headersList = await headers();
+      const session = await auth.api.getSession({ headers: headersList });
+      isAdmin = session?.user?.role === 'admin';
+    } catch {
+      isAdmin = false;
+    }
+
+    // Si preview demandé mais pas admin, rediriger vers 404
+    if (!isAdmin) {
+      notFound();
+    }
+  }
+
+  const album = await prisma.album.findUnique({
+    where: { id },
+  });
 
   if (!album) {
+    notFound();
+  }
+
+  // Si pas en mode preview et album non publié, 404
+  if (!isPreview && !album.published) {
     notFound();
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-obsidian via-obsidian-50 to-obsidian py-20">
       <div className="container-custom">
+        {/* Preview Banner */}
+        {isPreview && (
+          <div className="mb-8 rounded-lg border-2 border-neon-cyan/50 bg-neon-cyan/10 p-4">
+            <div className="flex items-center justify-center gap-3 text-neon-cyan">
+              <Eye className="h-5 w-5" />
+              <span className="font-semibold">
+                Mode Prévisualisation - Cet album {album.published ? 'est publié' : "n'est pas encore publié"}
+              </span>
+            </div>
+          </div>
+        )}
         {/* Back Button */}
         <AnimatedSection variant="fadeIn" className="mb-8">
           <Link
@@ -59,7 +130,7 @@ export default async function AlbumDetailPage({ params }: PageProps) {
           <div className="lg:col-span-2">
             <AnimatedSection variant="slideUp">
               <GlassCard variant="neon" className="overflow-hidden sticky top-24">
-                <div className="relative aspect-square w-full">
+                <div className="relative aspect-square w-full bg-obsidian-200">
                   <Image
                     src={album.img}
                     alt={album.title}
@@ -67,6 +138,7 @@ export default async function AlbumDetailPage({ params }: PageProps) {
                     className="object-cover"
                     priority
                     sizes="(max-width: 1024px) 100vw, 40vw"
+                    quality={90}
                   />
                 </div>
 
@@ -147,9 +219,12 @@ export default async function AlbumDetailPage({ params }: PageProps) {
                 <GlassCardContent className="p-8">
                   <h2 className="text-2xl font-bold text-white mb-6">À propos de l'album</h2>
                   <div className="prose prose-invert prose-lg max-w-none">
-                    <div className="text-gray-300 leading-relaxed space-y-4 album-descriptions">
-                      {album.descriptions}
-                    </div>
+                    <div
+                      className="text-gray-300 leading-relaxed space-y-4 album-descriptions"
+                      dangerouslySetInnerHTML={{
+                        __html: locale === 'fr' ? album.descriptionsFr : album.descriptionsEn
+                      }}
+                    />
                   </div>
                 </GlassCardContent>
               </GlassCard>

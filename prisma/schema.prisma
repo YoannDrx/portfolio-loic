@@ -1,0 +1,218 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(cuid())
+  email           String           @unique
+  emailVerified   Boolean          @default(false)
+  name            String?
+  image           String?
+  role            String           @default("user")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  accounts        Account[]
+  albums          Album[]
+  contentVersions ContentVersion[]
+  services        Service[]
+  sessions        Session[]
+  videos          Video[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id             String    @id @default(cuid())
+  userId         String
+  providerId     String
+  providerUserId String?
+  password       String?
+  accessToken    String?
+  refreshToken   String?
+  expiresAt      DateTime?
+  accountId      String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, providerUserId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+
+  @@unique([identifier, value])
+  @@map("verifications")
+}
+
+model Album {
+  id             String   @id @default(cuid())
+  title          String
+  img            String
+  poster         String
+  date           String
+  sortedDate     String
+  style          String
+  listenLink     String
+  collabName     String?
+  collabLink     String?
+  descriptionsFr String
+  descriptionsEn String
+  published      Boolean  @default(true)
+  order          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  createdById    String?
+  createdBy      User?    @relation(fields: [createdById], references: [id])
+
+  @@index([published, sortedDate])
+  @@index([style])
+  @@map("albums")
+}
+
+model Video {
+  id          String   @id @default(cuid())
+  img         String
+  type        String
+  videoId     String
+  title       String
+  date        String
+  published   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  createdBy   User?    @relation(fields: [createdById], references: [id])
+
+  @@index([published, date])
+  @@index([type])
+  @@map("videos")
+}
+
+model Service {
+  id              String   @id @default(cuid())
+  no              String
+  title           String
+  text            String
+  largeImg        String
+  largeTitle      String
+  poster          String
+  date            String
+  author          String
+  fullDescription String
+  descriptionsFr  String
+  descriptionsEn  String
+  published       Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  createdById     String?
+  createdBy       User?    @relation(fields: [createdById], references: [id])
+
+  @@index([published, order])
+  @@map("services")
+}
+
+model ContentVersion {
+  id          String   @id @default(cuid())
+  contentType String
+  contentId   String
+  version     Int
+  data        Json
+  changes     Json?
+  action      String   @default("update")
+  createdById String
+  createdAt   DateTime @default(now())
+  createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@unique([contentType, contentId, version])
+  @@index([contentType, contentId, createdAt(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
+  @@map("content_versions")
+}
+
+model NavigationItem {
+  id        String   @id @default(cuid())
+  icon      String
+  menuName  String
+  routePath String
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([published, order])
+  @@map("navigation_items")
+}
+
+model SiteSettings {
+  id        String   @id @default("site_settings")
+  // Informations générales
+  siteTitle       String   @default("Loïc Ghanem | Music Composer & Producer")
+  siteDescription String   @default("Award-winning music composer and producer")
+  contactEmail    String   @default("contact@loicghanem.com")
+  contactPhone    String?
+  location        String   @default("Paris, France")
+  footerBio       String?
+
+  // Réseaux sociaux
+  socialYoutube     String?
+  socialInstagram   String?
+  socialFacebook    String?
+  socialTwitter     String?
+  socialLinkedin    String?
+  socialSoundcloud  String?
+  socialSpotify     String?
+  socialAppleMusic  String?
+  socialBandcamp    String?
+  socialTiktok      String?
+
+  // Paramètres de contenu
+  homepageFeaturedAlbumsCount Int @default(6)
+  homepageLatestVideosCount   Int @default(6)
+  albumsPerPage               Int @default(12)
+  videosPerPage               Int @default(12)
+  servicesPerPage             Int @default(10)
+  defaultAlbumSort            String @default("date_desc")
+  defaultVideoSort            String @default("date_desc")
+
+  // Apparence
+  homepageWelcomeMessage String?
+  showFeaturedAlbums     Boolean @default(true)
+  showLatestVideos       Boolean @default(true)
+  showServices           Boolean @default(true)
+
+  // Maintenance
+  maintenanceMode    Boolean @default(false)
+  maintenanceMessage String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}

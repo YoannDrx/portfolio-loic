@@ -39,7 +39,7 @@ export default function AudioWaveform({
     const time = state.clock.getElapsedTime() * speed;
 
     particles.forEach((particle, i) => {
-      const { x, _y, z, t } = particle;
+      const { x, y: _y, z, t } = particle;
 
       // Create wave animation
       const waveY = Math.sin(t + time) * 2 + Math.cos(t * 2 + time * 0.5) * 1;

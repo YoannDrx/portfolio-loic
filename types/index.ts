@@ -22,12 +22,11 @@ export type VideoType =
  * Video project item
  */
 export interface Video {
-  id: number;
+  id: string;
   img: string;
-  type: VideoType;
+  type: string;
   videoId: string; // YouTube video ID
   title: string;
-  detail: string;
   date: string;
 }
 
@@ -35,7 +34,7 @@ export interface Video {
  * Service offered (Composition, Production, etc.)
  */
 export interface Service {
-  id: number;
+  id: string;
   no: string; // "01", "02", etc. for display
   title: string;
   text: string; // Short description
@@ -45,14 +44,15 @@ export interface Service {
   date: string;
   author: string; // Author name for blog-style display
   fullDescription: string; // Full text description for modal
-  descriptions: ReactNode; // Full JSX content with formatting
+  descriptionsFr: string; // HTML content for French
+  descriptionsEn: string; // HTML content for English
 }
 
 /**
  * Music album/project
  */
 export interface Album {
-  id: number;
+  id: string;
   title: string;
   img: string;
   poster: string;
@@ -62,7 +62,7 @@ export interface Album {
   listenLink: string; // External listening link (Spotify, YouTube, etc.)
   collabName?: string; // Optional collaborator name
   collabLink?: string; // Optional collaborator link
-  descriptions: ReactNode; // Full JSX content with formatting
+  descriptions: string; // HTML content
 }
 
 /**

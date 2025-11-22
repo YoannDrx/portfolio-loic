@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageToggle from '@/components/ui/LanguageToggle';
 
@@ -93,6 +93,15 @@ export default function Navbar() {
                 </Link>
               ))}
 
+              {/* Admin Login Button */}
+              <Link
+                href="/login"
+                className="ml-2 w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-neon-cyan/50 transition-all group"
+                title="Admin Login"
+              >
+                <Lock className="w-4 h-4 text-gray-400 group-hover:text-neon-cyan transition-colors" />
+              </Link>
+
               {/* Language Toggle */}
               <div className="ml-2">
                 <LanguageToggle />
@@ -165,11 +174,27 @@ export default function Navbar() {
                   </motion.div>
                 ))}
 
-                {/* Language Toggle - Mobile */}
+                {/* Admin Login - Mobile */}
                 <motion.div
                   initial={{ x: 50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: navLinks.length * 0.1 }}
+                  className="pt-2"
+                >
+                  <Link
+                    href="/login"
+                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-gray-400 hover:bg-white/5 hover:text-neon-cyan transition-all"
+                  >
+                    <Lock className="w-4 h-4" />
+                    <span className="text-sm font-medium">Admin</span>
+                  </Link>
+                </motion.div>
+
+                {/* Language Toggle - Mobile */}
+                <motion.div
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
                   className="pt-2 flex justify-center"
                 >
                   <LanguageToggle />
@@ -179,7 +204,7 @@ export default function Navbar() {
                 <motion.div
                   initial={{ x: 50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
+                  transition={{ delay: (navLinks.length + 2) * 0.1 }}
                   className="pt-4"
                 >
                   <Link

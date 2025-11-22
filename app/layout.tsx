@@ -1,6 +1,7 @@
 import { Inter, Montserrat } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import { setRequestLocale } from 'next-intl/server';
+import { Toaster } from '@/components/ui/toaster';
 import '../styles/globals.css';
 
 const inter = Inter({
@@ -36,6 +37,7 @@ export default async function RootLayout({
     <html lang={locale} className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <body className="bg-obsidian text-gray-300 antialiased" suppressHydrationWarning>
         {children}
+        <Toaster />
       </body>
     </html>
   );

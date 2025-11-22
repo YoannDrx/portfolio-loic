@@ -6,12 +6,12 @@ import { Facebook, Linkedin, Youtube, Cloud, Star, Mail } from "lucide-react";
 
 const footerLinks = {
   navigation: [
-    { href: "/", key: "nav.home" },
-    { href: "/about", key: "nav.about" },
-    { href: "/services", key: "nav.services" },
-    { href: "/albums", key: "nav.albums" },
-    { href: "/videos", key: "nav.videos" },
-    { href: "/contact", key: "nav.contact" },
+    { href: "/" as const, key: "nav.home" },
+    { href: "/about" as const, key: "nav.about" },
+    { href: "/services" as const, key: "nav.services" },
+    { href: "/albums" as const, key: "nav.albums" },
+    { href: "/videos" as const, key: "nav.videos" },
+    { href: "/contact" as const, key: "nav.contact" },
   ],
   social: [
     { href: "https://www.facebook.com/loic.leduc.54", icon: Facebook, label: "Facebook" },
@@ -124,16 +124,8 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="py-6 border-t border-white/10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <p className="text-sm text-gray-400">{tFooter("copyright", { year: currentYear })}</p>
-            <div className="flex items-center gap-6">
-              <Link href="/privacy" className="text-sm text-gray-400 hover:text-neon-cyan transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-sm text-gray-400 hover:text-neon-cyan transition-colors">
-                Terms of Service
-              </Link>
-            </div>
           </div>
         </div>
       </div>

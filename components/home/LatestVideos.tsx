@@ -1,16 +1,23 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { ArrowRight, Play } from 'lucide-react';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import VideoCard from '@/components/videos/VideoCard';
-import { videoData } from '@/data/videoData';
+import { prisma } from '@/lib/prisma';
 
-export default function LatestVideos() {
-  const t = useTranslations('home.latestVideos');
-  // Get the 3 most recent videos
-  const latestVideos = videoData.slice(0, 3);
+export default async function LatestVideos() {
+  const t = await getTranslations('home.latestVideos');
+
+  // Get the 3 most recent published videos
+  const latestVideos = await prisma.video.findMany({
+    where: { published: true },
+    orderBy: { date: 'desc' },
+    take: 3,
+  });
+
+  const totalCount = await prisma.video.count({
+    where: { published: true },
+  });
 
   return (
     <section className="py-24 bg-gradient-to-b from-obsidian-50 to-obsidian">
@@ -48,7 +55,7 @@ export default function LatestVideos() {
             href="/videos"
             className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-neon-purple rounded-lg font-semibold text-neon-purple hover:bg-neon-purple/10 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all duration-300"
           >
-            <span>{t('viewAll', { count: videoData.length })}</span>
+            <span>{t('viewAll', { count: totalCount })}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
           </Link>
         </AnimatedSection>
