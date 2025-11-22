@@ -1,109 +1,146 @@
 import { prisma } from "@/lib/prisma";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Image, Video, Briefcase } from "lucide-react";
+import { DashboardKPICards } from "@/components/admin/DashboardKPICards";
+import { RecentActivity } from "@/components/admin/RecentActivity";
+import { QuickActions } from "@/components/admin/QuickActions";
 
-export default async function AdminDashboardPage() {
+export default async function AdminDashboardPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
   // Récupérer les statistiques
-  const [albumsCount, videosCount, servicesCount] = await Promise.all([
+  const [
+    albumsCount,
+    videosCount,
+    servicesCount,
+    publishedAlbumsCount,
+    publishedVideosCount,
+    publishedServicesCount,
+    recentItems,
+  ] = await Promise.all([
     prisma.album.count(),
     prisma.video.count(),
     prisma.service.count(),
+    prisma.album.count({ where: { published: true } }),
+    prisma.video.count({ where: { published: true } }),
+    prisma.service.count({ where: { published: true } }),
+    // Get recent items (last 5 updated)
+    Promise.all([
+      prisma.album.findMany({
+        take: 3,
+        orderBy: { updatedAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          published: true,
+          img: true,
+          updatedAt: true,
+        },
+      }),
+      prisma.video.findMany({
+        take: 2,
+        orderBy: { updatedAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          published: true,
+          img: true,
+          updatedAt: true,
+        },
+      }),
+      prisma.service.findMany({
+        take: 2,
+        orderBy: { updatedAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          published: true,
+          largeImg: true,
+          updatedAt: true,
+        },
+      }),
+    ]).then(([albums, videos, services]) => {
+      return [
+        ...albums.map((item) => ({
+          id: item.id,
+          title: item.title,
+          type: "album" as const,
+          published: item.published,
+          img: item.img,
+          updatedAt: item.updatedAt.toISOString(),
+        })),
+        ...videos.map((item) => ({
+          id: item.id,
+          title: item.title,
+          type: "video" as const,
+          published: item.published,
+          img: item.img,
+          updatedAt: item.updatedAt.toISOString(),
+        })),
+        ...services.map((item) => ({
+          id: item.id,
+          title: item.title,
+          type: "service" as const,
+          published: item.published,
+          img: item.largeImg,
+          updatedAt: item.updatedAt.toISOString(),
+        })),
+      ]
+        .sort(
+          (a, b) =>
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        )
+        .slice(0, 5);
+    }),
   ]);
 
-  const stats = [
-    {
-      title: "Albums",
-      value: albumsCount,
-      icon: Image,
-      description: "Albums publiés",
-      href: "/admin/albums",
-    },
-    {
-      title: "Vidéos",
-      value: videosCount,
-      icon: Video,
-      description: "Vidéos publiées",
-      href: "/admin/videos",
-    },
-    {
-      title: "Services",
-      value: servicesCount,
-      icon: Briefcase,
-      description: "Services proposés",
-      href: "/admin/services",
-    },
-  ];
+  const totalContent = albumsCount + videosCount + servicesCount;
+  const totalPublished =
+    publishedAlbumsCount + publishedVideosCount + publishedServicesCount;
+  const publishRate = totalContent > 0
+    ? Math.round((totalPublished / totalContent) * 100)
+    : 0;
+
+  const stats = {
+    albumsCount,
+    videosCount,
+    servicesCount,
+    publishedAlbumsCount,
+    publishedVideosCount,
+    publishedServicesCount,
+    totalContent,
+    totalPublished,
+    publishRate,
+  };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-gray-500 dark:text-gray-400">
-          Vue d&apos;ensemble de votre contenu
+        <h1 className="text-3xl font-bold text-admin-text-primary tracking-tight">
+          Bienvenue ! 👋
+        </h1>
+        <p className="text-admin-text-secondary mt-1">
+          Vue d'ensemble de votre portfolio et statistiques
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {stats.map((stat) => {
-          const Icon = stat.icon;
-          return (
-            <Card key={stat.title}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {stat.title}
-                </CardTitle>
-                <Icon className="h-4 w-4 text-gray-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stat.value}</div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {stat.description}
-                </p>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
+      {/* KPI Cards */}
+      <DashboardKPICards stats={stats} locale={locale} />
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Bienvenue</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Utilisez le menu de navigation pour gérer vos albums, vidéos et
-              services. Toutes les modifications sont enregistrées dans la base
-              de données et seront immédiatement visibles sur le site public.
-            </p>
-          </CardContent>
-        </Card>
+      {/* Bottom Section */}
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Recent Activity - 2 columns */}
+        <div className="lg:col-span-2">
+          <RecentActivity items={recentItems} locale={locale} />
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Actions rapides</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <a
-              href="/admin/albums"
-              className="block text-sm text-primary hover:underline"
-            >
-              → Gérer les albums
-            </a>
-            <a
-              href="/admin/videos"
-              className="block text-sm text-primary hover:underline"
-            >
-              → Gérer les vidéos
-            </a>
-            <a
-              href="/admin/services"
-              className="block text-sm text-primary hover:underline"
-            >
-              → Gérer les services
-            </a>
-          </CardContent>
-        </Card>
+        {/* Quick Actions - 1 column */}
+        <div>
+          <QuickActions locale={locale} />
+        </div>
       </div>
     </div>
   );

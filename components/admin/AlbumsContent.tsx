@@ -141,19 +141,26 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Albums</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">Albums</h1>
+          <p className="text-admin-text-secondary">
             Gérez vos albums photo ({total} au total)
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={handleExport} className="gap-2">
+        <div className="flex gap-3">
+          <Button
+            variant="outline"
+            onClick={handleExport}
+            className="gap-2 border-admin-border hover:bg-admin-bg-secondary hover:border-admin-primary-300 transition-all duration-200"
+          >
             <Download className="h-4 w-4" />
             Exporter CSV
           </Button>
-          <Button asChild>
+          <Button
+            asChild
+            className="gap-2 bg-gradient-to-r from-admin-primary-500 to-admin-accent-500 hover:from-admin-primary-600 hover:to-admin-accent-600 shadow-md hover:shadow-lg transition-all duration-200"
+          >
             <Link href={`/${locale}/admin/albums/new`}>
-              <Plus className="mr-2 h-4 w-4" />
+              <Plus className="h-4 w-4" />
               Nouvel album
             </Link>
           </Button>
@@ -186,52 +193,72 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
         />
       ) : (
         <>
-          <div className="rounded-lg border">
+          <div className="rounded-lg border border-admin-border bg-white shadow-sm overflow-hidden">
             <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
               <Table>
-                <TableHeader className="sticky top-0 bg-background z-10">
-                  <TableRow>
-                    <TableHead>Aperçu</TableHead>
-                    <TableHead>Titre</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Style</TableHead>
-                    <TableHead>Statut</TableHead>
-                    <TableHead>Actions</TableHead>
+                <TableHeader className="sticky top-0 bg-admin-bg-secondary z-10 border-b border-admin-border">
+                  <TableRow className="hover:bg-admin-bg-secondary">
+                    <TableHead className="font-semibold text-admin-text-primary">Aperçu</TableHead>
+                    <TableHead className="font-semibold text-admin-text-primary">Titre</TableHead>
+                    <TableHead className="font-semibold text-admin-text-primary">Date</TableHead>
+                    <TableHead className="font-semibold text-admin-text-primary">Style</TableHead>
+                    <TableHead className="font-semibold text-admin-text-primary">Statut</TableHead>
+                    <TableHead className="font-semibold text-admin-text-primary">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {albums.map((album) => (
-                    <TableRow key={album.id}>
+                    <TableRow
+                      key={album.id}
+                      className="group hover:bg-admin-bg-secondary transition-colors duration-150 border-b border-admin-border-light last:border-b-0"
+                    >
                       <TableCell>
-                        <div className="relative h-12 w-20 overflow-hidden rounded">
+                        <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200">
                           <Image
                             src={album.img}
                             alt={album.title}
                             fill
                             className="object-cover"
-                            sizes="80px"
+                            sizes="96px"
                           />
                         </div>
                       </TableCell>
                       <TableCell>
-                        <span className="font-medium">{album.title}</span>
+                        <span className="font-semibold text-admin-text-primary">{album.title}</span>
                       </TableCell>
-                      <TableCell>{album.date}</TableCell>
                       <TableCell>
-                        <Badge variant="outline" className="capitalize">
+                        <span className="text-admin-text-secondary text-sm">{album.date}</span>
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant="outline"
+                          className="capitalize border-admin-accent-200 bg-admin-accent-50 text-admin-accent-700 font-medium"
+                        >
                           {album.style}
                         </Badge>
                       </TableCell>
                       <TableCell>
                         {album.published ? (
-                          <Badge className="bg-green-500">Publié</Badge>
+                          <Badge className="bg-admin-success-500 hover:bg-admin-success-600 text-white font-medium shadow-sm">
+                            Publié
+                          </Badge>
                         ) : (
-                          <Badge variant="secondary">Brouillon</Badge>
+                          <Badge
+                            variant="secondary"
+                            className="bg-gray-100 text-gray-700 border border-gray-200 font-medium"
+                          >
+                            Brouillon
+                          </Badge>
                         )}
                       </TableCell>
                       <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Button variant="ghost" size="sm" asChild>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            asChild
+                            className="h-9 w-9 p-0 hover:bg-admin-primary-50 hover:text-admin-primary-600 transition-all duration-200"
+                          >
                             <Link
                               href={`/${locale}/albums/${album.id}${!album.published ? "?preview=true" : ""}`}
                               target="_blank"
@@ -239,7 +266,12 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                               <Eye className="h-4 w-4" />
                             </Link>
                           </Button>
-                          <Button variant="ghost" size="sm" asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            asChild
+                            className="h-9 w-9 p-0 hover:bg-admin-accent-50 hover:text-admin-accent-600 transition-all duration-200"
+                          >
                             <Link href={`/${locale}/admin/albums/${album.id}`}>
                               <Pencil className="h-4 w-4" />
                             </Link>

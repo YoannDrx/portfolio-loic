@@ -1,4 +1,4 @@
-# 📊 Dashboard Admin - Documentation Complète
+ys# 📊 Dashboard Admin - Documentation Complète
 
 ## 📋 Table des Matières
 
@@ -19,7 +19,9 @@
 ## 🎯 Vue d'ensemble
 
 ### Concept
+
 Dashboard admin complet pour gérer un portfolio de musicien/compositeur avec:
+
 - Gestion de contenu (albums, vidéos, services)
 - Système de versioning/historique
 - Paramètres du site
@@ -27,6 +29,7 @@ Dashboard admin complet pour gérer un portfolio de musicien/compositeur avec:
 - Gestion de profil admin
 
 ### Objectifs
+
 1. **Simplicité** - Interface intuitive, pas de courbe d'apprentissage
 2. **Sécurité** - Authentification robuste, validation, sanitization
 3. **Traçabilité** - Historique complet de toutes les modifications
@@ -38,6 +41,7 @@ Dashboard admin complet pour gérer un portfolio de musicien/compositeur avec:
 ## 🏗️ Architecture & Stack Technique
 
 ### Framework & Core
+
 ```
 Next.js 16.0.3
 ├── App Router (nouvelle architecture)
@@ -48,6 +52,7 @@ Next.js 16.0.3
 ```
 
 ### Base de Données & ORM
+
 ```
 PostgreSQL (Neon)
 ├── Prisma ORM 6.19.0
@@ -56,6 +61,7 @@ PostgreSQL (Neon)
 ```
 
 ### Authentification
+
 ```
 Better Auth
 ├── Credential provider (email/password)
@@ -65,6 +71,7 @@ Better Auth
 ```
 
 ### Validation & Sécurité
+
 ```
 Zod - Validation de schémas
 ├── Validation côté serveur (API routes)
@@ -78,6 +85,7 @@ Sanitization HTML
 ```
 
 ### Stockage de Fichiers
+
 ```
 Vercel Blob
 ├── Upload direct depuis le client
@@ -87,6 +95,7 @@ Vercel Blob
 ```
 
 ### UI Framework
+
 ```
 shadcn/ui (Radix UI + Tailwind)
 ├── Components accessibles (ARIA)
@@ -96,6 +105,7 @@ shadcn/ui (Radix UI + Tailwind)
 ```
 
 ### Internationalization
+
 ```
 next-intl
 ├── Routes localisées (/fr, /en)
@@ -108,6 +118,7 @@ next-intl
 ## 🧭 Structure de Navigation
 
 ### Architecture des Routes
+
 ```
 /app/[locale]/
 ├── admin/                      # Layout admin avec sidebar
@@ -131,7 +142,9 @@ next-intl
 ```
 
 ### Sidebar (Navigation Principale)
+
 **Pensée derrière la sidebar:**
+
 - **Fixe à gauche** - Toujours visible, navigation rapide
 - **Icônes + Labels** - Clarté immédiate
 - **Indicateur actif** - On sait toujours où on est
@@ -139,6 +152,7 @@ next-intl
 - **Hiérarchie visuelle** - Groupes logiques
 
 **Items de navigation suggérés:**
+
 ```
 ┌─────────────────────────┐
 │ 🏠 Dashboard            │
@@ -164,7 +178,9 @@ next-intl
 ### 1. 💿 ALBUMS (/admin/albums)
 
 #### Liste des Albums (AlbumsContent)
+
 **Fonctionnalités:**
+
 - ✅ **Table paginée** (20 items/page)
 - ✅ **Filtres avancés**:
   - Recherche textuelle (titre, poster)
@@ -185,6 +201,7 @@ next-intl
   - Aperçu image miniature
 
 **Composants utilisés:**
+
 ```tsx
 <AlbumsContent initialAlbums={albums} locale={locale} />
   ├── <SearchFilters /> // Recherche + filtres
@@ -197,6 +214,7 @@ next-intl
 ```
 
 **Architecture technique:**
+
 - Server Component (page.tsx) → fetch data
 - Client Component (AlbumsContent) → interactivité
 - State management: useState + useCallback
@@ -205,6 +223,7 @@ next-intl
 #### Création/Édition d'Album
 
 **Formulaire complet:**
+
 ```
 Informations Générales
 ├── Titre* (Input)
@@ -241,6 +260,7 @@ Actions
 ```
 
 **Validation (Zod Schema):**
+
 ```typescript
 albumCreateSchema = {
   title: z.string().min(1),
@@ -255,11 +275,12 @@ albumCreateSchema = {
   descriptionsFr: z.string(),
   descriptionsEn: z.string(),
   published: z.boolean(),
-  order: z.number()
-}
+  order: z.number(),
+};
 ```
 
 **Features avancées:**
+
 1. **Auto-save** - Debounce 1s (optionnel)
 2. **Versioning** - Chaque sauvegarde crée une version
 3. **Historique** - Accès aux versions précédentes
@@ -273,6 +294,7 @@ albumCreateSchema = {
 **Structure similaire aux albums, avec spécificités:**
 
 **Champs spécifiques:**
+
 ```
 ├── ID Vidéo YouTube* (Input - ex: "dQw4w9WgXcQ")
 ├── Type de vidéo* (Select)
@@ -284,11 +306,13 @@ albumCreateSchema = {
 ```
 
 **Filtres spécifiques:**
+
 - Filtre par type (3 types)
 - Recherche par titre
 - Tri par date
 
 **Affichage public:**
+
 - Player YouTube intégré (iframe)
 - Click to play
 - Badge type de vidéo
@@ -297,6 +321,7 @@ albumCreateSchema = {
 ### 3. 💼 SERVICES (/admin/services)
 
 **Champs spécifiques:**
+
 ```
 ├── Numéro de service* (Input - ex: "01")
 ├── Titre* (Input)
@@ -308,6 +333,7 @@ albumCreateSchema = {
 ```
 
 **Page publique:**
+
 - Grille de cards cliquables
 - Click → page détail du service
 - Design moderne avec glass cards
@@ -318,6 +344,7 @@ albumCreateSchema = {
 **Système d'onglets (Tabs):**
 
 #### Onglet 1: 👤 Profil & Compte
+
 ```
 Card: Profil Administrateur
 ├── Nom (display only)
@@ -339,12 +366,14 @@ Card: Changer le Mot de Passe
 ```
 
 **Sécurité:**
+
 - Vérification mot de passe actuel (bcrypt compare)
 - Hash nouveau mot de passe (bcrypt)
 - Validation email unique en DB
 - Toast confirmations
 
 #### Onglet 2: 🌐 Informations Générales
+
 ```
 Card: Informations Générales
 ├── Titre du site (Input)
@@ -356,11 +385,13 @@ Card: Informations Générales
 ```
 
 **Sauvegarde:**
+
 - Auto-save avec debounce 1s
 - Indicateur "Sauvegardé à HH:MM:SS"
 - Toast de confirmation
 
 #### Onglet 3: 🔗 Réseaux Sociaux
+
 ```
 Grid 2 colonnes:
 ├── YouTube (URL)
@@ -378,6 +409,7 @@ Grid 2 colonnes:
 ```
 
 #### Onglet 4: 📊 Paramètres de Contenu
+
 ```
 Section: Page d'accueil
 ├── Nombre d'albums featured (Number 3-12)
@@ -398,6 +430,7 @@ Section: Tri par défaut
 ```
 
 #### Onglet 5: 💾 Export de Données
+
 ```
 Card par type de contenu:
 
@@ -418,9 +451,11 @@ Info Box:
 ```
 
 **Export formats:**
+
 - **CSV**: Headers + rows, escapé correctement
 - **JSON**: Pretty printed (indent 2)
 - **TXT**: Formaté lisible avec sections
+
   ```
   ========================================
      EXPORT ALBUMS
@@ -442,6 +477,7 @@ Info Box:
 ### Authentification (Better Auth)
 
 **Flow de connexion:**
+
 ```
 1. User visite /login
 2. Formulaire email + password
@@ -453,18 +489,16 @@ Info Box:
 ```
 
 **Vérification admin:**
+
 ```typescript
 // Middleware withAuth
 export const withAuth = (handler) => async (req, context) => {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
-  if (!session?.user || session.user.role !== 'admin') {
-    return Response.json(
-      { error: "Non autorisé" },
-      { status: 401 }
-    );
+  if (!session?.user || session.user.role !== "admin") {
+    return Response.json({ error: "Non autorisé" }, { status: 401 });
   }
 
   return handler(req, context, session.user);
@@ -474,6 +508,7 @@ export const withAuth = (handler) => async (req, context) => {
 ### Validation Zod
 
 **Pattern utilisé partout:**
+
 ```typescript
 // 1. Définir le schéma
 const albumCreateSchema = z.object({
@@ -483,18 +518,16 @@ const albumCreateSchema = z.object({
 });
 
 // 2. Valider dans API route
-export const POST = withAuthAndValidation(
-  albumCreateSchema,
-  async (req, context, user, validatedData) => {
-    // validatedData est typé et validé!
-    const album = await prisma.album.create({
-      data: validatedData
-    });
-  }
-);
+export const POST = withAuthAndValidation(albumCreateSchema, async (req, context, user, validatedData) => {
+  // validatedData est typé et validé!
+  const album = await prisma.album.create({
+    data: validatedData,
+  });
+});
 ```
 
 **Avantages:**
+
 - Type safety (TypeScript inféré)
 - Messages d'erreur clairs
 - Validation côté serveur (sécurisé)
@@ -503,22 +536,17 @@ export const POST = withAuthAndValidation(
 ### Sanitization HTML
 
 **Protection XSS:**
+
 ```typescript
 // lib/sanitize.ts
 export function sanitizeHTML(dirty: string): string {
   let cleaned = dirty;
 
   // Remove scripts
-  cleaned = cleaned.replace(
-    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-    ""
-  );
+  cleaned = cleaned.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
 
   // Remove event handlers
-  cleaned = cleaned.replace(
-    /\s*on\w+\s*=\s*["'][^"']*["']/gi,
-    ""
-  );
+  cleaned = cleaned.replace(/\s*on\w+\s*=\s*["'][^"']*["']/gi, "");
 
   // Remove javascript: URLs
   cleaned = cleaned.replace(/javascript:/gi, "");
@@ -528,6 +556,7 @@ export function sanitizeHTML(dirty: string): string {
 ```
 
 **Application:**
+
 - Toutes les descriptions FR/EN
 - Avant sauvegarde en DB
 - Après restauration de version
@@ -535,6 +564,7 @@ export function sanitizeHTML(dirty: string): string {
 ### Rate Limiting
 
 **Configuration:**
+
 ```typescript
 // lib/rate-limit.ts
 const limiters = {
@@ -549,11 +579,12 @@ const limiters = {
   api: rateLimit({
     interval: 60 * 1000,
     uniqueTokenPerInterval: 500,
-  })
+  }),
 };
 ```
 
 **Storage:**
+
 - Production: Upstash Redis
 - Dev: In-memory Map
 
@@ -564,9 +595,10 @@ const limiters = {
 ### Vercel Blob Storage
 
 **Configuration:**
+
 ```typescript
 // app/api/admin/upload/route.ts
-import { put } from '@vercel/blob';
+import { put } from "@vercel/blob";
 
 export const POST = withAuth(async (req) => {
   // Rate limit
@@ -574,7 +606,7 @@ export const POST = withAuth(async (req) => {
 
   // Parse form
   const formData = await req.formData();
-  const file = formData.get('file') as File;
+  const file = formData.get("file") as File;
 
   // Validate
   if (!file) throw new Error("No file");
@@ -582,14 +614,14 @@ export const POST = withAuth(async (req) => {
     throw new Error("File too large (max 5MB)");
   }
 
-  const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const validTypes = ["image/jpeg", "image/png", "image/webp"];
   if (!validTypes.includes(file.type)) {
     throw new Error("Invalid file type");
   }
 
   // Upload
   const blob = await put(file.name, file, {
-    access: 'public',
+    access: "public",
     addRandomSuffix: true,
   });
 
@@ -600,6 +632,7 @@ export const POST = withAuth(async (req) => {
 ### Composant ImageUpload
 
 **Features:**
+
 - ✅ Drag & drop zone
 - ✅ Click to browse
 - ✅ Preview instantanée (blob URL)
@@ -610,6 +643,7 @@ export const POST = withAuth(async (req) => {
 - ✅ Support dark mode
 
 **Usage:**
+
 ```tsx
 <ImageUpload
   value={formData.img}
@@ -620,6 +654,7 @@ export const POST = withAuth(async (req) => {
 ```
 
 **Validation URL:**
+
 ```typescript
 function isValidImageUrl(url: string): boolean {
   if (!url || url.trim() === "") return false;
@@ -637,12 +672,14 @@ function isValidImageUrl(url: string): boolean {
 ### Concept & Architecture
 
 **Problème résolu:**
+
 - Traçabilité: Qui a modifié quoi et quand?
 - Sécurité: Possibilité de revenir en arrière
 - Audit: Historique complet des changements
 - Collaboration: Voir les modifications des autres
 
 **Modèle Prisma:**
+
 ```prisma
 model ContentVersion {
   id          String   @id @default(cuid())
@@ -668,26 +705,18 @@ model ContentVersion {
 
 ```typescript
 // Créer une version
-async function createVersion(
-  contentType: string,
-  contentId: string,
-  data: any,
-  action: string,
-  userId: string
-) {
+async function createVersion(contentType: string, contentId: string, data: any, action: string, userId: string) {
   // 1. Récupérer dernière version
   const lastVersion = await prisma.contentVersion.findFirst({
     where: { contentType, contentId },
-    orderBy: { version: 'desc' }
+    orderBy: { version: "desc" },
   });
 
   // 2. Calculer le numéro
   const version = (lastVersion?.version || 0) + 1;
 
   // 3. Calculer le diff
-  const changes = lastVersion
-    ? calculateDiff(lastVersion.data, data)
-    : null;
+  const changes = lastVersion ? calculateDiff(lastVersion.data, data) : null;
 
   // 4. Créer la version
   await prisma.contentVersion.create({
@@ -698,22 +727,19 @@ async function createVersion(
       data,
       changes,
       action,
-      createdById: userId
-    }
+      createdById: userId,
+    },
   });
 }
 
 // Calculer les différences
 function calculateDiff(oldData: any, newData: any) {
   const changes = [];
-  const allKeys = new Set([
-    ...Object.keys(oldData),
-    ...Object.keys(newData)
-  ]);
+  const allKeys = new Set([...Object.keys(oldData), ...Object.keys(newData)]);
 
   for (const key of allKeys) {
     // Ignorer metadata
-    if (['id', 'createdAt', 'updatedAt'].includes(key)) {
+    if (["id", "createdAt", "updatedAt"].includes(key)) {
       continue;
     }
 
@@ -724,21 +750,21 @@ function calculateDiff(oldData: any, newData: any) {
       if (oldValue === undefined) {
         changes.push({
           field: key,
-          type: 'added',
-          newValue
+          type: "added",
+          newValue,
         });
       } else if (newValue === undefined) {
         changes.push({
           field: key,
-          type: 'removed',
-          oldValue
+          type: "removed",
+          oldValue,
         });
       } else {
         changes.push({
           field: key,
-          type: 'modified',
+          type: "modified",
           oldValue,
-          newValue
+          newValue,
         });
       }
     }
@@ -751,6 +777,7 @@ function calculateDiff(oldData: any, newData: any) {
 ### Composant VersionHistory
 
 **UI:**
+
 ```tsx
 <Dialog>
   <DialogTrigger>
@@ -762,7 +789,7 @@ function calculateDiff(oldData: any, newData: any) {
       <DialogTitle>Historique des versions</DialogTitle>
     </DialogHeader>
 
-    {versions.map(version => (
+    {versions.map((version) => (
       <Card key={version.id}>
         <CardHeader>
           <div>Version {version.version}</div>
@@ -776,23 +803,13 @@ function calculateDiff(oldData: any, newData: any) {
             {formatDate(version.createdAt)}
           </div>
 
-          {version.changes?.length > 0 && (
-            <div>{version.changes.length} modifications</div>
-          )}
+          {version.changes?.length > 0 && <div>{version.changes.length} modifications</div>}
         </CardContent>
 
         <CardFooter>
-          {!isLatest && (
-            <Button onClick={() => handleRestore(version.id)}>
-              Restaurer
-            </Button>
-          )}
+          {!isLatest && <Button onClick={() => handleRestore(version.id)}>Restaurer</Button>}
 
-          {version.changes && (
-            <Button onClick={() => showDiff(version)}>
-              Voir diff
-            </Button>
-          )}
+          {version.changes && <Button onClick={() => showDiff(version)}>Voir diff</Button>}
         </CardFooter>
       </Card>
     ))}
@@ -803,35 +820,39 @@ function calculateDiff(oldData: any, newData: any) {
 ### Composant DiffViewer
 
 **Affichage des changements:**
+
 ```tsx
-<DiffViewer changes={version.changes} />
+<DiffViewer changes={version.changes} />;
 
 // Component
-{changes.map(change => (
-  <Card key={change.field}>
-    {/* Type: added (vert) / removed (rouge) / modified (bleu) */}
-    <Badge variant={change.type}>
-      {change.type === 'added' && <Plus />}
-      {change.type === 'removed' && <Minus />}
-      {change.type === 'modified' && <Edit />}
-      {change.type}
-    </Badge>
+{
+  changes.map((change) => (
+    <Card key={change.field}>
+      {/* Type: added (vert) / removed (rouge) / modified (bleu) */}
+      <Badge variant={change.type}>
+        {change.type === "added" && <Plus />}
+        {change.type === "removed" && <Minus />}
+        {change.type === "modified" && <Edit />}
+        {change.type}
+      </Badge>
 
-    {/* Nom du champ traduit */}
-    <div>{fieldLabels[change.field]}</div>
+      {/* Nom du champ traduit */}
+      <div>{fieldLabels[change.field]}</div>
 
-    {/* Valeurs */}
-    {change.type === 'modified' && (
-      <div>
-        <div>Avant: {formatValue(change.oldValue)}</div>
-        <div>Après: {formatValue(change.newValue)}</div>
-      </div>
-    )}
-  </Card>
-))}
+      {/* Valeurs */}
+      {change.type === "modified" && (
+        <div>
+          <div>Avant: {formatValue(change.oldValue)}</div>
+          <div>Après: {formatValue(change.newValue)}</div>
+        </div>
+      )}
+    </Card>
+  ));
+}
 ```
 
 **Traduction des champs:**
+
 ```typescript
 const fieldLabels = {
   title: "Titre",
@@ -846,15 +867,16 @@ const fieldLabels = {
 ### Restauration de Version
 
 **Workflow:**
+
 ```typescript
 // 1. User clique "Restaurer"
 async function handleRestore(versionId: string) {
   if (!confirm("Restaurer cette version?")) return;
 
   // 2. API call
-  const response = await fetch('/api/admin/versions/restore', {
-    method: 'POST',
-    body: JSON.stringify({ versionId })
+  const response = await fetch("/api/admin/versions/restore", {
+    method: "POST",
+    body: JSON.stringify({ versionId }),
   });
 
   // 3. Refresh page
@@ -867,7 +889,7 @@ export const POST = async (req) => {
 
   // 1. Récupérer les données de la version
   const version = await prisma.contentVersion.findUnique({
-    where: { id: versionId }
+    where: { id: versionId },
   });
 
   const data = version.data;
@@ -885,17 +907,11 @@ export const POST = async (req) => {
   // 4. Update le contenu
   const updated = await prisma[version.contentType].update({
     where: { id: version.contentId },
-    data
+    data,
   });
 
   // 5. Créer nouvelle version "restore"
-  await createVersion(
-    version.contentType,
-    version.contentId,
-    updated,
-    'restore',
-    user.id
-  );
+  await createVersion(version.contentType, version.contentId, updated, "restore", user.id);
 
   return Response.json(updated);
 };
@@ -904,13 +920,14 @@ export const POST = async (req) => {
 ### Auto-Versioning dans API Routes
 
 **Pattern appliqué partout:**
+
 ```typescript
 // Après CREATE
 export const POST = async (req) => {
   const album = await prisma.album.create({ data });
 
   // Version automatique
-  await createVersion('album', album.id, album, 'create', user.id);
+  await createVersion("album", album.id, album, "create", user.id);
 
   return Response.json(album);
 };
@@ -920,7 +937,7 @@ export const PATCH = async (req) => {
   const album = await prisma.album.update({ where, data });
 
   // Version automatique
-  await createVersion('album', album.id, album, 'update', user.id);
+  await createVersion("album", album.id, album, "update", user.id);
 
   return Response.json(album);
 };
@@ -986,7 +1003,7 @@ export async function requireAuth(req: NextRequest) {
   const headersList = await headers();
   const session = await auth.api.getSession({ headers: headersList });
 
-  if (!session?.user || session.user.role !== 'admin') {
+  if (!session?.user || session.user.role !== "admin") {
     throw new ApiError(401, "Non autorisé", "UNAUTHORIZED");
   }
 
@@ -994,9 +1011,7 @@ export async function requireAuth(req: NextRequest) {
 }
 
 // 2. Wrapper pour routes avec auth
-export function withAuth(
-  handler: (req: NextRequest, context: any, user: User) => Promise<Response>
-) {
+export function withAuth(handler: (req: NextRequest, context: any, user: User) => Promise<Response>) {
   return async (req: NextRequest, context: any) => {
     try {
       const user = await requireAuth(req);
@@ -1010,12 +1025,7 @@ export function withAuth(
 // 3. Wrapper avec auth + validation Zod
 export function withAuthAndValidation<T extends z.ZodType>(
   schema: T,
-  handler: (
-    req: NextRequest,
-    context: any,
-    user: User,
-    data: z.infer<T>
-  ) => Promise<Response>
+  handler: (req: NextRequest, context: any, user: User, data: z.infer<T>) => Promise<Response>
 ) {
   return withAuth(async (req, context, user) => {
     const body = await req.json();
@@ -1027,33 +1037,20 @@ export function withAuthAndValidation<T extends z.ZodType>(
 // 4. Gestion centralisée des erreurs
 export function handleApiError(error: unknown): Response {
   if (error instanceof ApiError) {
-    return Response.json(
-      { error: error.message, code: error.code },
-      { status: error.status }
-    );
+    return Response.json({ error: error.message, code: error.code }, { status: error.status });
   }
 
   if (error instanceof z.ZodError) {
-    return Response.json(
-      { error: "Validation error", issues: error.issues },
-      { status: 400 }
-    );
+    return Response.json({ error: "Validation error", issues: error.issues }, { status: 400 });
   }
 
   console.error(error);
-  return Response.json(
-    { error: "Internal server error" },
-    { status: 500 }
-  );
+  return Response.json({ error: "Internal server error" }, { status: 500 });
 }
 
 // 5. Custom error class
 export class ApiError extends Error {
-  constructor(
-    public status: number,
-    message: string,
-    public code: string
-  ) {
+  constructor(public status: number, message: string, public code: string) {
     super(message);
   }
 }
@@ -1073,8 +1070,8 @@ export const GET = withAuth(async (req, context, user) => {
     search: z.string().optional(),
     style: z.string().optional(),
     published: z.coerce.boolean().optional(),
-    sortBy: z.enum(['date', 'title', 'style']).default('date'),
-    sortOrder: z.enum(['asc', 'desc']).default('desc'),
+    sortBy: z.enum(["date", "title", "style"]).default("date"),
+    sortOrder: z.enum(["asc", "desc"]).default("desc"),
   });
 
   const query = querySchema.parse(Object.fromEntries(searchParams));
@@ -1084,8 +1081,8 @@ export const GET = withAuth(async (req, context, user) => {
 
   if (query.search) {
     where.OR = [
-      { title: { contains: query.search, mode: 'insensitive' } },
-      { poster: { contains: query.search, mode: 'insensitive' } },
+      { title: { contains: query.search, mode: "insensitive" } },
+      { poster: { contains: query.search, mode: "insensitive" } },
     ];
   }
 
@@ -1129,30 +1126,27 @@ export const GET = withAuth(async (req, context, user) => {
 });
 
 // POST /api/admin/albums
-export const POST = withAuthAndValidation(
-  albumCreateSchema,
-  async (req, context, user, data) => {
-    // Sanitize HTML
-    const sanitizedData = {
-      ...data,
-      descriptionsFr: sanitizeHTML(data.descriptionsFr),
-      descriptionsEn: sanitizeHTML(data.descriptionsEn),
-    };
+export const POST = withAuthAndValidation(albumCreateSchema, async (req, context, user, data) => {
+  // Sanitize HTML
+  const sanitizedData = {
+    ...data,
+    descriptionsFr: sanitizeHTML(data.descriptionsFr),
+    descriptionsEn: sanitizeHTML(data.descriptionsEn),
+  };
 
-    // Create
-    const album = await prisma.album.create({
-      data: {
-        ...sanitizedData,
-        createdById: user.id,
-      },
-    });
+  // Create
+  const album = await prisma.album.create({
+    data: {
+      ...sanitizedData,
+      createdById: user.id,
+    },
+  });
 
-    // Version automatique
-    await createVersion('album', album.id, album, 'create', user.id);
+  // Version automatique
+  await createVersion("album", album.id, album, "create", user.id);
 
-    return Response.json(album, { status: 201 });
-  }
-);
+  return Response.json(album, { status: 201 });
+});
 ```
 
 ---
@@ -1162,6 +1156,7 @@ export const POST = withAuthAndValidation(
 ### Design System (shadcn/ui)
 
 **Composants utilisés:**
+
 ```
 Forms
 ├── Button (variants: default, outline, ghost, destructive)
@@ -1201,6 +1196,7 @@ Custom
 ### Patterns d'Interaction
 
 #### 1. Liste avec Filtres
+
 ```
 ┌────────────────────────────────────────┐
 │ 🔍 Recherche: [.....................]  │
@@ -1226,6 +1222,7 @@ Custom
 ```
 
 #### 2. Formulaire d'Édition
+
 ```
 ┌────────────────────────────────────────┐
 │ 🎵 Éditer l'Album                      │
@@ -1260,6 +1257,7 @@ Custom
 ```
 
 #### 3. Settings avec Auto-Save
+
 ```
 ┌────────────────────────────────────────┐
 │ ⚙️  Paramètres                          │
@@ -1283,6 +1281,7 @@ Custom
 ### Thème & Couleurs
 
 **Variables Tailwind:**
+
 ```css
 :root {
   /* Obsidian (dark theme) */
@@ -1307,6 +1306,7 @@ Custom
 ```
 
 **Glass Card Effect:**
+
 ```css
 .glass-card {
   background: rgba(255, 255, 255, 0.05);
@@ -1319,10 +1319,11 @@ Custom
 ### Animations (Framer Motion)
 
 **AnimatedSection:**
+
 ```tsx
 <AnimatedSection variant="slideUp" delay={0.1}>
   <AlbumCard album={album} />
-</AnimatedSection>
+</AnimatedSection>;
 
 // Variants
 const variants = {
@@ -1333,6 +1334,7 @@ const variants = {
 ```
 
 **Transitions:**
+
 - Buttons: hover scale 1.05
 - Cards: hover lift (shadow)
 - Images: hover scale 1.1
@@ -1342,6 +1344,7 @@ const variants = {
 ### Responsive Design
 
 **Breakpoints:**
+
 ```
 sm: 640px  → Mobile landscape
 md: 768px  → Tablet
@@ -1350,14 +1353,17 @@ xl: 1280px → Large desktop
 ```
 
 **Sidebar:**
+
 - Desktop (lg+): Fixed left, 250px width
 - Tablet/Mobile (< lg): Hamburger menu, overlay
 
 **Tables:**
+
 - Desktop: Full table
 - Mobile: Scroll horizontal ou Card layout
 
 **Forms:**
+
 - Desktop: 2 colonnes pour certains champs
 - Mobile: 1 colonne, full width
 
@@ -1544,6 +1550,7 @@ xl: 1280px → Large desktop
 ### Server Components par Défaut
 
 **Pattern:**
+
 ```tsx
 // ✅ Server Component (par défaut)
 // app/[locale]/admin/albums/page.tsx
@@ -1551,7 +1558,7 @@ export default async function AlbumsPage() {
   // Fetch directement dans le composant
   const albums = await prisma.album.findMany({
     where: { published: true },
-    orderBy: { date: 'desc' }
+    orderBy: { date: "desc" },
   });
 
   // Pass data au Client Component
@@ -1563,6 +1570,7 @@ export default async function AlbumsPage() {
 ```
 
 **Avantages:**
+
 - Pas de waterfall (fetch séquentiel)
 - Pas de loading state
 - SSR complet
@@ -1571,6 +1579,7 @@ export default async function AlbumsPage() {
 ### Client Components Stratégiques
 
 **Quand utiliser "use client":**
+
 ```tsx
 "use client"; // ← Uniquement si nécessaire
 
@@ -1590,6 +1599,7 @@ export default async function AlbumsPage() {
 ### ISR (Incremental Static Regeneration)
 
 **Pour pages publiques:**
+
 ```tsx
 // app/[locale]/albums/[id]/page.tsx
 export const revalidate = 3600; // 1 heure
@@ -1600,14 +1610,15 @@ export async function generateStaticParams() {
   const albums = await prisma.album.findMany({
     where: { published: true },
     take: 20,
-    select: { id: true }
+    select: { id: true },
   });
 
-  return albums.map(album => ({ id: album.id }));
+  return albums.map((album) => ({ id: album.id }));
 }
 ```
 
 **Avantages:**
+
 - Pages statiques (rapides)
 - Regeneration automatique
 - Fallback dynamique
@@ -1616,6 +1627,7 @@ export async function generateStaticParams() {
 ### Image Optimization
 
 **Next Image:**
+
 ```tsx
 <Image
   src={album.img}
@@ -1629,6 +1641,7 @@ export async function generateStaticParams() {
 ```
 
 **Avantages:**
+
 - Format automatique (WebP, AVIF)
 - Lazy loading
 - Responsive images
@@ -1637,6 +1650,7 @@ export async function generateStaticParams() {
 ### Debouncing
 
 **Auto-save Settings:**
+
 ```typescript
 const DEBOUNCE_DELAY = 1000; // 1 seconde
 
@@ -1654,6 +1668,7 @@ const handleChange = (field: string, value: any) => {
 ```
 
 **Avantages:**
+
 - Moins d'API calls
 - UX fluide
 - Économie serveur
@@ -1661,6 +1676,7 @@ const handleChange = (field: string, value: any) => {
 ### Pagination & Lazy Loading
 
 **Pattern:**
+
 ```typescript
 // Liste paginée
 const ITEMS_PER_PAGE = 20;
@@ -1676,16 +1692,13 @@ const total = await prisma.album.count({ where });
 const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
 
 // Client
-<Pagination
-  currentPage={page}
-  totalPages={totalPages}
-  onPageChange={setPage}
-/>
+<Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />;
 ```
 
 ### Parallel Data Fetching
 
 **Pattern:**
+
 ```tsx
 // ✅ Parallèle (rapide)
 async function getData() {
@@ -1711,6 +1724,7 @@ async function getDataSlow() {
 ### Caching Strategy
 
 **Levels de cache:**
+
 ```
 1. Next.js Cache (en mémoire)
    └─ fetch() avec revalidate
@@ -1732,6 +1746,7 @@ async function getDataSlow() {
 ### Dashboard Actuel
 
 **Fonctionnalités complètes:**
+
 - ✅ 3 types de contenu (Albums, Vidéos, Services)
 - ✅ CRUD complet pour chaque type
 - ✅ Upload de fichiers (Vercel Blob)
@@ -1749,6 +1764,7 @@ async function getDataSlow() {
 - ✅ Internationalization (FR/EN)
 
 **Fichiers créés:**
+
 ```
 Total: ~70 fichiers
 
@@ -1799,6 +1815,7 @@ Models Prisma: 7
 ```
 
 **Lignes de code:** ~8000 lignes
+
 - TypeScript/TSX: ~6000
 - Prisma: ~300
 - Config: ~200
@@ -1809,6 +1826,7 @@ Models Prisma: 7
 ## 🚀 Améliorations Futures Suggérées
 
 ### Phase 5: Dashboard Overview
+
 ```
 Page d'accueil admin avec:
 ├─ Statistiques globales
@@ -1834,6 +1852,7 @@ Page d'accueil admin avec:
 ```
 
 ### Phase 6: Audit Log Global
+
 ```
 Page /admin/audit avec:
 ├─ Filtre par utilisateur
@@ -1845,6 +1864,7 @@ Page /admin/audit avec:
 ```
 
 ### Phase 7: Media Library
+
 ```
 Galerie centralisée:
 ├─ Tous les uploads en un endroit
@@ -1856,6 +1876,7 @@ Galerie centralisée:
 ```
 
 ### Phase 8: Bulk Operations
+
 ```
 Actions en masse:
 ├─ Sélection multiple
@@ -1867,6 +1888,7 @@ Actions en masse:
 ```
 
 ### Phase 9: Prévisualisation Live
+
 ```
 Preview en temps réel:
 ├─ Split screen (edit | preview)
@@ -1876,6 +1898,7 @@ Preview en temps réel:
 ```
 
 ### Phase 10: Rôles & Permissions
+
 ```
 Multi-utilisateurs:
 ├─ Rôles: Admin, Editor, Viewer
@@ -1890,36 +1913,44 @@ Multi-utilisateurs:
 ## 📚 Technologies & Dépendances
 
 ### Core
+
 - `next@16.0.3` - Framework
 - `react@19.0.0-rc` - UI library
 - `typescript@5.x` - Type safety
 
 ### Database
+
 - `@prisma/client@6.19.0` - ORM
 - `prisma@6.19.0` - CLI & migrations
 - `pg` - PostgreSQL driver
 
 ### Authentication
+
 - `better-auth@1.x` - Auth système
 - `bcryptjs` - Password hashing
 
 ### Validation
+
 - `zod@3.x` - Schema validation
 
 ### UI
+
 - `@radix-ui/*` - Headless UI primitives
 - `tailwindcss@3.x` - Utility CSS
 - `framer-motion` - Animations
 - `lucide-react` - Icons
 
 ### Forms
+
 - `react-hook-form@7.x` - Form management
 - `@hookform/resolvers` - Zod integration
 
 ### Storage
+
 - `@vercel/blob` - File uploads
 
 ### Utils
+
 - `clsx` - Conditional classes
 - `date-fns` - Date formatting
 
@@ -1928,6 +1959,7 @@ Multi-utilisateurs:
 ## 🎓 Bonnes Pratiques Appliquées
 
 ### 1. Séparation des Responsabilités
+
 ```
 Server Components → Data fetching
 Client Components → Interactivité
@@ -1936,12 +1968,13 @@ Lib → Utilities réutilisables
 ```
 
 ### 2. Type Safety Partout
+
 ```typescript
 // Types inférés de Prisma
-type Album = Prisma.AlbumGetPayload<{}>
+type Album = Prisma.AlbumGetPayload<{}>;
 
 // Validation Zod → Types TS
-type AlbumCreate = z.infer<typeof albumCreateSchema>
+type AlbumCreate = z.infer<typeof albumCreateSchema>;
 
 // Props typées
 interface AlbumsContentProps {
@@ -1951,6 +1984,7 @@ interface AlbumsContentProps {
 ```
 
 ### 3. Error Handling Robuste
+
 ```typescript
 try {
   await operation();
@@ -1966,17 +2000,21 @@ try {
 ```
 
 ### 4. Loading States Partout
+
 ```tsx
-{loading ? (
-  <TableSkeleton rows={5} columns={6} />
-) : data.length === 0 ? (
-  <EmptyState icon={Icon} title="No data" />
-) : (
-  <Table data={data} />
-)}
+{
+  loading ? (
+    <TableSkeleton rows={5} columns={6} />
+  ) : data.length === 0 ? (
+    <EmptyState icon={Icon} title="No data" />
+  ) : (
+    <Table data={data} />
+  );
+}
 ```
 
 ### 5. Accessibilité (a11y)
+
 ```tsx
 // Labels associés
 <Label htmlFor="title">Titre *</Label>
@@ -1990,6 +2028,7 @@ try {
 ```
 
 ### 6. Performance
+
 ```tsx
 // Memo pour composants lourds
 const ExpensiveComponent = memo(({ data }) => ...);
@@ -2005,6 +2044,7 @@ const filteredData = useMemo(() =>
 ```
 
 ### 7. Sécurité
+
 ```
 ✅ Auth sur toutes les routes admin
 ✅ Validation côté serveur (jamais juste client)
@@ -2022,12 +2062,14 @@ const filteredData = useMemo(() =>
 Ce dashboard admin est un **système complet, sécurisé et évolutif** pour gérer un portfolio de musicien. Il combine:
 
 **Architecture moderne:**
+
 - Next.js 16 App Router
 - Server/Client Components
 - Prisma ORM
 - Better Auth
 
 **Features pro:**
+
 - CRUD complet
 - Versioning/Historique
 - Export multi-formats
@@ -2036,6 +2078,7 @@ Ce dashboard admin est un **système complet, sécurisé et évolutif** pour gé
 - Paramètres du site
 
 **Sécurité maximale:**
+
 - Auth robuste
 - Validation Zod
 - Sanitization HTML
@@ -2043,6 +2086,7 @@ Ce dashboard admin est un **système complet, sécurisé et évolutif** pour gé
 - Audit trail
 
 **UX exceptionnelle:**
+
 - Loading states
 - Empty states
 - Toast notifications

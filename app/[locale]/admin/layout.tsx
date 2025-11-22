@@ -32,7 +32,7 @@ export default async function AdminLayout({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-admin-bg-secondary">
       <div className="flex h-screen overflow-hidden">
         {/* Sidebar */}
         <AdminSidebar locale={locale} />
@@ -43,7 +43,7 @@ export default async function AdminLayout({
           <AdminHeader user={userData} locale={locale} />
 
           {/* Page content */}
-          <main className="flex-1 overflow-y-auto p-6">
+          <main className="flex-1 overflow-y-auto p-8">
             <div className="mx-auto max-w-7xl">{children}</div>
           </main>
         </div>
