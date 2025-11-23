@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { signIn } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const params = useParams();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,9 +27,10 @@ export default function LoginPage() {
       if (result.error) {
         setError(result.error.message || "Erreur de connexion");
       } else {
-        // Connexion réussie, redirection vers admin
-        router.push("/admin");
-        router.refresh();
+        // Connexion réussie, redirection vers admin avec locale
+        const locale = params.locale || 'fr';
+        // Utiliser window.location pour un refresh complet et garantir que les cookies sont bien pris en compte
+        window.location.href = `/${locale}/admin`;
       }
     } catch (err) {
       setError("Une erreur est survenue");

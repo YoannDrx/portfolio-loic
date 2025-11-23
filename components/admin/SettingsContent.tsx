@@ -215,8 +215,8 @@ export function SettingsContent({ locale }: SettingsContentProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Paramètres</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">Paramètres</h1>
+          <p className="text-admin-text-secondary">
             Gérez les paramètres et les exports de votre portfolio
           </p>
         </div>

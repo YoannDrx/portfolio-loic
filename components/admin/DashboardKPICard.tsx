@@ -40,8 +40,8 @@ export function DashboardKPICard({
     <CardWrapper {...wrapperProps}>
       <Card
         className={cn(
-          "group relative overflow-hidden border border-admin-border bg-white hover:shadow-lg transition-all duration-300 cursor-pointer",
-          href && "hover:border-admin-primary-200"
+          "group relative overflow-hidden border border-admin-border dark:border-dark-admin-border bg-white dark:bg-dark-admin-bg-secondary hover:shadow-lg transition-all duration-300 cursor-pointer",
+          href && "hover:border-admin-primary-200 dark:hover:border-admin-primary-700"
         )}
       >
         {/* Background Gradient Decoration */}
@@ -64,7 +64,7 @@ export function DashboardKPICard({
                 <Icon className={cn("h-6 w-6", colorClass)} />
               </div>
               <div>
-                <p className="text-sm font-medium text-admin-text-secondary">
+                <p className="text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300">
                   {title}
                 </p>
                 {badge && (
@@ -81,7 +81,7 @@ export function DashboardKPICard({
 
           <div className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl font-bold text-admin-text-primary">
+              <span className="text-4xl font-bold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">
                 {value}
               </span>
               {trend && (
@@ -104,7 +104,7 @@ export function DashboardKPICard({
             </div>
 
             {description && (
-              <p className="text-sm text-admin-text-tertiary">{description}</p>
+              <p className="text-sm text-admin-text-tertiary dark:text-dark-admin-text-tertiary transition-colors duration-300">{description}</p>
             )}
           </div>
 

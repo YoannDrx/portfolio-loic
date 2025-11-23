@@ -21,16 +21,16 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-obsidian via-obsidian-50 to-obsidian">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-100 via-white to-gray-50 dark:from-obsidian dark:via-obsidian-50 dark:to-obsidian transition-colors duration-300">
       {/* Three.js Background */}
-      <div className="absolute inset-0 z-0 opacity-40">
+      <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40 transition-opacity duration-300">
         {loading && <ThreeLoader />}
         {mounted && <AudioVisualizationScene />}
       </div>
 
       {/* Gradient Overlays for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-obsidian/20 to-obsidian z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-obsidian z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white dark:via-obsidian/20 dark:to-obsidian z-10 pointer-events-none transition-colors duration-300" />
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white dark:to-obsidian z-10 pointer-events-none transition-colors duration-300" />
 
       {/* Content */}
       <div className="container-custom relative z-20 py-32">
@@ -56,7 +56,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed transition-colors duration-300"
           >
             {t('description')}{' '}
             <span className="whitespace-nowrap">{t('yearsExperience', { years: 15 })}</span>.

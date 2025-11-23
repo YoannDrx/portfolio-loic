@@ -26,7 +26,7 @@ const config: Config = {
           pink: '#ec4899',
           green: '#10b981',
         },
-        // Admin Dashboard Colors
+        // Admin Dashboard Colors (Light Mode)
         admin: {
           // Primary - Blue moderne
           primary: {
@@ -116,6 +116,27 @@ const config: Config = {
             secondary: '#6B7280',
             tertiary: '#9CA3AF',
             inverse: '#FFFFFF',
+          },
+        },
+        // Dark Mode Colors (for both admin and public site)
+        'dark-admin': {
+          // Backgrounds
+          bg: {
+            DEFAULT: '#0F172A',      // Fond principal dark
+            secondary: '#1E293B',    // Fond secondaire (cards, sidebar)
+            tertiary: '#334155',     // Fond tertiaire (hover states)
+          },
+          // Borders
+          border: {
+            DEFAULT: '#334155',      // Bordure normale
+            light: '#475569',        // Bordure claire
+            dark: '#1E293B',         // Bordure foncée
+          },
+          // Text
+          text: {
+            primary: '#F1F5F9',      // Texte principal (blanc cassé)
+            secondary: '#CBD5E1',    // Texte secondaire (gris clair)
+            tertiary: '#94A3B8',     // Texte tertiaire (gris moyen)
           },
         },
       },

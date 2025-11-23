@@ -119,10 +119,10 @@ export default async function AdminDashboardPage({
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-admin-text-primary tracking-tight">
+        <h1 className="text-3xl font-bold text-admin-text-primary dark:text-dark-admin-text-primary tracking-tight transition-colors duration-300">
           Bienvenue ! 👋
         </h1>
-        <p className="text-admin-text-secondary mt-1">
+        <p className="text-admin-text-secondary dark:text-dark-admin-text-secondary mt-1 transition-colors duration-300">
           Vue d'ensemble de votre portfolio et statistiques
         </p>
       </div>
