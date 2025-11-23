@@ -1,12 +1,14 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { AnimatedSection, AnimatedText } from "@/components/ui/AnimatedSection";
+import PageShell from "@/components/ui/PageShell";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { GlassCard, GlassCardContent } from "@/components/ui/GlassCard";
 import Timeline from "@/components/about/Timeline";
 import SkillCard from "@/components/about/SkillCard";
 import Awards from "@/components/about/Awards";
 import MusicianExperience from "@/components/about/MusicianExperience";
+import AboutScene from "@/components/three/scenes/AboutScene";
 import { Award, Users, Building2, Sparkles, Download, MapPin, Mail, Languages } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -24,14 +26,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const t = await getTranslations({ locale, namespace: "about" });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-obsidian via-obsidian-50 to-obsidian py-20">
-      <div className="container-custom">
-        {/* Hero Section */}
-        <AnimatedSection variant="fadeIn" className="text-center mb-20">
-          <AnimatedText text={t("pageTitle")} className="mb-6 text-6xl md:text-7xl font-black text-gradient-neon" type="word" />
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">{t("pageDescription")}</p>
-        </AnimatedSection>
-
+    <PageShell
+      title={t("pageTitle")}
+      subtitle="Biography"
+      scene={<AboutScene />}
+      gradient="lime"
+    >
         {/* Bio Section */}
         <AnimatedSection variant="slideUp" delay={0.2} className="mb-20">
           <div className="max-w-6xl mx-auto">
@@ -146,7 +146,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
         {/* Skills Section */}
         <AnimatedSection variant="slideUp" delay={0.3} className="mb-20">
-          <h2 className="text-4xl font-bold text-white text-center mb-12">{t("skills.title")}</h2>
+          <h2 className="text-4xl font-bold text-white text-center mb-12 tracking-tighter">{t("skills.title")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <SkillCard
               iconName="Music"
@@ -180,7 +180,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
         {/* Timeline Section */}
         <AnimatedSection variant="slideUp" delay={0.4} className="mb-20">
-          <h2 className="text-4xl font-bold text-white text-center mb-12">{t("timeline.title")}</h2>
+          <h2 className="text-4xl font-bold text-white text-center mb-12 tracking-tighter">{t("timeline.title")}</h2>
           <div className="max-w-4xl mx-auto">
             <Timeline />
           </div>
@@ -196,7 +196,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <GlassCardContent className="p-8">
                 <Award className="w-12 h-12 text-neon-cyan mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">16</div>
-                <div className="text-gray-400">{t("achievements.albums")}</div>
+                <div className="text-gray-400 uppercase tracking-widest text-xs">{t("achievements.albums")}</div>
               </GlassCardContent>
             </GlassCard>
 
@@ -204,7 +204,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <GlassCardContent className="p-8">
                 <Sparkles className="w-12 h-12 text-neon-magenta mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">34</div>
-                <div className="text-gray-400">{t("achievements.projects")}</div>
+                <div className="text-gray-400 uppercase tracking-widest text-xs">{t("achievements.projects")}</div>
               </GlassCardContent>
             </GlassCard>
 
@@ -212,7 +212,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <GlassCardContent className="p-8">
                 <Users className="w-12 h-12 text-neon-purple mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">50+</div>
-                <div className="text-gray-400">Collaborations</div>
+                <div className="text-gray-400 uppercase tracking-widest text-xs">Collaborations</div>
               </GlassCardContent>
             </GlassCard>
 
@@ -220,7 +220,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <GlassCardContent className="p-8">
                 <Building2 className="w-12 h-12 text-neon-blue mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">15+</div>
-                <div className="text-gray-400">{t("achievements.years")}</div>
+                <div className="text-gray-400 uppercase tracking-widest text-xs">{t("achievements.years")}</div>
               </GlassCardContent>
             </GlassCard>
           </div>
@@ -230,11 +230,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <AnimatedSection variant="slideUp" delay={0.6} className="mb-20">
           <GlassCard variant="subtle" className="max-w-4xl mx-auto">
             <GlassCardContent className="p-8 md:p-12">
-              <h2 className="text-3xl font-bold text-white mb-6 text-center">{t("labelsPublishers.title")}</h2>
+              <h2 className="text-3xl font-bold text-white mb-6 text-center tracking-tighter">{t("labelsPublishers.title")}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
                 <div>
-                  <h3 className="text-xl font-semibold text-neon-cyan mb-4">{t("labelsPublishers.labels")}</h3>
-                  <ul className="space-y-2 text-gray-300">
+                  <h3 className="text-xl font-semibold text-neon-cyan mb-4 uppercase tracking-widest text-sm">{t("labelsPublishers.labels")}</h3>
+                  <ul className="space-y-2 text-gray-300 font-light">
                     <li>Infinity Scores (Cezame Music Agency)</li>
                     <li>Montmorency Music Agency (MYMA)</li>
                     <li>Justement Music</li>
@@ -243,8 +243,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-neon-magenta mb-4">{t("labelsPublishers.publishers")}</h3>
-                  <ul className="space-y-2 text-gray-300">
+                  <h3 className="text-xl font-semibold text-neon-magenta mb-4 uppercase tracking-widest text-sm">{t("labelsPublishers.publishers")}</h3>
+                  <ul className="space-y-2 text-gray-300 font-light">
                     <li>Cezame Music Agency</li>
                     <li>Montmorency Music Agency</li>
                   </ul>
@@ -256,27 +256,27 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
         {/* CTA Section */}
         <AnimatedSection variant="fadeIn" delay={0.7}>
-          <GlassCard variant="neon" className="text-center">
+          <GlassCard variant="neon" className="text-center max-w-3xl mx-auto">
             <GlassCardContent className="p-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{t("cta.title")}</h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">{t("cta.description")}</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tighter">{t("cta.title")}</h2>
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto font-light">{t("cta.description")}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-magenta rounded-lg font-semibold text-white hover:shadow-[0_0_30px_rgba(0,240,255,0.8)] transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-magenta rounded-lg font-semibold text-white hover:shadow-[0_0_30px_rgba(0,240,255,0.8)] transition-all duration-300 uppercase tracking-wider text-sm"
                 >
                   <span>{t("cta.contactMe")}</span>
                 </Link>
                 <Link
                   href="/albums"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-neon-cyan rounded-lg font-semibold text-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-neon-cyan rounded-lg font-semibold text-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300 uppercase tracking-wider text-sm"
                 >
                   <span>{t("cta.viewAlbums")}</span>
                 </Link>
                 <a
                   href="/img/cv_loic_ghanem.pdf"
                   download="CV_Loic_Ghanem.pdf"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-neon-purple rounded-lg font-semibold text-neon-purple hover:bg-neon-purple/10 transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-neon-purple rounded-lg font-semibold text-neon-purple hover:bg-neon-purple/10 transition-all duration-300 uppercase tracking-wider text-sm"
                 >
                   <Download className="w-5 h-5" />
                   <span>{t("cta.downloadCV")}</span>
@@ -285,7 +285,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             </GlassCardContent>
           </GlassCard>
         </AnimatedSection>
-      </div>
-    </div>
+    </PageShell>
   );
 }

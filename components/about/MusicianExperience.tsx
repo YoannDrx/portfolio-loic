@@ -5,56 +5,44 @@ import { motion } from 'framer-motion';
 import { Music2, ExternalLink, Guitar, Mic2 } from 'lucide-react';
 import { GlassCard, GlassCardContent } from '@/components/ui/GlassCard';
 
-interface Band {
+interface BandConfig {
   id: number;
+  key: string;
   name: string;
-  period: string;
-  role: string;
-  genre: string;
-  description?: string;
   link?: string;
   color: 'cyan' | 'magenta' | 'purple' | 'blue';
   icon: 'guitar' | 'mic' | 'music';
 }
 
-const bands: Band[] = [
+const bandsConfig: BandConfig[] = [
   {
     id: 1,
+    key: 'voyager1',
     name: 'Voyager1',
-    period: '2017 - Present',
-    role: 'Producer',
-    genre: 'Hip-Hop and Bass Music',
-    description: 'Current Project',
     link: 'https://www.youtube.com/watch?v=aPJUTPMEukM',
     color: 'cyan',
     icon: 'music',
   },
   {
     id: 2,
+    key: 'earlySeasons',
     name: 'Early Seasons',
-    period: '2011 - 2015',
-    role: 'Guitarist',
-    genre: 'Metalcore',
     link: 'https://www.youtube.com/watch?v=o8c9h2Vzrhw',
     color: 'magenta',
     icon: 'guitar',
   },
   {
     id: 3,
+    key: 'confront',
     name: 'Confront',
-    period: '2011 - 2014',
-    role: 'Producer and Guitarist',
-    genre: 'Electronic / Metal',
     link: 'https://www.youtube.com/watch?v=8m4W1IuVRco',
     color: 'purple',
     icon: 'music',
   },
   {
     id: 4,
+    key: 'riseOfTheNorthstar',
     name: 'Rise of the Northstar',
-    period: '2010 - 2012',
-    role: 'Guitarist',
-    genre: 'Hardcore',
     link: 'https://www.youtube.com/watch?v=NulC3-rQX24',
     color: 'blue',
     icon: 'guitar',
@@ -115,9 +103,13 @@ export default function MusicianExperience() {
 
       {/* Bands Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-        {bands.map((band, index) => {
+        {bandsConfig.map((band, index) => {
           const colors = colorClasses[band.color];
           const IconComponent = iconComponents[band.icon];
+
+          // Helper to safely get description if it exists
+          // Assuming all bands have a description in the provided JSON structure
+          const description = t(`${band.key}.description`);
 
           return (
             <motion.div
@@ -145,7 +137,7 @@ export default function MusicianExperience() {
                         </h3>
                       </div>
                       <p className={`text-sm font-semibold ${colors.text} mb-1`}>
-                        {band.period}
+                        {t(`${band.key}.period`)}
                       </p>
                     </div>
                   </div>
@@ -153,15 +145,15 @@ export default function MusicianExperience() {
                   {/* Role & Description */}
                   <div className="space-y-2 mb-4">
                     <p className="text-base font-medium text-gray-200">
-                      {band.role}
-                      {band.description && (
+                      {t(`${band.key}.role`)}
+                      {description && (
                         <span className={`ml-2 text-sm ${colors.text}`}>
-                          • {band.description}
+                          • {description}
                         </span>
                       )}
                     </p>
                     <p className="text-sm text-gray-400 italic">
-                      {band.genre}
+                      {t(`${band.key}.genre`)}
                     </p>
                   </div>
 

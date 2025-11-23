@@ -6,7 +6,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 
 export default function MapBox() {
   return (
-    <GlassCard variant="subtle" className="overflow-hidden h-[400px] w-full">
+    <GlassCard variant="subtle" className="overflow-hidden h-[400px] w-full border-white/10">
       <Map
         initialViewState={{
           latitude: 48.8596893,

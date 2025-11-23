@@ -6,6 +6,7 @@ import { Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface ImageUploadProps {
   value?: string;
@@ -33,15 +34,19 @@ function isValidImageUrl(url: string | null | undefined): url is string {
 export function ImageUpload({
   value,
   onChange,
-  label = "Image",
-  description = "Glissez-déposez une image ou cliquez pour sélectionner (max 5MB)",
+  label,
+  description,
 }: ImageUploadProps) {
+  const t = useTranslations("admin");
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [preview, setPreview] = useState<string | null>(
     isValidImageUrl(value) ? value : null
   );
   const { toast } = useToast();
+
+  const finalLabel = label || "Image"; // Fallback generic or use t if I add generic label key
+  const finalDescription = description || t("media.dropzone") + " (" + t("media.maxSize") + ")";
 
   // Synchroniser preview avec value quand il change de l'extérieur
   useEffect(() => {
@@ -94,7 +99,7 @@ export function ImageUpload({
 
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || "Erreur lors de l'upload");
+          throw new Error(error.error || t("media.error"));
         }
 
         const data = await response.json();
@@ -106,8 +111,8 @@ export function ImageUpload({
         onChange(data.url);
 
         toast({
-          title: "Image uploadée",
-          description: `${file.name} a été uploadée avec succès`,
+          title: t("media.success"),
+          description: `${file.name} ` + t("common.success").toLowerCase(), // Or customized message
         });
       } catch (error) {
         // En cas d'erreur, supprimer la preview
@@ -116,16 +121,16 @@ export function ImageUpload({
 
         toast({
           variant: "destructive",
-          title: "Erreur d'upload",
+          title: t("media.error"),
           description:
-            error instanceof Error ? error.message : "Une erreur est survenue",
+            error instanceof Error ? error.message : t("common.error"),
         });
       } finally {
         setUploading(false);
         setProgress(0);
       }
     },
-    [onChange, toast, value]
+    [onChange, toast, value, t]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -151,9 +156,9 @@ export function ImageUpload({
 
   return (
     <div className="space-y-2">
-      {label && (
+      {finalLabel && (
         <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-          {label}
+          {finalLabel}
         </label>
       )}
 
@@ -185,7 +190,7 @@ export function ImageUpload({
             <div className="absolute inset-0 flex items-center justify-center bg-black/50">
               <div className="w-64 space-y-2 rounded-lg bg-white p-4 dark:bg-gray-900">
                 <div className="flex items-center justify-between text-sm">
-                  <span>Upload en cours...</span>
+                  <span>{t("media.uploading")}</span>
                   <span>{progress}%</span>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
@@ -228,12 +233,12 @@ export function ImageUpload({
               <div className="text-center">
                 <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   {isDragActive
-                    ? "Déposez l'image ici"
-                    : "Glissez-déposez une image ou cliquez pour sélectionner"}
+                    ? t("media.dropzoneDrag")
+                    : t("media.dropzone")}
                 </p>
-                {description && (
+                {finalDescription && (
                   <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                    {description}
+                    {finalDescription}
                   </p>
                 )}
               </div>
@@ -243,7 +248,7 @@ export function ImageUpload({
           {uploading && (
             <div className="w-64 space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span>Upload en cours...</span>
+                <span>{t("media.uploading")}</span>
                 <span>{progress}%</span>
               </div>
               <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
@@ -260,7 +265,7 @@ export function ImageUpload({
       {/* URL actuelle (fallback si pas de preview) */}
       {value && !preview && (
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          URL actuelle : <span className="font-mono">{value}</span>
+          {t("media.currentUrl")} : <span className="font-mono">{value}</span>
         </p>
       )}
     </div>

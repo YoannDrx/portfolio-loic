@@ -33,6 +33,27 @@
       "description": "Mes compositions utilisées dans des productions professionnelles : sports, TV, publicités et plus encore.",
       "viewAll": "Voir toutes les vidéos ({count})",
       "notablePlacements": "Placements Notables"
+    },
+    "hero": {
+      "subtitle": "COMPOSITEUR & PRODUCTEUR MUSICAL",
+      "title": "BANDES<br />ORIGINALES",
+      "description": "Compositeur et producteur musical primé basé à Paris. Je crée de la musique pour le cinéma, la publicité et les jeux vidéo.",
+      "listenShowreel": "Écouter le Showreel",
+      "downloadResume": "Télécharger le CV"
+    },
+    "sections": {
+      "albums": "DERNIERS <span class=\"text-neon-cyan\">ALBUMS</span>",
+      "albumsSubtitle": "01 / DISCOGRAPHIE",
+      "viewAllAlbums": "Voir tous les albums",
+      "videos": "VIDÉOS <span class=\"text-neon-magenta\">EN VEDETTE</span>",
+      "videosSubtitle": "02 / VISUELS",
+      "viewAllVideos": "Voir toutes les vidéos",
+      "services": "SERVICES <span class=\"text-neon-purple\">SONORES</span>",
+      "servicesSubtitle": "EXPERTISE",
+      "viewAllServices": "Voir tous les services",
+      "contact": "FAISONS DU <br/><span class=\"text-neon-lime\">BRUIT</span>",
+      "contactText": "Prêt à élever votre projet avec une identité sonore unique ? Collaborons et construisons le futur du son.",
+      "getInTouch": "Me Contacter"
     }
   },
   "about": {
@@ -119,7 +140,49 @@
       }
     },
     "timeline": {
-      "title": "Parcours Professionnel"
+      "title": "Parcours Professionnel",
+      "events": {
+        "terra": {
+          "title": "Terra - Album Orchestral Ambient",
+          "description": "Album orchestral ambient pour les visuels de nature et d'environnement, publié par Cezame Music Agency sous le label Infinity Scores.",
+          "type": "Projet"
+        },
+        "metalcore": {
+          "title": "Metalcore II & Dystopia",
+          "description": "Double sortie : Metalcore II avec Aaron Matts et Terence Langlois, et Dystopia - une fusion unique de métal cinématique et d'ambient sous Infinity Scores.",
+          "type": "Projet"
+        },
+        "queens": {
+          "title": "The Queens Album",
+          "description": "Album ambitieux fusionnant punk rock et drill music avec 12 artistes internationaux. Sorti sous MYMA.",
+          "type": "Étape clé"
+        },
+        "bassMusic": {
+          "title": "Make Me Feel & Bass Music",
+          "description": "Deux albums Hip-Hop/RnB et Bass Music avec des collaborations internationales (Quincy Thompson, Novine, Lou.C).",
+          "type": "Projet"
+        },
+        "sync": {
+          "title": "Placements Sync Majeurs",
+          "description": "Placements sync sur NBA Countdown, NHL In the Room, MOTDx BBC, et WWE RAW.",
+          "type": "Récompense"
+        },
+        "prolific": {
+          "title": "Année Prolifique",
+          "description": "Sortie de 5 albums : Ambient Guitar, Cyberpunk, Hardcore, Fast Metal, et Kick-ass Metal Jacket.",
+          "type": "Étape clé"
+        },
+        "synthwave": {
+          "title": "Débuts Synthwave",
+          "description": "Premier album Synthwave - hommage au renouveau électro des années 80, publié par Stereoscopic et MYMA.",
+          "type": "Projet"
+        },
+        "metal": {
+          "title": "Débuts Metal",
+          "description": "Collaboration avec Rise of the Northstar, Confront, et Early Seasons - établissant une présence sur la scène metal.",
+          "type": "Collaboration"
+        }
+      }
     },
     "musicianExperience": {
       "title": "Expérience Musicale en Groupe",
@@ -164,6 +227,11 @@
     }
   },
   "services": {
+    "detail": {
+      "notFound": "Service non trouvé",
+      "about": "À propos du service",
+      "offeredOn": "Service offert le"
+    },
     "pageTitle": "Services",
     "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
     "noServices": "Aucun service disponible pour le moment",
@@ -255,7 +323,15 @@
     "listen": "Écouter",
     "collaboration": "En collaboration avec",
     "releaseDate": "Date de sortie",
-    "genre": "Genre"
+    "genre": "Genre",
+    "detail": {
+      "notFound": "Album non trouvé",
+      "listen": "Écouter l'album",
+      "about": "À propos de l'album",
+      "ctaTitle": "Prêt à découvrir cet album ?",
+      "ctaText": "Écoutez \"{title}\" sur toutes les plateformes de streaming.",
+      "ctaButton": "Écouter maintenant"
+    }
   },
   "videos": {
     "pageTitle": "Projets Vidéo",
@@ -265,7 +341,10 @@
     "filterSync": "Synchronisation",
     "filterMusicToPicture": "Music to Picture",
     "watchOn": "Voir sur",
-    "date": "Date"
+    "date": "Date",
+    "categories": "Catégories",
+    "placements": "Placements Sync",
+    "noVideos": "Aucune vidéo disponible pour le moment"
   },
   "contact": {
     "pageTitle": "Contact",
@@ -313,6 +392,284 @@
     "readMore": "Lire la suite",
     "learnMore": "En savoir plus",
     "viewAll": "Tout voir",
-    "backToHome": "Retour à l'accueil"
+    "backToHome": "Retour à l'accueil",
+    "backToAlbums": "Retour aux albums",
+    "backToServices": "Retour aux services",
+    "genre": "Genre",
+    "releaseDate": "Date de sortie",
+    "artist": "Artiste",
+    "collaborators": "Collaborateurs",
+    "author": "Auteur",
+    "notFound": "Page Non Trouvée",
+    "pageNotFoundDescription": "La page que vous recherchez n'existe pas ou a été déplacée."
+  },
+  "login": {
+    "title": "Connexion Admin",
+    "subtitle": "Accédez à l'interface d'administration",
+    "emailPlaceholder": "admin@loicghanem.com",
+    "passwordPlaceholder": "••••••••",
+    "email": "Email",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "loading": "Connexion en cours...",
+    "error": "Erreur de connexion"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Tableau de bord",
+      "albums": "Albums",
+      "videos": "Vidéos",
+      "services": "Services",
+      "settings": "Paramètres",
+      "viewSite": "Voir le site",
+      "viewsToday": "Vues aujourd'hui",
+      "published": "Publié"
+    },
+    "header": {
+      "profile": "Profil",
+      "settings": "Paramètres",
+      "signOut": "Déconnexion",
+      "searchPlaceholder": "Rechercher..."
+    },
+    "table": {
+      "preview": "Aperçu",
+      "title": "Titre",
+      "type": "Type",
+      "date": "Date",
+      "status": "Statut",
+      "actions": "Actions",
+      "number": "N°"
+    },
+    "common": {
+      "save": "Enregistrer",
+      "saving": "Sauvegarde...",
+      "saved": "Sauvegardé",
+      "cancel": "Annuler",
+      "delete": "Supprimer",
+      "error": "Erreur",
+      "success": "Succès",
+      "loading": "Chargement...",
+      "actions": "Actions",
+      "back": "Retour",
+      "preview": "Prévisualiser",
+      "upload": "Upload",
+      "dirtyWarning": "Vous avez des modifications non enregistrées.",
+      "created": "créé",
+      "updated": "modifié"
+    },
+    "settings": {
+      "title": "Paramètres",
+      "description": "Gérez les paramètres et les exports de votre portfolio",
+      "tabs": {
+        "profile": "Profil",
+        "general": "Général",
+        "social": "Réseaux",
+        "content": "Contenu",
+        "export": "Export"
+      },
+      "export": {
+        "title": "Export de Données",
+        "description": "Téléchargez vos données dans différents formats pour backup ou analyse",
+        "success": "Export réussi",
+        "error": "Erreur d'export",
+        "successDesc": "Les {type} ont été exportés en {format}",
+        "formats": {
+          "csv": { "label": "CSV", "desc": "Format tableur" },
+          "json": { "label": "JSON", "desc": "Format structuré" },
+          "txt": { "label": "TXT", "desc": "Texte lisible" }
+        },
+        "info": {
+          "title": "À propos des formats d'export",
+          "csv": "Idéal pour Excel, Google Sheets, ou analyses de données",
+          "json": "Format structuré pour développeurs et APIs",
+          "txt": "Texte brut lisible, parfait pour archivage"
+        }
+      },
+      "general": {
+        "title": "Informations Générales",
+        "siteTitle": "Titre du site",
+        "description": "Description",
+        "footerBio": "Bio courte pour le footer (optionnel)",
+        "contactEmail": "Email de contact",
+        "contactPhone": "Téléphone de contact",
+        "location": "Localisation"
+      },
+      "social": {
+        "title": "Réseaux Sociaux",
+        "description": "Gérez les liens vers vos profils sociaux",
+        "platforms": "Plateformes",
+        "tip": "💡 Laissez vide les champs des réseaux que vous n'utilisez pas."
+      },
+      "content": {
+        "title": "Paramètres de Contenu",
+        "description": "Configurez l'affichage du contenu sur le site",
+        "homepage": "Page d'accueil",
+        "homepageFeaturedCount": "Nombre d'albums mis en avant",
+        "homepageLatestCount": "Nombre de dernières vidéos",
+        "features": {
+          "showFeaturedAlbums": "Afficher les derniers albums",
+          "showLatestVideos": "Afficher les dernières vidéos",
+          "showServices": "Afficher les services"
+        },
+        "pagination": "Pagination",
+        "perPage": {
+          "albums": "Albums par page",
+          "videos": "Vidéos par page",
+          "services": "Services par page"
+        },
+        "sorting": "Tri par défaut",
+        "sortLabel": {
+          "albums": "Albums",
+          "videos": "Vidéos"
+        },
+        "sortOptions": {
+          "date_desc": "Plus récent d'abord",
+          "date_asc": "Plus ancien d'abord",
+          "title_asc": "Titre A-Z",
+          "title_desc": "Titre Z-A"
+        }
+      },
+      "profile": {
+        "title": "Profil Administrateur",
+        "description": "Informations de votre compte admin",
+        "name": "Nom",
+        "currentEmail": "Email actuel",
+        "role": "Rôle",
+        "newEmail": "Nouvel email",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "confirmPassword": "Confirmer le nouveau mot de passe",
+        "updateEmail": "Mettre à jour l'email",
+        "updatePassword": "Mettre à jour le mot de passe",
+        "successEmail": "Votre email a été mis à jour avec succès",
+        "successPassword": "Votre mot de passe a été mis à jour avec succès",
+        "errorEmail": "Erreur lors du changement d'email",
+        "errorPassword": "Erreur lors du changement de mot de passe",
+        "changeEmail": "Changer l'Email",
+        "changeEmailDesc": "Modifiez l'adresse email de connexion",
+        "changePassword": "Changer le Mot de Passe",
+        "changePasswordDesc": "Modifiez votre mot de passe de connexion",
+        "updating": "Modification...",
+        "minChars": "Minimum 8 caractères",
+        "invalidEmail": "Email invalide",
+        "enterValidEmail": "Veuillez entrer un email valide",
+        "enterDifferentEmail": "Veuillez entrer un nouvel email différent",
+        "requiredFields": "Champs requis",
+        "fillAllFields": "Veuillez remplir tous les champs",
+        "passwordTooShort": "Mot de passe trop court",
+        "passwordShortDesc": "Le mot de passe doit contenir au moins 8 caractères",
+        "passwordMismatch": "Mots de passe différents",
+        "passwordMismatchDesc": "Les nouveaux mots de passe ne correspondent pas"
+      }
+    },
+    "media": {
+      "dropzone": "Glissez-déposez une image ou cliquez pour sélectionner",
+      "dropzoneDrag": "Déposez l'image ici",
+      "maxSize": "max 5MB",
+      "currentUrl": "URL actuelle",
+      "uploading": "Upload en cours...",
+      "success": "Image uploadée",
+      "error": "Erreur d'upload"
+    },
+    "albums": {
+      "create": "Créer un album",
+      "edit": "Modifier l'album",
+      "delete": {
+        "title": "Supprimer l'album",
+        "confirm": "Êtes-vous sûr de vouloir supprimer l'album \"{title}\" ? Cette action est irréversible.",
+        "success": "Album supprimé"
+      },
+      "form": {
+        "generalInfo": "Informations générales",
+        "title": "Titre",
+        "titlePlaceholder": "Nom de l'album",
+        "style": "Style",
+        "date": "Date affichée",
+        "datePlaceholder": "Ex: Septembre 2024",
+        "sortedDate": "Date de tri",
+        "sortedDatePlaceholder": "MM-YYYY",
+        "coverImage": "Image de couverture",
+        "poster": "Poster",
+        "listenLink": "Lien d'écoute",
+        "collabName": "Nom de la collaboration",
+        "collabNamePlaceholder": "Nom de l'artiste",
+        "collabLink": "Lien de la collaboration",
+        "collabLinkPlaceholder": "https://...",
+        "order": "Ordre d'affichage",
+        "published": "Statut",
+        "status": {
+          "published": "Publié",
+          "draft": "Brouillon"
+        },
+        "descFr": "Description en français",
+        "descEn": "Description en anglais",
+        "successCreate": "Album créé",
+        "successUpdate": "Album modifié",
+        "successDesc": "L'album \"{title}\" a été {action} avec succès."
+      }
+    },
+    "videos": {
+      "create": "Créer une vidéo",
+      "edit": "Modifier la vidéo",
+      "listTitle": "Vidéos",
+      "delete": {
+        "title": "Supprimer la vidéo",
+        "confirm": "Êtes-vous sûr de vouloir supprimer la vidéo \"{title}\" ? Cette action est irréversible.",
+        "success": "Vidéo supprimée"
+      },
+      "form": {
+        "info": "Informations de la vidéo",
+        "title": "Titre",
+        "titlePlaceholder": "Titre de la vidéo",
+        "type": "Type",
+        "youtubeId": "ID ou URL YouTube",
+        "youtubeIdPlaceholder": "dQw4w9WgXcQ ou https://youtube.com/...",
+        "date": "Date",
+        "datePlaceholder": "JJ/MM/AAAA",
+        "thumbnail": "URL du thumbnail",
+        "thumbnailPlaceholder": "https://img.youtube.com/vi/...",
+        "order": "Ordre d'affichage",
+        "published": "Statut",
+        "successCreate": "Vidéo créée",
+        "successUpdate": "Vidéo modifiée",
+        "successDesc": "La vidéo \"{title}\" a été {action} avec succès."
+      }
+    },
+    "services": {
+      "create": "Créer un service",
+      "edit": "Modifier le service",
+      "listTitle": "Services",
+      "delete": {
+        "title": "Supprimer le service",
+        "confirm": "Êtes-vous sûr de vouloir supprimer le service \"{title}\" ? Cette action est irréversible.",
+        "success": "Service supprimé"
+      },
+      "form": {
+        "generalInfo": "Informations générales",
+        "number": "Numéro",
+        "numberPlaceholder": "01",
+        "title": "Titre",
+        "titlePlaceholder": "Nom du service",
+        "largeTitle": "Titre large",
+        "largeTitlePlaceholder": "Titre de la section",
+        "shortDesc": "Description courte",
+        "shortDescPlaceholder": "Description courte visible sur la carte",
+        "fullDesc": "Description complète",
+        "fullDescPlaceholder": "Description détaillée du service",
+        "author": "Auteur",
+        "authorPlaceholder": "Nom de l'auteur",
+        "date": "Date",
+        "datePlaceholder": "Ex: Janvier 2024",
+        "order": "Ordre d'affichage",
+        "published": "Statut",
+        "descFr": "Description détaillée en français",
+        "descFrPlaceholder": "Description détaillée en français...",
+        "descEn": "Description détaillée en anglais",
+        "descEnPlaceholder": "Detailed description in English...",
+        "successCreate": "Service créé",
+        "successUpdate": "Service modifié",
+        "successDesc": "Le service \"{title}\" a été {action} avec succès."
+      }
+    }
   }
 }

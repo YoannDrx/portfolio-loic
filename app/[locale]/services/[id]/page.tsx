@@ -7,6 +7,7 @@ import { auth } from '@/lib/auth';
 import { GlassCard, GlassCardContent } from '@/components/ui/GlassCard';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { Calendar, User, ArrowLeft, Eye } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 interface PageProps {
   params: Promise<{ id: string; locale: string }>;
@@ -35,7 +36,8 @@ export const dynamicParams = true; // Permettre les params non pré-générés
 export const revalidate = 3600; // Revalider toutes les heures en production
 
 export async function generateMetadata({ params }: PageProps) {
-  const { id } = await params;
+  const { id, locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'services.detail' });
 
   try {
     const service = await prisma.service.findUnique({
@@ -48,13 +50,13 @@ export async function generateMetadata({ params }: PageProps) {
 
     if (!service) {
       return {
-        title: 'Service non trouvé',
+        title: t('notFound'),
       };
     }
 
     return {
       title: `${service.title} | Loïc Ghanem`,
-      description: `Service offert le ${service.date}`,
+      description: `${t('offeredOn')} ${service.date}`,
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
@@ -68,6 +70,8 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
   const { id, locale } = await params;
   const { preview } = await searchParams;
   const isPreview = preview === 'true';
+  const t = await getTranslations({ locale, namespace: 'services.detail' });
+  const tCommon = await getTranslations({ locale, namespace: 'common' });
 
   // Si mode preview, vérifier l'authentification
   let isAdmin = false;
@@ -121,7 +125,7 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
             className="inline-flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            <span>Retour aux services</span>
+            <span>{tCommon('backToServices')}</span>
           </Link>
         </AnimatedSection>
 
@@ -166,7 +170,7 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
                     <div className="flex items-center gap-3">
                       <User className="w-5 h-5 text-neon-cyan flex-shrink-0" />
                       <span className="text-lg">
-                        <span className="text-gray-400">Auteur:</span>{' '}
+                        <span className="text-gray-400">{tCommon('author')}:</span>{' '}
                         <span className="text-white font-semibold">{service.author}</span>
                       </span>
                     </div>
@@ -175,7 +179,7 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
                     <div className="flex items-center gap-3">
                       <Calendar className="w-5 h-5 text-neon-magenta flex-shrink-0" />
                       <span className="text-lg">
-                        <span className="text-gray-400">Date:</span>{' '}
+                        <span className="text-gray-400">{tCommon('releaseDate')}:</span>{' '}
                         <span className="text-white font-semibold">{service.date}</span>
                       </span>
                     </div>
@@ -188,7 +192,7 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
             <AnimatedSection variant="slideUp" delay={0.2}>
               <GlassCard variant="subtle">
                 <GlassCardContent className="p-8">
-                  <h2 className="text-2xl font-bold text-white mb-6">À propos du service</h2>
+                  <h2 className="text-2xl font-bold text-white mb-6">{t('about')}</h2>
                   <div className="prose prose-invert prose-lg max-w-none">
                     <div
                       className="text-gray-300 leading-relaxed space-y-4 service-descriptions"

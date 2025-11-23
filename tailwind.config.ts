@@ -25,6 +25,7 @@ const config: Config = {
           blue: '#3b82f6',
           pink: '#ec4899',
           green: '#10b981',
+          lime: '#ccff00',
         },
         // Admin Dashboard Colors (Light Mode)
         admin: {

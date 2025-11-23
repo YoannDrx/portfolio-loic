@@ -1,7 +1,18 @@
 import { prisma } from '@/lib/prisma';
-import { VideosDisplay } from '@/components/videos/VideosDisplay';
+import VideosContent from '@/components/videos/VideosContent';
+import { getTranslations } from 'next-intl/server';
 
-export default async function VideosPage() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "videos" });
+
+  return {
+    title: `${t("pageTitle")} | Loïc Ghanem`,
+    description: t("pageDescription"),
+  };
+}
+
+export default async function VideosPage({ params }: { params: Promise<{ locale: string }> }) {
   // Récupérer toutes les vidéos publiées, triées par date de création décroissante
   const videos = await prisma.video.findMany({
     where: {
@@ -20,5 +31,5 @@ export default async function VideosPage() {
     },
   });
 
-  return <VideosDisplay videos={videos} />;
+  return <VideosContent videos={videos} />;
 }

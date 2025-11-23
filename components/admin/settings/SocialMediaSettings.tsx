@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Share2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface SocialMediaSettingsProps {
   settings: any;
@@ -24,16 +25,18 @@ const socialPlatforms = [
 ];
 
 export function SocialMediaSettings({ settings, onChange }: SocialMediaSettingsProps) {
+  const t = useTranslations("admin.settings.social");
+
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Share2 className="h-5 w-5" />
-            Réseaux Sociaux
+            {t("title")}
           </CardTitle>
           <CardDescription>
-            Liens vers vos profils sur les réseaux sociaux
+            {t("description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -53,7 +56,7 @@ export function SocialMediaSettings({ settings, onChange }: SocialMediaSettingsP
           </div>
 
           <p className="text-sm text-muted-foreground mt-4">
-            💡 Laissez vide les champs des réseaux que vous n'utilisez pas.
+            {t("tip")}
           </p>
         </CardContent>
       </Card>

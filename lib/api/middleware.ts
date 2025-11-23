@@ -39,13 +39,13 @@ export async function requireAuth(
     });
 
     if (!session?.user) {
-      throw new ApiError(401, "Non authentifié", "UNAUTHORIZED");
+      throw new ApiError(401, "Unauthorized", "UNAUTHORIZED");
     }
 
     if (session.user.role !== "admin") {
       throw new ApiError(
         403,
-        "Accès interdit - Rôle admin requis",
+        "Access denied - Admin role required",
         "FORBIDDEN"
       );
     }
@@ -59,7 +59,7 @@ export async function requireAuth(
     if (error instanceof ApiError) {
       throw error;
     }
-    throw new ApiError(401, "Session invalide", "INVALID_SESSION");
+    throw new ApiError(401, "Invalid session", "INVALID_SESSION");
   }
 }
 
@@ -86,11 +86,11 @@ export async function validateBody<T>(
 
       throw new ApiError(
         400,
-        "Validation échouée",
+        "Validation failed",
         "VALIDATION_ERROR"
       );
     }
-    throw new ApiError(400, "Body invalide", "INVALID_BODY");
+    throw new ApiError(400, "Invalid body", "INVALID_BODY");
   }
 }
 
@@ -109,7 +109,7 @@ export function validateQuery<T>(
     if (error instanceof ZodError) {
       throw new ApiError(
         400,
-        "Paramètres de requête invalides",
+        "Invalid query parameters",
         "INVALID_QUERY_PARAMS"
       );
     }
@@ -150,7 +150,7 @@ export function handleApiError(error: unknown): NextResponse {
 
     return NextResponse.json(
       {
-        error: "Validation échouée",
+        error: "Validation failed",
         code: "VALIDATION_ERROR",
         details: formattedErrors,
       },
@@ -165,7 +165,7 @@ export function handleApiError(error: unknown): NextResponse {
     if (prismaError.code === "P2002") {
       return NextResponse.json(
         {
-          error: "Cette ressource existe déjà",
+          error: "Resource already exists",
           code: "DUPLICATE_ENTRY",
         },
         { status: 409 }
@@ -175,7 +175,7 @@ export function handleApiError(error: unknown): NextResponse {
     if (prismaError.code === "P2025") {
       return NextResponse.json(
         {
-          error: "Ressource non trouvée",
+          error: "Resource not found",
           code: "NOT_FOUND",
         },
         { status: 404 }
@@ -188,8 +188,8 @@ export function handleApiError(error: unknown): NextResponse {
     process.env.NODE_ENV === "development"
       ? error instanceof Error
         ? error.message
-        : "Une erreur est survenue"
-      : "Une erreur est survenue";
+        : "An error occurred"
+      : "An error occurred";
 
   return NextResponse.json(
     {

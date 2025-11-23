@@ -1,111 +1,84 @@
-import type { ReactNode } from 'react';
+'use client';
+
 import React from 'react';
+import type { HTMLMotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-interface GlassCardProps {
-  children: ReactNode;
+interface GlassCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
+  children: React.ReactNode;
   className?: string;
-  variant?: 'default' | 'neon' | 'subtle';
   hover?: boolean;
-  onClick?: () => void;
+  variant?: 'default' | 'neon' | 'subtle';
+  neonColor?: 'lime' | 'cyan' | 'magenta' | 'purple' | 'blue';
 }
 
-/**
- * GlassCard - Glassmorphism card component with neon accents
- *
- * Variants:
- * - default: Standard glass card with subtle border
- * - neon: Glass card with neon gradient border and glow
- * - subtle: Minimal glass effect with less opacity
- */
 export function GlassCard({
   children,
   className,
-  variant = 'default',
   hover = false,
-  onClick
+  variant = 'default',
+  neonColor = 'cyan', // Default neon color
+  ...props
 }: GlassCardProps) {
-  const baseStyles = 'relative overflow-hidden rounded-2xl backdrop-blur-xl transition-all duration-300';
-
+  
   const variants = {
-    default: 'glass-card',
-    neon: 'glass-card-neon',
-    subtle: 'glass-card-subtle',
+    default: 'bg-obsidian-100/30 backdrop-blur-xl border border-white/5',
+    neon: 'bg-obsidian/60 backdrop-blur-xl border border-white/10',
+    subtle: 'bg-white/5 backdrop-blur-lg border border-white/5',
   };
 
-  const hoverEffect = hover
-    ? 'hover:scale-[1.02] hover:shadow-2xl hover:shadow-neon-cyan/20 cursor-pointer'
-    : '';
+  const borderColors = {
+    lime: 'group-hover:border-neon-lime/50',
+    cyan: 'group-hover:border-neon-cyan/50',
+    magenta: 'group-hover:border-neon-magenta/50',
+    purple: 'group-hover:border-neon-purple/50',
+    blue: 'group-hover:border-neon-blue/50',
+  };
 
   return (
-    <div
+    <motion.div
       className={cn(
-        baseStyles,
+        'group relative rounded-2xl shadow-xl transition-all duration-500',
         variants[variant],
-        hoverEffect,
+        hover && 'hover:shadow-[0_0_30px_-5px_rgba(0,0,0,0.5)] hover:-translate-y-1',
         className
       )}
-      onClick={onClick}
-      role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onClick();
-        }
-      } : undefined}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5 }}
+      {...props}
     >
-      {children}
-    </div>
+      {/* Gradient Border Effect on Hover */}
+      {hover && (
+        <div
+          className={cn(
+            'absolute inset-0 rounded-2xl border border-transparent transition-colors duration-500 pointer-events-none',
+            borderColors[neonColor] || borderColors.cyan
+          )}
+        />
+      )}
+      
+      {/* Inner Glow */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-700 pointer-events-none" />
+
+      {/* Content Wrapper */}
+      <div className="relative z-10 h-full">
+        {children}
+      </div>
+    </motion.div>
   );
 }
 
-/**
- * GlassCardHeader - Header section for GlassCard
- */
-export function GlassCardHeader({
-  children,
-  className
-}: {
-  children: ReactNode;
+interface GlassCardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
   className?: string;
-}) {
-  return (
-    <div className={cn('px-6 py-4 border-b border-white/10', className)}>
-      {children}
-    </div>
-  );
 }
 
-/**
- * GlassCardContent - Content section for GlassCard
- */
-export function GlassCardContent({
-  children,
-  className
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
+export function GlassCardContent({ children, className, ...props }: GlassCardContentProps) {
   return (
-    <div className={cn('px-6 py-4', className)}>
-      {children}
-    </div>
-  );
-}
-
-/**
- * GlassCardFooter - Footer section for GlassCard
- */
-export function GlassCardFooter({
-  children,
-  className
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={cn('px-6 py-4 border-t border-white/10', className)}>
+    <div className={cn("p-6", className)} {...props}>
       {children}
     </div>
   );

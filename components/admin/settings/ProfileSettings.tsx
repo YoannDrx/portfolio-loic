@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { User, Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 interface ProfileSettingsProps {
   user: any;
@@ -14,6 +15,9 @@ interface ProfileSettingsProps {
 }
 
 export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
+  const t = useTranslations("admin.settings.profile");
+  const tCommon = useTranslations("admin.common");
+
   // Email change state
   const [newEmail, setNewEmail] = useState("");
   const [emailLoading, setEmailLoading] = useState(false);
@@ -34,8 +38,8 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     if (!newEmail || newEmail === user.email) {
       toast({
         variant: "destructive",
-        title: "Email invalide",
-        description: "Veuillez entrer un nouvel email différent",
+        title: t("invalidEmail"),
+        description: t("enterDifferentEmail"),
       });
       return;
     }
@@ -45,8 +49,8 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     if (!emailRegex.test(newEmail)) {
       toast({
         variant: "destructive",
-        title: "Email invalide",
-        description: "Veuillez entrer un email valide",
+        title: t("invalidEmail"),
+        description: t("enterValidEmail"),
       });
       return;
     }
@@ -62,12 +66,12 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || "Erreur lors du changement d'email");
+        throw new Error(error.message || t("errorEmail"));
       }
 
       toast({
-        title: "Email modifié ✓",
-        description: "Votre email a été mis à jour avec succès",
+        title: t("successEmail") + " ✓",
+        description: t("successEmail"),
       });
 
       setNewEmail("");
@@ -75,8 +79,8 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Erreur",
-        description: error.message || "Impossible de changer l'email",
+        title: tCommon("error"),
+        description: error.message || t("errorEmail"),
       });
     } finally {
       setEmailLoading(false);
@@ -91,8 +95,8 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
         variant: "destructive",
-        title: "Champs requis",
-        description: "Veuillez remplir tous les champs",
+        title: t("requiredFields"),
+        description: t("fillAllFields"),
       });
       return;
     }
@@ -100,8 +104,8 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     if (newPassword.length < 8) {
       toast({
         variant: "destructive",
-        title: "Mot de passe trop court",
-        description: "Le mot de passe doit contenir au moins 8 caractères",
+        title: t("passwordTooShort"),
+        description: t("passwordShortDesc"),
       });
       return;
     }
@@ -109,8 +113,8 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     if (newPassword !== confirmPassword) {
       toast({
         variant: "destructive",
-        title: "Mots de passe différents",
-        description: "Les nouveaux mots de passe ne correspondent pas",
+        title: t("passwordMismatch"),
+        description: t("passwordMismatchDesc"),
       });
       return;
     }
@@ -126,12 +130,12 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || "Erreur lors du changement de mot de passe");
+        throw new Error(error.message || t("errorPassword"));
       }
 
       toast({
-        title: "Mot de passe modifié ✓",
-        description: "Votre mot de passe a été mis à jour avec succès",
+        title: t("successPassword") + " ✓",
+        description: t("successPassword"),
       });
 
       // Reset form
@@ -144,8 +148,8 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Erreur",
-        description: error.message || "Impossible de changer le mot de passe",
+        title: tCommon("error"),
+        description: error.message || t("errorPassword"),
       });
     } finally {
       setPasswordLoading(false);
@@ -159,25 +163,25 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <User className="h-5 w-5" />
-            Profil Administrateur
+            {t("title")}
           </CardTitle>
           <CardDescription>
-            Informations de votre compte admin
+            {t("description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>Nom</Label>
+            <Label>{t("name")}</Label>
             <Input value={user.name || "Administrateur"} disabled />
           </div>
 
           <div className="space-y-2">
-            <Label>Email actuel</Label>
+            <Label>{t("currentEmail")}</Label>
             <Input value={user.email} disabled />
           </div>
 
           <div className="space-y-2">
-            <Label>Rôle</Label>
+            <Label>{t("role")}</Label>
             <Input value="Admin" disabled />
           </div>
         </CardContent>
@@ -188,16 +192,16 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Mail className="h-5 w-5" />
-            Changer l'Email
+            {t("changeEmail")}
           </CardTitle>
           <CardDescription>
-            Modifiez l'adresse email de connexion
+            {t("changeEmailDesc")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleEmailChange} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="newEmail">Nouvel email</Label>
+              <Label htmlFor="newEmail">{t("newEmail")}</Label>
               <Input
                 id="newEmail"
                 type="email"
@@ -212,12 +216,12 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
               {emailLoading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Modification...
+                  {t("updating")}
                 </>
               ) : (
                 <>
                   <Mail className="h-4 w-4" />
-                  Modifier l'Email
+                  {t("updateEmail")}
                 </>
               )}
             </Button>
@@ -230,16 +234,16 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Lock className="h-5 w-5" />
-            Changer le Mot de Passe
+            {t("changePassword")}
           </CardTitle>
           <CardDescription>
-            Modifiez votre mot de passe de connexion
+            {t("changePasswordDesc")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handlePasswordChange} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="currentPassword">Mot de passe actuel</Label>
+              <Label htmlFor="currentPassword">{t("currentPassword")}</Label>
               <div className="relative">
                 <Input
                   id="currentPassword"
@@ -267,7 +271,7 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="newPassword">Nouveau mot de passe</Label>
+              <Label htmlFor="newPassword">{t("newPassword")}</Label>
               <div className="relative">
                 <Input
                   id="newPassword"
@@ -293,12 +297,12 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground">
-                Minimum 8 caractères
+                {t("minChars")}
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirmer le nouveau mot de passe</Label>
+              <Label htmlFor="confirmPassword">{t("confirmPassword")}</Label>
               <div className="relative">
                 <Input
                   id="confirmPassword"
@@ -329,12 +333,12 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
               {passwordLoading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Modification...
+                  {t("updating")}
                 </>
               ) : (
                 <>
                   <Lock className="h-4 w-4" />
-                  Modifier le Mot de Passe
+                  {t("updatePassword")}
                 </>
               )}
             </Button>

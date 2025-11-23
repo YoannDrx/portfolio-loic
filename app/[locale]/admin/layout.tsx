@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
+import AdminScene from "@/components/three/scenes/AdminScene";
 
 export default async function AdminLayout({
   children,
@@ -32,8 +33,9 @@ export default async function AdminLayout({
   };
 
   return (
-    <div className="min-h-screen bg-admin-bg-secondary dark:bg-dark-admin-bg transition-colors duration-300">
-      <div className="flex h-screen overflow-hidden">
+    <div className="min-h-screen bg-obsidian text-white transition-colors duration-300 relative overflow-hidden">
+      <AdminScene />
+      <div className="flex h-screen overflow-hidden relative z-10">
         {/* Sidebar */}
         <AdminSidebar locale={locale} />
 
@@ -43,7 +45,7 @@ export default async function AdminLayout({
           <AdminHeader user={userData} locale={locale} />
 
           {/* Page content */}
-          <main className="flex-1 overflow-y-auto p-8 bg-admin-bg-secondary dark:bg-dark-admin-bg transition-colors duration-300">
+          <main className="flex-1 overflow-y-auto p-8 bg-obsidian-50/50 backdrop-blur-sm transition-colors duration-300">
             <div className="mx-auto max-w-7xl">{children}</div>
           </main>
         </div>

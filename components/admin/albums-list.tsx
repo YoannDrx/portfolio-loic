@@ -1,11 +1,10 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Table,
   TableBody,
@@ -13,9 +12,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Search, Eye, Pencil, Plus } from "lucide-react";
-import { DeleteAlbumButton } from "@/components/admin/delete-album-button";
+} from '@/components/ui/table';
+import { Search, Eye, Pencil, Plus, Trash2 } from 'lucide-react';
+import { DeleteAlbumButton } from '@/components/admin/delete-album-button';
+import { GlassCard } from '@/components/ui/GlassCard';
 
 interface Album {
   id: string;
@@ -32,120 +32,116 @@ interface AlbumsListProps {
 }
 
 export function AlbumsList({ albums, locale }: AlbumsListProps) {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const filteredAlbums = albums.filter((album) =>
     album.title.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Header Action */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Albums</h1>
-          <p className="text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300">
-            Gérez vos albums photo ({albums.length} au total)
+          <h2 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
+            Album Library
+          </h2>
+          <p className="text-gray-400 font-mono text-sm">
+            Manage your discography / {albums.length} total entries
           </p>
         </div>
-        <Button
-          asChild
-          className="gap-2 bg-gradient-to-r from-admin-primary-500 to-admin-accent-500 hover:from-admin-primary-600 hover:to-admin-accent-600 shadow-md hover:shadow-lg transition-all duration-200"
-        >
-          <Link href={`/${locale}/admin/albums/new`}>
-            <Plus className="h-4 w-4" />
-            Nouvel album
-          </Link>
-        </Button>
+        <Link href={`/${locale}/admin/albums/new`}>
+          <Button className="bg-gradient-to-r from-neon-lime to-neon-green text-obsidian font-bold hover:shadow-[0_0_20px_rgba(204,255,0,0.4)] transition-all border-none">
+            <Plus className="mr-2 h-4 w-4" /> Create New
+          </Button>
+        </Link>
       </div>
 
-      {/* Search Bar */}
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-admin-text-tertiary dark:text-dark-admin-text-tertiary transition-colors duration-300" />
+      {/* Filter Bar */}
+      <GlassCard variant="subtle" className="p-4 flex items-center gap-4">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
           <Input
-            placeholder="Rechercher un album..."
+            placeholder="Search albums..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-8"
+            className="pl-10 bg-white/5 border-white/10 text-white focus:border-neon-lime/50 focus:ring-neon-lime/20"
           />
         </div>
-      </div>
+      </GlassCard>
 
-      {/* Table with fixed height and scroll */}
-      <div className="rounded-lg border border-admin-border dark:border-dark-admin-border bg-white dark:bg-dark-admin-bg-secondary shadow-sm overflow-hidden transition-colors duration-300">
-        <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
+      {/* Data Table */}
+      <GlassCard variant="default" className="overflow-hidden">
+        <div className="max-h-[600px] overflow-y-auto custom-scrollbar">
           <Table>
-            <TableHeader className="sticky top-0 bg-admin-bg-secondary dark:bg-dark-admin-bg-tertiary z-10 border-b border-admin-border dark:border-dark-admin-border transition-colors duration-300">
-              <TableRow className="hover:bg-admin-bg-secondary dark:hover:bg-dark-admin-bg-tertiary">
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Aperçu</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Titre</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Date</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Style</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Statut</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Actions</TableHead>
+            <TableHeader className="bg-white/5 sticky top-0 backdrop-blur-md z-10">
+              <TableRow className="hover:bg-transparent border-white/10">
+                <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Preview</TableHead>
+                <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Title</TableHead>
+                <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Date</TableHead>
+                <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Style</TableHead>
+                <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Status</TableHead>
+                <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredAlbums.length === 0 ? (
                 <TableRow>
-                  <TableCell
-                    colSpan={6}
-                    className="h-24 text-center text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300"
-                  >
-                    Aucun album trouvé
+                  <TableCell colSpan={6} className="h-32 text-center text-gray-500">
+                    No albums found matching your search.
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredAlbums.map((album) => (
                   <TableRow
                     key={album.id}
-                    className="group hover:bg-admin-bg-secondary dark:hover:bg-dark-admin-bg-tertiary transition-colors duration-150 border-b border-admin-border-light dark:border-dark-admin-border-light last:border-b-0"
+                    className="border-white/5 hover:bg-white/5 transition-colors group"
                   >
                     <TableCell>
-                      <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                      <div className="relative h-12 w-12 rounded overflow-hidden border border-white/10 group-hover:border-neon-lime/50 transition-colors">
                         <Image
                           src={album.img}
                           alt={album.title}
                           fill
                           className="object-cover"
-                          sizes="96px"
                         />
                       </div>
                     </TableCell>
+                    <TableCell className="font-bold text-white">{album.title}</TableCell>
+                    <TableCell className="text-gray-400 font-mono text-xs">{album.date}</TableCell>
                     <TableCell>
-                      <span className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">{album.title}</span>
-                    </TableCell>
-                    <TableCell>
-                      <span className="text-admin-text-secondary dark:text-dark-admin-text-secondary text-sm transition-colors duration-300">{album.date}</span>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="capitalize border-admin-accent-500/30 dark:border-admin-accent-400/30 bg-admin-accent-50 dark:bg-admin-accent-900/20 text-admin-accent-500 dark:text-admin-accent-400 font-medium transition-colors duration-300">
+                      <span className="px-2 py-1 rounded text-xs font-bold bg-white/5 border border-white/10 text-neon-purple">
                         {album.style}
-                      </Badge>
+                      </span>
                     </TableCell>
                     <TableCell>
                       {album.published ? (
-                        <Badge className="bg-admin-success-500 dark:bg-admin-success-600 hover:bg-admin-success-600 dark:hover:bg-admin-success-700 text-white font-medium shadow-sm transition-colors duration-300">Publié</Badge>
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
+                          Published
+                        </span>
                       ) : (
-                        <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400 border border-gray-200 dark:border-gray-700 font-medium transition-colors duration-300">Brouillon</Badge>
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-white/5 text-gray-500 border border-white/10">
+                          Draft
+                        </span>
                       )}
                     </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-1">
-                        <Button variant="ghost" size="sm" asChild className="h-9 w-9 p-0 hover:bg-admin-primary-50 dark:hover:bg-admin-primary-900/20 hover:text-admin-primary-600 dark:hover:text-admin-primary-400 transition-all duration-200">
+                    <TableCell className="text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-neon-cyan hover:bg-neon-cyan/10">
                           <Link href={`/${locale}/albums/${album.id}`} target="_blank">
                             <Eye className="h-4 w-4" />
                           </Link>
                         </Button>
-                        <Button variant="ghost" size="sm" asChild className="h-9 w-9 p-0 hover:bg-admin-accent-50 dark:hover:bg-admin-accent-900/20 hover:text-admin-accent-600 dark:hover:text-admin-accent-400 transition-all duration-200">
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-neon-lime hover:bg-neon-lime/10">
                           <Link href={`/${locale}/admin/albums/${album.id}`}>
                             <Pencil className="h-4 w-4" />
                           </Link>
                         </Button>
-                        <DeleteAlbumButton
-                          albumId={album.id}
-                          albumTitle={album.title}
-                        />
+                        {/* Wrap Delete button to style it if needed, or assume component handles it */}
+                        <div className="text-gray-400 hover:text-red-500">
+                           <DeleteAlbumButton albumId={album.id} albumTitle={album.title} />
+                        </div>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -154,13 +150,7 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
             </TableBody>
           </Table>
         </div>
-      </div>
-
-      {/* Footer */}
-      <div className="text-sm text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300">
-        {filteredAlbums.length} résultat{filteredAlbums.length > 1 ? "s" : ""}
-        {search && ` sur ${albums.length} au total`}
-      </div>
+      </GlassCard>
     </div>
   );
 }

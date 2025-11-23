@@ -1,5 +1,3 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -30,6 +28,7 @@ import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { albumCreateSchema, type AlbumCreateInput } from "@/lib/validations/schemas";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useTranslations } from "next-intl";
 
 interface AlbumFormProps {
   initialData?: AlbumCreateInput & { id?: string };
@@ -41,10 +40,11 @@ const STYLES = [
   { value: "music-video", label: "Music Video" },
   { value: "concert", label: "Concert" },
   { value: "session", label: "Session" },
-  { value: "other", label: "Autre" },
+  { value: "other", label: "Other" },
 ];
 
 export function AlbumForm({ initialData, locale }: AlbumFormProps) {
+  const t = useTranslations("admin");
   const router = useRouter();
   const isEditing = !!initialData?.id;
 
@@ -89,14 +89,15 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Erreur lors de la sauvegarde");
+        throw new Error(error.error || t("common.error"));
       }
 
       const album = await response.json();
 
+      const action = isEditing ? t("common.updated") : t("common.created");
       toast({
-        title: isEditing ? "Album modifié ✓" : "Album créé ✓",
-        description: `L'album "${data.title}" a été ${isEditing ? "modifié" : "créé"} avec succès.`,
+        title: (isEditing ? t("albums.form.successUpdate") : t("albums.form.successCreate")) + " ✓",
+        description: t("albums.form.successDesc", { title: data.title, action }),
       });
 
       router.push(`/${locale}/admin/albums`);
@@ -104,9 +105,9 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Erreur",
+        title: t("common.error"),
         description:
-          error instanceof Error ? error.message : "Une erreur est survenue lors de la sauvegarde.",
+          error instanceof Error ? error.message : t("common.error"),
       });
     }
   }
@@ -122,7 +123,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
           <Alert>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              Vous avez des modifications non enregistrées.
+              {t("common.dirtyWarning")}
             </AlertDescription>
           </Alert>
         )}
@@ -130,7 +131,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
         {/* Informations générales */}
         <Card>
           <CardHeader>
-            <CardTitle>Informations générales</CardTitle>
+            <CardTitle>{t("albums.form.generalInfo")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
@@ -139,9 +140,9 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Titre *</FormLabel>
+                    <FormLabel>{t("albums.form.title")} *</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Nom de l'album" />
+                      <Input {...field} placeholder={t("albums.form.titlePlaceholder")} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -153,7 +154,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="style"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Style *</FormLabel>
+                    <FormLabel>{t("albums.form.style")} *</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -183,12 +184,12 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Date affichée *</FormLabel>
+                    <FormLabel>{t("albums.form.date")} *</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Ex: Septembre 2024" />
+                      <Input {...field} placeholder={t("albums.form.datePlaceholder")} />
                     </FormControl>
                     <FormDescription>
-                      Format libre (ex: "Juin 2024", "Été 2024")
+                      Format libre
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -200,11 +201,11 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="sortedDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Date de tri *</FormLabel>
+                    <FormLabel>{t("albums.form.sortedDate")} *</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="MM-YYYY" />
+                      <Input {...field} placeholder={t("albums.form.sortedDatePlaceholder")} />
                     </FormControl>
-                    <FormDescription>Format: MM-YYYY (ex: 09-2024)</FormDescription>
+                    <FormDescription>{t("albums.form.sortedDatePlaceholder")}</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -221,8 +222,8 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                       <ImageUpload
                         value={field.value}
                         onChange={field.onChange}
-                        label="Image de couverture *"
-                        description="Format: JPEG, PNG, WebP (max 5MB)"
+                        label={t("albums.form.coverImage") + " *"}
+                        description={t("media.dropzone") + " (" + t("media.maxSize") + ")"}
                       />
                     </FormControl>
                     <FormMessage />
@@ -239,8 +240,8 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                       <ImageUpload
                         value={field.value}
                         onChange={field.onChange}
-                        label="Poster *"
-                        description="Format: JPEG, PNG, WebP (max 5MB)"
+                        label={t("albums.form.poster") + " *"}
+                        description={t("media.dropzone") + " (" + t("media.maxSize") + ")"}
                       />
                     </FormControl>
                     <FormMessage />
@@ -254,7 +255,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
               name="listenLink"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Lien d&apos;écoute *</FormLabel>
+                  <FormLabel>{t("albums.form.listenLink")} *</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -262,9 +263,6 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                       placeholder="https://open.spotify.com/..."
                     />
                   </FormControl>
-                  <FormDescription>
-                    Lien Spotify, Apple Music, ou autre plateforme d&apos;écoute
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -276,9 +274,9 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="collabName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nom de la collaboration</FormLabel>
+                    <FormLabel>{t("albums.form.collabName")}</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Nom de l'artiste" />
+                      <Input {...field} placeholder={t("albums.form.collabNamePlaceholder")} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -290,12 +288,12 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="collabLink"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Lien de la collaboration</FormLabel>
+                    <FormLabel>{t("albums.form.collabLink")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         type="url"
-                        placeholder="https://..."
+                        placeholder={t("albums.form.collabLinkPlaceholder")}
                       />
                     </FormControl>
                     <FormMessage />
@@ -310,7 +308,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="order"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Ordre d&apos;affichage</FormLabel>
+                    <FormLabel>{t("albums.form.order")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -318,9 +316,6 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                         onChange={(e) => field.onChange(parseInt(e.target.value))}
                       />
                     </FormControl>
-                    <FormDescription>
-                      Nombre plus petit = affiché en premier
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -331,7 +326,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 name="published"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Statut</FormLabel>
+                    <FormLabel>{t("albums.form.published")}</FormLabel>
                     <Select
                       onValueChange={(value) => field.onChange(value === "true")}
                       defaultValue={field.value ? "true" : "false"}
@@ -342,8 +337,8 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="true">Publié</SelectItem>
-                        <SelectItem value="false">Brouillon</SelectItem>
+                        <SelectItem value="true">{t("albums.form.status.published")}</SelectItem>
+                        <SelectItem value="false">{t("albums.form.status.draft")}</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -357,7 +352,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
         {/* Description français */}
         <Card>
           <CardHeader>
-            <CardTitle>Description en français *</CardTitle>
+            <CardTitle>{t("albums.form.descFr")} *</CardTitle>
           </CardHeader>
           <CardContent>
             <FormField
@@ -369,7 +364,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                     <RichTextEditor
                       content={field.value}
                       onChange={field.onChange}
-                      placeholder="Description en français..."
+                      placeholder={t("albums.form.descFr") + "..."}
                     />
                   </FormControl>
                   <FormMessage />
@@ -382,7 +377,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
         {/* Description anglais */}
         <Card>
           <CardHeader>
-            <CardTitle>Description en anglais *</CardTitle>
+            <CardTitle>{t("albums.form.descEn")} *</CardTitle>
           </CardHeader>
           <CardContent>
             <FormField
@@ -394,7 +389,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                     <RichTextEditor
                       content={field.value}
                       onChange={field.onChange}
-                      placeholder="Description in English..."
+                      placeholder={t("albums.form.descEn") + "..."}
                     />
                   </FormControl>
                   <FormMessage />
@@ -408,7 +403,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
         <div className="flex items-center gap-4">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isEditing ? "Enregistrer les modifications" : "Créer l'album"}
+            {isEditing ? t("common.save") : t("albums.create")}
           </Button>
 
           {isEditing && (
@@ -419,7 +414,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                   target="_blank"
                 >
                   <Eye className="mr-2 h-4 w-4" />
-                  Prévisualiser
+                  {t("common.preview")}
                 </Link>
               </Button>
 
@@ -436,19 +431,19 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
             onClick={() => {
               if (isDirty) {
                 const confirm = window.confirm(
-                  "Vous avez des modifications non enregistrées. Voulez-vous vraiment annuler ?"
+                  t("common.dirtyWarning")
                 );
                 if (!confirm) return;
               }
               router.push(`/${locale}/admin/albums`);
             }}
           >
-            Annuler
+            {t("common.cancel")}
           </Button>
 
           {isDirty && (
             <span className="text-sm text-muted-foreground">
-              Modifications non enregistrées
+              {t("common.dirtyWarning")}
             </span>
           )}
         </div>

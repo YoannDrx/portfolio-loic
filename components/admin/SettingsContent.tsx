@@ -10,6 +10,7 @@ import { GeneralSettings } from "@/components/admin/settings/GeneralSettings";
 import { SocialMediaSettings } from "@/components/admin/settings/SocialMediaSettings";
 import { ContentSettings } from "@/components/admin/settings/ContentSettings";
 import { ProfileSettings } from "@/components/admin/settings/ProfileSettings";
+import { useTranslations } from "next-intl";
 
 interface SettingsContentProps {
   locale: string;
@@ -21,6 +22,7 @@ type ExportFormat = "csv" | "json" | "txt";
 const DEBOUNCE_DELAY = 1000; // 1 seconde
 
 export function SettingsContent({ locale }: SettingsContentProps) {
+  const t = useTranslations("admin");
   const [settings, setSettings] = useState<any>({});
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +49,7 @@ export function SettingsContent({ locale }: SettingsContentProps) {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Erreur",
+        title: t("common.error"),
         description: "Impossible de charger les paramètres",
       });
     } finally {
@@ -89,20 +91,20 @@ export function SettingsContent({ locale }: SettingsContentProps) {
 
         setLastSaved(new Date());
         toast({
-          title: "Sauvegardé ✓",
+          title: t("common.saved") + " ✓",
           description: "Les paramètres ont été mis à jour",
         });
       } catch (error) {
         toast({
           variant: "destructive",
-          title: "Erreur",
+          title: t("common.error"),
           description: "Impossible de sauvegarder les paramètres",
         });
       } finally {
         setSaving(false);
       }
     },
-    []
+    [t]
   );
 
   // Gérer les changements avec debounce
@@ -144,13 +146,13 @@ export function SettingsContent({ locale }: SettingsContentProps) {
       window.URL.revokeObjectURL(url);
 
       toast({
-        title: "Export réussi ✓",
-        description: `Les ${type} ont été exportés en ${format.toUpperCase()}`,
+        title: t("settings.export.success") + " ✓",
+        description: t("settings.export.successDesc", { type, format: format.toUpperCase() }),
       });
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Erreur d'export",
+        title: t("settings.export.error"),
         description: "Impossible d'exporter les données",
       });
     } finally {
@@ -161,8 +163,8 @@ export function SettingsContent({ locale }: SettingsContentProps) {
   const exportCards = [
     {
       type: "albums" as ContentType,
-      title: "Albums",
-      description: "Exporter tous les albums avec leurs métadonnées",
+      title: "Albums", // Could translate if keys match
+      description: "Exporter tous les albums avec leurs métadonnées", // Hardcoded for now, add to json later if needed
       icon: Database,
       color: "text-neon-cyan",
     },
@@ -185,21 +187,21 @@ export function SettingsContent({ locale }: SettingsContentProps) {
   const formatButtons = [
     {
       format: "csv" as ExportFormat,
-      label: "CSV",
+      label: t("settings.export.formats.csv.label"),
       icon: FileSpreadsheet,
-      description: "Format tableur",
+      description: t("settings.export.formats.csv.desc"),
     },
     {
       format: "json" as ExportFormat,
-      label: "JSON",
+      label: t("settings.export.formats.json.label"),
       icon: FileJson,
-      description: "Format structuré",
+      description: t("settings.export.formats.json.desc"),
     },
     {
       format: "txt" as ExportFormat,
-      label: "TXT",
+      label: t("settings.export.formats.txt.label"),
       icon: FileText,
-      description: "Texte lisible",
+      description: t("settings.export.formats.txt.desc"),
     },
   ];
 
@@ -215,9 +217,9 @@ export function SettingsContent({ locale }: SettingsContentProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">Paramètres</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">{t("settings.title")}</h1>
           <p className="text-admin-text-secondary">
-            Gérez les paramètres et les exports de votre portfolio
+            {t("settings.description")}
           </p>
         </div>
 
@@ -226,13 +228,13 @@ export function SettingsContent({ locale }: SettingsContentProps) {
           {saving ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Sauvegarde...</span>
+              <span className="text-sm text-muted-foreground">{t("common.saving")}</span>
             </>
           ) : lastSaved ? (
             <>
               <CheckCircle2 className="h-4 w-4 text-green-500" />
               <span className="text-sm text-muted-foreground">
-                Sauvegardé {lastSaved.toLocaleTimeString()}
+                {t("common.saved")} {lastSaved.toLocaleTimeString()}
               </span>
             </>
           ) : null}
@@ -241,11 +243,11 @@ export function SettingsContent({ locale }: SettingsContentProps) {
 
       <Tabs defaultValue="profile" className="w-full">
         <TabsList className="grid w-full max-w-3xl grid-cols-5">
-          <TabsTrigger value="profile">Profil</TabsTrigger>
-          <TabsTrigger value="general">Général</TabsTrigger>
-          <TabsTrigger value="social">Réseaux</TabsTrigger>
-          <TabsTrigger value="content">Contenu</TabsTrigger>
-          <TabsTrigger value="export">Export</TabsTrigger>
+          <TabsTrigger value="profile">{t("settings.tabs.profile")}</TabsTrigger>
+          <TabsTrigger value="general">{t("settings.tabs.general")}</TabsTrigger>
+          <TabsTrigger value="social">{t("settings.tabs.social")}</TabsTrigger>
+          <TabsTrigger value="content">{t("settings.tabs.content")}</TabsTrigger>
+          <TabsTrigger value="export">{t("settings.tabs.export")}</TabsTrigger>
         </TabsList>
 
         {/* ONGLET PROFIL */}
@@ -280,10 +282,10 @@ export function SettingsContent({ locale }: SettingsContentProps) {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Download className="h-5 w-5" />
-                Export de Données
+                {t("settings.export.title")}
               </CardTitle>
               <CardDescription>
-                Téléchargez vos données dans différents formats pour backup ou analyse
+                {t("settings.export.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -332,17 +334,17 @@ export function SettingsContent({ locale }: SettingsContentProps) {
               <div className="rounded-lg bg-muted/50 p-4">
                 <h4 className="font-medium mb-2 flex items-center gap-2">
                   <FileText className="h-4 w-4" />
-                  À propos des formats d'export
+                  {t("settings.export.info.title")}
                 </h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>
-                    <strong>CSV</strong> - Idéal pour Excel, Google Sheets, ou analyses de données
+                    <strong>{t("settings.export.formats.csv.label")}</strong> - {t("settings.export.info.csv")}
                   </li>
                   <li>
-                    <strong>JSON</strong> - Format structuré pour développeurs et APIs
+                    <strong>{t("settings.export.formats.json.label")}</strong> - {t("settings.export.info.json")}
                   </li>
                   <li>
-                    <strong>TXT</strong> - Texte brut lisible, parfait pour archivage
+                    <strong>{t("settings.export.formats.txt.label")}</strong> - {t("settings.export.info.txt")}
                   </li>
                 </ul>
               </div>

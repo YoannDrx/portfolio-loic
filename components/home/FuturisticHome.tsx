@@ -1,0 +1,391 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import AudioVisualizationScene from '@/components/three/AudioVisualizationScene';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { NeonButton } from '@/components/ui/NeonButton';
+import { ArrowRight, Play, Music, Film, Mail, Download, Headphones, Sliders, Sparkles, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link, useRouter, usePathname } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+import { LoginModal } from '@/components/auth/LoginModal';
+import { Lock } from 'lucide-react';
+
+interface Album {
+  id: string;
+  title: string;
+  img: string;
+  style: string;
+  date: string;
+  listenLink: string;
+}
+
+interface Video {
+  id: string;
+  title: string;
+  videoId: string;
+  type: string;
+}
+
+interface Service {
+  id: string;
+  title: string;
+  text: string;
+}
+
+interface FuturisticHomeProps {
+  albums: Album[];
+  videos: Video[];
+  services: Service[];
+  initialLoginOpen?: boolean;
+}
+
+export default function FuturisticHome({ albums, videos, services, initialLoginOpen = false }: FuturisticHomeProps) {
+  const t = useTranslations();
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  
+  // Login Modal State
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isLoginOpen, setIsLoginOpen] = useState(initialLoginOpen);
+
+  useEffect(() => {
+    if (searchParams.get('login') === 'true') {
+      setIsLoginOpen(true);
+    }
+  }, [searchParams]);
+
+  const handleLoginClose = () => {
+    setIsLoginOpen(false);
+    if (pathname.includes('/login')) {
+      router.push('/');
+    } else {
+      // Remove ?login=true from URL cleanly
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.delete('login');
+      router.replace(`?${newParams.toString()}`, { scroll: false });
+    }
+  };
+  
+  // Carousel State
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+
+  const serviceIcons = [Music, Headphones, Sliders, Sparkles];
+
+  const nextService = () => {
+    setCurrentServiceIndex((prev) => (prev + 1) % services.length);
+  };
+
+  const prevService = () => {
+    setCurrentServiceIndex((prev) => (prev - 1 + services.length) % services.length);
+  };
+
+  return (
+    <div className="min-h-screen text-white selection:bg-neon-lime selection:text-obsidian font-inter overflow-x-hidden relative">
+      {/* 3D Background */}
+      <div className="fixed inset-0 z-0">
+        <AudioVisualizationScene />
+      </div>
+
+      {/* Overlay Gradient for readability */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-transparent via-obsidian/50 to-obsidian pointer-events-none" />
+
+      {/* Main Content */}
+      <main className="relative z-10 pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto">
+        
+        {/* Hero Section */}
+        <section id="about" className="min-h-[80vh] flex flex-col justify-center items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <h2 className="text-neon-lime font-mono text-sm md:text-base mb-4 tracking-[0.2em]">{t('home.hero.subtitle')}</h2>
+            <h1 
+              className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-8 font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500"
+              dangerouslySetInnerHTML={{ __html: t.raw('home.hero.title') }}
+            />
+            <p className="text-gray-400 max-w-xl text-lg md:text-xl mb-10 font-light border-l-2 border-neon-lime pl-6">
+              {t('home.hero.description')}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/albums">
+                <NeonButton>
+                  {t('home.hero.listenShowreel')} <Play className="inline ml-2 w-4 h-4" />
+                </NeonButton>
+              </Link>
+              <a href="/files/resume.pdf" target="_blank" rel="noopener noreferrer">
+                <NeonButton variant="outline">
+                  {t('home.hero.downloadResume')} <Download className="inline ml-2 w-4 h-4" />
+                </NeonButton>
+              </a>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Albums Section */}
+        <section id="work" className="py-32">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex justify-between items-end mb-16 border-b border-white/10 pb-4"
+          >
+            <h2 
+              className="text-4xl md:text-6xl font-bold tracking-tighter"
+              dangerouslySetInnerHTML={{ __html: t.raw('home.sections.albums') }}
+            />
+            <span className="text-gray-500 font-mono hidden md:block">{t('home.sections.albumsSubtitle')}</span>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {albums.map((album, index) => (
+              <a href={album.listenLink} target="_blank" rel="noopener noreferrer" key={album.id}>
+                <GlassCard neonColor={index % 2 === 0 ? 'lime' : 'cyan'} className="h-[400px] flex flex-col justify-end group cursor-pointer relative">
+                  {/* Album Art Background */}
+                  <div className="absolute inset-0 z-0">
+                    <Image 
+                      src={album.img} 
+                      alt={album.title} 
+                      fill 
+                      className="object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent" />
+                  </div>
+                   
+                   <div className="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-2">
+                     <div className="flex justify-between items-center mb-2">
+                       <span className={`px-3 py-1 rounded-full text-xs font-bold bg-black/50 backdrop-blur-md border border-white/20 uppercase tracking-wider text-neon-${index % 2 === 0 ? 'lime' : 'cyan'}`}>
+                         {album.style}
+                       </span>
+                       <span className="text-gray-300 font-mono text-sm">{album.date}</span>
+                     </div>
+                     <h3 className="text-3xl font-bold mb-2">{album.title}</h3>
+                     <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-300">
+                        <div className="pt-4 flex items-center text-sm font-bold tracking-widest uppercase text-white/70 group-hover:text-white">
+                          Listen Now <ArrowRight className="ml-2 w-4 h-4" />
+                        </div>
+                     </div>
+                   </div>
+                </GlassCard>
+              </a>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+             <Link href="/albums">
+               <NeonButton variant="outline">{t('home.sections.viewAllAlbums')}</NeonButton>
+             </Link>
+          </div>
+        </section>
+
+        {/* Videos Section */}
+        <section id="videos" className="py-32">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex justify-between items-end mb-16 border-b border-white/10 pb-4"
+          >
+            <h2 
+              className="text-4xl md:text-6xl font-bold tracking-tighter"
+              dangerouslySetInnerHTML={{ __html: t.raw('home.sections.videos') }}
+            />
+            <span className="text-gray-500 font-mono hidden md:block">{t('home.sections.videosSubtitle')}</span>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {videos.map((video) => (
+               <GlassCard key={video.id} neonColor="magenta" className="group cursor-pointer overflow-hidden p-0 h-64 relative" onClick={() => setSelectedVideo(video.videoId)}>
+                  <Image 
+                    src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} 
+                    alt={video.title} 
+                    fill 
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                     <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+                        <Play className="w-6 h-6 text-white fill-white" />
+                     </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                     <p className="text-xs font-bold text-neon-magenta uppercase tracking-wider mb-1">{video.type}</p>
+                     <h3 className="text-lg font-bold truncate">{video.title}</h3>
+                  </div>
+               </GlassCard>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+             <Link href="/videos">
+               <NeonButton variant="outline" color="magenta">{t('home.sections.viewAllVideos')}</NeonButton>
+             </Link>
+          </div>
+        </section>
+
+        {/* Services Carousel Section */}
+        <section id="services" className="py-32 relative">
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-neon-purple/10 rounded-full blur-[120px] pointer-events-none" />
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+          >
+             <span className="text-neon-purple font-mono tracking-[0.2em] mb-2 block">{t('home.sections.servicesSubtitle')}</span>
+             <h2 
+               className="text-4xl md:text-6xl font-bold tracking-tighter"
+               dangerouslySetInnerHTML={{ __html: t.raw('home.sections.services') }}
+             />
+          </motion.div>
+
+          {/* Carousel Container */}
+          <div className="relative max-w-4xl mx-auto px-12">
+             {/* Arrows */}
+             <button 
+                onClick={prevService}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-neon-purple transition-all group"
+                aria-label="Previous Service"
+             >
+                <ChevronLeft className="w-6 h-6 text-gray-400 group-hover:text-neon-purple" />
+             </button>
+             
+             <button 
+                onClick={nextService}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-neon-purple transition-all group"
+                aria-label="Next Service"
+             >
+                <ChevronRight className="w-6 h-6 text-gray-400 group-hover:text-neon-purple" />
+             </button>
+
+             <div className="overflow-hidden py-10">
+                <motion.div 
+                  key={currentServiceIndex}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  className="w-full"
+                >
+                   {services.length > 0 && (
+                     (() => {
+                       const service = services[currentServiceIndex];
+                       const Icon = serviceIcons[currentServiceIndex % serviceIcons.length];
+                       return (
+                         <GlassCard neonColor="purple" className="text-center py-16 px-8 md:px-16 group relative overflow-hidden">
+                           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                              <Icon className="w-32 h-32 text-neon-purple -rotate-12" />
+                           </div>
+                           
+                           <div className="relative z-10">
+                             <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-white/5 flex items-center justify-center text-neon-purple group-hover:scale-110 transition-transform duration-500 shadow-[0_0_30px_rgba(139,92,246,0.3)] border border-white/10">
+                                <Icon className="w-10 h-10" />
+                             </div>
+                             <h3 className="text-3xl md:text-4xl font-bold mb-6 font-montserrat tracking-tight">{service.title}</h3>
+                             <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">{service.text}</p>
+                           </div>
+                         </GlassCard>
+                       );
+                     })()
+                   )}
+                </motion.div>
+             </div>
+             
+             {/* Dots */}
+             <div className="flex justify-center gap-2 mt-4">
+                {services.map((_, idx) => (
+                   <button
+                      key={idx}
+                      onClick={() => setCurrentServiceIndex(idx)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                         idx === currentServiceIndex ? 'w-8 bg-neon-purple' : 'bg-white/20 hover:bg-white/40'
+                      }`}
+                      aria-label={`Go to service ${idx + 1}`}
+                   />
+                ))}
+             </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+             <Link href="/services">
+               <NeonButton variant="outline" color="purple">{t('home.sections.viewAllServices')}</NeonButton>
+             </Link>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-32 mb-20">
+           <GlassCard neonColor="lime" className="p-12 md:p-20 text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-lime/5 via-transparent to-transparent pointer-events-none" />
+              
+              <motion.div
+                 initial={{ scale: 0.9, opacity: 0 }}
+                 whileInView={{ scale: 1, opacity: 1 }}
+                 viewport={{ once: true }}
+              >
+                <h2 
+                  className="text-4xl md:text-7xl font-bold tracking-tighter mb-8"
+                  dangerouslySetInnerHTML={{ __html: t.raw('home.sections.contact') }}
+                />
+                <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light">
+                  {t('home.sections.contactText')}
+                </p>
+                <Link href="/contact">
+                  <NeonButton color="lime" className="mx-auto">
+                    <Mail className="inline mr-3 w-5 h-5" /> {t('home.sections.getInTouch')}
+                  </NeonButton>
+                </Link>
+              </motion.div>
+           </GlassCard>
+        </section>
+      </main>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4"
+            onClick={() => setSelectedVideo(null)}
+          >
+            <div className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(139,92,246,0.3)]">
+              <button 
+                onClick={() => setSelectedVideo(null)}
+                className="absolute top-4 right-4 z-10 p-2 bg-black/50 rounded-full text-white hover:text-neon-magenta transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <iframe 
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`} 
+                className="w-full h-full" 
+                allow="autoplay; encrypted-media" 
+                allowFullScreen 
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Login Modal */}
+      <LoginModal isOpen={isLoginOpen} onClose={handleLoginClose} />
+
+      {/* Admin Login Trigger (Discreet) */}
+      <button
+        onClick={() => setIsLoginOpen(true)}
+        className="fixed bottom-4 right-4 z-50 p-2 text-white/10 hover:text-neon-lime transition-colors duration-300"
+        aria-label="Admin Login"
+      >
+        <Lock className="w-4 h-4" />
+      </button>
+    </div>
+  );
+}

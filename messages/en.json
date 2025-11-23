@@ -33,6 +33,27 @@
       "description": "My compositions used in professional productions: sports, TV, commercials and more.",
       "viewAll": "View all videos ({count})",
       "notablePlacements": "Notable Placements"
+    },
+    "hero": {
+      "subtitle": "MUSIC COMPOSER & PRODUCER",
+      "title": "ORIGINAL<br />SOUNDTRACKS",
+      "description": "Award-winning music composer and producer based in Paris. I create music for Motion Picture, Advertising and Video Games.",
+      "listenShowreel": "Listen to Showreel",
+      "downloadResume": "Download Resume"
+    },
+    "sections": {
+      "albums": "LATEST <span class=\"text-neon-cyan\">ALBUMS</span>",
+      "albumsSubtitle": "01 / DISCOGRAPHY",
+      "viewAllAlbums": "View All Albums",
+      "videos": "FEATURED <span class=\"text-neon-magenta\">VIDEOS</span>",
+      "videosSubtitle": "02 / VISUALS",
+      "viewAllVideos": "View All Videos",
+      "services": "SONIC <span class=\"text-neon-purple\">SERVICES</span>",
+      "servicesSubtitle": "EXPERTISE",
+      "viewAllServices": "View All Services",
+      "contact": "LET'S MAKE <br/><span class=\"text-neon-lime\">NOISE</span>",
+      "contactText": "Ready to elevate your project with a unique sonic identity? Let's collaborate and build the future of sound.",
+      "getInTouch": "Get In Touch"
     }
   },
   "about": {
@@ -119,7 +140,49 @@
       }
     },
     "timeline": {
-      "title": "Professional Journey"
+      "title": "Professional Journey",
+      "events": {
+        "terra": {
+          "title": "Terra - Ambient Orchestral Album",
+          "description": "Ambient orchestral album for nature and environmental visuals, published by Cezame Music Agency under the Infinity Scores label.",
+          "type": "Project"
+        },
+        "metalcore": {
+          "title": "Metalcore II & Dystopia",
+          "description": "Double release: Metalcore II with Aaron Matts and Terence Langlois, and Dystopia - a unique fusion of cinematic metal and ambient under Infinity Scores.",
+          "type": "Project"
+        },
+        "queens": {
+          "title": "The Queens Album",
+          "description": "Ambitious album merging punk rock and drill music with 12 international artists. Released under MYMA.",
+          "type": "Milestone"
+        },
+        "bassMusic": {
+          "title": "Make Me Feel & Bass Music",
+          "description": "Two Hip-Hop/RnB and Bass Music albums with international collaborations (Quincy Thompson, Novine, Lou.C).",
+          "type": "Project"
+        },
+        "sync": {
+          "title": "Major Sync Placements",
+          "description": "Sync placements on NBA Countdown, NHL In the Room, MOTDx BBC, and WWE RAW.",
+          "type": "Award"
+        },
+        "prolific": {
+          "title": "Prolific Year",
+          "description": "Release of 5 albums: Ambient Guitar, Cyberpunk, Hardcore, Fast Metal, and Kick-ass Metal Jacket.",
+          "type": "Milestone"
+        },
+        "synthwave": {
+          "title": "Synthwave Debut",
+          "description": "First Synthwave album - homage to 80s electro revival, published by Stereoscopic and MYMA.",
+          "type": "Project"
+        },
+        "metal": {
+          "title": "Metal Beginnings",
+          "description": "Collaboration with Rise of the Northstar, Confront, and Early Seasons - establishing presence in the metal scene.",
+          "type": "Collaboration"
+        }
+      }
     },
     "musicianExperience": {
       "title": "Musician Experience",
@@ -164,6 +227,11 @@
     }
   },
   "services": {
+    "detail": {
+      "notFound": "Service not found",
+      "about": "About the service",
+      "offeredOn": "Service offered on"
+    },
     "pageTitle": "Services",
     "pageDescription": "From composition to post-production, I support you at every stage of your musical project with expertise and passion.",
     "noServices": "No services available at the moment",
@@ -186,7 +254,12 @@
       "details": {
         "intro": "I create **original music** to bring your audiovisual projects to life. Whether for a film, TV series, commercial, or video game, I compose original soundtracks that tell your story.",
         "approach": "My approach combines **artistic sensitivity** and **narrative vision**, creating unique sonic universes adapted to each project, from Metal to Hip-Hop, through Ambient and Electronic.",
-        "services": ["Orchestral and hybrid composition", "Custom musical themes", "Sonic artistic direction", "Adaptation to all musical genres"]
+        "services": [
+          "Orchestral and hybrid composition",
+          "Custom musical themes",
+          "Sonic artistic direction",
+          "Adaptation to all musical genres"
+        ]
       }
     },
     "production": {
@@ -197,7 +270,12 @@
       "details": {
         "intro": "I handle the **complete production** of your musical projects, from conception to final realization. My expertise covers all aspects of modern production.",
         "approach": "With a studio equipped with the latest technologies and in-depth knowledge of multiple musical genres, I transform your ideas into professional productions ready for distribution.",
-        "services": ["Multi-genre production (Metal, Hip-Hop, Electronic, Ambient)", "Programming and sound design", "Recording and artistic direction", "Mastering for all formats"]
+        "services": [
+          "Multi-genre production (Metal, Hip-Hop, Electronic, Ambient)",
+          "Programming and sound design",
+          "Recording and artistic direction",
+          "Mastering for all formats"
+        ]
       }
     },
     "arranging": {
@@ -208,7 +286,12 @@
       "details": {
         "intro": "**Arranging** is the art of structuring and dressing a composition to reveal its full potential. I work on orchestration, harmony, and sonic texture to create rich and coherent arrangements.",
         "approach": "From symphonic orchestration to modern electronic arrangements, I master a wide range of techniques to bring your musical ideas to life.",
-        "services": ["Symphonic and modern orchestration", "Arrangements for acoustic ensembles", "Reharmonization and adaptation", "Creation of hybrid textures"]
+        "services": [
+          "Symphonic and modern orchestration",
+          "Arrangements for acoustic ensembles",
+          "Reharmonization and adaptation",
+          "Creation of hybrid textures"
+        ]
       }
     },
     "vocalProducer": {
@@ -219,7 +302,12 @@
       "details": {
         "intro": "As a **vocal producer**, I guide artists to capture the best vocal performances. My role is to extract the emotion and power from each voice.",
         "approach": "From pre-production to recording, I accompany singers through their creative process, providing precise and caring artistic direction.",
-        "services": ["Vocal artistic direction", "Pre-session preparation and coaching", "Vocal recording and editing", "Voice processing and production"]
+        "services": [
+          "Vocal artistic direction",
+          "Pre-session preparation and coaching",
+          "Vocal recording and editing",
+          "Voice processing and production"
+        ]
       }
     },
     "mixing": {
@@ -230,7 +318,12 @@
       "details": {
         "intro": "**Mixing** is the crucial step that transforms raw tracks into a cohesive and professional production. I balance, equalize, and shape each element to create an impactful mix.",
         "approach": "With an analytical and creative approach, I optimize the clarity, depth, and dynamics of your tracks so they sound perfect on all playback systems.",
-        "services": ["Stereo and surround mixing", "Dynamic and frequency processing", "Spatialization and creative effects", "Optimization for streaming and broadcast"]
+        "services": [
+          "Stereo and surround mixing",
+          "Dynamic and frequency processing",
+          "Spatialization and creative effects",
+          "Optimization for streaming and broadcast"
+        ]
       }
     },
     "mastering": {
@@ -241,7 +334,12 @@
       "details": {
         "intro": "**Mastering** is the final touch that gives your music its professional shine. I prepare your tracks for distribution by optimizing the level, spectral balance, and consistency between tracks.",
         "approach": "My approach to mastering ensures your music sounds optimal on all listening systems, from headphones to hi-fi systems, while respecting industry standards.",
-        "services": ["Mastering for all formats (streaming, CD, vinyl)", "Spectral and dynamic optimization", "Consistency between album tracks", "Preparation for digital distribution"]
+        "services": [
+          "Mastering for all formats (streaming, CD, vinyl)",
+          "Spectral and dynamic optimization",
+          "Consistency between album tracks",
+          "Preparation for digital distribution"
+        ]
       }
     }
   },
@@ -255,7 +353,15 @@
     "listen": "Listen",
     "collaboration": "In collaboration with",
     "releaseDate": "Release Date",
-    "genre": "Genre"
+    "genre": "Genre",
+    "detail": {
+      "notFound": "Album not found",
+      "listen": "Listen to album",
+      "about": "About the album",
+      "ctaTitle": "Ready to discover this album?",
+      "ctaText": "Listen to \"{title}\" on all streaming platforms.",
+      "ctaButton": "Listen now"
+    }
   },
   "videos": {
     "pageTitle": "Video Projects",
@@ -265,7 +371,10 @@
     "filterSync": "Sync",
     "filterMusicToPicture": "Music to Picture",
     "watchOn": "Watch on",
-    "date": "Date"
+    "date": "Date",
+    "categories": "Categories",
+    "placements": "Sync Placements",
+    "noVideos": "No videos available at the moment"
   },
   "contact": {
     "pageTitle": "Contact",
@@ -313,6 +422,284 @@
     "readMore": "Read more",
     "learnMore": "Learn more",
     "viewAll": "View all",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "backToServices": "Back to services",
+    "genre": "Genre",
+    "releaseDate": "Release Date",
+    "artist": "Artist",
+    "collaborators": "Collaborators",
+    "author": "Author",
+    "notFound": "Page Not Found",
+    "pageNotFoundDescription": "The page you're looking for doesn't exist or has been moved.",
+    "backToAlbums": "Back to albums"
+  },
+  "login": {
+    "title": "Admin Login",
+    "subtitle": "Access the administration interface",
+    "emailPlaceholder": "admin@loicghanem.com",
+    "passwordPlaceholder": "••••••••",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "loading": "Logging in...",
+    "error": "Login failed"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "albums": "Albums",
+      "videos": "Videos",
+      "services": "Services",
+      "settings": "Settings",
+      "viewSite": "View Site",
+      "viewsToday": "Views Today",
+      "published": "Published"
+    },
+    "header": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "signOut": "Sign Out",
+      "searchPlaceholder": "Search database..."
+    },
+    "table": {
+      "preview": "Preview",
+      "title": "Title",
+      "type": "Type",
+      "date": "Date",
+      "status": "Status",
+      "actions": "Actions",
+      "number": "No."
+    },
+    "common": {
+      "save": "Save",
+      "saving": "Saving...",
+      "saved": "Saved",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "error": "Error",
+      "success": "Success",
+      "loading": "Loading...",
+      "actions": "Actions",
+      "back": "Back",
+      "preview": "Preview",
+      "upload": "Upload",
+      "dirtyWarning": "You have unsaved changes.",
+      "created": "created",
+      "updated": "updated"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Manage your portfolio settings and exports",
+      "tabs": {
+        "profile": "Profile",
+        "general": "General",
+        "social": "Social",
+        "content": "Content",
+        "export": "Export"
+      },
+      "export": {
+        "title": "Data Export",
+        "description": "Download your data in different formats for backup or analysis",
+        "success": "Export successful",
+        "error": "Export error",
+        "successDesc": "{type} were exported in {format}",
+        "formats": {
+          "csv": { "label": "CSV", "desc": "Spreadsheet format" },
+          "json": { "label": "JSON", "desc": "Structured format" },
+          "txt": { "label": "TXT", "desc": "Readable text" }
+        },
+        "info": {
+          "title": "About export formats",
+          "csv": "Ideal for Excel, Google Sheets, or data analysis",
+          "json": "Structured format for developers and APIs",
+          "txt": "Raw readable text, perfect for archiving"
+        }
+      },
+      "general": {
+        "title": "General Information",
+        "siteTitle": "Site Title",
+        "description": "Description",
+        "footerBio": "Short footer bio (optional)",
+        "contactEmail": "Contact Email",
+        "contactPhone": "Contact Phone",
+        "location": "Location"
+      },
+      "social": {
+        "title": "Social Media",
+        "description": "Manage links to your social profiles",
+        "platforms": "Platforms",
+        "tip": "💡 Leave fields empty for networks you don't use."
+      },
+      "content": {
+        "title": "Content Settings",
+        "description": "Configure content display on the site",
+        "homepage": "Homepage",
+        "homepageFeaturedCount": "Number of featured albums",
+        "homepageLatestCount": "Number of latest videos",
+        "features": {
+          "showFeaturedAlbums": "Show featured albums",
+          "showLatestVideos": "Show latest videos",
+          "showServices": "Show services"
+        },
+        "pagination": "Pagination",
+        "perPage": {
+          "albums": "Albums per page",
+          "videos": "Videos per page",
+          "services": "Services per page"
+        },
+        "sorting": "Default Sorting",
+        "sortLabel": {
+          "albums": "Albums",
+          "videos": "Videos"
+        },
+        "sortOptions": {
+          "date_desc": "Newest first",
+          "date_asc": "Oldest first",
+          "title_asc": "Title A-Z",
+          "title_desc": "Title Z-A"
+        }
+      },
+      "profile": {
+        "title": "Admin Profile",
+        "description": "Your admin account information",
+        "name": "Name",
+        "currentEmail": "Current Email",
+        "role": "Role",
+        "newEmail": "New Email",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm New Password",
+        "updateEmail": "Update Email",
+        "updatePassword": "Update Password",
+        "successEmail": "Your email has been updated successfully",
+        "successPassword": "Your password has been updated successfully",
+        "errorEmail": "Error changing email",
+        "errorPassword": "Error changing password",
+        "changeEmail": "Change Email",
+        "changeEmailDesc": "Update your login email address",
+        "changePassword": "Change Password",
+        "changePasswordDesc": "Update your login password",
+        "updating": "Updating...",
+        "minChars": "Minimum 8 characters",
+        "invalidEmail": "Invalid email",
+        "enterValidEmail": "Please enter a valid email",
+        "enterDifferentEmail": "Please enter a different email",
+        "requiredFields": "Required fields",
+        "fillAllFields": "Please fill all fields",
+        "passwordTooShort": "Password too short",
+        "passwordShortDesc": "Password must be at least 8 characters long",
+        "passwordMismatch": "Passwords do not match",
+        "passwordMismatchDesc": "New passwords do not match"
+      }
+    },
+    "media": {
+      "dropzone": "Drag and drop an image or click to select",
+      "dropzoneDrag": "Drop image here",
+      "maxSize": "max 5MB",
+      "currentUrl": "Current URL",
+      "uploading": "Uploading...",
+      "success": "Image uploaded",
+      "error": "Upload error"
+    },
+    "albums": {
+      "create": "Create Album",
+      "edit": "Edit Album",
+      "delete": {
+        "title": "Delete Album",
+        "confirm": "Are you sure you want to delete the album \"{title}\"? This action is irreversible.",
+        "success": "Album deleted"
+      },
+      "form": {
+        "generalInfo": "General Information",
+        "title": "Title",
+        "titlePlaceholder": "Album Name",
+        "style": "Style",
+        "date": "Display Date",
+        "datePlaceholder": "Ex: September 2024",
+        "sortedDate": "Sort Date",
+        "sortedDatePlaceholder": "MM-YYYY",
+        "coverImage": "Cover Image",
+        "poster": "Poster",
+        "listenLink": "Listen Link",
+        "collabName": "Collaboration Name",
+        "collabNamePlaceholder": "Artist Name",
+        "collabLink": "Collaboration Link",
+        "collabLinkPlaceholder": "https://...",
+        "order": "Display Order",
+        "published": "Status",
+        "status": {
+          "published": "Published",
+          "draft": "Draft"
+        },
+        "descFr": "Description in French",
+        "descEn": "Description in English",
+        "successCreate": "Album created",
+        "successUpdate": "Album modified",
+        "successDesc": "Album \"{title}\" was {action} successfully."
+      }
+    },
+    "videos": {
+      "create": "Create Video",
+      "edit": "Edit Video",
+      "listTitle": "Videos",
+      "delete": {
+        "title": "Delete Video",
+        "confirm": "Are you sure you want to delete the video \"{title}\"? This action is irreversible.",
+        "success": "Video deleted"
+      },
+      "form": {
+        "info": "Video Information",
+        "title": "Title",
+        "titlePlaceholder": "Video Title",
+        "type": "Type",
+        "youtubeId": "YouTube ID or URL",
+        "youtubeIdPlaceholder": "dQw4w9WgXcQ or https://youtube.com/...",
+        "date": "Date",
+        "datePlaceholder": "DD/MM/YYYY",
+        "thumbnail": "Thumbnail URL",
+        "thumbnailPlaceholder": "https://img.youtube.com/vi/...",
+        "order": "Display Order",
+        "published": "Status",
+        "successCreate": "Video created",
+        "successUpdate": "Video modified",
+        "successDesc": "Video \"{title}\" was {action} successfully."
+      }
+    },
+    "services": {
+      "create": "Create Service",
+      "edit": "Edit Service",
+      "listTitle": "Services",
+      "delete": {
+        "title": "Delete Service",
+        "confirm": "Are you sure you want to delete the service \"{title}\"? This action is irreversible.",
+        "success": "Service deleted"
+      },
+      "form": {
+        "generalInfo": "General Information",
+        "number": "Number",
+        "numberPlaceholder": "01",
+        "title": "Title",
+        "titlePlaceholder": "Service Name",
+        "largeTitle": "Large Title",
+        "largeTitlePlaceholder": "Section Title",
+        "shortDesc": "Short Description",
+        "shortDescPlaceholder": "Short description visible on card",
+        "fullDesc": "Full Description",
+        "fullDescPlaceholder": "Detailed service description",
+        "author": "Author",
+        "authorPlaceholder": "Author Name",
+        "date": "Date",
+        "datePlaceholder": "Ex: January 2024",
+        "order": "Display Order",
+        "published": "Status",
+        "descFr": "Detailed Description (FR)",
+        "descFrPlaceholder": "Detailed description in French...",
+        "descEn": "Detailed Description (EN)",
+        "descEnPlaceholder": "Detailed description in English...",
+        "successCreate": "Service created",
+        "successUpdate": "Service modified",
+        "successDesc": "Service \"{title}\" was {action} successfully."
+      }
+    }
   }
 }

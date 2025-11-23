@@ -38,14 +38,14 @@ export async function POST(req: NextRequest) {
     const file = formData.get("file") as File;
 
     if (!file) {
-      throw new ApiError(400, "Aucun fichier fourni", "NO_FILE");
+      throw new ApiError(400, "No file provided", "NO_FILE");
     }
 
     // Validation du type de fichier
     if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
       throw new ApiError(
         400,
-        `Format de fichier non supporté. Formats acceptés: ${ACCEPTED_IMAGE_TYPES.join(", ")}`,
+        `Unsupported file format. Accepted formats: ${ACCEPTED_IMAGE_TYPES.join(", ")}`,
         "INVALID_FILE_TYPE"
       );
     }
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
     if (file.size > MAX_FILE_SIZE) {
       throw new ApiError(
         400,
-        `Fichier trop volumineux. Taille maximum: ${MAX_FILE_SIZE / 1024 / 1024}MB`,
+        `File too large. Maximum size: ${MAX_FILE_SIZE / 1024 / 1024}MB`,
         "FILE_TOO_LARGE"
       );
     }

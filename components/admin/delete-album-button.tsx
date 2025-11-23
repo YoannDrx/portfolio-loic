@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Trash2, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 interface DeleteAlbumButtonProps {
   albumId: string;
@@ -24,6 +25,7 @@ export function DeleteAlbumButton({
   albumId,
   albumTitle,
 }: DeleteAlbumButtonProps) {
+  const t = useTranslations("admin");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -38,20 +40,20 @@ export function DeleteAlbumButton({
       });
 
       if (!response.ok) {
-        throw new Error("Erreur lors de la suppression");
+        throw new Error(t("common.error"));
       }
 
       toast({
-        title: "Album supprimé",
-        description: `L'album "${albumTitle}" a été supprimé avec succès.`,
+        title: t("albums.delete.success"),
+        description: `${t("albums.delete.success")} (${albumTitle})`,
       });
 
       setOpen(false);
       router.refresh();
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: "Une erreur est survenue lors de la suppression.",
+        title: t("common.error"),
+        description: t("common.error"),
         variant: "destructive",
       });
     } finally {
@@ -68,15 +70,14 @@ export function DeleteAlbumButton({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Supprimer l&apos;album</DialogTitle>
+          <DialogTitle>{t("albums.delete.title")}</DialogTitle>
           <DialogDescription>
-            Êtes-vous sûr de vouloir supprimer l&apos;album &quot;{albumTitle}
-            &quot; ? Cette action est irréversible.
+            {t("albums.delete.confirm", { title: albumTitle })}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>
-            Annuler
+            {t("common.cancel")}
           </Button>
           <Button
             variant="destructive"
@@ -84,7 +85,7 @@ export function DeleteAlbumButton({
             disabled={loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Supprimer
+            {t("common.delete")}
           </Button>
         </DialogFooter>
       </DialogContent>

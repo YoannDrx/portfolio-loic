@@ -1,5 +1,16 @@
 import { prisma } from '@/lib/prisma';
-import { ServicesDisplay } from '@/components/services/ServicesDisplay';
+import ServicesContent from '@/components/services/ServicesContent';
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "services" });
+
+  return {
+    title: `${t("pageTitle")} | Loïc Ghanem`,
+    description: t("pageDescription"),
+  };
+}
 
 export default async function ServicesPage({
   params,
@@ -32,5 +43,5 @@ export default async function ServicesPage({
     },
   });
 
-  return <ServicesDisplay services={services} locale={locale} />;
+  return <ServicesContent services={services} locale={locale} />;
 }

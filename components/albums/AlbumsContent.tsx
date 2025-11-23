@@ -3,8 +3,12 @@
 import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import AlbumCard from '@/components/albums/AlbumCard';
-import { AnimatedSection, AnimatedText } from '@/components/ui/AnimatedSection';
+import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { FilterButton, FilterButtonGroup } from '@/components/ui/FilterButton';
+import { Disc, Calendar, Layers } from 'lucide-react';
+import { GlassCard, GlassCardContent } from '@/components/ui/GlassCard';
+import AlbumsScene from '@/components/three/scenes/AlbumsScene';
+import PageShell from '@/components/ui/PageShell';
 
 interface Album {
   id: string;
@@ -48,39 +52,21 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
     return albums.filter((album) => album.style === activeFilter);
   }, [activeFilter, albums]);
 
-  // Albums are already sorted by sortedDate DESC from the query
-  const sortedAlbums = filteredAlbums;
-
   // Transform album data to match the expected format
-  const transformedAlbums = sortedAlbums.map((album) => ({
-    id: album.id,
-    title: album.title,
-    img: album.img,
-    poster: album.poster,
-    date: album.date,
-    sortedDate: album.sortedDate,
-    style: album.style,
-    listenLink: album.listenLink,
+  const transformedAlbums = filteredAlbums.map((album) => ({
+    ...album,
     collabName: album.collabName || undefined,
     collabLink: album.collabLink || undefined,
     descriptions: locale === 'fr' ? album.descriptionsFr : album.descriptionsEn,
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-obsidian via-obsidian-50 to-obsidian py-20">
-      <div className="container-custom">
-        {/* Hero Section */}
-        <AnimatedSection variant="fadeIn" className="text-center mb-16">
-          <AnimatedText
-            text={t('pageTitle')}
-            className="mb-6 text-6xl md:text-7xl font-black text-gradient-neon"
-            type="word"
-          />
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {t('pageDescription')}
-          </p>
-        </AnimatedSection>
-
+    <PageShell
+      title={t('pageTitle')}
+      subtitle="Discography"
+      scene={<AlbumsScene />}
+      gradient="blue"
+    >
         {/* Filter Buttons */}
         <AnimatedSection variant="slideUp" delay={0.2} className="mb-12">
           <FilterButtonGroup>
@@ -99,7 +85,7 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
 
         {/* Albums Grid */}
         {transformedAlbums.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
             {transformedAlbums.map((album, index) => (
               <AnimatedSection
                 key={album.id}
@@ -111,37 +97,56 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
             ))}
           </div>
         ) : (
-          <AnimatedSection variant="fadeIn" className="text-center py-20">
+          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 mb-6">
+               <Disc className="w-10 h-10 text-gray-500" />
+            </div>
             <p className="text-xl text-gray-400">
-              Aucun album trouvé pour ce genre.
+              No albums found for this genre.
             </p>
           </AnimatedSection>
         )}
 
         {/* Stats Section */}
-        <AnimatedSection variant="fadeIn" delay={0.4} className="mt-20">
+        <AnimatedSection variant="fadeIn" delay={0.4}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-card p-6 text-center">
-              <div className="text-4xl font-black text-gradient-neon mb-2">
-                {albums.length}
-              </div>
-              <div className="text-gray-400">{t('filterAll')}</div>
-            </div>
-            <div className="glass-card p-6 text-center">
-              <div className="text-4xl font-black text-gradient-neon mb-2">
-                {genres.length - 1}
-              </div>
-              <div className="text-gray-400">{t('genre')}</div>
-            </div>
-            <div className="glass-card p-6 text-center">
-              <div className="text-4xl font-black text-gradient-neon mb-2">
-                2019-2025
-              </div>
-              <div className="text-gray-400">{t('releaseDate')}</div>
-            </div>
+            <GlassCard variant="default" className="text-center h-full">
+              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
+                <div className="p-4 rounded-full bg-neon-cyan/10 text-neon-cyan mb-6">
+                  <Layers className="w-8 h-8" />
+                </div>
+                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
+                  {albums.length}
+                </div>
+                <div className="text-gray-400 uppercase tracking-widest text-sm">{t('filterAll')}</div>
+              </GlassCardContent>
+            </GlassCard>
+
+            <GlassCard variant="default" className="text-center h-full">
+              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
+                <div className="p-4 rounded-full bg-neon-magenta/10 text-neon-magenta mb-6">
+                  <Disc className="w-8 h-8" />
+                </div>
+                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
+                  {genres.length - 1}
+                </div>
+                <div className="text-gray-400 uppercase tracking-widest text-sm">{t('genre')}</div>
+              </GlassCardContent>
+            </GlassCard>
+
+            <GlassCard variant="default" className="text-center h-full">
+              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
+                <div className="p-4 rounded-full bg-neon-purple/10 text-neon-purple mb-6">
+                  <Calendar className="w-8 h-8" />
+                </div>
+                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
+                  2019-2025
+                </div>
+                <div className="text-gray-400 uppercase tracking-widest text-sm">{t('releaseDate')}</div>
+              </GlassCardContent>
+            </GlassCard>
           </div>
         </AnimatedSection>
-      </div>
-    </div>
+    </PageShell>
   );
 }

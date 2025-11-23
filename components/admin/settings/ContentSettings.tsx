@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sliders } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ContentSettingsProps {
   settings: any;
@@ -12,27 +13,29 @@ interface ContentSettingsProps {
 }
 
 export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
+  const t = useTranslations("admin.settings.content");
+
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Sliders className="h-5 w-5" />
-            Paramètres de Contenu
+            {t("title")}
           </CardTitle>
           <CardDescription>
-            Configuration de l'affichage du contenu sur le site
+            {t("description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Homepage */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Page d'accueil</h3>
+            <h3 className="font-semibold">{t("homepage")}</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="homepageFeaturedAlbumsCount">
-                  Nombre d'albums featured
+                  {t("homepageFeaturedCount")}
                 </Label>
                 <Input
                   id="homepageFeaturedAlbumsCount"
@@ -46,7 +49,7 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
 
               <div className="space-y-2">
                 <Label htmlFor="homepageLatestVideosCount">
-                  Nombre de vidéos latest
+                  {t("homepageLatestCount")}
                 </Label>
                 <Input
                   id="homepageLatestVideosCount"
@@ -62,11 +65,11 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
 
           {/* Pagination */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Pagination</h3>
+            <h3 className="font-semibold">{t("pagination")}</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="albumsPerPage">Albums par page</Label>
+                <Label htmlFor="albumsPerPage">{t("perPage.albums")}</Label>
                 <Input
                   id="albumsPerPage"
                   type="number"
@@ -78,7 +81,7 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="videosPerPage">Vidéos par page</Label>
+                <Label htmlFor="videosPerPage">{t("perPage.videos")}</Label>
                 <Input
                   id="videosPerPage"
                   type="number"
@@ -90,7 +93,7 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="servicesPerPage">Services par page</Label>
+                <Label htmlFor="servicesPerPage">{t("perPage.services")}</Label>
                 <Input
                   id="servicesPerPage"
                   type="number"
@@ -105,11 +108,11 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
 
           {/* Tri par défaut */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Tri par défaut</h3>
+            <h3 className="font-semibold">{t("sorting")}</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="defaultAlbumSort">Albums</Label>
+                <Label htmlFor="defaultAlbumSort">{t("sortLabel.albums")}</Label>
                 <Select
                   value={settings.defaultAlbumSort || "date_desc"}
                   onValueChange={(value) => onChange("defaultAlbumSort", value)}
@@ -118,16 +121,16 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="date_desc">Plus récent d'abord</SelectItem>
-                    <SelectItem value="date_asc">Plus ancien d'abord</SelectItem>
-                    <SelectItem value="title_asc">Titre A-Z</SelectItem>
-                    <SelectItem value="title_desc">Titre Z-A</SelectItem>
+                    <SelectItem value="date_desc">{t("sortOptions.date_desc")}</SelectItem>
+                    <SelectItem value="date_asc">{t("sortOptions.date_asc")}</SelectItem>
+                    <SelectItem value="title_asc">{t("sortOptions.title_asc")}</SelectItem>
+                    <SelectItem value="title_desc">{t("sortOptions.title_desc")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="defaultVideoSort">Vidéos</Label>
+                <Label htmlFor="defaultVideoSort">{t("sortLabel.videos")}</Label>
                 <Select
                   value={settings.defaultVideoSort || "date_desc"}
                   onValueChange={(value) => onChange("defaultVideoSort", value)}
@@ -136,10 +139,10 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="date_desc">Plus récent d'abord</SelectItem>
-                    <SelectItem value="date_asc">Plus ancien d'abord</SelectItem>
-                    <SelectItem value="title_asc">Titre A-Z</SelectItem>
-                    <SelectItem value="title_desc">Titre Z-A</SelectItem>
+                    <SelectItem value="date_desc">{t("sortOptions.date_desc")}</SelectItem>
+                    <SelectItem value="date_asc">{t("sortOptions.date_asc")}</SelectItem>
+                    <SelectItem value="title_asc">{t("sortOptions.title_asc")}</SelectItem>
+                    <SelectItem value="title_desc">{t("sortOptions.title_desc")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

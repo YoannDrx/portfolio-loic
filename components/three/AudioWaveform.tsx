@@ -8,62 +8,54 @@ interface AudioWaveformProps {
   count?: number;
   radius?: number;
   color?: string;
-  speed?: number;
 }
 
 export default function AudioWaveform({
-  count = 100,
-  radius = 8,
-  color = '#00f0ff',
-  speed = 0.5,
+  count = 60,
+  radius = 5,
+  color = '#ccff00',
 }: AudioWaveformProps) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
+  const dummy = useMemo(() => new THREE.Object3D(), []);
 
-  // Generate positions for particles in a wave pattern
-  const particles = useMemo(() => {
-    const temp = [];
-    for (let i = 0; i < count; i++) {
-      const t = (i / count) * Math.PI * 4; // Multiple waves
-      const x = Math.cos(t) * radius;
-      const y = Math.sin(t * 2) * 2; // Wave motion
-      const z = Math.sin(t) * radius;
-      temp.push({ x, y, z, t });
-    }
-    return temp;
-  }, [count, radius]);
-
-  // Animate particles
+  // Initial positions
   useFrame((state) => {
     if (!meshRef.current) return;
 
-    const time = state.clock.getElapsedTime() * speed;
+    const time = state.clock.getElapsedTime();
 
-    particles.forEach((particle, i) => {
-      const { x, y: _y, z, t } = particle;
-
-      // Create wave animation
-      const waveY = Math.sin(t + time) * 2 + Math.cos(t * 2 + time * 0.5) * 1;
-      const scale = 0.5 + Math.sin(t + time) * 0.3;
-
-      const matrix = new THREE.Matrix4();
-      matrix.makeTranslation(x, waveY, z);
-      matrix.scale(new THREE.Vector3(scale, scale, scale));
-
-      meshRef.current!.setMatrixAt(i, matrix);
-    });
-
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * Math.PI * 2;
+      
+      // Simulate audio data with noise
+      const noise = Math.sin(angle * 5 + time * 2) * 0.5 + Math.cos(angle * 3 - time) * 0.5;
+      const height = 1 + Math.max(0, noise * 2); // Ensure positive height
+      
+      // Position in a circle
+      const x = Math.cos(angle) * radius;
+      const z = Math.sin(angle) * radius;
+      
+      dummy.position.set(x, 0, z);
+      dummy.rotation.y = -angle; // Rotate to face center
+      dummy.scale.set(0.2, height, 0.2); // Scale height based on "audio"
+      
+      dummy.updateMatrix();
+      meshRef.current.setMatrixAt(i, dummy.matrix);
+    }
     meshRef.current.instanceMatrix.needsUpdate = true;
+    
+    // Slowly rotate the entire ring
+    meshRef.current.rotation.y += 0.002;
   });
 
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
-      <sphereGeometry args={[0.15, 16, 16]} />
+      <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial
         color={color}
         emissive={color}
-        emissiveIntensity={0.5}
-        metalness={0.8}
-        roughness={0.2}
+        emissiveIntensity={2}
+        toneMapped={false}
       />
     </instancedMesh>
   );
