@@ -32,11 +32,11 @@ export default async function HomePage() {
         type: true
       }
     }),
-    // Fetch latest 3 services
+    // Fetch latest 6 services
     prisma.service.findMany({
       where: { published: true },
       orderBy: { order: 'asc' },
-      take: 3,
+      take: 6,
       select: {
         id: true,
         title: true,
