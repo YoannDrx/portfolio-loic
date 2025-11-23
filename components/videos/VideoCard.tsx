@@ -46,7 +46,12 @@ export default function VideoCard({ video }: VideoCardProps) {
   const colors = colorClasses[config.color as keyof typeof colorClasses] || colorClasses.cyan;
 
   return (
-    <GlassCard variant="default" hover className={`group h-full flex flex-col overflow-hidden border-white/5 ${colors.border} ${colors.glow}`}>
+    <GlassCard
+      variant="default"
+      hover
+      triggerOnLoad
+      className={`group h-full flex flex-col overflow-hidden border-white/5 ${colors.border} ${colors.glow}`}
+    >
       {/* Video Thumbnail / Player */}
       <div className="relative aspect-video w-full overflow-hidden bg-obsidian-200">
         {!isPlaying ? (

@@ -30,15 +30,15 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Contact Form */}
-          <AnimatedSection variant="slideUp" delay={0.2}>
+          <AnimatedSection variant="slideUp" delay={0.2} triggerOnLoad>
             <ContactForm />
           </AnimatedSection>
 
           {/* Contact Info & Map */}
           <div className="space-y-8">
             {/* Contact Information */}
-            <AnimatedSection variant="slideUp" delay={0.3}>
-              <GlassCard variant="default" className="h-full">
+            <AnimatedSection variant="slideUp" delay={0.3} triggerOnLoad>
+              <GlassCard variant="default" className="h-full" triggerOnLoad>
                 <GlassCardContent className="p-8 space-y-6">
                   <h3 className="text-2xl font-bold text-white mb-6">{t("info.title")}</h3>
 
@@ -90,15 +90,15 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             </AnimatedSection>
 
             {/* Map */}
-            <AnimatedSection variant="slideUp" delay={0.4}>
+            <AnimatedSection variant="slideUp" delay={0.4} triggerOnLoad>
               <MapBox />
             </AnimatedSection>
           </div>
         </div>
 
         {/* Additional CTA */}
-        <AnimatedSection variant="fadeIn" delay={0.6}>
-          <GlassCard variant="subtle" className="text-center py-8">
+        <AnimatedSection variant="fadeIn" delay={0.6} triggerOnLoad>
+          <GlassCard variant="subtle" className="text-center py-8" triggerOnLoad>
             <GlassCardContent>
               <p className="text-gray-300 mb-4 font-light">{t("cta.text")}</p>
               <a

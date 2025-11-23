@@ -13,6 +13,7 @@ interface AnimatedSectionProps {
   duration?: number;
   variant?: 'fadeIn' | 'slideUp' | 'slideLeft' | 'slideRight' | 'scale' | 'blur';
   once?: boolean;
+  triggerOnLoad?: boolean;
 }
 
 /**
@@ -33,6 +34,7 @@ export function AnimatedSection({
   duration = 0.6,
   variant = 'fadeIn',
   once = true,
+  triggerOnLoad = false,
 }: AnimatedSectionProps) {
   const variants: Record<string, Variants> = {
     fadeIn: {
@@ -65,8 +67,8 @@ export function AnimatedSection({
     <motion.div
       className={cn(className)}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: '-100px' }}
+      {...(triggerOnLoad ? { animate: 'visible' } : { whileInView: 'visible' })}
+      viewport={{ once, margin: '0px' }}
       transition={{
         duration,
         delay,
@@ -106,7 +108,7 @@ export function AnimatedGrid({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: '0px' }}
       variants={container}
     >
       {children}

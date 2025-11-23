@@ -33,11 +33,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       gradient="lime"
     >
         {/* Bio Section */}
-        <AnimatedSection variant="slideUp" delay={0.2} className="mb-20">
+        <AnimatedSection variant="slideUp" className="mb-20" triggerOnLoad delay={0.2}>
           <div className="max-w-6xl mx-auto">
             {/* Hero Image */}
             <div className="mb-8">
-              <GlassCard variant="neon" className="overflow-hidden">
+              <GlassCard variant="neon" className="overflow-hidden" triggerOnLoad>
                 <div className="relative w-full h-[500px] md:h-[600px]">
                   <Image
                     src="/img/slider/loic-studio-front.jpg"
@@ -55,7 +55,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Main Bio */}
               <div className="lg:col-span-2">
-                <GlassCard variant="neon" className="h-full">
+                <GlassCard variant="neon" className="h-full" triggerOnLoad>
                   <GlassCardContent className="p-8 md:p-12">
                     <h2 className="text-3xl font-bold text-white mb-6">{t("title")}</h2>
                     <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
@@ -72,7 +72,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
               {/* Contact Info Sidebar */}
               <div className="lg:col-span-1 space-y-6">
-                <GlassCard variant="default" className="border-neon-cyan/30">
+                <GlassCard variant="default" className="border-neon-cyan/30" triggerOnLoad>
                   <GlassCardContent className="p-6">
                     <h3 className="text-xl font-bold text-white mb-4">{t("contactInfo.title")}</h3>
                     <div className="space-y-4">
@@ -114,7 +114,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   </GlassCardContent>
                 </GlassCard>
 
-                <GlassCard variant="subtle" className="border-neon-cyan/20">
+                <GlassCard variant="subtle" className="border-neon-cyan/20" triggerOnLoad>
                   <GlassCardContent className="p-6">
                     <h3 className="text-lg font-bold text-white mb-3">{t("achievements.title")}</h3>
                     <div className="space-y-3">
@@ -145,7 +145,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </AnimatedSection>
 
         {/* Skills Section */}
-        <AnimatedSection variant="slideUp" delay={0.3} className="mb-20">
+        <AnimatedSection variant="slideUp" className="mb-20" delay={0.3}>
           <h2 className="text-4xl font-bold text-white text-center mb-12 tracking-tighter">{t("skills.title")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <SkillCard
@@ -179,7 +179,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <Awards />
 
         {/* Timeline Section */}
-        <AnimatedSection variant="slideUp" delay={0.4} className="mb-20">
+        <AnimatedSection variant="slideUp" className="mb-20" delay={0.4}>
           <h2 className="text-4xl font-bold text-white text-center mb-12 tracking-tighter">{t("timeline.title")}</h2>
           <div className="max-w-4xl mx-auto">
             <Timeline />
@@ -190,7 +190,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <MusicianExperience />
 
         {/* Stats Grid */}
-        <AnimatedSection variant="fadeIn" delay={0.5} className="mb-20">
+        <AnimatedSection variant="fadeIn" className="mb-20" delay={0.5}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <GlassCard variant="default" hover className="text-center">
               <GlassCardContent className="p-8">
@@ -227,7 +227,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </AnimatedSection>
 
         {/* Labels & Publishers */}
-        <AnimatedSection variant="slideUp" delay={0.6} className="mb-20">
+        <AnimatedSection variant="slideUp" className="mb-20" delay={0.6}>
           <GlassCard variant="subtle" className="max-w-4xl mx-auto">
             <GlassCardContent className="p-8 md:p-12">
               <h2 className="text-3xl font-bold text-white mb-6 text-center tracking-tighter">{t("labelsPublishers.title")}</h2>

@@ -29,6 +29,7 @@ export default function AlbumCard({ album }: AlbumCardProps) {
       <GlassCard
         variant="default"
         hover
+        triggerOnLoad
         className="group h-full flex flex-col overflow-hidden cursor-pointer border-white/5 hover:border-neon-purple/30"
       >
         {/* Album Cover */}

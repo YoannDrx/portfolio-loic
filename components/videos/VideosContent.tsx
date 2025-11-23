@@ -52,7 +52,7 @@ export default function VideosContent({ videos }: VideosContentProps) {
       gradient="magenta"
     >
         {/* Filters */}
-        <AnimatedSection variant="slideUp" delay={0.2} className="mb-12">
+        <AnimatedSection variant="slideUp" delay={0.2} className="mb-12" triggerOnLoad>
           <FilterButtonGroup>
             {types.map((type) => (
               <FilterButton
@@ -75,13 +75,14 @@ export default function VideosContent({ videos }: VideosContentProps) {
                 key={video.id}
                 variant="slideUp"
                 delay={0.1 * (index % 6)}
+                triggerOnLoad
               >
                 <VideoCard video={video} />
               </AnimatedSection>
             ))}
           </div>
         ) : (
-          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20">
+          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20" triggerOnLoad>
             <Film className="w-16 h-16 text-gray-600 mx-auto mb-4" />
             <p className="text-xl text-gray-400">
               {t('noVideos')}
@@ -90,9 +91,9 @@ export default function VideosContent({ videos }: VideosContentProps) {
         )}
 
         {/* Stats Section */}
-        <AnimatedSection variant="fadeIn" delay={0.4}>
+        <AnimatedSection variant="fadeIn" delay={0.4} triggerOnLoad>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <GlassCard variant="default" className="text-center h-full">
+            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
               <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
                 <div className="p-4 rounded-full bg-neon-cyan/10 text-neon-cyan mb-6">
                   <Video className="w-8 h-8" />
@@ -104,7 +105,7 @@ export default function VideosContent({ videos }: VideosContentProps) {
               </GlassCardContent>
             </GlassCard>
 
-            <GlassCard variant="default" className="text-center h-full">
+            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
               <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
                 <div className="p-4 rounded-full bg-neon-magenta/10 text-neon-magenta mb-6">
                   <Layers className="w-8 h-8" />
@@ -116,7 +117,7 @@ export default function VideosContent({ videos }: VideosContentProps) {
               </GlassCardContent>
             </GlassCard>
 
-            <GlassCard variant="default" className="text-center h-full">
+            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
               <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
                 <div className="p-4 rounded-full bg-neon-purple/10 text-neon-purple mb-6">
                    <Play className="w-8 h-8" />

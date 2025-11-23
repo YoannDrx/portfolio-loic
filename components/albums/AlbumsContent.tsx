@@ -68,7 +68,7 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
       gradient="blue"
     >
         {/* Filter Buttons */}
-        <AnimatedSection variant="slideUp" delay={0.2} className="mb-12">
+        <AnimatedSection variant="slideUp" delay={0.2} className="mb-12" triggerOnLoad>
           <FilterButtonGroup>
             {genres.map((genre) => (
               <FilterButton
@@ -91,13 +91,14 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
                 key={album.id}
                 variant="slideUp"
                 delay={0.1 * (index % 8)}
+                triggerOnLoad
               >
                 <AlbumCard album={album} />
               </AnimatedSection>
             ))}
           </div>
         ) : (
-          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20">
+          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20" triggerOnLoad>
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 mb-6">
                <Disc className="w-10 h-10 text-gray-500" />
             </div>
@@ -108,9 +109,9 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
         )}
 
         {/* Stats Section */}
-        <AnimatedSection variant="fadeIn" delay={0.4}>
+        <AnimatedSection variant="fadeIn" delay={0.4} triggerOnLoad>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <GlassCard variant="default" className="text-center h-full">
+            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
               <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
                 <div className="p-4 rounded-full bg-neon-cyan/10 text-neon-cyan mb-6">
                   <Layers className="w-8 h-8" />
@@ -122,7 +123,7 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
               </GlassCardContent>
             </GlassCard>
 
-            <GlassCard variant="default" className="text-center h-full">
+            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
               <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
                 <div className="p-4 rounded-full bg-neon-magenta/10 text-neon-magenta mb-6">
                   <Disc className="w-8 h-8" />
@@ -134,7 +135,7 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
               </GlassCardContent>
             </GlassCard>
 
-            <GlassCard variant="default" className="text-center h-full">
+            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
               <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
                 <div className="p-4 rounded-full bg-neon-purple/10 text-neon-purple mb-6">
                   <Calendar className="w-8 h-8" />

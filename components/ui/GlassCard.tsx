@@ -11,6 +11,7 @@ interface GlassCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
   hover?: boolean;
   variant?: 'default' | 'neon' | 'subtle';
   neonColor?: 'lime' | 'cyan' | 'magenta' | 'purple' | 'blue';
+  triggerOnLoad?: boolean;
 }
 
 export function GlassCard({
@@ -19,6 +20,7 @@ export function GlassCard({
   hover = false,
   variant = 'default',
   neonColor = 'cyan', // Default neon color
+  triggerOnLoad = false,
   ...props
 }: GlassCardProps) {
   
@@ -45,8 +47,9 @@ export function GlassCard({
         className
       )}
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      {...(triggerOnLoad
+        ? { animate: { opacity: 1, y: 0 } }
+        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "0px" } })}
       transition={{ duration: 0.5 }}
       {...props}
     >
