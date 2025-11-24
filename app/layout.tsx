@@ -3,6 +3,7 @@ import { routing } from '@/i18n/routing';
 import { setRequestLocale } from 'next-intl/server';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Metadata } from 'next';
 import '../styles/globals.css';
 
 const inter = Inter({
@@ -17,6 +18,14 @@ const montserrat = Montserrat({
   display: 'swap',
   weight: ['300', '400', '500', '600', '700', '800', '900'],
 });
+
+export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
