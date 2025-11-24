@@ -139,7 +139,7 @@ export const albumsQuerySchema = z.object({
   search: z.string().optional(),
   style: z.string().optional(),
   published: z.coerce.boolean().optional(),
-  sortBy: z.enum(["date", "title", "order", "createdAt"]).default("sortedDate"),
+  sortBy: z.enum(["date", "title", "order", "createdAt", "sortedDate"]).default("sortedDate"),
   sortOrder: z.enum(["asc", "desc"]).default("desc"),
 });
 
@@ -165,3 +165,92 @@ export const servicesQuerySchema = z.object({
 export type AlbumsQueryParams = z.infer<typeof albumsQuerySchema>;
 export type VideosQueryParams = z.infer<typeof videosQuerySchema>;
 export type ServicesQueryParams = z.infer<typeof servicesQuerySchema>;
+
+// ============================================
+// RESUME ENTRY SCHEMAS
+// ============================================
+
+export const resumeEntryCreateSchema = z.object({
+  type: z.enum(["EXPERIENCE", "EDUCATION", "SKILL", "LANGUAGE", "INTEREST", "KNOWLEDGE", "AWARD", "CLIENT"]),
+  titleEn: z.string().min(1, "Titre (EN) requis"),
+  titleFr: z.string().min(1, "Titre (FR) requis"),
+  subtitleEn: z.string().optional(),
+  subtitleFr: z.string().optional(),
+  dateRangeEn: z.string().optional(),
+  dateRangeFr: z.string().optional(),
+  descriptionEn: z.string().optional(),
+  descriptionFr: z.string().optional(),
+  value: z.number().min(0).max(100).optional(),
+  link: z.union([urlSchema, z.literal("")]).optional(),
+  published: z.boolean().default(true),
+  order: z.number().int().default(0),
+});
+
+export const resumeEntryUpdateSchema = resumeEntryCreateSchema.partial();
+
+export type ResumeEntryCreateInput = z.infer<typeof resumeEntryCreateSchema>;
+export type ResumeEntryUpdateInput = z.infer<typeof resumeEntryUpdateSchema>;
+
+export const resumeEntriesQuerySchema = z.object({
+  page: z.coerce.number().int().min(0).default(0),
+  limit: z.coerce.number().int().min(1).max(100).default(50),
+  type: z.string().optional(),
+  published: z.coerce.boolean().optional(),
+  sortBy: z.enum(["order", "createdAt"]).default("order"),
+  sortOrder: z.enum(["asc", "desc"]).default("asc"),
+});
+
+export type ResumeEntriesQueryParams = z.infer<typeof resumeEntriesQuerySchema>;
+
+// ============================================
+// RESUME PROFILE / THEME / SECTION SCHEMAS
+// ============================================
+
+export const resumeProfileSchema = z.object({
+  name: z.string().min(1),
+  roleEn: z.string().min(1),
+  roleFr: z.string().min(1),
+  headlineEn: z.string().optional(),
+  headlineFr: z.string().optional(),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  location: z.string().optional(),
+  website: z.string().optional(),
+  photo: z.string().optional(),
+});
+
+export type ResumeProfileInput = z.infer<typeof resumeProfileSchema>;
+
+export const resumeThemeSchema = z.object({
+  primary: z.string().min(1),
+  secondary: z.string().min(1),
+  accent: z.string().min(1),
+  muted: z.string().min(1),
+  sidebar: z.string().min(1),
+  divider: z.string().min(1),
+  gradientFrom: z.string().min(1),
+  gradientTo: z.string().min(1),
+  tagBg: z.string().min(1),
+  tagText: z.string().min(1),
+  fontHeadings: z.string().min(1),
+  fontBody: z.string().min(1),
+});
+
+export type ResumeThemeInput = z.infer<typeof resumeThemeSchema>;
+
+export const resumeSectionCreateSchema = z.object({
+  slug: z.string().min(1),
+  titleEn: z.string().optional(),
+  titleFr: z.string().optional(),
+  type: z.string().min(1),
+  entryType: z.string().optional(),
+  entryIds: z.array(z.string()).optional(),
+  order: z.number().int().default(0),
+  published: z.boolean().default(true),
+});
+
+export const resumeSectionUpdateSchema = resumeSectionCreateSchema.partial();
+
+export type ResumeSectionCreateInput = z.infer<typeof resumeSectionCreateSchema>;
+export type ResumeSectionUpdateInput = z.infer<typeof resumeSectionUpdateSchema>;
+

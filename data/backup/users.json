@@ -1,0 +1,22 @@
+[
+  {
+    "id": "8FRu98UMdlpy539HpyUHODGYMPWRVBYp",
+    "email": "loic.ghanem@outlook.com",
+    "emailVerified": false,
+    "name": "Administrateur",
+    "image": null,
+    "role": "admin",
+    "createdAt": "2025-11-21T16:37:20.536Z",
+    "updatedAt": "2025-11-22T17:23:52.636Z"
+  },
+  {
+    "id": "De5uZ0xAAC3ur6TzjD6j4p8V34TuJhrN",
+    "email": "admin@loicghanem.com",
+    "emailVerified": true,
+    "name": "Admin",
+    "image": null,
+    "role": "admin",
+    "createdAt": "2025-11-22T22:08:18.642Z",
+    "updatedAt": "2025-11-22T22:08:18.776Z"
+  }
+]

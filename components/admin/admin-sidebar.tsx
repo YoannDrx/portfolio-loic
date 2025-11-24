@@ -12,6 +12,7 @@ import {
   Settings,
   TrendingUp,
   Home,
+  FileText,
 } from 'lucide-react';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -44,6 +45,12 @@ const menuItems = [
     label: 'Services',
     href: '/admin/services',
     color: 'text-neon-purple',
+  },
+  {
+    icon: FileText,
+    label: 'CV / Resume',
+    href: '/admin/resume',
+    color: 'text-orange-400',
   },
   {
     icon: Settings,

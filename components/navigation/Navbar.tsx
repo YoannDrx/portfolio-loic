@@ -65,7 +65,7 @@ export default function Navbar() {
                   <span className="text-xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">LG</span>
                 </div>
               </div>
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <div className="text-xl font-black text-white transition-all duration-300 font-montserrat tracking-tight">
                   LOÏC<span className="text-neon-lime">.GHANEM</span>
                 </div>
@@ -74,7 +74,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -141,7 +141,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all duration-300"
+              className="lg:hidden w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all duration-300"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -164,7 +164,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-obsidian/90 backdrop-blur-sm z-40 md:hidden transition-colors duration-300"
+              className="fixed inset-0 bg-obsidian/90 backdrop-blur-sm z-40 lg:hidden transition-colors duration-300"
             />
 
             {/* Menu Content */}
@@ -173,7 +173,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-20 right-0 bottom-0 w-[280px] bg-obsidian-50/95 backdrop-blur-xl border-l border-white/10 z-40 md:hidden overflow-y-auto transition-colors duration-300"
+              className="fixed top-20 right-0 bottom-0 w-[280px] bg-obsidian-50/95 backdrop-blur-xl border-l border-white/10 z-40 lg:hidden overflow-y-auto transition-colors duration-300"
             >
               <div className="p-6 space-y-4">
                 {navLinks.map((link, index) => (

@@ -22,6 +22,7 @@ model User {
   services        Service[]
   sessions        Session[]
   videos          Video[]
+  resumeEntries   ResumeEntry[]
 
   @@map("users")
 }
@@ -215,4 +216,85 @@ model SiteSettings {
   updatedAt DateTime @updatedAt
 
   @@map("site_settings")
+}
+
+model ResumeEntry {
+  id            String   @id @default(cuid())
+  type          String   // EXPERIENCE, EDUCATION, SKILL, LANGUAGE, INTEREST, KNOWLEDGE
+  titleEn       String
+  titleFr       String
+  subtitleEn    String?
+  subtitleFr    String?
+  dateRangeEn   String?
+  dateRangeFr   String?
+  descriptionEn String?
+  descriptionFr String?
+  value         Int?     // 0-100 for progress bars
+  link          String?
+  order         Int      @default(0)
+  published     Boolean  @default(true)
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  createdById   String?
+  createdBy     User?    @relation(fields: [createdById], references: [id])
+
+  @@index([type, order])
+  @@map("resume_entries")
+}
+
+model ResumeProfile {
+  id         String   @id @default("default_profile")
+  name       String
+  roleEn     String
+  roleFr     String
+  headlineEn String?
+  headlineFr String?
+  email      String
+  phone      String?
+  location   String?
+  website    String?
+  photo      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("resume_profile")
+}
+
+model ResumeTheme {
+  id           String   @id @default("default_theme")
+  primary      String
+  secondary    String
+  accent       String
+  muted        String
+  sidebar      String
+  divider      String
+  gradientFrom String
+  gradientTo   String
+  tagBg        String
+  tagText      String
+  fontHeadings String
+  fontBody     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("resume_theme")
+}
+
+model ResumeSection {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  titleEn    String?
+  titleFr    String?
+  type       String   // PROFILE, TIMELINE, SKILL_BARS, TAG_CLOUD, SIDEBAR_LIST, QUOTE, STATS
+  entryType  String?
+  entryIds   Json?
+  order      Int      @default(0)
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([published, order])
+  @@map("resume_sections")
 }

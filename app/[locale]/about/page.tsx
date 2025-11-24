@@ -274,8 +274,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   <span>{t("cta.viewAlbums")}</span>
                 </Link>
                 <a
-                  href="/img/cv_loic_ghanem.pdf"
-                  download="CV_Loic_Ghanem.pdf"
+                  href={`/api/cv/download?locale=${locale}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-neon-purple rounded-lg font-semibold text-neon-purple hover:bg-neon-purple/10 transition-all duration-300 uppercase tracking-wider text-sm"
                 >
                   <Download className="w-5 h-5" />

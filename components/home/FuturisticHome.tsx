@@ -8,7 +8,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { NeonButton } from '@/components/ui/NeonButton';
 import { ArrowRight, Play, Music, Film, Mail, Download, Headphones, Sliders, Sparkles, X, Lock } from 'lucide-react';
 import { Link, useRouter, usePathname } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { LoginModal } from '@/components/auth/LoginModal';
 import SoundCloudPlayer from '@/components/home/SoundCloudPlayer';
@@ -44,6 +44,7 @@ interface FuturisticHomeProps {
 
 export default function FuturisticHome({ albums, videos, services, initialLoginOpen = false }: FuturisticHomeProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -60,6 +61,10 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    setIsLoginOpen(initialLoginOpen);
+  }, [initialLoginOpen]);
+
   const handleLoginClose = () => {
     setIsLoginOpen(false);
     if (pathname.includes('/login')) {
@@ -68,7 +73,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
       // Remove ?login=true from URL cleanly
       const newParams = new URLSearchParams(searchParams.toString());
       newParams.delete('login');
-      router.replace(`?${newParams.toString()}`, { scroll: false });
+      router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
     }
   };
   
@@ -109,7 +114,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                   {t('home.hero.listenShowreel')} <Play className="inline ml-2 w-4 h-4" />
                 </NeonButton>
               </Link>
-              <a href="/files/resume.pdf" target="_blank" rel="noopener noreferrer">
+              <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
                 <NeonButton variant="outline">
                   {t('home.hero.downloadResume')} <Download className="inline ml-2 w-4 h-4" />
                 </NeonButton>
