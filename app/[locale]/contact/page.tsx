@@ -5,6 +5,7 @@ import ContactForm from "@/components/contact/ContactForm";
 import MapBox from "@/components/contact/MapBox";
 import ContactScene from "@/components/three/scenes/ContactScene";
 import PageShell from '@/components/ui/PageShell';
+import { Link } from '@/i18n/routing';
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -101,7 +102,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <GlassCard variant="subtle" className="text-center py-8" triggerOnLoad>
             <GlassCardContent>
               <p className="text-gray-300 mb-4 font-light">{t("cta.text")}</p>
-              <a
+              <Link
                 href="/services"
                 className="inline-flex items-center gap-2 text-neon-cyan hover:text-neon-magenta font-semibold transition-colors"
               >
@@ -109,7 +110,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
             </GlassCardContent>
           </GlassCard>
         </AnimatedSection>

@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
+import { Briefcase, Award, Lightbulb, Users } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 type EventType = 'milestone' | 'award' | 'project' | 'collaboration';
 
@@ -23,115 +24,126 @@ const eventsConfig: TimelineEventConfig[] = [
   { key: 'metal', year: '2011-2013', type: 'collaboration' },
 ];
 
-const colorMap = {
-  cyan: {
-    bg: 'bg-neon-cyan',
-    text: 'text-neon-cyan',
-    border: 'border-neon-cyan',
-    gradient: 'from-neon-cyan',
-    shadow: 'shadow-neon-cyan/50',
+const typeConfig = {
+  milestone: {
+    dotClass: 'bg-neon-cyan shadow-neon-cyan',
+    badgeBg: 'bg-neon-cyan/20',
+    badgeBorder: 'border-neon-cyan/50',
+    badgeText: 'text-neon-cyan',
+    yearGradient: 'from-neon-cyan to-white',
+    icon: Lightbulb,
   },
-  magenta: {
-    bg: 'bg-neon-magenta',
-    text: 'text-neon-magenta',
-    border: 'border-neon-magenta',
-    gradient: 'from-neon-magenta',
-    shadow: 'shadow-neon-magenta/50',
+  award: {
+    dotClass: 'bg-neon-magenta shadow-neon-magenta',
+    badgeBg: 'bg-neon-magenta/20',
+    badgeBorder: 'border-neon-magenta/50',
+    badgeText: 'text-neon-magenta',
+    yearGradient: 'from-neon-magenta to-white',
+    icon: Award,
   },
-  purple: {
-    bg: 'bg-neon-purple',
-    text: 'text-neon-purple',
-    border: 'border-neon-purple',
-    gradient: 'from-neon-purple',
-    shadow: 'shadow-neon-purple/50',
+  project: {
+    dotClass: 'bg-neon-purple shadow-neon-purple',
+    badgeBg: 'bg-neon-purple/20',
+    badgeBorder: 'border-neon-purple/50',
+    badgeText: 'text-neon-purple',
+    yearGradient: 'from-neon-purple to-white',
+    icon: Briefcase,
   },
-  blue: {
-    bg: 'bg-neon-blue',
-    text: 'text-neon-blue',
-    border: 'border-neon-blue',
-    gradient: 'from-neon-blue',
-    shadow: 'shadow-neon-blue/50',
+  collaboration: {
+    dotClass: 'bg-neon-blue shadow-neon-blue',
+    badgeBg: 'bg-neon-blue/20',
+    badgeBorder: 'border-neon-blue/50',
+    badgeText: 'text-neon-blue',
+    yearGradient: 'from-neon-blue to-white',
+    icon: Users,
   },
-};
-
-const typeColors: Record<EventType, keyof typeof colorMap> = {
-  milestone: 'cyan',
-  award: 'magenta',
-  project: 'purple',
-  collaboration: 'blue',
 };
 
 export default function Timeline() {
   const t = useTranslations('about.timeline.events');
 
   return (
-    <div className="relative py-10 pl-8 md:pl-0">
-      {/* Central Audio Wave Line (Desktop) */}
-      <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-white/20 to-transparent hidden md:block" />
-      
-      {/* Mobile Line */}
-      <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-white/10 md:hidden" />
+    <div className="relative max-w-5xl mx-auto py-8">
+      {/* Vertical Line */}
+      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-white/20 to-transparent transform -translate-x-1/2" />
 
       <div className="space-y-16">
         {eventsConfig.map((event, index) => {
-          const colorKey = typeColors[event.type];
-          const colors = colorMap[colorKey];
+          const config = typeConfig[event.type];
+          const Icon = config.icon;
           const isLeft = index % 2 === 0;
 
           return (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              key={event.key}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               className={cn(
-                "relative flex flex-col md:flex-row items-start md:items-center w-full",
-                isLeft ? "md:flex-row-reverse" : ""
+                "relative flex items-start",
+                isLeft ? "md:flex-row" : "md:flex-row-reverse"
               )}
             >
               {/* Spacer for desktop alignment */}
               <div className="flex-1 hidden md:block" />
 
-              {/* Center Node */}
-              <div className="absolute left-8 md:left-1/2 -translate-x-1/2 top-6 w-4 h-4 z-10 flex items-center justify-center">
-                <div className={cn("w-3 h-3 rounded-full shadow-[0_0_10px_currentColor] ring-4 ring-obsidian", colors.bg)} />
+              {/* Dot - visible through card transparency */}
+              <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 top-6 z-10">
+                <div className={cn(
+                  "w-4 h-4 rounded-full shadow-[0_0_20px_currentColor] ring-4 ring-obsidian",
+                  config.dotClass
+                )} />
               </div>
 
-              {/* Content Wrapper */}
+              {/* Content Card */}
               <div className={cn(
-                "flex-1 w-full pl-12 md:pl-0",
-                isLeft ? "md:pr-16 text-left md:text-right" : "md:pl-16 text-left"
+                "flex-1 pl-28 md:pl-0",
+                isLeft ? "md:pr-16" : "md:pl-16"
               )}>
-                <div className={cn(
-                  "relative p-6 bg-obsidian-100/50 border border-white/5 backdrop-blur-sm rounded-xl transition-all duration-300 group hover:border-white/20 hover:bg-obsidian-100/80",
-                  // Connecting line logic
-                  "before:absolute before:top-8 before:h-[1px] before:w-8 before:bg-white/20 md:before:w-16",
-                  isLeft ? "md:before:left-full md:before:-mr-16 before:-left-8 before:w-8" : "md:before:right-full md:before:-ml-16 before:-left-8 before:w-8"
-                )}>
-                  
-                  <div className={cn("flex flex-col gap-2 mb-3", isLeft ? "md:items-end" : "md:items-start")}>
-                    <span className={cn(
-                      "text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r opacity-30 group-hover:opacity-100 transition-opacity duration-500",
-                      colors.gradient,
-                      "to-white"
+                <div className="relative bg-obsidian-100/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-white/30 hover:bg-obsidian-100/70 transition-all duration-300 group">
+                  {/* Type Badge + Year - aligned based on card position */}
+                  <div className={cn(
+                    "flex flex-col gap-3 mb-4",
+                    isLeft ? "md:items-end items-start" : "items-start"
+                  )}>
+                    {/* Type Badge */}
+                    <div className={cn(
+                      "inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border",
+                      config.badgeBg,
+                      config.badgeBorder
+                    )}>
+                      <Icon className={cn("w-3.5 h-3.5", config.badgeText)} />
+                      <span className={cn(
+                        "text-xs font-bold uppercase tracking-wider",
+                        config.badgeText
+                      )}>
+                        {t(`${event.key}.type`)}
+                      </span>
+                    </div>
+
+                    {/* Year */}
+                    <div className={cn(
+                      "text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r",
+                      config.yearGradient
                     )}>
                       {event.year}
-                    </span>
-                    <span className={cn(
-                      "text-[10px] font-bold uppercase tracking-[0.2em] px-2 py-1 rounded border bg-opacity-10",
-                      colors.text,
-                      colors.border,
-                      colors.bg
-                    )}>
-                      {t(`${event.key}.type`)}
-                    </span>
+                    </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-neon-lime transition-colors">
+                  {/* Title */}
+                  <h3 className={cn(
+                    "text-xl font-bold text-white mb-3 group-hover:text-gradient-neon transition-all",
+                    !isLeft && "md:text-right"
+                  )}>
                     {t(`${event.key}.title`)}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed font-light">
+
+                  {/* Description */}
+                  <p className={cn(
+                    "text-gray-400 text-sm leading-relaxed",
+                    !isLeft && "md:text-right"
+                  )}>
                     {t(`${event.key}.description`)}
                   </p>
                 </div>

@@ -20,10 +20,10 @@ export default function ContactForm() {
 
     try {
       await emailjs.sendForm(
-        'service_ob10zfi',
-        'template_mqq0xhu',
+        'service_dx7j65t',
+        'template_653oqpu',
         form.current,
-        '8MVfTcZq0ja5jXXH1'
+        'W4SjcLIIqIH2c8aZX'
       );
 
       toast.success(t('success'), {
