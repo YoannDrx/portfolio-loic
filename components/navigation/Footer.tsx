@@ -39,13 +39,13 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <Link href="/" className="group inline-flex items-center gap-3 mb-6">
-              <div className="relative w-12 h-12 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-magenta p-[2px] group-hover:scale-110 transition-transform">
+              <div className="relative w-12 h-12 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform">
                 <div className="w-full h-full bg-obsidian rounded-lg flex items-center justify-center transition-colors duration-300">
-                  <span className="text-2xl font-black text-gradient-neon">LG</span>
+                  <span className="text-2xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">LG</span>
                 </div>
               </div>
               <div>
-                <div className="text-2xl font-black text-white group-hover:text-gradient-neon transition-all duration-300 font-montserrat tracking-tight">
+                <div className="text-2xl font-black text-white transition-all duration-300 font-montserrat tracking-tight">
                   LOÏC<span className="text-neon-lime">.GHANEM</span>
                 </div>
                 <div className="text-xs text-gray-500 uppercase tracking-widest font-mono">{tFooter("tagline")}</div>

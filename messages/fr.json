@@ -51,9 +51,14 @@
       "services": "SERVICES <span class=\"text-neon-purple\">SONORES</span>",
       "servicesSubtitle": "EXPERTISE",
       "viewAllServices": "Voir tous les services",
-      "contact": "FAISONS DU <br/><span class=\"text-neon-lime\">BRUIT</span>",
-      "contactText": "Prêt à élever votre projet avec une identité sonore unique ? Collaborons et construisons le futur du son.",
+      "contact": "CRÉONS <br/><span class=\"text-neon-lime\">ENSEMBLE</span>",
+      "contactText": "Une idée ? Un projet musical ? Transformons votre vision en réalité sonore.",
       "getInTouch": "Me Contacter"
+    },
+    "soundcloud": {
+      "title": "ÉCOUTEZ <span class=\"text-neon-green\">MAINTENANT</span>",
+      "subtitle": "Streamez mes derniers morceaux",
+      "follow": "Suivre sur SoundCloud"
     }
   },
   "about": {
@@ -382,7 +387,7 @@
   "footer": {
     "copyright": "© {year} Loïc Ghanem. Tous droits réservés.",
     "quickLinks": "Liens Rapides",
-    "followMe": "Suivez-moi",
+    "followMe": "Parlons de votre projet",
     "tagline": "Compositeur & Producteur Musical basé à Paris"
   },
   "common": {

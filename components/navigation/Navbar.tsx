@@ -60,13 +60,13 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="group flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-magenta p-[2px] group-hover:scale-110 transition-transform">
+              <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform">
                 <div className="w-full h-full bg-obsidian rounded-lg flex items-center justify-center transition-colors duration-300">
-                  <span className="text-xl font-black text-gradient-neon">LG</span>
+                  <span className="text-xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">LG</span>
                 </div>
               </div>
               <div className="hidden md:block">
-                <div className="text-xl font-black text-white group-hover:text-gradient-neon transition-all duration-300 font-montserrat tracking-tight">
+                <div className="text-xl font-black text-white transition-all duration-300 font-montserrat tracking-tight">
                   LOÏC<span className="text-neon-lime">.GHANEM</span>
                 </div>
                 <div className="text-xs text-gray-400 uppercase tracking-widest font-mono">Music Composer</div>

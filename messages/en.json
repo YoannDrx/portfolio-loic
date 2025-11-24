@@ -51,9 +51,14 @@
       "services": "SONIC <span class=\"text-neon-purple\">SERVICES</span>",
       "servicesSubtitle": "EXPERTISE",
       "viewAllServices": "View All Services",
-      "contact": "LET'S MAKE <br/><span class=\"text-neon-lime\">NOISE</span>",
-      "contactText": "Ready to elevate your project with a unique sonic identity? Let's collaborate and build the future of sound.",
+      "contact": "LET'S CREATE <br/><span class=\"text-neon-lime\">TOGETHER</span>",
+      "contactText": "An idea? A musical project? Let's transform your vision into sonic reality.",
       "getInTouch": "Get In Touch"
+    },
+    "soundcloud": {
+      "title": "LISTEN <span class=\"text-neon-green\">NOW</span>",
+      "subtitle": "Stream My Latest Tracks",
+      "follow": "Follow on SoundCloud"
     }
   },
   "about": {
@@ -412,7 +417,7 @@
   "footer": {
     "copyright": "© {year} Loïc Ghanem. All rights reserved.",
     "quickLinks": "Quick Links",
-    "followMe": "Follow Me",
+    "followMe": "Let's talk",
     "tagline": "Music Composer & Producer based in Paris"
   },
   "common": {

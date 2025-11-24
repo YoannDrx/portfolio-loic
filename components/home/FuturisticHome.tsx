@@ -11,6 +11,7 @@ import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { LoginModal } from '@/components/auth/LoginModal';
+import SoundCloudPlayer from '@/components/home/SoundCloudPlayer';
 
 interface Album {
   id: string;
@@ -174,6 +175,9 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
           </div>
         </section>
 
+        {/* SoundCloud Player Section */}
+        <SoundCloudPlayer />
+
         {/* Videos Section */}
         <section id="videos" className="py-32">
           <motion.div 
@@ -265,15 +269,16 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
 
         {/* Contact Section */}
         <section id="contact" className="py-32 mb-20">
-           <GlassCard neonColor="lime" className="p-12 md:p-20 text-center relative overflow-hidden">
+           <GlassCard neonColor="lime" className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-neon-lime/5 via-transparent to-transparent pointer-events-none" />
-              
+
               <motion.div
                  initial={{ scale: 0.9, opacity: 0 }}
                  whileInView={{ scale: 1, opacity: 1 }}
                  viewport={{ once: true }}
+                 className="p-12 md:p-20 text-center"
               >
-                <h2 
+                <h2
                   className="text-4xl md:text-7xl font-bold tracking-tighter mb-8"
                   dangerouslySetInnerHTML={{ __html: t.raw('home.sections.contact') }}
                 />
