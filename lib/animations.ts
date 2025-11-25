@@ -796,3 +796,374 @@ export const gridPreset = {
   viewport: viewportOnce,
   variants: staggerContainer,
 };
+
+/* ============================================
+   IMMERSIVE ANIMATIONS
+   ============================================ */
+
+/** Scroll reveal with 3D rotation */
+export const scrollReveal3D: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+    rotateX: -15,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.33, 1, 0.68, 1],
+    },
+  },
+};
+
+/** Scroll reveal with blur effect */
+export const scrollRevealBlur: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+    filter: 'blur(20px)',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.4, 0.25, 1],
+    },
+  },
+};
+
+/** Card 3D perspective variants */
+export const card3D: Variants = {
+  rest: {
+    rotateX: 0,
+    rotateY: 0,
+    scale: 1,
+    z: 0,
+  },
+  hover: {
+    scale: 1.05,
+    z: 50,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 17,
+    },
+  },
+};
+
+/** Floating animation for background elements */
+export const floatingElement: Variants = {
+  initial: {
+    y: 0,
+    x: 0,
+    scale: 1,
+    opacity: 0.3,
+  },
+  animate: {
+    y: [-20, 20, -20],
+    x: [-10, 10, -10],
+    scale: [1, 1.1, 1],
+    opacity: [0.3, 0.5, 0.3],
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+/** Glow pulse animation */
+export const glowPulse: Variants = {
+  initial: {
+    boxShadow: '0 0 20px rgba(213, 255, 10, 0.3)',
+  },
+  animate: {
+    boxShadow: [
+      '0 0 20px rgba(213, 255, 10, 0.3)',
+      '0 0 40px rgba(213, 255, 10, 0.6)',
+      '0 0 20px rgba(213, 255, 10, 0.3)',
+    ],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+/** Text glitch effect */
+export const glitchText: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -20,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  glitch: {
+    x: [0, -5, 5, -3, 3, 0],
+    opacity: [1, 0.8, 1, 0.9, 1],
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+/** Particle burst variants */
+export const particleBurst: Variants = {
+  hidden: {
+    scale: 0,
+    opacity: 1,
+  },
+  visible: {
+    scale: [0, 1.5, 2],
+    opacity: [1, 0.5, 0],
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+/** Magnetic button effect base */
+export const magneticButton: Variants = {
+  rest: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.05,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 17,
+    },
+  },
+  tap: {
+    scale: 0.95,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 17,
+    },
+  },
+};
+
+/** Hero parallax container */
+export const heroParallax: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+/** Section title dramatic reveal */
+export const sectionTitleReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+    skewY: 5,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    skewY: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.33, 1, 0.68, 1],
+    },
+  },
+};
+
+/** Underline draw animation */
+export const underlineDraw: Variants = {
+  hidden: {
+    scaleX: 0,
+    originX: 0,
+  },
+  visible: {
+    scaleX: 1,
+    transition: {
+      duration: 0.6,
+      delay: 0.3,
+      ease: [0.33, 1, 0.68, 1],
+    },
+  },
+};
+
+/** Orbit animation for skills */
+export const orbitAnimation: Variants = {
+  initial: {
+    rotate: 0,
+  },
+  animate: {
+    rotate: 360,
+    transition: {
+      duration: 20,
+      repeat: Infinity,
+      ease: 'linear',
+    },
+  },
+};
+
+/** Counter orbit (opposite direction) */
+export const counterOrbitAnimation: Variants = {
+  initial: {
+    rotate: 0,
+  },
+  animate: {
+    rotate: -360,
+    transition: {
+      duration: 20,
+      repeat: Infinity,
+      ease: 'linear',
+    },
+  },
+};
+
+/** Timeline item reveal */
+export const timelineItemReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -50,
+    scale: 0.9,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.4, 0.25, 1],
+    },
+  },
+};
+
+/** Stats counter container */
+export const statsContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+/** Stats item with pop effect */
+export const statsItem: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.5,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+};
+
+/** Immersive page transition */
+export const immersivePageTransition: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.95,
+    filter: 'blur(10px)',
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 1.05,
+    filter: 'blur(10px)',
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+/** Neon glow colors for hover effects */
+export const neonGlowColors = {
+  lime: 'rgba(213, 255, 10, 0.6)',
+  cyan: 'rgba(0, 240, 255, 0.6)',
+  magenta: 'rgba(255, 0, 110, 0.6)',
+  purple: 'rgba(181, 0, 255, 0.6)',
+  emerald: 'rgba(0, 193, 139, 0.6)',
+  teal: 'rgba(0, 153, 152, 0.6)',
+} as const;
+
+/** Create neon glow hover effect */
+export function createNeonGlow(color: keyof typeof neonGlowColors): TargetAndTransition {
+  return {
+    boxShadow: `0 0 30px ${neonGlowColors[color]}`,
+    transition: transitions.smooth,
+  };
+}
+
+/* ============================================
+   IMMERSIVE PRESETS
+   ============================================ */
+
+/** Immersive section preset */
+export const immersiveSectionPreset = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, margin: '-100px' },
+  variants: scrollReveal3D,
+};
+
+/** Immersive card preset */
+export const immersiveCardPreset = {
+  initial: 'rest',
+  whileHover: 'hover',
+  variants: card3D,
+  style: { transformPerspective: 1000 },
+};
+
+/** Stats section preset */
+export const statsPreset = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, margin: '-50px' },
+  variants: statsContainer,
+};
+
+/** Timeline preset */
+export const timelinePreset = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, margin: '-100px' },
+  variants: timelineItemReveal,
+};
