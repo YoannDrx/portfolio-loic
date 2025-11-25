@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { put } from "@vercel/blob";
 import {
   requireAuth,
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
 // ============================================
 
 export async function OPTIONS() {
-  return new Response(null, {
+  return new NextResponse(null, {
     status: 200,
     headers: {
       "Access-Control-Allow-Origin": "*",

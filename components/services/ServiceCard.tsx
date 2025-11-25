@@ -33,10 +33,10 @@ export function ServiceCard({ service, locale }: ServiceCardProps) {
   const previewText = description?.replace(/<[^>]*>/g, '').substring(0, 100) + '...';
 
   return (
-    <Link href={`/services/${service.id}`} className="block h-full">
+    <Link href={{ pathname: '/services/[id]', params: { id: service.id } }} className="block h-full">
       <GlassCard
         variant="default"
-        hover
+        hover="lift"
         className="group h-full flex flex-col overflow-hidden cursor-pointer border-white/5 hover:border-neon-cyan/30"
       >
         <GlassCardContent className="p-0 h-full flex flex-col">

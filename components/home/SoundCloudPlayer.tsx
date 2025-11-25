@@ -26,7 +26,7 @@ export default function SoundCloudPlayer() {
         <Music2 className="w-8 h-8 text-neon-green hidden md:block" />
       </motion.div>
 
-      <GlassCard neonColor="cyan" className="p-0 overflow-hidden border-neon-green/50">
+      <GlassCard hover="glow" glowColor="cyan" className="p-0 overflow-hidden border-neon-green/50">
         <iframe
           width="100%"
           height="450"

@@ -48,7 +48,7 @@ export default function VideoCard({ video }: VideoCardProps) {
   return (
     <GlassCard
       variant="default"
-      hover
+      hover="lift"
       triggerOnLoad
       className={`group h-full flex flex-col overflow-hidden border-white/5 ${colors.border} ${colors.glow}`}
     >

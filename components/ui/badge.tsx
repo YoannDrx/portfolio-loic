@@ -1,36 +1,69 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-admin-primary-500 dark:focus:ring-admin-primary-600 focus:ring-offset-2",
+  'inline-flex items-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background',
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-admin-primary-500 dark:bg-admin-primary-600 text-white shadow hover:bg-admin-primary-600 dark:hover:bg-admin-primary-700",
-        secondary:
-          "border-transparent bg-admin-bg-tertiary dark:bg-dark-admin-bg-tertiary text-admin-text-primary dark:text-dark-admin-text-primary hover:bg-admin-bg-secondary dark:hover:bg-dark-admin-bg",
-        destructive:
-          "border-transparent bg-admin-danger-500 dark:bg-admin-danger-600 text-white shadow hover:bg-admin-danger-600 dark:hover:bg-admin-danger-700",
-        outline: "border-admin-border dark:border-dark-admin-border text-admin-text-primary dark:text-dark-admin-text-primary",
+        /* ===== NEON VARIANTS ===== */
+        // Primary neon
+        neon: 'bg-primary/15 text-primary border border-primary/30 shadow-glow-primary-sm',
+        // Green
+        'neon-green':
+          'bg-green/15 text-green border border-green/30 shadow-glow-green-sm',
+        // Emerald
+        'neon-emerald':
+          'bg-emerald/15 text-emerald border border-emerald/30 shadow-glow-emerald-sm',
+        // Teal
+        'neon-teal':
+          'bg-teal/15 text-teal border border-teal/30 shadow-glow-teal-sm',
+        // Ocean
+        'neon-ocean':
+          'bg-ocean/15 text-ocean border border-ocean/30 shadow-glow-ocean-sm',
+        // Slate
+        'neon-slate': 'bg-slate/30 text-neutral-300 border border-slate/50',
+
+        /* ===== SOLID VARIANTS ===== */
+        // Default - primary solid
+        default: 'bg-primary text-neutral-950 border-transparent',
+        // Secondary - muted
+        secondary: 'bg-surface text-foreground border border-border',
+        // Success
+        success: 'bg-success/15 text-success border border-success/30',
+        // Warning
+        warning: 'bg-warning/15 text-warning border border-warning/30',
+        // Error / Destructive
+        destructive: 'bg-error/15 text-error border border-error/30',
+        // Outline
+        outline: 'bg-transparent text-foreground border border-border',
+      },
+      size: {
+        sm: 'px-2 py-0.5 text-xs rounded',
+        md: 'px-2.5 py-1 text-xs rounded-md',
+        lg: 'px-3 py-1.5 text-sm rounded-md',
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: 'default',
+      size: 'md',
     },
   }
-)
+);
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, size, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
-  )
+    <div
+      className={cn(badgeVariants({ variant, size }), className)}
+      {...props}
+    />
+  );
 }
 
-export { Badge, badgeVariants }
+export { Badge, badgeVariants };

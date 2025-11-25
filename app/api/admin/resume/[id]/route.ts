@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -19,7 +19,7 @@ export const GET = withAuth(async (req, context, user) => {
     });
 
     if (!entry) {
-      return new Response(JSON.stringify({ error: "Not found" }), { status: 404 });
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
     return successResponse(entry);

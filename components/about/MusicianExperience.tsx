@@ -121,7 +121,7 @@ export default function MusicianExperience() {
             >
               <GlassCard
                 variant="default"
-                hover
+                hover="lift"
                 className={`h-full ${colors.border} ${colors.glow} transition-all duration-300`}
               >
                 <GlassCardContent className="p-6">

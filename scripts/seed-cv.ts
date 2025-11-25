@@ -311,9 +311,9 @@ async function main() {
         translations: { create: section.translations },
         items: {
           create: section.items.map((item) => ({
-            startDate: item.startDate || null,
-            endDate: item.endDate || null,
-            isCurrent: item.isCurrent ?? false,
+            startDate: 'startDate' in item ? item.startDate : null,
+            endDate: 'endDate' in item ? item.endDate : null,
+            isCurrent: 'isCurrent' in item ? item.isCurrent : false,
             order: item.order,
             isActive: true,
             translations: { create: item.translations },

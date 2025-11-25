@@ -6,6 +6,7 @@ import Image from 'next/image';
 import AudioVisualizationScene from '@/components/three/AudioVisualizationScene';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { NeonButton } from '@/components/ui/NeonButton';
+import { GlassLinkButton } from '@/components/ui/GlassButton';
 import { ArrowRight, Play, Music, Film, Mail, Download, Headphones, Sliders, Sparkles, X, Lock } from 'lucide-react';
 import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { useTranslations, useLocale } from 'next-intl';
@@ -70,10 +71,11 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
     if (pathname.includes('/login')) {
       router.push('/');
     } else {
-      // Remove ?login=true from URL cleanly
+      // Remove ?login=true from URL cleanly using native history API
       const newParams = new URLSearchParams(searchParams.toString());
       newParams.delete('login');
-      router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
+      const newUrl = newParams.toString() ? `${pathname}?${newParams.toString()}` : pathname;
+      window.history.replaceState(null, '', newUrl);
     }
   };
   
@@ -104,9 +106,15 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
               className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-8 font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500"
               dangerouslySetInnerHTML={{ __html: t.raw('home.hero.title') }}
             />
-            <p className="text-gray-400 max-w-xl text-lg md:text-xl mb-10 font-light border-l-2 border-neon-lime pl-6">
-              {t('home.hero.description')}
-            </p>
+            <div className="group relative max-w-xl mb-10 cursor-default">
+              {/* Glass effect par défaut, plus foncé au hover */}
+              <div className="absolute -inset-3 bg-white/5 group-hover:bg-obsidian/90 backdrop-blur-md group-hover:backdrop-blur-xl rounded-xl border border-white/10 group-hover:border-white/20 transition-all duration-500 ease-out" />
+              {/* Glow subtil */}
+              <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-neon-lime/5 group-hover:from-neon-lime/10 via-transparent to-transparent transition-all duration-500" />
+              <p className="relative text-gray-400 group-hover:text-gray-200 max-w-xl text-lg md:text-xl font-light border-l-2 border-neon-lime pl-6 py-2 transition-colors duration-300">
+                {t('home.hero.description')}
+              </p>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/albums">
@@ -115,9 +123,9 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                 </NeonButton>
               </Link>
               <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
-                <NeonButton variant="outline">
-                  {t('home.hero.downloadResume')} <Download className="inline ml-2 w-4 h-4" />
-                </NeonButton>
+                <GlassLinkButton color="lime">
+                  {t('home.hero.downloadResume')} <Download className="w-4 h-4" />
+                </GlassLinkButton>
               </a>
             </div>
           </motion.div>
@@ -141,7 +149,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {albums.map((album, index) => (
               <a href={album.listenLink} target="_blank" rel="noopener noreferrer" key={album.id}>
-                <GlassCard neonColor={index % 2 === 0 ? 'lime' : 'cyan'} className="aspect-square flex flex-col justify-end group cursor-pointer relative">
+                <GlassCard hover="glow" glowColor={index % 2 === 0 ? 'lime' : 'cyan'} className="aspect-square flex flex-col justify-end group cursor-pointer relative">
                   {/* Album Art Background */}
                   <div className="absolute inset-0 z-0">
                     <Image 
@@ -175,7 +183,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
           
           <div className="mt-12 text-center">
              <Link href="/albums">
-               <NeonButton variant="outline">{t('home.sections.viewAllAlbums')}</NeonButton>
+               <GlassLinkButton color="lime">{t('home.sections.viewAllAlbums')}</GlassLinkButton>
              </Link>
           </div>
         </section>
@@ -200,7 +208,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {videos.map((video) => (
-               <GlassCard key={video.id} neonColor="magenta" className="group cursor-pointer overflow-hidden p-0 h-64 relative" onClick={() => setSelectedVideo(video.videoId)}>
+               <GlassCard key={video.id} hover="glow" glowColor="magenta" className="group cursor-pointer overflow-hidden p-0 h-64 relative" onClick={() => setSelectedVideo(video.videoId)}>
                   <Image 
                     src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} 
                     alt={video.title} 
@@ -222,7 +230,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
           
           <div className="mt-12 text-center">
              <Link href="/videos">
-               <NeonButton variant="outline" color="magenta">{t('home.sections.viewAllVideos')}</NeonButton>
+               <GlassLinkButton color="magenta">{t('home.sections.viewAllVideos')}</GlassLinkButton>
              </Link>
           </div>
         </section>
@@ -248,7 +256,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
             {services.map((service, index) => {
               const Icon = serviceIcons[index % serviceIcons.length];
               return (
-                <GlassCard key={service.id} neonColor="purple" className="text-center p-8 group relative overflow-hidden">
+                <GlassCard key={service.id} hover="glow" glowColor="purple" className="text-center p-8 group relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                       <Icon className="w-24 h-24 text-neon-purple -rotate-12" />
                   </div>
@@ -267,14 +275,14 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
           
           <div className="mt-12 text-center">
              <Link href="/services">
-               <NeonButton variant="outline" color="purple">{t('home.sections.viewAllServices')}</NeonButton>
+               <GlassLinkButton color="purple">{t('home.sections.viewAllServices')}</GlassLinkButton>
              </Link>
           </div>
         </section>
 
         {/* Contact Section */}
         <section id="contact" className="py-32 mb-20">
-           <GlassCard neonColor="lime" className="relative overflow-hidden">
+           <GlassCard hover="glow" glowColor="lime" className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-neon-lime/5 via-transparent to-transparent pointer-events-none" />
 
               <motion.div

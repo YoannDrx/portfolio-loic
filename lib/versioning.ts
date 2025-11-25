@@ -52,7 +52,7 @@ export async function createVersion(
     const newVersionNumber = (lastVersion?.version || 0) + 1;
 
     // Calculer les changements si ce n'est pas une création
-    let changes = null;
+    let changes: ReturnType<typeof calculateDiff> | undefined = undefined;
     if (action !== "create" && lastVersion) {
       changes = calculateDiff(lastVersion.data as any, data);
     }
@@ -64,7 +64,7 @@ export async function createVersion(
         contentId,
         version: newVersionNumber,
         data,
-        changes,
+        changes: changes as unknown as object ?? undefined,
         action,
         createdById: userId,
       },

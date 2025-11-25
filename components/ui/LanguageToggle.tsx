@@ -23,7 +23,8 @@ export default function LanguageToggle() {
     if (newLocale === currentLocale) return;
 
     startTransition(() => {
-      router.replace(pathname, { locale: newLocale });
+      // Type assertion needed for dynamic routes - pathname is always valid from current route
+      router.replace(pathname as Parameters<typeof router.replace>[0], { locale: newLocale });
     });
   };
 

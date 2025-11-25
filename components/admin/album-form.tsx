@@ -1,3 +1,5 @@
+'use client';
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -26,12 +28,12 @@ import { VersionHistory } from "@/components/admin/VersionHistory";
 import { Loader2, AlertCircle, Eye } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
-import { albumCreateSchema, type AlbumCreateInput } from "@/lib/validations/schemas";
+import { albumCreateSchema, type AlbumCreateFormInput } from "@/lib/validations/schemas";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useTranslations } from "next-intl";
 
 interface AlbumFormProps {
-  initialData?: AlbumCreateInput & { id?: string };
+  initialData?: AlbumCreateFormInput & { id?: string };
   locale: string;
 }
 
@@ -48,7 +50,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
   const router = useRouter();
   const isEditing = !!initialData?.id;
 
-  const form = useForm<AlbumCreateInput>({
+  const form = useForm<AlbumCreateFormInput>({
     resolver: zodResolver(albumCreateSchema),
     defaultValues: initialData || {
       title: "",
@@ -72,18 +74,25 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
     formState: { isSubmitting, isDirty, errors },
   } = form;
 
-  async function onSubmit(data: AlbumCreateInput) {
+  async function onSubmit(data: AlbumCreateFormInput) {
     try {
       const url = isEditing
         ? `/api/admin/albums/${initialData.id}`
         : "/api/admin/albums";
+
+      // Ensure defaults for optional fields
+      const payload = {
+        ...data,
+        published: data.published ?? false,
+        order: data.order ?? 0,
+      };
 
       const response = await fetch(url, {
         method: isEditing ? "PATCH" : "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
         credentials: "include",
       });
 

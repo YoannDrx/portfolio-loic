@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
 
@@ -21,7 +21,7 @@ export const GET = withAuth(async () => {
       });
     }
 
-    return Response.json(settings);
+    return NextResponse.json(settings);
   } catch (error) {
     return handleApiError(error);
   }
@@ -57,7 +57,7 @@ export const PATCH = withAuth(async (req) => {
       });
     }
 
-    return Response.json(settings);
+    return NextResponse.json(settings);
   } catch (error) {
     return handleApiError(error);
   }

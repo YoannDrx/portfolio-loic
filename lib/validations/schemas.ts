@@ -36,6 +36,7 @@ export const albumCreateSchema = z.object({
 export const albumUpdateSchema = albumCreateSchema.partial();
 
 export type AlbumCreateInput = z.infer<typeof albumCreateSchema>;
+export type AlbumCreateFormInput = z.input<typeof albumCreateSchema>;
 export type AlbumUpdateInput = z.infer<typeof albumUpdateSchema>;
 
 // ============================================
@@ -47,7 +48,7 @@ const videoTypes = ["OriginalMusic", "Sync", "MusicToPicture"] as const;
 export const videoCreateSchema = z.object({
   img: urlSchema,
   type: z.enum(videoTypes, {
-    errorMap: () => ({ message: "Type de vidéo invalide" }),
+    message: "Type de vidéo invalide",
   }),
   videoId: z
     .string()
@@ -67,6 +68,7 @@ export const videoCreateSchema = z.object({
 export const videoUpdateSchema = videoCreateSchema.partial();
 
 export type VideoCreateInput = z.infer<typeof videoCreateSchema>;
+export type VideoCreateFormInput = z.input<typeof videoCreateSchema>;
 export type VideoUpdateInput = z.infer<typeof videoUpdateSchema>;
 
 // ============================================
@@ -102,6 +104,7 @@ export const serviceCreateSchema = z.object({
 export const serviceUpdateSchema = serviceCreateSchema.partial();
 
 export type ServiceCreateInput = z.infer<typeof serviceCreateSchema>;
+export type ServiceCreateFormInput = z.input<typeof serviceCreateSchema>;
 export type ServiceUpdateInput = z.infer<typeof serviceUpdateSchema>;
 
 // ============================================
@@ -189,6 +192,7 @@ export const resumeEntryCreateSchema = z.object({
 export const resumeEntryUpdateSchema = resumeEntryCreateSchema.partial();
 
 export type ResumeEntryCreateInput = z.infer<typeof resumeEntryCreateSchema>;
+export type ResumeEntryCreateFormInput = z.input<typeof resumeEntryCreateSchema>;
 export type ResumeEntryUpdateInput = z.infer<typeof resumeEntryUpdateSchema>;
 
 export const resumeEntriesQuerySchema = z.object({

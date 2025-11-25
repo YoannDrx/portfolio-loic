@@ -45,8 +45,8 @@
       "albums": "DERNIERS <span class=\"text-neon-cyan\">ALBUMS</span>",
       "albumsSubtitle": "01 / DISCOGRAPHIE",
       "viewAllAlbums": "Voir tous les albums",
-      "videos": "VIDÉOS <span class=\"text-neon-magenta\">EN VEDETTE</span>",
-      "videosSubtitle": "02 / VISUELS",
+      "videos": "DERNIÈRES <span class=\"text-neon-magenta\">VIDÉOS</span>",
+      "videosSubtitle": "02 / RÉALISATIONS",
       "viewAllVideos": "Voir toutes les vidéos",
       "services": "SERVICES <span class=\"text-neon-purple\">SONORES</span>",
       "servicesSubtitle": "EXPERTISE",
@@ -56,8 +56,8 @@
       "getInTouch": "Me Contacter"
     },
     "soundcloud": {
-      "title": "ÉCOUTEZ <span class=\"text-neon-green\">MAINTENANT</span>",
-      "subtitle": "Streamez mes derniers morceaux",
+      "title": "ÉCOUTEZ <span class=\"text-neon-green\">MES PRODS</span>",
+      "subtitle": "Streamez mes dernières créations",
       "follow": "Suivre sur SoundCloud"
     }
   },

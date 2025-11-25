@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
 import { hash, compare } from "bcryptjs";
@@ -53,7 +53,7 @@ export const PATCH = withAuth(async (req, context, user) => {
       data: { password: hashedPassword },
     });
 
-    return Response.json({
+    return NextResponse.json({
       success: true,
       message: "Mot de passe modifié avec succès",
     });

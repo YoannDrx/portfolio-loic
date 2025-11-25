@@ -15,9 +15,13 @@ export const routing = defineRouting({
     '/': '/',
     '/about': '/about',
     '/services': '/services',
+    '/services/[id]': '/services/[id]',
     '/albums': '/albums',
+    '/albums/[id]': '/albums/[id]',
     '/videos': '/videos',
     '/contact': '/contact',
+    '/admin': '/admin',
+    '/login': '/login',
   },
 });
 

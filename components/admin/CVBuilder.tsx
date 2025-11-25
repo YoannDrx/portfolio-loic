@@ -309,6 +309,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
             <div className="grid grid-cols-2 gap-3">
               {Object.entries(themeState).map(([key, value]) => {
                 const isColor = key !== "fontHeadings" && key !== "fontBody";
+                const stringValue = String(value ?? "");
                 return (
                   <div key={key} className="space-y-1">
                     <label className="text-xs text-white/70 uppercase tracking-wide">{key}</label>
@@ -316,19 +317,19 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                       <div className="flex items-center gap-2">
                         <input
                           type="color"
-                          value={value}
+                          value={stringValue}
                           onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
                           className="h-10 w-12 rounded-md border border-white/10 bg-obsidian"
                         />
                         <Input
-                          value={value}
+                          value={stringValue}
                           onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
                           className="bg-white/5 text-white"
                         />
                       </div>
                     ) : (
                       <Input
-                        value={value}
+                        value={stringValue}
                         onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
                         className="bg-white/5 text-white"
                       />

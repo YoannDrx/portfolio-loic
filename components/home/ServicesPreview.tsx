@@ -97,7 +97,7 @@ export default function ServicesPreview() {
                 variant="slideUp"
                 delay={index * 0.1}
               >
-                <GlassCard variant="default" hover className="h-full group">
+                <GlassCard variant="default" hover="lift" className="h-full group">
                   <GlassCardContent className="p-8">
                     {/* Icon */}
                     <div

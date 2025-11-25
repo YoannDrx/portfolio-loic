@@ -231,7 +231,6 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
       translations[tIndex] = { ...translations[tIndex], [field]: value };
     } else {
       const newT: CVTranslation = { locale: loc };
-      // @ts-expect-error dynamic assignment
       newT[field] = value;
       translations.push(newT);
     }

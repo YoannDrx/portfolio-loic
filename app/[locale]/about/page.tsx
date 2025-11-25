@@ -192,7 +192,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         {/* Stats Grid */}
         <AnimatedSection variant="fadeIn" className="mb-20" delay={0.5}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <GlassCard variant="default" hover className="text-center">
+            <GlassCard variant="default" hover="lift" className="text-center">
               <GlassCardContent className="p-8">
                 <Award className="w-12 h-12 text-neon-cyan mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">16</div>
@@ -200,7 +200,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               </GlassCardContent>
             </GlassCard>
 
-            <GlassCard variant="default" hover className="text-center">
+            <GlassCard variant="default" hover="lift" className="text-center">
               <GlassCardContent className="p-8">
                 <Sparkles className="w-12 h-12 text-neon-magenta mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">34</div>
@@ -208,7 +208,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               </GlassCardContent>
             </GlassCard>
 
-            <GlassCard variant="default" hover className="text-center">
+            <GlassCard variant="default" hover="lift" className="text-center">
               <GlassCardContent className="p-8">
                 <Users className="w-12 h-12 text-neon-purple mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">50+</div>
@@ -216,7 +216,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               </GlassCardContent>
             </GlassCard>
 
-            <GlassCard variant="default" hover className="text-center">
+            <GlassCard variant="default" hover="lift" className="text-center">
               <GlassCardContent className="p-8">
                 <Building2 className="w-12 h-12 text-neon-blue mx-auto mb-4" />
                 <div className="text-4xl font-black text-gradient-neon mb-2">15+</div>

@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { withAuth, handleApiError } from "@/lib/api/middleware";
 
 // ============================================
@@ -7,7 +8,7 @@ import { withAuth, handleApiError } from "@/lib/api/middleware";
 
 export const GET = withAuth(async (req, context, user) => {
   try {
-    return Response.json({
+    return NextResponse.json({
       user: {
         id: user.id,
         email: user.email,

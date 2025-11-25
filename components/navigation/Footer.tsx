@@ -29,7 +29,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-obsidian border-t border-white/10 text-gray-300 font-inter overflow-hidden">
+    <footer className="relative bg-obsidian/80 backdrop-blur-xl backdrop-brightness-50 border-t border-white/10 text-gray-200 font-inter overflow-hidden">
       {/* Background Effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-neon-cyan/5 blur-[100px] pointer-events-none" />
       
@@ -48,10 +48,10 @@ export default function Footer() {
                 <div className="text-2xl font-black text-white transition-all duration-300 font-montserrat tracking-tight">
                   LOÏC<span className="text-neon-lime">.GHANEM</span>
                 </div>
-                <div className="text-xs text-gray-500 uppercase tracking-widest font-mono">{tFooter("tagline")}</div>
+                <div className="text-xs text-gray-400 uppercase tracking-widest font-mono">{tFooter("tagline")}</div>
               </div>
             </Link>
-            <p className="text-gray-400 leading-relaxed max-w-md mb-8 font-light">{t("about.pageDescription")}</p>
+            <p className="text-gray-300 leading-relaxed max-w-md mb-8 font-light">{t("about.pageDescription")}</p>
             {/* Social Links */}
             <div className="flex items-center gap-4">
               {footerLinks.social.map((social) => {
@@ -80,7 +80,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-neon-lime transition-colors duration-300 inline-flex items-center gap-2 group font-medium tracking-wide text-sm"
+                    className="text-gray-300 hover:text-neon-lime transition-colors duration-300 inline-flex items-center gap-2 group font-medium tracking-wide text-sm"
                   >
                     <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-neon-lime group-hover:shadow-[0_0_5px_#ccff00] transition-all duration-300" />
                     <span className="uppercase">{tNav(link.key.split(".")[1])}</span>
@@ -97,7 +97,7 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:loic.ghanem@outlook.com"
-                  className="text-gray-400 hover:text-neon-magenta transition-colors duration-300 inline-flex items-center gap-3 group"
+                  className="text-gray-300 hover:text-neon-magenta transition-colors duration-300 inline-flex items-center gap-3 group"
                 >
                   <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-neon-magenta/10 transition-colors">
                     <Mail className="w-4 h-4" />
@@ -105,7 +105,7 @@ export default function Footer() {
                   loic.ghanem@outlook.com
                 </a>
               </li>
-              <li className="text-gray-400 flex items-center gap-3">
+              <li className="text-gray-300 flex items-center gap-3">
                  <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -129,7 +129,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="py-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <p className="text-xs text-gray-500 font-mono uppercase tracking-widest">
+            <p className="text-xs text-gray-400 font-mono uppercase tracking-widest">
               {tFooter("copyright", { year: currentYear })}
             </p>
           </div>

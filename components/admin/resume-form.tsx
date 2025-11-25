@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { resumeEntryCreateSchema, ResumeEntryCreateInput } from "@/lib/validations/schemas";
+import { resumeEntryCreateSchema, ResumeEntryCreateFormInput } from "@/lib/validations/schemas";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,7 +35,7 @@ interface ResumeFormProps {
 
 export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) {
   const router = useRouter();
-  const form = useForm<ResumeEntryCreateInput>({
+  const form = useForm<ResumeEntryCreateFormInput>({
     resolver: zodResolver(resumeEntryCreateSchema),
     defaultValues: initialData || {
       type: "EXPERIENCE",
@@ -54,17 +54,24 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
     },
   });
 
-  const onSubmit = async (data: ResumeEntryCreateInput) => {
+  const onSubmit = async (data: ResumeEntryCreateFormInput) => {
     try {
       const url = isEditing
         ? `/api/admin/resume/${initialData.id}`
         : "/api/admin/resume";
       const method = isEditing ? "PATCH" : "POST";
 
+      // Ensure defaults for optional fields
+      const payload = {
+        ...data,
+        published: data.published ?? true,
+        order: data.order ?? 0,
+      };
+
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) throw new Error("Something went wrong");

@@ -276,7 +276,7 @@ export async function POST(req: NextRequest) {
           layout: cvData.layout,
           accentColor: cvData.accentColor || cvData.theme?.primary,
           showPhoto: cvData.showPhoto,
-          theme: cvData.theme,
+          theme: cvData.theme ?? undefined,
         },
       });
     } else {

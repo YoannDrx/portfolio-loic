@@ -237,7 +237,7 @@ export async function GET(req: NextRequest) {
 
     const buffer = await renderToBuffer(<CVDocumentCreative data={pdfData} locale={localeParam} />);
 
-    return new NextResponse(buffer, {
+    return new NextResponse(new Uint8Array(buffer), {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="Loic_Ghanem_CV_${localeParam.toUpperCase()}.pdf"`,

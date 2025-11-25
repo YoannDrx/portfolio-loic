@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
 
@@ -77,7 +77,7 @@ export const GET = withAuth(async (req, context, user) => {
     if (format === "csv") {
       const csv = convertToCSV(data);
 
-      return new Response(csv, {
+      return new NextResponse(csv, {
         headers: {
           "Content-Type": "text/csv; charset=utf-8",
           "Content-Disposition": `attachment; filename="${type}-${new Date().toISOString().split("T")[0]}.csv"`,
@@ -87,7 +87,7 @@ export const GET = withAuth(async (req, context, user) => {
 
     // Format JSON
     if (format === "json") {
-      return new Response(JSON.stringify(data, null, 2), {
+      return new NextResponse(JSON.stringify(data, null, 2), {
         headers: {
           "Content-Type": "application/json",
           "Content-Disposition": `attachment; filename="${type}-${new Date().toISOString().split("T")[0]}.json"`,
@@ -98,7 +98,7 @@ export const GET = withAuth(async (req, context, user) => {
     // Format TXT
     if (format === "txt") {
       const txt = convertToTXT(data, type);
-      return new Response(txt, {
+      return new NextResponse(txt, {
         headers: {
           "Content-Type": "text/plain; charset=utf-8",
           "Content-Disposition": `attachment; filename="${type}-${new Date().toISOString().split("T")[0]}.txt"`,

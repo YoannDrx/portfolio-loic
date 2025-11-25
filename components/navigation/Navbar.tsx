@@ -40,8 +40,8 @@ export default function Navbar() {
   }, [pathname]);
 
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/' || pathname === '/fr' || pathname === '/en';
-    return pathname.includes(href);
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
   };
 
   return (

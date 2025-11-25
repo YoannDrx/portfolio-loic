@@ -26,12 +26,12 @@ import {
 import { VersionHistory } from "@/components/admin/VersionHistory";
 import { Loader2, Download, AlertCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { videoCreateSchema, type VideoCreateInput } from "@/lib/validations/schemas";
+import { videoCreateSchema, type VideoCreateFormInput } from "@/lib/validations/schemas";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Image from "next/image";
 
 interface VideoFormProps {
-  initialData?: VideoCreateInput & { id?: string };
+  initialData?: VideoCreateFormInput & { id?: string };
   locale: string;
 }
 
@@ -70,7 +70,7 @@ export function VideoForm({ initialData, locale }: VideoFormProps) {
   const router = useRouter();
   const isEditing = !!initialData?.id;
 
-  const form = useForm<VideoCreateInput>({
+  const form = useForm<VideoCreateFormInput>({
     resolver: zodResolver(videoCreateSchema),
     defaultValues: initialData || {
       img: "",
@@ -101,16 +101,23 @@ export function VideoForm({ initialData, locale }: VideoFormProps) {
     }
   }, [videoId, img, setValue]);
 
-  async function onSubmit(data: VideoCreateInput) {
+  async function onSubmit(data: VideoCreateFormInput) {
     try {
       const url = isEditing
         ? `/api/admin/videos/${initialData.id}`
         : "/api/admin/videos";
 
+      // Ensure defaults for optional fields
+      const payload = {
+        ...data,
+        published: data.published ?? false,
+        order: data.order ?? 0,
+      };
+
       const response = await fetch(url, {
         method: isEditing ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {

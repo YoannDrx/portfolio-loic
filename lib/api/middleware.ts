@@ -10,6 +10,9 @@ export interface AuthenticatedUser {
   id: string;
   email: string;
   role: string;
+  name?: string | null;
+  emailVerified?: boolean;
+  image?: string | null;
 }
 
 export class ApiError extends Error {
@@ -54,6 +57,9 @@ export async function requireAuth(
       id: session.user.id,
       email: session.user.email,
       role: session.user.role,
+      name: session.user.name,
+      emailVerified: session.user.emailVerified,
+      image: session.user.image,
     };
   } catch (error) {
     if (error instanceof ApiError) {
@@ -79,11 +85,6 @@ export async function validateBody<T>(
     return schema.parse(body);
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.errors.map((err) => ({
-        field: err.path.join("."),
-        message: err.message,
-      }));
-
       throw new ApiError(
         400,
         "Validation failed",
@@ -143,9 +144,9 @@ export function handleApiError(error: unknown): NextResponse {
 
   // Erreur de validation Zod
   if (error instanceof ZodError) {
-    const formattedErrors = error.errors.map((err) => ({
-      field: err.path.join("."),
-      message: err.message,
+    const formattedErrors = error.issues.map((issue) => ({
+      field: issue.path.join("."),
+      message: issue.message,
     }));
 
     return NextResponse.json(
@@ -238,7 +239,7 @@ export function withAuth<T = any>(handler: ApiHandler<T>) {
       const user = await requireAuth(req);
       return await handler(req, context, user);
     } catch (error) {
-      return handleApiError(error);
+      return handleApiError(error) as NextResponse<T>;
     }
   };
 }
@@ -264,7 +265,7 @@ export function withAuthAndValidation<TSchema, TResponse = any>(
       const data = await validateBody(req, schema);
       return await handler(req, context, user, data);
     } catch (error) {
-      return handleApiError(error);
+      return handleApiError(error) as NextResponse<TResponse>;
     }
   };
 }

@@ -65,7 +65,7 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
       title={t('pageTitle')}
       subtitle="Discography"
       scene={<AlbumsScene />}
-      gradient="blue"
+      gradient="cyan"
     >
         {/* Filter Buttons */}
         <AnimatedSection variant="slideUp" delay={0.2} className="mb-12" triggerOnLoad>

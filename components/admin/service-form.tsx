@@ -28,11 +28,11 @@ import { ImageUpload } from "@/components/admin/ImageUpload";
 import { VersionHistory } from "@/components/admin/VersionHistory";
 import { Loader2, AlertCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { serviceCreateSchema, type ServiceCreateInput } from "@/lib/validations/schemas";
+import { serviceCreateSchema, type ServiceCreateFormInput } from "@/lib/validations/schemas";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface ServiceFormProps {
-  initialData?: ServiceCreateInput & { id?: string };
+  initialData?: ServiceCreateFormInput & { id?: string };
   locale: string;
 }
 
@@ -40,7 +40,7 @@ export function ServiceForm({ initialData, locale }: ServiceFormProps) {
   const router = useRouter();
   const isEditing = !!initialData?.id;
 
-  const form = useForm<ServiceCreateInput>({
+  const form = useForm<ServiceCreateFormInput>({
     resolver: zodResolver(serviceCreateSchema),
     defaultValues: initialData || {
       no: "01",
@@ -64,16 +64,23 @@ export function ServiceForm({ initialData, locale }: ServiceFormProps) {
     formState: { isSubmitting, isDirty },
   } = form;
 
-  async function onSubmit(data: ServiceCreateInput) {
+  async function onSubmit(data: ServiceCreateFormInput) {
     try {
       const url = isEditing
         ? `/api/admin/services/${initialData.id}`
         : "/api/admin/services";
 
+      // Ensure defaults for optional fields
+      const payload = {
+        ...data,
+        published: data.published ?? false,
+        order: data.order ?? 0,
+      };
+
       const response = await fetch(url, {
         method: isEditing ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {

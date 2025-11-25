@@ -53,7 +53,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="bg-transparent border-none shadow-none p-0 max-w-md w-full sm:max-w-md">
-        <GlassCard neonColor="lime" className="w-full p-8">
+        <GlassCard hover="glow" glowColor="primary" className="w-full p-8">
           <DialogHeader className="mb-6">
             <DialogTitle className="text-3xl font-bold text-white text-center tracking-tighter">
               {t('title')}

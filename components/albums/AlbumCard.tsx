@@ -25,10 +25,10 @@ interface AlbumCardProps {
 
 export default function AlbumCard({ album }: AlbumCardProps) {
   return (
-    <Link href={`/albums/${album.id}`} className="block h-full">
+    <Link href={{ pathname: '/albums/[id]', params: { id: album.id } }} className="block h-full">
       <GlassCard
         variant="default"
-        hover
+        hover="lift"
         triggerOnLoad
         className="group h-full flex flex-col overflow-hidden cursor-pointer border-white/5 hover:border-neon-purple/30"
       >
