@@ -45,7 +45,8 @@
       "albums": "LATEST <span class=\"text-neon-cyan\">ALBUMS</span>",
       "albumsSubtitle": "01 / DISCOGRAPHY",
       "viewAllAlbums": "View All Albums",
-      "videos": "FEATURED <span class=\"text-neon-magenta\">VIDEOS</span>",
+      "listenNow": "Listen",
+      "videos": "LATEST <span class=\"text-neon-magenta\">VIDEOS</span>",
       "videosSubtitle": "02 / VISUALS",
       "viewAllVideos": "View All Videos",
       "services": "SONIC <span class=\"text-neon-purple\">SERVICES</span>",
@@ -56,7 +57,7 @@
       "getInTouch": "Get In Touch"
     },
     "soundcloud": {
-      "title": "LISTEN <span class=\"text-neon-green\">NOW</span>",
+      "title": "LISTEN TO <span class=\"text-neon-green\">MY PRODS</span>",
       "subtitle": "Stream My Latest Tracks",
       "follow": "Follow on SoundCloud"
     }
