@@ -49,7 +49,7 @@ const menuItems = [
   {
     icon: FileText,
     label: 'CV / Resume',
-    href: '/admin/resume',
+    href: '/admin/cv',
     color: 'text-orange-400',
   },
   {

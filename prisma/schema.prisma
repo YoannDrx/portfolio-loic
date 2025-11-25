@@ -298,3 +298,171 @@ model ResumeSection {
   @@index([published, order])
   @@map("resume_sections")
 }
+
+// ============================================
+// CV / Resume (new layout)
+// ============================================
+
+model CV {
+  id        String   @id @default(cuid())
+  isActive  Boolean  @default(true)
+
+  // Personal info
+  fullName   String?
+  badgeFr    String?
+  badgeEn    String?
+  photo      String?
+  phone      String?
+  email      String?
+  website    String?
+  location   String?
+  linkedInUrl String?
+
+  // Bio/Headline (multilingual)
+  headlineFr String?
+  headlineEn String?
+  bioFr      String? @db.Text
+  bioEn      String? @db.Text
+
+  // Layout settings
+  layout      String  @default("creative")
+  accentColor String  @default("#D5FF0A")
+  showPhoto   Boolean @default(true)
+  theme       Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sections    CVSection[]
+  skills      CVSkill[]
+  socialLinks CVSocialLink[]
+  versions    CVVersion[]
+
+  @@map("cv")
+}
+
+model CVSection {
+  id         String   @id @default(cuid())
+  cvId       String
+  cv         CV       @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  type       String
+  icon       String?
+  color      String?
+  placement  String   @default("main")
+  layoutType String   @default("list")
+  order      Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  translations CVSectionTranslation[]
+  items        CVItem[]
+
+  @@index([cvId])
+  @@index([order])
+  @@map("cv_section")
+}
+
+model CVSectionTranslation {
+  id        String   @id @default(cuid())
+  sectionId String
+  section   CVSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  locale    String
+  title     String
+
+  @@unique([sectionId, locale])
+  @@index([locale])
+  @@map("cv_section_translation")
+}
+
+model CVItem {
+  id        String    @id @default(cuid())
+  sectionId String
+  section   CVSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  startDate DateTime?
+  endDate   DateTime?
+  isCurrent Boolean   @default(false)
+  order     Int       @default(0)
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  translations CVItemTranslation[]
+
+  @@index([sectionId])
+  @@index([order])
+  @@map("cv_item")
+}
+
+model CVItemTranslation {
+  id        String  @id @default(cuid())
+  itemId    String
+  item      CVItem  @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  locale    String
+  title     String
+  subtitle  String?
+  location  String?
+  description String? @db.Text
+
+  @@unique([itemId, locale])
+  @@index([locale])
+  @@map("cv_item_translation")
+}
+
+model CVSkill {
+  id        String   @id @default(cuid())
+  cvId      String
+  cv        CV       @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  category  String
+  level     Int      @default(3)
+  showAsBar Boolean  @default(true)
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  translations CVSkillTranslation[]
+
+  @@index([cvId])
+  @@index([category])
+  @@map("cv_skill")
+}
+
+model CVSkillTranslation {
+  id      String  @id @default(cuid())
+  skillId String
+  skill   CVSkill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  locale  String
+  name    String
+
+  @@unique([skillId, locale])
+  @@index([locale])
+  @@map("cv_skill_translation")
+}
+
+model CVSocialLink {
+  id       String @id @default(cuid())
+  cvId     String
+  cv       CV     @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  platform String
+  url      String
+  label    String?
+  order    Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([cvId])
+  @@map("cv_social_link")
+}
+
+model CVVersion {
+  id        String   @id @default(cuid())
+  cvId      String?
+  cv        CV?      @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  name      String
+  data      Json
+  createdAt DateTime @default(now())
+
+  @@index([cvId, createdAt])
+  @@map("cv_version")
+}
