@@ -2,13 +2,27 @@
 
 import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import { AnimatedSection } from '@/components/ui/AnimatedSection';
+import { motion } from 'framer-motion';
+import { Film, Video, Tv, Clapperboard, Award } from 'lucide-react';
+
+// Immersive components
+import ImmersivePage, { ImmersiveSection, ImmersiveTitle } from '@/components/immersive/ImmersivePage';
+import GlowingStats from '@/components/immersive/GlowingStats';
+
+// 3D Scene
+import CinemaScene from '@/components/three/scenes/CinemaScene';
+
+// Videos components
+import VideosHero from '@/components/videos/VideosHero';
+import ImmersiveVideoCard from '@/components/videos/ImmersiveVideoCard';
+import VideosCTA from '@/components/videos/VideosCTA';
+
+// UI components
 import { FilterButton, FilterButtonGroup } from '@/components/ui/FilterButton';
-import VideoCard from '@/components/videos/VideoCard';
-import { Film, Play, Video, Layers } from 'lucide-react';
-import { GlassCard, GlassCardContent } from '@/components/ui/GlassCard';
-import VideosScene from '@/components/three/scenes/VideosScene';
-import PageShell from '@/components/ui/PageShell';
+
+/* ============================================
+   TYPES
+   ============================================ */
 
 interface Video {
   id: string;
@@ -21,11 +35,17 @@ interface Video {
 
 interface VideosContentProps {
   videos: Video[];
+  locale: string;
 }
 
-export default function VideosContent({ videos }: VideosContentProps) {
+/* ============================================
+   MAIN COMPONENT
+   ============================================ */
+
+export default function VideosContent({ videos, locale }: VideosContentProps) {
   const t = useTranslations('videos');
   const [activeFilter, setActiveFilter] = useState<string>('All');
+  const [highlightedVideo, setHighlightedVideo] = useState<number | null>(null);
 
   // Extract unique types for filters
   const types = useMemo(() => {
@@ -39,97 +59,161 @@ export default function VideosContent({ videos }: VideosContentProps) {
     return videos.filter((video) => video.type === activeFilter);
   }, [activeFilter, videos]);
 
+  // Get count for each type
   const getCount = (type: string) => {
     if (type === 'All') return videos.length;
     return videos.filter((v) => v.type === type).length;
   };
 
+  // Get type translation key
+  const getTypeLabel = (type: string) => {
+    const typeMap: Record<string, string> = {
+      OriginalMusic: 'filterOriginalMusic',
+      Sync: 'filterSync',
+      MusicToPicture: 'filterMusicToPicture',
+    };
+    return type === 'All' ? t('filterAll') : t(typeMap[type] || type);
+  };
+
+  // Calculate stats
+  const syncCount = useMemo(() => {
+    return videos.filter((v) => v.type === 'Sync').length;
+  }, [videos]);
+
+  // Stats configuration for GlowingStats
+  const stats = [
+    {
+      value: videos.length,
+      label: t('stats.total'),
+      icon: Video,
+      color: 'cyan' as const,
+    },
+    {
+      value: types.length - 1,
+      label: t('stats.categories'),
+      icon: Clapperboard,
+      color: 'purple' as const,
+    },
+    {
+      value: syncCount,
+      label: t('stats.syncPlacements'),
+      icon: Tv,
+      color: 'magenta' as const,
+    },
+    {
+      value: '50+',
+      label: t('stats.brands'),
+      icon: Award,
+      color: 'lime' as const,
+    },
+  ];
+
   return (
-    <PageShell
-      title={t('pageTitle')}
-      subtitle="Visuals"
-      scene={<VideosScene />}
-      gradient="magenta"
+    <ImmersivePage
+      scene={<CinemaScene highlightedVideo={highlightedVideo ?? undefined} />}
+      gradient="cyan"
+      showOrbs={false}
+      showScrollProgress={true}
+      sceneVisibility="high"
+      parallaxHero={false}
     >
-        {/* Filters */}
-        <AnimatedSection variant="slideUp" delay={0.2} className="mb-12" triggerOnLoad>
-          <FilterButtonGroup>
-            {types.map((type) => (
-              <FilterButton
-                key={type}
-                active={activeFilter === type}
-                count={getCount(type)}
-                onClick={() => setActiveFilter(type)}
+      {/* Hero Section */}
+      <VideosHero
+        videosCount={videos.length}
+        categoriesCount={types.length - 1}
+        syncCount={syncCount}
+        locale={locale}
+      />
+
+      {/* Videos Grid Section */}
+      <div id="videos-grid">
+        <ImmersiveSection className="py-20 lg:py-32">
+          <div className="container-custom">
+            {/* Section Title */}
+            <ImmersiveTitle
+              subtitle="PORTFOLIO"
+              gradient="cyan"
+              align="center"
+              className="mb-12"
+            >
+              {t('pageTitle')}
+            </ImmersiveTitle>
+
+            {/* Filter Buttons */}
+            <motion.div
+              className="mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <FilterButtonGroup>
+                {types.map((type) => (
+                  <FilterButton
+                    key={type}
+                    active={activeFilter === type}
+                    count={getCount(type)}
+                    onClick={() => setActiveFilter(type)}
+                  >
+                    {getTypeLabel(type)}
+                  </FilterButton>
+                ))}
+              </FilterButtonGroup>
+            </motion.div>
+
+            {/* Videos Grid */}
+            {filteredVideos.length > 0 ? (
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.1,
+                      delayChildren: 0.2,
+                    },
+                  },
+                }}
               >
-                {type === 'All' ? t('filterAll') : type}
-              </FilterButton>
-            ))}
-          </FilterButtonGroup>
-        </AnimatedSection>
-
-        {/* Videos Grid */}
-        {filteredVideos.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-            {filteredVideos.map((video, index) => (
-              <AnimatedSection
-                key={video.id}
-                variant="slideUp"
-                delay={0.1 * (index % 6)}
-                triggerOnLoad
+                {filteredVideos.map((video, index) => (
+                  <ImmersiveVideoCard
+                    key={video.id}
+                    video={video}
+                    index={index}
+                    onHover={setHighlightedVideo}
+                  />
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                className="text-center py-20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                <VideoCard video={video} />
-              </AnimatedSection>
-            ))}
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 mb-6">
+                  <Film className="w-10 h-10 text-gray-500" />
+                </div>
+                <p className="text-xl text-gray-400">{t('noVideos')}</p>
+              </motion.div>
+            )}
           </div>
-        ) : (
-          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20" triggerOnLoad>
-            <Film className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-xl text-gray-400">
-              {t('noVideos')}
-            </p>
-          </AnimatedSection>
-        )}
+        </ImmersiveSection>
+      </div>
 
-        {/* Stats Section */}
-        <AnimatedSection variant="fadeIn" delay={0.4} triggerOnLoad>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-cyan/10 text-neon-cyan mb-6">
-                  <Video className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  {videos.length}
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-xs">{t('filterAll')}</div>
-              </GlassCardContent>
-            </GlassCard>
+      {/* Stats Section */}
+      <ImmersiveSection className="py-20 lg:py-32">
+        <div className="container-custom">
+          <GlowingStats stats={stats} columns={4} />
+        </div>
+      </ImmersiveSection>
 
-            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-magenta/10 text-neon-magenta mb-6">
-                  <Layers className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  {types.length - 1}
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-xs">{t('categories')}</div>
-              </GlassCardContent>
-            </GlassCard>
-
-            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-purple/10 text-neon-purple mb-6">
-                   <Play className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  50+
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-xs">{t('placements')}</div>
-              </GlassCardContent>
-            </GlassCard>
-          </div>
-        </AnimatedSection>
-    </PageShell>
+      {/* CTA Section */}
+      <VideosCTA locale={locale} />
+    </ImmersivePage>
   );
 }

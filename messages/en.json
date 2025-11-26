@@ -448,7 +448,29 @@
     "date": "Date",
     "categories": "Categories",
     "placements": "Sync Placements",
-    "noVideos": "No videos available at the moment"
+    "noVideos": "No videos available at the moment",
+    "hero": {
+      "badge": "AUDIOVISUAL PROJECTS",
+      "title": "My Music in Motion",
+      "description": "Discover my compositions in action: TV synchronizations, commercials, music videos, and original productions for visual media.",
+      "cta": "Explore videos",
+      "ctaSecondary": "Contact me"
+    },
+    "stats": {
+      "total": "Videos",
+      "categories": "Categories",
+      "syncPlacements": "Sync Placements",
+      "brands": "Brands"
+    },
+    "videosCta": {
+      "title": "Have an audiovisual project?",
+      "description": "Whether it's for a film, commercial, documentary, or video game, I create the soundtrack that will elevate your project.",
+      "button": "Let's discuss your project"
+    },
+    "card": {
+      "watch": "Watch",
+      "viewMore": "View more"
+    }
   },
   "contact": {
     "pageTitle": "Contact",

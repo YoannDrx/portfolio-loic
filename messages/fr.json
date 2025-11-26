@@ -418,7 +418,29 @@
     "date": "Date",
     "categories": "Catégories",
     "placements": "Placements Sync",
-    "noVideos": "Aucune vidéo disponible pour le moment"
+    "noVideos": "Aucune vidéo disponible pour le moment",
+    "hero": {
+      "badge": "PROJETS AUDIOVISUELS",
+      "title": "Ma Musique en Images",
+      "description": "Découvrez mes compositions en action : synchronisations TV, publicités, clips musicaux et productions originales pour l'image.",
+      "cta": "Explorer les vidéos",
+      "ctaSecondary": "Me contacter"
+    },
+    "stats": {
+      "total": "Vidéos",
+      "categories": "Catégories",
+      "syncPlacements": "Sync Placements",
+      "brands": "Marques"
+    },
+    "videosCta": {
+      "title": "Un projet audiovisuel ?",
+      "description": "Que ce soit pour un film, une publicité, un documentaire ou un jeu vidéo, je crée la bande sonore qui sublimera votre projet.",
+      "button": "Discutons de votre projet"
+    },
+    "card": {
+      "watch": "Regarder",
+      "viewMore": "Voir plus"
+    }
   },
   "contact": {
     "pageTitle": "Contact",
