@@ -246,6 +246,48 @@
     "availability": "Availability",
     "seeMore": "See more",
     "writtenBy": "Written by",
+    "hero": {
+      "badge": "SONIC EXPERTISE",
+      "title": "The Universe of Musical Creation",
+      "description": "From composition to post-production, explore my services to bring your audiovisual projects to life with creativity and professionalism.",
+      "cta": "Explore my services",
+      "ctaSecondary": "Contact me"
+    },
+    "stats": {
+      "services": "Services",
+      "experience": "Years of experience",
+      "projects": "Projects completed",
+      "satisfaction": "Satisfaction"
+    },
+    "process": {
+      "title": "The Creative Journey",
+      "subtitle": "PROCESS",
+      "brief": {
+        "title": "Brief",
+        "description": "Understanding your vision and goals"
+      },
+      "composition": {
+        "title": "Composition",
+        "description": "Creating the unique sonic universe"
+      },
+      "production": {
+        "title": "Production",
+        "description": "Bringing the music to life"
+      },
+      "mixing": {
+        "title": "Mix & Master",
+        "description": "Perfecting every detail"
+      },
+      "delivery": {
+        "title": "Delivery",
+        "description": "Your finalized project"
+      }
+    },
+    "cosmicCta": {
+      "title": "Ready to explore the sonic universe?",
+      "description": "Every project is a new star in our creative galaxy. Let's embark on this musical adventure together.",
+      "button": "Start the adventure"
+    },
     "cta": {
       "title": "Ready to start your project?",
       "description": "Contact me to discuss your musical vision and discover how I can bring your ideas to life.",

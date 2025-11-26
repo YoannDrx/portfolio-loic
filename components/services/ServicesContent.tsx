@@ -1,12 +1,26 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { ServiceCard } from '@/components/services/ServiceCard';
-import { FileText, Layers, Star, Clock } from 'lucide-react';
-import { GlassCard, GlassCardContent } from '@/components/ui/GlassCard';
-import ServicesScene from '@/components/three/scenes/ServicesScene';
-import PageShell from '@/components/ui/PageShell';
+import { motion } from 'framer-motion';
+import { FileText, Layers, Award, Star, Sparkles } from 'lucide-react';
+
+// Immersive components
+import ImmersivePage, { ImmersiveSection, ImmersiveTitle } from '@/components/immersive/ImmersivePage';
+import GlowingStats from '@/components/immersive/GlowingStats';
+
+// 3D Scene
+import CosmosScene from '@/components/three/scenes/CosmosScene';
+
+// Services components
+import ServicesHero from '@/components/services/ServicesHero';
+import CosmicServiceCard from '@/components/services/CosmicServiceCard';
+import ServiceProcess from '@/components/services/ServiceProcess';
+import ServicesCTA from '@/components/services/ServicesCTA';
+
+/* ============================================
+   TYPES
+   ============================================ */
 
 interface Service {
   id: string;
@@ -28,78 +42,126 @@ interface ServicesContentProps {
   locale: string;
 }
 
+/* ============================================
+   MAIN COMPONENT
+   ============================================ */
+
 export default function ServicesContent({ services, locale }: ServicesContentProps) {
   const t = useTranslations('services');
+  const [highlightedService, setHighlightedService] = useState<number | null>(null);
+
+  // Stats configuration
+  const stats = [
+    {
+      value: services.length,
+      label: t('stats.services'),
+      icon: Layers,
+      color: 'cyan' as const,
+    },
+    {
+      value: 15,
+      suffix: '+',
+      label: t('stats.experience'),
+      icon: Award,
+      color: 'purple' as const,
+    },
+    {
+      value: 50,
+      suffix: '+',
+      label: t('stats.projects'),
+      icon: Sparkles,
+      color: 'magenta' as const,
+    },
+    {
+      value: 100,
+      suffix: '%',
+      label: t('stats.satisfaction'),
+      icon: Star,
+      color: 'lime' as const,
+    },
+  ];
 
   return (
-    <PageShell
-      title={t('pageTitle')}
-      subtitle="Expertise"
-      scene={<ServicesScene />}
+    <ImmersivePage
+      scene={<CosmosScene highlightedService={highlightedService ?? undefined} />}
       gradient="cyan"
+      showOrbs={true}
+      showScrollProgress={true}
+      sceneVisibility="high"
+      parallaxHero={false}
     >
-        {/* Services Grid */}
-        {services.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-            {services.map((service, index) => (
-              <AnimatedSection
-                key={service.id}
-                variant="slideUp"
-                delay={0.1 * (index % 6)}
-              >
-                <ServiceCard service={service} locale={locale} />
-              </AnimatedSection>
-            ))}
-          </div>
-        ) : (
-          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20">
-            <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-xl text-gray-400">
-              {t('noServices')}
-            </p>
-          </AnimatedSection>
-        )}
+      {/* Hero Section */}
+      <ServicesHero servicesCount={services.length} locale={locale} />
 
-        {/* Stats Section */}
-        <AnimatedSection variant="fadeIn" delay={0.4}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <GlassCard variant="default" className="text-center h-full">
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-cyan/10 text-neon-cyan mb-6">
-                    <Layers className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  {services.length}
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-xs">{t('totalServices')}</div>
-              </GlassCardContent>
-            </GlassCard>
-            
-            <GlassCard variant="default" className="text-center h-full">
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-magenta/10 text-neon-magenta mb-6">
-                    <Star className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  100%
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-xs">{t('satisfaction')}</div>
-              </GlassCardContent>
-            </GlassCard>
+      {/* Services Grid Section */}
+      <div id="services-grid">
+      <ImmersiveSection className="py-20 lg:py-32">
+        <div className="container-custom">
+          {/* Section Title */}
+          <ImmersiveTitle
+            subtitle="EXPERTISE"
+            gradient="cyan"
+            align="center"
+            className="mb-16"
+          >
+            {t('pageTitle')}
+          </ImmersiveTitle>
 
-            <GlassCard variant="default" className="text-center h-full">
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-purple/10 text-neon-purple mb-6">
-                    <Clock className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  24/7
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-xs">{t('availability')}</div>
-              </GlassCardContent>
-            </GlassCard>
-          </div>
-        </AnimatedSection>
-    </PageShell>
+          {/* Services Grid */}
+          {services.length > 0 ? (
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.2,
+                  },
+                },
+              }}
+            >
+              {services.map((service, index) => (
+                <CosmicServiceCard
+                  key={service.id}
+                  service={service}
+                  locale={locale}
+                  index={index}
+                  onHover={setHighlightedService}
+                />
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              className="text-center py-20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+              <p className="text-xl text-gray-400">{t('noServices')}</p>
+            </motion.div>
+          )}
+        </div>
+      </ImmersiveSection>
+      </div>
+
+      {/* Process Timeline Section */}
+      <ServiceProcess />
+
+      {/* Stats Section */}
+      <ImmersiveSection className="py-20 lg:py-32">
+        <div className="container-custom">
+          <GlowingStats stats={stats} columns={4} />
+        </div>
+      </ImmersiveSection>
+
+      {/* CTA Section */}
+      <ServicesCTA locale={locale} />
+    </ImmersivePage>
   );
 }

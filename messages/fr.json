@@ -246,6 +246,48 @@
     "availability": "Disponibilité",
     "seeMore": "En savoir plus",
     "writtenBy": "Écrit par",
+    "hero": {
+      "badge": "EXPERTISE SONORE",
+      "title": "L'Univers de la Création Musicale",
+      "description": "De la composition à la post-production, explorez mes services pour donner vie à vos projets audiovisuels avec créativité et professionnalisme.",
+      "cta": "Explorer mes services",
+      "ctaSecondary": "Me contacter"
+    },
+    "stats": {
+      "services": "Services",
+      "experience": "Années d'expérience",
+      "projects": "Projets réalisés",
+      "satisfaction": "Satisfaction"
+    },
+    "process": {
+      "title": "Le Voyage Créatif",
+      "subtitle": "PROCESSUS",
+      "brief": {
+        "title": "Brief",
+        "description": "Comprendre votre vision et vos objectifs"
+      },
+      "composition": {
+        "title": "Composition",
+        "description": "Créer l'univers sonore unique"
+      },
+      "production": {
+        "title": "Production",
+        "description": "Donner vie à la musique"
+      },
+      "mixing": {
+        "title": "Mix & Master",
+        "description": "Peaufiner chaque détail"
+      },
+      "delivery": {
+        "title": "Livraison",
+        "description": "Votre projet finalisé"
+      }
+    },
+    "cosmicCta": {
+      "title": "Prêt à explorer l'univers sonore ?",
+      "description": "Chaque projet est une nouvelle étoile dans notre galaxie créative. Lançons-nous ensemble dans cette aventure musicale.",
+      "button": "Démarrer l'aventure"
+    },
     "cta": {
       "title": "Prêt à démarrer votre projet ?",
       "description": "Contactez-moi pour discuter de votre vision musicale et découvrir comment je peux donner vie à vos idées.",
