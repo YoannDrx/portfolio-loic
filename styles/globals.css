@@ -33,8 +33,12 @@
   }
 
   a {
-    color: inherit;
     text-decoration: none;
+  }
+
+  /* Links inherit color only if no explicit color class is set */
+  a:where(:not([class*="text-"])) {
+    color: inherit;
   }
 
   /* Typography */

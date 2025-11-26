@@ -50,6 +50,13 @@ interface MagneticButtonProps {
    COLOR CONFIGURATIONS
    ============================================ */
 
+// Text colors for solid variants with light backgrounds (needs dark text)
+const solidTextColors: Partial<Record<ButtonColor, string>> = {
+  lime: "#0a0a0f", // obsidian-950
+  emerald: "#0a0a0f",
+  teal: "#0a0a0f",
+};
+
 const colorConfig: Record<
   ButtonColor,
   {
@@ -60,8 +67,7 @@ const colorConfig: Record<
   }
 > = {
   lime: {
-    solid:
-      "bg-gradient-to-r from-neon-lime to-neon-cyan !text-obsidian-950 [&_*]:!text-obsidian-950 hover:shadow-[0_0_30px_rgba(213,255,10,0.5)]",
+    solid: "bg-gradient-to-r from-neon-lime to-neon-cyan hover:shadow-[0_0_30px_rgba(213,255,10,0.5)]",
     outline: "border-2 border-neon-lime text-neon-lime hover:bg-neon-lime/10 hover:shadow-[0_0_20px_rgba(213,255,10,0.3)]",
     ghost: "text-neon-lime hover:bg-neon-lime/10",
     glow: "shadow-[0_0_20px_rgba(213,255,10,0.4)]",
@@ -86,13 +92,13 @@ const colorConfig: Record<
     glow: "shadow-[0_0_20px_rgba(181,0,255,0.4)]",
   },
   emerald: {
-    solid: "bg-gradient-to-r from-emerald-400 to-teal-400 text-obsidian-950 hover:shadow-[0_0_30px_rgba(0,193,139,0.5)]",
+    solid: "bg-gradient-to-r from-emerald-400 to-teal-400 hover:shadow-[0_0_30px_rgba(0,193,139,0.5)]",
     outline: "border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400/10 hover:shadow-[0_0_20px_rgba(0,193,139,0.3)]",
     ghost: "text-emerald-400 hover:bg-emerald-400/10",
     glow: "shadow-[0_0_20px_rgba(0,193,139,0.4)]",
   },
   teal: {
-    solid: "bg-gradient-to-r from-teal-400 to-cyan-400 text-obsidian-950 hover:shadow-[0_0_30px_rgba(0,153,152,0.5)]",
+    solid: "bg-gradient-to-r from-teal-400 to-cyan-400 hover:shadow-[0_0_30px_rgba(0,153,152,0.5)]",
     outline: "border-2 border-teal-400 text-teal-400 hover:bg-teal-400/10 hover:shadow-[0_0_20px_rgba(0,153,152,0.3)]",
     ghost: "text-teal-400 hover:bg-teal-400/10",
     glow: "shadow-[0_0_20px_rgba(0,153,152,0.4)]",
@@ -134,6 +140,9 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
 
     const config = colorConfig[color];
 
+    // Get text color for solid variants with light backgrounds
+    const textColor = variant === 'solid' ? solidTextColors[color] : undefined;
+
     const buttonClasses = cn(
       "relative inline-flex items-center justify-center",
       "font-semibold uppercase tracking-wider",
@@ -146,12 +155,14 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
       className
     );
 
+    const contentStyle = textColor ? { color: textColor } : undefined;
+
     const content = (
-      <>
+      <span style={contentStyle} className="inline-flex items-center gap-2">
         {LeftIcon && <LeftIcon className="w-5 h-5" />}
         <span>{children}</span>
         {RightIcon && <RightIcon className="w-5 h-5" />}
-      </>
+      </span>
     );
 
     // Render as link
@@ -164,6 +175,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
               target="_blank"
               rel="noopener noreferrer"
               className={buttonClasses}
+              style={contentStyle}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -175,9 +187,9 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
 
       return (
         <motion.div ref={ref} style={{ x, y }} className={fullWidth ? "w-full" : "inline-block"}>
-          <Link href={href} className={buttonClasses}>
+          <Link href={href} className={buttonClasses} style={contentStyle}>
             <motion.span
-              className="flex items-center justify-center gap-2 w-full"
+              className="flex items-center justify-center w-full"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -195,6 +207,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
           onClick={onClick}
           disabled={disabled}
           className={buttonClasses}
+          style={contentStyle}
           whileHover={{ scale: disabled ? 1 : 1.02 }}
           whileTap={{ scale: disabled ? 1 : 0.98 }}
         >
