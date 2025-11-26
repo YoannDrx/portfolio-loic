@@ -2,13 +2,27 @@
 
 import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import AlbumCard from '@/components/albums/AlbumCard';
-import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { FilterButton, FilterButtonGroup } from '@/components/ui/FilterButton';
-import { Disc, Calendar, Layers } from 'lucide-react';
-import { GlassCard, GlassCardContent } from '@/components/ui/GlassCard';
+import { motion } from 'framer-motion';
+import { Disc, Music, Users, Calendar, Layers, Star } from 'lucide-react';
+
+// Immersive components
+import ImmersivePage, { ImmersiveSection, ImmersiveTitle } from '@/components/immersive/ImmersivePage';
+import GlowingStats from '@/components/immersive/GlowingStats';
+
+// 3D Scene
 import AlbumsScene from '@/components/three/scenes/AlbumsScene';
-import PageShell from '@/components/ui/PageShell';
+
+// Albums components
+import AlbumsHero from '@/components/albums/AlbumsHero';
+import ImmersiveAlbumCard from '@/components/albums/ImmersiveAlbumCard';
+import AlbumsCTA from '@/components/albums/AlbumsCTA';
+
+// UI components
+import { FilterButton, FilterButtonGroup } from '@/components/ui/FilterButton';
+
+/* ============================================
+   TYPES
+   ============================================ */
 
 interface Album {
   id: string;
@@ -30,9 +44,14 @@ interface AlbumsContentProps {
   locale: string;
 }
 
+/* ============================================
+   MAIN COMPONENT
+   ============================================ */
+
 export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
   const t = useTranslations('albums');
   const [activeFilter, setActiveFilter] = useState<string>('All');
+  const [highlightedAlbum, setHighlightedAlbum] = useState<number | null>(null);
 
   // Extract unique styles for filters
   const genres = useMemo(() => {
@@ -60,94 +79,155 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
     descriptions: locale === 'fr' ? album.descriptionsFr : album.descriptionsEn,
   }));
 
+  // Calculate stats for hero
+  const collabCount = useMemo(() => {
+    return albums.filter((album) => album.collabName).length;
+  }, [albums]);
+
+  // Get period from sorted dates
+  const period = useMemo(() => {
+    if (albums.length === 0) return '2019-2025';
+    const dates = albums.map((a) => parseInt(a.sortedDate.substring(0, 4)));
+    const minYear = Math.min(...dates);
+    const maxYear = Math.max(...dates);
+    return `${minYear}-${maxYear}`;
+  }, [albums]);
+
+  // Stats configuration for GlowingStats
+  const stats = [
+    {
+      value: albums.length,
+      label: t('stats.total'),
+      icon: Layers,
+      color: 'magenta' as const,
+    },
+    {
+      value: genres.length - 1,
+      label: t('stats.genres'),
+      icon: Music,
+      color: 'purple' as const,
+    },
+    {
+      value: collabCount,
+      label: t('stats.collaborations'),
+      icon: Users,
+      color: 'cyan' as const,
+    },
+    {
+      value: period,
+      label: t('stats.period'),
+      icon: Calendar,
+      color: 'lime' as const,
+    },
+  ];
+
   return (
-    <PageShell
-      title={t('pageTitle')}
-      subtitle="Discography"
-      scene={<AlbumsScene />}
-      gradient="cyan"
+    <ImmersivePage
+      scene={<AlbumsScene highlightedAlbum={highlightedAlbum ?? undefined} />}
+      gradient="magenta"
+      showOrbs={true}
+      showScrollProgress={true}
+      sceneVisibility="high"
+      parallaxHero={false}
     >
-        {/* Filter Buttons */}
-        <AnimatedSection variant="slideUp" delay={0.2} className="mb-12" triggerOnLoad>
-          <FilterButtonGroup>
-            {genres.map((genre) => (
-              <FilterButton
-                key={genre}
-                active={activeFilter === genre}
-                count={getGenreCount(genre)}
-                onClick={() => setActiveFilter(genre)}
+      {/* Hero Section */}
+      <AlbumsHero
+        albumsCount={albums.length}
+        genresCount={genres.length - 1}
+        collabCount={collabCount}
+        period={period}
+        locale={locale}
+      />
+
+      {/* Albums Grid Section */}
+      <div id="albums-grid">
+        <ImmersiveSection className="py-20 lg:py-32">
+          <div className="container-custom">
+            {/* Section Title */}
+            <ImmersiveTitle
+              subtitle="COLLECTION"
+              gradient="magenta"
+              align="center"
+              className="mb-12"
+            >
+              {t('pageTitle')}
+            </ImmersiveTitle>
+
+            {/* Filter Buttons */}
+            <motion.div
+              className="mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <FilterButtonGroup>
+                {genres.map((genre) => (
+                  <FilterButton
+                    key={genre}
+                    active={activeFilter === genre}
+                    count={getGenreCount(genre)}
+                    onClick={() => setActiveFilter(genre)}
+                  >
+                    {genre === 'All' ? t('filterAll') : genre}
+                  </FilterButton>
+                ))}
+              </FilterButtonGroup>
+            </motion.div>
+
+            {/* Albums Grid */}
+            {transformedAlbums.length > 0 ? (
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.1,
+                      delayChildren: 0.2,
+                    },
+                  },
+                }}
               >
-                {genre === 'All' ? t('filterAll') : genre}
-              </FilterButton>
-            ))}
-          </FilterButtonGroup>
-        </AnimatedSection>
-
-        {/* Albums Grid */}
-        {transformedAlbums.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
-            {transformedAlbums.map((album, index) => (
-              <AnimatedSection
-                key={album.id}
-                variant="slideUp"
-                delay={0.1 * (index % 8)}
-                triggerOnLoad
+                {transformedAlbums.map((album, index) => (
+                  <ImmersiveAlbumCard
+                    key={album.id}
+                    album={album}
+                    index={index}
+                    onHover={setHighlightedAlbum}
+                  />
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                className="text-center py-20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                <AlbumCard album={album} />
-              </AnimatedSection>
-            ))}
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 mb-6">
+                  <Disc className="w-10 h-10 text-gray-500" />
+                </div>
+                <p className="text-xl text-gray-400">{t('noAlbums')}</p>
+              </motion.div>
+            )}
           </div>
-        ) : (
-          <AnimatedSection variant="fadeIn" className="text-center py-20 mb-20" triggerOnLoad>
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 mb-6">
-               <Disc className="w-10 h-10 text-gray-500" />
-            </div>
-            <p className="text-xl text-gray-400">
-              No albums found for this genre.
-            </p>
-          </AnimatedSection>
-        )}
+        </ImmersiveSection>
+      </div>
 
-        {/* Stats Section */}
-        <AnimatedSection variant="fadeIn" delay={0.4} triggerOnLoad>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-cyan/10 text-neon-cyan mb-6">
-                  <Layers className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  {albums.length}
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-sm">{t('filterAll')}</div>
-              </GlassCardContent>
-            </GlassCard>
+      {/* Stats Section */}
+      <ImmersiveSection className="py-20 lg:py-32">
+        <div className="container-custom">
+          <GlowingStats stats={stats} columns={4} />
+        </div>
+      </ImmersiveSection>
 
-            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-magenta/10 text-neon-magenta mb-6">
-                  <Disc className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  {genres.length - 1}
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-sm">{t('genre')}</div>
-              </GlassCardContent>
-            </GlassCard>
-
-            <GlassCard variant="default" className="text-center h-full" triggerOnLoad>
-              <GlassCardContent className="p-8 flex flex-col items-center justify-center h-full">
-                <div className="p-4 rounded-full bg-neon-purple/10 text-neon-purple mb-6">
-                  <Calendar className="w-8 h-8" />
-                </div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
-                  2019-2025
-                </div>
-                <div className="text-gray-400 uppercase tracking-widest text-sm">{t('releaseDate')}</div>
-              </GlassCardContent>
-            </GlassCard>
-          </div>
-        </AnimatedSection>
-    </PageShell>
+      {/* CTA Section */}
+      <AlbumsCTA locale={locale} />
+    </ImmersivePage>
   );
 }

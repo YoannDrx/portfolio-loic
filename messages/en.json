@@ -402,13 +402,39 @@
     "collaboration": "In collaboration with",
     "releaseDate": "Release Date",
     "genre": "Genre",
+    "hero": {
+      "badge": "DISCOGRAPHY",
+      "title": "My Musical Creations",
+      "description": "Explore my complete discography: Metal, Hip-Hop, Ambient, Electronic productions and more. Each album tells a unique story.",
+      "cta": "Explore albums",
+      "ctaSecondary": "Contact me"
+    },
+    "stats": {
+      "total": "Albums",
+      "genres": "Genres",
+      "collaborations": "Collaborations",
+      "period": "Period"
+    },
+    "albumsCta": {
+      "title": "Ready to listen?",
+      "description": "Discover my complete discography on streaming platforms. Each album is a new sonic adventure.",
+      "button": "Listen on Spotify",
+      "buttonSecondary": "Contact me"
+    },
+    "card": {
+      "listen": "Listen",
+      "viewMore": "View more"
+    },
+    "noAlbums": "No albums found for this genre.",
     "detail": {
       "notFound": "Album not found",
       "listen": "Listen to album",
       "about": "About the album",
       "ctaTitle": "Ready to discover this album?",
       "ctaText": "Listen to \"{title}\" on all streaming platforms.",
-      "ctaButton": "Listen now"
+      "ctaButton": "Listen now",
+      "backToAlbums": "Back to albums",
+      "relatedAlbums": "Related albums"
     }
   },
   "videos": {
