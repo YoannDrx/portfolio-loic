@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCountUp } from '@/hooks/useAnimations';
 
@@ -107,7 +107,7 @@ function StatCard({ stat, index }: StatCardProps) {
         'transition-all duration-500',
         'hover:bg-obsidian-800/50',
         config.border,
-        'hover:' + config.glow
+        `hover:${config.glow}`
       )}
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}

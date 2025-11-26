@@ -184,7 +184,7 @@ export default function CosmicServiceCard({
               className={cn(
                 'text-xl font-bold mb-3 tracking-tight',
                 'transition-colors duration-300',
-                'group-hover:' + config.accent.replace('text-', 'text-')
+                `group-hover:${config.accent.replace('text-', 'text-')}`
               )}
             >
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent group-hover:from-white group-hover:to-white transition-all duration-300">

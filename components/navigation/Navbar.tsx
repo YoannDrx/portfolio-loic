@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import { Menu, X, Lock, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageToggle from '@/components/ui/LanguageToggle';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 import { useSession } from '@/lib/auth-client';
 
 const navLinks = [

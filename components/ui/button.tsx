@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 import { hoverScale, tapScale } from '@/lib/animations';

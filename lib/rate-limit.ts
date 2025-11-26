@@ -1,6 +1,6 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { ApiError } from "@/lib/api/middleware";
 
 // ============================================
@@ -110,7 +110,7 @@ export async function checkUploadRateLimit(req: NextRequest): Promise<void> {
   const identifier = getIP(req);
 
   if (uploadLimiter) {
-    const { success, remaining } = await uploadLimiter.limit(identifier);
+    const { success } = await uploadLimiter.limit(identifier);
 
     if (!success) {
       throw new ApiError(
@@ -144,7 +144,7 @@ export async function checkLoginRateLimit(req: NextRequest): Promise<void> {
   const identifier = getIP(req);
 
   if (loginLimiter) {
-    const { success, remaining } = await loginLimiter.limit(identifier);
+    const { success } = await loginLimiter.limit(identifier);
 
     if (!success) {
       throw new ApiError(
@@ -178,7 +178,7 @@ export async function checkApiRateLimit(req: NextRequest): Promise<void> {
   const identifier = getIP(req);
 
   if (apiLimiter) {
-    const { success, remaining } = await apiLimiter.limit(identifier);
+    const { success } = await apiLimiter.limit(identifier);
 
     if (!success) {
       throw new ApiError(
@@ -223,8 +223,4 @@ if (!isUpstashConfigured && typeof setInterval !== "undefined") {
 }
 
 // Log au démarrage
-if (process.env.NODE_ENV === "development") {
-  console.log(
-    `[Rate Limiting] Mode: ${isUpstashConfigured ? "Upstash Redis" : "In-Memory (dev only)"}`
-  );
-}
+// Avoid noisy logging in production; rely on monitoring instead.

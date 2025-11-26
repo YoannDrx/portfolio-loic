@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import {
@@ -17,6 +16,7 @@ import { sanitizeDescription } from "@/lib/sanitize";
 const restoreSchema = z.object({
   versionId: z.string().min(1, "versionId requis"),
 });
+type RestoreInput = z.infer<typeof restoreSchema>;
 
 // ============================================
 // POST /api/admin/versions/restore
@@ -25,7 +25,7 @@ const restoreSchema = z.object({
 
 export const POST = withAuthAndValidation(
   restoreSchema,
-  async (req, context, user, data) => {
+  async (_req, _context, user, data: RestoreInput) => {
     try {
       // Récupérer les données de la version à restaurer
       const versionInfo = await getVersionData(data.versionId);
@@ -34,7 +34,7 @@ export const POST = withAuthAndValidation(
       // Supprimer les champs metadata avant restauration
       const { id, createdAt, updatedAt, createdById, createdBy, ...restoreData } = versionData;
 
-      let restoredContent: any;
+      let restoredContent: Record<string, unknown> | null = null;
 
       // Restaurer selon le type de contenu
       switch (contentType) {

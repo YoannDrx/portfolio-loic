@@ -12,11 +12,30 @@ import { NeonButton } from "@/components/ui/NeonButton";
 import { CVPreview } from "@/components/admin/CVPreview";
 import { Plus, Save, Download, LayoutTemplate, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 
+type Section = {
+  id?: string;
+  slug: string;
+  titleEn: string;
+  titleFr: string;
+  type: string;
+  entryType: string;
+  entryIds?: string[] | string;
+  order?: number;
+  published?: boolean;
+};
+
+type Entry = {
+  order?: number;
+} & Record<string, unknown>;
+
+type Profile = Record<string, unknown>;
+type Theme = Record<string, unknown>;
+
 interface CVBuilderProps {
-  profile: any;
-  theme: any;
-  sections: any[];
-  entries: any[];
+  profile: Profile;
+  theme: Theme;
+  sections: Section[];
+  entries: Entry[];
   locale: string;
 }
 
@@ -45,9 +64,9 @@ const defaultSections = [
 ];
 
 export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuilderProps) {
-  const [profileState, setProfile] = useState(profile);
-  const [themeState, setTheme] = useState({ ...defaultPalette, ...theme });
-  const [sectionsState, setSections] = useState(
+  const [profileState, setProfile] = useState<Profile>(profile);
+  const [themeState, setTheme] = useState<Theme>({ ...defaultPalette, ...theme });
+  const [sectionsState, setSections] = useState<Section[]>(
     (sections && sections.length > 0 ? sections : defaultSections).sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
   );
   const [savingProfile, setSavingProfile] = useState(false);
@@ -68,7 +87,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
       });
       if (!res.ok) throw new Error("failed");
       toast({ title: "Profil mis à jour" });
-    } catch (error) {
+    } catch {
       toast({ title: "Erreur lors de la sauvegarde du profil", variant: "destructive" });
     } finally {
       setSavingProfile(false);
@@ -85,7 +104,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
       });
       if (!res.ok) throw new Error("failed");
       toast({ title: "Thème mis à jour" });
-    } catch (error) {
+    } catch {
       toast({ title: "Erreur lors de la sauvegarde du thème", variant: "destructive" });
     } finally {
       setSavingTheme(false);
@@ -103,7 +122,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
   const handleSaveSections = async () => {
     try {
       setSavingSections(true);
-      const updated: any[] = [];
+      const updated: Section[] = [];
       for (const section of sectionsState) {
         const payload = {
           slug: section.slug,
@@ -123,7 +142,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
             body: JSON.stringify(payload),
           });
           if (!res.ok) throw new Error("failed");
-          const data = await res.json();
+          const data: Section = await res.json();
           updated.push(data);
         } else {
           const res = await fetch(`/api/admin/resume/sections/${section.id}`, {
@@ -132,13 +151,13 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
             body: JSON.stringify(payload),
           });
           if (!res.ok) throw new Error("failed");
-          const data = await res.json();
+          const data: Section = await res.json();
           updated.push(data);
         }
       }
       setSections(updated.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)));
       toast({ title: "Sections mises à jour" });
-    } catch (error) {
+    } catch {
       toast({ title: "Erreur lors de la sauvegarde des sections", variant: "destructive" });
     } finally {
       setSavingSections(false);
@@ -156,7 +175,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
       if (!res.ok) throw new Error("failed");
       setSections((prev) => prev.filter((s) => s.id !== id));
       toast({ title: "Section supprimée" });
-    } catch (error) {
+    } catch {
       toast({ title: "Erreur lors de la suppression", variant: "destructive" });
     }
   };

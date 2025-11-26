@@ -58,8 +58,7 @@ export async function generateMetadata({ params }: PageProps) {
       title: `${service.title} | Loïc Ghanem`,
       description: `${t('offeredOn')} ${service.date}`,
     };
-  } catch (error) {
-    console.error('Error generating metadata:', error);
+  } catch {
     return {
       title: 'Service | Loïc Ghanem',
     };

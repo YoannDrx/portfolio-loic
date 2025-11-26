@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, Database, FileText, FileJson, FileSpreadsheet, Loader2, Save, CheckCircle2 } from "lucide-react";
+import { Download, Database, FileText, FileJson, FileSpreadsheet, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { GeneralSettings } from "@/components/admin/settings/GeneralSettings";
 import { SocialMediaSettings } from "@/components/admin/settings/SocialMediaSettings";
@@ -12,19 +12,15 @@ import { ContentSettings } from "@/components/admin/settings/ContentSettings";
 import { ProfileSettings } from "@/components/admin/settings/ProfileSettings";
 import { useTranslations } from "next-intl";
 
-interface SettingsContentProps {
-  locale: string;
-}
-
 type ContentType = "albums" | "videos" | "services";
 type ExportFormat = "csv" | "json" | "txt";
 
 const DEBOUNCE_DELAY = 1000; // 1 seconde
 
-export function SettingsContent({ locale }: SettingsContentProps) {
+export function SettingsContent() {
   const t = useTranslations("admin");
-  const [settings, setSettings] = useState<any>({});
-  const [user, setUser] = useState<any>(null);
+  const [settings, setSettings] = useState<Record<string, unknown>>({});
+  const [user, setUser] = useState<Record<string, unknown> | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
@@ -46,7 +42,7 @@ export function SettingsContent({ locale }: SettingsContentProps) {
 
       const data = await response.json();
       setSettings(data);
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: t("common.error"),
@@ -64,20 +60,28 @@ export function SettingsContent({ locale }: SettingsContentProps) {
       });
 
       if (!response.ok) {
-        console.error("Erreur lors du chargement du profil");
+        toast({
+          variant: "destructive",
+          title: t("common.error"),
+          description: "Impossible de charger le profil",
+        });
         return;
       }
 
       const data = await response.json();
       setUser(data.user);
-    } catch (error) {
-      console.error("Erreur chargement user:", error);
+    } catch {
+      toast({
+        variant: "destructive",
+        title: t("common.error"),
+        description: "Impossible de charger le profil",
+      });
     }
   };
 
   // Debounced save
   const saveSettings = useCallback(
-    async (newSettings: any) => {
+    async (newSettings: Record<string, unknown>) => {
       setSaving(true);
       try {
         const response = await fetch("/api/admin/settings", {
@@ -91,10 +95,10 @@ export function SettingsContent({ locale }: SettingsContentProps) {
 
         setLastSaved(new Date());
         toast({
-          title: t("common.saved") + " ✓",
+          title: `${t("common.saved")} ✓`,
           description: "Les paramètres ont été mis à jour",
         });
-      } catch (error) {
+      } catch {
         toast({
           variant: "destructive",
           title: t("common.error"),
@@ -109,7 +113,7 @@ export function SettingsContent({ locale }: SettingsContentProps) {
 
   // Gérer les changements avec debounce
   const handleChange = useCallback(
-    (field: string, value: any) => {
+    (field: string, value: unknown) => {
       const newSettings = { ...settings, [field]: value };
       setSettings(newSettings);
 
@@ -146,10 +150,10 @@ export function SettingsContent({ locale }: SettingsContentProps) {
       window.URL.revokeObjectURL(url);
 
       toast({
-        title: t("settings.export.success") + " ✓",
+        title: `${t("settings.export.success")} ✓`,
         description: t("settings.export.successDesc", { type, format: format.toUpperCase() }),
       });
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: t("settings.export.error"),

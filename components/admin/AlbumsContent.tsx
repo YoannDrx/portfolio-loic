@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -88,7 +88,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
         setAlbums(data.items || []);
         setTotalPages(data.pagination?.totalPages || 1);
         setTotal(data.pagination?.total || 0);
-      } catch (error) {
+      } catch {
         toast({
           variant: "destructive",
           title: "Erreur",
@@ -127,7 +127,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
         title: "Export réussi ✓",
         description: "Les albums ont été exportés en CSV",
       });
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: "Erreur",

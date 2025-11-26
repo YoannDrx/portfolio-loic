@@ -1,13 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { withAuth, handleApiError, ApiError, successResponse } from "@/lib/api/middleware";
+import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
 
 // ============================================
 // PATCH /api/admin/profile/email
 // Changer l'email de l'utilisateur
 // ============================================
 
-export const PATCH = withAuth(async (req, context, user) => {
+export const PATCH = withAuth(async (req, _context, user) => {
   try {
     const body = await req.json();
     const { newEmail } = body;

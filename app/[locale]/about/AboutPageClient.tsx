@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
 import {
   Award, Users, Building2, Sparkles, Download, MapPin, Mail, Languages,
   Music, Headphones, Mic2, Sliders

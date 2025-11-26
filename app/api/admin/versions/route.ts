@@ -1,18 +1,17 @@
-import { NextRequest } from "next/server";
 import {
   withAuth,
   handleApiError,
   successResponse,
   ApiError,
 } from "@/lib/api/middleware";
-import { getVersionHistory, getRecentVersions, ContentType } from "@/lib/versioning";
+import { getVersionHistory, getRecentVersions, type ContentType } from "@/lib/versioning";
 
 // ============================================
 // GET /api/admin/versions
 // Récupère l'historique des versions
 // ============================================
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (req, _context, _user) => {
   try {
     const { searchParams } = new URL(req.url);
     const contentType = searchParams.get("contentType") as ContentType | null;

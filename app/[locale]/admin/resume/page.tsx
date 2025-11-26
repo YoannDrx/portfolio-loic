@@ -17,10 +17,10 @@ export default async function ResumePage({
   };
 
   const [entries, profile, theme, sections] = await Promise.all([
-    safeFetch(prisma.resumeEntry.findMany({ orderBy: { order: "asc" } }), [] as any[]),
+    safeFetch(prisma.resumeEntry.findMany({ orderBy: { order: "asc" } }), []),
     safeFetch(prisma.resumeProfile.findFirst(), null),
     safeFetch(prisma.resumeTheme.findFirst(), null),
-    safeFetch(prisma.resumeSection.findMany({ orderBy: { order: "asc" } }), [] as any[]),
+    safeFetch(prisma.resumeSection.findMany({ orderBy: { order: "asc" } }), []),
   ]);
 
   const fallbackProfile = {

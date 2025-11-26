@@ -6,8 +6,8 @@ import { Plus, Minus, Edit } from "lucide-react";
 
 interface DiffItem {
   field: string;
-  oldValue: any;
-  newValue: any;
+  oldValue: unknown;
+  newValue: unknown;
   type: "added" | "removed" | "modified";
 }
 
@@ -54,13 +54,13 @@ export function DiffViewer({ changes }: DiffViewerProps) {
     return labels[field] || field;
   }
 
-  function formatValue(value: any): string {
+  function formatValue(value: unknown): string {
     if (value === null || value === undefined) return "(vide)";
     if (typeof value === "boolean") return value ? "Oui" : "Non";
     if (typeof value === "string") {
       // Tronquer les longues chaînes (descriptions HTML)
       if (value.length > 200) {
-        return value.substring(0, 200) + "...";
+        return `${value.substring(0, 200)}...`;
       }
       return value;
     }

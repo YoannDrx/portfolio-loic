@@ -68,13 +68,6 @@ const ALLOWED_ATTR = [
   "title",
 ];
 
-/**
- * Configuration pour les URLs autorisées
- * Bloque les protocoles dangereux (javascript:, data:, etc.)
- */
-const ALLOWED_URI_REGEXP =
-  /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i;
-
 // ============================================
 // FONCTION PRINCIPALE
 // ============================================

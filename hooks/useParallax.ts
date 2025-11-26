@@ -1,13 +1,13 @@
 'use client';
 
-import { useRef, RefObject } from 'react';
+import { useRef } from 'react';
 import {
   useScroll,
   useTransform,
   useSpring,
-  MotionValue,
-  SpringOptions,
 } from 'framer-motion';
+import type { MotionValue, SpringOptions } from 'framer-motion';
+import type { RefObject } from 'react';
 
 /* ============================================
    TYPES

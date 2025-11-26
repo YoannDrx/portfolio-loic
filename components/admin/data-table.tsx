@@ -9,14 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 
 export interface Column<T> {
   key: keyof T | "actions";
   label: string;
-  render?: (value: any, item: T) => React.ReactNode;
+  render?: (value: T[keyof T] | null, item: T) => React.ReactNode;
 }
 
 interface DataTableProps<T> {

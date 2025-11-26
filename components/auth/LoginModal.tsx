@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { NeonButton } from '@/components/ui/NeonButton';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { signIn } from '@/lib/auth-client';
-import { useRouter, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Loader2 } from 'lucide-react';
 
@@ -22,7 +22,6 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const params = useParams();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -42,9 +41,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         const locale = params.locale || 'fr';
         window.location.href = `/${locale}/admin`;
       }
-    } catch (err) {
+    } catch {
       setError(t('error'));
-      console.error(err);
     } finally {
       setLoading(false);
     }

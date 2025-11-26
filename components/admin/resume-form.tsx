@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { resumeEntryCreateSchema, ResumeEntryCreateFormInput } from "@/lib/validations/schemas";
+import { resumeEntryCreateSchema, type ResumeEntryCreateFormInput } from "@/lib/validations/schemas";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,7 +28,7 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { NeonButton } from "@/components/ui/NeonButton";
 
 interface ResumeFormProps {
-  initialData?: any;
+  initialData?: Partial<ResumeEntryCreateFormInput>;
   locale: string;
   isEditing?: boolean;
 }
@@ -79,7 +79,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
       toast({ title: isEditing ? "Updated successfully" : "Created successfully" });
       router.push(`/${locale}/admin/resume`);
       router.refresh();
-    } catch (error) {
+    } catch {
       toast({ title: "Error", variant: "destructive" });
     }
   };

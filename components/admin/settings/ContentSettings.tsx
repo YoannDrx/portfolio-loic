@@ -7,9 +7,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Sliders } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+type ContentSettingsValues = {
+  homepageFeaturedAlbumsCount?: number;
+  homepageLatestVideosCount?: number;
+  albumsPerPage?: number;
+  videosPerPage?: number;
+  servicesPerPage?: number;
+  defaultAlbumSort?: string;
+  defaultVideoSort?: string;
+  defaultServiceSort?: string;
+};
+
 interface ContentSettingsProps {
-  settings: any;
-  onChange: (field: string, value: any) => void;
+  settings: ContentSettingsValues;
+  onChange: (field: keyof ContentSettingsValues | string, value: unknown) => void;
 }
 
 export function ContentSettings({ settings, onChange }: ContentSettingsProps) {

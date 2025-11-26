@@ -3,7 +3,7 @@ import { routing } from '@/i18n/routing';
 import { setRequestLocale } from 'next-intl/server';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import '../styles/globals.css';
 
 const inter = Inter({

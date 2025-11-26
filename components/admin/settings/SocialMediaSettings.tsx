@@ -7,8 +7,8 @@ import { Share2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface SocialMediaSettingsProps {
-  settings: any;
-  onChange: (field: string, value: any) => void;
+  settings: Record<string, string | undefined>;
+  onChange: (field: string, value: string) => void;
 }
 
 const socialPlatforms = [

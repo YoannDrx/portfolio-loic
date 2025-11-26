@@ -129,30 +129,57 @@ const buildFallback = async (): Promise<CVData> => {
   };
 };
 
+type CvSectionItem = {
+  startDate?: unknown;
+  endDate?: unknown;
+} & Record<string, unknown>;
+
+type CvSection = {
+  items: CvSectionItem[];
+} & Record<string, unknown>;
+
+type CvRecord = {
+  id: string;
+  fullName?: string | null;
+  badgeFr?: string | null;
+  badgeEn?: string | null;
+  photo?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  website?: string | null;
+  location?: string | null;
+  linkedInUrl?: string | null;
+  headlineFr?: string | null;
+  headlineEn?: string | null;
+  bioFr?: string | null;
+  bioEn?: string | null;
+  layout?: string | null;
+  accentColor?: string | null;
+  showPhoto?: boolean | null;
+  theme?: unknown;
+  sections: CvSection[];
+  skills: unknown[];
+  socialLinks: unknown[];
+};
+
+const toIsoString = (value: unknown): string | null => {
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+
+  if (typeof value === "string") {
+    return value;
+  }
+
+  if (value && typeof (value as { toISOString?: unknown }).toISOString === "function") {
+    return (value as { toISOString: () => string }).toISOString();
+  }
+
+  return null;
+};
+
 const transformCv = (cv: unknown): CVData => {
-  const typed = cv as {
-    id: string;
-    fullName?: string | null;
-    badgeFr?: string | null;
-    badgeEn?: string | null;
-    photo?: string | null;
-    phone?: string | null;
-    email?: string | null;
-    website?: string | null;
-    location?: string | null;
-    linkedInUrl?: string | null;
-    headlineFr?: string | null;
-    headlineEn?: string | null;
-    bioFr?: string | null;
-    bioEn?: string | null;
-    layout?: string | null;
-    accentColor?: string | null;
-    showPhoto?: boolean | null;
-    theme?: unknown;
-    sections: any[];
-    skills: any[];
-    socialLinks: any[];
-  };
+  const typed = cv as CvRecord;
 
   const theme = (typed as { theme?: unknown })?.theme ?? null;
   const accent =
@@ -179,10 +206,10 @@ const transformCv = (cv: unknown): CVData => {
     theme: theme as CVTheme | null,
     sections: typed.sections.map((section) => ({
       ...section,
-      items: section.items.map((item: any) => ({
+      items: section.items.map((item: CvSectionItem) => ({
         ...item,
-        startDate: item.startDate ? item.startDate.toISOString?.() ?? item.startDate : null,
-        endDate: item.endDate ? item.endDate.toISOString?.() ?? item.endDate : null,
+        startDate: toIsoString(item.startDate),
+        endDate: toIsoString(item.endDate),
       })),
     })),
     skills: typed.skills ?? [],

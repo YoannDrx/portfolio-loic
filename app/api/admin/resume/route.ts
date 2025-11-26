@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -11,14 +10,15 @@ import {
 import {
   resumeEntryCreateSchema,
   resumeEntriesQuerySchema,
-  ResumeEntryCreateInput,
-  ResumeEntriesQueryParams,
+  type ResumeEntryCreateInput,
+  type ResumeEntriesQueryParams,
 } from "@/lib/validations/schemas";
+import type { Prisma } from "@prisma/client";
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (req, _context, _user) => {
   try {
     const query: ResumeEntriesQueryParams = validateQuery(req, resumeEntriesQuerySchema);
-    const where: any = {};
+    const where: Prisma.ResumeEntryWhereInput = {};
 
     if (query.type) where.type = query.type;
     if (query.published !== undefined) where.published = query.published;
@@ -48,7 +48,7 @@ export const GET = withAuth(async (req, context, user) => {
 
 export const POST = withAuthAndValidation(
   resumeEntryCreateSchema,
-  async (req, context, user, data: ResumeEntryCreateInput) => {
+  async (_req, _context, user, data: ResumeEntryCreateInput) => {
     try {
       const entry = await prisma.resumeEntry.create({
         data: {

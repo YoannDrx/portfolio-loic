@@ -14,7 +14,6 @@ import {
   Home,
   FileText,
 } from 'lucide-react';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 import { GlassCard } from '@/components/ui/GlassCard';
 
 interface AdminSidebarProps {

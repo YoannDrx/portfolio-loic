@@ -1,9 +1,10 @@
 'use client';
 
-import { useRef, useEffect, useState, createContext, useContext, ReactNode } from 'react';
+import { useRef, useEffect, useState, createContext, useContext } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useScroll } from 'framer-motion';
 import * as THREE from 'three';
+import type { ReactNode } from 'react';
 
 /* ============================================
    TYPES
@@ -176,8 +177,8 @@ function ClickEffect({ type, position, onComplete }: ClickEffectProps) {
 interface SceneContentProps {
   children: ReactNode;
   mouseInfluence: number;
-  scrollInfluence: number;
   clickEffect: 'pulse' | 'ripple' | 'none';
+  scrollState: ScrollState;
   backgroundColor?: string;
   fog?: { color: string; near: number; far: number };
 }
@@ -185,13 +186,12 @@ interface SceneContentProps {
 function SceneContent({
   children,
   mouseInfluence,
-  scrollInfluence,
   clickEffect,
+  scrollState,
   backgroundColor,
   fog,
 }: SceneContentProps) {
   const [mouse, setMouse] = useState<MouseState>({ x: 0, y: 0, isActive: false });
-  const [scroll, setScroll] = useState<ScrollState>({ progress: 0, velocity: 0, direction: 'none' });
   const [isHovered, setIsHovered] = useState(false);
   const [clickPosition, setClickPosition] = useState<THREE.Vector3 | null>(null);
   const { gl } = useThree();
@@ -226,7 +226,7 @@ function SceneContent({
   }, [gl]);
 
   return (
-    <InteractiveContext.Provider value={{ mouse, scroll, isHovered }}>
+    <InteractiveContext.Provider value={{ mouse, scroll: scrollState, isHovered }}>
       {/* Background color */}
       {backgroundColor && <color attach="background" args={[backgroundColor]} />}
 
@@ -316,8 +316,8 @@ export default function InteractiveScene({
       >
         <SceneContent
           mouseInfluence={mouseInfluence}
-          scrollInfluence={scrollInfluence}
           clickEffect={clickEffect}
+          scrollState={scroll}
           backgroundColor={backgroundColor}
           fog={fog}
         >

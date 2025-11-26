@@ -1,4 +1,4 @@
-import { Variants, Transition, TargetAndTransition } from 'framer-motion';
+import type { Variants, Transition, TargetAndTransition } from 'framer-motion';
 
 /* ============================================
    TRANSITIONS

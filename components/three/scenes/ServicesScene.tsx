@@ -2,7 +2,7 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Instance, Instances, Environment, Float } from '@react-three/drei';
+import { Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 function EqualizerBars() {
@@ -22,17 +22,20 @@ function EqualizerBars() {
 
   useFrame((state) => {
     if (ref.current) {
-      ref.current.children.forEach((child: any, i) => {
-         // Simple sine wave animation simulating music
-         const t = state.clock.elapsedTime;
-         const noise = Math.sin(t * 5 + i * 0.5) * 0.5 + 0.5; // 0 to 1
-         const scaleY = 0.5 + noise * 3;
-         child.scale.y = scaleY;
-         child.position.y = -2 + scaleY / 2;
-         
-         // Color shift
-         const color = new THREE.Color().setHSL((i / numBars) * 0.2 + 0.6, 0.8, 0.5); // Blue to Purple
-         if(child.material) child.material.color = color;
+      ref.current.children.forEach((child, i) => {
+        if (!(child instanceof THREE.Mesh)) {
+          return;
+        }
+        // Simple sine wave animation simulating music
+        const t = state.clock.elapsedTime;
+        const noise = Math.sin(t * 5 + i * 0.5) * 0.5 + 0.5; // 0 to 1
+        const scaleY = 0.5 + noise * 3;
+        child.scale.y = scaleY;
+        child.position.y = -2 + scaleY / 2;
+        
+        // Color shift
+        const color = new THREE.Color().setHSL((i / numBars) * 0.2 + 0.6, 0.8, 0.5); // Blue to Purple
+        child.material.color = color;
       });
     }
   });

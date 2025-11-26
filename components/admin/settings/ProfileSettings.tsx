@@ -10,7 +10,9 @@ import { toast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
 
 interface ProfileSettingsProps {
-  user: any;
+  user: {
+    email?: string;
+  };
   onUserUpdate: () => void;
 }
 
@@ -70,17 +72,18 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       }
 
       toast({
-        title: t("successEmail") + " ✓",
+        title: `${t("successEmail")} ✓`,
         description: t("successEmail"),
       });
 
       setNewEmail("");
       onUserUpdate();
-    } catch (error: any) {
+    } catch (error) {
+      const message = error instanceof Error ? error.message : t("errorEmail");
       toast({
         variant: "destructive",
         title: tCommon("error"),
-        description: error.message || t("errorEmail"),
+        description: message,
       });
     } finally {
       setEmailLoading(false);
@@ -134,7 +137,7 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       }
 
       toast({
-        title: t("successPassword") + " ✓",
+        title: `${t("successPassword")} ✓`,
         description: t("successPassword"),
       });
 
@@ -145,11 +148,11 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       setShowCurrentPassword(false);
       setShowNewPassword(false);
       setShowConfirmPassword(false);
-    } catch (error: any) {
+    } catch (error) {
       toast({
         variant: "destructive",
         title: tCommon("error"),
-        description: error.message || t("errorPassword"),
+        description: error instanceof Error ? error.message : t("errorPassword"),
       });
     } finally {
       setPasswordLoading(false);

@@ -1,13 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
+
+type ExportValue = string | number | boolean | Date | null | undefined;
+type ExportRow = Record<string, ExportValue>;
 
 // ============================================
 // GET /api/admin/export
 // Export de données en CSV ou JSON
 // ============================================
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (req, _context, _user) => {
   try {
     const { searchParams } = new URL(req.url);
     const type = searchParams.get("type"); // "albums", "videos", "services"
@@ -22,7 +25,7 @@ export const GET = withAuth(async (req, context, user) => {
     }
 
     // Fetch data
-    let data: any[] = [];
+    let data: ExportRow[] = [];
 
     switch (type) {
       case "albums":
@@ -116,7 +119,7 @@ export const GET = withAuth(async (req, context, user) => {
 // HELPERS
 // ============================================
 
-function convertToCSV(data: any[]): string {
+function convertToCSV(data: ExportRow[]): string {
   if (data.length === 0) return "";
 
   const headers = Object.keys(data[0]);
@@ -139,7 +142,7 @@ function convertToCSV(data: any[]): string {
   return csvRows.join("\n");
 }
 
-function convertToTXT(data: any[], type: string): string {
+function convertToTXT(data: ExportRow[], type: string): string {
   if (data.length === 0) return `Aucune donnée à exporter pour ${type}\n`;
 
   const typeTitles: Record<string, string> = {

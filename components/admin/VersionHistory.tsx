@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -26,7 +26,7 @@ interface Version {
     name: string | null;
   };
   createdAt: string;
-  changes: any;
+  changes: unknown[];
 }
 
 interface VersionHistoryProps {
@@ -63,7 +63,7 @@ export function VersionHistory({ contentType, contentId, trigger }: VersionHisto
 
       const data = await response.json();
       setVersions(data.versions || []);
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: "Erreur",
@@ -96,7 +96,7 @@ export function VersionHistory({ contentType, contentId, trigger }: VersionHisto
       // Rafraîchir l'historique et fermer
       await fetchVersions();
       setTimeout(() => window.location.reload(), 1000);
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: "Erreur",
@@ -115,7 +115,7 @@ export function VersionHistory({ contentType, contentId, trigger }: VersionHisto
   }
 
   function getActionBadge(action: string) {
-    const variants: Record<string, { variant: any; label: string }> = {
+    const variants: Record<string, { variant: "default" | "secondary" | "outline"; label: string }> = {
       create: { variant: "default", label: "Création" },
       update: { variant: "secondary", label: "Modification" },
       restore: { variant: "outline", label: "Restauration" },

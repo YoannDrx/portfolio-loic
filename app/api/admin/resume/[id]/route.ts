@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -8,10 +8,10 @@ import {
 } from "@/lib/api/middleware";
 import {
   resumeEntryUpdateSchema,
-  ResumeEntryUpdateInput,
+  type ResumeEntryUpdateInput,
 } from "@/lib/validations/schemas";
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (_req, context, _user) => {
   try {
     const params = await context.params;
     const entry = await prisma.resumeEntry.findUnique({
@@ -30,7 +30,7 @@ export const GET = withAuth(async (req, context, user) => {
 
 export const PATCH = withAuthAndValidation(
   resumeEntryUpdateSchema,
-  async (req, context, user, data: ResumeEntryUpdateInput) => {
+  async (_req, context, _user, data: ResumeEntryUpdateInput) => {
     try {
       const params = await context.params;
       const entry = await prisma.resumeEntry.update({
@@ -44,7 +44,7 @@ export const PATCH = withAuthAndValidation(
   }
 );
 
-export const DELETE = withAuth(async (req, context, user) => {
+export const DELETE = withAuth(async (_req, context, _user) => {
   try {
     const params = await context.params;
     await prisma.resumeEntry.delete({

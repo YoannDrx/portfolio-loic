@@ -46,18 +46,13 @@ export function ImageUpload({
   const { toast } = useToast();
 
   const finalLabel = label || "Image"; // Fallback generic or use t if I add generic label key
-  const finalDescription = description || t("media.dropzone") + " (" + t("media.maxSize") + ")";
+  const finalDescription = description || `${t("media.dropzone")} (${t("media.maxSize")})`;
 
   // Synchroniser preview avec value quand il change de l'extérieur
   useEffect(() => {
     // Ne pas écraser preview si on est en train d'uploader
     if (!uploading) {
       const isValid = isValidImageUrl(value);
-      if (!isValid && value) {
-        console.warn(
-          `[ImageUpload] Invalid URL received: "${value}" (type: ${typeof value})`
-        );
-      }
       setPreview(isValid ? value : null);
     }
   }, [value, uploading]);
@@ -112,7 +107,7 @@ export function ImageUpload({
 
         toast({
           title: t("media.success"),
-          description: `${file.name} ` + t("common.success").toLowerCase(), // Or customized message
+          description: `${file.name} ${t("common.success").toLowerCase()}`, // Or customized message
         });
       } catch (error) {
         // En cas d'erreur, supprimer la preview

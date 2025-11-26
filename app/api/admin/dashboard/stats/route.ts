@@ -1,9 +1,8 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuth, handleApiError, successResponse } from "@/lib/api/middleware";
 import { getRecentVersions } from "@/lib/versioning";
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (_req, _context, _user) => {
   try {
     const [totalAlbums, publishedAlbums, totalVideos, publishedVideos, totalServices, publishedServices, recentActivity] = await Promise.all([
       prisma.album.count(),

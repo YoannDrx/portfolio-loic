@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -11,24 +10,25 @@ import {
 import {
   albumCreateSchema,
   albumsQuerySchema,
-  AlbumCreateInput,
-  AlbumsQueryParams,
+  type AlbumCreateInput,
+  type AlbumsQueryParams,
 } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
+import type { Prisma } from "@prisma/client";
 
 // ============================================
 // GET /api/admin/albums
 // Liste tous les albums avec pagination et filtres
 // ============================================
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (req, _context, _user) => {
   try {
     // Valider les query params
     const query: AlbumsQueryParams = validateQuery(req, albumsQuerySchema);
 
     // Construire les filtres
-    const where: any = {};
+    const where: Prisma.AlbumWhereInput = {};
 
     if (query.search) {
       where.OR = [
@@ -86,7 +86,7 @@ export const GET = withAuth(async (req, context, user) => {
 
 export const POST = withAuthAndValidation(
   albumCreateSchema,
-  async (req, context, user, data: AlbumCreateInput) => {
+  async (_req, _context, user, data: AlbumCreateInput) => {
     try {
       // Sanitizer les descriptions HTML
       const sanitizedDescriptionsFr = sanitizeDescription(data.descriptionsFr);

@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Search, Eye, Pencil, Plus, Trash2 } from 'lucide-react';
+import { Search, Eye, Pencil, Plus } from 'lucide-react';
 import { DeleteAlbumButton } from '@/components/admin/delete-album-button';
 import { GlassCard } from '@/components/ui/GlassCard';
 

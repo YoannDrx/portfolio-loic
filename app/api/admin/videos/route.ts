@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -11,23 +10,24 @@ import {
 import {
   videoCreateSchema,
   videosQuerySchema,
-  VideoCreateInput,
-  VideosQueryParams,
+  type VideoCreateInput,
+  type VideosQueryParams,
 } from "@/lib/validations/schemas";
 import { createVersion } from "@/lib/versioning";
+import type { Prisma } from "@prisma/client";
 
 // ============================================
 // GET /api/admin/videos
 // Liste toutes les vidéos avec pagination et filtres
 // ============================================
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (req, _context, _user) => {
   try {
     // Valider les query params
     const query: VideosQueryParams = validateQuery(req, videosQuerySchema);
 
     // Construire les filtres
-    const where: any = {};
+    const where: Prisma.VideoWhereInput = {};
 
     if (query.search) {
       where.title = { contains: query.search, mode: "insensitive" };
@@ -82,7 +82,7 @@ export const GET = withAuth(async (req, context, user) => {
 
 export const POST = withAuthAndValidation(
   videoCreateSchema,
-  async (req, context, user, data: VideoCreateInput) => {
+  async (_req, _context, user, data: VideoCreateInput) => {
     try {
       // Créer la vidéo
       const video = await prisma.video.create({

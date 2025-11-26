@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ColorPicker } from "@/components/admin/color-picker";
 import { CVDocument } from "@/components/cv/pdf-document";
-import type { CVData, CVTheme, CVSection, CVItem, CVSkill, CVTranslation } from "@/types/cv";
+import type { CVData, CVTheme, CVSection, CVItem, CVTranslation } from "@/types/cv";
 import { toast } from "@/hooks/use-toast";
 
 const defaultTheme: CVTheme = {

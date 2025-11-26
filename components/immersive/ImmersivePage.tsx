@@ -1,6 +1,7 @@
 'use client';
 
-import { useRef, ReactNode, Suspense } from 'react';
+import { useRef, Suspense } from 'react';
+import type { ReactNode } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
 

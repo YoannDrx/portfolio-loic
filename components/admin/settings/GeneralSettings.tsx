@@ -4,9 +4,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 
+type GeneralSettingsValues = {
+  siteTitle?: string;
+  siteDescription?: string;
+  footerBio?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  location?: string;
+  availability?: string;
+};
+
 interface GeneralSettingsProps {
-  settings: any;
-  onChange: (field: string, value: any) => void;
+  settings: GeneralSettingsValues;
+  onChange: (field: keyof GeneralSettingsValues | string, value: unknown) => void;
 }
 
 export function GeneralSettings({ settings, onChange }: GeneralSettingsProps) {

@@ -30,10 +30,9 @@ function StarField({ mouse, scrollProgress }: StarFieldProps) {
   const radius = 20;
 
   // Generate star positions and colors
-  const { positions, colors, sizes } = useMemo(() => {
+  const { positions, colors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
 
     const white = new THREE.Color('#ffffff');
     const cyan = new THREE.Color('#00F0FF');
@@ -67,11 +66,9 @@ function StarField({ mouse, scrollProgress }: StarFieldProps) {
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
 
-      // Random sizes for depth
-      sizes[i] = 0.02 + Math.random() * 0.06;
     }
 
-    return { positions, colors, sizes };
+    return { positions, colors };
   }, []);
 
   // Twinkle effect - stored in ref for performance

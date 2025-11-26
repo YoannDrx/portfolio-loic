@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import type { ComponentType } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Pencil, FileDown, Trash2, Calendar, Building2, GraduationCap, Briefcase, Star, Award, Users } from "lucide-react";
@@ -25,7 +25,7 @@ interface ResumeContentProps {
 }
 
 // Configuration des couleurs et icônes par type
-const typeConfig: Record<string, { color: string; bgColor: string; borderColor: string; icon: any }> = {
+const typeConfig: Record<string, { color: string; bgColor: string; borderColor: string; icon: ComponentType<{ className?: string }> }> = {
   EXPERIENCE: {
     color: "text-blue-700",
     bgColor: "bg-blue-50",
@@ -77,7 +77,6 @@ const typeConfig: Record<string, { color: string; bgColor: string; borderColor: 
 };
 
 export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
-  const router = useRouter();
   const [entries, setEntries] = useState<ResumeEntry[]>(initialEntries);
 
   const handleDelete = async (id: string) => {
@@ -91,7 +90,7 @@ export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
 
       setEntries(entries.filter((e) => e.id !== id));
       toast({ title: "Entrée supprimée avec succès" });
-    } catch (error) {
+    } catch {
       toast({ title: "Erreur lors de la suppression", variant: "destructive" });
     }
   };

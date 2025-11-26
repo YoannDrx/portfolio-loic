@@ -21,7 +21,6 @@ import {
   Menu,
   Bell,
 } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
 
 interface AdminHeaderProps {
   user: {

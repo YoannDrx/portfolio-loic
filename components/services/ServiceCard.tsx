@@ -30,7 +30,9 @@ export function ServiceCard({ service, locale }: ServiceCardProps) {
     : (service.descriptionsEn || service.text);
 
   // Strip HTML tags for preview if needed, or just take a substring
-  const previewText = description?.replace(/<[^>]*>/g, '').substring(0, 100) + '...';
+  const previewText = description
+    ? `${description.replace(/<[^>]*>/g, '').substring(0, 100)}...`
+    : '';
 
   return (
     <Link href={{ pathname: '/services/[id]', params: { id: service.id } }} className="block h-full">

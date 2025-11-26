@@ -71,7 +71,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
   });
 
   const {
-    formState: { isSubmitting, isDirty, errors },
+    formState: { isSubmitting, isDirty, errors: _errors },
   } = form;
 
   async function onSubmit(data: AlbumCreateFormInput) {
@@ -101,11 +101,11 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
         throw new Error(error.error || t("common.error"));
       }
 
-      const album = await response.json();
+      await response.json();
 
       const action = isEditing ? t("common.updated") : t("common.created");
       toast({
-        title: (isEditing ? t("albums.form.successUpdate") : t("albums.form.successCreate")) + " ✓",
+        title: `${isEditing ? t("albums.form.successUpdate") : t("albums.form.successCreate")} ✓`,
         description: t("albums.form.successDesc", { title: data.title, action }),
       });
 
@@ -231,8 +231,8 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                       <ImageUpload
                         value={field.value}
                         onChange={field.onChange}
-                        label={t("albums.form.coverImage") + " *"}
-                        description={t("media.dropzone") + " (" + t("media.maxSize") + ")"}
+                        label={`${t("albums.form.coverImage")} *`}
+                        description={`${t("media.dropzone")} (${t("media.maxSize")})`}
                       />
                     </FormControl>
                     <FormMessage />
@@ -249,8 +249,8 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                       <ImageUpload
                         value={field.value}
                         onChange={field.onChange}
-                        label={t("albums.form.poster") + " *"}
-                        description={t("media.dropzone") + " (" + t("media.maxSize") + ")"}
+                        label={`${t("albums.form.poster")} *`}
+                        description={`${t("media.dropzone")} (${t("media.maxSize")})`}
                       />
                     </FormControl>
                     <FormMessage />
@@ -373,7 +373,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                     <RichTextEditor
                       content={field.value}
                       onChange={field.onChange}
-                      placeholder={t("albums.form.descFr") + "..."}
+                      placeholder={`${t("albums.form.descFr")}...`}
                     />
                   </FormControl>
                   <FormMessage />
@@ -398,7 +398,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                     <RichTextEditor
                       content={field.value}
                       onChange={field.onChange}
-                      placeholder={t("albums.form.descEn") + "..."}
+                      placeholder={`${t("albums.form.descEn")}...`}
                     />
                   </FormControl>
                   <FormMessage />

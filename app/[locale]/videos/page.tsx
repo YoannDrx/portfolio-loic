@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function VideosPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function VideosPage() {
   // Récupérer toutes les vidéos publiées, triées par date de création décroissante
   const videos = await prisma.video.findMany({
     where: {

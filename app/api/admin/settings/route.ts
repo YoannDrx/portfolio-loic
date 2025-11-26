@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
+import { withAuth, handleApiError } from "@/lib/api/middleware";
 
 // ============================================
 // GET /api/admin/settings

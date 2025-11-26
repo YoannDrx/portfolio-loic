@@ -3,13 +3,39 @@ import { Page, Text, View, Document, StyleSheet, Svg, Path, Circle, Image } from
 import path from 'path';
 
 interface ResumeData {
-  settings: any;
-  entries: any[];
-  sections: any[];
-  profile: any;
-  theme: any;
+  settings: Record<string, unknown>;
+  entries: ResumeEntry[];
+  sections: ResumeSection[];
+  profile: Record<string, unknown>;
+  theme: Partial<Palette>;
   locale: string;
 }
+
+type ResumeEntry = {
+  id?: string;
+  type?: string;
+  value?: number | null;
+  titleEn?: string | null;
+  titleFr?: string | null;
+  subtitleEn?: string | null;
+  subtitleFr?: string | null;
+  dateRangeEn?: string | null;
+  dateRangeFr?: string | null;
+  link?: string | null;
+  [key: string]: unknown;
+};
+
+type ResumeSection = {
+  slug?: string;
+  titleEn?: string;
+  titleFr?: string;
+  type?: string;
+  entryType?: string;
+  entryIds?: string[];
+  order?: number;
+  published?: boolean;
+  items?: ResumeEntry[];
+};
 
 type Palette = {
   primary: string;
@@ -24,7 +50,7 @@ type Palette = {
   gradientTo: string;
 };
 
-const buildPalette = (theme: any): Palette => ({
+const buildPalette = (theme: Partial<Palette> | undefined): Palette => ({
   primary: theme?.primary || '#1bd99a',
   secondary: theme?.secondary || '#5dd6ff',
   accent: theme?.accent || '#ff6bd6',
@@ -264,7 +290,7 @@ const createStyles = (palette: Palette) =>
     },
   });
 
-const HeaderGraphic = ({ palette, style }: { palette: Palette; style: any }) => (
+const HeaderGraphic = ({ palette, style }: { palette: Palette; style: Record<string, unknown> }) => (
   <Svg style={style} viewBox="0 0 280 140">
     <Path d="M0 0 L180 0 L120 80 Z" fill={palette.gradientFrom} opacity={0.25} />
     <Path d="M70 10 L250 0 L210 110 Z" fill={palette.gradientTo} opacity={0.3} />
@@ -305,10 +331,10 @@ const GlobeIcon = ({ color }: { color: string }) => (
   </Svg>
 );
 
-const resolveSectionEntries = (section: any, entries: any[]) => {
+const resolveSectionEntries = (section: ResumeSection, entries: ResumeEntry[]) => {
   if (!section) return [];
   if (section.entryIds && Array.isArray(section.entryIds) && section.entryIds.length > 0) {
-    return entries.filter((e) => section.entryIds.includes(e.id));
+    return entries.filter((e) => (e.id ? section.entryIds?.includes(e.id) : false));
   }
   if (section.entryType) {
     return entries.filter((e) => e.type === section.entryType);
@@ -322,7 +348,7 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
   const palette = buildPalette(theme);
   const styles = createStyles(palette);
 
-  const defaultSections = [
+  const defaultSections: ResumeSection[] = [
     { slug: 'experience', titleEn: 'Experience', titleFr: 'Expérience', type: 'TIMELINE', entryType: 'EXPERIENCE', order: 1, published: true },
     { slug: 'awards', titleEn: 'Awards', titleFr: 'Récompenses', type: 'TIMELINE', entryType: 'AWARD', order: 2, published: true },
     { slug: 'skills', titleEn: 'Skills', titleFr: 'Compétences', type: 'SKILL_BARS', entryType: 'SKILL', order: 3, published: true },
@@ -331,15 +357,15 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
     { slug: 'interests', titleEn: 'Interests', titleFr: "Centres d'intérêt", type: 'TAG_CLOUD', entryType: 'INTEREST', order: 6, published: true },
   ];
 
-  const resolvedSections = (sections && sections.length > 0 ? sections : defaultSections).filter((s: any) => s.published !== false);
-  const sortedSections = [...resolvedSections].sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0));
+  const resolvedSections = (sections && sections.length > 0 ? sections : defaultSections).filter((s) => s.published !== false);
+  const sortedSections = [...resolvedSections].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
-  const sidebarSections = sortedSections.filter((s: any) => ['SKILL_BARS', 'TAG_CLOUD', 'SIDEBAR_LIST'].includes(s.type));
-  const timelineSections = sortedSections.filter((s: any) => s.type === 'TIMELINE');
+  const sidebarSections = sortedSections.filter((s) => ['SKILL_BARS', 'TAG_CLOUD', 'SIDEBAR_LIST'].includes(s.type ?? ''));
+  const timelineSections = sortedSections.filter((s) => s.type === 'TIMELINE');
 
-  const textFor = (entry: any, field: string) => {
+  const textFor = (entry: ResumeEntry, field: string) => {
     const val = entry?.[`${field}${isFr ? 'Fr' : 'En'}`];
-    return val || entry?.[`${field}En`] || '';
+    return (val as string) || (entry?.[`${field}En`] as string) || '';
   };
 
   const phone = profile.phone || settings?.contactPhone;
@@ -352,13 +378,13 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
       ? profile.photo
       : path.resolve(`./public${profile.photo || '/img/slider/loic-studio-front.jpg'}`);
 
-  const renderTimelineSection = (section: any) => {
-    const list = resolveSectionEntries(section, entries);
+  const renderTimelineSection = (section: ResumeSection) => {
+    const list = section.items ?? resolveSectionEntries(section, entries);
     if (!list || list.length === 0) return null;
     return (
       <View style={styles.timelineSection} key={section.slug || section.titleEn}>
         <Text style={styles.sectionTitle}>{isFr ? section.titleFr || section.titleEn : section.titleEn || section.titleFr}</Text>
-        {list.map((item: any) => (
+        {list.map((item: ResumeEntry) => (
           <View style={styles.timelineItem} key={item.id}>
             <View style={styles.timelineDot} />
             <View style={styles.entryTitleRow}>
@@ -373,15 +399,15 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
     );
   };
 
-  const renderSidebarSection = (section: any) => {
-    const list = resolveSectionEntries(section, entries);
+  const renderSidebarSection = (section: ResumeSection) => {
+    const list = section.items ?? resolveSectionEntries(section, entries);
     if (!list || list.length === 0) return null;
 
     if (section.type === 'SKILL_BARS') {
       return (
         <View key={section.slug || section.titleEn}>
           <Text style={styles.sidebarTitle}>{isFr ? section.titleFr || section.titleEn : section.titleEn || section.titleFr}</Text>
-          {list.map((skill: any) => (
+          {list.map((skill: ResumeEntry) => (
             <View key={skill.id} style={styles.skillItem}>
               <View style={styles.skillHeader}>
                 <Text style={styles.skillName}>{textFor(skill, 'title')}</Text>
@@ -402,7 +428,7 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
       return (
         <View key={section.slug || section.titleEn}>
           <Text style={styles.sidebarTitle}>{isFr ? section.titleFr || section.titleEn : section.titleEn || section.titleFr}</Text>
-          {list.map((item: any) => (
+          {list.map((item: ResumeEntry) => (
             <View key={item.id} style={{ marginBottom: 8 }}>
               <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#111827' }}>{textFor(item, 'title')}</Text>
               {textFor(item, 'description') && <Text style={{ fontSize: 9, color: palette.muted }}>{textFor(item, 'description')}</Text>}
@@ -417,7 +443,7 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
       <View key={section.slug || section.titleEn}>
         <Text style={styles.sidebarTitle}>{isFr ? section.titleFr || section.titleEn : section.titleEn || section.titleFr}</Text>
         <View style={styles.tagGrid}>
-          {list.map((item: any) => (
+          {list.map((item: ResumeEntry) => (
             <View key={item.id} style={styles.tag}>
               <Text style={styles.tagText}>{textFor(item, 'title')}</Text>
             </View>
@@ -468,13 +494,13 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
 
         <View style={styles.layout}>
           <View style={styles.sidebar}>
-            {sidebarSections.map((section: any) => (
+            {sidebarSections.map((section: ResumeSection) => (
               <View key={section.slug || section.titleEn}>{renderSidebarSection(section)}</View>
             ))}
           </View>
 
           <View style={styles.main}>
-            {timelineSections.map((section: any, idx: number) => (
+            {timelineSections.map((section: ResumeSection, idx: number) => (
               <View key={section.slug || section.titleEn}>
                 {renderTimelineSection(section)}
                 {idx < timelineSections.length - 1 && <View style={styles.divider} />}

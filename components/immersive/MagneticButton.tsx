@@ -134,7 +134,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
       className,
       fullWidth = false,
     },
-    forwardedRef
+    _forwardedRef
   ) => {
     const { ref, x, y } = useMagnetic({ strength: magneticStrength });
 

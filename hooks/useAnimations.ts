@@ -1,14 +1,12 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback, RefObject } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import {
   useMotionValue,
   useSpring,
-  useTransform,
   useInView,
-  MotionValue,
-  SpringOptions,
 } from 'framer-motion';
+import type { RefObject, MotionValue, SpringOptions } from 'framer-motion';
 
 /* ============================================
    MOUSE POSITION HOOK
@@ -338,6 +336,9 @@ export function useMouseGlow({
     opacity: isHovered ? opacity : 0,
     left: position.x,
     top: position.y,
+    width: size,
+    height: size,
+    filter: `blur(${blur}px)`,
   };
 
   return { ref, glowStyle, isHovered };

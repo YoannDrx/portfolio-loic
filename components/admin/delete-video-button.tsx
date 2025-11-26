@@ -47,7 +47,7 @@ export function DeleteVideoButton({
 
       setOpen(false);
       router.refresh();
-    } catch (error) {
+    } catch {
       toast({
         title: "Erreur",
         description: "Une erreur est survenue lors de la suppression.",

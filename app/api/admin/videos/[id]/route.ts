@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -10,7 +9,7 @@ import {
 } from "@/lib/api/middleware";
 import {
   videoUpdateSchema,
-  VideoUpdateInput,
+  type VideoUpdateInput,
 } from "@/lib/validations/schemas";
 import { createVersion } from "@/lib/versioning";
 
@@ -19,7 +18,7 @@ import { createVersion } from "@/lib/versioning";
 // Récupérer une vidéo par ID
 // ============================================
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (_req, context, _user) => {
   try {
     const { id } = await context.params;
 
@@ -53,7 +52,7 @@ export const GET = withAuth(async (req, context, user) => {
 
 export const PATCH = withAuthAndValidation(
   videoUpdateSchema,
-  async (req, context, user, data: VideoUpdateInput) => {
+  async (_req, context, user, data: VideoUpdateInput) => {
     try {
       const { id } = await context.params;
 
@@ -96,7 +95,7 @@ export const PATCH = withAuthAndValidation(
 // Supprimer une vidéo
 // ============================================
 
-export const DELETE = withAuth(async (req, context, user) => {
+export const DELETE = withAuth(async (_req, context, _user) => {
   try {
     const { id } = await context.params;
 

@@ -59,8 +59,7 @@ export async function generateMetadata({ params }: PageProps) {
       title: `${album.title} | Loïc Ghanem`,
       description: `Album ${album.style} (${album.date})`,
     };
-  } catch (error) {
-    console.error('Error generating metadata:', error);
+  } catch {
     return {
       title: 'Album | Loïc Ghanem',
     };

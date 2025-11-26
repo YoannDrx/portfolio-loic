@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { motion } from 'framer-motion';
+import { motion, type MotionProps } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 import { staggerContainer, staggerItem, viewportOnce } from '@/lib/animations';
@@ -54,7 +54,7 @@ export function Grid({
         whileInView="visible"
         viewport={viewportOnce}
         variants={staggerContainer}
-        {...(props as any)}
+        {...(props as MotionProps)}
       >
         {children}
       </motion.div>
@@ -86,7 +86,7 @@ export function GridItem({ className, span, children, ...props }: GridItemProps)
     <motion.div
       className={cn(span && spanClasses[span], className)}
       variants={staggerItem}
-      {...(props as any)}
+      {...(props as MotionProps)}
     >
       {children}
     </motion.div>

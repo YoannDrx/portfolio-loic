@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
 import { hash, compare } from "bcryptjs";
@@ -8,7 +8,7 @@ import { hash, compare } from "bcryptjs";
 // Changer le mot de passe de l'utilisateur
 // ============================================
 
-export const PATCH = withAuth(async (req, context, user) => {
+export const PATCH = withAuth(async (req, _context, user) => {
   try {
     const body = await req.json();
     const { currentPassword, newPassword } = body;

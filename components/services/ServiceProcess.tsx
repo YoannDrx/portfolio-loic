@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { FileText, Music, Headphones, Sliders, Rocket, Sparkles, LucideIcon } from 'lucide-react';
+import { FileText, Music, Headphones, Sliders, Rocket, Sparkles, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 /* ============================================

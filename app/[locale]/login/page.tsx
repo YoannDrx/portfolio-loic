@@ -1,10 +1,7 @@
 import FuturisticHome from '@/components/home/FuturisticHome';
 import { prisma } from '@/lib/prisma';
-import { getLocale } from 'next-intl/server';
 
 export default async function LoginPage() {
-  const locale = await getLocale();
-
   const [albums, videos, services] = await Promise.all([
     // Fetch latest 4 albums
     prisma.album.findMany({

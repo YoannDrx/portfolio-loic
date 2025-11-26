@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -11,24 +10,25 @@ import {
 import {
   serviceCreateSchema,
   servicesQuerySchema,
-  ServiceCreateInput,
-  ServicesQueryParams,
+  type ServiceCreateInput,
+  type ServicesQueryParams,
 } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
+import type { Prisma } from "@prisma/client";
 
 // ============================================
 // GET /api/admin/services
 // Liste tous les services avec pagination et filtres
 // ============================================
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (req, _context, _user) => {
   try {
     // Valider les query params
     const query: ServicesQueryParams = validateQuery(req, servicesQuerySchema);
 
     // Construire les filtres
-    const where: any = {};
+    const where: Prisma.ServiceWhereInput = {};
 
     if (query.search) {
       where.OR = [
@@ -82,7 +82,7 @@ export const GET = withAuth(async (req, context, user) => {
 
 export const POST = withAuthAndValidation(
   serviceCreateSchema,
-  async (req, context, user, data: ServiceCreateInput) => {
+  async (_req, _context, user, data: ServiceCreateInput) => {
     try {
       // Sanitizer les descriptions HTML
       const sanitizedDescriptionsFr = sanitizeDescription(data.descriptionsFr);

@@ -10,8 +10,8 @@ export type VersionAction = "create" | "update" | "restore";
 export interface VersionData {
   id: string;
   version: number;
-  data: any;
-  changes: any;
+  data: unknown;
+  changes: unknown;
   action: VersionAction;
   createdBy: {
     id: string;
@@ -23,8 +23,8 @@ export interface VersionData {
 
 export interface DiffItem {
   field: string;
-  oldValue: any;
-  newValue: any;
+  oldValue: unknown;
+  newValue: unknown;
   type: "added" | "removed" | "modified";
 }
 
@@ -38,7 +38,7 @@ export interface DiffItem {
 export async function createVersion(
   contentType: ContentType,
   contentId: string,
-  data: any,
+  data: Record<string, unknown>,
   action: VersionAction,
   userId: string
 ): Promise<void> {
@@ -54,7 +54,10 @@ export async function createVersion(
     // Calculer les changements si ce n'est pas une création
     let changes: ReturnType<typeof calculateDiff> | undefined = undefined;
     if (action !== "create" && lastVersion) {
-      changes = calculateDiff(lastVersion.data as any, data);
+      changes = calculateDiff(
+        (lastVersion.data as Record<string, unknown> | null) ?? {},
+        data
+      );
     }
 
     // Créer la nouvelle version
@@ -64,13 +67,12 @@ export async function createVersion(
         contentId,
         version: newVersionNumber,
         data,
-        changes: changes as unknown as object ?? undefined,
+        changes: changes ?? undefined,
         action,
         createdById: userId,
       },
     });
-  } catch (error) {
-    console.error("Erreur lors de la création de version:", error);
+  } catch {
     // Ne pas bloquer l'opération principale si le versioning échoue
   }
 }
@@ -159,13 +161,14 @@ export async function compareVersions(
 /**
  * Calcule les différences entre deux objets
  */
-export function calculateDiff(oldData: any, newData: any): DiffItem[] {
+export function calculateDiff(
+  oldData: Record<string, unknown> | null,
+  newData: Record<string, unknown> | null
+): DiffItem[] {
   const diff: DiffItem[] = [];
 
-  // Champs à ignorer pour le diff
   const ignoredFields = ["id", "createdAt", "updatedAt", "createdById"];
 
-  // Tous les champs uniques
   const allKeys = new Set([
     ...Object.keys(oldData || {}),
     ...Object.keys(newData || {}),
@@ -177,7 +180,6 @@ export function calculateDiff(oldData: any, newData: any): DiffItem[] {
     const oldValue = oldData?.[key];
     const newValue = newData?.[key];
 
-    // Valeur ajoutée
     if (oldValue === undefined && newValue !== undefined) {
       diff.push({
         field: key,
@@ -185,18 +187,14 @@ export function calculateDiff(oldData: any, newData: any): DiffItem[] {
         newValue,
         type: "added",
       });
-    }
-    // Valeur supprimée
-    else if (oldValue !== undefined && newValue === undefined) {
+    } else if (oldValue !== undefined && newValue === undefined) {
       diff.push({
         field: key,
         oldValue,
         newValue: null,
         type: "removed",
       });
-    }
-    // Valeur modifiée
-    else if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
+    } else if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
       diff.push({
         field: key,
         oldValue,
@@ -213,7 +211,11 @@ export function calculateDiff(oldData: any, newData: any): DiffItem[] {
  * Restaure une version antérieure
  * Retourne les données de la version à restaurer
  */
-export async function getVersionData(versionId: string): Promise<any> {
+export async function getVersionData(versionId: string): Promise<{
+  contentType: ContentType;
+  contentId: string;
+  data: unknown;
+}> {
   const version = await prisma.contentVersion.findUnique({
     where: { id: versionId },
     select: { data: true, contentType: true, contentId: true },

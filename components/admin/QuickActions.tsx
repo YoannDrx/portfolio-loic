@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Plus, Upload, Settings, Download, Eye } from "lucide-react";
+import { Plus, Settings, Download, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface QuickActionsProps {

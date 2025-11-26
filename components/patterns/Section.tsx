@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { motion } from 'framer-motion';
+import { motion, type MotionProps } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 import { fadeIn, fadeInUp, transitions, viewportOnce } from '@/lib/animations';
@@ -66,7 +66,7 @@ export function Section({
         viewport={viewportOnce}
         variants={variants}
         transition={transitions.smooth}
-        {...(props as any)}
+        {...(props as MotionProps)}
       >
         {children}
       </motion.section>

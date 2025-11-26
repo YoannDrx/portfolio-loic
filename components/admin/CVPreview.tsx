@@ -1,18 +1,57 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+type ThemePalette = {
+  primary?: string;
+  secondary?: string;
+  accent?: string;
+  muted?: string;
+  sidebar?: string;
+  divider?: string;
+  tagBg?: string;
+  tagText?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+};
+
+type Profile = {
+  photo?: string | null;
+  name?: string | null;
+  roleFr?: string | null;
+  roleEn?: string | null;
+  headlineFr?: string | null;
+  headlineEn?: string | null;
+};
+
+type Section = {
+  slug: string;
+  titleEn?: string;
+  titleFr?: string;
+  type: string;
+  entryType?: string;
+  entryIds?: string[];
+  order?: number;
+  published?: boolean;
+};
+
+type Entry = {
+  id?: string;
+  type?: string;
+  value?: number | null;
+  [key: string]: unknown;
+};
+
 interface CVPreviewProps {
-  profile: any;
-  theme: any;
-  sections: any[];
-  entries: any[];
+  profile: Profile;
+  theme: ThemePalette;
+  sections: Section[];
+  entries: Entry[];
   locale: string;
 }
 
-const buildPalette = (theme: any) => ({
+const buildPalette = (theme: ThemePalette) => ({
   primary: theme?.primary || "#1bd99a",
   secondary: theme?.secondary || "#5dd6ff",
   accent: theme?.accent || "#ff6bd6",
@@ -25,10 +64,10 @@ const buildPalette = (theme: any) => ({
   gradientTo: theme?.gradientTo || "#5dd6ff",
 });
 
-const resolveEntriesForSection = (section: any, entries: any[]) => {
+const resolveEntriesForSection = (section: Section, entries: Entry[]) => {
   if (!section) return [];
   if (section.entryIds && Array.isArray(section.entryIds) && section.entryIds.length > 0) {
-    return entries.filter((e) => section.entryIds.includes(e.id));
+    return entries.filter((e) => (e.id ? section.entryIds?.includes(e.id) : false));
   }
   if (section.entryType) {
     return entries.filter((e) => e.type === section.entryType);
@@ -53,9 +92,11 @@ export function CVPreview({ profile, theme, sections, entries, locale }: CVPrevi
   const sidebarSections = sortedSections.filter((s) => ["SKILL_BARS", "TAG_CLOUD", "SIDEBAR_LIST"].includes(s.type));
   const timelineSections = sortedSections.filter((s) => s.type === "TIMELINE");
 
-  const textFor = (entry: any, field: string) => {
-    const val = entry?.[`${field}${isFr ? "Fr" : "En"}`];
-    return val || entry?.[`${field}En`] || "";
+  const textFor = (entry: Entry, field: string) => {
+    const localizedField = `${field}${isFr ? "Fr" : "En"}`;
+    const val = entry?.[localizedField];
+    const fallback = entry?.[`${field}En`];
+    return (val as string) || (fallback as string) || "";
   };
 
   return (

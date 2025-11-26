@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   withAuth,
@@ -10,7 +9,7 @@ import {
 } from "@/lib/api/middleware";
 import {
   albumUpdateSchema,
-  AlbumUpdateInput,
+  type AlbumUpdateInput,
 } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
@@ -20,7 +19,7 @@ import { createVersion } from "@/lib/versioning";
 // Récupérer un album par ID
 // ============================================
 
-export const GET = withAuth(async (req, context, user) => {
+export const GET = withAuth(async (_req, context, _user) => {
   try {
     const { id } = await context.params;
 
@@ -54,7 +53,7 @@ export const GET = withAuth(async (req, context, user) => {
 
 export const PATCH = withAuthAndValidation(
   albumUpdateSchema,
-  async (req, context, user, data: AlbumUpdateInput) => {
+  async (_req, context, user, data: AlbumUpdateInput) => {
     try {
       const { id } = await context.params;
 
@@ -68,7 +67,7 @@ export const PATCH = withAuthAndValidation(
       }
 
       // Préparer les données de mise à jour
-      const updateData: any = { ...data };
+      const updateData: Partial<AlbumUpdateInput> = { ...data };
 
       // Sanitizer les descriptions si elles sont fournies
       if (data.descriptionsFr) {
@@ -108,7 +107,7 @@ export const PATCH = withAuthAndValidation(
 // Supprimer un album
 // ============================================
 
-export const DELETE = withAuth(async (req, context, user) => {
+export const DELETE = withAuth(async (_req, context, _user) => {
   try {
     const { id } = await context.params;
 

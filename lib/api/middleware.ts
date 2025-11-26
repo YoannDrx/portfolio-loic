@@ -1,6 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { ZodSchema, ZodError } from "zod";
+import type { ZodSchema } from "zod";
+import { ZodError } from "zod";
 
 // ============================================
 // TYPES
@@ -126,11 +128,6 @@ export function validateQuery<T>(
  * Gère les erreurs et retourne une réponse appropriée
  */
 export function handleApiError(error: unknown): NextResponse {
-  // Logging en développement
-  if (process.env.NODE_ENV === "development") {
-    console.error("[API Error]", error);
-  }
-
   // Erreur personnalisée
   if (error instanceof ApiError) {
     return NextResponse.json(
@@ -161,7 +158,7 @@ export function handleApiError(error: unknown): NextResponse {
 
   // Erreur Prisma (contraintes, etc.)
   if (error && typeof error === "object" && "code" in error) {
-    const prismaError = error as { code: string; meta?: Record<string, any> };
+    const prismaError = error as { code: string; meta?: Record<string, unknown> };
 
     if (prismaError.code === "P2002") {
       return NextResponse.json(
@@ -221,7 +218,7 @@ export function noContentResponse(): NextResponse {
 // HELPER: Wrapper pour les routes API
 // ============================================
 
-type ApiHandler<T = any> = (
+type ApiHandler<T = unknown> = (
   req: NextRequest,
   context: { params: Promise<Record<string, string>> },
   user: AuthenticatedUser
@@ -230,7 +227,7 @@ type ApiHandler<T = any> = (
 /**
  * Wrapper qui gère automatiquement l'auth et les erreurs
  */
-export function withAuth<T = any>(handler: ApiHandler<T>) {
+export function withAuth<T = unknown>(handler: ApiHandler<T>) {
   return async (
     req: NextRequest,
     context: { params: Promise<Record<string, string>> }
@@ -247,7 +244,7 @@ export function withAuth<T = any>(handler: ApiHandler<T>) {
 /**
  * Wrapper qui gère automatiquement l'auth, la validation et les erreurs
  */
-export function withAuthAndValidation<TSchema, TResponse = any>(
+export function withAuthAndValidation<TSchema, TResponse = unknown>(
   schema: ZodSchema<TSchema>,
   handler: (
     req: NextRequest,

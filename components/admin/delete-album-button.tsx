@@ -50,7 +50,7 @@ export function DeleteAlbumButton({
 
       setOpen(false);
       router.refresh();
-    } catch (error) {
+    } catch {
       toast({
         title: t("common.error"),
         description: t("common.error"),
