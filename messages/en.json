@@ -260,7 +260,7 @@
       "satisfaction": "Satisfaction"
     },
     "process": {
-      "title": "The Creative Journey",
+      "title": "How I Work",
       "subtitle": "PROCESS",
       "brief": {
         "title": "Brief",
@@ -284,9 +284,9 @@
       }
     },
     "cosmicCta": {
-      "title": "Ready to explore the sonic universe?",
-      "description": "Every project is a new star in our creative galaxy. Let's embark on this musical adventure together.",
-      "button": "Start the adventure"
+      "title": "Ready to create together?",
+      "description": "Every project deserves a unique sonic identity. Let's turn your vision into music.",
+      "button": "Let's talk about your project"
     },
     "cta": {
       "title": "Ready to start your project?",

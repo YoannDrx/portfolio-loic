@@ -1,19 +1,20 @@
-'use client';
+"use client";
 
-import { forwardRef, ReactNode } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { useMagnetic } from '@/hooks/useAnimations';
-import { LucideIcon } from 'lucide-react';
+import { forwardRef } from "react";
+import type { ReactNode } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { useMagnetic } from "@/hooks/useAnimations";
+import type { LucideIcon } from "lucide-react";
 
 /* ============================================
    TYPES
    ============================================ */
 
-type ButtonColor = 'lime' | 'cyan' | 'magenta' | 'purple' | 'emerald' | 'teal';
-type ButtonVariant = 'solid' | 'outline' | 'ghost';
-type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+type ButtonColor = "lime" | "cyan" | "magenta" | "purple" | "emerald" | "teal";
+type ButtonVariant = "solid" | "outline" | "ghost";
+type ButtonSize = "sm" | "md" | "lg" | "xl";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -49,55 +50,60 @@ interface MagneticButtonProps {
    COLOR CONFIGURATIONS
    ============================================ */
 
-const colorConfig: Record<ButtonColor, {
-  solid: string;
-  outline: string;
-  ghost: string;
-  glow: string;
-}> = {
+const colorConfig: Record<
+  ButtonColor,
+  {
+    solid: string;
+    outline: string;
+    ghost: string;
+    glow: string;
+  }
+> = {
   lime: {
-    solid: 'bg-gradient-to-r from-neon-lime to-neon-cyan text-obsidian-950 hover:shadow-[0_0_30px_rgba(213,255,10,0.5)]',
-    outline: 'border-2 border-neon-lime text-neon-lime hover:bg-neon-lime/10 hover:shadow-[0_0_20px_rgba(213,255,10,0.3)]',
-    ghost: 'text-neon-lime hover:bg-neon-lime/10',
-    glow: 'shadow-[0_0_20px_rgba(213,255,10,0.4)]',
+    solid:
+      "bg-gradient-to-r from-neon-lime to-neon-cyan !text-obsidian-950 [&_*]:!text-obsidian-950 hover:shadow-[0_0_30px_rgba(213,255,10,0.5)]",
+    outline: "border-2 border-neon-lime text-neon-lime hover:bg-neon-lime/10 hover:shadow-[0_0_20px_rgba(213,255,10,0.3)]",
+    ghost: "text-neon-lime hover:bg-neon-lime/10",
+    glow: "shadow-[0_0_20px_rgba(213,255,10,0.4)]",
   },
   cyan: {
-    solid: 'bg-gradient-to-r from-neon-cyan to-neon-purple text-white hover:shadow-[0_0_30px_rgba(0,240,255,0.5)]',
-    outline: 'border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]',
-    ghost: 'text-neon-cyan hover:bg-neon-cyan/10',
-    glow: 'shadow-[0_0_20px_rgba(0,240,255,0.4)]',
+    solid: "bg-gradient-to-r from-neon-cyan to-neon-purple text-white hover:shadow-[0_0_30px_rgba(0,240,255,0.5)]",
+    outline: "border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]",
+    ghost: "text-neon-cyan hover:bg-neon-cyan/10",
+    glow: "shadow-[0_0_20px_rgba(0,240,255,0.4)]",
   },
   magenta: {
-    solid: 'bg-gradient-to-r from-neon-magenta to-neon-purple text-white hover:shadow-[0_0_30px_rgba(255,0,110,0.5)]',
-    outline: 'border-2 border-neon-magenta text-neon-magenta hover:bg-neon-magenta/10 hover:shadow-[0_0_20px_rgba(255,0,110,0.3)]',
-    ghost: 'text-neon-magenta hover:bg-neon-magenta/10',
-    glow: 'shadow-[0_0_20px_rgba(255,0,110,0.4)]',
+    solid: "bg-gradient-to-r from-neon-magenta to-neon-purple text-white hover:shadow-[0_0_30px_rgba(255,0,110,0.5)]",
+    outline:
+      "border-2 border-neon-magenta text-neon-magenta hover:bg-neon-magenta/10 hover:shadow-[0_0_20px_rgba(255,0,110,0.3)]",
+    ghost: "text-neon-magenta hover:bg-neon-magenta/10",
+    glow: "shadow-[0_0_20px_rgba(255,0,110,0.4)]",
   },
   purple: {
-    solid: 'bg-gradient-to-r from-neon-purple to-neon-cyan text-white hover:shadow-[0_0_30px_rgba(181,0,255,0.5)]',
-    outline: 'border-2 border-neon-purple text-neon-purple hover:bg-neon-purple/10 hover:shadow-[0_0_20px_rgba(181,0,255,0.3)]',
-    ghost: 'text-neon-purple hover:bg-neon-purple/10',
-    glow: 'shadow-[0_0_20px_rgba(181,0,255,0.4)]',
+    solid: "bg-gradient-to-r from-neon-purple to-neon-cyan text-white hover:shadow-[0_0_30px_rgba(181,0,255,0.5)]",
+    outline: "border-2 border-neon-purple text-neon-purple hover:bg-neon-purple/10 hover:shadow-[0_0_20px_rgba(181,0,255,0.3)]",
+    ghost: "text-neon-purple hover:bg-neon-purple/10",
+    glow: "shadow-[0_0_20px_rgba(181,0,255,0.4)]",
   },
   emerald: {
-    solid: 'bg-gradient-to-r from-emerald-400 to-teal-400 text-obsidian-950 hover:shadow-[0_0_30px_rgba(0,193,139,0.5)]',
-    outline: 'border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400/10 hover:shadow-[0_0_20px_rgba(0,193,139,0.3)]',
-    ghost: 'text-emerald-400 hover:bg-emerald-400/10',
-    glow: 'shadow-[0_0_20px_rgba(0,193,139,0.4)]',
+    solid: "bg-gradient-to-r from-emerald-400 to-teal-400 text-obsidian-950 hover:shadow-[0_0_30px_rgba(0,193,139,0.5)]",
+    outline: "border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400/10 hover:shadow-[0_0_20px_rgba(0,193,139,0.3)]",
+    ghost: "text-emerald-400 hover:bg-emerald-400/10",
+    glow: "shadow-[0_0_20px_rgba(0,193,139,0.4)]",
   },
   teal: {
-    solid: 'bg-gradient-to-r from-teal-400 to-cyan-400 text-obsidian-950 hover:shadow-[0_0_30px_rgba(0,153,152,0.5)]',
-    outline: 'border-2 border-teal-400 text-teal-400 hover:bg-teal-400/10 hover:shadow-[0_0_20px_rgba(0,153,152,0.3)]',
-    ghost: 'text-teal-400 hover:bg-teal-400/10',
-    glow: 'shadow-[0_0_20px_rgba(0,153,152,0.4)]',
+    solid: "bg-gradient-to-r from-teal-400 to-cyan-400 text-obsidian-950 hover:shadow-[0_0_30px_rgba(0,153,152,0.5)]",
+    outline: "border-2 border-teal-400 text-teal-400 hover:bg-teal-400/10 hover:shadow-[0_0_20px_rgba(0,153,152,0.3)]",
+    ghost: "text-teal-400 hover:bg-teal-400/10",
+    glow: "shadow-[0_0_20px_rgba(0,153,152,0.4)]",
   },
 };
 
 const sizeConfig: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-sm gap-2',
-  md: 'px-6 py-3 text-base gap-2',
-  lg: 'px-8 py-4 text-lg gap-3',
-  xl: 'px-10 py-5 text-xl gap-3',
+  sm: "px-4 py-2 text-sm gap-2",
+  md: "px-6 py-3 text-base gap-2",
+  lg: "px-8 py-4 text-lg gap-3",
+  xl: "px-10 py-5 text-xl gap-3",
 };
 
 /* ============================================
@@ -108,9 +114,9 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
   (
     {
       children,
-      color = 'cyan',
-      variant = 'solid',
-      size = 'md',
+      color = "cyan",
+      variant = "solid",
+      size = "md",
       magneticStrength = 0.3,
       glow = false,
       leftIcon: LeftIcon,
@@ -129,14 +135,14 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     const config = colorConfig[color];
 
     const buttonClasses = cn(
-      'relative inline-flex items-center justify-center',
-      'font-semibold uppercase tracking-wider',
-      'rounded-lg transition-all duration-300',
-      'disabled:opacity-50 disabled:cursor-not-allowed',
+      "relative inline-flex items-center justify-center",
+      "font-semibold uppercase tracking-wider",
+      "rounded-lg transition-all duration-300",
+      "disabled:opacity-50 disabled:cursor-not-allowed",
       sizeConfig[size],
       config[variant],
       glow && config.glow,
-      fullWidth && 'w-full',
+      fullWidth && "w-full",
       className
     );
 
@@ -152,11 +158,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     if (href) {
       if (external) {
         return (
-          <motion.div
-            ref={ref}
-            style={{ x, y }}
-            className={fullWidth ? 'w-full' : 'inline-block'}
-          >
+          <motion.div ref={ref} style={{ x, y }} className={fullWidth ? "w-full" : "inline-block"}>
             <motion.a
               href={href}
               target="_blank"
@@ -172,11 +174,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
       }
 
       return (
-        <motion.div
-          ref={ref}
-          style={{ x, y }}
-          className={fullWidth ? 'w-full' : 'inline-block'}
-        >
+        <motion.div ref={ref} style={{ x, y }} className={fullWidth ? "w-full" : "inline-block"}>
           <Link href={href} className={buttonClasses}>
             <motion.span
               className="flex items-center justify-center gap-2 w-full"
@@ -192,11 +190,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
 
     // Render as button
     return (
-      <motion.div
-        ref={ref}
-        style={{ x, y }}
-        className={fullWidth ? 'w-full' : 'inline-block'}
-      >
+      <motion.div ref={ref} style={{ x, y }} className={fullWidth ? "w-full" : "inline-block"}>
         <motion.button
           onClick={onClick}
           disabled={disabled}
@@ -211,7 +205,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
   }
 );
 
-MagneticButton.displayName = 'MagneticButton';
+MagneticButton.displayName = "MagneticButton";
 
 export default MagneticButton;
 export type { MagneticButtonProps, ButtonColor, ButtonVariant, ButtonSize };

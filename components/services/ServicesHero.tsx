@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { useTranslations } from 'next-intl';
-import { Sparkles, Layers, Award, ArrowRight, Mail } from 'lucide-react';
-import MagneticButton from '@/components/immersive/MagneticButton';
-import { cn } from '@/lib/utils';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { Sparkles, Layers, Award, ArrowRight, Mail } from "lucide-react";
+import MagneticButton from "@/components/immersive/MagneticButton";
+import { cn } from "@/lib/utils";
 
 /* ============================================
    TYPES
@@ -27,9 +27,8 @@ function CosmicOrb() {
       <motion.div
         className="absolute inset-0 rounded-full"
         style={{
-          background:
-            'radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.2), rgba(0, 240, 255, 0.1), transparent 70%)',
-          filter: 'blur(40px)',
+          background: "radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.2), rgba(0, 240, 255, 0.1), transparent 70%)",
+          filter: "blur(40px)",
         }}
         animate={{
           scale: [1, 1.1, 1],
@@ -38,7 +37,7 @@ function CosmicOrb() {
         transition={{
           duration: 4,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       />
 
@@ -47,8 +46,8 @@ function CosmicOrb() {
         className="absolute inset-[15%] rounded-full"
         style={{
           background:
-            'radial-gradient(circle at 30% 30%, rgba(213, 255, 10, 0.3), rgba(0, 240, 255, 0.2), rgba(139, 92, 246, 0.1))',
-          filter: 'blur(20px)',
+            "radial-gradient(circle at 30% 30%, rgba(213, 255, 10, 0.3), rgba(0, 240, 255, 0.2), rgba(139, 92, 246, 0.1))",
+          filter: "blur(20px)",
         }}
         animate={{
           scale: [1, 1.05, 0.95, 1],
@@ -58,12 +57,12 @@ function CosmicOrb() {
           scale: {
             duration: 3,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           },
           rotate: {
             duration: 20,
             repeat: Infinity,
-            ease: 'linear',
+            ease: "linear",
           },
         }}
       />
@@ -72,8 +71,8 @@ function CosmicOrb() {
       <motion.div
         className="absolute inset-[35%] rounded-full"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(213, 255, 10, 0.6), transparent 70%)',
-          boxShadow: '0 0 60px rgba(213, 255, 10, 0.4)',
+          background: "radial-gradient(circle at 50% 50%, rgba(213, 255, 10, 0.6), transparent 70%)",
+          boxShadow: "0 0 60px rgba(213, 255, 10, 0.4)",
         }}
         animate={{
           scale: [1, 1.2, 1],
@@ -82,7 +81,7 @@ function CosmicOrb() {
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       />
 
@@ -92,8 +91,8 @@ function CosmicOrb() {
           key={i}
           className="absolute w-2 h-2 rounded-full bg-neon-lime/60"
           style={{
-            left: '50%',
-            top: '50%',
+            left: "50%",
+            top: "50%",
           }}
           animate={{
             x: [0, Math.cos((i * Math.PI * 2) / 6) * 120, 0],
@@ -104,7 +103,7 @@ function CosmicOrb() {
           transition={{
             duration: 3 + i * 0.5,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
             delay: i * 0.3,
           }}
         />
@@ -146,9 +145,9 @@ function StatBadge({ value, label, icon, delay = 0 }: StatBadgeProps) {
    ============================================ */
 
 export default function ServicesHero({ servicesCount, locale }: ServicesHeroProps) {
-  const t = useTranslations('services');
+  const t = useTranslations("services");
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section ref={ref} className="relative min-h-[80vh] flex items-center py-16 lg:py-24">
@@ -164,22 +163,20 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <Sparkles className="w-4 h-4 text-neon-cyan" />
-              <span className="text-neon-cyan text-sm font-medium uppercase tracking-wider">
-                {t('hero.badge')}
-              </span>
+              <span className="text-neon-cyan text-sm font-medium uppercase tracking-wider">{t("hero.badge")}</span>
             </motion.div>
 
             {/* Title */}
             <motion.h1
               className={cn(
-                'text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter mb-6',
-                'bg-gradient-to-r from-white via-neon-cyan to-neon-purple bg-clip-text text-transparent'
+                "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter mb-6",
+                "bg-gradient-to-r from-white via-neon-cyan to-neon-purple bg-clip-text text-transparent"
               )}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {t('hero.title')}
+              {t("hero.title")}
             </motion.h1>
 
             {/* Description */}
@@ -189,7 +186,7 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              {t('hero.description')}
+              {t("hero.description")}
             </motion.p>
 
             {/* Inline Stats */}
@@ -199,24 +196,9 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <StatBadge
-                value={servicesCount}
-                label={t('stats.services')}
-                icon={<Layers className="w-5 h-5" />}
-                delay={0.5}
-              />
-              <StatBadge
-                value="15+"
-                label={t('stats.experience')}
-                icon={<Award className="w-5 h-5" />}
-                delay={0.6}
-              />
-              <StatBadge
-                value="100%"
-                label={t('stats.satisfaction')}
-                icon={<Sparkles className="w-5 h-5" />}
-                delay={0.7}
-              />
+              <StatBadge value={servicesCount} label={t("stats.services")} icon={<Layers className="w-5 h-5" />} delay={0.5} />
+              <StatBadge value="15+" label={t("stats.experience")} icon={<Award className="w-5 h-5" />} delay={0.6} />
+              <StatBadge value="100%" label={t("stats.satisfaction")} icon={<Sparkles className="w-5 h-5" />} delay={0.7} />
             </motion.div>
 
             {/* CTA Buttons */}
@@ -226,25 +208,12 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <MagneticButton
-                href="#services-grid"
-                color="lime"
-                variant="solid"
-                size="lg"
-                glow
-                rightIcon={ArrowRight}
-              >
-                {t('hero.cta')}
+              <MagneticButton href="#services-grid" color="lime" variant="solid" size="lg" glow rightIcon={ArrowRight}>
+                {t("hero.cta")}
               </MagneticButton>
 
-              <MagneticButton
-                href={`/${locale}/contact`}
-                color="cyan"
-                variant="outline"
-                size="lg"
-                rightIcon={Mail}
-              >
-                {t('hero.ctaSecondary')}
+              <MagneticButton href={`/${locale}/contact`} color="cyan" variant="outline" size="lg" rightIcon={Mail}>
+                {t("hero.ctaSecondary")}
               </MagneticButton>
             </motion.div>
           </div>
@@ -271,21 +240,11 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
         <motion.div
           className="flex flex-col items-center gap-2 text-gray-500"
           animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.div>
       </motion.div>

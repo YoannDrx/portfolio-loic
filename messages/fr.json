@@ -260,7 +260,7 @@
       "satisfaction": "Satisfaction"
     },
     "process": {
-      "title": "Le Voyage Créatif",
+      "title": "Comment je travaille",
       "subtitle": "PROCESSUS",
       "brief": {
         "title": "Brief",
@@ -284,9 +284,9 @@
       }
     },
     "cosmicCta": {
-      "title": "Prêt à explorer l'univers sonore ?",
-      "description": "Chaque projet est une nouvelle étoile dans notre galaxie créative. Lançons-nous ensemble dans cette aventure musicale.",
-      "button": "Démarrer l'aventure"
+      "title": "Prêt à créer ensemble ?",
+      "description": "Chaque projet mérite une identité sonore unique. Transformons votre vision en musique.",
+      "button": "Parlons de votre projet"
     },
     "cta": {
       "title": "Prêt à démarrer votre projet ?",
