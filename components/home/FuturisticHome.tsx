@@ -13,6 +13,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { LoginModal } from '@/components/auth/LoginModal';
 import SoundCloudPlayer from '@/components/home/SoundCloudPlayer';
+import { CyclicScramble } from '@/components/home/GlitchTitle';
 
 interface Album {
   id: string;
@@ -307,16 +308,26 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
               {t('home.hero.subtitle')}
             </motion.h2>
 
-            {/* Main title with character animation */}
-            <div className="overflow-hidden mb-8">
+            {/* Main title with glitch animation */}
+            <div className="overflow-hidden mb-8 h-[120px] sm:h-[160px] lg:h-[200px] flex items-center">
               <motion.h1
                 initial={{ y: 120, rotateX: -80 }}
                 animate={{ y: 0, rotateX: 0 }}
                 transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1], delay: 0.4 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500"
+                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] font-montserrat text-white whitespace-pre-line"
                 style={{ transformOrigin: 'bottom' }}
-                dangerouslySetInnerHTML={{ __html: t.raw('home.hero.title') }}
-              />
+              >
+                <CyclicScramble 
+                    words={[
+                        t('home.hero.cyclicTitles.musicProduction'),
+                        t('home.hero.cyclicTitles.filmScoring'),
+                        t('home.hero.cyclicTitles.soundDesign'),
+                        t('home.hero.cyclicTitles.immersiveAudio')
+                    ]} 
+                    interval={4000}
+                    className="block"
+                />
+              </motion.h1>
             </div>
 
             {/* Description with glass effect */}

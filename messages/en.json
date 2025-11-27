@@ -39,7 +39,13 @@
       "title": "ORIGINAL<br />SOUNDTRACKS",
       "description": "Award-winning music composer and producer based in Paris. I create music for Motion Picture, Advertising and Video Games.",
       "listenShowreel": "Listen to Showreel",
-      "downloadResume": "Download Resume"
+      "downloadResume": "Download Resume",
+      "cyclicTitles": {
+        "musicProduction": "MUSIC\nPRODUCTION",
+        "filmScoring": "FILM\nSCORING",
+        "soundDesign": "SOUND\nDESIGN",
+        "immersiveAudio": "IMMERSIVE\nAUDIO"
+      }
     },
     "sections": {
       "albums": "LATEST <span class=\"text-neon-cyan\">ALBUMS</span>",

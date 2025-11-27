@@ -39,7 +39,13 @@
       "title": "BANDES<br />ORIGINALES",
       "description": "Compositeur et producteur musical primé basé à Paris. Je crée de la musique pour le cinéma, la publicité et les jeux vidéo.",
       "listenShowreel": "Écouter le Showreel",
-      "downloadResume": "Télécharger le CV"
+      "downloadResume": "Télécharger le CV",
+      "cyclicTitles": {
+        "musicProduction": "PRODUCTION\nMUSICALE",
+        "filmScoring": "MUSIQUE\nDE FILM",
+        "soundDesign": "DESIGN\nSONORE",
+        "immersiveAudio": "AUDIO\nIMMERSIF"
+      }
     },
     "sections": {
       "albums": "DERNIERS <span class=\"text-neon-cyan\">ALBUMS</span>",

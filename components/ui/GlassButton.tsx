@@ -25,6 +25,7 @@ const glassButtonVariants = cva(
         cyan: '',
         magenta: '',
         purple: '',
+        white: '',
       },
       size: {
         sm: 'text-xs',
@@ -78,6 +79,13 @@ const colorConfig = {
     text: 'text-purple',
     glowBorder: 'group-hover:shadow-[inset_0_0_0_2px_rgba(139,92,246,0.5)]',
     glow: 'group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]',
+  },
+  white: {
+    border: 'border-white',
+    borderHover: 'group-hover:border-white',
+    text: 'text-white',
+    glowBorder: 'group-hover:shadow-[inset_0_0_0_2px_rgba(255,255,255,0.5)]',
+    glow: 'group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]',
   },
 };
 
