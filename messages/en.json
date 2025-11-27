@@ -477,6 +477,22 @@
     "pageDescription": "Let's discuss your musical project. I'm always excited to collaborate on new creations.",
     "getInTouch": "Get in Touch",
     "description": "Have a project in mind? I'd love to discuss it with you. Fill out the form below and I'll get back to you as soon as possible.",
+    "hero": {
+      "badge": "GET IN TOUCH",
+      "title": "Let's Create Together",
+      "description": "Have a musical project in mind? I'd love to discuss it with you and bring your sonic vision to life.",
+      "stats": {
+        "response": "Response",
+        "satisfaction": "Satisfaction"
+      },
+      "cta": "Send a message",
+      "ctaSecondary": "View my services"
+    },
+    "stats": {
+      "responseTime": "Response Time",
+      "satisfaction": "Satisfaction",
+      "projects": "Projects Completed"
+    },
     "form": {
       "name": "Name",
       "namePlaceholder": "Your name",

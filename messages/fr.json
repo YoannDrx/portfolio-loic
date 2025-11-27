@@ -447,6 +447,22 @@
     "pageDescription": "Discutons de votre projet musical. Je suis toujours enthousiaste à l'idée de collaborer sur de nouvelles créations.",
     "getInTouch": "Prenons Contact",
     "description": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous. Remplissez le formulaire ci-dessous et je vous répondrai dans les plus brefs délais.",
+    "hero": {
+      "badge": "CONTACTEZ-MOI",
+      "title": "Créons Ensemble",
+      "description": "Vous avez un projet musical en tête ? Je serais ravi d'en discuter avec vous et de donner vie à votre vision sonore.",
+      "stats": {
+        "response": "Réponse",
+        "satisfaction": "Satisfaction"
+      },
+      "cta": "Envoyer un message",
+      "ctaSecondary": "Voir mes services"
+    },
+    "stats": {
+      "responseTime": "Temps de réponse",
+      "satisfaction": "Satisfaction",
+      "projects": "Projets réalisés"
+    },
     "form": {
       "name": "Nom",
       "namePlaceholder": "Votre nom",
