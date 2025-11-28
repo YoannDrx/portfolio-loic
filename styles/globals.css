@@ -312,12 +312,7 @@
   }
 
   .album-descriptions a {
-    color: var(--color-emerald);
-    @apply hover:underline transition-colors;
-  }
-
-  .album-descriptions a:hover {
-    color: var(--color-primary);
+    @apply text-neon-magenta hover:text-neon-purple hover:underline transition-colors;
   }
 
   .album-descriptions strong {

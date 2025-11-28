@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Music, Headphones, Play, ExternalLink } from 'lucide-react';
@@ -9,11 +8,18 @@ import { Music, Headphones, Play, ExternalLink } from 'lucide-react';
    TYPES
    ============================================ */
 
-type Platform = 'spotify' | 'soundcloud' | 'youtube' | 'deezer' | 'apple' | 'unknown';
+type Platform = 'spotify' | 'soundcloud' | 'youtube' | 'deezer' | 'apple' | 'fanlink' | 'unknown';
 
 interface EmbedPlayerProps {
-  listenLink: string;
+  /** Lien pour le player embarqué (Spotify ou YouTube) */
+  embedLink?: string | null;
   title?: string;
+  className?: string;
+}
+
+interface ListenButtonProps {
+  /** Lien externe (fanlink) pour le bouton "Écouter cet album" */
+  listenLink: string;
   className?: string;
 }
 
@@ -27,6 +33,7 @@ function detectPlatform(url: string): Platform {
   if (url.includes('youtube.com') || url.includes('youtu.be')) return 'youtube';
   if (url.includes('deezer.com')) return 'deezer';
   if (url.includes('music.apple.com')) return 'apple';
+  if (url.includes('fanlink.tv')) return 'fanlink';
   return 'unknown';
 }
 
@@ -36,14 +43,16 @@ function detectPlatform(url: string): Platform {
 
 function getSpotifyEmbedUrl(url: string): string | null {
   try {
-    // Convert various Spotify URL formats to embed format
-    // https://open.spotify.com/track/xxx -> https://open.spotify.com/embed/track/xxx
-    // https://open.spotify.com/album/xxx -> https://open.spotify.com/embed/album/xxx
     const urlObj = new URL(url);
-    const pathParts = urlObj.pathname.split('/').filter(Boolean);
+    let pathParts = urlObj.pathname.split('/').filter(Boolean);
+
+    // Skip language prefix like 'intl-fr', 'intl-en', etc.
+    if (pathParts[0]?.startsWith('intl-')) {
+      pathParts = pathParts.slice(1);
+    }
 
     if (pathParts.length >= 2) {
-      const type = pathParts[0]; // track, album, playlist, artist
+      const type = pathParts[0];
       const id = pathParts[1].split('?')[0];
 
       if (['track', 'album', 'playlist', 'artist'].includes(type)) {
@@ -56,27 +65,18 @@ function getSpotifyEmbedUrl(url: string): string | null {
   }
 }
 
-function getSoundCloudEmbedUrl(url: string): string {
-  // SoundCloud requires the original URL encoded
-  return `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%2300F0FF&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true`;
-}
-
 function getYouTubeId(url: string): string | null {
   try {
     const urlObj = new URL(url);
 
-    // Handle youtu.be format
     if (urlObj.hostname === 'youtu.be') {
       return urlObj.pathname.slice(1);
     }
 
-    // Handle youtube.com format
     if (urlObj.hostname.includes('youtube.com')) {
-      // /watch?v=xxx format
       const videoId = urlObj.searchParams.get('v');
       if (videoId) return videoId;
 
-      // /embed/xxx format
       const pathParts = urlObj.pathname.split('/').filter(Boolean);
       if (pathParts[0] === 'embed' && pathParts[1]) {
         return pathParts[1];
@@ -141,6 +141,14 @@ const platformConfig: Record<Platform, {
     borderColor: 'border-[#FC3C44]/30',
     glowColor: 'rgba(252, 60, 68, 0.3)',
   },
+  fanlink: {
+    name: 'Toutes les plateformes',
+    icon: Headphones,
+    color: 'text-neon-magenta',
+    bgColor: 'bg-neon-magenta/10',
+    borderColor: 'border-neon-magenta/30',
+    glowColor: 'rgba(255, 0, 110, 0.3)',
+  },
   unknown: {
     name: 'Écouter',
     icon: Headphones,
@@ -158,9 +166,7 @@ const platformConfig: Record<Platform, {
 function SpotifyEmbed({ url }: { url: string }) {
   const embedUrl = getSpotifyEmbedUrl(url);
 
-  if (!embedUrl) {
-    return <ExternalLinkButton href={url} platform="spotify" />;
-  }
+  if (!embedUrl) return null;
 
   return (
     <motion.div
@@ -182,35 +188,10 @@ function SpotifyEmbed({ url }: { url: string }) {
   );
 }
 
-function SoundCloudEmbed({ url }: { url: string }) {
-  const embedUrl = getSoundCloudEmbedUrl(url);
-
-  return (
-    <motion.div
-      className="rounded-xl overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <iframe
-        src={embedUrl}
-        width="100%"
-        height="166"
-        allow="autoplay"
-        loading="lazy"
-        className="rounded-xl"
-        style={{ border: 'none' }}
-      />
-    </motion.div>
-  );
-}
-
 function YouTubeEmbed({ url }: { url: string }) {
   const videoId = getYouTubeId(url);
 
-  if (!videoId) {
-    return <ExternalLinkButton href={url} platform="youtube" />;
-  }
+  if (!videoId) return null;
 
   return (
     <motion.div
@@ -233,13 +214,18 @@ function YouTubeEmbed({ url }: { url: string }) {
   );
 }
 
-function ExternalLinkButton({ href, platform }: { href: string; platform: Platform }) {
+/* ============================================
+   LISTEN BUTTON (Exported separately)
+   ============================================ */
+
+export function ListenButton({ listenLink, className }: ListenButtonProps) {
+  const platform = detectPlatform(listenLink);
   const config = platformConfig[platform];
   const Icon = config.icon;
 
   return (
     <motion.a
-      href={href}
+      href={listenLink}
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
@@ -247,7 +233,8 @@ function ExternalLinkButton({ href, platform }: { href: string; platform: Platfo
         'backdrop-blur-md border transition-all duration-300',
         config.bgColor,
         config.borderColor,
-        'hover:scale-[1.02]'
+        'hover:scale-[1.02]',
+        className
       )}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -260,8 +247,8 @@ function ExternalLinkButton({ href, platform }: { href: string; platform: Platfo
         <Icon className={cn('w-6 h-6', config.color)} />
       </div>
       <div className="flex-1">
-        <p className="text-white font-medium">Écouter sur {config.name}</p>
-        <p className="text-gray-400 text-sm">Ouvrir dans une nouvelle fenêtre</p>
+        <p className="text-white font-medium">Écouter cet album</p>
+        <p className="text-gray-400 text-sm">Sur vos plateformes préférées</p>
       </div>
       <ExternalLink className={cn('w-5 h-5', config.color)} />
     </motion.a>
@@ -269,14 +256,19 @@ function ExternalLinkButton({ href, platform }: { href: string; platform: Platfo
 }
 
 /* ============================================
-   MAIN COMPONENT
+   MAIN COMPONENT (Player only)
    ============================================ */
 
-export default function EmbedPlayer({ listenLink, title, className }: EmbedPlayerProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const platform = detectPlatform(listenLink);
-  const config = platformConfig[platform];
+export default function EmbedPlayer({ embedLink, title, className }: EmbedPlayerProps) {
+  if (!embedLink) return null;
+
+  const embedPlatform = detectPlatform(embedLink);
+  const config = platformConfig[embedPlatform];
   const Icon = config.icon;
+
+  const hasEmbedPlayer = embedPlatform === 'spotify' || embedPlatform === 'youtube';
+
+  if (!hasEmbedPlayer) return null;
 
   return (
     <motion.div
@@ -322,14 +314,8 @@ export default function EmbedPlayer({ listenLink, title, className }: EmbedPlaye
           'bg-obsidian-900/50'
         )}
       >
-        {platform === 'spotify' && <SpotifyEmbed url={listenLink} />}
-        {platform === 'soundcloud' && <SoundCloudEmbed url={listenLink} />}
-        {platform === 'youtube' && <YouTubeEmbed url={listenLink} />}
-        {(platform === 'deezer' || platform === 'apple' || platform === 'unknown') && (
-          <div className="p-4">
-            <ExternalLinkButton href={listenLink} platform={platform} />
-          </div>
-        )}
+        {embedPlatform === 'spotify' && <SpotifyEmbed url={embedLink} />}
+        {embedPlatform === 'youtube' && <YouTubeEmbed url={embedLink} />}
       </div>
     </motion.div>
   );

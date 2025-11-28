@@ -278,15 +278,6 @@ export default function ServiceDetailClient({
                 >
                   {tCommon('contact')}
                 </MagneticButton>
-
-                <MagneticButton
-                  href={`/${locale}/services`}
-                  color="purple"
-                  variant="outline"
-                  size="lg"
-                >
-                  {tCommon('seeAllServices')}
-                </MagneticButton>
               </motion.div>
             </div>
           </div>

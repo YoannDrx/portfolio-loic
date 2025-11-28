@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { Calendar, Disc, ExternalLink, Users, ArrowLeft, Headphones, Eye } from 'lucide-react';
+import { Calendar, Disc, Users, ArrowLeft, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Immersive components
@@ -21,8 +21,11 @@ import AlbumsScene from '@/components/three/scenes/AlbumsScene';
 // Related albums
 import RelatedAlbums from './RelatedAlbums';
 
-// Embed player
-import EmbedPlayer from './EmbedPlayer';
+// Embed player and listen button
+import EmbedPlayer, { ListenButton } from './EmbedPlayer';
+
+// Album embed links mapping
+import { getEmbedLink } from '@/data/albumEmbedLinks';
 
 /* ============================================
    TYPES
@@ -133,98 +136,118 @@ export default function AlbumDetailClient({
 
           {/* Main Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Left Column - Album Cover with 3D Effect */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
+            {/* Left Column - Album Cover + Description */}
+            <div className="space-y-8">
+              {/* Album Cover with 3D Effect */}
               <motion.div
-                ref={(el) => {
-                  // Combine refs for 3D effect
-                  if (card3DRef.current !== el) {
-                    (card3DRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
-                  }
-                  if (glowRef.current !== el) {
-                    (glowRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
-                  }
-                }}
-                className="relative aspect-square rounded-2xl overflow-hidden sticky top-24 cursor-pointer"
-                style={{
-                  ...card3DStyle,
-                  transformStyle: 'preserve-3d',
-                  perspective: 1000,
-                }}
+                className="relative"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.7, delay: 0.2 }}
               >
-                {/* Cursor Glow Effect */}
-                {isGlowHovered && (
-                  <div
-                    className="absolute pointer-events-none rounded-full z-10"
-                    style={{
-                      ...glowStyle,
-                      transform: 'translate(-50%, -50%)',
+                <motion.div
+                  ref={(el) => {
+                    // Combine refs for 3D effect
+                    if (card3DRef.current !== el) {
+                      (card3DRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+                    }
+                    if (glowRef.current !== el) {
+                      (glowRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+                    }
+                  }}
+                  className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+                  style={{
+                    ...card3DStyle,
+                    transformStyle: 'preserve-3d',
+                    perspective: 1000,
+                  }}
+                >
+                  {/* Cursor Glow Effect */}
+                  {isGlowHovered && (
+                    <div
+                      className="absolute pointer-events-none rounded-full z-10"
+                      style={{
+                        ...glowStyle,
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                    />
+                  )}
+
+                  {/* Cover Image */}
+                  <Image
+                    src={album.img}
+                    alt={album.title}
+                    fill
+                    className={cn(
+                      'object-cover transition-all duration-500',
+                      isCard3DHovered && 'scale-105'
+                    )}
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    quality={90}
+                  />
+
+                  {/* Glow overlay */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-t from-neon-magenta/20 via-transparent to-transparent"
+                    animate={{
+                      opacity: isCard3DHovered ? [0.4, 0.6, 0.4] : [0.3, 0.5, 0.3],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
                     }}
                   />
-                )}
 
-                {/* Cover Image */}
-                <Image
-                  src={album.img}
-                  alt={album.title}
-                  fill
-                  className={cn(
-                    'object-cover transition-all duration-500',
-                    isCard3DHovered && 'scale-105'
-                  )}
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  quality={90}
-                />
+                  {/* Border glow - enhanced on hover */}
+                  <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
+                  <motion.div
+                    className="absolute -inset-1 rounded-2xl"
+                    style={{
+                      background:
+                        'linear-gradient(135deg, rgba(255,0,110,0.3), transparent, rgba(139,92,246,0.3))',
+                    }}
+                    animate={{
+                      opacity: isCard3DHovered ? [0.5, 0.7, 0.5] : [0.3, 0.5, 0.3],
+                    }}
+                    transition={{
+                      duration: isCard3DHovered ? 2 : 4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  />
 
-                {/* Glow overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-neon-magenta/20 via-transparent to-transparent"
-                  animate={{
-                    opacity: isCard3DHovered ? [0.4, 0.6, 0.4] : [0.3, 0.5, 0.3],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-
-                {/* Border glow - enhanced on hover */}
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
-                <motion.div
-                  className="absolute -inset-1 rounded-2xl"
-                  style={{
-                    background:
-                      'linear-gradient(135deg, rgba(255,0,110,0.3), transparent, rgba(139,92,246,0.3))',
-                  }}
-                  animate={{
-                    opacity: isCard3DHovered ? [0.5, 0.7, 0.5] : [0.3, 0.5, 0.3],
-                  }}
-                  transition={{
-                    duration: isCard3DHovered ? 2 : 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-
-                {/* Shine effect on hover */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"
-                  initial={{ x: '-100%', opacity: 0 }}
-                  animate={isCard3DHovered ? { x: '100%', opacity: 1 } : { x: '-100%', opacity: 0 }}
-                  transition={{ duration: 0.6, ease: 'easeOut' }}
-                />
+                  {/* Shine effect on hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"
+                    initial={{ x: '-100%', opacity: 0 }}
+                    animate={isCard3DHovered ? { x: '100%', opacity: 1 } : { x: '-100%', opacity: 0 }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                  />
+                </motion.div>
               </motion.div>
-            </motion.div>
 
-            {/* Right Column - Album Info */}
-            <div className="space-y-8">
+              {/* Description - Under the cover */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <h2 className="text-xl font-bold text-white mb-4">{t('about')}</h2>
+                <div className="prose prose-invert prose-lg max-w-none">
+                  <div
+                    className="text-gray-300 leading-relaxed space-y-4 album-descriptions"
+                    dangerouslySetInnerHTML={{
+                      __html: locale === 'fr' ? album.descriptionsFr : album.descriptionsEn,
+                    }}
+                  />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Column - Album Info + Player */}
+            <div className="space-y-6">
               {/* Title */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -307,68 +330,45 @@ export default function AlbumDetailClient({
                 )}
               </motion.div>
 
-              {/* Embed Player */}
+              {/* Listen Button - Right after metadata */}
               {album.listenLink && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.45 }}
                 >
-                  <EmbedPlayer
-                    listenLink={album.listenLink}
-                    title={album.title}
-                  />
+                  <ListenButton listenLink={album.listenLink} />
                 </motion.div>
               )}
 
-              {/* Description */}
+              {/* Embed Player - Spotify or YouTube */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <h2 className="text-xl font-bold text-white mb-4">{t('about')}</h2>
-                <div className="prose prose-invert prose-lg max-w-none">
-                  <div
-                    className="text-gray-300 leading-relaxed space-y-4"
-                    dangerouslySetInnerHTML={{
-                      __html: locale === 'fr' ? album.descriptionsFr : album.descriptionsEn,
-                    }}
-                  />
-                </div>
+                <EmbedPlayer
+                  embedLink={getEmbedLink(album.title)}
+                  title={album.title}
+                />
               </motion.div>
 
-              {/* CTA Buttons */}
-              {album.listenLink && (
-                <motion.div
-                  className="flex flex-wrap gap-4 pt-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 }}
+              {/* CTA Button */}
+              <motion.div
+                className="flex flex-wrap gap-4 pt-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                <MagneticButton
+                  href={`/${locale}/contact`}
+                  color="purple"
+                  variant="outline"
+                  size="lg"
                 >
-                  <MagneticButton
-                    href={album.listenLink}
-                    external
-                    color="magenta"
-                    variant="solid"
-                    size="lg"
-                    glow
-                    leftIcon={Headphones}
-                    rightIcon={ExternalLink}
-                  >
-                    {t('listen')}
-                  </MagneticButton>
-
-                  <MagneticButton
-                    href={`/${locale}/contact`}
-                    color="purple"
-                    variant="outline"
-                    size="lg"
-                  >
-                    {tCommon('contact')}
-                  </MagneticButton>
-                </motion.div>
-              )}
+                  {tCommon('contact')}
+                </MagneticButton>
+              </motion.div>
             </div>
           </div>
         </div>
