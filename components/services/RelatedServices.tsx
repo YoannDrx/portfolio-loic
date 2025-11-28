@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useCallback, useRef, useEffect } from 'react';
+import { motion, useMotionValue, useAnimation, PanInfo } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CosmicServiceCard from './CosmicServiceCard';
@@ -59,7 +59,7 @@ function NavButton({ direction, onClick, disabled }: NavButtonProps) {
         'text-white hover:text-neon-cyan',
         'transition-all duration-300',
         'disabled:opacity-30 disabled:cursor-not-allowed',
-        direction === 'prev' ? '-left-4 lg:-left-6' : '-right-4 lg:-right-6'
+        direction === 'prev' ? 'left-0 lg:-left-6' : 'right-0 lg:-right-6'
       )}
       whileHover={!disabled ? { scale: 1.1, borderColor: 'rgba(0, 240, 255, 0.6)' } : {}}
       whileTap={!disabled ? { scale: 0.95 } : {}}
@@ -90,14 +90,56 @@ export default function RelatedServices({
 }: RelatedServicesProps) {
   const t = useTranslations('services.detail');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(3);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+  const x = useMotionValue(0);
 
   // Filter related services (exclude current)
   const relatedServices = services.filter((service) => service.id !== currentServiceId);
 
-  // Calculate items per view based on screen size (handled via CSS)
-  const itemsPerView = 3; // We show 1 on mobile, 2 on tablet, 3 on desktop via CSS
+  // Constants
+  const GAP = 32; // gap-8 = 2rem = 32px
 
-  const maxIndex = Math.max(0, relatedServices.length - 1);
+  // Calculate dimensions
+  const cardWidth = containerWidth > 0
+    ? (containerWidth - GAP * (itemsPerView - 1)) / itemsPerView
+    : 300;
+  const slideWidth = cardWidth + GAP;
+  const maxIndex = Math.max(0, relatedServices.length - itemsPerView);
+
+  // Responsive items per view and container width
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+      // Responsive items per view
+      if (window.innerWidth < 768) {
+        setItemsPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(3);
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  // Animate to current index
+  useEffect(() => {
+    if (containerWidth > 0) {
+      controls.start({
+        x: -currentIndex * slideWidth,
+        transition: { type: 'spring', stiffness: 300, damping: 30 },
+      });
+    }
+  }, [currentIndex, slideWidth, controls, containerWidth]);
 
   const goToPrev = useCallback(() => {
     setCurrentIndex((prev) => Math.max(0, prev - 1));
@@ -107,19 +149,38 @@ export default function RelatedServices({
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
   }, [maxIndex]);
 
+  // Handle drag end with snap
+  const handleDragEnd = useCallback(
+    (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+      const offset = info.offset.x;
+      const velocity = info.velocity.x;
+      const threshold = 50; // px minimum pour changer de slide
+
+      let direction = 0;
+      if (Math.abs(velocity) > 500) {
+        // Fast swipe - use velocity direction
+        direction = velocity > 0 ? -1 : 1;
+      } else if (Math.abs(offset) > threshold) {
+        // Slow drag - use offset direction
+        direction = offset > 0 ? -1 : 1;
+      }
+
+      const newIndex = Math.max(0, Math.min(maxIndex, currentIndex + direction));
+      setCurrentIndex(newIndex);
+
+      // Delay disabling isDragging to prevent accidental clicks
+      setTimeout(() => setIsDragging(false), 100);
+    },
+    [currentIndex, maxIndex]
+  );
+
   if (relatedServices.length === 0) {
     return null;
   }
 
-  // Get visible services (3 at a time, sliding window)
-  const getVisibleServices = () => {
-    const startIndex = currentIndex;
-    return relatedServices.slice(startIndex, startIndex + itemsPerView);
-  };
-
-  const visibleServices = getVisibleServices();
   const canGoPrev = currentIndex > 0;
-  const canGoNext = currentIndex < relatedServices.length - itemsPerView;
+  const canGoNext = currentIndex < maxIndex;
+  const showNavigation = relatedServices.length > itemsPerView;
 
   return (
     <section className="py-16 lg:py-24">
@@ -135,50 +196,70 @@ export default function RelatedServices({
         </ImmersiveTitle>
 
         {/* Carousel Container */}
-        <div className="relative px-8 lg:px-12">
+        <div className="relative">
           {/* Navigation Buttons */}
-          {relatedServices.length > itemsPerView && (
+          {showNavigation && (
             <>
               <NavButton direction="prev" onClick={goToPrev} disabled={!canGoPrev} />
               <NavButton direction="next" onClick={goToNext} disabled={!canGoNext} />
             </>
           )}
 
-          {/* Cards Container */}
-          <div className="overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-              >
-                {visibleServices.map((service, index) => (
-                  <CosmicServiceCard
-                    key={service.id}
-                    service={service}
-                    locale={locale}
-                    index={index}
-                  />
-                ))}
-              </motion.div>
-            </AnimatePresence>
+          {/* Carousel Track */}
+          <div
+            ref={containerRef}
+            className="overflow-hidden px-1 py-2"
+          >
+            <motion.div
+              className={cn(
+                'flex',
+                showNavigation && 'cursor-grab active:cursor-grabbing'
+              )}
+              style={{
+                gap: GAP,
+                x,
+              }}
+              drag={showNavigation ? 'x' : false}
+              dragConstraints={{
+                left: -maxIndex * slideWidth,
+                right: 0,
+              }}
+              dragElastic={0.1}
+              dragMomentum={false}
+              onDragStart={() => setIsDragging(true)}
+              onDragEnd={handleDragEnd}
+              animate={controls}
+            >
+              {relatedServices.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  className="flex-shrink-0"
+                  style={{ width: cardWidth > 0 ? cardWidth : 'auto' }}
+                >
+                  <div style={{ pointerEvents: isDragging ? 'none' : 'auto' }}>
+                    <CosmicServiceCard
+                      service={service}
+                      locale={locale}
+                      index={index}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
 
           {/* Dots Indicator */}
-          {relatedServices.length > itemsPerView && (
+          {showNavigation && maxIndex > 0 && (
             <div className="flex justify-center gap-2 mt-8">
-              {Array.from({ length: relatedServices.length - itemsPerView + 1 }).map((_, idx) => (
+              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={cn(
-                    'w-2 h-2 rounded-full transition-all duration-300',
+                    'h-2 rounded-full transition-all duration-300',
                     idx === currentIndex
                       ? 'bg-neon-cyan w-6'
-                      : 'bg-white/30 hover:bg-white/50'
+                      : 'bg-white/30 hover:bg-white/50 w-2'
                   )}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
