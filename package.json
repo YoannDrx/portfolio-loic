@@ -10,7 +10,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "seed:cv": "tsx scripts/seed-cv.ts"
+    "seed:cv": "tsx scripts/seed-cv.ts",
+    "db:seed": "tsx seed/index.ts",
+    "db:seed:albums": "tsx seed/index.ts --only=albums",
+    "db:seed:videos": "tsx seed/index.ts --only=videos",
+    "db:seed:services": "tsx seed/index.ts --only=services",
+    "db:seed:resume": "tsx seed/index.ts --only=resume_entries",
+    "db:seed:settings": "tsx seed/index.ts --only=site_settings",
+    "db:seed:users": "tsx seed/index.ts --only=users",
+    "db:backup": "tsx seed/backup.ts",
+    "db:backup:overwrite": "tsx seed/backup.ts --overwrite",
+    "db:clean": "tsx seed/clean.ts",
+    "db:reset": "tsx seed/backup.ts && prisma migrate reset --force",
+    "db:reset:seed": "tsx seed/backup.ts && prisma migrate reset --force && tsx seed/index.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

@@ -33,3 +33,6 @@ yarn-error.log*
 .vercel
 
 /lib/generated/prisma
+
+# seed backups (horodatés, ne pas versionner)
+/seed/backups/

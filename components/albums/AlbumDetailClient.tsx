@@ -24,9 +24,6 @@ import RelatedAlbums from './RelatedAlbums';
 // Embed player and listen button
 import EmbedPlayer, { ListenButton } from './EmbedPlayer';
 
-// Album embed links mapping
-import { getEmbedLink } from '@/data/albumEmbedLinks';
-
 /* ============================================
    TYPES
    ============================================ */
@@ -40,6 +37,8 @@ interface Album {
   sortedDate: string;
   style: string;
   listenLink: string;
+  spotifyEmbed: string | null;
+  youtubeEmbed: string | null;
   collabName: string | null;
   collabLink: string | null;
   descriptionsFr: string;
@@ -348,7 +347,7 @@ export default function AlbumDetailClient({
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
                 <EmbedPlayer
-                  embedLink={getEmbedLink(album.title)}
+                  embedLink={album.spotifyEmbed || album.youtubeEmbed}
                   title={album.title}
                 />
               </motion.div>

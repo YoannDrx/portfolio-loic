@@ -80,6 +80,8 @@ model Album {
   sortedDate     String
   style          String
   listenLink     String
+  spotifyEmbed   String?
+  youtubeEmbed   String?
   collabName     String?
   collabLink     String?
   descriptionsFr String
