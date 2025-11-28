@@ -242,7 +242,8 @@
     "detail": {
       "notFound": "Service not found",
       "about": "About the service",
-      "offeredOn": "Service offered on"
+      "offeredOn": "Service offered on",
+      "relatedServices": "Related Services"
     },
     "pageTitle": "Services",
     "pageDescription": "From composition to post-production, I support you at every stage of your musical project with expertise and passion.",
@@ -547,6 +548,8 @@
     "artist": "Artist",
     "collaborators": "Collaborators",
     "author": "Author",
+    "contact": "Contact me",
+    "seeAllServices": "See all services",
     "notFound": "Page Not Found",
     "pageNotFoundDescription": "The page you're looking for doesn't exist or has been moved.",
     "backToAlbums": "Back to albums"

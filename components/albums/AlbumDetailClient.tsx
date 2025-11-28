@@ -9,14 +9,20 @@ import { Calendar, Disc, ExternalLink, Users, ArrowLeft, Headphones, Eye } from 
 import { cn } from '@/lib/utils';
 
 // Immersive components
-import ImmersivePage, { ImmersiveSection } from '@/components/immersive/ImmersivePage';
+import ImmersivePage from '@/components/immersive/ImmersivePage';
 import MagneticButton from '@/components/immersive/MagneticButton';
+
+// Animation hooks
+import { use3DCard, useMouseGlow } from '@/hooks/useAnimations';
 
 // 3D Scene
 import AlbumsScene from '@/components/three/scenes/AlbumsScene';
 
 // Related albums
 import RelatedAlbums from './RelatedAlbums';
+
+// Embed player
+import EmbedPlayer from './EmbedPlayer';
 
 /* ============================================
    TYPES
@@ -58,7 +64,21 @@ export default function AlbumDetailClient({
   const t = useTranslations('albums.detail');
   const tCommon = useTranslations('common');
   const heroRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(heroRef, { once: true, margin: '-100px' });
+  // Use amount: 0 to trigger animation as soon as the element is in viewport
+  const isInView = useInView(heroRef, { once: true, amount: 0 });
+
+  // 3D card effect for album cover
+  const { ref: card3DRef, style: card3DStyle, isHovered: isCard3DHovered } = use3DCard({
+    maxRotation: 10,
+    scale: 1.02,
+  });
+
+  // Cursor glow effect
+  const { ref: glowRef, glowStyle, isHovered: isGlowHovered } = useMouseGlow({
+    color: 'rgba(255, 0, 110, 0.4)',
+    size: 300,
+    blur: 60,
+  });
 
   // Transform albums for RelatedAlbums component
   const transformedAlbums = allAlbums.map((a) => ({
@@ -92,12 +112,12 @@ export default function AlbumDetailClient({
         </div>
       )}
 
-      {/* Hero Section */}
-      <ImmersiveSection className="py-20 lg:py-32">
+      {/* Hero Section - No animation delay, content visible immediately */}
+      <section className="relative pt-4 pb-16 lg:pt-8 lg:pb-24">
         <div ref={heroRef} className="container-custom">
           {/* Back Button */}
           <motion.div
-            className="mb-12"
+            className="mb-6 lg:mb-8"
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5 }}
@@ -113,20 +133,50 @@ export default function AlbumDetailClient({
 
           {/* Main Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Left Column - Album Cover */}
+            {/* Left Column - Album Cover with 3D Effect */}
             <motion.div
               className="relative"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <div className="relative aspect-square rounded-2xl overflow-hidden sticky top-24">
+              <motion.div
+                ref={(el) => {
+                  // Combine refs for 3D effect
+                  if (card3DRef.current !== el) {
+                    (card3DRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+                  }
+                  if (glowRef.current !== el) {
+                    (glowRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+                  }
+                }}
+                className="relative aspect-square rounded-2xl overflow-hidden sticky top-24 cursor-pointer"
+                style={{
+                  ...card3DStyle,
+                  transformStyle: 'preserve-3d',
+                  perspective: 1000,
+                }}
+              >
+                {/* Cursor Glow Effect */}
+                {isGlowHovered && (
+                  <div
+                    className="absolute pointer-events-none rounded-full z-10"
+                    style={{
+                      ...glowStyle,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  />
+                )}
+
                 {/* Cover Image */}
                 <Image
                   src={album.img}
                   alt={album.title}
                   fill
-                  className="object-cover"
+                  className={cn(
+                    'object-cover transition-all duration-500',
+                    isCard3DHovered && 'scale-105'
+                  )}
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   quality={90}
@@ -136,7 +186,7 @@ export default function AlbumDetailClient({
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-neon-magenta/20 via-transparent to-transparent"
                   animate={{
-                    opacity: [0.3, 0.5, 0.3],
+                    opacity: isCard3DHovered ? [0.4, 0.6, 0.4] : [0.3, 0.5, 0.3],
                   }}
                   transition={{
                     duration: 3,
@@ -145,24 +195,32 @@ export default function AlbumDetailClient({
                   }}
                 />
 
-                {/* Border glow */}
+                {/* Border glow - enhanced on hover */}
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
                 <motion.div
-                  className="absolute -inset-1 rounded-2xl opacity-50"
+                  className="absolute -inset-1 rounded-2xl"
                   style={{
                     background:
                       'linear-gradient(135deg, rgba(255,0,110,0.3), transparent, rgba(139,92,246,0.3))',
                   }}
                   animate={{
-                    opacity: [0.3, 0.5, 0.3],
+                    opacity: isCard3DHovered ? [0.5, 0.7, 0.5] : [0.3, 0.5, 0.3],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: isCard3DHovered ? 2 : 4,
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
                 />
-              </div>
+
+                {/* Shine effect on hover */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"
+                  initial={{ x: '-100%', opacity: 0 }}
+                  animate={isCard3DHovered ? { x: '100%', opacity: 1 } : { x: '-100%', opacity: 0 }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                />
+              </motion.div>
             </motion.div>
 
             {/* Right Column - Album Info */}
@@ -182,12 +240,30 @@ export default function AlbumDetailClient({
                   {album.title}
                 </h1>
 
-                {/* Genre Badge */}
+                {/* Genre Badge - Pulsing Animation */}
                 <motion.div
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-magenta/10 border border-neon-magenta/30"
                   whileHover={{ scale: 1.05 }}
+                  animate={{
+                    scale: [1, 1.02, 1],
+                    boxShadow: [
+                      '0 0 0 rgba(255, 0, 110, 0)',
+                      '0 0 20px rgba(255, 0, 110, 0.3)',
+                      '0 0 0 rgba(255, 0, 110, 0)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
                 >
-                  <Disc className="w-4 h-4 text-neon-magenta" />
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                  >
+                    <Disc className="w-4 h-4 text-neon-magenta" />
+                  </motion.div>
                   <span className="text-neon-magenta text-sm font-medium uppercase tracking-wider">
                     {album.style}
                   </span>
@@ -230,6 +306,20 @@ export default function AlbumDetailClient({
                   </div>
                 )}
               </motion.div>
+
+              {/* Embed Player */}
+              {album.listenLink && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.45 }}
+                >
+                  <EmbedPlayer
+                    listenLink={album.listenLink}
+                    title={album.title}
+                  />
+                </motion.div>
+              )}
 
               {/* Description */}
               <motion.div
@@ -282,7 +372,7 @@ export default function AlbumDetailClient({
             </div>
           </div>
         </div>
-      </ImmersiveSection>
+      </section>
 
       {/* Related Albums Section */}
       <RelatedAlbums

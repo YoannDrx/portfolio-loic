@@ -242,7 +242,8 @@
     "detail": {
       "notFound": "Service non trouvé",
       "about": "À propos du service",
-      "offeredOn": "Service offert le"
+      "offeredOn": "Service offert le",
+      "relatedServices": "Autres Services"
     },
     "pageTitle": "Services",
     "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
@@ -518,6 +519,8 @@
     "artist": "Artiste",
     "collaborators": "Collaborateurs",
     "author": "Auteur",
+    "contact": "Me contacter",
+    "seeAllServices": "Voir tous les services",
     "notFound": "Page Non Trouvée",
     "pageNotFoundDescription": "La page que vous recherchez n'existe pas ou a été déplacée."
   },
