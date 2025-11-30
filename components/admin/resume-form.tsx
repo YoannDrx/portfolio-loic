@@ -28,7 +28,7 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { NeonButton } from "@/components/ui/NeonButton";
 
 interface ResumeFormProps {
-  initialData?: Partial<ResumeEntryCreateFormInput>;
+  initialData?: Partial<ResumeEntryCreateFormInput> & { id?: string };
   locale: string;
   isEditing?: boolean;
 }
@@ -56,7 +56,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
 
   const onSubmit = async (data: ResumeEntryCreateFormInput) => {
     try {
-      const url = isEditing
+      const url = isEditing && initialData?.id
         ? `/api/admin/resume/${initialData.id}`
         : "/api/admin/resume";
       const method = isEditing ? "PATCH" : "POST";

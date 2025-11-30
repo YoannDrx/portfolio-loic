@@ -16,6 +16,13 @@ import { History, RotateCcw, Eye, AlertCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { DiffViewer } from "./DiffViewer";
 
+type DiffItem = {
+  field: string;
+  oldValue: unknown;
+  newValue: unknown;
+  type: "added" | "removed" | "modified";
+};
+
 interface Version {
   id: string;
   version: number;
@@ -26,7 +33,7 @@ interface Version {
     name: string | null;
   };
   createdAt: string;
-  changes: unknown[];
+  changes: DiffItem[];
 }
 
 interface VersionHistoryProps {

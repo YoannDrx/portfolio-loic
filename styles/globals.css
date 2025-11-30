@@ -2,6 +2,7 @@
    IMPORTS
    ============================================ */
 @import './tokens.css';
+@import './admin-tokens.css';
 
 @tailwind base;
 @tailwind components;
@@ -296,6 +297,120 @@
   /* Spin Slow */
   .spin-slow {
     animation: spin 20s linear infinite;
+  }
+
+  /* ============================================
+     ADMIN UTILITY CLASSES
+     ============================================ */
+
+  /* Admin Background Effects */
+  .admin-bg-gradient {
+    background: var(--admin-bg);
+    background-image: var(--gradient-admin-bg), var(--gradient-admin-bg-alt);
+  }
+
+  /* Admin Glass Effect */
+  .admin-glass {
+    background: var(--admin-surface);
+    backdrop-filter: blur(var(--admin-blur-lg));
+    -webkit-backdrop-filter: blur(var(--admin-blur-lg));
+    border: 1px solid var(--admin-border);
+  }
+
+  .admin-glass-elevated {
+    background: var(--admin-surface-elevated);
+    backdrop-filter: blur(var(--admin-blur-xl));
+    -webkit-backdrop-filter: blur(var(--admin-blur-xl));
+    border: 1px solid var(--admin-border-strong);
+  }
+
+  /* Admin Glow Classes */
+  .admin-glow-cyan {
+    box-shadow: var(--admin-glow-cyan-md);
+  }
+
+  .admin-glow-lime {
+    box-shadow: var(--admin-glow-lime-md);
+  }
+
+  .admin-glow-magenta {
+    box-shadow: var(--admin-glow-magenta-md);
+  }
+
+  .admin-glow-purple {
+    box-shadow: var(--admin-glow-purple-md);
+  }
+
+  /* Hover Glow Effects */
+  .admin-hover-glow-cyan {
+    transition: box-shadow var(--admin-transition-normal);
+  }
+  .admin-hover-glow-cyan:hover {
+    box-shadow: var(--admin-glow-cyan-lg);
+  }
+
+  .admin-hover-glow-lime {
+    transition: box-shadow var(--admin-transition-normal);
+  }
+  .admin-hover-glow-lime:hover {
+    box-shadow: var(--admin-glow-lime-lg);
+  }
+
+  .admin-hover-glow-magenta {
+    transition: box-shadow var(--admin-transition-normal);
+  }
+  .admin-hover-glow-magenta:hover {
+    box-shadow: var(--admin-glow-magenta-lg);
+  }
+
+  .admin-hover-glow-purple {
+    transition: box-shadow var(--admin-transition-normal);
+  }
+  .admin-hover-glow-purple:hover {
+    box-shadow: var(--admin-glow-purple-lg);
+  }
+
+  /* Admin Card Styles */
+  .admin-card {
+    background: var(--gradient-admin-card);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--radius-xl);
+    transition: all var(--admin-transition-normal);
+  }
+
+  .admin-card:hover {
+    background: var(--gradient-admin-card-hover);
+    border-color: var(--admin-border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--admin-shadow-lg);
+  }
+
+  /* Admin Animations */
+  .admin-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--admin-surface) 0%,
+      var(--admin-surface-elevated) 50%,
+      var(--admin-surface) 100%
+    );
+    background-size: 200% 100%;
+    animation: admin-shimmer 1.5s ease-in-out infinite;
+  }
+
+  .admin-pulse-cyan {
+    animation: admin-pulse-cyan 2s ease-in-out infinite;
+  }
+
+  .admin-pulse-lime {
+    animation: admin-pulse-lime 2s ease-in-out infinite;
+  }
+
+  .admin-pulse-magenta {
+    animation: admin-pulse-magenta 2s ease-in-out infinite;
+  }
+
+  .admin-float {
+    animation: admin-float 6s ease-in-out infinite;
   }
 
   /* Album descriptions custom styles */

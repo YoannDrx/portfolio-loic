@@ -31,8 +31,11 @@ export const POST = withAuthAndValidation(
       const versionInfo = await getVersionData(data.versionId);
       const { contentType, contentId, data: versionData } = versionInfo;
 
+      // Type-safe destructuring
+      const typedVersionData = versionData as Record<string, unknown>;
+
       // Supprimer les champs metadata avant restauration
-      const { id, createdAt, updatedAt, createdById, createdBy, ...restoreData } = versionData;
+      const { id, createdAt, updatedAt, createdById, createdBy, ...restoreData } = typedVersionData;
 
       let restoredContent: Record<string, unknown> | null = null;
 
@@ -42,8 +45,8 @@ export const POST = withAuthAndValidation(
           // Sanitizer les descriptions HTML
           const sanitizedData = {
             ...restoreData,
-            descriptionsFr: sanitizeDescription(restoreData.descriptionsFr),
-            descriptionsEn: sanitizeDescription(restoreData.descriptionsEn),
+            descriptionsFr: sanitizeDescription((restoreData.descriptionsFr as string) ?? ""),
+            descriptionsEn: sanitizeDescription((restoreData.descriptionsEn as string) ?? ""),
           };
 
           restoredContent = await prisma.album.update({
@@ -65,8 +68,8 @@ export const POST = withAuthAndValidation(
           // Sanitizer les descriptions HTML
           const sanitizedData = {
             ...restoreData,
-            descriptionsFr: sanitizeDescription(restoreData.descriptionsFr),
-            descriptionsEn: sanitizeDescription(restoreData.descriptionsEn),
+            descriptionsFr: sanitizeDescription((restoreData.descriptionsFr as string) ?? ""),
+            descriptionsEn: sanitizeDescription((restoreData.descriptionsEn as string) ?? ""),
           };
 
           restoredContent = await prisma.service.update({

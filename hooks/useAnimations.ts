@@ -1,12 +1,12 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, type RefObject } from 'react';
 import {
   useMotionValue,
   useSpring,
   useInView,
 } from 'framer-motion';
-import type { RefObject, MotionValue, SpringOptions } from 'framer-motion';
+import type { MotionValue, SpringOptions } from 'framer-motion';
 
 /* ============================================
    MOUSE POSITION HOOK

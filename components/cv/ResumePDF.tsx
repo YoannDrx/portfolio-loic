@@ -1,12 +1,29 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Svg, Path, Circle, Image } from '@react-pdf/renderer';
+import type { Styles } from '@react-pdf/renderer';
 import path from 'path';
+
+interface ProfileData {
+  name?: string | null;
+  roleEn?: string | null;
+  roleFr?: string | null;
+  headlineEn?: string | null;
+  headlineFr?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  location?: string | null;
+  website?: string | null;
+  linkedin?: string | null;
+  github?: string | null;
+  twitter?: string | null;
+  photo?: string | null;
+}
 
 interface ResumeData {
   settings: Record<string, unknown>;
   entries: ResumeEntry[];
   sections: ResumeSection[];
-  profile: Record<string, unknown>;
+  profile: ProfileData;
   theme: Partial<Palette>;
   locale: string;
 }
@@ -290,7 +307,7 @@ const createStyles = (palette: Palette) =>
     },
   });
 
-const HeaderGraphic = ({ palette, style }: { palette: Palette; style: Record<string, unknown> }) => (
+const HeaderGraphic = ({ palette, style }: { palette: Palette; style?: Styles[keyof Styles] }) => (
   <Svg style={style} viewBox="0 0 280 140">
     <Path d="M0 0 L180 0 L120 80 Z" fill={palette.gradientFrom} opacity={0.25} />
     <Path d="M70 10 L250 0 L210 110 Z" fill={palette.gradientTo} opacity={0.3} />
@@ -368,15 +385,16 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
     return (val as string) || (entry?.[`${field}En`] as string) || '';
   };
 
-  const phone = profile.phone || settings?.contactPhone;
-  const location = profile.location || settings?.location;
-  const website = profile.website || 'loicghanem.com';
-  const email = profile.email || settings?.contactEmail || 'contact@loicghanem.com';
+  const phone = (profile.phone || settings?.contactPhone || '') as string;
+  const location = (profile.location || settings?.location || '') as string;
+  const website = (profile.website || 'loicghanem.com') as string;
+  const email = (profile.email || settings?.contactEmail || 'contact@loicghanem.com') as string;
 
+  const photoPath = typeof profile.photo === 'string' ? profile.photo : '';
   const resolvedPhoto =
-    profile.photo && profile.photo.startsWith('http')
-      ? profile.photo
-      : path.resolve(`./public${profile.photo || '/img/slider/loic-studio-front.jpg'}`);
+    photoPath && photoPath.startsWith('http')
+      ? photoPath
+      : path.resolve(`./public${photoPath || '/img/slider/loic-studio-front.jpg'}`);
 
   const renderTimelineSection = (section: ResumeSection) => {
     const list = section.items ?? resolveSectionEntries(section, entries);
@@ -462,10 +480,10 @@ export const ResumePDF = ({ data }: { data: ResumeData }) => {
             <Image src={resolvedPhoto} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </View>
           <View style={styles.nameBlock}>
-            <Text style={styles.name}>{profile.name}</Text>
-            <Text style={styles.role}>{isFr ? profile.roleFr || profile.roleEn : profile.roleEn || profile.roleFr}</Text>
+            <Text style={styles.name}>{profile.name || ''}</Text>
+            <Text style={styles.role}>{isFr ? (profile.roleFr || profile.roleEn || '') : (profile.roleEn || profile.roleFr || '')}</Text>
             {profile.headlineEn || profile.headlineFr ? (
-              <Text style={styles.headline}>{isFr ? profile.headlineFr || profile.headlineEn : profile.headlineEn || profile.headlineFr}</Text>
+              <Text style={styles.headline}>{isFr ? (profile.headlineFr || profile.headlineEn || '') : (profile.headlineEn || profile.headlineFr || '')}</Text>
             ) : null}
             <View style={styles.contactRow}>
               <View style={styles.contactChip}>

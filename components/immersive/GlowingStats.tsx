@@ -13,7 +13,7 @@ import { useCountUp } from '@/hooks/useAnimations';
 type GlowColor = 'lime' | 'cyan' | 'magenta' | 'purple' | 'emerald' | 'teal';
 
 interface StatItem {
-  value: number;
+  value: number | string;
   suffix?: string;
   prefix?: string;
   label: string;
@@ -88,15 +88,19 @@ function StatCard({ stat, index }: StatCardProps) {
   const color = stat.color || 'cyan';
   const config = colorConfig[color];
   const Icon = stat.icon;
+  const isNumeric = typeof stat.value === 'number';
 
   const { ref, value } = useCountUp({
-    end: stat.value,
+    end: isNumeric ? (stat.value as number) : 0,
     suffix: stat.suffix || '',
     prefix: stat.prefix || '',
     duration: 2,
     startOnView: true,
     easing: 'easeOut',
   });
+
+  // Display value: use countUp for numbers, direct string for text
+  const displayValue = isNumeric ? value : stat.value;
 
   return (
     <motion.div
@@ -156,7 +160,7 @@ function StatCard({ stat, index }: StatCardProps) {
             config.gradient
           )}
         >
-          {value}
+          {displayValue}
         </span>
       </div>
 

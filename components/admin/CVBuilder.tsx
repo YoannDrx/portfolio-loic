@@ -19,16 +19,34 @@ type Section = {
   titleFr: string;
   type: string;
   entryType: string;
-  entryIds?: string[] | string;
+  entryIds?: string[];
   order?: number;
   published?: boolean;
 };
 
 type Entry = {
+  id?: string;
+  type?: string;
   order?: number;
+  titleEn?: string | null;
+  titleFr?: string | null;
+  subtitleEn?: string | null;
+  subtitleFr?: string | null;
 } & Record<string, unknown>;
 
-type Profile = Record<string, unknown>;
+type Profile = {
+  name?: string | null;
+  roleFr?: string | null;
+  roleEn?: string | null;
+  headlineFr?: string | null;
+  headlineEn?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  location?: string | null;
+  website?: string | null;
+  photo?: string | null;
+} & Record<string, unknown>;
+
 type Theme = Record<string, unknown>;
 
 interface CVBuilderProps {
@@ -263,17 +281,17 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
             </div>
             <div className="grid grid-cols-1 gap-4">
               <Input
-                value={profileState.name}
+                value={profileState.name || ""}
                 onChange={(e) => setProfile({ ...profileState, name: e.target.value })}
                 placeholder="Nom"
               />
               <Input
-                value={profileState.roleFr}
+                value={profileState.roleFr || ""}
                 onChange={(e) => setProfile({ ...profileState, roleFr: e.target.value })}
                 placeholder="Rôle (FR)"
               />
               <Input
-                value={profileState.roleEn}
+                value={profileState.roleEn || ""}
                 onChange={(e) => setProfile({ ...profileState, roleEn: e.target.value })}
                 placeholder="Role (EN)"
               />
@@ -290,7 +308,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                 className="min-h-[80px]"
               />
               <Input
-                value={profileState.email}
+                value={profileState.email || ""}
                 onChange={(e) => setProfile({ ...profileState, email: e.target.value })}
                 placeholder="Email"
               />

@@ -132,11 +132,42 @@ const buildFallback = async (): Promise<CVData> => {
 type CvSectionItem = {
   startDate?: unknown;
   endDate?: unknown;
+  order: number;
+  isActive?: boolean;
+  isCurrent?: boolean;
+  translations: Array<{ locale: string; title?: string; subtitle?: string; location?: string; description?: string }>;
 } & Record<string, unknown>;
 
 type CvSection = {
+  id?: string;
+  type: string;
+  icon?: string | null;
+  color?: string | null;
+  placement?: string;
+  layoutType?: string;
+  order: number;
+  isActive?: boolean;
   items: CvSectionItem[];
+  translations: Array<{ locale: string; title?: string }>;
 } & Record<string, unknown>;
+
+type CvSkill = {
+  id?: string;
+  category: string;
+  level: number;
+  showAsBar?: boolean;
+  order: number;
+  isActive?: boolean;
+  translations: Array<{ locale: string; title?: string }>;
+};
+
+type CvSocialLink = {
+  id?: string;
+  platform: string;
+  url: string;
+  label?: string | null;
+  order: number;
+};
 
 type CvRecord = {
   id: string;
@@ -158,8 +189,8 @@ type CvRecord = {
   showPhoto?: boolean | null;
   theme?: unknown;
   sections: CvSection[];
-  skills: unknown[];
-  socialLinks: unknown[];
+  skills: CvSkill[];
+  socialLinks: CvSocialLink[];
 };
 
 const toIsoString = (value: unknown): string | null => {

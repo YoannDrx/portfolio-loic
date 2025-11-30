@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 interface ProfileSettingsProps {
   user: {
     email?: string;
+    name?: string;
   };
   onUserUpdate: () => void;
 }

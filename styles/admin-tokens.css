@@ -1,0 +1,205 @@
+/* ============================================
+   ADMIN DASHBOARD DESIGN TOKENS
+   Immersive Dark Theme with Neon Accents
+   ============================================ */
+
+:root {
+  /* ===== ADMIN SURFACES ===== */
+  --admin-bg: #09090b;
+  --admin-bg-rgb: 9, 9, 11;
+  --admin-surface: rgba(15, 15, 20, 0.8);
+  --admin-surface-solid: #0f0f14;
+  --admin-surface-elevated: rgba(20, 20, 28, 0.9);
+  --admin-surface-elevated-solid: #14141c;
+  --admin-surface-glass: rgba(255, 255, 255, 0.03);
+  --admin-surface-hover: rgba(255, 255, 255, 0.05);
+  --admin-surface-active: rgba(255, 255, 255, 0.08);
+
+  /* ===== ADMIN BORDERS ===== */
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-border-subtle: rgba(255, 255, 255, 0.04);
+  --admin-border-strong: rgba(255, 255, 255, 0.12);
+  --admin-border-glow-cyan: rgba(0, 240, 255, 0.3);
+  --admin-border-glow-lime: rgba(213, 255, 10, 0.3);
+  --admin-border-glow-magenta: rgba(255, 0, 110, 0.3);
+  --admin-border-glow-purple: rgba(161, 0, 242, 0.3);
+
+  /* ===== NEON ACCENT COLORS ===== */
+  --admin-neon-cyan: #00F0FF;
+  --admin-neon-cyan-rgb: 0, 240, 255;
+  --admin-neon-lime: #D5FF0A;
+  --admin-neon-lime-rgb: 213, 255, 10;
+  --admin-neon-magenta: #FF006E;
+  --admin-neon-magenta-rgb: 255, 0, 110;
+  --admin-neon-purple: #A100F2;
+  --admin-neon-purple-rgb: 161, 0, 242;
+  --admin-neon-orange: #FF6B35;
+  --admin-neon-orange-rgb: 255, 107, 53;
+
+  /* ===== ADMIN GLOW EFFECTS ===== */
+  /* Cyan Glow */
+  --admin-glow-cyan-sm: 0 0 10px -2px rgba(0, 240, 255, 0.4);
+  --admin-glow-cyan-md: 0 0 20px -4px rgba(0, 240, 255, 0.5);
+  --admin-glow-cyan-lg: 0 0 30px -6px rgba(0, 240, 255, 0.6);
+  --admin-glow-cyan-xl: 0 0 50px -10px rgba(0, 240, 255, 0.5);
+  --admin-glow-cyan-intense: 0 0 40px rgba(0, 240, 255, 0.8);
+
+  /* Lime Glow */
+  --admin-glow-lime-sm: 0 0 10px -2px rgba(213, 255, 10, 0.4);
+  --admin-glow-lime-md: 0 0 20px -4px rgba(213, 255, 10, 0.5);
+  --admin-glow-lime-lg: 0 0 30px -6px rgba(213, 255, 10, 0.6);
+  --admin-glow-lime-intense: 0 0 40px rgba(213, 255, 10, 0.8);
+
+  /* Magenta Glow */
+  --admin-glow-magenta-sm: 0 0 10px -2px rgba(255, 0, 110, 0.4);
+  --admin-glow-magenta-md: 0 0 20px -4px rgba(255, 0, 110, 0.5);
+  --admin-glow-magenta-lg: 0 0 30px -6px rgba(255, 0, 110, 0.6);
+  --admin-glow-magenta-intense: 0 0 40px rgba(255, 0, 110, 0.8);
+
+  /* Purple Glow */
+  --admin-glow-purple-sm: 0 0 10px -2px rgba(161, 0, 242, 0.4);
+  --admin-glow-purple-md: 0 0 20px -4px rgba(161, 0, 242, 0.5);
+  --admin-glow-purple-lg: 0 0 30px -6px rgba(161, 0, 242, 0.6);
+  --admin-glow-purple-intense: 0 0 40px rgba(161, 0, 242, 0.8);
+
+  /* State Glows */
+  --admin-glow-success: 0 0 20px rgba(92, 228, 98, 0.4);
+  --admin-glow-error: 0 0 20px rgba(239, 68, 68, 0.4);
+  --admin-glow-warning: 0 0 20px rgba(251, 191, 36, 0.4);
+  --admin-glow-info: 0 0 20px rgba(0, 240, 255, 0.4);
+
+  /* ===== ADMIN GRADIENTS ===== */
+  /* Background Gradients */
+  --gradient-admin-bg: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 240, 255, 0.08), transparent 50%);
+  --gradient-admin-bg-alt: radial-gradient(ellipse 60% 40% at 80% 20%, rgba(161, 0, 242, 0.05), transparent 50%);
+  --gradient-admin-surface: linear-gradient(180deg, rgba(15, 15, 20, 0.95) 0%, rgba(9, 9, 11, 0.98) 100%);
+
+  /* Card Gradients */
+  --gradient-admin-card: linear-gradient(135deg, rgba(20, 20, 28, 0.9) 0%, rgba(15, 15, 20, 0.95) 100%);
+  --gradient-admin-card-hover: linear-gradient(135deg, rgba(25, 25, 35, 0.95) 0%, rgba(18, 18, 25, 0.98) 100%);
+
+  /* Sidebar Gradient */
+  --gradient-admin-sidebar: linear-gradient(180deg, rgba(15, 15, 20, 0.98) 0%, rgba(9, 9, 11, 0.95) 100%);
+
+  /* KPI Card Gradients */
+  --gradient-kpi-cyan: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 240, 255, 0.02) 100%);
+  --gradient-kpi-lime: linear-gradient(135deg, rgba(213, 255, 10, 0.1) 0%, rgba(213, 255, 10, 0.02) 100%);
+  --gradient-kpi-magenta: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(255, 0, 110, 0.02) 100%);
+  --gradient-kpi-purple: linear-gradient(135deg, rgba(161, 0, 242, 0.1) 0%, rgba(161, 0, 242, 0.02) 100%);
+
+  /* Neon Border Gradients */
+  --gradient-border-cyan: linear-gradient(135deg, var(--admin-neon-cyan) 0%, rgba(0, 240, 255, 0.3) 100%);
+  --gradient-border-lime: linear-gradient(135deg, var(--admin-neon-lime) 0%, rgba(213, 255, 10, 0.3) 100%);
+  --gradient-border-magenta: linear-gradient(135deg, var(--admin-neon-magenta) 0%, rgba(255, 0, 110, 0.3) 100%);
+  --gradient-border-purple: linear-gradient(135deg, var(--admin-neon-purple) 0%, rgba(161, 0, 242, 0.3) 100%);
+
+  /* ===== ADMIN SHADOWS ===== */
+  --admin-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --admin-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --admin-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --admin-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+  /* Elevated shadows with subtle color */
+  --admin-shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --admin-shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  /* ===== ADMIN Z-INDEX SCALE ===== */
+  --admin-z-background: -10;
+  --admin-z-base: 0;
+  --admin-z-content: 10;
+  --admin-z-sidebar: 20;
+  --admin-z-header: 30;
+  --admin-z-dropdown: 40;
+  --admin-z-modal-backdrop: 50;
+  --admin-z-modal: 60;
+  --admin-z-command-palette: 70;
+  --admin-z-toast: 80;
+  --admin-z-tooltip: 90;
+
+  /* ===== ADMIN TRANSITIONS ===== */
+  --admin-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --admin-transition-bounce: 600ms cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* ===== ADMIN BLUR VALUES ===== */
+  --admin-blur-sm: 8px;
+  --admin-blur-md: 16px;
+  --admin-blur-lg: 24px;
+  --admin-blur-xl: 40px;
+}
+
+/* ============================================
+   ADMIN KEYFRAMES
+   ============================================ */
+@keyframes admin-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes admin-pulse-cyan {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.6);
+  }
+}
+
+@keyframes admin-pulse-lime {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(213, 255, 10, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(213, 255, 10, 0.6);
+  }
+}
+
+@keyframes admin-pulse-magenta {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 0, 110, 0.6);
+  }
+}
+
+@keyframes admin-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes admin-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes admin-success-bounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

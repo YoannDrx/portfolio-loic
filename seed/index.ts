@@ -13,97 +13,105 @@ const prisma = new PrismaClient();
 // === SEEDERS PAR ENTITÉ ===
 const seeders: Record<SeedEntity, () => Promise<number>> = {
   users: async () => {
-    const data = await loadJSON("users");
+    const data = await loadJSON<Record<string, unknown>>("users");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
-    await prisma.user.createMany({ data: transformed, skipDuplicates: true });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await prisma.user.createMany({ data: transformed as any, skipDuplicates: true });
     return data.length;
   },
 
   accounts: async () => {
-    const data = await loadJSON("accounts");
+    const data = await loadJSON<Record<string, unknown>>("accounts");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
-    await prisma.account.createMany({ data: transformed, skipDuplicates: true });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await prisma.account.createMany({ data: transformed as any, skipDuplicates: true });
     return data.length;
   },
 
   site_settings: async () => {
-    const data = await loadJSON("site_settings");
+    const data = await loadJSON<Record<string, unknown>>("site_settings");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     for (const item of transformed) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await prisma.siteSettings.upsert({
         where: { id: (item as { id: string }).id },
-        update: item,
-        create: item,
+        update: item as any,
+        create: item as any,
       });
     }
     return data.length;
   },
 
   navigation_items: async () => {
-    const data = await loadJSON("navigation_items");
+    const data = await loadJSON<Record<string, unknown>>("navigation_items");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await prisma.navigationItem.createMany({
-      data: transformed,
+      data: transformed as any,
       skipDuplicates: true,
     });
     return data.length;
   },
 
   albums: async () => {
-    const data = await loadJSON("albums");
+    const data = await loadJSON<Record<string, unknown>>("albums");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     for (const item of transformed) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await prisma.album.upsert({
         where: { id: (item as { id: string }).id },
-        update: item,
-        create: item,
+        update: item as any,
+        create: item as any,
       });
     }
     return data.length;
   },
 
   videos: async () => {
-    const data = await loadJSON("videos");
+    const data = await loadJSON<Record<string, unknown>>("videos");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     for (const item of transformed) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await prisma.video.upsert({
         where: { id: (item as { id: string }).id },
-        update: item,
-        create: item,
+        update: item as any,
+        create: item as any,
       });
     }
     return data.length;
   },
 
   services: async () => {
-    const data = await loadJSON("services");
+    const data = await loadJSON<Record<string, unknown>>("services");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     for (const item of transformed) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await prisma.service.upsert({
         where: { id: (item as { id: string }).id },
-        update: item,
-        create: item,
+        update: item as any,
+        create: item as any,
       });
     }
     return data.length;
   },
 
   resume_entries: async () => {
-    const data = await loadJSON("resume_entries");
+    const data = await loadJSON<Record<string, unknown>>("resume_entries");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     for (const item of transformed) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await prisma.resumeEntry.upsert({
         where: { id: (item as { id: string }).id },
-        update: item,
-        create: item,
+        update: item as any,
+        create: item as any,
       });
     }
     return data.length;

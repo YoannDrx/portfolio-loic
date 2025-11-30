@@ -1,6 +1,18 @@
 import { prisma } from "@/lib/prisma";
 import { CVBuilder } from "@/components/admin/CVBuilder";
 
+type Section = {
+  id?: string;
+  slug: string;
+  titleEn: string;
+  titleFr: string;
+  type: string;
+  entryType: string;
+  entryIds?: string[];
+  order?: number;
+  published?: boolean;
+};
+
 export default async function ResumePage({
   params,
 }: {
@@ -16,12 +28,25 @@ export default async function ResumePage({
     }
   };
 
-  const [entries, profile, theme, sections] = await Promise.all([
+  const [entries, profile, theme, rawSections] = await Promise.all([
     safeFetch(prisma.resumeEntry.findMany({ orderBy: { order: "asc" } }), []),
     safeFetch(prisma.resumeProfile.findFirst(), null),
     safeFetch(prisma.resumeTheme.findFirst(), null),
     safeFetch(prisma.resumeSection.findMany({ orderBy: { order: "asc" } }), []),
   ]);
+
+  // Transform sections to match expected type (handle null values)
+  const sections: Section[] = rawSections.map((s) => ({
+    id: s.id,
+    slug: s.slug,
+    titleEn: s.titleEn ?? "",
+    titleFr: s.titleFr ?? "",
+    type: s.type,
+    entryType: s.entryType ?? "",
+    entryIds: Array.isArray(s.entryIds) ? s.entryIds as string[] : undefined,
+    order: s.order,
+    published: s.published,
+  }));
 
   const fallbackProfile = {
     name: "Loïc Ghanem",

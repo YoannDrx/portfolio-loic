@@ -119,9 +119,9 @@ export default function Footer() {
             {/* CTA */}
             <Link
               href="/contact"
-              className="inline-block w-full p-4 rounded-lg bg-gradient-to-r from-neon-cyan/10 to-neon-magenta/10 border border-white/10 hover:border-neon-cyan/30 transition-all duration-300 text-center group"
+              className="inline-flex items-center justify-center w-full px-4 py-3 rounded-lg border-2 border-neon-green bg-transparent text-neon-green font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:bg-neon-green/10 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] group"
             >
-              <span className="text-sm font-bold text-white group-hover:text-neon-cyan transition-colors uppercase tracking-wider">{tFooter("followMe")}</span>
+              {tFooter("followMe")}
             </Link>
           </div>
         </div>

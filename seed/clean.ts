@@ -10,7 +10,7 @@ async function clean() {
     // Suppression dans l'ordre inverse des dépendances FK
     for (const modelName of CLEAN_ORDER) {
       try {
-        const model = (prisma as Record<string, unknown>)[modelName];
+        const model = (prisma as unknown as Record<string, unknown>)[modelName];
         if (model && typeof model === "object" && "deleteMany" in model) {
           const deleteMany = (model as { deleteMany: () => Promise<{ count: number }> }).deleteMany;
           const result = await deleteMany();

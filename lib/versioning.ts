@@ -1,4 +1,5 @@
 import { prisma } from "./prisma";
+import type { Prisma } from "@prisma/client";
 
 // ============================================
 // TYPES
@@ -66,8 +67,8 @@ export async function createVersion(
         contentType,
         contentId,
         version: newVersionNumber,
-        data,
-        changes: changes ?? undefined,
+        data: data as Prisma.InputJsonValue,
+        changes: (changes ?? undefined) as Prisma.InputJsonValue | undefined,
         action,
         createdById: userId,
       },
@@ -155,7 +156,10 @@ export async function compareVersions(
     throw new Error("Version not found");
   }
 
-  return calculateDiff(version1.data, version2.data);
+  return calculateDiff(
+    version1.data as Record<string, unknown> | null,
+    version2.data as Record<string, unknown> | null
+  );
 }
 
 /**
@@ -226,7 +230,7 @@ export async function getVersionData(versionId: string): Promise<{
   }
 
   return {
-    contentType: version.contentType,
+    contentType: version.contentType as ContentType,
     contentId: version.contentId,
     data: version.data,
   };

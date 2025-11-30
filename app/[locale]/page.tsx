@@ -1,6 +1,9 @@
 import FuturisticHome from '@/components/home/FuturisticHome';
 import { prisma } from '@/lib/prisma';
 
+// Force dynamic rendering for useSearchParams in FuturisticHome
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const [albums, videos, services] = await Promise.all([
     // Fetch latest 4 albums

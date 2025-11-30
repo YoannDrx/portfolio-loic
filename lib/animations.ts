@@ -1167,3 +1167,477 @@ export const timelinePreset = {
   viewport: { once: true, margin: '-100px' },
   variants: timelineItemReveal,
 };
+
+/* ============================================
+   ADMIN DASHBOARD ANIMATIONS
+   ============================================ */
+
+/** Admin card reveal with perspective */
+export const adminCardReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    rotateX: -10,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+/** Admin sidebar item with glow */
+export const adminSidebarItem: Variants = {
+  rest: {
+    x: 0,
+    backgroundColor: 'transparent',
+  },
+  hover: {
+    x: 4,
+    backgroundColor: 'rgba(0, 240, 255, 0.05)',
+    transition: {
+      duration: 0.2,
+      ease: 'easeOut',
+    },
+  },
+  active: {
+    x: 0,
+    backgroundColor: 'rgba(0, 240, 255, 0.1)',
+  },
+};
+
+/** Admin table row animation */
+export const adminTableRow: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -20,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.3,
+      ease: [0.25, 0.4, 0.25, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 20,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+/** Admin table container with stagger */
+export const adminTableContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.03,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/** Admin page transition with blur */
+export const adminPageTransition: Variants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+    filter: 'blur(10px)',
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    filter: 'blur(10px)',
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+/** Admin success pulse animation */
+export const adminSuccessPulse: Variants = {
+  initial: {
+    scale: 0,
+    opacity: 0,
+  },
+  animate: {
+    scale: [0, 1.2, 1],
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      times: [0, 0.6, 1],
+      ease: 'easeOut',
+    },
+  },
+};
+
+/** Admin error shake animation */
+export const adminErrorShake: Variants = {
+  initial: {
+    x: 0,
+  },
+  shake: {
+    x: [-4, 4, -4, 4, -2, 2, 0],
+    transition: {
+      duration: 0.4,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+/** Admin KPI counter animation */
+export const adminKPIReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.9,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 25,
+    },
+  },
+};
+
+/** Admin KPI container stagger */
+export const adminKPIContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+/** Admin command palette backdrop */
+export const adminCommandBackdrop: Variants = {
+  hidden: {
+    opacity: 0,
+    backdropFilter: 'blur(0px)',
+  },
+  visible: {
+    opacity: 1,
+    backdropFilter: 'blur(8px)',
+    transition: {
+      duration: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+    backdropFilter: 'blur(0px)',
+    transition: {
+      duration: 0.15,
+    },
+  },
+};
+
+/** Admin command palette content */
+export const adminCommandContent: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+    y: -20,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 30,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    y: -20,
+    transition: {
+      duration: 0.15,
+    },
+  },
+};
+
+/** Admin command item */
+export const adminCommandItem: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -10,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+};
+
+/** Admin toast notification */
+export const adminToast: Variants = {
+  initial: {
+    opacity: 0,
+    y: 50,
+    scale: 0.9,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 25,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 100,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+/** Admin floating orb animation */
+export const adminFloatingOrb: Variants = {
+  initial: {
+    opacity: 0.3,
+    scale: 1,
+  },
+  animate: {
+    opacity: [0.2, 0.4, 0.2],
+    scale: [1, 1.1, 1],
+    x: [0, 30, 0],
+    y: [0, -20, 0],
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+/** Admin drag item */
+export const adminDragItem: Variants = {
+  rest: {
+    scale: 1,
+    boxShadow: '0 0 0 rgba(0, 240, 255, 0)',
+  },
+  dragging: {
+    scale: 1.02,
+    boxShadow: '0 0 30px rgba(0, 240, 255, 0.4)',
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 25,
+    },
+  },
+};
+
+/** Admin bulk action bar */
+export const adminBulkActionBar: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 30,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 20,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+/** Admin timeline item */
+export const adminTimelineItem: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -30,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.25, 0.4, 0.25, 1],
+    },
+  },
+};
+
+/** Admin timeline container */
+export const adminTimelineContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+/** Admin form field animation */
+export const adminFormField: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 10,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.3,
+      ease: 'easeOut',
+    },
+  },
+};
+
+/** Admin form container stagger */
+export const adminFormContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/** Admin header dropdown */
+export const adminHeaderDropdown: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+    y: -10,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 30,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    y: -10,
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
+
+/** Admin notification bell */
+export const adminNotificationBell: Variants = {
+  rest: {
+    rotate: 0,
+  },
+  ring: {
+    rotate: [0, 15, -15, 10, -10, 5, -5, 0],
+    transition: {
+      duration: 0.6,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+/** Admin neon glow colors for admin */
+export const adminNeonColors = {
+  cyan: 'rgba(0, 240, 255, 0.6)',
+  lime: 'rgba(213, 255, 10, 0.6)',
+  magenta: 'rgba(255, 0, 110, 0.6)',
+  purple: 'rgba(161, 0, 242, 0.6)',
+  orange: 'rgba(255, 107, 53, 0.6)',
+} as const;
+
+/** Create admin glow hover effect */
+export function createAdminGlow(color: keyof typeof adminNeonColors): TargetAndTransition {
+  return {
+    boxShadow: `0 0 30px ${adminNeonColors[color]}`,
+    transition: transitions.smooth,
+  };
+}
+
+/* ============================================
+   ADMIN PRESETS
+   ============================================ */
+
+/** Admin card preset */
+export const adminCardPreset = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, margin: '-50px' },
+  variants: adminCardReveal,
+  whileHover: { y: -4, transition: { duration: 0.2 } },
+};
+
+/** Admin KPI preset */
+export const adminKPIPreset = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, margin: '0px' },
+  variants: adminKPIContainer,
+};
+
+/** Admin table preset */
+export const adminTablePreset = {
+  initial: 'hidden',
+  animate: 'visible',
+  variants: adminTableContainer,
+};
+
+/** Admin timeline preset */
+export const adminTimelinePreset = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, margin: '-50px' },
+  variants: adminTimelineContainer,
+};
+
+/** Admin form preset */
+export const adminFormPreset = {
+  initial: 'hidden',
+  animate: 'visible',
+  variants: adminFormContainer,
+};

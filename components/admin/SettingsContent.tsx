@@ -272,7 +272,7 @@ export function SettingsContent() {
 
         {/* ONGLET RÉSEAUX SOCIAUX */}
         <TabsContent value="social" className="space-y-6">
-          <SocialMediaSettings settings={settings} onChange={handleChange} />
+          <SocialMediaSettings settings={settings as Record<string, string | undefined>} onChange={handleChange} />
         </TabsContent>
 
         {/* ONGLET CONTENU */}

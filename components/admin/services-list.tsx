@@ -42,47 +42,49 @@ export function ServicesList({ services, locale }: ServicesListProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Services</h1>
-          <p className="text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300">
-            Gérez vos services proposés ({services.length} au total)
+          <h1 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
+            Services Library
+          </h1>
+          <p className="text-neutral-400 font-mono text-sm">
+            Manage your services / {services.length} total entries
           </p>
         </div>
         <Button
           asChild
-          className="gap-2 bg-gradient-to-r from-admin-primary-500 to-admin-accent-500 hover:from-admin-primary-600 hover:to-admin-accent-600 shadow-md hover:shadow-lg transition-all duration-200"
+          className="gap-2 bg-gradient-to-r from-[var(--admin-neon-purple)] to-[var(--admin-neon-cyan)] text-white font-bold hover:shadow-[0_0_20px_rgba(161,0,242,0.4)] transition-all border-none"
         >
           <Link href={`/${locale}/admin/services/new`}>
             <Plus className="h-4 w-4" />
-            Nouveau service
+            Create New
           </Link>
         </Button>
       </div>
 
       {/* Search Bar */}
       <div className="flex items-center gap-2">
-        <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-admin-text-tertiary dark:text-dark-admin-text-tertiary transition-colors duration-300" />
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500" />
           <Input
-            placeholder="Rechercher un service..."
+            placeholder="Search services..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-8"
+            className="pl-10 bg-white/5 border-white/10 text-white focus:border-[var(--admin-neon-purple)]/50 focus:ring-[var(--admin-neon-purple)]/20"
           />
         </div>
       </div>
 
       {/* Table with fixed height and scroll */}
-      <div className="rounded-lg border border-admin-border dark:border-dark-admin-border bg-white dark:bg-dark-admin-bg-secondary shadow-sm overflow-hidden transition-colors duration-300">
+      <div className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-colors duration-300">
         <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
           <Table>
-            <TableHeader className="sticky top-0 bg-admin-bg-secondary dark:bg-dark-admin-bg-tertiary z-10 border-b border-admin-border dark:border-dark-admin-border transition-colors duration-300">
-              <TableRow className="hover:bg-admin-bg-secondary dark:hover:bg-dark-admin-bg-tertiary">
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Aperçu</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">N°</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Titre</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Date</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Statut</TableHead>
-                <TableHead className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">Actions</TableHead>
+            <TableHeader className="sticky top-0 bg-white/5 backdrop-blur-md z-10 border-b border-white/10 transition-colors duration-300">
+              <TableRow className="hover:bg-white/5 border-white/10">
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Aperçu</TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">N°</TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Titre</TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Date</TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Statut</TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -90,16 +92,16 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                 <TableRow>
                   <TableCell
                     colSpan={6}
-                    className="h-24 text-center text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300"
+                    className="h-24 text-center text-neutral-500"
                   >
-                    Aucun service trouvé
+                    No services found
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredServices.map((service) => (
                   <TableRow
                     key={service.id}
-                    className="group hover:bg-admin-bg-secondary dark:hover:bg-dark-admin-bg-tertiary transition-colors duration-150 border-b border-admin-border-light dark:border-dark-admin-border-light last:border-b-0"
+                    className="group hover:bg-white/5 transition-colors duration-150 border-b border-white/5 last:border-b-0"
                   >
                     <TableCell>
                       <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200">
@@ -115,29 +117,27 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                     <TableCell>
                       <Badge
                         variant="outline"
-                        className="border-neon-cyan/30 dark:border-cyan-400/30 bg-cyan-50 dark:bg-cyan-900/20 text-neon-cyan dark:text-cyan-400 font-bold transition-colors duration-300"
+                        className="border-[var(--admin-neon-cyan)]/30 bg-[var(--admin-neon-cyan)]/10 text-[var(--admin-neon-cyan)] font-bold"
                       >
                         #{service.no}
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <span className="font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">{service.title}</span>
+                      <span className="font-bold text-white">{service.title}</span>
                     </TableCell>
                     <TableCell>
-                      <span className="text-admin-text-secondary dark:text-dark-admin-text-secondary text-sm transition-colors duration-300">{service.date}</span>
+                      <span className="text-neutral-400 text-sm font-mono">{service.date}</span>
                     </TableCell>
                     <TableCell>
                       {service.published ? (
-                        <Badge className="bg-admin-success-500 dark:bg-admin-success-600 hover:bg-admin-success-600 dark:hover:bg-admin-success-700 text-white font-medium shadow-sm transition-colors duration-300">
-                          Publié
-                        </Badge>
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
+                          Published
+                        </span>
                       ) : (
-                        <Badge
-                          variant="secondary"
-                          className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400 border border-gray-200 dark:border-gray-700 font-medium transition-colors duration-300"
-                        >
-                          Brouillon
-                        </Badge>
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-white/5 text-neutral-500 border border-white/10">
+                          Draft
+                        </span>
                       )}
                     </TableCell>
                     <TableCell>
@@ -146,7 +146,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                           variant="ghost"
                           size="sm"
                           asChild
-                          className="h-9 w-9 p-0 hover:bg-admin-accent-50 dark:hover:bg-admin-accent-900/20 hover:text-admin-accent-600 dark:hover:text-admin-accent-400 transition-all duration-200"
+                          className="h-9 w-9 p-0 text-neutral-400 hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
                         >
                           <Link href={`/${locale}/admin/services/${service.id}`}>
                             <Pencil className="h-4 w-4" />
@@ -167,9 +167,9 @@ export function ServicesList({ services, locale }: ServicesListProps) {
       </div>
 
       {/* Footer */}
-      <div className="text-sm text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300">
-        {filteredServices.length} résultat{filteredServices.length > 1 ? "s" : ""}
-        {search && ` sur ${services.length} au total`}
+      <div className="text-sm text-neutral-500 font-mono">
+        {filteredServices.length} result{filteredServices.length > 1 ? "s" : ""}
+        {search && ` of ${services.length} total`}
       </div>
     </div>
   );
