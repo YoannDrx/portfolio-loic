@@ -11,16 +11,16 @@ const cardVariants = cva('rounded-xl border transition-all', {
       /* ===== GLASS VARIANTS (site public) ===== */
       // Glass - blurred background
       glass:
-        'bg-neutral-900/60 backdrop-blur-xl border-neutral-800/50',
+        'bg-glass backdrop-blur-xl border-[var(--glass-border)]',
       // Glass with neon border
       'glass-neon':
-        'bg-neutral-900/60 backdrop-blur-xl border-primary/20 shadow-glow-primary-sm',
+        'bg-glass backdrop-blur-xl border-primary/20 shadow-glow-primary-sm',
       // Glass with emerald border
       'glass-emerald':
-        'bg-neutral-900/60 backdrop-blur-xl border-emerald/20 shadow-glow-emerald-sm',
+        'bg-glass backdrop-blur-xl border-emerald/20 shadow-glow-emerald-sm',
       // Glass subtle
       'glass-subtle':
-        'bg-neutral-900/40 backdrop-blur-lg border-neutral-800/30',
+        'bg-glass-subtle backdrop-blur-lg border-[var(--glass-border-subtle)]',
 
       /* ===== SOLID VARIANTS ===== */
       // Default - solid background
@@ -35,16 +35,16 @@ const cardVariants = cva('rounded-xl border transition-all', {
       /* ===== GLOW VARIANTS ===== */
       // Glow primary
       'glow-primary':
-        'bg-neutral-900 border-primary/20 shadow-glow-primary-sm hover:shadow-glow-primary',
+        'bg-surface border-primary/20 shadow-glow-primary-sm hover:shadow-glow-primary',
       // Glow emerald
       'glow-emerald':
-        'bg-neutral-900 border-emerald/20 shadow-glow-emerald-sm hover:shadow-glow-emerald',
+        'bg-surface border-emerald/20 shadow-glow-emerald-sm hover:shadow-glow-emerald',
       // Glow teal
       'glow-teal':
-        'bg-neutral-900 border-teal/20 shadow-glow-teal-sm hover:shadow-glow-teal',
+        'bg-surface border-teal/20 shadow-glow-teal-sm hover:shadow-glow-teal',
       // Gradient background
       gradient:
-        'bg-gradient-to-b from-neutral-900 to-neutral-950 border-neutral-800',
+        'bg-gradient-to-b from-surface to-background border-border',
     },
     padding: {
       none: 'p-0',
@@ -158,7 +158,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-sm text-neutral-400', className)}
+    className={cn('text-sm text-muted-foreground', className)}
     {...props}
   />
 ));

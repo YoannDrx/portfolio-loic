@@ -129,7 +129,7 @@ export function GlassButton({
       <div
         className={cn(
           'absolute inset-0 rounded-lg',
-          'bg-white/5 group-hover:bg-obsidian/80',
+          'bg-[var(--glass-subtle)] group-hover:bg-background/80',
           'backdrop-blur-md group-hover:backdrop-blur-xl',
           'transition-all duration-500 ease-out',
         )}
@@ -213,7 +213,7 @@ export function GlassLinkButton({
       <div
         className={cn(
           'absolute inset-0 rounded-lg',
-          'bg-white/5 group-hover:bg-obsidian/80',
+          'bg-[var(--glass-subtle)] group-hover:bg-background/80',
           'backdrop-blur-md group-hover:backdrop-blur-xl',
           'transition-all duration-500 ease-out',
         )}

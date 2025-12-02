@@ -50,10 +50,10 @@ export default function VideoCard({ video }: VideoCardProps) {
       variant="default"
       hover="lift"
       triggerOnLoad
-      className={`group h-full flex flex-col overflow-hidden border-white/5 ${colors.border} ${colors.glow}`}
+      className={`group h-full flex flex-col overflow-hidden border-[var(--glass-border-subtle)] ${colors.border} ${colors.glow}`}
     >
       {/* Video Thumbnail / Player */}
-      <div className="relative aspect-video w-full overflow-hidden bg-obsidian-200">
+      <div className="relative aspect-video w-full overflow-hidden bg-muted">
         {!isPlaying ? (
           <>
             {/* Thumbnail */}
@@ -66,7 +66,7 @@ export default function VideoCard({ video }: VideoCardProps) {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
 
             {/* Play Button */}
             <button
@@ -74,7 +74,7 @@ export default function VideoCard({ video }: VideoCardProps) {
               className="absolute inset-0 flex items-center justify-center group/play z-10"
               aria-label="Play video"
             >
-              <div className={`w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover/play:bg-${config.color === 'cyan' ? 'neon-cyan' : config.color === 'magenta' ? 'neon-magenta' : 'neon-purple'}/80 group-hover/play:scale-110 transition-all duration-300 group-hover/play:border-transparent shadow-lg`}>
+              <div className={`w-16 h-16 rounded-full bg-[var(--glass-active)] backdrop-blur-md flex items-center justify-center border border-[var(--glass-border-strong)] group-hover/play:bg-${config.color === 'cyan' ? 'neon-cyan' : config.color === 'magenta' ? 'neon-magenta' : 'neon-purple'}/80 group-hover/play:scale-110 transition-all duration-300 group-hover/play:border-transparent shadow-lg`}>
                 <Play className="w-6 h-6 text-white fill-white ml-1" />
               </div>
             </button>
@@ -100,14 +100,14 @@ export default function VideoCard({ video }: VideoCardProps) {
       </div>
 
       {/* Video Info */}
-      <div className="p-6 flex-1 flex flex-col bg-gradient-to-b from-obsidian/50 to-transparent">
+      <div className="p-6 flex-1 flex flex-col bg-gradient-to-b from-background/50 to-transparent">
         {/* Title */}
-        <h3 className="text-lg font-bold text-white mb-3 group-hover:text-gradient-neon transition-all line-clamp-2 font-montserrat uppercase tracking-wide">
+        <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-gradient-neon transition-all line-clamp-2 font-montserrat uppercase tracking-wide">
           {video.title}
         </h3>
 
         {/* Date */}
-        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-widest mt-auto">
+        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-widest mt-auto">
           <Calendar className={`w-3 h-3 ${colors.icon}`} />
           <span>{video.date}</span>
         </div>

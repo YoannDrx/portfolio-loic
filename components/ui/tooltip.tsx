@@ -26,7 +26,7 @@ const tooltipContentVariants = cva(
       variant: {
         default: "bg-neutral-800 text-foreground border border-border",
         dark: "bg-neutral-950 text-foreground border border-neutral-800",
-        primary: "bg-primary text-neutral-950",
+        primary: "bg-primary text-foreground",
         inverted: "bg-foreground text-background",
       },
     },

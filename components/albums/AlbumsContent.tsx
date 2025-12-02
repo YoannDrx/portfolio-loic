@@ -209,10 +209,10 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 mb-6">
-                  <Disc className="w-10 h-10 text-gray-500" />
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[var(--glass-subtle)] mb-6">
+                  <Disc className="w-10 h-10 text-muted-foreground" />
                 </div>
-                <p className="text-xl text-gray-400">{t('noAlbums')}</p>
+                <p className="text-xl text-muted-foreground">{t('noAlbums')}</p>
               </motion.div>
             )}
           </div>

@@ -93,10 +93,10 @@ export default function MusicianExperience() {
           <Music2 className="w-5 h-5 text-neon-magenta" />
           <span className="text-neon-magenta font-semibold">Band Experience</span>
         </div>
-        <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+        <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4">
           {t('title')}
         </h2>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+        <p className="text-xl text-foreground/85 max-w-3xl mx-auto">
           {t('subtitle')}
         </p>
       </div>
@@ -132,7 +132,7 @@ export default function MusicianExperience() {
                         <div className={`p-2 rounded-lg ${colors.bg} ${colors.border} border flex-shrink-0`}>
                           <IconComponent className={`w-5 h-5 ${colors.text}`} />
                         </div>
-                        <h3 className="text-xl font-bold text-white">
+                        <h3 className="text-xl font-bold text-foreground">
                           {band.name}
                         </h3>
                       </div>
@@ -144,7 +144,7 @@ export default function MusicianExperience() {
 
                   {/* Role & Description */}
                   <div className="space-y-2 mb-4">
-                    <p className="text-base font-medium text-gray-200">
+                    <p className="text-base font-medium text-foreground/90">
                       {t(`${band.key}.role`)}
                       {description && (
                         <span className={`ml-2 text-sm ${colors.text}`}>
@@ -152,7 +152,7 @@ export default function MusicianExperience() {
                         </span>
                       )}
                     </p>
-                    <p className="text-sm text-gray-400 italic">
+                    <p className="text-sm text-muted-foreground italic">
                       {t(`${band.key}.genre`)}
                     </p>
                   </div>

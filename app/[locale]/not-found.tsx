@@ -10,7 +10,7 @@ export default function NotFound() {
       <div className="text-center">
         <h1 className="mb-4 text-9xl font-black text-gradient-neon">404</h1>
         <h2 className="mb-6 text-3xl font-bold text-white">{t('notFound')}</h2>
-        <p className="mb-8 text-lg text-gray-400">
+        <p className="mb-8 text-lg text-muted-foreground">
           {t('pageNotFoundDescription')}
         </p>
         <Link

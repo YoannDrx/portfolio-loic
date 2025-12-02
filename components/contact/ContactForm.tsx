@@ -73,13 +73,13 @@ export default function ContactForm() {
               {t('name')}
             </label>
             <div className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-neon-cyan transition-colors" />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-neon-cyan transition-colors" />
               <input
                 type="text"
                 id="name"
                 name="name"
                 required
-                className="w-full pl-12 pr-4 py-3 bg-obsidian-100/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-glass-subtle border border-[var(--glass-border)] rounded-lg text-foreground placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all"
                 placeholder={t('namePlaceholder')}
               />
             </div>
@@ -91,13 +91,13 @@ export default function ContactForm() {
               {t('email')}
             </label>
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-neon-cyan transition-colors" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-neon-cyan transition-colors" />
               <input
                 type="email"
                 id="email"
                 name="user_email"
                 required
-                className="w-full pl-12 pr-4 py-3 bg-obsidian-100/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-glass-subtle border border-[var(--glass-border)] rounded-lg text-foreground placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all"
                 placeholder={t('emailPlaceholder')}
               />
             </div>
@@ -109,13 +109,13 @@ export default function ContactForm() {
               {t('message')}
             </label>
             <div className="relative">
-              <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-neon-cyan transition-colors" />
+              <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-muted-foreground group-focus-within:text-neon-cyan transition-colors" />
               <textarea
                 id="message"
                 name="message"
                 required
                 rows={6}
-                className="w-full pl-12 pr-4 py-3 bg-obsidian-100/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all resize-none"
+                className="w-full pl-12 pr-4 py-3 bg-glass-subtle border border-[var(--glass-border)] rounded-lg text-foreground placeholder-gray-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all resize-none"
                 placeholder={t('messagePlaceholder')}
               />
             </div>
@@ -129,7 +129,7 @@ export default function ContactForm() {
           >
             {isSubmitting ? (
               <>
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-[var(--glass-border-strong)] border-t-white rounded-full animate-spin" />
                 <span>{t('sending')}</span>
               </>
             ) : (

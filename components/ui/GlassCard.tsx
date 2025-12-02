@@ -18,9 +18,9 @@ const glassCardVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-neutral-900/30 backdrop-blur-xl border border-border-subtle',
-        neon: 'bg-neutral-950/60 backdrop-blur-xl border border-border',
-        subtle: 'bg-neutral-800/20 backdrop-blur-lg border border-border-subtle',
+        default: 'bg-glass backdrop-blur-xl border border-[var(--glass-border)]',
+        neon: 'bg-glass-strong backdrop-blur-xl border border-border',
+        subtle: 'bg-glass-subtle backdrop-blur-lg border border-[var(--glass-border-subtle)]',
         solid: 'bg-surface border border-border',
         elevated: 'bg-surface-elevated border border-border shadow-lg',
       },
@@ -251,7 +251,7 @@ export function GlassCardDescription({
   ...props
 }: GlassCardDescriptionProps) {
   return (
-    <p className={cn('text-sm text-neutral-400', className)} {...props}>
+    <p className={cn('text-sm text-muted-foreground', className)} {...props}>
       {children}
     </p>
   );

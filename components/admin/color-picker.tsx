@@ -27,7 +27,7 @@ export function ColorPicker({
       <Input
         value={colorValue}
         onChange={(e) => onChange(e.target.value)}
-        className="bg-white/5 text-white"
+        className="bg-[var(--glass-subtle)] text-white"
       />
       <input
         ref={colorRef}

@@ -41,9 +41,9 @@ const actions = [
     description: "Gérer les paramètres",
     icon: Settings,
     href: "/admin/settings",
-    colorClass: "text-neutral-400",
-    bgClass: "bg-white/5 hover:bg-white/10",
-    borderClass: "border-white/10 hover:border-white/20",
+    colorClass: "text-muted-foreground",
+    bgClass: "bg-[var(--glass-subtle)] hover:bg-[var(--glass-active)]",
+    borderClass: "border-[var(--glass-border)] hover:border-[var(--glass-border-strong)]",
   },
   {
     label: "Voir le site",
@@ -68,8 +68,8 @@ const actions = [
 
 export function QuickActions({ locale }: QuickActionsProps) {
   return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
-      <div className="px-6 py-4 border-b border-white/10">
+    <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+      <div className="px-6 py-4 border-b border-[var(--glass-border)]">
         <h3 className="text-lg font-bold text-white">
           Actions rapides
         </h3>
@@ -94,7 +94,7 @@ export function QuickActions({ locale }: QuickActionsProps) {
                 >
                   <div className="flex items-center gap-2">
                     <div className={cn(
-                      "flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 group-hover:scale-110 transition-all duration-200"
+                      "flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--glass-active)] group-hover:scale-110 transition-all duration-200"
                     )}>
                       <Icon className={cn("h-4 w-4", action.colorClass)} />
                     </div>
@@ -103,7 +103,7 @@ export function QuickActions({ locale }: QuickActionsProps) {
                     <p className="text-sm font-bold text-white">
                       {action.label}
                     </p>
-                    <p className="text-xs text-neutral-500 mt-0.5">
+                    <p className="text-xs text-muted-foreground mt-0.5">
                       {action.description}
                     </p>
                   </div>

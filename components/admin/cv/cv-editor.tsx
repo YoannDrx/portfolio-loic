@@ -29,7 +29,7 @@ const defaultTheme: CVTheme = {
 
 const PDFViewerClient = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), {
   ssr: false,
-  loading: () => <div className="h-[600px] w-full flex items-center justify-center bg-white/5 text-white">Chargement du PDF...</div>,
+  loading: () => <div className="h-[600px] w-full flex items-center justify-center bg-[var(--glass-subtle)] text-white">Chargement du PDF...</div>,
 });
 
 const normalizeData = (input?: CVData | null): CVData => {
@@ -288,7 +288,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 h-[calc(100vh-12rem)]">
       <div className="space-y-6 overflow-y-auto pr-2 h-full pb-20">
-        <Card className="bg-black border-white/10">
+        <Card className="bg-black border-[var(--glass-border)]">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <SettingsIcon className="w-5 h-5" />
@@ -302,7 +302,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 <Input
                   value={data.fullName || ""}
                   onChange={(e) => updateGlobal("fullName", e.target.value)}
-                  className="bg-black border-white/10 text-white"
+                  className="bg-black border-[var(--glass-border)] text-white"
                 />
               </div>
               <div className="space-y-2">
@@ -310,7 +310,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 <Input
                   value={data.badgeFr || ""}
                   onChange={(e) => updateGlobal("badgeFr", e.target.value)}
-                  className="bg-black border-white/10 text-white"
+                  className="bg-black border-[var(--glass-border)] text-white"
                 />
               </div>
               <div className="space-y-2">
@@ -318,7 +318,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 <Input
                   value={data.badgeEn || ""}
                   onChange={(e) => updateGlobal("badgeEn", e.target.value)}
-                  className="bg-black border-white/10 text-white"
+                  className="bg-black border-[var(--glass-border)] text-white"
                 />
               </div>
             </div>
@@ -359,36 +359,36 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label className="text-white/70">Titre (FR)</Label>
-                <Input value={data.headlineFr || ""} onChange={(e) => updateGlobal("headlineFr", e.target.value)} className="bg-black border-white/10 text-white" />
+                <Input value={data.headlineFr || ""} onChange={(e) => updateGlobal("headlineFr", e.target.value)} className="bg-black border-[var(--glass-border)] text-white" />
               </div>
               <div className="space-y-2">
                 <Label className="text-white/70">Titre (EN)</Label>
-                <Input value={data.headlineEn || ""} onChange={(e) => updateGlobal("headlineEn", e.target.value)} className="bg-black border-white/10 text-white" />
+                <Input value={data.headlineEn || ""} onChange={(e) => updateGlobal("headlineEn", e.target.value)} className="bg-black border-[var(--glass-border)] text-white" />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label className="text-white/70">Bio (FR)</Label>
-                <Textarea value={data.bioFr || ""} onChange={(e) => updateGlobal("bioFr", e.target.value)} className="bg-black border-white/10 text-white h-20" />
+                <Textarea value={data.bioFr || ""} onChange={(e) => updateGlobal("bioFr", e.target.value)} className="bg-black border-[var(--glass-border)] text-white h-20" />
               </div>
               <div className="space-y-2">
                 <Label className="text-white/70">Bio (EN)</Label>
-                <Textarea value={data.bioEn || ""} onChange={(e) => updateGlobal("bioEn", e.target.value)} className="bg-black border-white/10 text-white h-20" />
+                <Textarea value={data.bioEn || ""} onChange={(e) => updateGlobal("bioEn", e.target.value)} className="bg-black border-[var(--glass-border)] text-white h-20" />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
-              <Input placeholder="Email" value={data.email || ""} onChange={(e) => updateGlobal("email", e.target.value)} className="bg-black border-white/10 text-white" />
-              <Input placeholder="Téléphone" value={data.phone || ""} onChange={(e) => updateGlobal("phone", e.target.value)} className="bg-black border-white/10 text-white" />
-              <Input placeholder="Site Web" value={data.website || ""} onChange={(e) => updateGlobal("website", e.target.value)} className="bg-black border-white/10 text-white" />
-              <Input placeholder="Localisation" value={data.location || ""} onChange={(e) => updateGlobal("location", e.target.value)} className="bg-black border-white/10 text-white" />
-              <Input placeholder="LinkedIn" value={data.linkedInUrl || ""} onChange={(e) => updateGlobal("linkedInUrl", e.target.value)} className="bg-black border-white/10 text-white col-span-2" />
-              <Input placeholder="Photo (URL public/…)" value={data.photo || ""} onChange={(e) => updateGlobal("photo", e.target.value)} className="bg-black border-white/10 text-white col-span-2" />
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[var(--glass-border)]">
+              <Input placeholder="Email" value={data.email || ""} onChange={(e) => updateGlobal("email", e.target.value)} className="bg-black border-[var(--glass-border)] text-white" />
+              <Input placeholder="Téléphone" value={data.phone || ""} onChange={(e) => updateGlobal("phone", e.target.value)} className="bg-black border-[var(--glass-border)] text-white" />
+              <Input placeholder="Site Web" value={data.website || ""} onChange={(e) => updateGlobal("website", e.target.value)} className="bg-black border-[var(--glass-border)] text-white" />
+              <Input placeholder="Localisation" value={data.location || ""} onChange={(e) => updateGlobal("location", e.target.value)} className="bg-black border-[var(--glass-border)] text-white" />
+              <Input placeholder="LinkedIn" value={data.linkedInUrl || ""} onChange={(e) => updateGlobal("linkedInUrl", e.target.value)} className="bg-black border-[var(--glass-border)] text-white col-span-2" />
+              <Input placeholder="Photo (URL public/…)" value={data.photo || ""} onChange={(e) => updateGlobal("photo", e.target.value)} className="bg-black border-[var(--glass-border)] text-white col-span-2" />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-black border-white/10">
-          <CardHeader className="flex flex-row items-center justify-between sticky top-0 z-10 bg-black border-b border-white/10">
+        <Card className="bg-black border-[var(--glass-border)]">
+          <CardHeader className="flex flex-row items-center justify-between sticky top-0 z-10 bg-black border-b border-[var(--glass-border)]">
             <CardTitle className="text-white">Sections</CardTitle>
             <Button onClick={handleSave} disabled={isSaving} className="bg-lime-300 text-black hover:bg-lime-400">
               <SaveIcon className="mr-2 h-4 w-4" />
@@ -399,7 +399,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
             {data.sections.map((section, sIndex) => {
               const isOpen = openSections[sIndex] ?? true;
               return (
-                <div key={sIndex} className="border border-white/10 rounded-lg px-4 bg-white/5">
+                <div key={sIndex} className="border border-[var(--glass-border)] rounded-lg px-4 bg-[var(--glass-subtle)]">
                   <button
                     type="button"
                     className="flex w-full items-center justify-between py-3"
@@ -407,7 +407,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-lg font-medium text-white">{getT(section.translations, "fr").title || "Nouvelle Section"}</span>
-                      <span className="text-xs bg-white/10 px-2 py-1 rounded text-white/50 uppercase">{section.placement || "main"}</span>
+                      <span className="text-xs bg-[var(--glass-active)] px-2 py-1 rounded text-white/50 uppercase">{section.placement || "main"}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Button size="icon" variant="ghost" onClick={(e) => { e.stopPropagation(); moveSection(sIndex, "up"); }} disabled={sIndex === 0}>
@@ -429,7 +429,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                         <div className="space-y-2">
                           <Label className="text-white/70">Placement</Label>
                           <Select value={section.placement || "main"} onValueChange={(v) => updateSection(sIndex, "placement", v)}>
-                            <SelectTrigger className="bg-black border-white/10 text-white">
+                            <SelectTrigger className="bg-black border-[var(--glass-border)] text-white">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -441,7 +441,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                         <div className="space-y-2">
                           <Label className="text-white/70">Style d'affichage</Label>
                           <Select value={section.layoutType || "list"} onValueChange={(v) => updateSection(sIndex, "layoutType", v)}>
-                            <SelectTrigger className="bg-black border-white/10 text-white">
+                            <SelectTrigger className="bg-black border-[var(--glass-border)] text-white">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -464,7 +464,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                             value={section.icon || ""}
                             onChange={(e) => updateSection(sIndex, "icon", e.target.value)}
                             placeholder="Briefcase, GraduationCap..."
-                            className="bg-black border-white/10 text-white"
+                            className="bg-black border-[var(--glass-border)] text-white"
                           />
                         </div>
                       </div>
@@ -477,7 +477,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                             onChange={(e) => {
                               updateSectionTranslation(sIndex, "fr", e.target.value);
                             }}
-                            className="bg-black border-white/10 text-white"
+                            className="bg-black border-[var(--glass-border)] text-white"
                           />
                         </div>
                         <div className="space-y-2">
@@ -487,28 +487,28 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                             onChange={(e) => {
                               updateSectionTranslation(sIndex, "en", e.target.value);
                             }}
-                            className="bg-black border-white/10 text-white"
+                            className="bg-black border-[var(--glass-border)] text-white"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-4 mt-4">
-                        <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                        <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
                           <h4 className="text-sm font-medium text-white/70 uppercase">Éléments de contenu</h4>
-                          <Button size="sm" variant="outline" onClick={() => addItem(sIndex)} className="border-white/20 text-white hover:bg-white/10">
+                          <Button size="sm" variant="outline" onClick={() => addItem(sIndex)} className="border-[var(--glass-border-strong)] text-white hover:bg-[var(--glass-active)]">
                             <PlusIcon className="mr-2 h-3 w-3" /> Ajouter un élément
                           </Button>
                         </div>
 
                         {section.items?.map((item, iIndex) => (
-                          <div key={iIndex} className="p-4 border border-white/10 rounded-md bg-black/40 space-y-4">
+                          <div key={iIndex} className="p-4 border border-[var(--glass-border)] rounded-md bg-black/40 space-y-4">
                             <div className="flex items-start justify-between">
                               <div className="grid grid-cols-2 gap-2 text-xs text-white/50 w-full pr-4">
                                 <div className="space-y-1">
                                   <span>Début</span>
                                   <input
                                     type="date"
-                                    className="w-full bg-white/5 rounded border border-white/10 text-white p-1"
+                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-white p-1"
                                     value={item.startDate ? new Date(item.startDate).toISOString().split("T")[0] : ""}
                                     onChange={(e) => {
                                       updateItem(sIndex, iIndex, "startDate", e.target.value);
@@ -519,7 +519,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   <span>Fin</span>
                                   <input
                                     type="date"
-                                    className="w-full bg-white/5 rounded border border-white/10 text-white p-1"
+                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-white p-1"
                                     value={item.endDate ? new Date(item.endDate).toISOString().split("T")[0] : ""}
                                     onChange={(e) => {
                                       updateItem(sIndex, iIndex, "endDate", e.target.value);
@@ -528,14 +528,14 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   />
                                 </div>
                                 <div className="col-span-2 pt-2">
-                                  <label className="flex items-center gap-2 cursor-pointer hover:text-white">
+                                  <label className="flex items-center gap-2 cursor-pointer hover:text-foreground">
                                     <input
                                       type="checkbox"
                                       checked={item.isCurrent}
                                       onChange={(e) => {
                                         updateItem(sIndex, iIndex, "isCurrent", e.target.checked);
                                       }}
-                                      className="rounded border-white/20 bg-white/5"
+                                      className="rounded border-[var(--glass-border-strong)] bg-[var(--glass-subtle)]"
                                     />
                                     En poste actuellement
                                   </label>
@@ -578,7 +578,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                             </div>
 
                             <Tabs defaultValue="fr" className="w-full">
-                              <TabsList className="bg-white/10 h-8 w-full justify-start">
+                              <TabsList className="bg-[var(--glass-active)] h-8 w-full justify-start">
                                 <TabsTrigger value="fr" className="text-xs h-7 px-4">
                                   Français
                                 </TabsTrigger>
@@ -593,7 +593,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "fr", "title", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white h-9"
+                                  className="bg-black border-[var(--glass-border)] text-white h-9"
                                 />
                                 <Input
                                   placeholder="Sous-titre / Entreprise"
@@ -601,7 +601,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "fr", "subtitle", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white h-9"
+                                  className="bg-black border-[var(--glass-border)] text-white h-9"
                                 />
                                 <Input
                                   placeholder="Lieu"
@@ -609,7 +609,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "fr", "location", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white h-9"
+                                  className="bg-black border-[var(--glass-border)] text-white h-9"
                                 />
                                 <Textarea
                                   placeholder="Description"
@@ -617,7 +617,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "fr", "description", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white min-h-[80px]"
+                                  className="bg-black border-[var(--glass-border)] text-white min-h-[80px]"
                                 />
                               </TabsContent>
                               <TabsContent value="en" className="space-y-3 mt-3">
@@ -627,7 +627,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "en", "title", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white h-9"
+                                  className="bg-black border-[var(--glass-border)] text-white h-9"
                                 />
                                 <Input
                                   placeholder="Subtitle / Company"
@@ -635,7 +635,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "en", "subtitle", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white h-9"
+                                  className="bg-black border-[var(--glass-border)] text-white h-9"
                                 />
                                 <Input
                                   placeholder="Location"
@@ -643,7 +643,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "en", "location", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white h-9"
+                                  className="bg-black border-[var(--glass-border)] text-white h-9"
                                 />
                                 <Textarea
                                   placeholder="Description"
@@ -651,7 +651,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   onChange={(e) => {
                                     updateItemTranslation(sIndex, iIndex, "en", "description", e.target.value);
                                   }}
-                                  className="bg-black border-white/10 text-white min-h-[80px]"
+                                  className="bg-black border-[var(--glass-border)] text-white min-h-[80px]"
                                 />
                               </TabsContent>
                             </Tabs>
@@ -664,7 +664,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
               );
             })}
 
-            <Button variant="outline" className="w-full border-dashed border-white/20 hover:bg-white/5 text-white py-8 mt-4" onClick={addSection}>
+            <Button variant="outline" className="w-full border-dashed border-[var(--glass-border-strong)] hover:bg-[var(--glass-subtle)] text-white py-8 mt-4" onClick={addSection}>
               <PlusIcon className="mr-2 h-4 w-4" /> Ajouter une nouvelle section
             </Button>
           </CardContent>
@@ -672,8 +672,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
       </div>
 
       <div className="h-full sticky top-0 pb-4 space-y-4">
-        <Card className="bg-black border-white/10">
-          <CardHeader className="flex flex-row items-center justify-between py-4 border-b border-white/10">
+        <Card className="bg-black border-[var(--glass-border)]">
+          <CardHeader className="flex flex-row items-center justify-between py-4 border-b border-[var(--glass-border)]">
             <CardTitle className="text-white">Versions du CV</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -682,18 +682,18 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 placeholder="Nom de la version"
                 value={versionName}
                 onChange={(e) => setVersionName(e.target.value)}
-                className="bg-black border-white/10 text-white"
+                className="bg-black border-[var(--glass-border)] text-white"
               />
               <Button onClick={handleSaveVersion} disabled={isSavingVersion} className="bg-lime-300 text-black hover:bg-lime-400">
                 {isSavingVersion ? "..." : "Enregistrer"}
               </Button>
-              <Button variant="outline" onClick={fetchVersions} disabled={isLoadingVersions} className="border-white/20 text-white">
+              <Button variant="outline" onClick={fetchVersions} disabled={isLoadingVersions} className="border-[var(--glass-border-strong)] text-white">
                 {isLoadingVersions ? "..." : "Rafraîchir"}
               </Button>
             </div>
             <div className="space-y-2 max-h-72 overflow-y-auto">
               {versions.map((version) => (
-                <div key={version.id} className="flex items-center justify-between rounded-md border border-white/10 px-3 py-2 bg-white/5">
+                <div key={version.id} className="flex items-center justify-between rounded-md border border-[var(--glass-border)] px-3 py-2 bg-[var(--glass-subtle)]">
                   <div>
                     <div className="text-white text-sm font-medium">{version.name}</div>
                     <div className="text-white/50 text-xs">{new Date(version.createdAt).toLocaleString("fr-FR")}</div>
@@ -701,7 +701,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-white/30 text-white"
+                    className="border-[var(--glass-border-strong)] text-white"
                     onClick={() => setData(normalizeData(version.data))}
                   >
                     Charger
@@ -715,11 +715,11 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
           </CardContent>
         </Card>
 
-        <Card className="bg-black border-white/10 h-full flex flex-col">
-          <CardHeader className="flex flex-row items-center justify-between py-4 shrink-0 bg-black z-20 border-b border-white/10">
+        <Card className="bg-black border-[var(--glass-border)] h-full flex flex-col">
+          <CardHeader className="flex flex-row items-center justify-between py-4 shrink-0 bg-black z-20 border-b border-[var(--glass-border)]">
             <CardTitle className="text-white">Prévisualisation PDF</CardTitle>
             <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
-              <TabsList className="bg-white/10 border border-white/10">
+              <TabsList className="bg-[var(--glass-active)] border border-[var(--glass-border)]">
                 <TabsTrigger value="fr">FR</TabsTrigger>
                 <TabsTrigger value="en">EN</TabsTrigger>
               </TabsList>

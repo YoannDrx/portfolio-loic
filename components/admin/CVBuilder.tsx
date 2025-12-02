@@ -233,7 +233,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
 
   return (
     <div className="space-y-8">
-      <div className="bg-gradient-to-r from-admin-primary-500 via-admin-accent-500 to-admin-primary-600 rounded-2xl p-8 shadow-xl border border-white/10">
+      <div className="bg-gradient-to-r from-admin-primary-500 via-admin-accent-500 to-admin-primary-600 rounded-2xl p-8 shadow-xl border border-[var(--glass-border)]">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="text-white space-y-2">
             <div className="flex items-center gap-3">
@@ -247,14 +247,14 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
           <div className="flex flex-wrap gap-3">
             <Button
               onClick={() => downloadPDF("fr")}
-              className="gap-2 bg-white/20 hover:bg-white/30 text-white border border-white/30"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border border-[var(--glass-border-strong)]"
             >
               <Download className="h-4 w-4" />
               PDF FR
             </Button>
             <Button
               onClick={() => downloadPDF("en")}
-              className="gap-2 bg-white/20 hover:bg-white/30 text-white border border-white/30"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border border-[var(--glass-border-strong)]"
             >
               <Download className="h-4 w-4" />
               PDF EN
@@ -356,19 +356,19 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                           type="color"
                           value={stringValue}
                           onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
-                          className="h-10 w-12 rounded-md border border-white/10 bg-obsidian"
+                          className="h-10 w-12 rounded-md border border-[var(--glass-border)] bg-obsidian"
                         />
                         <Input
                           value={stringValue}
                           onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
-                          className="bg-white/5 text-white"
+                          className="bg-[var(--glass-subtle)] text-white"
                         />
                       </div>
                     ) : (
                       <Input
                         value={stringValue}
                         onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
-                        className="bg-white/5 text-white"
+                        className="bg-[var(--glass-subtle)] text-white"
                       />
                     )}
                   </div>
@@ -399,7 +399,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
 
             <div className="space-y-4">
               {sectionsState.map((section, idx) => (
-                <div key={section.id} className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-3">
+                <div key={section.id} className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-subtle)] p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold text-white/60">#{section.order ?? idx + 1}</span>
@@ -410,7 +410,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                           next[idx] = { ...next[idx], slug: e.target.value };
                           setSections(next);
                         }}
-                        className="max-w-[180px] bg-white/5 text-white"
+                        className="max-w-[180px] bg-[var(--glass-subtle)] text-white"
                       />
                     </div>
                     <div className="flex items-center gap-2">
@@ -435,7 +435,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         setSections(next);
                       }}
                       placeholder="Titre FR"
-                      className="bg-white/5 text-white"
+                      className="bg-[var(--glass-subtle)] text-white"
                     />
                     <Input
                       value={section.titleEn || ""}
@@ -445,7 +445,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         setSections(next);
                       }}
                       placeholder="Title EN"
-                      className="bg-white/5 text-white"
+                      className="bg-[var(--glass-subtle)] text-white"
                     />
                     <select
                       value={section.type}
@@ -454,7 +454,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         next[idx] = { ...next[idx], type: e.target.value };
                         setSections(next);
                       }}
-                      className="bg-white/5 text-white rounded-md border border-white/10 h-10 px-3"
+                      className="bg-[var(--glass-subtle)] text-white rounded-md border border-[var(--glass-border)] h-10 px-3"
                     >
                       <option value="TIMELINE">Timeline (main)</option>
                       <option value="SKILL_BARS">Skills (sidebar)</option>
@@ -469,7 +469,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         setSections(next);
                       }}
                       placeholder="Type d'entrée (EXPERIENCE, AWARD...)"
-                      className="bg-white/5 text-white"
+                      className="bg-[var(--glass-subtle)] text-white"
                     />
                     <Input
                       value={(section.entryIds || []).join(", ")}
@@ -479,7 +479,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         setSections(next);
                       }}
                       placeholder="IDs d'entrées (optionnel, séparés par des virgules)"
-                      className="bg-white/5 text-white col-span-2"
+                      className="bg-[var(--glass-subtle)] text-white col-span-2"
                     />
                     <div className="flex items-center gap-3">
                       <span className="text-sm text-white/70">Publié</span>
@@ -514,7 +514,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {orderedEntries.map((entry) => (
-                <div key={entry.id} className="rounded-lg border border-white/10 bg-white/5 p-3 space-y-1">
+                <div key={entry.id} className="rounded-lg border border-[var(--glass-border)] bg-[var(--glass-subtle)] p-3 space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-xs uppercase tracking-wide text-white/60">{entry.type}</span>
                     <span className="text-[11px] text-white/60">#{entry.order}</span>
@@ -524,7 +524,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                   <div className="flex items-center justify-between pt-2">
                     <Link
                       href={`/${locale}/admin/resume/${entry.id}`}
-                      className="text-xs text-neon-cyan hover:text-white underline"
+                      className="text-xs text-neon-cyan hover:text-foreground underline"
                     >
                       Modifier
                     </Link>
@@ -535,7 +535,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
             </div>
           </GlassCard>
 
-          <GlassCard className="p-4 border border-white/10">
+          <GlassCard className="p-4 border border-[var(--glass-border)]">
             <CVPreview profile={profileState} theme={themeState} sections={sectionsState} entries={orderedEntries} locale={locale} />
           </GlassCard>
         </div>

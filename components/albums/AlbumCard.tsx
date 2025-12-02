@@ -30,10 +30,10 @@ export default function AlbumCard({ album }: AlbumCardProps) {
         variant="default"
         hover="lift"
         triggerOnLoad
-        className="group h-full flex flex-col overflow-hidden cursor-pointer border-white/5 hover:border-neon-purple/30"
+        className="group h-full flex flex-col overflow-hidden cursor-pointer border-[var(--glass-border-subtle)] hover:border-neon-purple/30"
       >
         {/* Album Cover */}
-        <div className="relative aspect-square w-full overflow-hidden bg-obsidian-200">
+        <div className="relative aspect-square w-full overflow-hidden bg-muted">
           <Image
             src={album.img}
             alt={album.title}
@@ -42,14 +42,14 @@ export default function AlbumCard({ album }: AlbumCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-500" />
           
           {/* Hover Glow Effect */}
           <div className="absolute inset-0 bg-neon-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay" />
 
           {/* Listen Link Badge */}
           <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-2 group-hover:translate-y-0">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-obsidian/80 backdrop-blur-md rounded-full border border-neon-cyan/50 shadow-[0_0_10px_rgba(0,240,255,0.3)]">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-glass-strong backdrop-blur-md rounded-full border border-neon-cyan/50 shadow-[0_0_10px_rgba(0,240,255,0.3)]">
               <ExternalLink className="w-3 h-3 text-neon-cyan" />
               <span className="text-xs font-bold text-neon-cyan uppercase tracking-wider">Listen</span>
             </div>
@@ -57,9 +57,9 @@ export default function AlbumCard({ album }: AlbumCardProps) {
         </div>
 
         {/* Album Info */}
-        <div className="p-6 flex-1 flex flex-col bg-gradient-to-b from-obsidian/50 to-transparent">
+        <div className="p-6 flex-1 flex flex-col bg-gradient-to-b from-[var(--glass-subtle)] to-transparent">
           {/* Title */}
-          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gradient-neon transition-all line-clamp-2 font-montserrat uppercase tracking-wide leading-tight">
+          <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-gradient-neon transition-all line-clamp-2 font-montserrat uppercase tracking-wide leading-tight">
             {album.title}
           </h3>
 
@@ -72,16 +72,16 @@ export default function AlbumCard({ album }: AlbumCardProps) {
           </div>
 
           {/* Metadata */}
-          <div className="mt-auto pt-4 border-t border-white/10 flex flex-col gap-2">
+          <div className="mt-auto pt-4 border-t border-[var(--glass-border)] flex flex-col gap-2">
              {/* Date */}
-             <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-widest">
+             <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-widest">
                 <Calendar className="w-3 h-3 text-neon-magenta" />
                 <span>{album.date}</span>
              </div>
              
              {/* Collaborators */}
              {album.collabName && (
-                <div className="flex items-start gap-2 text-xs font-medium text-gray-400">
+                <div className="flex items-start gap-2 text-xs font-medium text-muted-foreground">
                    <Users className="w-3 h-3 flex-shrink-0 mt-0.5 text-neon-blue" />
                    <span className="line-clamp-1">{album.collabName}</span>
                 </div>

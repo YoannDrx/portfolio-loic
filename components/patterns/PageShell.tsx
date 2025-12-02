@@ -169,7 +169,7 @@ export function PageSubtitle({ children, className }: PageSubtitleProps) {
   return (
     <p
       className={cn(
-        'mt-4 text-lg md:text-xl text-neutral-400 max-w-3xl',
+        'mt-4 text-lg md:text-xl text-muted-foreground max-w-3xl',
         className
       )}
     >
@@ -274,7 +274,7 @@ export function HeroSection({
       }
     >
       {overlay && (
-        <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-overlay backdrop-blur-sm" />
       )}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         {children}
@@ -299,7 +299,7 @@ export function BackButton({ href, label = 'Retour', className }: BackButtonProp
       href={href}
       className={cn(
         'inline-flex items-center gap-2',
-        'text-sm text-neutral-400 hover:text-foreground',
+        'text-sm text-muted-foreground hover:text-foreground',
         'transition-colors duration-fast',
         className
       )}
@@ -341,11 +341,11 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
     <nav className={cn('flex items-center gap-2 text-sm', className)}>
       {items.map((item, index) => (
         <React.Fragment key={index}>
-          {index > 0 && <span className="text-neutral-600">/</span>}
+          {index > 0 && <span className="text-muted-foreground">/</span>}
           {item.href ? (
             <a
               href={item.href}
-              className="text-neutral-400 hover:text-foreground transition-colors duration-fast"
+              className="text-muted-foreground hover:text-foreground transition-colors duration-fast"
             >
               {item.label}
             </a>

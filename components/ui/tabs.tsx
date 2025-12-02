@@ -15,7 +15,7 @@ const tabsListVariants = cva(
   {
     variants: {
       variant: {
-        default: "rounded-lg bg-surface p-1 text-neutral-400",
+        default: "rounded-lg bg-surface p-1 text-muted-foreground",
         pills: "gap-2 p-0 bg-transparent",
         underline: "gap-4 p-0 bg-transparent border-b border-border",
       },
@@ -45,17 +45,17 @@ const tabsTriggerVariants = cva(
         default: [
           "rounded-md px-3 py-1.5 text-sm",
           "data-[state=active]:bg-surface-elevated data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-          "data-[state=inactive]:text-neutral-400 data-[state=inactive]:hover:text-neutral-300",
+          "data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground",
         ],
         pills: [
           "rounded-full px-4 py-1.5 text-sm",
-          "data-[state=active]:bg-primary data-[state=active]:text-neutral-950",
-          "data-[state=inactive]:text-neutral-400 data-[state=inactive]:hover:bg-surface-hover data-[state=inactive]:hover:text-neutral-300",
+          "data-[state=active]:bg-primary data-[state=active]:text-foreground",
+          "data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-surface-hover data-[state=inactive]:hover:text-foreground",
         ],
         underline: [
           "px-1 pb-2 text-sm border-b-2 -mb-px rounded-none",
           "data-[state=active]:border-primary data-[state=active]:text-foreground",
-          "data-[state=inactive]:border-transparent data-[state=inactive]:text-neutral-400 data-[state=inactive]:hover:text-neutral-300 data-[state=inactive]:hover:border-border",
+          "data-[state=inactive]:border-transparent data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:border-border",
         ],
       },
       size: {

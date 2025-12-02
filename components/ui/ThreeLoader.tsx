@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function ThreeLoader() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-obsidian z-20">
+    <div className="absolute inset-0 flex items-center justify-center bg-background z-20">
       <div className="text-center">
         {/* Animated dots */}
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -28,7 +28,7 @@ export default function ThreeLoader() {
 
         {/* Loading text */}
         <motion.p
-          className="text-sm text-gray-400 uppercase tracking-wider"
+          className="text-sm text-muted-foreground uppercase tracking-wider"
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{
             duration: 2,

@@ -46,7 +46,7 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
           <h2 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
             Album Library
           </h2>
-          <p className="text-gray-400 font-mono text-sm">
+          <p className="text-muted-foreground font-mono text-sm">
             Manage your discography / {albums.length} total entries
           </p>
         </div>
@@ -60,12 +60,12 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
       {/* Filter Bar */}
       <GlassCard variant="subtle" className="p-4 flex items-center gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search albums..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-white/5 border-white/10 text-white focus:border-neon-lime/50 focus:ring-neon-lime/20"
+            className="pl-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white focus:border-neon-lime/50 focus:ring-neon-lime/20"
           />
         </div>
       </GlassCard>
@@ -74,8 +74,8 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
       <GlassCard variant="default" className="overflow-hidden">
         <div className="max-h-[600px] overflow-y-auto custom-scrollbar">
           <Table>
-            <TableHeader className="bg-white/5 sticky top-0 backdrop-blur-md z-10">
-              <TableRow className="hover:bg-transparent border-white/10">
+            <TableHeader className="bg-[var(--glass-subtle)] sticky top-0 backdrop-blur-md z-10">
+              <TableRow className="hover:bg-transparent border-[var(--glass-border)]">
                 <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Preview</TableHead>
                 <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Title</TableHead>
                 <TableHead className="text-neon-cyan font-bold uppercase text-xs tracking-wider">Date</TableHead>
@@ -87,7 +87,7 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
             <TableBody>
               {filteredAlbums.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="h-32 text-center text-gray-500">
+                  <TableCell colSpan={6} className="h-32 text-center text-muted-foreground">
                     No albums found matching your search.
                   </TableCell>
                 </TableRow>
@@ -95,10 +95,10 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
                 filteredAlbums.map((album) => (
                   <TableRow
                     key={album.id}
-                    className="border-white/5 hover:bg-white/5 transition-colors group"
+                    className="border-[var(--glass-border-subtle)] hover:bg-[var(--glass-subtle)] transition-colors group"
                   >
                     <TableCell>
-                      <div className="relative h-12 w-12 rounded overflow-hidden border border-white/10 group-hover:border-neon-lime/50 transition-colors">
+                      <div className="relative h-12 w-12 rounded overflow-hidden border border-[var(--glass-border)] group-hover:border-neon-lime/50 transition-colors">
                         <Image
                           src={album.img}
                           alt={album.title}
@@ -108,9 +108,9 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
                       </div>
                     </TableCell>
                     <TableCell className="font-bold text-white">{album.title}</TableCell>
-                    <TableCell className="text-gray-400 font-mono text-xs">{album.date}</TableCell>
+                    <TableCell className="text-muted-foreground font-mono text-xs">{album.date}</TableCell>
                     <TableCell>
-                      <span className="px-2 py-1 rounded text-xs font-bold bg-white/5 border border-white/10 text-neon-purple">
+                      <span className="px-2 py-1 rounded text-xs font-bold bg-[var(--glass-subtle)] border border-[var(--glass-border)] text-neon-purple">
                         {album.style}
                       </span>
                     </TableCell>
@@ -121,25 +121,25 @@ export function AlbumsList({ albums, locale }: AlbumsListProps) {
                           Published
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-white/5 text-gray-500 border border-white/10">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
                           Draft
                         </span>
                       )}
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-neon-cyan hover:bg-neon-cyan/10">
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-neon-cyan hover:bg-neon-cyan/10">
                           <Link href={`/${locale}/albums/${album.id}`} target="_blank">
                             <Eye className="h-4 w-4" />
                           </Link>
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-neon-lime hover:bg-neon-lime/10">
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-neon-lime hover:bg-neon-lime/10">
                           <Link href={`/${locale}/admin/albums/${album.id}`}>
                             <Pencil className="h-4 w-4" />
                           </Link>
                         </Button>
                         {/* Wrap Delete button to style it if needed, or assume component handles it */}
-                        <div className="text-gray-400 hover:text-red-500">
+                        <div className="text-muted-foreground hover:text-red-500">
                            <DeleteAlbumButton albumId={album.id} albumTitle={album.title} />
                         </div>
                       </div>

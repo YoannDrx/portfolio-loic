@@ -31,7 +31,7 @@ export default async function LatestVideos() {
           <h2 className="text-5xl md:text-6xl font-black text-gradient-neon mb-4">
             {t('title')}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-foreground/85 max-w-3xl mx-auto">
             {t('description')}
           </p>
         </AnimatedSection>
@@ -63,7 +63,7 @@ export default async function LatestVideos() {
         {/* Notable Placements */}
         <AnimatedSection variant="fadeIn" delay={0.6} className="mt-20">
           <div className="relative overflow-hidden rounded-2xl backdrop-blur-xl glass-card-neon p-8 md:p-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
               {t('notablePlacements')}
             </h3>
             <div className="flex flex-wrap items-center justify-center gap-6">
@@ -77,9 +77,9 @@ export default async function LatestVideos() {
               ].map((platform) => (
                 <div
                   key={platform}
-                  className="px-6 py-3 bg-white/5 border border-white/10 rounded-lg hover:border-neon-cyan/50 hover:bg-neon-cyan/5 transition-all duration-300"
+                  className="px-6 py-3 bg-[var(--glass-subtle)] border border-[var(--glass-border)] rounded-lg hover:border-neon-cyan/50 hover:bg-neon-cyan/5 transition-all duration-300"
                 >
-                  <span className="text-lg font-semibold text-gray-200">
+                  <span className="text-lg font-semibold text-foreground/90">
                     {platform}
                   </span>
                 </div>

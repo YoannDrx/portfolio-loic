@@ -10,7 +10,7 @@ const headingVariants = cva('font-display font-bold tracking-tight', {
     variant: {
       default: 'text-foreground',
       primary: 'text-primary',
-      muted: 'text-neutral-400',
+      muted: 'text-muted-foreground',
       // Gradient variants
       gradient: 'bg-gradient-brand bg-clip-text text-transparent',
       'gradient-primary': 'bg-gradient-primary bg-clip-text text-transparent',

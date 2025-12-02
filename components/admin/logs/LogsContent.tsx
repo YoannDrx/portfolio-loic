@@ -323,7 +323,7 @@ export function LogsContent({ locale }: LogsContentProps) {
                     {logs.map((log) => {
                       const typeInfo = typeLabels[log.type] || {
                         label: log.type,
-                        color: "bg-gray-500/20 text-gray-400",
+                        color: "bg-gray-500/20 text-muted-foreground",
                       };
                       const ActionIcon = actionIcons[log.action] || Settings;
 

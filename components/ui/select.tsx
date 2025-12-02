@@ -20,7 +20,7 @@ const selectTriggerVariants = cva(
     "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background",
     "disabled:cursor-not-allowed disabled:opacity-50",
     "[&>span]:line-clamp-1",
-    "data-[placeholder]:text-neutral-500",
+    "data-[placeholder]:text-muted-foreground",
   ],
   {
     variants: {
@@ -70,7 +70,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 text-neutral-400" />
+      <ChevronDown className="h-4 w-4 text-muted-foreground" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))
@@ -88,7 +88,7 @@ const SelectScrollUpButton = React.forwardRef<
     ref={ref}
     className={cn(
       "flex cursor-default items-center justify-center py-1",
-      "text-neutral-400",
+      "text-muted-foreground",
       className
     )}
     {...props}
@@ -106,7 +106,7 @@ const SelectScrollDownButton = React.forwardRef<
     ref={ref}
     className={cn(
       "flex cursor-default items-center justify-center py-1",
-      "text-neutral-400",
+      "text-muted-foreground",
       className
     )}
     {...props}

@@ -120,7 +120,7 @@ const SwitchWithLabel = React.forwardRef<
         {label}
       </label>
       {description && (
-        <p className="text-xs text-neutral-400">{description}</p>
+        <p className="text-xs text-muted-foreground">{description}</p>
       )}
     </div>
   )

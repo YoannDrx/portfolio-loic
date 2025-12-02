@@ -56,7 +56,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed transition-colors duration-300"
+            className="text-xl md:text-2xl text-foreground/75 mb-12 max-w-3xl mx-auto leading-relaxed transition-colors duration-300"
           >
             {t('description')}{' '}
             <span className="whitespace-nowrap">{t('yearsExperience', { years: 15 })}</span>.
@@ -71,19 +71,19 @@ export default function Hero() {
           >
             <div className="text-center">
               <div className="text-5xl font-black text-gradient-neon mb-2">16</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">{t('stats.albums')}</div>
+              <div className="text-sm text-muted-foreground uppercase tracking-wider">{t('stats.albums')}</div>
             </div>
             <div className="w-px bg-gradient-to-b from-transparent via-neon-cyan/30 to-transparent" />
             <div className="text-center">
               <div className="text-5xl font-black text-gradient-neon mb-2">34</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">
+              <div className="text-sm text-muted-foreground uppercase tracking-wider">
                 {t('stats.audiovisualProjects')}
               </div>
             </div>
             <div className="w-px bg-gradient-to-b from-transparent via-neon-cyan/30 to-transparent" />
             <div className="text-center">
               <div className="text-5xl font-black text-gradient-neon mb-2">50+</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">
+              <div className="text-sm text-muted-foreground uppercase tracking-wider">
                 {t('stats.collaborations')}
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="flex flex-col items-center gap-2 text-gray-400"
+              className="flex flex-col items-center gap-2 text-muted-foreground"
             >
               <span className="text-xs uppercase tracking-wider">{t('scroll')}</span>
               <svg

@@ -113,8 +113,8 @@ export default function CosmicServiceCard({
         <motion.div
           className={cn(
             'relative h-full overflow-hidden rounded-2xl',
-            'bg-obsidian-900/60 backdrop-blur-sm',
-            'border border-white/10',
+            'bg-glass backdrop-blur-sm',
+            'border border-[var(--glass-border)]',
             'transition-all duration-500',
             config.shadow,
             config.border
@@ -146,7 +146,7 @@ export default function CosmicServiceCard({
             />
 
             {/* Overlay gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
             <div
               className={cn(
                 'absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500',
@@ -193,13 +193,13 @@ export default function CosmicServiceCard({
             </h3>
 
             {/* Description */}
-            <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
               {service.text}
             </p>
 
             {/* Footer */}
-            <div className="flex items-center justify-between pt-4 border-t border-white/5">
-              <div className="flex items-center gap-2 text-gray-500 text-xs">
+            <div className="flex items-center justify-between pt-4 border-t border-[var(--glass-border-subtle)]">
+              <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 <Layers className="w-4 h-4" />
                 <span className="uppercase tracking-wider">Service</span>
               </div>

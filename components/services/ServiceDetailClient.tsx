@@ -98,7 +98,7 @@ export default function ServiceDetailClient({
           >
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors group"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-neon-cyan transition-colors group"
             >
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               <span>{tCommon('backToServices')}</span>
@@ -156,7 +156,7 @@ export default function ServiceDetailClient({
                       ease: 'easeInOut',
                     }}
                   >
-                    <span className="text-sm font-bold text-white">Service #{service.no}</span>
+                    <span className="text-sm font-bold text-foreground">Service #{service.no}</span>
                   </motion.div>
                 </div>
 
@@ -219,7 +219,7 @@ export default function ServiceDetailClient({
 
               {/* Metadata */}
               <motion.div
-                className="space-y-4 py-6 border-y border-white/10"
+                className="space-y-4 py-6 border-y border-[var(--glass-border)]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -228,8 +228,8 @@ export default function ServiceDetailClient({
                 <div className="flex items-center gap-3">
                   <User className="w-5 h-5 text-neon-cyan flex-shrink-0" />
                   <span className="text-lg">
-                    <span className="text-gray-400">{tCommon('author')}:</span>{' '}
-                    <span className="text-white font-semibold">{service.author}</span>
+                    <span className="text-muted-foreground">{tCommon('author')}:</span>{' '}
+                    <span className="text-foreground font-semibold">{service.author}</span>
                   </span>
                 </div>
 
@@ -237,8 +237,8 @@ export default function ServiceDetailClient({
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-neon-purple flex-shrink-0" />
                   <span className="text-lg">
-                    <span className="text-gray-400">{tCommon('releaseDate')}:</span>{' '}
-                    <span className="text-white font-semibold">{service.date}</span>
+                    <span className="text-muted-foreground">{tCommon('releaseDate')}:</span>{' '}
+                    <span className="text-foreground font-semibold">{service.date}</span>
                   </span>
                 </div>
               </motion.div>
@@ -249,10 +249,10 @@ export default function ServiceDetailClient({
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <h2 className="text-xl font-bold text-white mb-4">{t('about')}</h2>
+                <h2 className="text-xl font-bold text-foreground mb-4">{t('about')}</h2>
                 <div className="prose prose-invert prose-lg max-w-none">
                   <div
-                    className="text-gray-300 leading-relaxed space-y-4 service-descriptions"
+                    className="text-foreground/85 leading-relaxed space-y-4 service-descriptions"
                     dangerouslySetInnerHTML={{
                       __html: locale === 'fr' ? service.descriptionsFr : service.descriptionsEn,
                     }}

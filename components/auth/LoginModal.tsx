@@ -56,14 +56,14 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <DialogTitle className="text-3xl font-bold text-white text-center tracking-tighter">
               {t('title')}
             </DialogTitle>
-            <p className="text-gray-400 text-center mt-2">
+            <p className="text-muted-foreground text-center mt-2">
               {t('subtitle')}
             </p>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-300">
+              <Label htmlFor="email" className="text-foreground/85">
                 {t('email')}
               </Label>
               <Input
@@ -72,14 +72,14 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus-visible:ring-neon-lime"
+                className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white placeholder:text-muted-foreground focus-visible:ring-neon-lime"
                 placeholder={t('emailPlaceholder')}
                 disabled={loading}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-300">
+              <Label htmlFor="password" className="text-foreground/85">
                 {t('password')}
               </Label>
               <Input
@@ -88,7 +88,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus-visible:ring-neon-lime"
+                className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white placeholder:text-muted-foreground focus-visible:ring-neon-lime"
                 placeholder={t('passwordPlaceholder')}
                 disabled={loading}
               />

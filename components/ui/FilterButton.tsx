@@ -28,7 +28,7 @@ export function FilterButton({
         'border backdrop-blur-sm',
         active
           ? 'border-neon-cyan bg-neon-cyan/20 text-neon-cyan shadow-[0_0_15px_rgba(0,240,255,0.5)]'
-          : 'border-white/20 bg-white/5 text-gray-400 hover:border-white/30 hover:bg-white/10 hover:text-gray-300',
+          : 'border-[var(--glass-border)] bg-[var(--glass-subtle)] text-muted-foreground hover:border-[var(--glass-border-subtle)] hover:bg-[var(--glass-hover)] hover:text-foreground',
         className
       )}
       {...props}
@@ -41,7 +41,7 @@ export function FilterButton({
               'rounded-full px-2 py-0.5 text-xs font-bold',
               active
                 ? 'bg-neon-cyan/30 text-neon-cyan'
-                : 'bg-white/10 text-gray-500'
+                : 'bg-[var(--glass-hover)] text-muted-foreground'
             )}
           >
             {count}

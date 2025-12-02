@@ -126,15 +126,15 @@ interface StatBadgeProps {
 function StatBadge({ value, label, icon, delay = 0 }: StatBadgeProps) {
   return (
     <motion.div
-      className="flex items-center gap-3 px-4 py-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10"
+      className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[var(--glass-subtle)] backdrop-blur-sm border border-[var(--glass-border)]"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
     >
       <span className="text-neon-cyan">{icon}</span>
       <div className="flex flex-col">
-        <span className="text-white font-bold text-lg leading-none">{value}</span>
-        <span className="text-gray-400 text-xs uppercase tracking-wider">{label}</span>
+        <span className="text-foreground font-bold text-lg leading-none">{value}</span>
+        <span className="text-muted-foreground text-xs uppercase tracking-wider">{label}</span>
       </div>
     </motion.div>
   );
@@ -181,7 +181,7 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
 
             {/* Description */}
             <motion.p
-              className="text-lg text-gray-300 mb-8 max-w-lg leading-relaxed"
+              className="text-lg text-foreground/85 mb-8 max-w-lg leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -238,7 +238,7 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
         transition={{ delay: 1.5 }}
       >
         <motion.div
-          className="flex flex-col items-center gap-2 text-gray-500"
+          className="flex flex-col items-center gap-2 text-muted-foreground"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >

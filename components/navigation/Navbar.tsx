@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Menu, X, Lock, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageToggle from '@/components/ui/LanguageToggle';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 import { useSession } from '@/lib/auth-client';
 
 const navLinks = [
@@ -51,7 +52,7 @@ export default function Navbar() {
         transition={{ duration: 0.3 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-obsidian/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-neon-cyan/5'
+            ? 'bg-glass-strong backdrop-blur-xl border-b border-[var(--glass-border)] shadow-lg shadow-primary/5'
             : 'bg-transparent'
         }`}
       >
@@ -60,15 +61,15 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="group flex items-center gap-3">
               <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform">
-                <div className="w-full h-full bg-obsidian rounded-lg flex items-center justify-center transition-colors duration-300">
+                <div className="w-full h-full bg-background rounded-lg flex items-center justify-center transition-colors duration-300">
                   <span className="text-xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">LG</span>
                 </div>
               </div>
               <div className="hidden lg:block">
-                <div className="text-xl font-black text-white transition-all duration-300 font-montserrat tracking-tight">
-                  LOÏC<span className="text-neon-lime">.GHANEM</span>
+                <div className="text-xl font-black text-foreground transition-all duration-300 font-montserrat tracking-tight">
+                  LOÏC<span className="text-primary dark:text-neon-lime">.GHANEM</span>
                 </div>
-                <div className="text-xs text-gray-400 uppercase tracking-widest font-mono">Music Composer</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-widest font-mono">Music Composer</div>
               </div>
             </Link>
 
@@ -80,15 +81,15 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative font-medium text-sm uppercase tracking-widest transition-all duration-300 ${
                     isActive(link.href)
-                      ? 'text-neon-lime'
-                      : 'text-gray-400 hover:text-white'
+                      ? 'text-primary dark:text-neon-lime'
+                      : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   {t(link.key)}
                   {isActive(link.href) && (
                     <motion.div
                       layoutId="navbar-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-neon-lime shadow-[0_0_10px_rgba(204,255,0,0.5)]"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary dark:bg-neon-lime shadow-[0_0_10px_var(--accent-glow)]"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -99,18 +100,18 @@ export default function Navbar() {
               <div className="ml-2">
                 {isPending ? (
                   // État de chargement
-                  <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                    <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-9 h-9 rounded-lg bg-[var(--glass-hover)] border border-[var(--glass-border)] flex items-center justify-center">
+                    <div className="w-4 h-4 border-2 border-muted-foreground border-t-transparent rounded-full animate-spin" />
                   </div>
                 ) : session?.user ? (
                   // Utilisateur connecté
                   <Link
                     href="/admin"
-                    className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2 hover:bg-white/10 hover:border-neon-cyan/50 transition-all duration-300 group"
+                    className="px-3 py-1.5 rounded-lg bg-[var(--glass-hover)] border border-[var(--glass-border)] flex items-center gap-2 hover:bg-[var(--glass-active)] hover:border-primary/50 transition-all duration-300 group"
                     title="Panel Admin"
                   >
-                    <User className="w-4 h-4 text-gray-400 group-hover:text-neon-cyan transition-colors duration-300" />
-                    <span className="text-xs font-medium text-gray-400 group-hover:text-white uppercase tracking-wider">
+                    <User className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                    <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground uppercase tracking-wider">
                       Admin
                     </span>
                   </Link>
@@ -118,18 +119,18 @@ export default function Navbar() {
                   // Utilisateur non connecté
                   <Link
                     href="/login"
-                    className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-neon-cyan/50 transition-all duration-300 group"
+                    className="w-9 h-9 rounded-lg bg-[var(--glass-hover)] border border-[var(--glass-border)] flex items-center justify-center hover:bg-[var(--glass-active)] hover:border-primary/50 transition-all duration-300 group"
                     title="Admin Login"
                   >
-                    <Lock className="w-4 h-4 text-gray-400 group-hover:text-neon-cyan transition-colors duration-300" />
+                    <Lock className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
                   </Link>
                 )}
               </div>
 
-              {/* Theme Switcher (Hidden/Modified for dark mode only preference but kept for admin compatibility if needed) */}
-              {/* <div className="ml-2">
-                <ThemeSwitcher className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10" />
-              </div> */}
+              {/* Theme Switcher */}
+              <div className="ml-2">
+                <ThemeSwitcher className="w-9 h-9 rounded-lg bg-[var(--glass-hover)] border border-[var(--glass-border)] hover:bg-[var(--glass-active)] transition-all duration-300" />
+              </div>
 
               {/* Language Toggle */}
               <div className="ml-2">
@@ -140,13 +141,13 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all duration-300"
+              className="lg:hidden w-10 h-10 rounded-lg bg-[var(--glass-hover)] border border-[var(--glass-border)] flex items-center justify-center hover:bg-[var(--glass-active)] transition-all duration-300"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-white transition-colors duration-300" />
+                <X className="w-6 h-6 text-foreground transition-colors duration-300" />
               ) : (
-                <Menu className="w-6 h-6 text-white transition-colors duration-300" />
+                <Menu className="w-6 h-6 text-foreground transition-colors duration-300" />
               )}
             </button>
           </div>
@@ -163,7 +164,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-obsidian/90 backdrop-blur-sm z-40 lg:hidden transition-colors duration-300"
+              className="fixed inset-0 bg-overlay-strong backdrop-blur-sm z-40 lg:hidden transition-colors duration-300"
             />
 
             {/* Menu Content */}
@@ -172,7 +173,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-20 right-0 bottom-0 w-[280px] bg-obsidian-50/95 backdrop-blur-xl border-l border-white/10 z-40 lg:hidden overflow-y-auto transition-colors duration-300"
+              className="fixed top-20 right-0 bottom-0 w-[280px] bg-glass-strong backdrop-blur-xl border-l border-[var(--glass-border)] z-40 lg:hidden overflow-y-auto transition-colors duration-300"
             >
               <div className="p-6 space-y-4">
                 {navLinks.map((link, index) => (
@@ -186,8 +187,8 @@ export default function Navbar() {
                       href={link.href}
                       className={`block text-lg font-montserrat font-bold uppercase tracking-wider transition-all duration-300 ${
                         isActive(link.href)
-                          ? 'text-neon-lime pl-4 border-l-2 border-neon-lime'
-                          : 'text-gray-400 hover:text-white'
+                          ? 'text-primary dark:text-neon-lime pl-4 border-l-2 border-primary dark:border-neon-lime'
+                          : 'text-muted-foreground hover:text-foreground'
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -196,7 +197,7 @@ export default function Navbar() {
                   </motion.div>
                 ))}
 
-                <div className="h-px bg-white/10 my-6" />
+                <div className="h-px bg-[var(--glass-border)] my-6" />
 
                 {/* Admin Section - Mobile */}
                 <motion.div
@@ -205,14 +206,14 @@ export default function Navbar() {
                   transition={{ delay: navLinks.length * 0.1 }}
                 >
                   {isPending ? (
-                    <div className="flex items-center gap-3 text-gray-400">
-                      <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <div className="w-4 h-4 border-2 border-muted-foreground border-t-transparent rounded-full animate-spin" />
                       <span className="text-sm font-medium uppercase tracking-wider">Loading...</span>
                     </div>
                   ) : session?.user ? (
                     <Link
                       href="/admin"
-                      className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-all duration-300"
+                      className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-all duration-300"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <User className="w-4 h-4" />
@@ -221,13 +222,24 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href="/login"
-                      className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-all duration-300"
+                      className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-all duration-300"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <Lock className="w-4 h-4" />
                       <span className="text-sm font-medium uppercase tracking-wider">Admin Portal</span>
                     </Link>
                   )}
+                </motion.div>
+
+                {/* Theme Switcher - Mobile */}
+                <motion.div
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
+                  className="pt-4"
+                >
+                  <div className="text-muted-foreground text-xs uppercase tracking-widest mb-2">Thème</div>
+                  <ThemeSwitcher className="w-9 h-9 rounded-lg bg-[var(--glass-hover)] border border-[var(--glass-border)] hover:bg-[var(--glass-active)]" />
                 </motion.div>
 
                 {/* Language Toggle - Mobile */}
@@ -237,7 +249,7 @@ export default function Navbar() {
                   transition={{ delay: (navLinks.length + 2) * 0.1 }}
                   className="pt-4"
                 >
-                  <div className="text-gray-400 text-xs uppercase tracking-widest mb-2">Language</div>
+                  <div className="text-muted-foreground text-xs uppercase tracking-widest mb-2">Language</div>
                   <LanguageToggle />
                 </motion.div>
               </div>

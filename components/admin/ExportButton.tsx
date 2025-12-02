@@ -101,7 +101,7 @@ export function ExportButton({ type, label = "Exporter" }: ExportButtonProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="gap-2 border-white/10 bg-white/5 text-neutral-300 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all duration-200"
+          className="gap-2 border-[var(--glass-border)] bg-[var(--glass-subtle)] text-foreground/85 hover:bg-[var(--glass-active)] hover:border-[var(--glass-border-strong)] hover:text-foreground transition-all duration-200"
           disabled={exporting !== null}
         >
           {exporting ? (
@@ -115,12 +115,12 @@ export function ExportButton({ type, label = "Exporter" }: ExportButtonProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-48 bg-neutral-900 border-white/10"
+        className="w-48 bg-neutral-900 border-[var(--glass-border)]"
       >
-        <DropdownMenuLabel className="text-xs text-neutral-400">
+        <DropdownMenuLabel className="text-xs text-muted-foreground">
           Format d'export
         </DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-white/10" />
+        <DropdownMenuSeparator className="bg-[var(--glass-active)]" />
         {formatOptions.map((option) => {
           const Icon = option.icon;
           const isLoading = exporting === option.format;
@@ -130,17 +130,17 @@ export function ExportButton({ type, label = "Exporter" }: ExportButtonProps) {
               key={option.format}
               onClick={() => handleExport(option.format)}
               disabled={exporting !== null}
-              className="cursor-pointer hover:bg-white/10 focus:bg-white/10"
+              className="cursor-pointer hover:bg-[var(--glass-active)] focus:bg-[var(--glass-active)]"
             >
               <div className="flex items-center gap-3 w-full">
                 {isLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin text-admin-accent" />
                 ) : (
-                  <Icon className="h-4 w-4 text-neutral-400" />
+                  <Icon className="h-4 w-4 text-muted-foreground" />
                 )}
                 <div className="flex flex-col">
                   <span className="text-sm text-neutral-200">{option.label}</span>
-                  <span className="text-xs text-neutral-500">{option.description}</span>
+                  <span className="text-xs text-muted-foreground">{option.description}</span>
                 </div>
               </div>
             </DropdownMenuItem>

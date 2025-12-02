@@ -48,7 +48,7 @@ function StepCard({ step, index, totalSteps, t }: StepCardProps) {
     >
       {/* Icon Circle */}
       <motion.div
-        className={`relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-obsidian-900/80 backdrop-blur-sm border-2 transition-all duration-500 ${step.borderColor}`}
+        className={`relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-glass-strong backdrop-blur-sm border-2 transition-all duration-500 ${step.borderColor}`}
         whileHover={{
           scale: 1.1,
           boxShadow: step.glowColor,
@@ -86,10 +86,10 @@ function StepCard({ step, index, totalSteps, t }: StepCardProps) {
 
       {/* Content */}
       <div className="mt-6 text-center max-w-[140px]">
-        <h4 className="text-white font-semibold text-sm md:text-base mb-1">
+        <h4 className="text-foreground font-semibold text-sm md:text-base mb-1">
           {t(`process.${step.key}.title`)}
         </h4>
-        <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
+        <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
           {t(`process.${step.key}.description`)}
         </p>
       </div>
@@ -220,7 +220,7 @@ export default function ServiceProcess() {
         {/* Process Timeline - Desktop */}
         <div className="hidden lg:block relative">
           {/* Background line */}
-          <div className="absolute top-10 left-0 right-0 h-0.5 bg-white/10" />
+          <div className="absolute top-10 left-0 right-0 h-0.5 bg-[var(--glass-active)]" />
 
           {/* Animated progress line */}
           <motion.div
@@ -245,7 +245,7 @@ export default function ServiceProcess() {
         {/* Process Timeline - Mobile (vertical) */}
         <div className="lg:hidden relative">
           {/* Vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-white/10" />
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-[var(--glass-active)]" />
 
           {/* Steps */}
           <div className="space-y-12">
@@ -262,20 +262,20 @@ export default function ServiceProcess() {
                 >
                   {/* Icon */}
                   <div
-                    className={`relative z-10 w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center bg-obsidian-900/80 backdrop-blur-sm border-2 ${step.borderColor}`}
+                    className={`relative z-10 w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center bg-glass-strong backdrop-blur-sm border-2 ${step.borderColor}`}
                   >
                     <Icon className={`w-5 h-5 ${step.textColor}`} />
                   </div>
 
                   {/* Content */}
                   <div className="pt-2">
-                    <span className="text-xs text-gray-500 uppercase tracking-wider">
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">
                       Étape {index + 1}
                     </span>
-                    <h4 className="text-white font-semibold text-lg mt-1">
+                    <h4 className="text-foreground font-semibold text-lg mt-1">
                       {t(`process.${step.key}.title`)}
                     </h4>
-                    <p className="text-gray-400 text-sm mt-1">
+                    <p className="text-muted-foreground text-sm mt-1">
                       {t(`process.${step.key}.description`)}
                     </p>
                   </div>

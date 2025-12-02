@@ -113,14 +113,14 @@ export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
           <div className="flex gap-3">
             <Button
               onClick={() => downloadPDF("fr")}
-              className="gap-2 bg-white/20 hover:bg-white/30 text-white border-2 border-white/30 backdrop-blur-sm transition-all duration-200 hover:scale-105"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border-2 border-[var(--glass-border-strong)] backdrop-blur-sm transition-all duration-200 hover:scale-105"
             >
               <FileDown className="h-4 w-4" />
               PDF (FR)
             </Button>
             <Button
               onClick={() => downloadPDF("en")}
-              className="gap-2 bg-white/20 hover:bg-white/30 text-white border-2 border-white/30 backdrop-blur-sm transition-all duration-200 hover:scale-105"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border-2 border-[var(--glass-border-strong)] backdrop-blur-sm transition-all duration-200 hover:scale-105"
             >
               <FileDown className="h-4 w-4" />
               PDF (EN)
@@ -143,10 +143,10 @@ export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
         <div className="bg-white rounded-2xl border-2 border-dashed border-gray-300 p-16 text-center">
           <div className="flex flex-col items-center gap-4">
             <div className="rounded-full bg-gray-100 p-6">
-              <FileDown className="h-12 w-12 text-gray-400" />
+              <FileDown className="h-12 w-12 text-muted-foreground" />
             </div>
-            <h3 className="text-2xl font-semibold text-gray-900">Aucune entrée</h3>
-            <p className="text-gray-500 max-w-md">
+            <h3 className="text-2xl font-semibold text-foreground">Aucune entrée</h3>
+            <p className="text-muted-foreground max-w-md">
               Commencez par créer votre première entrée de CV pour construire votre parcours professionnel.
             </p>
             <Button asChild className="mt-4 gap-2 bg-admin-primary-500 hover:bg-admin-primary-600">
@@ -197,10 +197,10 @@ export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
                 <div className="p-6 space-y-4">
                   {/* Titres */}
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-admin-primary-600 transition-colors">
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-admin-primary-600 transition-colors">
                       {entry.titleEn}
                     </h3>
-                    <p className="text-sm font-medium text-gray-600">
+                    <p className="text-sm font-medium text-muted-foreground">
                       🇫🇷 {entry.titleFr}
                     </p>
                   </div>
@@ -208,14 +208,14 @@ export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
                   {/* Informations secondaires */}
                   <div className="space-y-2 pt-2 border-t border-gray-100">
                     {entry.subtitleEn && (
-                      <div className="flex items-center gap-2 text-gray-700">
-                        <Building2 className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                      <div className="flex items-center gap-2 text-foreground/75">
+                        <Building2 className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                         <span className="font-medium">{entry.subtitleEn}</span>
                       </div>
                     )}
                     {entry.dateRangeEn && (
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <Calendar className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Calendar className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                         <span>{entry.dateRangeEn}</span>
                       </div>
                     )}

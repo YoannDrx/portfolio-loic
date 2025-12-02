@@ -106,7 +106,7 @@ const TableHead = React.forwardRef<
     ref={ref}
     className={cn(
       "h-12 px-4 text-left align-middle",
-      "font-medium text-neutral-400",
+      "font-medium text-muted-foreground",
       "[&:has([role=checkbox])]:pr-0",
       className
     )}
@@ -137,7 +137,7 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("mt-4 text-sm text-neutral-500", className)}
+    className={cn("mt-4 text-sm text-muted-foreground", className)}
     {...props}
   />
 ))
@@ -157,7 +157,7 @@ const TableEmpty = React.forwardRef<HTMLTableRowElement, TableEmptyProps>(
     <tr ref={ref} className={className} {...props}>
       <td
         colSpan={colSpan}
-        className="h-32 text-center text-neutral-500"
+        className="h-32 text-center text-muted-foreground"
       >
         {message}
       </td>

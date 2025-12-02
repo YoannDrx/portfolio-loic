@@ -45,7 +45,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
-      <body className="bg-white dark:bg-obsidian text-gray-900 dark:text-gray-300 antialiased transition-colors duration-300" suppressHydrationWarning>
+      <body className="bg-background text-foreground antialiased transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

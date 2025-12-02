@@ -142,8 +142,8 @@ export default function ServicesContent({ services, locale }: ServicesContentPro
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-              <p className="text-xl text-gray-400">{t('noServices')}</p>
+              <FileText className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+              <p className="text-xl text-muted-foreground">{t('noServices')}</p>
             </motion.div>
           )}
         </div>

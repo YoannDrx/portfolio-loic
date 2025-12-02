@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
    ============================================ */
 
 const progressVariants = cva(
-  "relative w-full overflow-hidden rounded-full bg-neutral-800",
+  "relative w-full overflow-hidden rounded-full bg-muted",
   {
     variants: {
       size: {
@@ -82,7 +82,7 @@ const Progress = React.forwardRef<
         />
       </ProgressPrimitive.Root>
       {showValue && (
-        <span className="absolute right-0 -top-6 text-xs text-neutral-400">
+        <span className="absolute right-0 -top-6 text-xs text-muted-foreground">
           {value}%
         </span>
       )}
@@ -106,7 +106,7 @@ const ProgressWithLabel = React.forwardRef<
   <div className={cn("space-y-2", className)}>
     <div className="flex justify-between text-sm">
       {label && <span className="text-foreground">{label}</span>}
-      <span className="text-neutral-400">{value}%</span>
+      <span className="text-muted-foreground">{value}%</span>
     </div>
     <Progress ref={ref} value={value} {...props} />
   </div>
@@ -178,7 +178,7 @@ const CircularProgress = React.forwardRef<HTMLDivElement, CircularProgressProps>
             r={radius}
             fill="none"
             strokeWidth={strokeWidth}
-            className="stroke-neutral-800"
+            className="stroke-muted"
           />
           {/* Progress circle */}
           <circle

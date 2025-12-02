@@ -222,17 +222,17 @@ export function ImageUpload({
               {isDragActive ? (
                 <Upload className="h-12 w-12 text-blue-500" />
               ) : (
-                <ImageIcon className="h-12 w-12 text-gray-400" />
+                <ImageIcon className="h-12 w-12 text-muted-foreground" />
               )}
 
               <div className="text-center">
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <p className="text-sm font-medium text-foreground/75 dark:text-foreground/85">
                   {isDragActive
                     ? t("media.dropzoneDrag")
                     : t("media.dropzone")}
                 </p>
                 {finalDescription && (
-                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground">
                     {finalDescription}
                   </p>
                 )}
@@ -259,7 +259,7 @@ export function ImageUpload({
 
       {/* URL actuelle (fallback si pas de preview) */}
       {value && !preview && (
-        <p className="text-xs text-gray-500 dark:text-gray-400">
+        <p className="text-xs text-muted-foreground dark:text-muted-foreground">
           {t("media.currentUrl")} : <span className="font-mono">{value}</span>
         </p>
       )}

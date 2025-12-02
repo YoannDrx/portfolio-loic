@@ -59,8 +59,8 @@ export default function SkillCard({ iconName, title, skills, color }: SkillCardP
     >
       {/* Tech Border Container */}
       <div className={`
-        relative h-full bg-obsidian-100/80 backdrop-blur-md 
-        border-l-4 ${style.border} 
+        relative h-full bg-glass-subtle backdrop-blur-md
+        border-l-4 ${style.border}
         overflow-hidden rounded-r-xl
         before:absolute before:inset-0 before:bg-gradient-to-br before:${style.gradient} before:opacity-10 before:group-hover:opacity-20 before:transition-opacity
       `}>
@@ -77,7 +77,7 @@ export default function SkillCard({ iconName, title, skills, color }: SkillCardP
           {/* Header */}
           <div className="flex items-start justify-between mb-6">
             <div className={`
-              p-3 rounded-lg bg-white/5 border border-white/10 
+              p-3 rounded-lg bg-[var(--glass-subtle)] border border-[var(--glass-border)] 
               group-hover:border-${color === 'cyan' ? 'neon-cyan' : color === 'magenta' ? 'neon-magenta' : color === 'purple' ? 'neon-purple' : 'neon-blue'}/50 
               transition-colors duration-300
             `}>
@@ -92,14 +92,14 @@ export default function SkillCard({ iconName, title, skills, color }: SkillCardP
           </div>
 
           {/* Title */}
-          <h3 className="text-xl font-black text-white mb-6 uppercase tracking-wider group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all">
+          <h3 className="text-xl font-black text-foreground mb-6 uppercase tracking-wider group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all">
             {title}
           </h3>
 
           {/* Skills List */}
           <ul className="space-y-3">
             {skills.map((skill, index) => (
-              <li key={index} className="flex items-center gap-3 text-gray-400 group-hover:text-gray-200 transition-colors">
+              <li key={index} className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground/90 transition-colors">
                 <span className={`w-1 h-1 rounded-full ${style.dot} shadow-[0_0_5px_currentColor]`} />
                 <span className="font-mono text-sm tracking-wide">{skill}</span>
               </li>

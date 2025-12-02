@@ -11,7 +11,7 @@ export default async function NewVideoPage({
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Nouvelle vidéo</h1>
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-muted-foreground dark:text-muted-foreground">
           Ajoutez une nouvelle vidéo YouTube
         </p>
       </div>

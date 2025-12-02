@@ -21,7 +21,7 @@ export default async function EditServicePage({
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Modifier le service</h1>
-        <p className="text-gray-500 dark:text-gray-400">{service.title}</p>
+        <p className="text-muted-foreground dark:text-muted-foreground">{service.title}</p>
       </div>
 
       <ServiceForm locale={locale} initialData={service} />

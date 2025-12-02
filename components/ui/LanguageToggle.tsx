@@ -29,8 +29,8 @@ export default function LanguageToggle() {
   };
 
   return (
-    <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
-      <Globe className="w-4 h-4 text-gray-400" />
+    <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--glass-subtle)] border border-[var(--glass-border)]">
+      <Globe className="w-4 h-4 text-muted-foreground" />
 
       <div className="flex items-center gap-1">
         {languages.map((lang) => {
@@ -44,7 +44,7 @@ export default function LanguageToggle() {
               className={`relative px-2 py-1 text-xs font-semibold rounded transition-all ${
                 isActive
                   ? 'text-neon-cyan'
-                  : 'text-gray-400 hover:text-white disabled:opacity-50'
+                  : 'text-muted-foreground hover:text-foreground disabled:opacity-50'
               }`}
               title={lang.name}
             >

@@ -106,10 +106,10 @@ function StatCard({ stat, index }: StatCardProps) {
     <motion.div
       className={cn(
         'relative group',
-        'bg-obsidian-900/50 backdrop-blur-sm',
+        'bg-glass backdrop-blur-sm',
         'border rounded-2xl p-8',
         'transition-all duration-500',
-        'hover:bg-obsidian-800/50',
+        'hover:bg-glass-strong',
         config.border,
         `hover:${config.glow}`
       )}
@@ -165,7 +165,7 @@ function StatCard({ stat, index }: StatCardProps) {
       </div>
 
       {/* Label */}
-      <p className="text-gray-400 text-sm uppercase tracking-widest font-medium">
+      <p className="text-muted-foreground text-sm uppercase tracking-widest font-medium">
         {stat.label}
       </p>
 

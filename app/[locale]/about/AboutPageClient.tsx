@@ -68,7 +68,7 @@ function HeaderSection() {
 
             {/* Intro text */}
             <motion.p
-              className="text-xl text-gray-300 mb-8 leading-relaxed"
+              className="text-xl text-foreground/85 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -88,19 +88,19 @@ function HeaderSection() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center text-xl font-black text-obsidian-950">
                   16
                 </div>
-                <span className="text-sm text-gray-400">{t('achievements.albums')}</span>
+                <span className="text-sm text-muted-foreground">{t('achievements.albums')}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-xl font-black text-obsidian-950">
                   34
                 </div>
-                <span className="text-sm text-gray-400">{t('achievements.projects')}</span>
+                <span className="text-sm text-muted-foreground">{t('achievements.projects')}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-xl font-black text-obsidian-950">
                   15+
                 </div>
-                <span className="text-sm text-gray-400">{t('achievements.years')}</span>
+                <span className="text-sm text-muted-foreground">{t('achievements.years')}</span>
               </div>
             </motion.div>
 
@@ -131,7 +131,7 @@ function HeaderSection() {
             <div className="absolute -inset-4 bg-gradient-to-r from-emerald-400/20 via-teal-400/20 to-cyan-400/20 rounded-3xl blur-2xl" />
 
             {/* Image container */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden border border-[var(--glass-border)] shadow-2xl">
               <div className="aspect-[4/5] relative">
                 <Image
                   src="/img/slider/loic-studio-front.jpg"
@@ -153,13 +153,13 @@ function HeaderSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <div className="bg-obsidian-900/80 backdrop-blur-sm border border-white/10 rounded-xl p-4">
+                <div className="bg-obsidian-900/80 backdrop-blur-sm border border-[var(--glass-border)] rounded-xl p-4">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-emerald-400/20 border border-emerald-400/30">
                       <MapPin className="w-5 h-5 text-emerald-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">{t('contactInfo.address')}</p>
+                      <p className="text-xs text-muted-foreground">{t('contactInfo.address')}</p>
                       <p className="text-white font-semibold">{t('contactInfo.location')}</p>
                     </div>
                   </div>
@@ -199,7 +199,7 @@ function BioSection() {
                   <span className="w-10 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full" />
                   À propos
                 </h2>
-                <div className="space-y-5 text-gray-300 text-lg leading-relaxed">
+                <div className="space-y-5 text-foreground/85 text-lg leading-relaxed">
                   <p>{t('bio.paragraph2')}</p>
                   <p>{t('bio.paragraph3')}</p>
                   <p className="text-emerald-400 font-medium border-l-4 border-emerald-400/50 pl-5 italic">
@@ -245,7 +245,7 @@ function BioSection() {
                 <div className="space-y-4">
                   <div>
                     <h4 className="text-xs uppercase tracking-widest text-emerald-400 mb-2">{t('labelsPublishers.labels')}</h4>
-                    <ul className="text-sm text-gray-400 space-y-1">
+                    <ul className="text-sm text-muted-foreground space-y-1">
                       <li>Infinity Scores (Cezame)</li>
                       <li>Montmorency Music (MYMA)</li>
                       <li>Justement Music</li>
@@ -253,7 +253,7 @@ function BioSection() {
                   </div>
                   <div>
                     <h4 className="text-xs uppercase tracking-widest text-teal-400 mb-2">{t('labelsPublishers.publishers')}</h4>
-                    <ul className="text-sm text-gray-400 space-y-1">
+                    <ul className="text-sm text-muted-foreground space-y-1">
                       <li>Cezame Music Agency</li>
                       <li>Montmorency Music Agency</li>
                     </ul>
@@ -294,7 +294,7 @@ function ContactInfoItem({ icon: Icon, label, value, color, href }: ContactInfoI
         <Icon className="w-4 h-4" />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs text-gray-500 mb-0.5">{label}</p>
+        <p className="text-xs text-muted-foreground mb-0.5">{label}</p>
         <p className={cn('font-medium text-sm break-words', href ? 'text-white hover:text-emerald-400 transition-colors' : 'text-white')}>
           {value}
         </p>
@@ -435,7 +435,7 @@ function SkillCard({ skill, index }: SkillCardProps) {
         {skill.skills.map((item, i) => (
           <motion.li
             key={item}
-            className="text-gray-400 text-sm flex items-center gap-2"
+            className="text-muted-foreground text-sm flex items-center gap-2"
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -530,7 +530,7 @@ function CTASection({ locale }: { locale: string }) {
               </motion.h2>
 
               <motion.p
-                className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
+                className="text-lg text-foreground/85 mb-8 max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

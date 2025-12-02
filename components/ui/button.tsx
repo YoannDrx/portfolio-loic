@@ -13,7 +13,7 @@ const buttonVariants = cva(
       variant: {
         /* ===== NEON VARIANTS (site public) ===== */
         // Primary neon - bright yellow
-        neon: 'bg-primary text-neutral-950 font-semibold tracking-wide shadow-glow-primary-sm hover:shadow-glow-primary hover:bg-primary-300',
+        neon: 'bg-primary text-foreground font-semibold tracking-wide shadow-glow-primary-sm hover:shadow-glow-primary hover:bg-primary-300',
         // Neon outline - border only
         'neon-outline':
           'border-2 border-primary text-primary bg-transparent hover:bg-primary/10 shadow-glow-primary-sm hover:shadow-glow-primary',
@@ -24,7 +24,7 @@ const buttonVariants = cva(
           'bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 hover:border-primary/50',
         // Green accent
         'neon-green':
-          'bg-green text-neutral-950 font-semibold shadow-glow-green-sm hover:shadow-glow-green hover:bg-green-300',
+          'bg-green text-foreground font-semibold shadow-glow-green-sm hover:shadow-glow-green hover:bg-green-300',
         // Emerald accent
         'neon-emerald':
           'bg-emerald text-white font-semibold shadow-glow-emerald-sm hover:shadow-glow-emerald hover:bg-emerald-300',
@@ -36,7 +36,7 @@ const buttonVariants = cva(
           'bg-ocean text-white font-semibold shadow-glow-ocean-sm hover:shadow-glow-ocean hover:bg-ocean-300',
         // Gradient - primary to emerald
         gradient:
-          'bg-gradient-primary text-neutral-950 font-semibold shadow-glow-primary-sm hover:shadow-glow-primary',
+          'bg-gradient-primary text-foreground font-semibold shadow-glow-primary-sm hover:shadow-glow-primary',
         // Gradient - emerald to ocean
         'gradient-teal':
           'bg-gradient-teal text-white font-semibold shadow-glow-emerald-sm hover:shadow-glow-emerald',
@@ -44,7 +44,7 @@ const buttonVariants = cva(
         /* ===== STANDARD VARIANTS ===== */
         // Default - primary color
         default:
-          'bg-primary text-neutral-950 shadow-sm hover:bg-primary-300',
+          'bg-primary text-foreground shadow-sm hover:bg-primary-300',
         // Destructive - error color
         destructive:
           'bg-error text-white shadow-sm hover:bg-error-dark',

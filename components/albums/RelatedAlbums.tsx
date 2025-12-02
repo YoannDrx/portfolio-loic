@@ -51,7 +51,7 @@ function NavButton({ direction, onClick, disabled }: NavButtonProps) {
       className={cn(
         'absolute top-1/2 -translate-y-1/2 z-20',
         'w-12 h-12 rounded-full',
-        'bg-obsidian-800/80 backdrop-blur-md',
+        'bg-glass-strong backdrop-blur-md',
         'border border-neon-magenta/30',
         'flex items-center justify-center',
         'text-white hover:text-neon-magenta',

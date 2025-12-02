@@ -64,12 +64,12 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
   };
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+    <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--glass-border)]">
         <h3 className="text-lg font-bold text-white">
           Activité récente
         </h3>
-        <Button variant="ghost" size="sm" className="text-[var(--admin-neon-cyan)] hover:text-white hover:bg-white/10" asChild>
+        <Button variant="ghost" size="sm" className="text-[var(--admin-neon-cyan)] hover:text-foreground hover:bg-[var(--glass-active)]" asChild>
           <Link href={`/${locale}/admin/albums`}>
             Voir tout
             <ArrowRight className="ml-2 h-4 w-4" />
@@ -80,10 +80,10 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
         <div className="space-y-2">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <div className="rounded-full bg-white/5 p-4 mb-3">
-                <ImageIcon className="h-8 w-8 text-neutral-500" />
+              <div className="rounded-full bg-[var(--glass-subtle)] p-4 mb-3">
+                <ImageIcon className="h-8 w-8 text-muted-foreground" />
               </div>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-muted-foreground">
                 Aucune activité récente
               </p>
             </div>
@@ -95,7 +95,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
               return (
                 <div
                   key={item.id}
-                  className="group flex items-center gap-4 rounded-xl p-3 hover:bg-white/5 transition-colors duration-200"
+                  className="group flex items-center gap-4 rounded-xl p-3 hover:bg-[var(--glass-subtle)] transition-colors duration-200"
                 >
                   {/* Thumbnail or Icon */}
                   <div className="relative h-12 w-12 flex-shrink-0">
@@ -126,7 +126,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
                         {item.title}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-neutral-500">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Icon className={cn("h-3 w-3", config.color)} />
                       <span>{config.label}</span>
                       <span>•</span>
@@ -140,7 +140,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
                       <span className="w-1 h-1 rounded-full bg-neon-green" />
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-white/5 text-neutral-500 border border-white/10">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
                       <span className="w-1 h-1 rounded-full bg-neutral-500" />
                     </span>
                   )}

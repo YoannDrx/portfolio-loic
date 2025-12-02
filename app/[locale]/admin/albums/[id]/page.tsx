@@ -28,7 +28,7 @@ export default async function EditAlbumPage({
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Modifier l&apos;album</h1>
-        <p className="text-gray-500 dark:text-gray-400">{album.title}</p>
+        <p className="text-muted-foreground dark:text-muted-foreground">{album.title}</p>
       </div>
 
       <AlbumForm locale={locale} initialData={formData} />

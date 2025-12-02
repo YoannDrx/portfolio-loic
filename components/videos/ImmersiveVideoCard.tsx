@@ -128,8 +128,8 @@ export default function ImmersiveVideoCard({ video, index, onHover }: ImmersiveV
         <motion.div
           className={cn(
             'relative h-full overflow-hidden rounded-2xl cursor-pointer',
-            'bg-obsidian-900/60 backdrop-blur-sm',
-            'border border-white/10',
+            'bg-glass backdrop-blur-sm',
+            'border border-[var(--glass-border)]',
             'transition-all duration-500',
             config.shadow,
             config.border
@@ -163,7 +163,7 @@ export default function ImmersiveVideoCard({ video, index, onHover }: ImmersiveV
             />
 
             {/* Overlay gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
             <div
               className={cn(
                 'absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500',
@@ -232,9 +232,9 @@ export default function ImmersiveVideoCard({ video, index, onHover }: ImmersiveV
             </h3>
 
             {/* Metadata */}
-            <div className="flex items-center justify-between pt-3 border-t border-white/5">
+            <div className="flex items-center justify-between pt-3 border-t border-[var(--glass-border-subtle)]">
               {/* Date */}
-              <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <Calendar className="w-3 h-3" style={{ color: config.color === 'cyan' ? '#00F0FF' : config.color === 'magenta' ? '#FF006E' : '#8B5CF6' }} />
                 <span>{video.date}</span>
               </div>
@@ -266,7 +266,7 @@ export default function ImmersiveVideoCard({ video, index, onHover }: ImmersiveV
       <AnimatePresence>
         {isPlaying && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-obsidian-950/95 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/95 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -274,7 +274,7 @@ export default function ImmersiveVideoCard({ video, index, onHover }: ImmersiveV
           >
             {/* Close Button */}
             <motion.button
-              className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/20"
+              className="absolute top-6 right-6 p-3 rounded-full bg-[var(--glass-active)] hover:bg-[var(--glass-active)] transition-colors border border-[var(--glass-border-strong)]"
               onClick={handleCloseVideo}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -314,7 +314,7 @@ export default function ImmersiveVideoCard({ video, index, onHover }: ImmersiveV
               exit={{ opacity: 0, y: 20 }}
               transition={{ delay: 0.2 }}
             >
-              <h3 className="text-xl font-bold text-white mb-2">{video.title}</h3>
+              <h3 className="text-xl font-bold text-foreground mb-2">{video.title}</h3>
               <span className={cn('text-sm', config.accent)}>{t(config.translationKey)}</span>
             </motion.div>
           </motion.div>

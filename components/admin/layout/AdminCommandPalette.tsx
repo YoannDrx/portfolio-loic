@@ -106,7 +106,7 @@ const getCommandItems = (locale: string, router: ReturnType<typeof useRouter>): 
     category: 'navigation',
     icon: Settings,
     href: `/${locale}/admin/settings`,
-    color: 'text-neutral-400',
+    color: 'text-muted-foreground',
   },
 
   // Actions
@@ -147,7 +147,7 @@ const getCommandItems = (locale: string, router: ReturnType<typeof useRouter>): 
     category: 'action',
     icon: Home,
     href: `/${locale}`,
-    color: 'text-neutral-400',
+    color: 'text-muted-foreground',
   },
 ];
 
@@ -181,8 +181,8 @@ function CommandItemRow({ item, isSelected, onSelect }: CommandItemProps) {
       className={cn(
         'w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all',
         isSelected
-          ? 'bg-white/10 text-white'
-          : 'text-neutral-400 hover:bg-white/5 hover:text-white'
+          ? 'bg-[var(--glass-active)] text-white'
+          : 'text-muted-foreground hover:bg-[var(--glass-subtle)] hover:text-foreground'
       )}
       style={{
         boxShadow: isSelected ? 'var(--admin-glow-cyan-sm)' : 'none',
@@ -191,7 +191,7 @@ function CommandItemRow({ item, isSelected, onSelect }: CommandItemProps) {
       <div
         className={cn(
           'flex items-center justify-center w-10 h-10 rounded-lg transition-colors',
-          isSelected ? 'bg-white/10' : 'bg-white/5'
+          isSelected ? 'bg-[var(--glass-active)]' : 'bg-[var(--glass-subtle)]'
         )}
       >
         <Icon className={cn('h-5 w-5', item.color || 'text-white')} />
@@ -199,11 +199,11 @@ function CommandItemRow({ item, isSelected, onSelect }: CommandItemProps) {
       <div className="flex-1 min-w-0">
         <div className="font-medium text-sm">{item.label}</div>
         {item.description && (
-          <div className="text-xs text-neutral-500 truncate">{item.description}</div>
+          <div className="text-xs text-muted-foreground truncate">{item.description}</div>
         )}
       </div>
       {item.shortcut && (
-        <div className="flex items-center gap-1 px-2 py-1 rounded bg-white/5 text-xs font-mono text-neutral-500">
+        <div className="flex items-center gap-1 px-2 py-1 rounded bg-[var(--glass-subtle)] text-xs font-mono text-muted-foreground">
           {item.shortcut}
         </div>
       )}
@@ -339,15 +339,15 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
             exit="exit"
           >
             <div
-              className="overflow-hidden rounded-2xl border border-white/10"
+              className="overflow-hidden rounded-2xl border border-[var(--glass-border)]"
               style={{
                 background: 'var(--admin-surface-elevated-solid)',
                 boxShadow: 'var(--admin-shadow-modal), var(--admin-glow-cyan-sm)',
               }}
             >
               {/* Search Input */}
-              <div className="flex items-center gap-3 px-4 py-4 border-b border-white/10">
-                <Search className="h-5 w-5 text-neutral-500" />
+              <div className="flex items-center gap-3 px-4 py-4 border-b border-[var(--glass-border)]">
+                <Search className="h-5 w-5 text-muted-foreground" />
                 <input
                   ref={inputRef}
                   type="text"
@@ -359,7 +359,7 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
                   placeholder="Rechercher une page ou une action..."
                   className="flex-1 bg-transparent text-white placeholder-neutral-500 outline-none text-base"
                 />
-                <div className="flex items-center gap-1 px-2 py-1 rounded bg-white/10 text-xs font-mono text-neutral-500">
+                <div className="flex items-center gap-1 px-2 py-1 rounded bg-[var(--glass-active)] text-xs font-mono text-muted-foreground">
                   <span>esc</span>
                 </div>
               </div>
@@ -367,7 +367,7 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
               {/* Results */}
               <div className="max-h-[400px] overflow-y-auto p-2">
                 {flatItems.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-12 text-neutral-500">
+                  <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                     <Search className="h-8 w-8 mb-3 opacity-50" />
                     <p className="text-sm">Aucun résultat trouvé</p>
                   </div>
@@ -375,7 +375,7 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
                   Object.entries(groupedItems).map(([category, items]) => (
                     <div key={category} className="mb-4 last:mb-0">
                       {/* Category header */}
-                      <div className="flex items-center gap-2 px-4 py-2 text-[10px] font-bold text-neutral-600 uppercase tracking-[0.2em]">
+                      <div className="flex items-center gap-2 px-4 py-2 text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
                         {categoryLabels[category]?.label || category}
                       </div>
 
@@ -407,15 +407,15 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
               </div>
 
               {/* Footer */}
-              <div className="flex items-center justify-between px-4 py-3 border-t border-white/10 text-xs text-neutral-500">
+              <div className="flex items-center justify-between px-4 py-3 border-t border-[var(--glass-border)] text-xs text-muted-foreground">
                 <div className="flex items-center gap-4">
                   <span className="flex items-center gap-1">
-                    <kbd className="px-1.5 py-0.5 rounded bg-white/10 font-mono">↑</kbd>
-                    <kbd className="px-1.5 py-0.5 rounded bg-white/10 font-mono">↓</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">↑</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">↓</kbd>
                     <span className="ml-1">pour naviguer</span>
                   </span>
                   <span className="flex items-center gap-1">
-                    <kbd className="px-1.5 py-0.5 rounded bg-white/10 font-mono">↵</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">↵</kbd>
                     <span className="ml-1">pour sélectionner</span>
                   </span>
                 </div>

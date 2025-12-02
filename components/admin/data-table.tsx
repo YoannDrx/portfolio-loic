@@ -52,7 +52,7 @@ export function DataTable<T extends { id: string }>({
       {searchKey && (
         <div className="flex items-center gap-2">
           <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder={searchPlaceholder}
               value={search}
@@ -78,7 +78,7 @@ export function DataTable<T extends { id: string }>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center text-gray-500"
+                  className="h-24 text-center text-muted-foreground"
                 >
                   {emptyMessage}
                 </TableCell>
@@ -108,7 +108,7 @@ export function DataTable<T extends { id: string }>({
       </div>
 
       {/* Footer avec nombre de résultats */}
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-muted-foreground">
         {filteredData.length} résultat{filteredData.length > 1 ? "s" : ""}
         {search && ` sur ${data.length} au total`}
       </div>

@@ -180,6 +180,60 @@ const config: Config = {
           950: '#09090b',
         },
 
+        /* ===== OBSIDIAN (Dark background base) ===== */
+        obsidian: {
+          DEFAULT: '#09090b',
+          50: '#18181b',
+          100: '#121214',
+          200: '#0f0f12',
+          300: '#0c0c0e',
+          400: '#09090b',
+          500: '#050506',
+          600: '#030303',
+          700: '#020202',
+          800: '#010101',
+          900: '#000000',
+        },
+
+        /* ===== INDIGO (Light mode accent) ===== */
+        indigo: {
+          DEFAULT: '#4f46e5',
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
+        },
+
+        /* ===== GLASS SYSTEM (CSS Variables based) ===== */
+        glass: {
+          DEFAULT: 'var(--glass-bg)',
+          subtle: 'var(--glass-bg-subtle)',
+          strong: 'var(--glass-bg-strong)',
+        },
+        'glass-border': {
+          DEFAULT: 'var(--glass-border)',
+          subtle: 'var(--glass-border-subtle)',
+          strong: 'var(--glass-border-strong)',
+        },
+        'glass-hover': 'var(--glass-hover)',
+        'glass-active': 'var(--glass-active)',
+
+        /* ===== OVERLAY (CSS Variables based) ===== */
+        overlay: {
+          DEFAULT: 'var(--overlay-bg)',
+          strong: 'var(--overlay-bg-strong)',
+        },
+
+        /* ===== TEXT SEMANTIC ===== */
+        'muted-foreground': 'var(--text-muted)',
+
         /* ===== SEMANTIC ===== */
         background: 'rgb(var(--background-rgb) / <alpha-value>)',
         foreground: 'rgb(var(--foreground-rgb) / <alpha-value>)',

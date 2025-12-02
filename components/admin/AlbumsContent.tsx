@@ -117,7 +117,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
           <h1 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
             Albums Library
           </h1>
-          <p className="text-neutral-400 font-mono text-sm">
+          <p className="text-muted-foreground font-mono text-sm">
             Manage your photo albums / {total} total entries
           </p>
         </div>
@@ -161,11 +161,11 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
         />
       ) : (
         <>
-          <div className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+          <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden">
             <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
               <Table>
-                <TableHeader className="sticky top-0 bg-white/5 backdrop-blur-md z-10 border-b border-white/10">
-                  <TableRow className="hover:bg-white/5 border-white/10">
+                <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)]">
+                  <TableRow className="hover:bg-[var(--glass-subtle)] border-[var(--glass-border)]">
                     <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Aperçu</TableHead>
                     <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Titre</TableHead>
                     <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Date</TableHead>
@@ -178,7 +178,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                   {albums.map((album) => (
                     <TableRow
                       key={album.id}
-                      className="group hover:bg-white/5 transition-colors duration-150 border-b border-white/5 last:border-b-0"
+                      className="group hover:bg-[var(--glass-subtle)] transition-colors duration-150 border-b border-[var(--glass-border-subtle)] last:border-b-0"
                     >
                       <TableCell>
                         <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200 ring-1 ring-white/10">
@@ -195,7 +195,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                         <span className="font-bold text-white">{album.title}</span>
                       </TableCell>
                       <TableCell>
-                        <span className="text-neutral-400 text-sm font-mono">{album.date}</span>
+                        <span className="text-muted-foreground text-sm font-mono">{album.date}</span>
                       </TableCell>
                       <TableCell>
                         <Badge
@@ -212,7 +212,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                             Published
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-white/5 text-neutral-500 border border-white/10">
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
                             Draft
                           </span>
                         )}
@@ -223,7 +223,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                             variant="ghost"
                             size="sm"
                             asChild
-                            className="h-9 w-9 p-0 text-neutral-400 hover:text-[var(--admin-neon-cyan)] hover:bg-[var(--admin-neon-cyan)]/10 transition-all duration-200"
+                            className="h-9 w-9 p-0 text-muted-foreground hover:text-[var(--admin-neon-cyan)] hover:bg-[var(--admin-neon-cyan)]/10 transition-all duration-200"
                           >
                             <Link
                               href={`/${locale}/albums/${album.id}${!album.published ? "?preview=true" : ""}`}
@@ -236,7 +236,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                             variant="ghost"
                             size="sm"
                             asChild
-                            className="h-9 w-9 p-0 text-neutral-400 hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
+                            className="h-9 w-9 p-0 text-muted-foreground hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
                           >
                             <Link href={`/${locale}/admin/albums/${album.id}`}>
                               <Pencil className="h-4 w-4" />

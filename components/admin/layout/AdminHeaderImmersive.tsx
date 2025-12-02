@@ -113,12 +113,12 @@ function AnimatedBreadcrumbs({ locale }: { locale: string }) {
             transition={{ delay: index * 0.1, duration: 0.3 }}
           >
             {index > 0 && (
-              <ChevronRight className="h-4 w-4 text-neutral-600" />
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
             )}
             {crumb.href && !isLast ? (
               <a
                 href={crumb.href}
-                className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-colors"
+                className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[var(--glass-hover)] transition-colors"
               >
                 {Icon && <Icon className="h-4 w-4" />}
                 <span>{crumb.label}</span>
@@ -126,7 +126,7 @@ function AnimatedBreadcrumbs({ locale }: { locale: string }) {
             ) : (
               <span className={cn(
                 'flex items-center gap-1.5 px-2 py-1',
-                isLast ? 'text-white font-medium' : 'text-neutral-400'
+                isLast ? 'text-foreground font-medium' : 'text-muted-foreground'
               )}>
                 {Icon && <Icon className="h-4 w-4" />}
                 <span>{crumb.label}</span>
@@ -254,7 +254,7 @@ function NotificationBell({ locale }: { locale: string }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <motion.button
-          className="relative p-2.5 rounded-xl hover:bg-white/5 transition-colors text-neutral-400 hover:text-white group"
+          className="relative p-2.5 rounded-xl hover:bg-[var(--glass-hover)] transition-colors text-muted-foreground hover:text-foreground group"
           variants={adminNotificationBell}
           initial="rest"
           animate={isAnimating ? 'ring' : 'rest'}
@@ -280,7 +280,7 @@ function NotificationBell({ locale }: { locale: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-80 bg-[var(--admin-surface-solid)] backdrop-blur-xl border-white/10 text-white p-0"
+        className="w-80 bg-[var(--admin-surface-solid)] backdrop-blur-xl border-[var(--glass-border)] text-foreground p-0"
         sideOffset={8}
       >
         <motion.div
@@ -289,12 +289,12 @@ function NotificationBell({ locale }: { locale: string }) {
           animate="visible"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--glass-border)]">
             <span className="text-sm font-bold">Notifications</span>
             {unreadCount > 0 && (
               <button
                 onClick={markAllAsRead}
-                className="flex items-center gap-1 text-xs text-[var(--admin-neon-cyan)] hover:text-white transition-colors"
+                className="flex items-center gap-1 text-xs text-[var(--admin-neon-cyan)] hover:text-foreground transition-colors"
               >
                 <CheckCheck className="h-3 w-3" />
                 Tout marquer lu
@@ -305,13 +305,13 @@ function NotificationBell({ locale }: { locale: string }) {
           {/* Liste */}
           <div className="max-h-80 overflow-y-auto">
             {isLoading ? (
-              <div className="p-4 text-center text-neutral-500 text-sm">
+              <div className="p-4 text-center text-muted-foreground text-sm">
                 Chargement...
               </div>
             ) : notifications.length === 0 ? (
               <div className="p-6 text-center">
-                <Bell className="h-8 w-8 text-neutral-600 mx-auto mb-2" />
-                <p className="text-sm text-neutral-500">Aucune notification</p>
+                <Bell className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                <p className="text-sm text-muted-foreground">Aucune notification</p>
               </div>
             ) : (
               notifications.map((notif) => {
@@ -321,9 +321,9 @@ function NotificationBell({ locale }: { locale: string }) {
                     key={notif.id}
                     onClick={() => handleNotificationClick(notif)}
                     className={cn(
-                      'flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors border-b border-white/5 last:border-b-0',
+                      'flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors border-b border-[var(--glass-border-subtle)] last:border-b-0',
                       notif.read
-                        ? 'hover:bg-white/5'
+                        ? 'hover:bg-[var(--glass-hover)]'
                         : 'bg-[var(--admin-neon-cyan)]/5 hover:bg-[var(--admin-neon-cyan)]/10'
                     )}
                   >
@@ -345,13 +345,13 @@ function NotificationBell({ locale }: { locale: string }) {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-white truncate">
+                      <p className="text-sm font-medium text-foreground truncate">
                         {notif.title}
                       </p>
-                      <p className="text-xs text-neutral-400 truncate">
+                      <p className="text-xs text-muted-foreground truncate">
                         {notif.message}
                       </p>
-                      <p className="text-[10px] text-neutral-500 mt-1">
+                      <p className="text-[10px] text-muted-foreground mt-1">
                         {formatDate(notif.createdAt)}
                       </p>
                     </div>
@@ -398,7 +398,7 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <motion.button
-          className="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10"
+          className="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-xl hover:bg-[var(--glass-hover)] transition-all group border border-transparent hover:border-[var(--glass-border)]"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -411,10 +411,10 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
             {getUserInitials()}
           </motion.div>
           <div className="hidden sm:flex flex-col items-start text-left">
-            <span className="text-sm font-bold text-white group-hover:text-[var(--admin-neon-cyan)] transition-colors">
+            <span className="text-sm font-bold text-foreground group-hover:text-[var(--admin-neon-cyan)] transition-colors">
               {user.name || 'Administrator'}
             </span>
-            <span className="text-[10px] text-neutral-500 uppercase tracking-widest">
+            <span className="text-[10px] text-muted-foreground uppercase tracking-widest">
               {user.role || 'Super Admin'}
             </span>
           </div>
@@ -422,7 +422,7 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-64 bg-[var(--admin-surface-solid)] backdrop-blur-xl border-white/10 text-white p-2"
+        className="w-64 bg-[var(--admin-surface-solid)] backdrop-blur-xl border-[var(--glass-border)] text-foreground p-2"
         sideOffset={8}
       >
         <motion.div
@@ -430,7 +430,7 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
           initial="hidden"
           animate="visible"
         >
-          <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-600 px-2">
+          <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground px-2">
             Mon compte
           </DropdownMenuLabel>
 
@@ -440,15 +440,15 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold truncate">{user.name || 'Administrator'}</p>
-              <p className="text-xs text-neutral-500 truncate">{user.email}</p>
+              <p className="text-xs text-muted-foreground truncate">{user.email}</p>
             </div>
           </div>
 
-          <DropdownMenuSeparator className="bg-white/10 my-2" />
+          <DropdownMenuSeparator className="bg-[var(--glass-border)] my-2" />
 
           <DropdownMenuItem
             onClick={() => router.push(`/${locale}/admin/settings`)}
-            className="flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer focus:bg-white/10 focus:text-white transition-colors"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer focus:bg-[var(--glass-hover)] focus:text-foreground transition-colors"
           >
             <User className="h-4 w-4 text-[var(--admin-neon-cyan)]" />
             <span>Mon Profil</span>
@@ -456,13 +456,13 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
 
           <DropdownMenuItem
             onClick={() => router.push(`/${locale}/admin/settings`)}
-            className="flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer focus:bg-white/10 focus:text-white transition-colors"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer focus:bg-[var(--glass-hover)] focus:text-foreground transition-colors"
           >
             <Settings className="h-4 w-4 text-[var(--admin-neon-purple)]" />
             <span>Paramètres</span>
           </DropdownMenuItem>
 
-          <DropdownMenuSeparator className="bg-white/10 my-2" />
+          <DropdownMenuSeparator className="bg-[var(--glass-border)] my-2" />
 
           <DropdownMenuItem
             onClick={onSignOut}
@@ -492,11 +492,7 @@ export function AdminHeaderImmersive({ user, locale }: AdminHeaderProps) {
 
   return (
     <motion.header
-      className="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-white/10 px-6"
-      style={{
-        background: 'linear-gradient(180deg, rgba(9, 9, 11, 0.95) 0%, rgba(9, 9, 11, 0.8) 100%)',
-        backdropFilter: 'blur(24px)',
-      }}
+      className="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-[var(--glass-border)] px-6 bg-glass-strong backdrop-blur-xl"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -511,7 +507,7 @@ export function AdminHeaderImmersive({ user, locale }: AdminHeaderProps) {
         {/* Quick action: Back to site */}
         <motion.a
           href={`/${locale}`}
-          className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-neutral-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-[var(--glass-hover)] transition-colors"
           whileHover={{ x: -2 }}
         >
           <Home className="h-4 w-4" />
@@ -519,7 +515,7 @@ export function AdminHeaderImmersive({ user, locale }: AdminHeaderProps) {
         </motion.a>
 
         {/* Divider */}
-        <div className="hidden lg:block w-px h-8 bg-white/10 mx-2" />
+        <div className="hidden lg:block w-px h-8 bg-[var(--glass-border)] mx-2" />
 
         {/* Notifications */}
         <NotificationBell locale={locale} />

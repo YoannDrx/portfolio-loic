@@ -7,8 +7,8 @@ const textVariants = cva('', {
   variants: {
     variant: {
       default: 'text-foreground',
-      muted: 'text-neutral-500',
-      secondary: 'text-neutral-400',
+      muted: 'text-muted-foreground',
+      secondary: 'text-muted-foreground',
       primary: 'text-primary',
       success: 'text-success',
       warning: 'text-warning',

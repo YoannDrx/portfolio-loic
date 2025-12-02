@@ -248,7 +248,7 @@ export function ListenButton({ listenLink, className }: ListenButtonProps) {
       </div>
       <div className="flex-1">
         <p className="text-white font-medium">Écouter cet album</p>
-        <p className="text-gray-400 text-sm">Sur vos plateformes préférées</p>
+        <p className="text-muted-foreground text-sm">Sur vos plateformes préférées</p>
       </div>
       <ExternalLink className={cn('w-5 h-5', config.color)} />
     </motion.a>
@@ -302,7 +302,7 @@ export default function EmbedPlayer({ embedLink, title, className }: EmbedPlayer
         </motion.div>
         <div>
           <p className={cn('font-semibold', config.color)}>{config.name}</p>
-          {title && <p className="text-gray-400 text-sm">{title}</p>}
+          {title && <p className="text-muted-foreground text-sm">{title}</p>}
         </div>
       </div>
 
@@ -311,7 +311,7 @@ export default function EmbedPlayer({ embedLink, title, className }: EmbedPlayer
         className={cn(
           'rounded-xl border backdrop-blur-md overflow-hidden',
           config.borderColor,
-          'bg-obsidian-900/50'
+          'bg-glass'
         )}
       >
         {embedPlatform === 'spotify' && <SpotifyEmbed url={embedLink} />}

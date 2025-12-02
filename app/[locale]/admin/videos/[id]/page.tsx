@@ -21,7 +21,7 @@ export default async function EditVideoPage({
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Modifier la vidéo</h1>
-        <p className="text-gray-500 dark:text-gray-400">{video.title}</p>
+        <p className="text-muted-foreground dark:text-muted-foreground">{video.title}</p>
       </div>
 
       <VideoForm locale={locale} initialData={{

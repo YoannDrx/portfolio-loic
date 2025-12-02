@@ -80,7 +80,7 @@ export default function ServicesPreview() {
           <h2 className="text-5xl md:text-6xl font-black text-gradient-neon mb-4">
             {t('pageTitle')}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-foreground/85 max-w-3xl mx-auto">
             {t('pageDescription')}
           </p>
         </AnimatedSection>
@@ -107,10 +107,10 @@ export default function ServicesPreview() {
                     </div>
 
                     {/* Content */}
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gradient-neon transition-all">
+                    <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-gradient-neon transition-all">
                       {service.title}
                     </h3>
-                    <p className="text-gray-400 leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed">
                       {service.description}
                     </p>
                   </GlassCardContent>

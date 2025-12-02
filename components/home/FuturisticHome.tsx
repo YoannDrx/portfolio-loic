@@ -96,7 +96,7 @@ const AnimatedSectionTitle = ({
   return (
     <motion.div
       ref={ref}
-      className={`mb-16 ${align === 'center' ? 'text-center' : 'flex justify-between items-end border-b border-white/10 pb-4'}`}
+      className={`mb-16 ${align === 'center' ? 'text-center' : 'flex justify-between items-end border-b border-[var(--glass-border)] pb-4'}`}
     >
       <div className="overflow-hidden">
         <motion.h2
@@ -112,7 +112,7 @@ const AnimatedSectionTitle = ({
           initial={{ opacity: 0, x: 20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-gray-500 font-mono hidden md:block"
+          className="text-muted-foreground font-mono hidden md:block"
         >
           {subtitle}
         </motion.span>
@@ -258,7 +258,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
   };
 
   return (
-    <div className="min-h-screen text-white selection:bg-neon-lime selection:text-obsidian font-inter overflow-x-hidden relative">
+    <div className="min-h-screen text-foreground selection:bg-primary selection:text-background font-inter overflow-x-hidden relative">
       {/* Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-lime via-neon-cyan to-neon-magenta z-[100] origin-left"
@@ -279,7 +279,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
       </div>
 
       {/* Overlay Gradient for readability */}
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-transparent via-obsidian/50 to-obsidian pointer-events-none" />
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
 
       {/* Main Content */}
       <main className="relative z-10 pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto">
@@ -314,7 +314,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                 initial={{ y: 120, rotateX: -80 }}
                 animate={{ y: 0, rotateX: 0 }}
                 transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1], delay: 0.4 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] font-montserrat text-white whitespace-pre-line"
+                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] font-montserrat text-foreground whitespace-pre-line"
                 style={{ transformOrigin: 'bottom' }}
               >
                 <CyclicScramble 
@@ -337,9 +337,9 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
               transition={{ duration: 0.8, delay: 0.8 }}
               className="group relative max-w-xl mb-10 cursor-default"
             >
-              <div className="absolute -inset-3 bg-white/5 group-hover:bg-obsidian/90 backdrop-blur-md group-hover:backdrop-blur-xl rounded-xl border border-white/10 group-hover:border-white/20 transition-all duration-500 ease-out" />
+              <div className="absolute -inset-3 bg-[var(--glass-subtle)] group-hover:bg-background/90 backdrop-blur-md group-hover:backdrop-blur-xl rounded-xl border border-[var(--glass-border)] group-hover:border-[var(--glass-border-strong)] transition-all duration-500 ease-out" />
               <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-neon-lime/5 group-hover:from-neon-lime/10 via-transparent to-transparent transition-all duration-500" />
-              <p className="relative text-gray-400 group-hover:text-gray-200 max-w-xl text-lg md:text-xl font-light border-l-2 border-neon-lime pl-6 py-2 transition-colors duration-300">
+              <p className="relative text-muted-foreground group-hover:text-foreground/90 max-w-xl text-lg md:text-xl font-light border-l-2 border-neon-lime pl-6 py-2 transition-colors duration-300">
                 {t('home.hero.description')}
               </p>
             </motion.div>
@@ -375,7 +375,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
             transition={{ delay: 1.5, duration: 1 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
-            <span className="text-xs text-gray-500 uppercase tracking-widest font-mono">Scroll</span>
+            <span className="text-xs text-muted-foreground uppercase tracking-widest font-mono">Scroll</span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -436,7 +436,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                         fill
                         className="object-cover rounded-2xl opacity-70 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent opacity-90" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-90" />
                       <div className={`absolute inset-0 ${isLime ? 'bg-neon-lime/5' : 'bg-neon-cyan/5'} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                     </div>
 
@@ -450,7 +450,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                         initial={{ scale: 0.5, opacity: 0 }}
                         whileHover={{ scale: 1, opacity: 1 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className={`w-20 h-20 rounded-full bg-white/10 backdrop-blur-xl flex items-center justify-center border ${borderColorClass} ${glowShadowClass}`}
+                        className={`w-20 h-20 rounded-full bg-[var(--glass-active)] backdrop-blur-xl flex items-center justify-center border ${borderColorClass} ${glowShadowClass}`}
                       >
                         <Play className={`w-8 h-8 ${textColorClass} fill-current ml-1`} />
                       </motion.div>
@@ -458,16 +458,16 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
 
                     {/* Text content container with glass effect */}
                     <div className="absolute inset-x-0 bottom-0 z-20 transform transition-transform duration-500 ease-out group-hover:-translate-y-1">
-                      <div className="absolute inset-0 bg-obsidian/70 group-hover:bg-obsidian/90 backdrop-blur-md group-hover:backdrop-blur-xl transition-all duration-500" />
+                      <div className="absolute inset-0 bg-background/70 group-hover:bg-background/90 backdrop-blur-md group-hover:backdrop-blur-xl transition-all duration-500" />
 
                       <div className="relative p-6">
                         <div className="flex justify-between items-center mb-3">
-                          <span className={`px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 backdrop-blur-md border border-white/20 uppercase tracking-wider ${textColorClass}`}>
+                          <span className={`px-3 py-1.5 rounded-full text-xs font-bold bg-[var(--glass-active)] backdrop-blur-md border border-[var(--glass-border-strong)] uppercase tracking-wider ${textColorClass}`}>
                             {album.style}
                           </span>
-                          <span className="text-gray-400 font-mono text-sm">{album.date}</span>
+                          <span className="text-muted-foreground font-mono text-sm">{album.date}</span>
                         </div>
-                        <h3 className="text-2xl md:text-3xl font-bold mb-1 text-white group-hover:text-white transition-colors">{album.title}</h3>
+                        <h3 className="text-2xl md:text-3xl font-bold mb-1 text-foreground group-hover:text-foreground transition-colors">{album.title}</h3>
 
                         <div className={`flex items-center gap-2 mt-4 text-white/60 ${isLime ? 'group-hover:text-neon-lime' : 'group-hover:text-neon-cyan'} transition-colors duration-300`}>
                           <Music className={`w-4 h-4 ${textColorClass}`} />
@@ -553,7 +553,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                         boxShadow: { duration: 2, repeat: Infinity },
                         scale: { type: "spring", stiffness: 300 }
                       }}
-                      className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-neon-magenta/30"
+                      className="w-16 h-16 rounded-full bg-[var(--glass-active)] backdrop-blur-md flex items-center justify-center border border-neon-magenta/30"
                     >
                       <Play className="w-6 h-6 text-neon-magenta fill-neon-magenta" />
                     </motion.div>
@@ -666,12 +666,12 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                       <motion.div
                         whileHover={{ scale: 1.15, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 300 }}
-                        className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center text-neon-purple shadow-[0_0_30px_rgba(139,92,246,0.3)] border border-white/10"
+                        className="w-16 h-16 mx-auto mb-6 rounded-full bg-[var(--glass-subtle)] flex items-center justify-center text-neon-purple shadow-[0_0_30px_rgba(139,92,246,0.3)] border border-[var(--glass-border)]"
                       >
                         <Icon className="w-8 h-8" />
                       </motion.div>
                       <h3 className="text-2xl font-bold mb-4 font-montserrat tracking-tight">{service.title}</h3>
-                      <p className="text-gray-300 text-base leading-relaxed">{service.text}</p>
+                      <p className="text-foreground/85 text-base leading-relaxed">{service.text}</p>
                     </div>
                   </GlassCard>
                 </motion.div>
@@ -750,7 +750,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light"
+                    className="text-xl text-foreground/85 mb-10 max-w-2xl mx-auto font-light"
                   >
                     {t('home.sections.contactText')}
                   </motion.p>
@@ -782,7 +782,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-xl p-4"
             onClick={() => setSelectedVideo(null)}
           >
             <motion.div
@@ -790,7 +790,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
               animate={{ scale: 1, opacity: 1, rotateX: 0 }}
               exit={{ scale: 0.8, opacity: 0, rotateX: 15 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(255,0,110,0.3)]"
+              className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-[var(--glass-border)] shadow-[0_0_50px_rgba(255,0,110,0.3)]"
               onClick={(e) => e.stopPropagation()}
             >
               <button

@@ -24,11 +24,11 @@ const badgeVariants = cva(
         'neon-ocean':
           'bg-ocean/15 text-ocean border border-ocean/30 shadow-glow-ocean-sm',
         // Slate
-        'neon-slate': 'bg-slate/30 text-neutral-300 border border-slate/50',
+        'neon-slate': 'bg-slate/30 text-foreground/85 border border-slate/50',
 
         /* ===== SOLID VARIANTS ===== */
         // Default - primary solid
-        default: 'bg-primary text-neutral-950 border-transparent',
+        default: 'bg-primary text-foreground border-transparent',
         // Secondary - muted
         secondary: 'bg-surface text-foreground border border-border',
         // Success

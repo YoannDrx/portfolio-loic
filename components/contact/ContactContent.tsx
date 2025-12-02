@@ -38,7 +38,7 @@ function ContactInfoCard() {
   return (
     <GlassCard variant="default" className="h-full">
       <GlassCardContent className="p-8 space-y-6">
-        <h3 className="text-2xl font-bold text-white mb-6">{t('info.title')}</h3>
+        <h3 className="text-2xl font-bold text-foreground mb-6">{t('info.title')}</h3>
 
         {/* Email */}
         <div className="flex items-start gap-4 group">
@@ -46,8 +46,8 @@ function ContactInfoCard() {
             <Mail className="w-6 h-6 text-neon-cyan" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-gray-400 mb-1">{t('info.email')}</h4>
-            <a href="mailto:loic.ghanem@outlook.com" className="text-white hover:text-neon-cyan transition-colors break-all">
+            <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('info.email')}</h4>
+            <a href="mailto:loic.ghanem@outlook.com" className="text-foreground hover:text-neon-cyan transition-colors break-all">
               loic.ghanem@outlook.com
             </a>
           </div>
@@ -59,8 +59,8 @@ function ContactInfoCard() {
             <Phone className="w-6 h-6 text-neon-magenta" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-gray-400 mb-1">{t('info.phone')}</h4>
-            <a href="tel:+33123456789" className="text-white hover:text-neon-magenta transition-colors">
+            <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('info.phone')}</h4>
+            <a href="tel:+33123456789" className="text-foreground hover:text-neon-magenta transition-colors">
               +33 6 00 00 00 00
             </a>
           </div>
@@ -72,14 +72,14 @@ function ContactInfoCard() {
             <MapPin className="w-6 h-6 text-neon-purple" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-gray-400 mb-1">{t('info.location')}</h4>
-            <p className="text-white">{t('info.locationValue')}</p>
+            <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('info.location')}</h4>
+            <p className="text-foreground">{t('info.locationValue')}</p>
           </div>
         </div>
 
         {/* Availability Notice */}
-        <div className="mt-8 pt-6 border-t border-white/10">
-          <p className="text-sm text-gray-400">
+        <div className="mt-8 pt-6 border-t border-[var(--glass-border)]">
+          <p className="text-sm text-muted-foreground">
             {t('info.availability')}
           </p>
         </div>
@@ -110,7 +110,7 @@ function ContactCTA({ locale: _locale }: { locale: string }) {
 
           <GlassCard variant="subtle" className="relative text-center py-8">
             <GlassCardContent>
-              <p className="text-gray-300 mb-4 font-light">{t('cta.text')}</p>
+              <p className="text-foreground/85 mb-4 font-light">{t('cta.text')}</p>
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 text-neon-cyan hover:text-neon-magenta font-semibold transition-colors"

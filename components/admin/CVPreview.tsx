@@ -100,9 +100,9 @@ export function CVPreview({ profile, theme, sections, entries, locale }: CVPrevi
   };
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-4">
+    <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-subtle)] backdrop-blur-sm p-4">
       <div
-        className="rounded-xl border border-white/10 bg-white text-slate-900 shadow-lg overflow-hidden"
+        className="rounded-xl border border-[var(--glass-border)] bg-white text-slate-900 shadow-lg overflow-hidden"
         style={{ aspectRatio: "1/1.414", minHeight: 600 }}
       >
         <div

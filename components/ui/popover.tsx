@@ -99,7 +99,7 @@ const PopoverDescription = ({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement>) => (
   <p
-    className={cn("text-xs text-neutral-400", className)}
+    className={cn("text-xs text-muted-foreground", className)}
     {...props}
   />
 )

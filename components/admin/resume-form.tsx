@@ -90,21 +90,21 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
         
         {/* General Info Section */}
         <GlassCard className="p-6 space-y-6">
-          <h3 className="text-xl font-bold text-white border-b border-white/10 pb-2 mb-4">General Information</h3>
+          <h3 className="text-xl font-bold text-white border-b border-[var(--glass-border)] pb-2 mb-4">General Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
               name="type"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Type</FormLabel>
+                  <FormLabel className="text-foreground/85">Type</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                      <SelectTrigger className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white">
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-obsidian border-white/10 text-white">
+                    <SelectContent className="bg-obsidian border-[var(--glass-border)] text-white">
                       <SelectItem value="EXPERIENCE">Experience</SelectItem>
                       <SelectItem value="EDUCATION">Education</SelectItem>
                       <SelectItem value="SKILL">Skill</SelectItem>
@@ -125,9 +125,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
               name="order"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Order</FormLabel>
+                  <FormLabel className="text-foreground/85">Order</FormLabel>
                   <FormControl>
-                    <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} className="bg-white/5 border-white/10 text-white" />
+                    <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,9 +141,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
               name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Value (0-100 for Skills)</FormLabel>
+                  <FormLabel className="text-foreground/85">Value (0-100 for Skills)</FormLabel>
                   <FormControl>
-                     <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} value={field.value || 0} className="bg-white/5 border-white/10 text-white" />
+                     <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} value={field.value || 0} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -155,9 +155,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
               name="link"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Link (Optional)</FormLabel>
+                  <FormLabel className="text-foreground/85">Link (Optional)</FormLabel>
                   <FormControl>
-                    <Input {...field} value={field.value || ''} className="bg-white/5 border-white/10 text-white" />
+                    <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -168,16 +168,16 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
 
         {/* English Content Section */}
         <GlassCard className="p-6 space-y-6">
-           <h3 className="text-xl font-bold text-neon-cyan border-b border-white/10 pb-2 mb-4">English Content</h3>
+           <h3 className="text-xl font-bold text-neon-cyan border-b border-[var(--glass-border)] pb-2 mb-4">English Content</h3>
            <div className="grid grid-cols-1 gap-4">
             <FormField
               control={form.control}
               name="titleEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Title (EN)</FormLabel>
+                  <FormLabel className="text-foreground/85">Title (EN)</FormLabel>
                   <FormControl>
-                    <Input {...field} className="bg-white/5 border-white/10 text-white" placeholder="e.g. Music Producer" />
+                    <Input {...field} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="e.g. Music Producer" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -190,9 +190,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 name="subtitleEn"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-300">Subtitle (EN)</FormLabel>
+                    <FormLabel className="text-foreground/85">Subtitle (EN)</FormLabel>
                     <FormControl>
-                      <Input {...field} value={field.value || ''} className="bg-white/5 border-white/10 text-white" placeholder="e.g. Sony Music" />
+                      <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="e.g. Sony Music" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -203,9 +203,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 name="dateRangeEn"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-300">Date Range (EN)</FormLabel>
+                    <FormLabel className="text-foreground/85">Date Range (EN)</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="e.g. 2020 - Present" value={field.value || ''} className="bg-white/5 border-white/10 text-white" />
+                      <Input {...field} placeholder="e.g. 2020 - Present" value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -218,9 +218,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
               name="descriptionEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Description (EN)</FormLabel>
+                  <FormLabel className="text-foreground/85">Description (EN)</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="h-24 bg-white/5 border-white/10 text-white" value={field.value || ''} />
+                    <Textarea {...field} className="h-24 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" value={field.value || ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -231,16 +231,16 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
 
         {/* French Content Section */}
         <GlassCard className="p-6 space-y-6">
-           <h3 className="text-xl font-bold text-neon-magenta border-b border-white/10 pb-2 mb-4">French Content</h3>
+           <h3 className="text-xl font-bold text-neon-magenta border-b border-[var(--glass-border)] pb-2 mb-4">French Content</h3>
            <div className="grid grid-cols-1 gap-4">
             <FormField
               control={form.control}
               name="titleFr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Title (FR)</FormLabel>
+                  <FormLabel className="text-foreground/85">Title (FR)</FormLabel>
                   <FormControl>
-                    <Input {...field} className="bg-white/5 border-white/10 text-white" placeholder="ex. Producteur de Musique" />
+                    <Input {...field} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="ex. Producteur de Musique" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -253,9 +253,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 name="subtitleFr"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-300">Subtitle (FR)</FormLabel>
+                    <FormLabel className="text-foreground/85">Subtitle (FR)</FormLabel>
                     <FormControl>
-                      <Input {...field} value={field.value || ''} className="bg-white/5 border-white/10 text-white" placeholder="ex. Sony Music" />
+                      <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="ex. Sony Music" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -266,9 +266,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 name="dateRangeFr"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-300">Date Range (FR)</FormLabel>
+                    <FormLabel className="text-foreground/85">Date Range (FR)</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="ex. 2020 - Aujourd'hui" value={field.value || ''} className="bg-white/5 border-white/10 text-white" />
+                      <Input {...field} placeholder="ex. 2020 - Aujourd'hui" value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -281,9 +281,9 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
               name="descriptionFr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Description (FR)</FormLabel>
+                  <FormLabel className="text-foreground/85">Description (FR)</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="h-24 bg-white/5 border-white/10 text-white" value={field.value || ''} />
+                    <Textarea {...field} className="h-24 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" value={field.value || ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -298,7 +298,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
             control={form.control}
             name="published"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border border-white/10 p-4 bg-white/5">
+              <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border border-[var(--glass-border)] p-4 bg-[var(--glass-subtle)]">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -310,7 +310,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                   <FormLabel className="text-white font-medium cursor-pointer">
                     Published
                   </FormLabel>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     This entry will be visible on the generated CV.
                   </p>
                 </div>
@@ -326,7 +326,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
           <Button 
             type="button" 
             variant="ghost" 
-            className="text-gray-400 hover:text-white hover:bg-white/10" 
+            className="text-muted-foreground hover:text-foreground hover:bg-[var(--glass-active)]" 
             onClick={() => router.back()}
           >
             Cancel

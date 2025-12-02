@@ -130,7 +130,7 @@ function ToastNeon({ toast, onDismiss }: ToastNeonProps) {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-white">{toast.title}</p>
           {toast.message && (
-            <p className="mt-1 text-sm text-neutral-400">{toast.message}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{toast.message}</p>
           )}
           {toast.action && (
             <button
@@ -149,14 +149,14 @@ function ToastNeon({ toast, onDismiss }: ToastNeonProps) {
         {/* Dismiss button */}
         <button
           onClick={() => onDismiss(toast.id)}
-          className="flex-shrink-0 p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+          className="flex-shrink-0 p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[var(--glass-active)] transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
       {/* Progress bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10">
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--glass-active)]">
         <motion.div
           className={cn('h-full', config.progressColor)}
           initial={{ width: '100%' }}

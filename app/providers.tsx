@@ -19,7 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         draggable
         pauseOnHover
         theme="dark"
-        className="!bg-obsidian-50 !border !border-neon-cyan/30 !text-gray-300"
+        className="!bg-obsidian-50 !border !border-neon-cyan/30 !text-foreground/85"
       />
     </ThemeProvider>
   );

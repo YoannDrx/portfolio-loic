@@ -133,7 +133,7 @@ const RadioGroupItemWithLabel = React.forwardRef<
           {label}
         </label>
         {description && (
-          <p className="text-xs text-neutral-400">{description}</p>
+          <p className="text-xs text-muted-foreground">{description}</p>
         )}
       </div>
     </div>
@@ -190,7 +190,7 @@ const RadioGroupCard = React.forwardRef<
           <div className="flex-1">
             <div className="text-sm font-medium text-foreground">{label}</div>
             {description && (
-              <div className="text-xs text-neutral-400">{description}</div>
+              <div className="text-xs text-muted-foreground">{description}</div>
             )}
           </div>
           <div

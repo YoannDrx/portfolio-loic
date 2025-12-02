@@ -53,7 +53,7 @@ const neonButtonVariants = cva(
       {
         variant: 'solid',
         color: 'primary',
-        className: 'bg-primary text-neutral-950 hover:bg-primary-300 focus-visible:ring-primary/50',
+        className: 'bg-primary text-foreground hover:bg-primary-300 focus-visible:ring-primary/50',
       },
       {
         variant: 'solid',
@@ -72,7 +72,7 @@ const neonButtonVariants = cva(
       {
         variant: 'solid',
         color: 'green',
-        className: 'bg-accent-green text-neutral-950 hover:bg-green-300 focus-visible:ring-green/50',
+        className: 'bg-accent-green text-foreground hover:bg-green-300 focus-visible:ring-green/50',
       },
       {
         variant: 'solid',
@@ -148,7 +148,7 @@ const neonButtonVariants = cva(
       {
         variant: 'solid',
         color: 'lime',
-        className: 'bg-primary text-neutral-950 hover:bg-primary-300 focus-visible:ring-primary/50',
+        className: 'bg-primary text-foreground hover:bg-primary-300 focus-visible:ring-primary/50',
       },
       {
         variant: 'solid',
@@ -167,7 +167,7 @@ const neonButtonVariants = cva(
       {
         variant: 'solid',
         color: 'cyan',
-        className: 'bg-cyan text-neutral-950 hover:bg-cyan-300 focus-visible:ring-cyan/50',
+        className: 'bg-cyan text-foreground hover:bg-cyan-300 focus-visible:ring-cyan/50',
       },
       {
         variant: 'solid',

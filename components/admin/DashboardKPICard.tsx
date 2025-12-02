@@ -36,7 +36,7 @@ export function DashboardKPICard({
   const cardContent = (
     <Card
       className={cn(
-        "group relative overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.06] hover:border-white/20 hover:shadow-[0_0_30px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-pointer",
+        "group relative overflow-hidden border border-[var(--glass-border)] bg-glass-subtle backdrop-blur-sm hover:bg-glass hover:border-[var(--glass-border-strong)] hover:shadow-[0_0_30px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-pointer",
         href && "hover:border-[var(--admin-neon-cyan)]/30"
       )}
     >
@@ -60,7 +60,7 @@ export function DashboardKPICard({
               <Icon className={cn("h-6 w-6", colorClass)} />
             </div>
             <div>
-              <p className="text-sm font-medium text-neutral-400 transition-colors duration-300">
+              <p className="text-sm font-medium text-muted-foreground transition-colors duration-300">
                 {title}
               </p>
               {badge && (
@@ -77,7 +77,7 @@ export function DashboardKPICard({
 
         <div className="space-y-2">
           <div className="flex items-baseline gap-2">
-            <span className="text-4xl font-bold text-white transition-colors duration-300">
+            <span className="text-4xl font-bold text-foreground transition-colors duration-300">
               {value}
             </span>
             {trend && (
@@ -100,7 +100,7 @@ export function DashboardKPICard({
           </div>
 
           {description && (
-            <p className="text-sm text-neutral-500 transition-colors duration-300">{description}</p>
+            <p className="text-sm text-muted-foreground transition-colors duration-300">{description}</p>
           )}
         </div>
 

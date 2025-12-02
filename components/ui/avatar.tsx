@@ -48,9 +48,9 @@ const avatarFallbackVariants = cva(
         "2xl": "text-xl",
       },
       variant: {
-        default: "bg-surface text-neutral-400",
+        default: "bg-surface text-muted-foreground",
         primary: "bg-primary/10 text-primary",
-        muted: "bg-neutral-800 text-neutral-400",
+        muted: "bg-muted text-muted-foreground",
       },
     },
     defaultVariants: {

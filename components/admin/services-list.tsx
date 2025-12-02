@@ -46,7 +46,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
           <h1 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
             Services Library
           </h1>
-          <p className="text-neutral-400 font-mono text-sm">
+          <p className="text-muted-foreground font-mono text-sm">
             Manage your services / {services.length} total entries
           </p>
         </div>
@@ -67,22 +67,22 @@ export function ServicesList({ services, locale }: ServicesListProps) {
       {/* Search Bar */}
       <div className="flex items-center gap-2">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search services..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-white/5 border-white/10 text-white focus:border-[var(--admin-neon-purple)]/50 focus:ring-[var(--admin-neon-purple)]/20"
+            className="pl-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white focus:border-[var(--admin-neon-purple)]/50 focus:ring-[var(--admin-neon-purple)]/20"
           />
         </div>
       </div>
 
       {/* Table with fixed height and scroll */}
-      <div className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-colors duration-300">
+      <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-colors duration-300">
         <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
           <Table>
-            <TableHeader className="sticky top-0 bg-white/5 backdrop-blur-md z-10 border-b border-white/10 transition-colors duration-300">
-              <TableRow className="hover:bg-white/5 border-white/10">
+            <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)] transition-colors duration-300">
+              <TableRow className="hover:bg-[var(--glass-subtle)] border-[var(--glass-border)]">
                 <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Aperçu</TableHead>
                 <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">N°</TableHead>
                 <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Titre</TableHead>
@@ -96,7 +96,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                 <TableRow>
                   <TableCell
                     colSpan={6}
-                    className="h-24 text-center text-neutral-500"
+                    className="h-24 text-center text-muted-foreground"
                   >
                     No services found
                   </TableCell>
@@ -105,7 +105,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                 filteredServices.map((service) => (
                   <TableRow
                     key={service.id}
-                    className="group hover:bg-white/5 transition-colors duration-150 border-b border-white/5 last:border-b-0"
+                    className="group hover:bg-[var(--glass-subtle)] transition-colors duration-150 border-b border-[var(--glass-border-subtle)] last:border-b-0"
                   >
                     <TableCell>
                       <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200">
@@ -130,7 +130,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                       <span className="font-bold text-white">{service.title}</span>
                     </TableCell>
                     <TableCell>
-                      <span className="text-neutral-400 text-sm font-mono">{service.date}</span>
+                      <span className="text-muted-foreground text-sm font-mono">{service.date}</span>
                     </TableCell>
                     <TableCell>
                       {service.published ? (
@@ -139,7 +139,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                           Published
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-white/5 text-neutral-500 border border-white/10">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
                           Draft
                         </span>
                       )}
@@ -150,7 +150,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                           variant="ghost"
                           size="sm"
                           asChild
-                          className="h-9 w-9 p-0 text-neutral-400 hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
+                          className="h-9 w-9 p-0 text-muted-foreground hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
                         >
                           <Link href={`/${locale}/admin/services/${service.id}`}>
                             <Pencil className="h-4 w-4" />
@@ -171,7 +171,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
       </div>
 
       {/* Footer */}
-      <div className="text-sm text-neutral-500 font-mono">
+      <div className="text-sm text-muted-foreground font-mono">
         {filteredServices.length} result{filteredServices.length > 1 ? "s" : ""}
         {search && ` of ${services.length} total`}
       </div>

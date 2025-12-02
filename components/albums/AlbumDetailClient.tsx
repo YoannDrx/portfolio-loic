@@ -126,7 +126,7 @@ export default function AlbumDetailClient({
           >
             <Link
               href="/albums"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-neon-magenta transition-colors group"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-neon-magenta transition-colors group"
             >
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               <span>{t('backToAlbums')}</span>
@@ -233,10 +233,10 @@ export default function AlbumDetailClient({
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <h2 className="text-xl font-bold text-white mb-4">{t('about')}</h2>
+                <h2 className="text-xl font-bold text-foreground mb-4">{t('about')}</h2>
                 <div className="prose prose-invert prose-lg max-w-none">
                   <div
-                    className="text-gray-300 leading-relaxed space-y-4 album-descriptions"
+                    className="text-foreground/85 leading-relaxed space-y-4 album-descriptions"
                     dangerouslySetInnerHTML={{
                       __html: locale === 'fr' ? album.descriptionsFr : album.descriptionsEn,
                     }}
@@ -294,7 +294,7 @@ export default function AlbumDetailClient({
 
               {/* Metadata */}
               <motion.div
-                className="space-y-4 py-6 border-y border-white/10"
+                className="space-y-4 py-6 border-y border-[var(--glass-border)]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -303,8 +303,8 @@ export default function AlbumDetailClient({
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-neon-cyan flex-shrink-0" />
                   <span className="text-lg">
-                    <span className="text-gray-400">{tCommon('releaseDate')}:</span>{' '}
-                    <span className="text-white font-semibold">{album.date}</span>
+                    <span className="text-muted-foreground">{tCommon('releaseDate')}:</span>{' '}
+                    <span className="text-foreground font-semibold">{album.date}</span>
                   </span>
                 </div>
 
@@ -312,8 +312,8 @@ export default function AlbumDetailClient({
                 <div className="flex items-center gap-3">
                   <Users className="w-5 h-5 text-neon-purple flex-shrink-0" />
                   <span className="text-lg">
-                    <span className="text-gray-400">{tCommon('artist')}:</span>{' '}
-                    <span className="text-white font-semibold">{album.poster}</span>
+                    <span className="text-muted-foreground">{tCommon('artist')}:</span>{' '}
+                    <span className="text-foreground font-semibold">{album.poster}</span>
                   </span>
                 </div>
 
@@ -322,8 +322,8 @@ export default function AlbumDetailClient({
                   <div className="flex items-start gap-3">
                     <Users className="w-5 h-5 text-neon-magenta flex-shrink-0 mt-1" />
                     <div>
-                      <span className="text-gray-400">{tCommon('collaborators')}:</span>
-                      <div className="text-white font-semibold">{album.collabName}</div>
+                      <span className="text-muted-foreground">{tCommon('collaborators')}:</span>
+                      <div className="text-foreground font-semibold">{album.collabName}</div>
                     </div>
                   </div>
                 )}

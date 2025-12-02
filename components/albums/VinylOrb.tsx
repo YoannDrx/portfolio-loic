@@ -32,7 +32,7 @@ export default function VinylOrb() {
 
       {/* Vinyl disc outer ring */}
       <motion.div
-        className="absolute inset-[10%] rounded-full border-4 border-white/10"
+        className="absolute inset-[10%] rounded-full border-4 border-[var(--glass-border)]"
         style={{
           background:
             "conic-gradient(from 0deg, rgba(10, 10, 15, 0.95), rgba(30, 30, 40, 0.9), rgba(10, 10, 15, 0.95), rgba(40, 40, 50, 0.9), rgba(10, 10, 15, 0.95))",
@@ -51,7 +51,7 @@ export default function VinylOrb() {
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="absolute rounded-full border border-white/5"
+            className="absolute rounded-full border border-[var(--glass-border-subtle)]"
             style={{
               inset: `${12 + i * 5}%`,
             }}
@@ -106,7 +106,7 @@ export default function VinylOrb() {
 
       {/* Center hole */}
       <motion.div
-        className="absolute inset-[46%] rounded-full bg-obsidian-950"
+        className="absolute inset-[46%] rounded-full bg-background"
         style={{
           boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 110, 0.3)",
         }}

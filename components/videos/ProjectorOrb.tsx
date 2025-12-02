@@ -32,7 +32,7 @@ export default function ProjectorOrb() {
 
       {/* Projector body - dark circle */}
       <motion.div
-        className="absolute inset-[15%] rounded-full border-4 border-white/10"
+        className="absolute inset-[15%] rounded-full border-4 border-[var(--glass-border)]"
         style={{
           background:
             "radial-gradient(circle at 30% 30%, rgba(30, 30, 40, 0.95), rgba(10, 10, 15, 0.98))",

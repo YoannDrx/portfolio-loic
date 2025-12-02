@@ -17,8 +17,8 @@ const checkboxVariants = cva(
     "border transition-all duration-fast",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:cursor-not-allowed disabled:opacity-50",
-    "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-neutral-950",
-    "data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-neutral-950",
+    "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-foreground",
+    "data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-foreground",
   ],
   {
     variants: {
@@ -96,7 +96,7 @@ const CheckboxWithLabel = React.forwardRef<
           {label}
         </label>
         {description && (
-          <p className="text-xs text-neutral-400">{description}</p>
+          <p className="text-xs text-muted-foreground">{description}</p>
         )}
       </div>
     </div>

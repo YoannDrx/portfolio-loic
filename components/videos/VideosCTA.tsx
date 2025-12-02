@@ -55,8 +55,8 @@ export default function VideosCTA({ locale }: VideosCTAProps) {
           <div
             className={cn(
               'relative rounded-3xl overflow-hidden',
-              'bg-obsidian-950/90 backdrop-blur-xl',
-              'border border-white/10'
+              'bg-glass-strong backdrop-blur-xl',
+              'border border-[var(--glass-border)]'
             )}
           >
             {/* Background effects */}
@@ -132,7 +132,7 @@ export default function VideosCTA({ locale }: VideosCTAProps) {
 
               {/* Description */}
               <motion.p
-                className="text-gray-300 text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+                className="text-foreground/85 text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 }}
@@ -162,7 +162,7 @@ export default function VideosCTA({ locale }: VideosCTAProps) {
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 {/* Orbit 1 */}
                 <motion.div
-                  className="absolute top-1/2 left-1/2 w-[400px] h-[400px] border border-white/5 rounded-full"
+                  className="absolute top-1/2 left-1/2 w-[400px] h-[400px] border border-[var(--glass-border-subtle)] rounded-full"
                   style={{ transform: 'translate(-50%, -50%)' }}
                   animate={{ rotate: 360 }}
                   transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
@@ -172,7 +172,7 @@ export default function VideosCTA({ locale }: VideosCTAProps) {
 
                 {/* Orbit 2 */}
                 <motion.div
-                  className="absolute top-1/2 left-1/2 w-[550px] h-[550px] border border-white/5 rounded-full"
+                  className="absolute top-1/2 left-1/2 w-[550px] h-[550px] border border-[var(--glass-border-subtle)] rounded-full"
                   style={{ transform: 'translate(-50%, -50%)' }}
                   animate={{ rotate: -360 }}
                   transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}

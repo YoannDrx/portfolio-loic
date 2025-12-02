@@ -109,8 +109,8 @@ export default function ImmersiveAlbumCard({
         <motion.div
           className={cn(
             'relative h-full overflow-hidden rounded-2xl',
-            'bg-obsidian-900/60 backdrop-blur-sm',
-            'border border-white/10',
+            'bg-glass backdrop-blur-sm',
+            'border border-[var(--glass-border)]',
             'transition-all duration-500',
             config.shadow,
             config.border
@@ -143,7 +143,7 @@ export default function ImmersiveAlbumCard({
             />
 
             {/* Overlay gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
             <div
               className={cn(
                 'absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500',
@@ -214,14 +214,14 @@ export default function ImmersiveAlbumCard({
             {/* Metadata */}
             <div className="flex flex-col gap-2 mb-4">
               {/* Date */}
-              <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <Calendar className="w-3 h-3 text-neon-magenta" />
                 <span>{album.date}</span>
               </div>
 
               {/* Collaborators */}
               {album.collabName && !compact && (
-                <div className="flex items-start gap-2 text-xs font-medium text-gray-400">
+                <div className="flex items-start gap-2 text-xs font-medium text-muted-foreground">
                   <Users className="w-3 h-3 flex-shrink-0 mt-0.5 text-neon-purple" />
                   <span className="line-clamp-1">{album.collabName}</span>
                 </div>
@@ -229,8 +229,8 @@ export default function ImmersiveAlbumCard({
             </div>
 
             {/* Footer with CTA */}
-            <div className="flex items-center justify-between pt-3 border-t border-white/5">
-              <div className="flex items-center gap-2 text-gray-500 text-xs">
+            <div className="flex items-center justify-between pt-3 border-t border-[var(--glass-border-subtle)]">
+              <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 <Disc className="w-3 h-3" />
                 <span className="uppercase tracking-wider">Album</span>
               </div>
