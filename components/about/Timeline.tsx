@@ -133,7 +133,7 @@ export default function Timeline() {
 
                   {/* Title */}
                   <h3 className={cn(
-                    "text-xl font-bold text-white mb-3 group-hover:text-gradient-neon transition-all",
+                    "text-xl font-bold text-foreground mb-3 group-hover:text-gradient-neon transition-all",
                     !isLeft && "md:text-right"
                   )}>
                     {t(`${event.key}.title`)}

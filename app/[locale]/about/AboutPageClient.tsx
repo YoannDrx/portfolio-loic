@@ -61,7 +61,7 @@ function HeaderSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-foreground via-emerald-500 to-foreground bg-clip-text text-transparent">
                 {t('title')}
               </span>
             </motion.h1>
@@ -73,7 +73,7 @@ function HeaderSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <span className="text-white font-semibold text-2xl">{t('intro')}</span>{' '}
+              <span className="text-foreground font-semibold text-2xl">{t('intro')}</span>{' '}
               {t('bio.paragraph1')}
             </motion.p>
 
@@ -160,7 +160,7 @@ function HeaderSection() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">{t('contactInfo.address')}</p>
-                      <p className="text-white font-semibold">{t('contactInfo.location')}</p>
+                      <p className="text-foreground font-semibold">{t('contactInfo.location')}</p>
                     </div>
                   </div>
                 </div>
@@ -195,7 +195,7 @@ function BioSection() {
           >
             <GlassCard variant="neon" className="h-full">
               <GlassCardContent className="p-8 md:p-10">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
                   <span className="w-10 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full" />
                   À propos
                 </h2>
@@ -219,7 +219,7 @@ function BioSection() {
           >
             <GlassCard variant="default" className="border-emerald-400/30">
               <GlassCardContent className="p-6">
-                <h3 className="text-lg font-bold text-white mb-5">{t('contactInfo.title')}</h3>
+                <h3 className="text-lg font-bold text-foreground mb-5">{t('contactInfo.title')}</h3>
                 <div className="space-y-4">
                   <ContactInfoItem
                     icon={Mail}
@@ -241,7 +241,7 @@ function BioSection() {
             {/* Labels & Publishers */}
             <GlassCard variant="subtle" className="border-teal-400/20">
               <GlassCardContent className="p-6">
-                <h3 className="text-lg font-bold text-white mb-4">{t('labelsPublishers.title')}</h3>
+                <h3 className="text-lg font-bold text-foreground mb-4">{t('labelsPublishers.title')}</h3>
                 <div className="space-y-4">
                   <div>
                     <h4 className="text-xs uppercase tracking-widest text-emerald-400 mb-2">{t('labelsPublishers.labels')}</h4>
@@ -295,7 +295,7 @@ function ContactInfoItem({ icon: Icon, label, value, color, href }: ContactInfoI
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-xs text-muted-foreground mb-0.5">{label}</p>
-        <p className={cn('font-medium text-sm break-words', href ? 'text-white hover:text-emerald-400 transition-colors' : 'text-white')}>
+        <p className={cn('font-medium text-sm break-words', href ? 'text-foreground hover:text-emerald-400 transition-colors' : 'text-foreground')}>
           {value}
         </p>
       </div>
@@ -428,7 +428,7 @@ function SkillCard({ skill, index }: SkillCardProps) {
       </motion.div>
 
       {/* Title */}
-      <h3 className="text-lg font-bold text-white mb-3">{skill.title}</h3>
+      <h3 className="text-lg font-bold text-foreground mb-3">{skill.title}</h3>
 
       {/* Skills list */}
       <ul className="space-y-1.5">

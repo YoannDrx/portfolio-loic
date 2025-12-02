@@ -56,7 +56,7 @@ function NavButton({ direction, onClick, disabled }: NavButtonProps) {
         'bg-glass-strong backdrop-blur-md',
         'border border-neon-cyan/30',
         'flex items-center justify-center',
-        'text-white hover:text-neon-cyan',
+        'text-foreground hover:text-neon-cyan',
         'transition-all duration-300',
         'disabled:opacity-30 disabled:cursor-not-allowed',
         direction === 'prev' ? 'left-0 lg:-left-6' : 'right-0 lg:-right-6'
@@ -259,7 +259,7 @@ export default function RelatedServices({
                     'h-2 rounded-full transition-all duration-300',
                     idx === currentIndex
                       ? 'bg-neon-cyan w-6'
-                      : 'bg-white/30 hover:bg-white/50 w-2'
+                      : 'bg-foreground/30 hover:bg-foreground/50 w-2'
                   )}
                   aria-label={`Go to slide ${idx + 1}`}
                 />

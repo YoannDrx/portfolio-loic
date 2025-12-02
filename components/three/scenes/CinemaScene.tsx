@@ -3,6 +3,7 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
+import { useTheme } from 'next-themes';
 import * as THREE from 'three';
 
 /* ============================================
@@ -560,12 +561,24 @@ function InteractiveCamera({ mouse }: { mouse: MouseState }) {
    ============================================ */
 
 function SceneContent({ mouse, scrollProgress }: { mouse: MouseState; scrollProgress: number }) {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Theme-aware colors
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const bgColor = isDark ? '#050508' : '#252535';  // Lighter cinematic variant
+  const fogColor = isDark ? '#050508' : '#303042';
+
   const layerProps = { mouse, scrollProgress };
 
   return (
     <>
-      <color attach="background" args={['#050508']} />
-      <fog attach="fog" args={['#050508', 15, 45]} />
+      <color attach="background" args={[bgColor]} />
+      <fog attach="fog" args={[fogColor, 15, 45]} />
 
       {/* Layer 1: Nebula Fog (far background) */}
       <NebulaFog {...layerProps} />

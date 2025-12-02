@@ -3,6 +3,7 @@
 import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
+import { useTheme } from 'next-themes';
 import * as THREE from 'three';
 
 /* ============================================
@@ -528,6 +529,17 @@ interface SceneContentProps {
 
 function SceneContent({ mouse, scrollProgress, highlightedService }: SceneContentProps) {
   const { camera } = useThree();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Theme-aware colors
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const bgColor = isDark ? '#050510' : '#252538';  // Lighter cinematic variant
+  const fogColor = isDark ? '#050510' : '#303045';
 
   // Subtle camera movement based on mouse
   useFrame(() => {
@@ -541,8 +553,8 @@ function SceneContent({ mouse, scrollProgress, highlightedService }: SceneConten
   return (
     <>
       {/* Deep space background */}
-      <color attach="background" args={['#050510']} />
-      <fog attach="fog" args={['#050510', 15, 35]} />
+      <color attach="background" args={[bgColor]} />
+      <fog attach="fog" args={[fogColor, 15, 35]} />
 
       {/* Star field - main attraction */}
       <StarField mouse={mouse} scrollProgress={scrollProgress} />

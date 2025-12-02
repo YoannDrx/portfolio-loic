@@ -69,7 +69,7 @@ export default function Awards() {
       <div className="text-center mb-16">
         <div className="inline-flex items-center gap-3 px-6 py-3 bg-[var(--glass-subtle)] rounded-full border border-[var(--glass-border)] backdrop-blur-md mb-6">
           <Trophy className="w-5 h-5 text-yellow-400" />
-          <span className="text-white font-bold tracking-wider uppercase text-sm">{t('subtitle')}</span>
+          <span className="text-foreground font-bold tracking-wider uppercase text-sm">{t('subtitle')}</span>
         </div>
         <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4 tracking-tighter">
           {t('title')}
@@ -117,7 +117,7 @@ export default function Awards() {
                 <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-background via-background/95 to-transparent p-6 flex flex-col justify-end">
                   <div className={`w-12 h-1 ${style.bg} mb-4 rounded-full shadow-[0_0_10px_currentColor]`} />
                   
-                  <h3 className="text-2xl font-bold text-foreground mb-2 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-foreground/60">
                     {title}
                   </h3>
                   

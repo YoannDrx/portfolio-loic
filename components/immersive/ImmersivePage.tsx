@@ -87,9 +87,9 @@ const gradientConfigs: Record<GradientColor, {
 };
 
 const sceneOverlayOpacity: Record<'low' | 'medium' | 'high', string> = {
-  low: 'from-obsidian/95 via-obsidian/80 to-obsidian/70',
-  medium: 'from-obsidian/90 via-obsidian/60 to-obsidian/50',
-  high: 'from-obsidian/80 via-obsidian/40 to-obsidian/30',
+  low: 'from-background/95 via-background/80 to-background/70',
+  medium: 'from-background/90 via-background/60 to-background/50',
+  high: 'from-background/80 via-background/40 to-background/30',
 };
 
 /* ============================================
@@ -223,6 +223,15 @@ export default function ImmersivePage({
           'fixed inset-0 z-[1] pointer-events-none',
           'bg-gradient-to-b',
           sceneOverlayOpacity[sceneVisibility]
+        )}
+      />
+
+      {/* Light Mode Softening Overlay - Subtle white veil for cinematic light mode */}
+      <div
+        className={cn(
+          'fixed inset-0 z-[1] pointer-events-none transition-opacity duration-500',
+          'bg-white/[0.15]',
+          'dark:opacity-0'
         )}
       />
 

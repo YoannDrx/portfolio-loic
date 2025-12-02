@@ -247,8 +247,8 @@ export function ListenButton({ listenLink, className }: ListenButtonProps) {
         <Icon className={cn('w-6 h-6', config.color)} />
       </div>
       <div className="flex-1">
-        <p className="text-white font-medium">Écouter cet album</p>
-        <p className="text-muted-foreground text-sm">Sur vos plateformes préférées</p>
+        <p className="text-foreground font-medium">Écouter cet album</p>
+        <p className="text-foreground text-sm">Sur vos plateformes préférées</p>
       </div>
       <ExternalLink className={cn('w-5 h-5', config.color)} />
     </motion.a>
@@ -302,7 +302,7 @@ export default function EmbedPlayer({ embedLink, title, className }: EmbedPlayer
         </motion.div>
         <div>
           <p className={cn('font-semibold', config.color)}>{config.name}</p>
-          {title && <p className="text-muted-foreground text-sm">{title}</p>}
+          {title && <p className="text-foreground text-sm">{title}</p>}
         </div>
       </div>
 

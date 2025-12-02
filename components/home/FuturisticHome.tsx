@@ -469,7 +469,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
                         </div>
                         <h3 className="text-2xl md:text-3xl font-bold mb-1 text-foreground group-hover:text-foreground transition-colors">{album.title}</h3>
 
-                        <div className={`flex items-center gap-2 mt-4 text-white/60 ${isLime ? 'group-hover:text-neon-lime' : 'group-hover:text-neon-cyan'} transition-colors duration-300`}>
+                        <div className={`flex items-center gap-2 mt-4 text-foreground/60 ${isLime ? 'group-hover:text-neon-lime' : 'group-hover:text-neon-cyan'} transition-colors duration-300`}>
                           <Music className={`w-4 h-4 ${textColorClass}`} />
                           <span className="text-sm font-bold tracking-widest uppercase">
                             {t('home.sections.listenNow')}

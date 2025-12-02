@@ -6,10 +6,10 @@ export default function NotFound() {
   const t = useTranslations('common');
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-obsidian to-obsidian-50">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted">
       <div className="text-center">
         <h1 className="mb-4 text-9xl font-black text-gradient-neon">404</h1>
-        <h2 className="mb-6 text-3xl font-bold text-white">{t('notFound')}</h2>
+        <h2 className="mb-6 text-3xl font-bold text-foreground">{t('notFound')}</h2>
         <p className="mb-8 text-lg text-muted-foreground">
           {t('pageNotFoundDescription')}
         </p>

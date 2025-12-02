@@ -3,6 +3,7 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial, Torus, Float } from '@react-three/drei';
+import { useTheme } from 'next-themes';
 import * as THREE from 'three';
 
 /* ============================================
@@ -293,6 +294,17 @@ interface SceneContentProps {
 
 function SceneContent({ mouse, scrollProgress, highlightedAlbum }: SceneContentProps) {
   const { camera } = useThree();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Theme-aware colors
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const bgColor = isDark ? '#0a0a0f' : '#2d2d42';  // Lighter cinematic blue-gray
+  const fogColor = isDark ? '#0a0a0f' : '#353548';
 
   // Subtle camera movement based on mouse
   useFrame(() => {
@@ -306,8 +318,8 @@ function SceneContent({ mouse, scrollProgress, highlightedAlbum }: SceneContentP
   return (
     <>
       {/* Deep space background */}
-      <color attach="background" args={['#0a0a0f']} />
-      <fog attach="fog" args={['#0a0a0f', 8, 25]} />
+      <color attach="background" args={[bgColor]} />
+      <fog attach="fog" args={[fogColor, 8, 25]} />
 
       {/* Ambient lighting */}
       <ambientLight intensity={0.4} />

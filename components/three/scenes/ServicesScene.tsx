@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float } from '@react-three/drei';
+import { useTheme } from 'next-themes';
 import * as THREE from 'three';
 
 function EqualizerBars() {
@@ -52,20 +53,40 @@ function EqualizerBars() {
   );
 }
 
+function SceneContent() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Theme-aware colors
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const bgColor = isDark ? '#0a0a0f' : '#2d2d42';  // Lighter cinematic blue-gray
+  const fogColor = isDark ? '#0a0a0f' : '#353548';
+
+  return (
+    <>
+      <color attach="background" args={[bgColor]} />
+      <fog attach="fog" args={[fogColor, 8, 25]} />
+      <ambientLight intensity={0.2} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+
+      <Float speed={1} rotationIntensity={0.2} floatIntensity={0.2}>
+        <EqualizerBars />
+      </Float>
+
+      <Environment preset="city" />
+    </>
+  );
+}
+
 export default function ServicesScene() {
   return (
     <div className="w-full h-full absolute inset-0 -z-10">
       <Canvas camera={{ position: [0, 2, 12], fov: 45 }}>
-        <color attach="background" args={['#0a0a0f']} />
-        <fog attach="fog" args={['#0a0a0f', 8, 25]} />
-        <ambientLight intensity={0.2} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        
-        <Float speed={1} rotationIntensity={0.2} floatIntensity={0.2}>
-          <EqualizerBars />
-        </Float>
-        
-        <Environment preset="city" />
+        <SceneContent />
       </Canvas>
     </div>
   );

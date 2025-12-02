@@ -226,7 +226,7 @@ export default function ImmersiveVideoCard({ video, index, onHover }: ImmersiveV
           <div className="p-5">
             {/* Title */}
             <h3 className="font-bold text-lg mb-3 tracking-tight line-clamp-2">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent group-hover:from-white group-hover:to-white transition-all duration-300">
+              <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent group-hover:from-foreground group-hover:to-foreground transition-all duration-300">
                 {video.title}
               </span>
             </h3>

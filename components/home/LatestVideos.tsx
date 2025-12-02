@@ -20,7 +20,7 @@ export default async function LatestVideos() {
   });
 
   return (
-    <section className="py-24 bg-gradient-to-b from-obsidian-50 to-obsidian">
+    <section className="py-24 bg-gradient-to-b from-muted to-background">
       <div className="container-custom">
         {/* Section Header */}
         <AnimatedSection variant="fadeIn" className="text-center mb-16">

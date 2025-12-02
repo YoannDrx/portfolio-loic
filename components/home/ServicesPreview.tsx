@@ -73,7 +73,7 @@ export default function ServicesPreview() {
   const services = useServices();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-obsidian to-obsidian-50">
+    <section className="py-24 bg-gradient-to-b from-background to-muted">
       <div className="container-custom">
         {/* Section Header */}
         <AnimatedSection variant="fadeIn" className="text-center mb-16">

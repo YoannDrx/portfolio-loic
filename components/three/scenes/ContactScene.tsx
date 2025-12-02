@@ -2,6 +2,7 @@
 
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useTheme } from 'next-themes';
 import * as THREE from 'three';
 
 /* ============================================
@@ -11,7 +12,8 @@ import * as THREE from 'three';
 const LIME = '#D5FF0A';
 const LIME_BRIGHT = '#E8FF4A';
 const CYAN = '#00F0FF';
-const BACKGROUND = '#050508';
+const BACKGROUND_DARK = '#050508';
+const BACKGROUND_LIGHT = '#252535';  // Lighter cinematic variant
 
 // Deterministic random to avoid hydration errors
 function seededRandom(seed: number): number {
@@ -926,6 +928,16 @@ function InteractiveCamera({ smoothMouse }: InteractiveCameraProps) {
 function SceneContent() {
   const { mouse, smoothMouse, velocity, prevMouse } = useMouseTracking();
   const corePosition = useRef(new THREE.Vector3(0, 0, 0));
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const bgColor = isDark ? BACKGROUND_DARK : BACKGROUND_LIGHT;
+  const fogColor = isDark ? BACKGROUND_DARK : '#303042';
 
   // Update smooth mouse and velocity
   useFrame(() => {
@@ -995,6 +1007,17 @@ function SceneContent() {
    ============================================ */
 
 export default function ContactScene() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const bgColor = isDark ? BACKGROUND_DARK : BACKGROUND_LIGHT;
+  const fogColor = isDark ? BACKGROUND_DARK : '#303042';
+
   return (
     <div className="w-full h-full absolute inset-0 -z-10">
       <Canvas
@@ -1006,8 +1029,8 @@ export default function ContactScene() {
           powerPreference: 'high-performance',
         }}
       >
-        <color attach="background" args={[BACKGROUND]} />
-        <fog attach="fog" args={[BACKGROUND, 15, 35]} />
+        <color attach="background" args={[bgColor]} />
+        <fog attach="fog" args={[fogColor, 15, 35]} />
         <SceneContent />
       </Canvas>
     </div>

@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Cone, Float } from '@react-three/drei';
+import { useTheme } from 'next-themes';
 import * as THREE from 'three';
 
 function LightBeams() {
@@ -40,16 +41,36 @@ function LightBeams() {
   );
 }
 
+function SceneContent() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Theme-aware colors
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const bgColor = isDark ? '#0a0a0f' : '#2d2d42';  // Lighter cinematic blue-gray
+  const fogColor = isDark ? '#0a0a0f' : '#353548';
+
+  return (
+    <>
+      <color attach="background" args={[bgColor]} />
+      <fog attach="fog" args={[fogColor, 5, 25]} />
+
+      <Float speed={1} rotationIntensity={0.2} floatIntensity={0.2}>
+        <LightBeams />
+      </Float>
+    </>
+  );
+}
+
 export default function VideosScene() {
   return (
     <div className="w-full h-full absolute inset-0 -z-10">
       <Canvas camera={{ position: [0, -2, 10], fov: 50 }}>
-        <color attach="background" args={['#0a0a0f']} />
-        <fog attach="fog" args={['#0a0a0f', 5, 25]} />
-        
-        <Float speed={1} rotationIntensity={0.2} floatIntensity={0.2}>
-           <LightBeams />
-        </Float>
+        <SceneContent />
       </Canvas>
     </div>
   );
