@@ -45,7 +45,7 @@ export default function AdminLayoutClient({
   }, [toastSystem]);
 
   return (
-    <div className="min-h-screen text-white transition-colors duration-300 relative overflow-hidden">
+    <div className="min-h-screen text-foreground transition-colors duration-300 relative overflow-hidden">
       {/* Immersive Background */}
       <AdminBackgroundEffects
         showThreeJS={true}

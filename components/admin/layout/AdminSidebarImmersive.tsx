@@ -162,8 +162,8 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
           className={cn(
             'group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300',
             isActive
-              ? 'text-white bg-white/[0.08]'
-              : 'text-muted-foreground hover:text-foreground hover:bg-white/[0.04]'
+              ? 'text-foreground bg-[var(--glass-active)]'
+              : 'text-muted-foreground hover:text-foreground hover:bg-[var(--glass-subtle)]'
           )}
           variants={adminSidebarItem}
           initial="rest"
@@ -210,7 +210,7 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
             <motion.span
               className={cn(
                 'px-2 py-0.5 text-xs font-bold rounded-full',
-                isActive ? 'bg-[var(--glass-active)] text-white' : 'bg-[var(--glass-active)] text-muted-foreground'
+                isActive ? 'bg-[var(--glass-active)] text-foreground' : 'bg-[var(--glass-active)] text-muted-foreground'
               )}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -289,7 +289,7 @@ function QuickStatsCard() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5, duration: 0.4 }}
-      className="relative overflow-hidden rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-xl p-4"
+      className="relative overflow-hidden rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-xl p-4"
     >
       {/* Animated gradient border */}
       <div className="absolute inset-0 rounded-xl opacity-50">
@@ -330,7 +330,7 @@ function QuickStatsCard() {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs text-muted-foreground">Total</span>
-              <span className="font-mono font-bold text-white text-sm">
+              <span className="font-mono font-bold text-foreground text-sm">
                 <AnimatedCounter value={stats.totalContent} />
               </span>
             </div>
@@ -427,7 +427,7 @@ function MobileSidebar({
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-lg font-bold text-white tracking-tight">Loïc Ghanem</span>
+                    <span className="text-lg font-bold text-foreground tracking-tight">Loïc Ghanem</span>
                     <span className="text-xs text-neon-lime uppercase tracking-widest">Admin Panel</span>
                   </div>
                 </Link>
@@ -497,7 +497,7 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
       {/* Mobile menu button */}
       <button
         onClick={() => setIsMobileOpen(true)}
-        className="fixed top-4 left-4 z-30 p-2 rounded-lg bg-[var(--glass-active)] backdrop-blur-xl border border-[var(--glass-border)] text-white lg:hidden admin-hover-glow-cyan"
+        className="fixed top-4 left-4 z-30 p-2 rounded-lg bg-[var(--glass-active)] backdrop-blur-xl border border-[var(--glass-border)] text-foreground lg:hidden admin-hover-glow-cyan"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -543,7 +543,7 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
               />
             </motion.div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-white tracking-tight font-montserrat">
+              <span className="text-lg font-bold text-foreground tracking-tight font-montserrat">
                 Loïc Ghanem
               </span>
               <span className="text-xs text-neon-lime uppercase tracking-widest">
@@ -557,7 +557,7 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
         <div className="px-4 py-3 border-b border-[var(--glass-border)]">
           <motion.button
             onClick={onOpenCommandPalette}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-[var(--glass-border)] text-muted-foreground hover:text-foreground hover:border-[var(--glass-border-strong)] hover:bg-white/[0.05] transition-all group"
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[var(--glass-bg)] border border-[var(--glass-border)] text-muted-foreground hover:text-foreground hover:border-[var(--glass-border-strong)] hover:bg-[var(--glass-subtle)] transition-all group"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

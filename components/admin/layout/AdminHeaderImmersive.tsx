@@ -33,6 +33,7 @@ import {
   adminHeaderDropdown,
   adminNotificationBell,
 } from '@/lib/animations';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 
 /* ============================================
    TYPES
@@ -516,6 +517,9 @@ export function AdminHeaderImmersive({ user, locale }: AdminHeaderProps) {
 
         {/* Divider */}
         <div className="hidden lg:block w-px h-8 bg-[var(--glass-border)] mx-2" />
+
+        {/* Theme Switcher */}
+        <ThemeSwitcher className="p-2.5 rounded-xl hover:bg-[var(--glass-hover)] text-muted-foreground hover:text-foreground" />
 
         {/* Notifications */}
         <NotificationBell locale={locale} />

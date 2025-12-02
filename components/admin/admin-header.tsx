@@ -68,13 +68,13 @@ export function AdminHeader({ user, locale }: AdminHeaderProps) {
       {/* Left Section */}
       <div className="flex items-center gap-6 flex-1">
         {/* Mobile Menu Trigger */}
-        <Button variant="ghost" size="icon" className="lg:hidden text-white hover:bg-[var(--glass-active)]">
+        <Button variant="ghost" size="icon" className="lg:hidden text-foreground hover:bg-[var(--glass-active)]">
           <Menu className="h-5 w-5" />
         </Button>
 
         {/* Page Title */}
         <div className="hidden md:block">
-          <h1 className="text-xl font-bold text-white font-montserrat tracking-tight">
+          <h1 className="text-xl font-bold text-foreground font-montserrat tracking-tight">
             {getPageTitle()}
           </h1>
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
@@ -91,7 +91,7 @@ export function AdminHeader({ user, locale }: AdminHeaderProps) {
               placeholder="Search database..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 h-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white placeholder-gray-600 focus:border-neon-cyan/50 focus:ring-neon-cyan/20 rounded-lg transition-all"
+              className="pl-10 h-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground placeholder-muted-foreground focus:border-neon-cyan/50 focus:ring-neon-cyan/20 rounded-lg transition-all"
             />
           </div>
         </div>
@@ -113,7 +113,7 @@ export function AdminHeader({ user, locale }: AdminHeaderProps) {
                 {getUserInitials()}
               </div>
               <div className="hidden sm:flex flex-col items-start text-left">
-                <span className="text-sm font-bold text-white group-hover:text-neon-cyan transition-colors">
+                <span className="text-sm font-bold text-foreground group-hover:text-neon-cyan transition-colors">
                   {user.name || 'Administrator'}
                 </span>
                 <span className="text-[10px] text-muted-foreground uppercase tracking-widest">
@@ -122,7 +122,7 @@ export function AdminHeader({ user, locale }: AdminHeaderProps) {
               </div>
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-64 bg-obsidian/95 backdrop-blur-xl border-[var(--glass-border)] text-white">
+          <DropdownMenuContent align="end" className="w-64 bg-[var(--admin-surface-solid)] backdrop-blur-xl border-[var(--glass-border)] text-foreground">
             <DropdownMenuLabel className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
               My Account
             </DropdownMenuLabel>
@@ -131,7 +131,7 @@ export function AdminHeader({ user, locale }: AdminHeaderProps) {
             <div className="px-2 py-3 flex items-center gap-3">
                <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center text-white font-bold">
                   {getUserInitials()}
-               </div>
+              </div>
                <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold truncate">{user.name || 'Administrator'}</p>
                   <p className="text-xs text-muted-foreground truncate">{user.email}</p>
@@ -140,7 +140,7 @@ export function AdminHeader({ user, locale }: AdminHeaderProps) {
 
             <DropdownMenuSeparator className="bg-[var(--glass-active)]" />
 
-            <DropdownMenuItem className="focus:bg-[var(--glass-active)] focus:text-white cursor-pointer">
+            <DropdownMenuItem className="focus:bg-[var(--glass-active)] focus:text-foreground cursor-pointer">
               <User className="mr-2 h-4 w-4 text-neon-cyan" />
               <span>Profile</span>
             </DropdownMenuItem>

@@ -68,9 +68,9 @@ const actions = [
 
 export function QuickActions({ locale }: QuickActionsProps) {
   return (
-    <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-[var(--glass-border)]">
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-lg font-bold text-foreground">
           Actions rapides
         </h3>
       </div>
@@ -100,7 +100,7 @@ export function QuickActions({ locale }: QuickActionsProps) {
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-white">
+                    <p className="text-sm font-bold text-foreground">
                       {action.label}
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">

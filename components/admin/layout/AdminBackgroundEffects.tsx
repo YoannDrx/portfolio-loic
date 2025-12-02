@@ -1,9 +1,11 @@
 'use client';
 
-import { useRef, useMemo, memo } from 'react';
+import { useRef, useMemo, memo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
+import { useTheme } from 'next-themes';
+import { cn } from '@/lib/utils';
 import { adminFloatingOrb } from '@/lib/animations';
 
 /* ============================================
@@ -239,31 +241,34 @@ function GridPattern() {
    GRADIENT OVERLAY
    ============================================ */
 
-function GradientOverlay() {
+function GradientOverlay({ isDark }: { isDark: boolean }) {
   return (
     <>
       {/* Top radial glow */}
       <div
         className="absolute top-0 left-0 right-0 h-[50vh] pointer-events-none"
         style={{
-          background:
-            'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 240, 255, 0.08), transparent 50%)',
+          background: isDark
+            ? 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 240, 255, 0.08), transparent 50%)'
+            : 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.06), transparent 50%)',
         }}
       />
       {/* Bottom right accent */}
       <div
         className="absolute bottom-0 right-0 w-[50vw] h-[50vh] pointer-events-none"
         style={{
-          background:
-            'radial-gradient(ellipse 60% 60% at 100% 100%, rgba(161, 0, 242, 0.05), transparent 60%)',
+          background: isDark
+            ? 'radial-gradient(ellipse 60% 60% at 100% 100%, rgba(161, 0, 242, 0.05), transparent 60%)'
+            : 'radial-gradient(ellipse 60% 60% at 100% 100%, rgba(124, 58, 237, 0.04), transparent 60%)',
         }}
       />
-      {/* Vignette */}
+      {/* Vignette - adapté au thème */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background:
-            'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(9, 9, 11, 0.4) 100%)',
+          background: isDark
+            ? 'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(9, 9, 11, 0.4) 100%)'
+            : 'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(250, 250, 250, 0.6) 100%)',
         }}
       />
     </>
@@ -289,29 +294,57 @@ export default function AdminBackgroundEffects({
   showGradients = true,
   className = '',
 }: AdminBackgroundEffectsProps) {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Default to dark to avoid hydration mismatch
+  const isDark = !mounted || resolvedTheme === 'dark';
+
   return (
     <div
       className={`fixed inset-0 -z-10 overflow-hidden pointer-events-none ${className}`}
       style={{ background: 'var(--admin-bg)' }}
     >
-      {/* Three.js Canvas */}
+      {/* Three.js Canvas - opacité réduite en light mode */}
       {showThreeJS && (
-        <div className="absolute inset-0 opacity-40">
+        <div className={cn(
+          "absolute inset-0 transition-opacity duration-500",
+          isDark ? "opacity-40" : "opacity-20"
+        )}>
           <ThreeCanvas />
         </div>
       )}
 
-      {/* CSS Floating Orbs */}
-      {showOrbs &&
-        orbConfigs.map((config, index) => (
-          <FloatingOrb key={index} config={config} />
-        ))}
+      {/* CSS Floating Orbs - opacité réduite en light mode */}
+      {showOrbs && (
+        <div className={cn(
+          "transition-opacity duration-500",
+          isDark ? "opacity-100" : "opacity-50"
+        )}>
+          {orbConfigs.map((config, index) => (
+            <FloatingOrb key={index} config={config} />
+          ))}
+        </div>
+      )}
 
       {/* SVG Grid Pattern */}
       {showGrid && <GridPattern />}
 
       {/* Gradient Overlays */}
-      {showGradients && <GradientOverlay />}
+      {showGradients && <GradientOverlay isDark={isDark} />}
+
+      {/* Light Mode Softening Overlay - calque blanc pour adoucir */}
+      <div
+        className={cn(
+          'absolute inset-0 pointer-events-none transition-opacity duration-500',
+          'bg-white/[0.15]',
+          isDark ? 'opacity-0' : 'opacity-100'
+        )}
+      />
 
       {/* Noise texture overlay (subtle) */}
       <div

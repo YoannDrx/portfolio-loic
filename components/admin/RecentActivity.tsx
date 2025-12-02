@@ -64,9 +64,9 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
   };
 
   return (
-    <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden">
       <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--glass-border)]">
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-lg font-bold text-foreground">
           Activité récente
         </h3>
         <Button variant="ghost" size="sm" className="text-[var(--admin-neon-cyan)] hover:text-foreground hover:bg-[var(--glass-active)]" asChild>
@@ -122,7 +122,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <p className="text-sm font-bold text-white truncate">
+                      <p className="text-sm font-bold text-foreground truncate">
                         {item.title}
                       </p>
                     </div>
