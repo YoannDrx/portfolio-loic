@@ -65,7 +65,6 @@ export default function AdminLayoutClient({
           <AdminHeaderImmersive
             user={user}
             locale={locale}
-            onOpenCommandPalette={commandPalette.open}
           />
 
           {/* Page content with animations */}

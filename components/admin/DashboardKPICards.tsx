@@ -5,8 +5,6 @@ import {
   Image,
   Video,
   Briefcase,
-  Eye,
-  Users,
   TrendingUp,
 } from "lucide-react";
 
@@ -79,36 +77,10 @@ export function DashboardKPICards({ stats, locale }: DashboardKPICardsProps) {
           ? `${stats.servicesCount - stats.publishedServicesCount} brouillon${stats.servicesCount - stats.publishedServicesCount > 1 ? "s" : ""}`
           : undefined,
     },
-    {
-      title: "Vues ce mois",
-      value: "12.5k",
-      icon: Eye,
-      description: "+23% vs le mois dernier",
-      href: undefined,
-      colorClass: "text-admin-success-600",
-      bgColorClass: "bg-admin-success-100",
-      trend: {
-        value: 23,
-        isPositive: true,
-      },
-    },
-    {
-      title: "Visiteurs",
-      value: "3.2k",
-      icon: Users,
-      description: "+12% cette semaine",
-      href: undefined,
-      colorClass: "text-admin-warning-600",
-      bgColorClass: "bg-admin-warning-100",
-      trend: {
-        value: 12,
-        isPositive: true,
-      },
-    },
   ];
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       {kpis.map((kpi) => (
         <DashboardKPICard key={kpi.title} {...kpi} />
       ))}

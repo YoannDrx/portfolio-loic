@@ -15,6 +15,8 @@ import {
 } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
+import { notifyNewContent } from "@/lib/notifications";
+import { logCrud } from "@/lib/activity-logger";
 import type { Prisma } from "@prisma/client";
 
 // ============================================
@@ -109,6 +111,12 @@ export const POST = withAuthAndValidation(
 
       // Créer la version initiale
       await createVersion("service", service.id, service, "create", user.id);
+
+      // Créer une notification
+      await notifyNewContent("service", service.id, service.title);
+
+      // Logger l'action
+      await logCrud("create", "service", service.id, service.title, user.id);
 
       return createdResponse(service);
     } catch (error) {

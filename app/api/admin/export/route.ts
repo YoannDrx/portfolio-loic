@@ -1,26 +1,29 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuth, handleApiError, ApiError } from "@/lib/api/middleware";
+import { logExport } from "@/lib/activity-logger";
+import * as XLSX from "xlsx";
 
 type ExportValue = string | number | boolean | Date | null | undefined;
 type ExportRow = Record<string, ExportValue>;
 
 // ============================================
 // GET /api/admin/export
-// Export de données en CSV ou JSON
+// Export de données en CSV, JSON, TXT ou XLSX
+// Stocke l'export en DB pour re-téléchargement
 // ============================================
 
-export const GET = withAuth(async (req, _context, _user) => {
+export const GET = withAuth(async (req, _context, user) => {
   try {
     const { searchParams } = new URL(req.url);
     const type = searchParams.get("type"); // "albums", "videos", "services"
-    const format = searchParams.get("format") || "csv"; // "csv", "json" ou "txt"
+    const format = searchParams.get("format") || "csv"; // "csv", "json", "txt" ou "xlsx"
 
     if (!type || !["albums", "videos", "services"].includes(type)) {
       throw new ApiError(400, "Type invalide", "INVALID_TYPE");
     }
 
-    if (!["csv", "json", "txt"].includes(format)) {
+    if (!["csv", "json", "txt", "xlsx"].includes(format)) {
       throw new ApiError(400, "Format invalide", "INVALID_FORMAT");
     }
 
@@ -76,40 +79,61 @@ export const GET = withAuth(async (req, _context, _user) => {
         break;
     }
 
-    // Format CSV
+    // Générer le contenu selon le format
+    let content: string | Buffer;
+    let contentType: string;
+    const dateStr = new Date().toISOString().split("T")[0];
+    const filename = `${type}-${dateStr}.${format}`;
+    let isBinary = false;
+
     if (format === "csv") {
-      const csv = convertToCSV(data);
-
-      return new NextResponse(csv, {
-        headers: {
-          "Content-Type": "text/csv; charset=utf-8",
-          "Content-Disposition": `attachment; filename="${type}-${new Date().toISOString().split("T")[0]}.csv"`,
-        },
-      });
+      content = convertToCSV(data);
+      contentType = "text/csv; charset=utf-8";
+    } else if (format === "json") {
+      content = JSON.stringify(data, null, 2);
+      contentType = "application/json";
+    } else if (format === "txt") {
+      content = convertToTXT(data, type);
+      contentType = "text/plain; charset=utf-8";
+    } else if (format === "xlsx") {
+      content = convertToXLSX(data, type);
+      contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+      isBinary = true;
+    } else {
+      throw new ApiError(400, "Format non supporté", "UNSUPPORTED_FORMAT");
     }
 
-    // Format JSON
-    if (format === "json") {
-      return new NextResponse(JSON.stringify(data, null, 2), {
-        headers: {
-          "Content-Type": "application/json",
-          "Content-Disposition": `attachment; filename="${type}-${new Date().toISOString().split("T")[0]}.json"`,
-        },
-      });
-    }
+    // Stocker l'export en DB pour re-téléchargement
+    // Pour les fichiers binaires, on stocke en base64
+    const contentToStore = isBinary
+      ? (content as Buffer).toString("base64")
+      : (content as string);
 
-    // Format TXT
-    if (format === "txt") {
-      const txt = convertToTXT(data, type);
-      return new NextResponse(txt, {
-        headers: {
-          "Content-Type": "text/plain; charset=utf-8",
-          "Content-Disposition": `attachment; filename="${type}-${new Date().toISOString().split("T")[0]}.txt"`,
-        },
-      });
-    }
+    await prisma.exportLog.create({
+      data: {
+        userId: user.id,
+        type,
+        format,
+        filename,
+        content: contentToStore,
+        fileSize: isBinary ? (content as Buffer).length : Buffer.byteLength(content as string, "utf-8"),
+      },
+    });
 
-    throw new ApiError(400, "Format non supporté", "UNSUPPORTED_FORMAT");
+    // Logger l'action
+    await logExport(user.id, type, format, data.length);
+
+    // Pour les réponses binaires, convertir en Uint8Array
+    const responseBody = isBinary
+      ? new Uint8Array(content as Buffer)
+      : (content as string);
+
+    return new NextResponse(responseBody, {
+      headers: {
+        "Content-Type": contentType,
+        "Content-Disposition": `attachment; filename="${filename}"`,
+      },
+    });
   } catch (error) {
     return handleApiError(error);
   }
@@ -188,4 +212,65 @@ function convertToTXT(data: ExportRow[], type: string): string {
   txt += `========================================\n`;
 
   return txt;
+}
+
+function convertToXLSX(data: ExportRow[], type: string): Buffer {
+  const typeTitles: Record<string, string> = {
+    albums: "Albums",
+    videos: "Vidéos",
+    services: "Services",
+  };
+
+  // Préparer les données pour Excel avec headers traduits
+  const headerTranslations: Record<string, string> = {
+    id: "ID",
+    title: "Titre",
+    date: "Date",
+    sortedDate: "Date triée",
+    style: "Style",
+    published: "Publié",
+    listenLink: "Lien écoute",
+    collabName: "Collaboration",
+    createdAt: "Créé le",
+    videoId: "ID Vidéo",
+    type: "Type",
+    no: "Numéro",
+    author: "Auteur",
+  };
+
+  // Convertir les données pour Excel
+  const excelData = data.map((row) => {
+    const newRow: Record<string, unknown> = {};
+    Object.entries(row).forEach(([key, value]) => {
+      const translatedKey = headerTranslations[key] || key;
+      // Formater les valeurs
+      if (typeof value === "boolean") {
+        newRow[translatedKey] = value ? "Oui" : "Non";
+      } else if (value instanceof Date) {
+        newRow[translatedKey] = value.toLocaleString("fr-FR");
+      } else {
+        newRow[translatedKey] = value;
+      }
+    });
+    return newRow;
+  });
+
+  // Créer le workbook
+  const worksheet = XLSX.utils.json_to_sheet(excelData);
+
+  // Ajuster la largeur des colonnes
+  const maxWidths: number[] = [];
+  excelData.forEach((row) => {
+    Object.values(row).forEach((value, index) => {
+      const len = String(value || "").length;
+      maxWidths[index] = Math.max(maxWidths[index] || 10, len);
+    });
+  });
+  worksheet["!cols"] = maxWidths.map((w) => ({ wch: Math.min(w + 2, 50) }));
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, typeTitles[type] || type);
+
+  // Générer le buffer
+  return Buffer.from(XLSX.write(workbook, { type: "buffer", bookType: "xlsx" }));
 }

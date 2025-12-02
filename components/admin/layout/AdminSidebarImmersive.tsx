@@ -20,6 +20,7 @@ import {
   Sparkles,
   Command,
   Search,
+  ClipboardList,
 } from 'lucide-react';
 import {
   adminSidebarItem,
@@ -84,6 +85,13 @@ const menuItems: MenuItem[] = [
     href: '/admin/cv',
     color: 'text-[var(--admin-neon-orange)]',
     glowColor: '0 0 20px rgba(255, 107, 53, 0.5)',
+  },
+  {
+    icon: ClipboardList,
+    label: 'Journal',
+    href: '/admin/logs',
+    color: 'text-[var(--admin-neon-cyan)]',
+    glowColor: 'var(--admin-glow-cyan-md)',
   },
   {
     icon: Settings,
@@ -235,10 +243,47 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
 }
 
 /* ============================================
-   QUICK STATS CARD
+   QUICK STATS CARD (Real Data)
    ============================================ */
 
+interface StatsData {
+  totalContent: number;
+  totalPublished: number;
+  publishRate: number;
+}
+
 function QuickStatsCard() {
+  const [stats, setStats] = useState<StatsData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch('/api/admin/dashboard/stats', {
+          credentials: 'include',
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setStats({
+            totalContent: data.totalContent ?? 0,
+            totalPublished: data.totalPublished ?? 0,
+            publishRate: data.publishRate ?? 0,
+          });
+        } else {
+          console.error('Stats API error:', res.status);
+          setError(true);
+        }
+      } catch (err) {
+        console.error('Erreur fetch stats:', err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -266,41 +311,60 @@ function QuickStatsCard() {
             <Sparkles className="h-4 w-4 text-[var(--admin-neon-lime)]" />
           </motion.div>
           <span className="text-xs font-bold text-[var(--admin-neon-lime)] uppercase tracking-widest">
-            Activity
+            Contenus
           </span>
         </div>
 
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-neutral-400">Views Today</span>
-            <span className="font-mono font-bold text-white text-sm">
-              <AnimatedCounter value={1234} />
-            </span>
+        {loading ? (
+          <div className="space-y-3">
+            <div className="h-4 w-24 bg-white/10 rounded animate-pulse" />
+            <div className="h-1 w-full bg-white/10 rounded" />
+            <div className="h-4 w-20 bg-white/10 rounded animate-pulse" />
+            <div className="h-1 w-full bg-white/10 rounded" />
           </div>
-          <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-[var(--admin-neon-cyan)] to-[var(--admin-neon-lime)]"
-              initial={{ width: 0 }}
-              animate={{ width: '75%' }}
-              transition={{ delay: 0.8, duration: 1, ease: 'easeOut' }}
-            />
+        ) : error ? (
+          <div className="text-center py-2">
+            <span className="text-xs text-neutral-500">Impossible de charger</span>
           </div>
+        ) : stats ? (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-neutral-400">Total</span>
+              <span className="font-mono font-bold text-white text-sm">
+                <AnimatedCounter value={stats.totalContent} />
+              </span>
+            </div>
+            <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-[var(--admin-neon-cyan)] to-[var(--admin-neon-lime)]"
+                initial={{ width: 0 }}
+                animate={{ width: '100%' }}
+                transition={{ delay: 0.8, duration: 1, ease: 'easeOut' }}
+              />
+            </div>
 
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-neutral-400">Published</span>
-            <span className="font-mono font-bold text-[var(--admin-neon-cyan)] text-sm">
-              <AnimatedCounter value={42} duration={1000} />
-            </span>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-neutral-400">Publiés</span>
+              <span className="font-mono font-bold text-[var(--admin-neon-cyan)] text-sm">
+                <AnimatedCounter value={stats.totalPublished} duration={1000} />
+              </span>
+            </div>
+            <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-[var(--admin-neon-magenta)] to-[var(--admin-neon-purple)]"
+                initial={{ width: 0 }}
+                animate={{ width: `${stats.publishRate}%` }}
+                transition={{ delay: 1, duration: 1, ease: 'easeOut' }}
+              />
+            </div>
+
+            <div className="text-center pt-2">
+              <span className="text-[10px] text-neutral-500">
+                {stats.publishRate}% publiés
+              </span>
+            </div>
           </div>
-          <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-[var(--admin-neon-magenta)] to-[var(--admin-neon-purple)]"
-              initial={{ width: 0 }}
-              animate={{ width: '60%' }}
-              transition={{ delay: 1, duration: 1, ease: 'easeOut' }}
-            />
-          </div>
-        </div>
+        ) : null}
       </div>
     </motion.div>
   );

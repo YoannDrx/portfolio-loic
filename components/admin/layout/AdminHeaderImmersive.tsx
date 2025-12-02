@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { signOut } from '@/lib/auth-client';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -17,9 +17,7 @@ import {
   LogOut,
   User,
   Settings,
-  Search,
   Bell,
-  Command,
   ChevronRight,
   Home,
   Image,
@@ -27,6 +25,9 @@ import {
   Briefcase,
   FileText,
   LayoutDashboard,
+  Mail,
+  Check,
+  CheckCheck,
 } from 'lucide-react';
 import {
   adminHeaderDropdown,
@@ -45,7 +46,6 @@ interface AdminHeaderProps {
     role?: string;
   };
   locale: string;
-  onOpenCommandPalette?: () => void;
 }
 
 /* ============================================
@@ -140,67 +140,232 @@ function AnimatedBreadcrumbs({ locale }: { locale: string }) {
 }
 
 /* ============================================
-   SEARCH TRIGGER
-   ============================================ */
-
-interface SearchTriggerProps {
-  onClick?: () => void;
-}
-
-function SearchTrigger({ onClick }: SearchTriggerProps) {
-  return (
-    <motion.button
-      onClick={onClick}
-      className="hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-neutral-400 hover:text-white hover:border-white/20 hover:bg-white/[0.05] transition-all group"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <Search className="h-4 w-4 group-hover:text-[var(--admin-neon-cyan)] transition-colors" />
-      <span className="text-sm">Rechercher...</span>
-      <div className="flex items-center gap-1 ml-8 px-2 py-0.5 rounded bg-white/10 text-xs font-mono text-neutral-500">
-        <Command className="h-3 w-3" />
-        <span>K</span>
-      </div>
-    </motion.button>
-  );
-}
-
-/* ============================================
    NOTIFICATION BELL
    ============================================ */
 
-interface NotificationBellProps {
-  count?: number;
+interface Notification {
+  id: string;
+  type: string;
+  title: string;
+  message: string;
+  read: boolean;
+  data?: { contentType?: string; contentId?: string };
+  createdAt: string;
 }
 
-function NotificationBell({ count = 3 }: NotificationBellProps) {
+function NotificationBell({ locale }: { locale: string }) {
+  const router = useRouter();
   const [isAnimating, setIsAnimating] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch notifications
+  const fetchNotifications = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/notifications?limit=10', {
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setNotifications(data.items || []);
+        setUnreadCount(data.unreadCount || 0);
+      }
+    } catch (error) {
+      console.error('Erreur fetch notifications:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchNotifications();
+    // Rafraîchir toutes les 30 secondes
+    const interval = setInterval(fetchNotifications, 30000);
+    return () => clearInterval(interval);
+  }, [fetchNotifications]);
+
+  // Marquer comme lu
+  const markAsRead = async (ids: string[]) => {
+    try {
+      await fetch('/api/admin/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ ids }),
+      });
+      fetchNotifications();
+    } catch (error) {
+      console.error('Erreur markAsRead:', error);
+    }
+  };
+
+  // Marquer toutes comme lues
+  const markAllAsRead = async () => {
+    try {
+      await fetch('/api/admin/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ markAllRead: true }),
+      });
+      fetchNotifications();
+    } catch (error) {
+      console.error('Erreur markAllAsRead:', error);
+    }
+  };
+
+  // Naviguer vers le contenu
+  const handleNotificationClick = (notif: Notification) => {
+    if (!notif.read) {
+      markAsRead([notif.id]);
+    }
+    if (notif.data?.contentType && notif.data?.contentId) {
+      router.push(`/${locale}/admin/${notif.data.contentType}s/${notif.data.contentId}`);
+    }
+  };
+
+  // Format date relative
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'À l\'instant';
+    if (diffMins < 60) return `Il y a ${diffMins}min`;
+    if (diffHours < 24) return `Il y a ${diffHours}h`;
+    if (diffDays < 7) return `Il y a ${diffDays}j`;
+    return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+  };
+
+  // Icône selon le type
+  const getIcon = (type: string, contentType?: string) => {
+    if (type === 'contact_message') return Mail;
+    if (contentType === 'album') return Image;
+    if (contentType === 'video') return Video;
+    if (contentType === 'service') return Briefcase;
+    return Bell;
+  };
 
   return (
-    <motion.button
-      className="relative p-2.5 rounded-xl hover:bg-white/5 transition-colors text-neutral-400 hover:text-white group"
-      variants={adminNotificationBell}
-      initial="rest"
-      animate={isAnimating ? 'ring' : 'rest'}
-      onHoverStart={() => setIsAnimating(true)}
-      onAnimationComplete={() => setIsAnimating(false)}
-      whileTap={{ scale: 0.95 }}
-    >
-      <Bell className="h-5 w-5 group-hover:text-[var(--admin-neon-cyan)] transition-colors" />
-      {count > 0 && (
-        <motion.span
-          className="absolute top-1.5 right-1.5 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold bg-[var(--admin-neon-magenta)] text-white rounded-full"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-          style={{
-            boxShadow: '0 0 10px var(--admin-neon-magenta)',
-          }}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <motion.button
+          className="relative p-2.5 rounded-xl hover:bg-white/5 transition-colors text-neutral-400 hover:text-white group"
+          variants={adminNotificationBell}
+          initial="rest"
+          animate={isAnimating ? 'ring' : 'rest'}
+          onHoverStart={() => setIsAnimating(true)}
+          onAnimationComplete={() => setIsAnimating(false)}
+          whileTap={{ scale: 0.95 }}
         >
-          {count > 9 ? '9+' : count}
-        </motion.span>
-      )}
-    </motion.button>
+          <Bell className="h-5 w-5 group-hover:text-[var(--admin-neon-cyan)] transition-colors" />
+          {unreadCount > 0 && (
+            <motion.span
+              className="absolute top-1.5 right-1.5 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold bg-[var(--admin-neon-magenta)] text-white rounded-full"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              style={{
+                boxShadow: '0 0 10px var(--admin-neon-magenta)',
+              }}
+            >
+              {unreadCount > 9 ? '9+' : unreadCount}
+            </motion.span>
+          )}
+        </motion.button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        className="w-80 bg-[var(--admin-surface-solid)] backdrop-blur-xl border-white/10 text-white p-0"
+        sideOffset={8}
+      >
+        <motion.div
+          variants={adminHeaderDropdown}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+            <span className="text-sm font-bold">Notifications</span>
+            {unreadCount > 0 && (
+              <button
+                onClick={markAllAsRead}
+                className="flex items-center gap-1 text-xs text-[var(--admin-neon-cyan)] hover:text-white transition-colors"
+              >
+                <CheckCheck className="h-3 w-3" />
+                Tout marquer lu
+              </button>
+            )}
+          </div>
+
+          {/* Liste */}
+          <div className="max-h-80 overflow-y-auto">
+            {isLoading ? (
+              <div className="p-4 text-center text-neutral-500 text-sm">
+                Chargement...
+              </div>
+            ) : notifications.length === 0 ? (
+              <div className="p-6 text-center">
+                <Bell className="h-8 w-8 text-neutral-600 mx-auto mb-2" />
+                <p className="text-sm text-neutral-500">Aucune notification</p>
+              </div>
+            ) : (
+              notifications.map((notif) => {
+                const Icon = getIcon(notif.type, notif.data?.contentType);
+                return (
+                  <div
+                    key={notif.id}
+                    onClick={() => handleNotificationClick(notif)}
+                    className={cn(
+                      'flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors border-b border-white/5 last:border-b-0',
+                      notif.read
+                        ? 'hover:bg-white/5'
+                        : 'bg-[var(--admin-neon-cyan)]/5 hover:bg-[var(--admin-neon-cyan)]/10'
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        'flex-shrink-0 h-8 w-8 rounded-lg flex items-center justify-center',
+                        notif.type === 'contact_message'
+                          ? 'bg-[var(--admin-neon-magenta)]/20'
+                          : 'bg-[var(--admin-neon-cyan)]/20'
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          'h-4 w-4',
+                          notif.type === 'contact_message'
+                            ? 'text-[var(--admin-neon-magenta)]'
+                            : 'text-[var(--admin-neon-cyan)]'
+                        )}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-white truncate">
+                        {notif.title}
+                      </p>
+                      <p className="text-xs text-neutral-400 truncate">
+                        {notif.message}
+                      </p>
+                      <p className="text-[10px] text-neutral-500 mt-1">
+                        {formatDate(notif.createdAt)}
+                      </p>
+                    </div>
+                    {!notif.read && (
+                      <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[var(--admin-neon-cyan)]" />
+                    )}
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </motion.div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 
@@ -282,10 +447,11 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
           <DropdownMenuSeparator className="bg-white/10 my-2" />
 
           <DropdownMenuItem
+            onClick={() => router.push(`/${locale}/admin/settings`)}
             className="flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer focus:bg-white/10 focus:text-white transition-colors"
           >
             <User className="h-4 w-4 text-[var(--admin-neon-cyan)]" />
-            <span>Profil</span>
+            <span>Mon Profil</span>
           </DropdownMenuItem>
 
           <DropdownMenuItem
@@ -315,7 +481,7 @@ function UserMenu({ user, locale, onSignOut }: UserMenuProps) {
    MAIN HEADER COMPONENT
    ============================================ */
 
-export function AdminHeaderImmersive({ user, locale, onOpenCommandPalette }: AdminHeaderProps) {
+export function AdminHeaderImmersive({ user, locale }: AdminHeaderProps) {
   const router = useRouter();
 
   const handleSignOut = useCallback(async () => {
@@ -340,11 +506,6 @@ export function AdminHeaderImmersive({ user, locale, onOpenCommandPalette }: Adm
         <AnimatedBreadcrumbs locale={locale} />
       </div>
 
-      {/* Center Section - Search */}
-      <div className="flex-1 flex justify-center">
-        <SearchTrigger onClick={onOpenCommandPalette} />
-      </div>
-
       {/* Right Section - Actions */}
       <div className="flex items-center gap-2 flex-1 justify-end">
         {/* Quick action: Back to site */}
@@ -361,7 +522,7 @@ export function AdminHeaderImmersive({ user, locale, onOpenCommandPalette }: Adm
         <div className="hidden lg:block w-px h-8 bg-white/10 mx-2" />
 
         {/* Notifications */}
-        <NotificationBell count={3} />
+        <NotificationBell locale={locale} />
 
         {/* User Menu */}
         <UserMenu user={user} locale={locale} onSignOut={handleSignOut} />

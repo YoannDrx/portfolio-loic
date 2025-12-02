@@ -12,6 +12,7 @@ import {
   type VideoUpdateInput,
 } from "@/lib/validations/schemas";
 import { createVersion } from "@/lib/versioning";
+import { logCrud } from "@/lib/activity-logger";
 
 // ============================================
 // GET /api/admin/videos/[id]
@@ -83,6 +84,11 @@ export const PATCH = withAuthAndValidation(
       // Créer une version après la mise à jour
       await createVersion("video", video.id, video, "update", user.id);
 
+      // Logger l'action
+      await logCrud("update", "video", video.id, video.title, user.id, {
+        updatedFields: Object.keys(data),
+      });
+
       return successResponse(video);
     } catch (error) {
       return handleApiError(error);
@@ -95,7 +101,7 @@ export const PATCH = withAuthAndValidation(
 // Supprimer une vidéo
 // ============================================
 
-export const DELETE = withAuth(async (_req, context, _user) => {
+export const DELETE = withAuth(async (_req, context, user) => {
   try {
     const { id } = await context.params;
 
@@ -112,6 +118,9 @@ export const DELETE = withAuth(async (_req, context, _user) => {
     await prisma.video.delete({
       where: { id },
     });
+
+    // Logger l'action (avec le titre sauvegardé avant suppression)
+    await logCrud("delete", "video", id, existingVideo.title, user.id);
 
     return noContentResponse();
   } catch (error) {

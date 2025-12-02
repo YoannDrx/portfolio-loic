@@ -15,6 +15,8 @@ import {
 } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
+import { notifyNewContent } from "@/lib/notifications";
+import { logCrud } from "@/lib/activity-logger";
 import type { Prisma } from "@prisma/client";
 
 // ============================================
@@ -113,6 +115,12 @@ export const POST = withAuthAndValidation(
 
       // Créer la version initiale
       await createVersion("album", album.id, album, "create", user.id);
+
+      // Créer une notification
+      await notifyNewContent("album", album.id, album.title);
+
+      // Logger l'action
+      await logCrud("create", "album", album.id, album.title, user.id);
 
       return createdResponse(album);
     } catch (error) {

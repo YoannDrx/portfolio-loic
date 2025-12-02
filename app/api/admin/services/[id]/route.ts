@@ -13,6 +13,7 @@ import {
 } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
+import { logCrud } from "@/lib/activity-logger";
 
 // ============================================
 // GET /api/admin/services/[id]
@@ -95,6 +96,11 @@ export const PATCH = withAuthAndValidation(
       // Créer une version après la mise à jour
       await createVersion("service", service.id, service, "update", user.id);
 
+      // Logger l'action
+      await logCrud("update", "service", service.id, service.title, user.id, {
+        updatedFields: Object.keys(data),
+      });
+
       return successResponse(service);
     } catch (error) {
       return handleApiError(error);
@@ -107,7 +113,7 @@ export const PATCH = withAuthAndValidation(
 // Supprimer un service
 // ============================================
 
-export const DELETE = withAuth(async (_req, context, _user) => {
+export const DELETE = withAuth(async (_req, context, user) => {
   try {
     const { id } = await context.params;
 
@@ -124,6 +130,9 @@ export const DELETE = withAuth(async (_req, context, _user) => {
     await prisma.service.delete({
       where: { id },
     });
+
+    // Logger l'action (avec le titre sauvegardé avant suppression)
+    await logCrud("delete", "service", id, existingService.title, user.id);
 
     return noContentResponse();
   } catch (error) {

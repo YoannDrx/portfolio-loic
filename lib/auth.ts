@@ -1,6 +1,8 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { createAuthMiddleware } from "better-auth/api";
 import { prisma } from "./prisma";
+import { logAuth, logSettingsChange } from "./activity-logger";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -26,6 +28,47 @@ export const auth = betterAuth({
   trustedOrigins: [
     process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   ],
+  hooks: {
+    after: createAuthMiddleware(async (ctx) => {
+      // Log des connexions réussies
+      if (ctx.path === "/sign-in/email") {
+        const newSession = ctx.context.newSession;
+        if (newSession) {
+          await logAuth("login", newSession.user.id, undefined, {
+            email: newSession.user.email,
+          });
+        }
+      }
+
+      // Log des déconnexions
+      if (ctx.path === "/sign-out") {
+        // Pour le sign-out, on récupère le userId depuis la session actuelle avant déconnexion
+        const session = ctx.context.session;
+        if (session) {
+          await logAuth("logout", session.user.id);
+        }
+      }
+
+      // Log des changements de mot de passe
+      if (ctx.path === "/change-password") {
+        const session = ctx.context.session;
+        if (session) {
+          await logSettingsChange("password_change", session.user.id);
+        }
+      }
+
+      // Log des changements d'email
+      if (ctx.path === "/change-email") {
+        const session = ctx.context.session;
+        if (session) {
+          const body = ctx.body as { newEmail?: string } | undefined;
+          await logSettingsChange("email_change", session.user.id, {
+            newEmail: body?.newEmail,
+          });
+        }
+      }
+    }),
+  },
 });
 
 export type Session = typeof auth.$Infer.Session;

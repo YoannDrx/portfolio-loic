@@ -23,6 +23,8 @@ model User {
   sessions        Session[]
   videos          Video[]
   resumeEntries   ResumeEntry[]
+  activityLogs    ActivityLog[]
+  exportLogs      ExportLog[]
 
   @@map("users")
 }
@@ -467,4 +469,61 @@ model CVVersion {
 
   @@index([cvId, createdAt])
   @@map("cv_version")
+}
+
+// ============================================
+// Notifications Admin
+// ============================================
+
+model Notification {
+  id        String   @id @default(cuid())
+  type      String   // "new_content" | "contact_message"
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  data      Json?    // { contentType: "album", contentId: "xxx", locale: "fr" }
+  createdAt DateTime @default(now())
+
+  @@index([read, createdAt(sort: Desc)])
+  @@map("notifications")
+}
+
+// ============================================
+// Activity Logs (Journal d'activité)
+// ============================================
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  type        String   // "auth" | "export" | "crud" | "settings"
+  action      String   // "login" | "logout" | "create" | "update" | "delete" | "export" | "password_change" | "email_change"
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  entityType  String?  // "album" | "video" | "service" | null
+  entityId    String?
+  entityTitle String?  // Titre du contenu pour affichage
+  details     Json?    // Détails supplémentaires
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  @@index([type])
+  @@index([userId])
+  @@index([createdAt(sort: Desc)])
+  @@map("activity_logs")
+}
+
+model ExportLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String   // "albums" | "videos" | "services" | "contacts"
+  format    String   // "csv" | "json" | "txt"
+  filename  String
+  content   String   @db.Text // Contenu de l'export stocké
+  fileSize  Int      // Taille en bytes
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt(sort: Desc)])
+  @@map("export_logs")
 }

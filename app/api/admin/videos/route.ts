@@ -14,6 +14,8 @@ import {
   type VideosQueryParams,
 } from "@/lib/validations/schemas";
 import { createVersion } from "@/lib/versioning";
+import { notifyNewContent } from "@/lib/notifications";
+import { logCrud } from "@/lib/activity-logger";
 import type { Prisma } from "@prisma/client";
 
 // ============================================
@@ -103,6 +105,12 @@ export const POST = withAuthAndValidation(
 
       // Créer la version initiale
       await createVersion("video", video.id, video, "create", user.id);
+
+      // Créer une notification
+      await notifyNewContent("video", video.id, video.title);
+
+      // Logger l'action
+      await logCrud("create", "video", video.id, video.title, user.id);
 
       return createdResponse(video);
     } catch (error) {

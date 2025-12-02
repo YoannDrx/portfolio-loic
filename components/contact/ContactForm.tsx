@@ -26,6 +26,17 @@ export default function ContactForm() {
         'W4SjcLIIqIH2c8aZX'
       );
 
+      // Créer une notification admin (non-bloquant)
+      const formData = new FormData(form.current);
+      fetch('/api/contact/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('user_email'),
+        }),
+      }).catch(() => {}); // Ignorer les erreurs
+
       toast.success(t('success'), {
         position: 'top-right',
         autoClose: 3000,

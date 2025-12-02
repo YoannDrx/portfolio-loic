@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { Search, Pencil, Plus } from "lucide-react";
 import { DeleteServiceButton } from "@/components/admin/delete-service-button";
+import { ExportButton } from "@/components/admin/ExportButton";
 
 interface Service {
   id: string;
@@ -49,15 +50,18 @@ export function ServicesList({ services, locale }: ServicesListProps) {
             Manage your services / {services.length} total entries
           </p>
         </div>
-        <Button
-          asChild
-          className="gap-2 bg-gradient-to-r from-[var(--admin-neon-purple)] to-[var(--admin-neon-cyan)] text-white font-bold hover:shadow-[0_0_20px_rgba(161,0,242,0.4)] transition-all border-none"
-        >
-          <Link href={`/${locale}/admin/services/new`}>
-            <Plus className="h-4 w-4" />
-            Create New
-          </Link>
-        </Button>
+        <div className="flex gap-3">
+          <ExportButton type="services" />
+          <Button
+            asChild
+            className="gap-2 bg-gradient-to-r from-[var(--admin-neon-purple)] to-[var(--admin-neon-cyan)] text-white font-bold hover:shadow-[0_0_20px_rgba(161,0,242,0.4)] transition-all border-none"
+          >
+            <Link href={`/${locale}/admin/services/new`}>
+              <Plus className="h-4 w-4" />
+              Create New
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {/* Search Bar */}

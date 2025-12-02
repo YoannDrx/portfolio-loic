@@ -14,10 +14,18 @@ export const GET = withAuth(async (_req, _context, _user) => {
       getRecentVersions(20),
     ]);
 
+    // Calculer les totaux
+    const totalContent = totalAlbums + totalVideos + totalServices;
+    const totalPublished = publishedAlbums + publishedVideos + publishedServices;
+    const publishRate = totalContent > 0 ? Math.round((totalPublished / totalContent) * 100) : 0;
+
     return successResponse({
       albums: { total: totalAlbums, published: publishedAlbums },
       videos: { total: totalVideos, published: publishedVideos },
       services: { total: totalServices, published: publishedServices },
+      totalContent,
+      totalPublished,
+      publishRate,
       recentActivity,
     });
   } catch (error) {

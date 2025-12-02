@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { Search, Pencil, Plus } from "lucide-react";
 import { DeleteVideoButton } from "@/components/admin/delete-video-button";
+import { ExportButton } from "@/components/admin/ExportButton";
 
 interface Video {
   id: string;
@@ -49,15 +50,18 @@ export function VideosList({ videos, locale }: VideosListProps) {
             Manage your video content / {videos.length} total entries
           </p>
         </div>
-        <Button
-          asChild
-          className="gap-2 bg-gradient-to-r from-[var(--admin-neon-magenta)] to-[var(--admin-neon-purple)] text-white font-bold hover:shadow-[0_0_20px_rgba(255,0,110,0.4)] transition-all border-none"
-        >
-          <Link href={`/${locale}/admin/videos/new`}>
-            <Plus className="h-4 w-4" />
-            Create New
-          </Link>
-        </Button>
+        <div className="flex gap-3">
+          <ExportButton type="videos" />
+          <Button
+            asChild
+            className="gap-2 bg-gradient-to-r from-[var(--admin-neon-magenta)] to-[var(--admin-neon-purple)] text-white font-bold hover:shadow-[0_0_20px_rgba(255,0,110,0.4)] transition-all border-none"
+          >
+            <Link href={`/${locale}/admin/videos/new`}>
+              <Plus className="h-4 w-4" />
+              Create New
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {/* Search Bar */}

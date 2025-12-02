@@ -14,12 +14,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Plus, Eye, Pencil, Download } from "lucide-react";
+import { Plus, Eye, Pencil } from "lucide-react";
 import { DeleteAlbumButton } from "@/components/admin/delete-album-button";
 import { SearchFilters, type FilterState } from "@/components/admin/SearchFilters";
 import { Pagination } from "@/components/admin/Pagination";
 import { TableSkeleton } from "@/components/admin/TableSkeleton";
 import { EmptyState } from "@/components/admin/EmptyState";
+import { ExportButton } from "@/components/admin/ExportButton";
 import { Image as ImageIcon } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
@@ -108,60 +109,27 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
     setCurrentPage(0);
   };
 
-  // Export CSV
-  async function handleExport() {
-    try {
-      const response = await fetch("/api/admin/export?type=albums&format=csv", {
-        credentials: "include",
-      });
-      if (!response.ok) throw new Error("Erreur export");
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `albums-${new Date().toISOString().split("T")[0]}.csv`;
-      a.click();
-
-      toast({
-        title: "Export réussi ✓",
-        description: "Les albums ont été exportés en CSV",
-      });
-    } catch {
-      toast({
-        variant: "destructive",
-        title: "Erreur",
-        description: "Impossible d'exporter les albums",
-      });
-    }
-  }
-
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">Albums</h1>
-          <p className="text-admin-text-secondary">
-            Gérez vos albums photo ({total} au total)
+          <h1 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
+            Albums Library
+          </h1>
+          <p className="text-neutral-400 font-mono text-sm">
+            Manage your photo albums / {total} total entries
           </p>
         </div>
         <div className="flex gap-3">
-          <Button
-            variant="outline"
-            onClick={handleExport}
-            className="gap-2 border-admin-border hover:bg-admin-bg-secondary hover:border-admin-primary-300 transition-all duration-200"
-          >
-            <Download className="h-4 w-4" />
-            Exporter CSV
-          </Button>
+          <ExportButton type="albums" />
           <Button
             asChild
-            className="gap-2 bg-gradient-to-r from-admin-primary-500 to-admin-accent-500 hover:from-admin-primary-600 hover:to-admin-accent-600 shadow-md hover:shadow-lg transition-all duration-200"
+            className="gap-2 bg-gradient-to-r from-[var(--admin-neon-lime)] to-[var(--admin-neon-cyan)] text-black font-bold hover:shadow-[0_0_20px_rgba(213,255,10,0.4)] transition-all border-none"
           >
             <Link href={`/${locale}/admin/albums/new`}>
               <Plus className="h-4 w-4" />
-              Nouvel album
+              Create New
             </Link>
           </Button>
         </div>
@@ -193,27 +161,27 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
         />
       ) : (
         <>
-          <div className="rounded-lg border border-admin-border bg-white shadow-sm overflow-hidden">
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
             <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
               <Table>
-                <TableHeader className="sticky top-0 bg-admin-bg-secondary z-10 border-b border-admin-border">
-                  <TableRow className="hover:bg-admin-bg-secondary">
-                    <TableHead className="font-semibold text-admin-text-primary">Aperçu</TableHead>
-                    <TableHead className="font-semibold text-admin-text-primary">Titre</TableHead>
-                    <TableHead className="font-semibold text-admin-text-primary">Date</TableHead>
-                    <TableHead className="font-semibold text-admin-text-primary">Style</TableHead>
-                    <TableHead className="font-semibold text-admin-text-primary">Statut</TableHead>
-                    <TableHead className="font-semibold text-admin-text-primary">Actions</TableHead>
+                <TableHeader className="sticky top-0 bg-white/5 backdrop-blur-md z-10 border-b border-white/10">
+                  <TableRow className="hover:bg-white/5 border-white/10">
+                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Aperçu</TableHead>
+                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Titre</TableHead>
+                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Date</TableHead>
+                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Style</TableHead>
+                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Statut</TableHead>
+                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {albums.map((album) => (
                     <TableRow
                       key={album.id}
-                      className="group hover:bg-admin-bg-secondary transition-colors duration-150 border-b border-admin-border-light last:border-b-0"
+                      className="group hover:bg-white/5 transition-colors duration-150 border-b border-white/5 last:border-b-0"
                     >
                       <TableCell>
-                        <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                        <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200 ring-1 ring-white/10">
                           <Image
                             src={album.img}
                             alt={album.title}
@@ -224,31 +192,29 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <span className="font-semibold text-admin-text-primary">{album.title}</span>
+                        <span className="font-bold text-white">{album.title}</span>
                       </TableCell>
                       <TableCell>
-                        <span className="text-admin-text-secondary text-sm">{album.date}</span>
+                        <span className="text-neutral-400 text-sm font-mono">{album.date}</span>
                       </TableCell>
                       <TableCell>
                         <Badge
                           variant="outline"
-                          className="capitalize border-admin-accent-200 bg-admin-accent-50 text-admin-accent-700 font-medium"
+                          className="capitalize border-[var(--admin-neon-lime)]/30 bg-[var(--admin-neon-lime)]/10 text-[var(--admin-neon-lime)] font-bold"
                         >
                           {album.style}
                         </Badge>
                       </TableCell>
                       <TableCell>
                         {album.published ? (
-                          <Badge className="bg-admin-success-500 hover:bg-admin-success-600 text-white font-medium shadow-sm">
-                            Publié
-                          </Badge>
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
+                            <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
+                            Published
+                          </span>
                         ) : (
-                          <Badge
-                            variant="secondary"
-                            className="bg-gray-100 text-gray-700 border border-gray-200 font-medium"
-                          >
-                            Brouillon
-                          </Badge>
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-white/5 text-neutral-500 border border-white/10">
+                            Draft
+                          </span>
                         )}
                       </TableCell>
                       <TableCell>
@@ -257,7 +223,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                             variant="ghost"
                             size="sm"
                             asChild
-                            className="h-9 w-9 p-0 hover:bg-admin-primary-50 hover:text-admin-primary-600 transition-all duration-200"
+                            className="h-9 w-9 p-0 text-neutral-400 hover:text-[var(--admin-neon-cyan)] hover:bg-[var(--admin-neon-cyan)]/10 transition-all duration-200"
                           >
                             <Link
                               href={`/${locale}/albums/${album.id}${!album.published ? "?preview=true" : ""}`}
@@ -270,7 +236,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                             variant="ghost"
                             size="sm"
                             asChild
-                            className="h-9 w-9 p-0 hover:bg-admin-accent-50 hover:text-admin-accent-600 transition-all duration-200"
+                            className="h-9 w-9 p-0 text-neutral-400 hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
                           >
                             <Link href={`/${locale}/admin/albums/${album.id}`}>
                               <Pencil className="h-4 w-4" />

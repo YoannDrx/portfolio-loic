@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, Database, FileText, FileJson, FileSpreadsheet, Loader2, CheckCircle2 } from "lucide-react";
+import { Download, Database, FileText, FileJson, FileSpreadsheet, Sheet, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { GeneralSettings } from "@/components/admin/settings/GeneralSettings";
 import { SocialMediaSettings } from "@/components/admin/settings/SocialMediaSettings";
@@ -13,7 +13,7 @@ import { ProfileSettings } from "@/components/admin/settings/ProfileSettings";
 import { useTranslations } from "next-intl";
 
 type ContentType = "albums" | "videos" | "services";
-type ExportFormat = "csv" | "json" | "txt";
+type ExportFormat = "csv" | "json" | "txt" | "xlsx";
 
 const DEBOUNCE_DELAY = 1000; // 1 seconde
 
@@ -190,6 +190,12 @@ export function SettingsContent() {
 
   const formatButtons = [
     {
+      format: "xlsx" as ExportFormat,
+      label: "Excel",
+      icon: Sheet,
+      description: "Fichier Excel (.xlsx)",
+    },
+    {
       format: "csv" as ExportFormat,
       label: t("settings.export.formats.csv.label"),
       icon: FileSpreadsheet,
@@ -341,6 +347,9 @@ export function SettingsContent() {
                   {t("settings.export.info.title")}
                 </h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>
+                    <strong>Excel (.xlsx)</strong> - Fichier tableur compatible Excel, Numbers, Google Sheets
+                  </li>
                   <li>
                     <strong>{t("settings.export.formats.csv.label")}</strong> - {t("settings.export.info.csv")}
                   </li>

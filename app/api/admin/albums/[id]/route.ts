@@ -13,6 +13,7 @@ import {
 } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
+import { logCrud } from "@/lib/activity-logger";
 
 // ============================================
 // GET /api/admin/albums/[id]
@@ -95,6 +96,11 @@ export const PATCH = withAuthAndValidation(
       // Créer une version après la mise à jour
       await createVersion("album", album.id, album, "update", user.id);
 
+      // Logger l'action
+      await logCrud("update", "album", album.id, album.title, user.id, {
+        updatedFields: Object.keys(data),
+      });
+
       return successResponse(album);
     } catch (error) {
       return handleApiError(error);
@@ -107,7 +113,7 @@ export const PATCH = withAuthAndValidation(
 // Supprimer un album
 // ============================================
 
-export const DELETE = withAuth(async (_req, context, _user) => {
+export const DELETE = withAuth(async (_req, context, user) => {
   try {
     const { id } = await context.params;
 
@@ -124,6 +130,9 @@ export const DELETE = withAuth(async (_req, context, _user) => {
     await prisma.album.delete({
       where: { id },
     });
+
+    // Logger l'action (avec le titre sauvegardé avant suppression)
+    await logCrud("delete", "album", id, existingAlbum.title, user.id);
 
     return noContentResponse();
   } catch (error) {

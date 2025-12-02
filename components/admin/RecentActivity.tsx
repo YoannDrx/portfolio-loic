@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Image as ImageIcon, Video as VideoIcon, Briefcase } from "lucide-react";
@@ -29,24 +28,24 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
         return {
           icon: ImageIcon,
           label: "Album",
-          color: "text-admin-accent-500",
-          bgColor: "bg-admin-accent-50",
+          color: "text-[var(--admin-neon-lime)]",
+          bgColor: "bg-[var(--admin-neon-lime)]/10",
           href: `/admin/albums`,
         };
       case "video":
         return {
           icon: VideoIcon,
           label: "Vidéo",
-          color: "text-neon-magenta",
-          bgColor: "bg-pink-50",
+          color: "text-[var(--admin-neon-magenta)]",
+          bgColor: "bg-[var(--admin-neon-magenta)]/10",
           href: `/admin/videos`,
         };
       case "service":
         return {
           icon: Briefcase,
           label: "Service",
-          color: "text-neon-cyan",
-          bgColor: "bg-cyan-50",
+          color: "text-[var(--admin-neon-cyan)]",
+          bgColor: "bg-[var(--admin-neon-cyan)]/10",
           href: `/admin/services`,
         };
     }
@@ -65,26 +64,26 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
   };
 
   return (
-    <Card className="border border-admin-border dark:border-dark-admin-border bg-white dark:bg-dark-admin-bg-secondary transition-colors duration-300">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <CardTitle className="text-lg font-semibold text-admin-text-primary dark:text-dark-admin-text-primary transition-colors duration-300">
+    <div className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h3 className="text-lg font-bold text-white">
           Activité récente
-        </CardTitle>
-        <Button variant="ghost" size="sm" className="text-admin-primary-600 dark:text-admin-primary-400 transition-colors duration-300" asChild>
+        </h3>
+        <Button variant="ghost" size="sm" className="text-[var(--admin-neon-cyan)] hover:text-white hover:bg-white/10" asChild>
           <Link href={`/${locale}/admin/albums`}>
             Voir tout
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-3">
+      </div>
+      <div className="p-4">
+        <div className="space-y-2">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <div className="rounded-full bg-admin-bg-secondary dark:bg-dark-admin-bg-tertiary p-4 mb-3 transition-colors duration-300">
-                <ImageIcon className="h-8 w-8 text-admin-text-tertiary dark:text-dark-admin-text-tertiary transition-colors duration-300" />
+              <div className="rounded-full bg-white/5 p-4 mb-3">
+                <ImageIcon className="h-8 w-8 text-neutral-500" />
               </div>
-              <p className="text-sm text-admin-text-secondary dark:text-dark-admin-text-secondary transition-colors duration-300">
+              <p className="text-sm text-neutral-500">
                 Aucune activité récente
               </p>
             </div>
@@ -96,7 +95,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
               return (
                 <div
                   key={item.id}
-                  className="group flex items-center gap-4 rounded-lg p-3 hover:bg-admin-bg-secondary dark:hover:bg-dark-admin-bg-tertiary transition-colors duration-200"
+                  className="group flex items-center gap-4 rounded-xl p-3 hover:bg-white/5 transition-colors duration-200"
                 >
                   {/* Thumbnail or Icon */}
                   <div className="relative h-12 w-12 flex-shrink-0">
@@ -105,7 +104,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
                         src={item.img}
                         alt={item.title}
                         fill
-                        className="rounded-lg object-cover"
+                        className="rounded-lg object-cover ring-1 ring-white/10"
                         sizes="48px"
                       />
                     ) : (
@@ -123,22 +122,11 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <p className="text-sm font-medium text-admin-text-primary dark:text-dark-admin-text-primary truncate transition-colors duration-300">
+                      <p className="text-sm font-bold text-white truncate">
                         {item.title}
                       </p>
-                      <Badge
-                        variant={item.published ? "default" : "secondary"}
-                        className={cn(
-                          "text-xs transition-colors duration-300",
-                          item.published
-                            ? "bg-admin-success-100 dark:bg-admin-success-900/30 text-admin-success-700 dark:text-admin-success-400 border-admin-success-200 dark:border-admin-success-700"
-                            : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700"
-                        )}
-                      >
-                        {item.published ? "Publié" : "Brouillon"}
-                      </Badge>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-admin-text-tertiary dark:text-dark-admin-text-tertiary transition-colors duration-300">
+                    <div className="flex items-center gap-2 text-xs text-neutral-500">
                       <Icon className={cn("h-3 w-3", config.color)} />
                       <span>{config.label}</span>
                       <span>•</span>
@@ -146,25 +134,22 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
                     </div>
                   </div>
 
-                  {/* Action */}
-                  <Link
-                    href={`/${locale}${config.href}/${item.id}`}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                  >
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 w-8 p-0"
-                    >
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                  {/* Status Badge */}
+                  {item.published ? (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
+                      <span className="w-1 h-1 rounded-full bg-neon-green" />
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-white/5 text-neutral-500 border border-white/10">
+                      <span className="w-1 h-1 rounded-full bg-neutral-500" />
+                    </span>
+                  )}
                 </div>
               );
             })
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
