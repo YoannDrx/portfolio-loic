@@ -494,10 +494,10 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
 
   return (
     <>
-      {/* Mobile menu button */}
+      {/* Mobile menu button - z-40 to be above header (z-30) */}
       <button
         onClick={() => setIsMobileOpen(true)}
-        className="fixed top-4 left-4 z-30 p-2 rounded-lg bg-[var(--glass-active)] backdrop-blur-xl border border-[var(--glass-border)] text-foreground lg:hidden admin-hover-glow-cyan"
+        className="fixed top-4 left-4 z-40 p-2.5 rounded-lg bg-[var(--glass-active)] backdrop-blur-xl border border-lime-400/50 text-foreground lg:hidden admin-hover-glow-cyan shadow-lg"
       >
         <Menu className="h-5 w-5" />
       </button>

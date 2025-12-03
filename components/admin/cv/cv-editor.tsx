@@ -344,11 +344,12 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   };
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-      <div className="space-y-4 pb-8">
+    <div className="flex flex-col lg:grid lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 min-h-0 lg:h-[calc(100vh-6rem)]">
+      {/* Panneau gauche - scrollable sur desktop */}
+      <div className="space-y-3 sm:space-y-4 pb-8 lg:overflow-y-auto lg:pr-2 order-last lg:order-first">
         <Card className="bg-card border-[var(--glass-border)]">
           <div
-            className="flex items-center justify-between p-4 cursor-pointer hover:bg-[var(--glass-subtle)] transition-colors"
+            className="flex items-center justify-between p-3 sm:p-4 cursor-pointer hover:bg-[var(--glass-subtle)] transition-colors"
             onClick={() => setSettingsOpen(!settingsOpen)}
             role="button"
             tabIndex={0}
@@ -360,8 +361,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
             </CardTitle>
             <ChevronDown className={`h-5 w-5 text-foreground/60 transition-transform ${settingsOpen ? "rotate-180" : ""}`} />
           </div>
-          {settingsOpen && <CardContent className="space-y-4 pt-0 border-t border-[var(--glass-border)]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {settingsOpen && <CardContent className="space-y-3 sm:space-y-4 pt-3 px-2 sm:px-4 border-t border-[var(--glass-border)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label className="text-foreground/70">Nom complet</Label>
                 <Input
@@ -387,7 +388,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label className="text-foreground/70">Accent principal</Label>
                 <ColorPicker value={data.theme?.primary || data.accentColor || defaultTheme.primary} onChange={(c) => updateTheme("primary", c)} />
@@ -397,7 +398,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 <ColorPicker value={data.theme?.secondary || defaultTheme.secondary} onChange={(c) => updateTheme("secondary", c)} />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label className="text-foreground/70">Fond du header</Label>
                 <ColorPicker value={data.theme?.header || defaultTheme.header} onChange={(c) => updateTheme("header", c)} />
@@ -407,7 +408,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 <ColorPicker value={data.theme?.sidebar || defaultTheme.sidebar} onChange={(c) => updateTheme("sidebar", c)} />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label className="text-foreground/70">Couleur du texte</Label>
                 <ColorPicker value={data.theme?.text || defaultTheme.text} onChange={(c) => updateTheme("text", c)} />
@@ -421,7 +422,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
               <input type="checkbox" checked={data.showPhoto} onChange={(e) => updateGlobal("showPhoto", e.target.checked)} className="w-4 h-4" />
               <Label className="text-foreground">Afficher la photo</Label>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label className="text-foreground/70">Titre (FR)</Label>
                 <Input value={data.headlineFr || ""} onChange={(e) => updateGlobal("headlineFr", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground" />
@@ -431,7 +432,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 <Input value={data.headlineEn || ""} onChange={(e) => updateGlobal("headlineEn", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground" />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label className="text-foreground/70">Bio (FR)</Label>
                 <Textarea value={data.bioFr || ""} onChange={(e) => updateGlobal("bioFr", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground h-20" />
@@ -441,58 +442,58 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 <Textarea value={data.bioEn || ""} onChange={(e) => updateGlobal("bioEn", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground h-20" />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[var(--glass-border)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4 border-t border-[var(--glass-border)]">
               <Input placeholder="Email" value={data.email || ""} onChange={(e) => updateGlobal("email", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground" />
               <Input placeholder="Téléphone" value={data.phone || ""} onChange={(e) => updateGlobal("phone", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground" />
               <Input placeholder="Site Web" value={data.website || ""} onChange={(e) => updateGlobal("website", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground" />
               <Input placeholder="Localisation" value={data.location || ""} onChange={(e) => updateGlobal("location", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground" />
-              <Input placeholder="LinkedIn" value={data.linkedInUrl || ""} onChange={(e) => updateGlobal("linkedInUrl", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground col-span-2" />
-              <Input placeholder="Photo (URL public/…)" value={data.photo || ""} onChange={(e) => updateGlobal("photo", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground col-span-2" />
+              <Input placeholder="LinkedIn" value={data.linkedInUrl || ""} onChange={(e) => updateGlobal("linkedInUrl", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground sm:col-span-2" />
+              <Input placeholder="Photo (URL public/…)" value={data.photo || ""} onChange={(e) => updateGlobal("photo", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground sm:col-span-2" />
             </div>
           </CardContent>}
         </Card>
 
         <Card className="bg-card border-[var(--glass-border)]">
-          <CardHeader className="flex flex-row items-center justify-between py-4 border-b border-[var(--glass-border)]">
-            <CardTitle className="text-foreground">Sections</CardTitle>
-            <Button onClick={handleSave} disabled={isSaving} className="bg-lime-300 text-black hover:bg-lime-400">
+          <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 py-3 sm:py-4 border-b border-[var(--glass-border)]">
+            <CardTitle className="text-foreground text-base sm:text-lg">Sections</CardTitle>
+            <Button onClick={handleSave} disabled={isSaving} className="bg-lime-300 text-black hover:bg-lime-400 w-full sm:w-auto">
               <SaveIcon className="mr-2 h-4 w-4" />
               {isSaving ? "..." : "Sauvegarder"}
             </Button>
           </CardHeader>
-          <CardContent className="pt-6 space-y-4">
+          <CardContent className="pt-3 sm:pt-4 space-y-2 sm:space-y-3 px-2 sm:px-4">
             {data.sections.map((section, sIndex) => {
               const isOpen = openSections[sIndex] ?? true;
               return (
-                <div key={sIndex} className="border border-[var(--glass-border)] rounded-lg px-4 bg-[var(--glass-subtle)]">
+                <div key={sIndex} className="border border-[var(--glass-border)] rounded-lg px-2 sm:px-3 bg-[var(--glass-subtle)]">
                   <div
-                    className="flex w-full items-center justify-between py-3 cursor-pointer"
+                    className="flex w-full items-center justify-between py-2 sm:py-3 gap-2 cursor-pointer"
                     onClick={() => toggleSection(sIndex)}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleSection(sIndex); }}
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-lg font-medium text-foreground">{getT(section.translations, "fr").title || "Nouvelle Section"}</span>
-                      <span className="text-xs bg-[var(--glass-active)] px-2 py-1 rounded text-foreground/50 uppercase">{section.placement || "main"}</span>
+                    <div className="flex items-center gap-2 min-w-0 flex-1">
+                      <span className="text-sm sm:text-lg font-medium text-foreground truncate">{getT(section.translations, "fr").title || "Nouvelle Section"}</span>
+                      <span className="text-[10px] sm:text-xs bg-[var(--glass-active)] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-foreground/50 uppercase shrink-0">{section.placement || "main"}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Button size="icon" variant="ghost" onClick={(e) => { e.stopPropagation(); moveSection(sIndex, "up"); }} disabled={sIndex === 0}>
-                        <ArrowUpIcon className="h-4 w-4 text-foreground/50" />
+                    <div className="flex items-center shrink-0">
+                      <Button size="icon" variant="ghost" className="h-7 w-7 sm:h-8 sm:w-8" onClick={(e) => { e.stopPropagation(); moveSection(sIndex, "up"); }} disabled={sIndex === 0}>
+                        <ArrowUpIcon className="h-3 w-3 sm:h-4 sm:w-4 text-foreground/50" />
                       </Button>
-                      <Button size="icon" variant="ghost" onClick={(e) => { e.stopPropagation(); moveSection(sIndex, "down"); }} disabled={sIndex === data.sections.length - 1}>
-                        <ArrowDownIcon className="h-4 w-4 text-foreground/50" />
+                      <Button size="icon" variant="ghost" className="h-7 w-7 sm:h-8 sm:w-8" onClick={(e) => { e.stopPropagation(); moveSection(sIndex, "down"); }} disabled={sIndex === data.sections.length - 1}>
+                        <ArrowDownIcon className="h-3 w-3 sm:h-4 sm:w-4 text-foreground/50" />
                       </Button>
-                      <Button size="icon" variant="ghost" onClick={(e) => { e.stopPropagation(); removeSection(sIndex); }} className="text-red-400 hover:text-red-300 hover:bg-red-900/20">
-                        <TrashIcon className="h-4 w-4" />
+                      <Button size="icon" variant="ghost" className="h-7 w-7 sm:h-8 sm:w-8 text-red-400 hover:text-red-300 hover:bg-red-900/20" onClick={(e) => { e.stopPropagation(); removeSection(sIndex); }}>
+                        <TrashIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                       </Button>
-                      <ChevronDown className={`h-4 w-4 transition-transform text-foreground/60 ${isOpen ? "rotate-180" : ""}`} />
+                      <ChevronDown className={`h-3 w-3 sm:h-4 sm:w-4 transition-transform text-foreground/60 ${isOpen ? "rotate-180" : ""}`} />
                     </div>
                   </div>
 
                   {isOpen && (
-                    <div className="space-y-6 pb-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-muted/20 rounded-md mb-4">
+                    <div className="space-y-4 sm:space-y-6 pb-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 bg-muted/20 rounded-md mb-4">
                         <div className="space-y-2">
                           <Label className="text-foreground/70">Placement</Label>
                           <Select value={section.placement || "main"} onValueChange={(v) => updateSection(sIndex, "placement", v)}>
@@ -525,8 +526,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                             onChange={(v) => updateSection(sIndex, "color", v)}
                           />
                         </div>
-                        <div className="space-y-2 md:col-span-2 lg:col-span-3">
-                          <Label className="text-foreground/70">Icône (nom Lucide, optionnel)</Label>
+                        <div className="space-y-2 sm:col-span-2 lg:col-span-3">
+                          <Label className="text-foreground/70 text-sm">Icône (nom Lucide)</Label>
                           <Input
                             value={section.icon || ""}
                             onChange={(e) => updateSection(sIndex, "icon", e.target.value)}
@@ -568,14 +569,14 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                         </div>
 
                         {section.items?.map((item, iIndex) => (
-                          <div key={iIndex} className="p-4 border border-[var(--glass-border)] rounded-md bg-muted/40 space-y-4">
-                            <div className="flex items-start justify-between">
-                              <div className="grid grid-cols-2 gap-2 text-xs text-foreground/50 w-full pr-4">
+                          <div key={iIndex} className="p-3 sm:p-4 border border-[var(--glass-border)] rounded-md bg-muted/40 space-y-3 sm:space-y-4">
+                            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                              <div className="grid grid-cols-2 gap-2 text-xs text-foreground/50 w-full">
                                 <div className="space-y-1">
                                   <span>Début</span>
                                   <input
                                     type="date"
-                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-foreground p-1"
+                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-foreground p-1 text-xs sm:text-sm"
                                     value={item.startDate ? new Date(item.startDate).toISOString().split("T")[0] : ""}
                                     onChange={(e) => {
                                       updateItem(sIndex, iIndex, "startDate", e.target.value);
@@ -586,7 +587,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   <span>Fin</span>
                                   <input
                                     type="date"
-                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-foreground p-1"
+                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-foreground p-1 text-xs sm:text-sm"
                                     value={item.endDate ? new Date(item.endDate).toISOString().split("T")[0] : ""}
                                     onChange={(e) => {
                                       updateItem(sIndex, iIndex, "endDate", e.target.value);
@@ -595,7 +596,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   />
                                 </div>
                                 <div className="col-span-2 pt-2">
-                                  <label className="flex items-center gap-2 cursor-pointer hover:text-foreground">
+                                  <label className="flex items-center gap-2 cursor-pointer hover:text-foreground text-xs">
                                     <input
                                       type="checkbox"
                                       checked={item.isCurrent}
@@ -608,7 +609,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                                   </label>
                                 </div>
                               </div>
-                              <div className="flex flex-col gap-1">
+                              <div className="flex sm:flex-col gap-1 justify-end shrink-0">
                                 <Button
                                   size="icon"
                                   variant="ghost"
@@ -739,17 +740,17 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
 
         {/* CARD COMPÉTENCES */}
         <Card className="bg-card border-[var(--glass-border)]">
-          <CardHeader className="flex flex-row items-center justify-between py-3 border-b border-[var(--glass-border)]">
+          <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 py-3 border-b border-[var(--glass-border)]">
             <CardTitle className="text-foreground text-base">Compétences</CardTitle>
-            <Button size="sm" onClick={addSkill} className="bg-lime-300 text-black hover:bg-lime-400">
+            <Button size="sm" onClick={addSkill} className="bg-lime-300 text-black hover:bg-lime-400 w-full sm:w-auto">
               <PlusIcon className="h-4 w-4 mr-1" /> Ajouter
             </Button>
           </CardHeader>
-          <CardContent className="pt-4 space-y-3">
+          <CardContent className="pt-3 sm:pt-4 space-y-2 sm:space-y-3 px-2 sm:px-4">
             {data.skills.map((skill, idx) => (
-              <div key={skill.id || idx} className="border border-[var(--glass-border)] rounded-lg p-3 bg-[var(--glass-subtle)]">
+              <div key={skill.id || idx} className="border border-[var(--glass-border)] rounded-lg p-2 sm:p-3 bg-[var(--glass-subtle)]">
                 {/* Header avec catégorie et actions */}
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
                   <Select value={skill.category || "technical"} onValueChange={(v) => updateSkill(idx, "category", v)}>
                     <SelectTrigger className="w-32 h-8 bg-card border-[var(--glass-border)] text-foreground">
                       <SelectValue />
@@ -774,7 +775,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 </div>
 
                 {/* Traductions FR/EN */}
-                <div className="grid grid-cols-2 gap-3 mb-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3">
                   <div>
                     <Label className="text-xs text-foreground/60">Nom (FR)</Label>
                     <Input
@@ -794,7 +795,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 </div>
 
                 {/* Niveau et options */}
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                   <div className="flex items-center gap-2">
                     <Label className="text-xs text-foreground/60">Niveau</Label>
                     <Select value={String(skill.level || 3)} onValueChange={(v) => updateSkill(idx, "level", Number(v))}>
@@ -835,7 +836,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="space-y-3 pt-3">
+          <CardContent className="space-y-2 sm:space-y-3 pt-3 px-2 sm:px-4">
             <div className="flex gap-2">
               <Input
                 placeholder="Nom de la version"
@@ -872,22 +873,23 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
         </Card>
       </div>
 
-      <div className="xl:sticky xl:top-4 xl:self-start xl:max-h-[calc(100vh-2rem)]">
-        <Card className="bg-card border-[var(--glass-border)]">
-          <CardHeader className="flex flex-row items-center justify-between py-4 bg-card z-20 border-b border-[var(--glass-border)]">
-            <CardTitle className="text-foreground">Prévisualisation PDF</CardTitle>
-            <div className="flex items-center gap-3">
+      {/* Panneau droite - Preview PDF (en haut sur mobile, à droite sur desktop) */}
+      <div className="flex flex-col h-[60vh] sm:h-[500px] lg:h-full order-first lg:order-last">
+        <Card className="bg-card border-[var(--glass-border)] flex flex-col h-full">
+          <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 py-3 sm:py-4 border-b border-[var(--glass-border)] shrink-0">
+            <CardTitle className="text-foreground text-sm sm:text-base">Prévisualisation PDF</CardTitle>
+            <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
               <PDFDownloadButton data={data} locale={previewLocale} />
               <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
                 <TabsList className="bg-[var(--glass-active)] border border-lime-400/50">
-                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black">FR</TabsTrigger>
-                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black">EN</TabsTrigger>
+                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs sm:text-sm">FR</TabsTrigger>
+                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs sm:text-sm">EN</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
           </CardHeader>
-          <CardContent className="p-0 bg-zinc-900/50">
-            <PDFViewerClient width="100%" height={850} className="border-none w-full">
+          <CardContent className="p-0 bg-zinc-900/50 flex-1 min-h-0">
+            <PDFViewerClient width="100%" height="100%" className="border-none w-full h-full min-h-[300px]">
               <CVDocument data={data} locale={previewLocale} />
             </PDFViewerClient>
           </CardContent>
