@@ -188,6 +188,7 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
   const heroY = useTransform(heroScrollProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(heroScrollProgress, [0, 0.5], [1, 0]);
   const heroScale = useTransform(heroScrollProgress, [0, 0.5], [1, 0.95]);
+  const scrollIndicatorOpacity = useTransform(heroScrollProgress, [0, 0.1], [1, 0]);
 
   // Login Modal State
   const searchParams = useSearchParams();
@@ -282,12 +283,12 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
       <div className="fixed inset-0 z-0 bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
 
       {/* Main Content */}
-      <main className="relative z-10 pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto">
+      <main className="relative z-10 pt-0 sm:pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto">
 
         {/* ============================================
             HERO SECTION
             ============================================ */}
-        <section ref={heroRef} id="about" className="min-h-[90vh] flex flex-col justify-center items-start relative">
+        <section ref={heroRef} id="about" className="min-h-screen sm:min-h-[90vh] flex flex-col justify-center items-start relative">
           <motion.div
             style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
             className="relative"
@@ -368,12 +369,13 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
             </motion.div>
           </motion.div>
 
-          {/* Scroll indicator */}
+          {/* Scroll indicator - Fixed on mobile, absolute on desktop, fades on scroll */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            style={{ opacity: scrollIndicatorOpacity }}
+            className="fixed sm:absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 pointer-events-none"
           >
             <span className="text-xs text-muted-foreground uppercase tracking-widest font-mono">Scroll</span>
             <motion.div
@@ -813,10 +815,10 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
       {/* Login Modal */}
       <LoginModal isOpen={isLoginOpen} onClose={handleLoginClose} />
 
-      {/* Admin Login Trigger (Discreet) */}
+      {/* Admin Login Trigger (Discreet) - Hidden on mobile, visible on desktop */}
       <button
         onClick={() => setIsLoginOpen(true)}
-        className="fixed bottom-4 right-4 z-50 p-2 text-white/10 hover:text-neon-lime transition-colors duration-300"
+        className="hidden sm:block fixed bottom-4 right-4 z-50 p-2 text-white/10 hover:text-neon-lime transition-colors duration-300"
         aria-label="Admin Login"
       >
         <Lock className="w-4 h-4" />
