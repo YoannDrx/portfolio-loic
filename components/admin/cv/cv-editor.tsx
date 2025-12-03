@@ -531,7 +531,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
               {isSaving ? "..." : "Sauvegarder"}
             </Button>
           </CardHeader>
-          <CardContent className="pt-3 sm:pt-4 space-y-2 sm:space-y-3 px-1 sm:px-4 bg-white/5">
+          <CardContent className="pt-3 sm:pt-4 space-y-2 sm:space-y-3 px-1 sm:px-4">
             {data.sections.map((section, sIndex) => {
               const isOpen = openSections[sIndex] ?? true;
               return (
@@ -1033,24 +1033,18 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
       </div>
 
       {/* Panneau droite - Preview PDF (en haut sur mobile, à droite sur desktop) */}
-      <div className="flex flex-col h-[50vh] sm:h-[500px] lg:h-full order-first lg:order-last overflow-hidden">
+      <div className="flex flex-col h-[calc(92vw*1.5)] sm:h-[500px] lg:h-full order-first lg:order-last overflow-hidden">
         <Card className="bg-card border-[var(--glass-border)] flex flex-col h-full overflow-hidden">
-          <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 py-3 sm:py-4 border-b border-[var(--glass-border)] shrink-0">
+          <CardHeader className="flex flex-row items-center justify-between gap-2 py-2 sm:py-4 border-b border-[var(--glass-border)] shrink-0">
             <CardTitle className="text-foreground text-sm sm:text-base">Prévisualisation PDF</CardTitle>
-            <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
+            <div className="flex items-center gap-2 sm:gap-3">
               <PDFDownloadButton data={data} locale={previewLocale} />
               <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
-                <TabsList className="bg-[var(--glass-active)] border border-lime-400/50">
-                  <TabsTrigger
-                    value="fr"
-                    className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs sm:text-sm"
-                  >
+                <TabsList className="bg-[var(--glass-active)] border border-lime-400/50 h-8">
+                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
                     FR
                   </TabsTrigger>
-                  <TabsTrigger
-                    value="en"
-                    className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs sm:text-sm"
-                  >
+                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
                     EN
                   </TabsTrigger>
                 </TabsList>
