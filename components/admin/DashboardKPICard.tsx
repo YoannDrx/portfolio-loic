@@ -48,51 +48,49 @@ export function DashboardKPICard({
         )}
       />
 
-      <CardContent className="relative p-6">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div
-              className={cn(
-                "flex h-12 w-12 items-center justify-center rounded-xl shadow-sm group-hover:scale-110 transition-transform duration-300",
-                bgColorClass
-              )}
-            >
-              <Icon className={cn("h-6 w-6", colorClass)} />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground transition-colors duration-300">
-                {title}
-              </p>
-              {badge && (
-                <Badge
-                  variant="outline"
-                  className="mt-1 text-xs border-admin-border-light"
-                >
-                  {badge}
-                </Badge>
-              )}
-            </div>
+      <CardContent className="relative p-3 sm:p-6">
+        <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4">
+          <div
+            className={cn(
+              "flex h-8 w-8 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl shadow-sm group-hover:scale-110 transition-transform duration-300 shrink-0",
+              bgColorClass
+            )}
+          >
+            <Icon className={cn("h-4 w-4 sm:h-6 sm:w-6", colorClass)} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-300">
+              {title}
+            </p>
+            {badge && (
+              <Badge
+                variant="outline"
+                className="mt-0.5 text-[10px] sm:text-xs border-admin-border-light"
+              >
+                {badge}
+              </Badge>
+            )}
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1 sm:space-y-2">
           <div className="flex items-baseline gap-2">
-            <span className="text-4xl font-bold text-foreground transition-colors duration-300">
+            <span className="text-2xl sm:text-4xl font-bold text-foreground transition-colors duration-300">
               {value}
             </span>
             {trend && (
               <div
                 className={cn(
-                  "flex items-center gap-1 text-sm font-semibold",
+                  "flex items-center gap-1 text-xs sm:text-sm font-semibold",
                   trend.isPositive
                     ? "text-admin-success-600"
                     : "text-admin-danger-600"
                 )}
               >
                 {trend.isPositive ? (
-                  <TrendingUp className="h-4 w-4" />
+                  <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
                 ) : (
-                  <TrendingDown className="h-4 w-4" />
+                  <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4" />
                 )}
                 <span>{Math.abs(trend.value)}%</span>
               </div>
@@ -100,7 +98,7 @@ export function DashboardKPICard({
           </div>
 
           {description && (
-            <p className="text-sm text-muted-foreground transition-colors duration-300">{description}</p>
+            <p className="text-xs sm:text-sm text-muted-foreground transition-colors duration-300">{description}</p>
           )}
         </div>
 

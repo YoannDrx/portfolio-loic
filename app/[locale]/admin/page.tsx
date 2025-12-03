@@ -119,10 +119,10 @@ export default async function AdminDashboardPage({
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-admin-text-primary dark:text-dark-admin-text-primary tracking-tight transition-colors duration-300">
+        <h1 className="text-2xl sm:text-3xl font-bold text-admin-text-primary dark:text-dark-admin-text-primary tracking-tight transition-colors duration-300">
           Bienvenue ! 👋
         </h1>
-        <p className="text-admin-text-secondary dark:text-dark-admin-text-secondary mt-1 transition-colors duration-300">
+        <p className="text-sm sm:text-base text-admin-text-secondary dark:text-dark-admin-text-secondary mt-1 transition-colors duration-300">
           Vue d'ensemble de votre portfolio et statistiques
         </p>
       </div>
@@ -131,14 +131,14 @@ export default async function AdminDashboardPage({
       <DashboardKPICards stats={stats} locale={locale} />
 
       {/* Bottom Section */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 min-w-0">
         {/* Recent Activity - 2 columns */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 min-w-0 overflow-hidden">
           <RecentActivity items={recentItems} locale={locale} />
         </div>
 
         {/* Quick Actions - 1 column */}
-        <div>
+        <div className="min-w-0 overflow-hidden">
           <QuickActions locale={locale} />
         </div>
       </div>

@@ -68,14 +68,14 @@ const actions = [
 
 export function QuickActions({ locale }: QuickActionsProps) {
   return (
-    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden">
-      <div className="px-6 py-4 border-b border-[var(--glass-border)]">
+    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden w-full">
+      <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-[var(--glass-border)]">
         <h3 className="text-lg font-bold text-foreground">
           Actions rapides
         </h3>
       </div>
-      <div className="p-4">
-        <div className="grid grid-cols-2 gap-3">
+      <div className="p-3 sm:p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
           {actions.map((action) => {
             const Icon = action.icon;
             const LinkWrapper = action.external ? "a" : Link;
@@ -87,7 +87,7 @@ export function QuickActions({ locale }: QuickActionsProps) {
               <LinkWrapper key={action.label} {...linkProps}>
                 <div
                   className={cn(
-                    "group flex flex-col gap-3 rounded-xl p-4 transition-all duration-300 cursor-pointer border",
+                    "group flex flex-col gap-2 sm:gap-3 rounded-xl p-3 sm:p-4 transition-all duration-300 cursor-pointer border w-full min-w-0",
                     action.bgClass,
                     action.borderClass
                   )}

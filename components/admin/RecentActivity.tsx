@@ -64,8 +64,8 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
   };
 
   return (
-    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--glass-border)]">
+    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden w-full">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-[var(--glass-border)]">
         <h3 className="text-lg font-bold text-foreground">
           Activité récente
         </h3>
@@ -76,7 +76,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
           </Link>
         </Button>
       </div>
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         <div className="space-y-2">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center">
@@ -95,7 +95,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
               return (
                 <div
                   key={item.id}
-                  className="group flex items-center gap-4 rounded-xl p-3 hover:bg-[var(--glass-subtle)] transition-colors duration-200"
+                  className="group flex items-center gap-3 rounded-xl p-2 sm:p-3 hover:bg-[var(--glass-subtle)] transition-colors duration-200 overflow-hidden"
                 >
                   {/* Thumbnail or Icon */}
                   <div className="relative h-12 w-12 flex-shrink-0">
@@ -122,7 +122,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <p className="text-sm font-bold text-foreground truncate">
+                      <p className="text-sm font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
                         {item.title}
                       </p>
                     </div>

@@ -78,8 +78,70 @@ export function VideosList({ videos, locale }: VideosListProps) {
         </div>
       </div>
 
-      {/* Table with fixed height and scroll */}
-      <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden transition-colors duration-300">
+      {/* Mobile: Cards view */}
+      <div className="sm:hidden space-y-3">
+        {filteredVideos.length === 0 ? (
+          <div className="text-center py-8 text-muted-foreground">Aucune vidéo trouvée</div>
+        ) : (
+          filteredVideos.map((video) => (
+            <div
+              key={video.id}
+              className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm p-3"
+            >
+              <div className="flex gap-3">
+                <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/10">
+                  <Image
+                    src={video.img}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-foreground text-sm truncate">{video.title}</h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Badge
+                      variant="outline"
+                      className="capitalize border-[var(--admin-neon-magenta)]/30 bg-[var(--admin-neon-magenta)]/10 text-[var(--admin-neon-magenta)] font-medium text-xs"
+                    >
+                      {video.type}
+                    </Badge>
+                    {video.published ? (
+                      <span className="inline-flex items-center gap-1 text-xs text-neon-green">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neon-green" />
+                        Publié
+                      </span>
+                    ) : (
+                      <span className="text-xs text-muted-foreground">Brouillon</span>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground font-mono mt-1">{video.date}</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-end gap-1 mt-2 pt-2 border-t border-[var(--glass-border-subtle)]">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  asChild
+                  className="h-8 w-8 p-0 text-muted-foreground hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10"
+                >
+                  <Link href={`/${locale}/admin/videos/${video.id}`}>
+                    <Pencil className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <DeleteVideoButton
+                  videoId={video.id}
+                  videoTitle={video.title}
+                />
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop: Table view */}
+      <div className="hidden sm:block rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden transition-colors duration-300">
         <div className="max-h-[calc(100vh-400px)] min-h-[200px] overflow-y-auto">
           <Table>
             <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)] transition-colors duration-300">

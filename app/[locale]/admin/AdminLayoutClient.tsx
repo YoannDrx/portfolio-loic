@@ -68,7 +68,7 @@ export default function AdminLayoutClient({
           />
 
           {/* Page content with animations */}
-          <main className="flex-1 overflow-y-auto p-3 sm:p-6 lg:p-8 transition-colors duration-300">
+          <main className="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-6 lg:p-8 transition-colors duration-300">
             <div className="mx-auto max-w-7xl">
               <AnimatedPageWrapper>
                 {children}

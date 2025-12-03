@@ -209,18 +209,18 @@ export function LogsContent({ locale }: LogsContentProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-bold text-admin-text-primary dark:text-dark-admin-text-primary tracking-tight transition-colors duration-300">
+          <h1 className="text-2xl sm:text-3xl font-bold text-admin-text-primary dark:text-dark-admin-text-primary tracking-tight transition-colors duration-300">
             Journal d'activité
           </h1>
-          <p className="text-admin-text-secondary dark:text-dark-admin-text-secondary mt-1 transition-colors duration-300">
+          <p className="text-sm sm:text-base text-admin-text-secondary dark:text-dark-admin-text-secondary mt-1 transition-colors duration-300">
             Historique de toutes les actions sur votre portfolio
           </p>
         </div>
         <button
           onClick={() => (activeTab === "logs" ? fetchLogs() : fetchExports())}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-admin-card dark:bg-dark-admin-card border border-admin-border dark:border-dark-admin-border text-admin-text-secondary dark:text-dark-admin-text-secondary hover:text-admin-text-primary dark:hover:text-dark-admin-text-primary transition-colors"
+          className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-admin-card dark:bg-dark-admin-card border border-admin-border dark:border-dark-admin-border text-admin-text-secondary dark:text-dark-admin-text-secondary hover:text-admin-text-primary dark:hover:text-dark-admin-text-primary transition-colors self-start sm:self-auto"
         >
           <RefreshCw className="h-4 w-4" />
           Actualiser
@@ -298,93 +298,141 @@ export function LogsContent({ locale }: LogsContentProps) {
                 <p>Aucun log trouvé</p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-admin-border dark:border-dark-admin-border bg-admin-hover/50 dark:bg-dark-admin-hover/50">
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Date
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Utilisateur
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Type
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Action
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Détails
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-admin-border dark:divide-dark-admin-border">
-                    {logs.map((log) => {
-                      const typeInfo = typeLabels[log.type] || {
-                        label: log.type,
-                        color: "bg-gray-500/20 text-muted-foreground",
-                      };
-                      const ActionIcon = actionIcons[log.action] || Settings;
+              <>
+                {/* Mobile: Cards view */}
+                <div className="sm:hidden divide-y divide-admin-border dark:divide-dark-admin-border">
+                  {logs.map((log) => {
+                    const typeInfo = typeLabels[log.type] || {
+                      label: log.type,
+                      color: "bg-gray-500/20 text-muted-foreground",
+                    };
+                    const ActionIcon = actionIcons[log.action] || Settings;
 
-                      return (
-                        <tr
-                          key={log.id}
-                          className="hover:bg-admin-hover/30 dark:hover:bg-dark-admin-hover/30 transition-colors"
-                        >
-                          <td className="px-4 py-3 text-sm text-admin-text-primary dark:text-dark-admin-text-primary whitespace-nowrap">
-                            {formatDate(log.createdAt)}
-                          </td>
-                          <td className="px-4 py-3">
-                            <div className="flex items-center gap-2">
-                              {log.user?.image ? (
-                                <img
-                                  src={log.user.image}
-                                  alt=""
-                                  className="h-6 w-6 rounded-full"
-                                />
-                              ) : (
-                                <UserCircle className="h-6 w-6 text-admin-text-secondary dark:text-dark-admin-text-secondary" />
-                              )}
-                              <span className="text-sm text-admin-text-primary dark:text-dark-admin-text-primary">
-                                {log.user?.name || log.user?.email || "Système"}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="px-4 py-3">
-                            <span
-                              className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${typeInfo.color}`}
-                            >
-                              {typeInfo.label}
+                    return (
+                      <div key={log.id} className="p-3 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            {log.user?.image ? (
+                              <img src={log.user.image} alt="" className="h-6 w-6 rounded-full" />
+                            ) : (
+                              <UserCircle className="h-6 w-6 text-admin-text-secondary dark:text-dark-admin-text-secondary" />
+                            )}
+                            <span className="text-sm font-medium text-admin-text-primary dark:text-dark-admin-text-primary">
+                              {log.user?.name || log.user?.email || "Système"}
                             </span>
-                          </td>
-                          <td className="px-4 py-3">
-                            <div className="flex items-center gap-2">
-                              <ActionIcon className="h-4 w-4 text-admin-text-secondary dark:text-dark-admin-text-secondary" />
-                              <span className="text-sm text-admin-text-primary dark:text-dark-admin-text-primary">
-                                {actionLabels[log.action] || log.action}
+                          </div>
+                          <span className={`inline-flex px-2 py-0.5 text-[10px] font-medium rounded-full ${typeInfo.color}`}>
+                            {typeInfo.label}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <ActionIcon className="h-4 w-4 text-admin-text-secondary dark:text-dark-admin-text-secondary" />
+                          <span className="text-sm text-admin-text-primary dark:text-dark-admin-text-primary">
+                            {actionLabels[log.action] || log.action}
+                          </span>
+                        </div>
+                        {log.entityTitle && (
+                          <p className="text-xs text-admin-text-secondary dark:text-dark-admin-text-secondary truncate">
+                            {log.entityType && `[${log.entityType}] `}{log.entityTitle}
+                          </p>
+                        )}
+                        <p className="text-[10px] text-admin-text-secondary/70 dark:text-dark-admin-text-secondary/70">
+                          {formatDate(log.createdAt)}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Desktop: Table view */}
+                <div className="hidden sm:block overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-admin-border dark:border-dark-admin-border bg-admin-hover/50 dark:bg-dark-admin-hover/50">
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Date
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Utilisateur
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Type
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Action
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Détails
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-admin-border dark:divide-dark-admin-border">
+                      {logs.map((log) => {
+                        const typeInfo = typeLabels[log.type] || {
+                          label: log.type,
+                          color: "bg-gray-500/20 text-muted-foreground",
+                        };
+                        const ActionIcon = actionIcons[log.action] || Settings;
+
+                        return (
+                          <tr
+                            key={log.id}
+                            className="hover:bg-admin-hover/30 dark:hover:bg-dark-admin-hover/30 transition-colors"
+                          >
+                            <td className="px-4 py-3 text-sm text-admin-text-primary dark:text-dark-admin-text-primary whitespace-nowrap">
+                              {formatDate(log.createdAt)}
+                            </td>
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-2">
+                                {log.user?.image ? (
+                                  <img
+                                    src={log.user.image}
+                                    alt=""
+                                    className="h-6 w-6 rounded-full"
+                                  />
+                                ) : (
+                                  <UserCircle className="h-6 w-6 text-admin-text-secondary dark:text-dark-admin-text-secondary" />
+                                )}
+                                <span className="text-sm text-admin-text-primary dark:text-dark-admin-text-primary">
+                                  {log.user?.name || log.user?.email || "Système"}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3">
+                              <span
+                                className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${typeInfo.color}`}
+                              >
+                                {typeInfo.label}
                               </span>
-                            </div>
-                          </td>
-                          <td className="px-4 py-3 text-sm text-admin-text-secondary dark:text-dark-admin-text-secondary max-w-xs truncate">
-                            {log.entityTitle && (
-                              <span className="font-medium text-admin-text-primary dark:text-dark-admin-text-primary">
-                                {log.entityType && `[${log.entityType}] `}
-                                {log.entityTitle}
-                              </span>
-                            )}
-                            {log.details && !log.entityTitle && (
-                              <span className="opacity-75">
-                                {JSON.stringify(log.details).substring(0, 50)}...
-                              </span>
-                            )}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+                            </td>
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-2">
+                                <ActionIcon className="h-4 w-4 text-admin-text-secondary dark:text-dark-admin-text-secondary" />
+                                <span className="text-sm text-admin-text-primary dark:text-dark-admin-text-primary">
+                                  {actionLabels[log.action] || log.action}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 text-sm text-admin-text-secondary dark:text-dark-admin-text-secondary max-w-xs truncate">
+                              {log.entityTitle && (
+                                <span className="font-medium text-admin-text-primary dark:text-dark-admin-text-primary">
+                                  {log.entityType && `[${log.entityType}] `}
+                                  {log.entityTitle}
+                                </span>
+                              )}
+                              {log.details && !log.entityTitle && (
+                                <span className="opacity-75">
+                                  {JSON.stringify(log.details).substring(0, 50)}...
+                                </span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
 
             {/* Pagination */}
@@ -436,65 +484,96 @@ export function LogsContent({ locale }: LogsContentProps) {
                 </p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-admin-border dark:border-dark-admin-border bg-admin-hover/50 dark:bg-dark-admin-hover/50">
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Date
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Type
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Format
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Taille
-                      </th>
-                      <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-admin-border dark:divide-dark-admin-border">
-                    {exports.map((exp) => (
-                      <tr
-                        key={exp.id}
-                        className="hover:bg-admin-hover/30 dark:hover:bg-dark-admin-hover/30 transition-colors"
-                      >
-                        <td className="px-4 py-3 text-sm text-admin-text-primary dark:text-dark-admin-text-primary whitespace-nowrap">
-                          {formatDate(exp.createdAt)}
-                        </td>
-                        <td className="px-4 py-3">
-                          <span className="capitalize text-sm text-admin-text-primary dark:text-dark-admin-text-primary">
-                            {exp.type}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3">
-                          <span className="uppercase text-xs font-mono px-2 py-0.5 rounded bg-admin-hover dark:bg-dark-admin-hover text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                            {exp.format}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 text-sm text-admin-text-secondary dark:text-dark-admin-text-secondary">
-                          {formatFileSize(exp.fileSize)}
-                        </td>
-                        <td className="px-4 py-3">
-                          <button
-                            onClick={() =>
-                              handleDownloadExport(exp.id, exp.filename)
-                            }
-                            className="flex items-center gap-1 px-3 py-1 rounded-lg bg-admin-accent/20 text-admin-accent hover:bg-admin-accent/30 transition-colors text-sm"
-                          >
-                            <Download className="h-4 w-4" />
-                            Télécharger
-                          </button>
-                        </td>
+              <>
+                {/* Mobile: Cards view */}
+                <div className="sm:hidden divide-y divide-admin-border dark:divide-dark-admin-border">
+                  {exports.map((exp) => (
+                    <div key={exp.id} className="p-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="capitalize text-sm font-medium text-admin-text-primary dark:text-dark-admin-text-primary">
+                          {exp.type}
+                        </span>
+                        <span className="uppercase text-xs font-mono px-2 py-0.5 rounded bg-admin-hover dark:bg-dark-admin-hover text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          {exp.format}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          {formatFileSize(exp.fileSize)} • {formatDate(exp.createdAt)}
+                        </span>
+                        <button
+                          onClick={() => handleDownloadExport(exp.id, exp.filename)}
+                          className="flex items-center gap-1 px-2 py-1 rounded-lg bg-admin-accent/20 text-admin-accent hover:bg-admin-accent/30 transition-colors text-xs"
+                        >
+                          <Download className="h-3 w-3" />
+                          Télécharger
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Desktop: Table view */}
+                <div className="hidden sm:block overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-admin-border dark:border-dark-admin-border bg-admin-hover/50 dark:bg-dark-admin-hover/50">
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Date
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Type
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Format
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Taille
+                        </th>
+                        <th className="text-left px-4 py-3 text-sm font-medium text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                          Action
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody className="divide-y divide-admin-border dark:divide-dark-admin-border">
+                      {exports.map((exp) => (
+                        <tr
+                          key={exp.id}
+                          className="hover:bg-admin-hover/30 dark:hover:bg-dark-admin-hover/30 transition-colors"
+                        >
+                          <td className="px-4 py-3 text-sm text-admin-text-primary dark:text-dark-admin-text-primary whitespace-nowrap">
+                            {formatDate(exp.createdAt)}
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className="capitalize text-sm text-admin-text-primary dark:text-dark-admin-text-primary">
+                              {exp.type}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className="uppercase text-xs font-mono px-2 py-0.5 rounded bg-admin-hover dark:bg-dark-admin-hover text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                              {exp.format}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-admin-text-secondary dark:text-dark-admin-text-secondary">
+                            {formatFileSize(exp.fileSize)}
+                          </td>
+                          <td className="px-4 py-3">
+                            <button
+                              onClick={() =>
+                                handleDownloadExport(exp.id, exp.filename)
+                              }
+                              className="flex items-center gap-1 px-3 py-1 rounded-lg bg-admin-accent/20 text-admin-accent hover:bg-admin-accent/30 transition-colors text-sm"
+                            >
+                              <Download className="h-4 w-4" />
+                              Télécharger
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
           </div>
         </motion.div>
