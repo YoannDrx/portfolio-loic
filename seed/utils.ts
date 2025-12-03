@@ -114,6 +114,7 @@ export const SEED_ORDER = [
   "videos",
   "services",
   "resume_entries",
+  "cv",
 ] as const;
 
 // === ORDRE DE SUPPRESSION (inverse pour FK) ===

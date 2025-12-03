@@ -116,6 +116,224 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
     }
     return data.length;
   },
+
+  cv: async () => {
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const filePath = path.join(process.cwd(), "seed/data/cv.json");
+
+    try {
+      const raw = await fs.readFile(filePath, "utf-8");
+      const data = JSON.parse(raw);
+      if (!data.cv) return 0;
+
+      // Créer ou mettre à jour le CV principal
+      const cvData = {
+        id: data.cv.id,
+        isActive: data.cv.isActive ?? true,
+        fullName: data.cv.fullName,
+        badgeFr: data.cv.badgeFr,
+        badgeEn: data.cv.badgeEn,
+        photo: data.cv.photo,
+        phone: data.cv.phone,
+        email: data.cv.email,
+        website: data.cv.website,
+        location: data.cv.location,
+        linkedInUrl: data.cv.linkedInUrl,
+        headlineFr: data.cv.headlineFr,
+        headlineEn: data.cv.headlineEn,
+        bioFr: data.cv.bioFr,
+        bioEn: data.cv.bioEn,
+        layout: data.cv.layout ?? "creative",
+        accentColor: data.cv.accentColor ?? "#D5FF0A",
+        showPhoto: data.cv.showPhoto ?? true,
+        theme: data.cv.theme ?? null,
+      };
+
+      await prisma.cV.upsert({
+        where: { id: data.cv.id },
+        update: cvData,
+        create: cvData,
+      });
+
+      let count = 1;
+
+      // Créer les sections avec leurs items
+      if (data.sections && Array.isArray(data.sections)) {
+        for (const section of data.sections) {
+          // Créer la section
+          await prisma.cVSection.upsert({
+            where: { id: section.id },
+            update: {
+              cvId: data.cv.id,
+              type: section.type,
+              icon: section.icon,
+              color: section.color,
+              placement: section.placement ?? "main",
+              layoutType: section.layoutType ?? "list",
+              order: section.order ?? 0,
+              isActive: section.isActive ?? true,
+            },
+            create: {
+              id: section.id,
+              cvId: data.cv.id,
+              type: section.type,
+              icon: section.icon,
+              color: section.color,
+              placement: section.placement ?? "main",
+              layoutType: section.layoutType ?? "list",
+              order: section.order ?? 0,
+              isActive: section.isActive ?? true,
+            },
+          });
+          count++;
+
+          // Créer les traductions de section
+          if (section.translations) {
+            for (const trans of section.translations) {
+              await prisma.cVSectionTranslation.upsert({
+                where: {
+                  sectionId_locale: { sectionId: section.id, locale: trans.locale },
+                },
+                update: { title: trans.title },
+                create: {
+                  sectionId: section.id,
+                  locale: trans.locale,
+                  title: trans.title,
+                },
+              });
+            }
+          }
+
+          // Créer les items de section
+          if (section.items && Array.isArray(section.items)) {
+            for (const item of section.items) {
+              await prisma.cVItem.upsert({
+                where: { id: item.id },
+                update: {
+                  sectionId: section.id,
+                  startDate: item.startDate ? new Date(item.startDate) : null,
+                  endDate: item.endDate ? new Date(item.endDate) : null,
+                  isCurrent: item.isCurrent ?? false,
+                  order: item.order ?? 0,
+                  isActive: item.isActive ?? true,
+                },
+                create: {
+                  id: item.id,
+                  sectionId: section.id,
+                  startDate: item.startDate ? new Date(item.startDate) : null,
+                  endDate: item.endDate ? new Date(item.endDate) : null,
+                  isCurrent: item.isCurrent ?? false,
+                  order: item.order ?? 0,
+                  isActive: item.isActive ?? true,
+                },
+              });
+              count++;
+
+              // Créer les traductions d'item
+              if (item.translations) {
+                for (const trans of item.translations) {
+                  await prisma.cVItemTranslation.upsert({
+                    where: {
+                      itemId_locale: { itemId: item.id, locale: trans.locale },
+                    },
+                    update: {
+                      title: trans.title,
+                      subtitle: trans.subtitle,
+                      location: trans.location,
+                      description: trans.description,
+                    },
+                    create: {
+                      itemId: item.id,
+                      locale: trans.locale,
+                      title: trans.title,
+                      subtitle: trans.subtitle,
+                      location: trans.location,
+                      description: trans.description,
+                    },
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Créer les skills
+      if (data.skills && Array.isArray(data.skills)) {
+        for (const skill of data.skills) {
+          await prisma.cVSkill.upsert({
+            where: { id: skill.id },
+            update: {
+              cvId: data.cv.id,
+              category: skill.category,
+              level: skill.level ?? 3,
+              showAsBar: skill.showAsBar ?? true,
+              order: skill.order ?? 0,
+              isActive: skill.isActive ?? true,
+            },
+            create: {
+              id: skill.id,
+              cvId: data.cv.id,
+              category: skill.category,
+              level: skill.level ?? 3,
+              showAsBar: skill.showAsBar ?? true,
+              order: skill.order ?? 0,
+              isActive: skill.isActive ?? true,
+            },
+          });
+          count++;
+
+          // Créer les traductions de skill
+          if (skill.translations) {
+            for (const trans of skill.translations) {
+              await prisma.cVSkillTranslation.upsert({
+                where: {
+                  skillId_locale: { skillId: skill.id, locale: trans.locale },
+                },
+                update: { name: trans.name },
+                create: {
+                  skillId: skill.id,
+                  locale: trans.locale,
+                  name: trans.name,
+                },
+              });
+            }
+          }
+        }
+      }
+
+      // Créer les social links
+      if (data.socialLinks && Array.isArray(data.socialLinks)) {
+        for (const link of data.socialLinks) {
+          await prisma.cVSocialLink.upsert({
+            where: { id: link.id },
+            update: {
+              cvId: data.cv.id,
+              platform: link.platform,
+              url: link.url,
+              label: link.label,
+              order: link.order ?? 0,
+            },
+            create: {
+              id: link.id,
+              cvId: data.cv.id,
+              platform: link.platform,
+              url: link.url,
+              label: link.label,
+              order: link.order ?? 0,
+            },
+          });
+          count++;
+        }
+      }
+
+      return count;
+    } catch (error) {
+      logger.warn(`Fichier cv.json non trouvé ou invalide`);
+      return 0;
+    }
+  },
 };
 
 // === SEEDING PRINCIPAL ===
