@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { PlusIcon, TrashIcon, SaveIcon, ArrowUpIcon, ArrowDownIcon, SettingsIcon, ChevronDown, DownloadIcon } from "lucide-react";
+import { PlusIcon, TrashIcon, SaveIcon, ArrowUpIcon, ArrowDownIcon, SettingsIcon, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ColorPicker } from "@/components/admin/color-picker";
 import { CVDocument } from "@/components/cv/pdf-document";
+import { PDFDownloadButton } from "@/components/cv/pdf-download-button";
 import type { CVData, CVTheme, CVSection, CVItem, CVTranslation } from "@/types/cv";
 import { toast } from "@/hooks/use-toast";
 
@@ -29,12 +30,7 @@ const defaultTheme: CVTheme = {
 
 const PDFViewerClient = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), {
   ssr: false,
-  loading: () => <div className="h-[600px] w-full flex items-center justify-center bg-[var(--glass-subtle)] text-foreground">Chargement du PDF...</div>,
-});
-
-const PDFDownloadLinkClient = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink), {
-  ssr: false,
-  loading: () => <Button disabled size="sm" variant="outline"><DownloadIcon className="h-4 w-4 mr-2" />...</Button>,
+  loading: () => <div className="h-full w-full flex items-center justify-center bg-[var(--glass-subtle)] text-foreground">Chargement du PDF...</div>,
 });
 
 const normalizeData = (input?: CVData | null): CVData => {
@@ -266,6 +262,62 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
     setData({ ...data, sections: newSections });
   };
 
+  // === GESTION DES COMPÉTENCES ===
+  const addSkill = () => {
+    const newSkill = {
+      id: `skill_${Date.now()}`,
+      category: "technical" as const,
+      level: 3,
+      showAsBar: true,
+      order: data.skills.length,
+      isActive: true,
+      translations: [
+        { locale: "fr", name: "Nouvelle compétence" },
+        { locale: "en", name: "New skill" },
+      ],
+    };
+    setData({ ...data, skills: [...data.skills, newSkill] });
+  };
+
+  const updateSkill = (index: number, field: string, value: unknown) => {
+    const newSkills = [...data.skills];
+    newSkills[index] = { ...newSkills[index], [field]: value };
+    setData({ ...data, skills: newSkills });
+  };
+
+  const updateSkillTranslation = (index: number, locale: string, name: string) => {
+    const newSkills = [...data.skills];
+    const translations = [...(newSkills[index].translations || [])];
+    const tIndex = translations.findIndex((t) => t.locale === locale);
+    if (tIndex >= 0) {
+      translations[tIndex] = { ...translations[tIndex], name };
+    } else {
+      translations.push({ locale, name });
+    }
+    newSkills[index] = { ...newSkills[index], translations };
+    setData({ ...data, skills: newSkills });
+  };
+
+  const removeSkill = (index: number) => {
+    setData({ ...data, skills: data.skills.filter((_, i) => i !== index) });
+  };
+
+  const moveSkill = (index: number, direction: "up" | "down") => {
+    const newSkills = [...data.skills];
+    if (direction === "up" && index === 0) return;
+    if (direction === "down" && index === newSkills.length - 1) return;
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+    [newSkills[index], newSkills[targetIndex]] = [newSkills[targetIndex], newSkills[index]];
+    newSkills.forEach((skill, i) => {
+      skill.order = i;
+    });
+    setData({ ...data, skills: newSkills });
+  };
+
+  const getSkillT = (translations: Array<{ locale: string; name?: string }>, loc: string) => {
+    return translations?.find((t) => t.locale === loc) ?? { locale: loc, name: "" };
+  };
+
   const handleSave = async () => {
     setIsSaving(true);
     try {
@@ -292,8 +344,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   };
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[calc(100vh-10rem)]">
-      <div className="space-y-4 overflow-y-auto pr-2 h-full pb-8 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 min-h-[800px]">
+      <div className="space-y-4 overflow-y-auto pr-2 max-h-[calc(100vh-8rem)] pb-8">
         <Card className="bg-card border-[var(--glass-border)]">
           <div
             className="flex items-center justify-between p-4 cursor-pointer hover:bg-[var(--glass-subtle)] transition-colors"
@@ -685,6 +737,95 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
           </CardContent>
         </Card>
 
+        {/* CARD COMPÉTENCES */}
+        <Card className="bg-card border-[var(--glass-border)]">
+          <CardHeader className="flex flex-row items-center justify-between py-3 border-b border-[var(--glass-border)]">
+            <CardTitle className="text-foreground text-base">Compétences</CardTitle>
+            <Button size="sm" onClick={addSkill} className="bg-lime-300 text-black hover:bg-lime-400">
+              <PlusIcon className="h-4 w-4 mr-1" /> Ajouter
+            </Button>
+          </CardHeader>
+          <CardContent className="pt-4 space-y-3">
+            {data.skills.map((skill, idx) => (
+              <div key={skill.id || idx} className="border border-[var(--glass-border)] rounded-lg p-3 bg-[var(--glass-subtle)]">
+                {/* Header avec catégorie et actions */}
+                <div className="flex items-center justify-between mb-3">
+                  <Select value={skill.category || "technical"} onValueChange={(v) => updateSkill(idx, "category", v)}>
+                    <SelectTrigger className="w-32 h-8 bg-card border-[var(--glass-border)] text-foreground">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="technical">Technique</SelectItem>
+                      <SelectItem value="software">Logiciel</SelectItem>
+                      <SelectItem value="language">Langue</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <div className="flex items-center gap-1">
+                    <Button size="icon" variant="ghost" onClick={() => moveSkill(idx, "up")} disabled={idx === 0} className="h-8 w-8">
+                      <ArrowUpIcon className="h-4 w-4 text-foreground/50" />
+                    </Button>
+                    <Button size="icon" variant="ghost" onClick={() => moveSkill(idx, "down")} disabled={idx === data.skills.length - 1} className="h-8 w-8">
+                      <ArrowDownIcon className="h-4 w-4 text-foreground/50" />
+                    </Button>
+                    <Button size="icon" variant="ghost" onClick={() => removeSkill(idx)} className="text-red-400 hover:text-red-300 hover:bg-red-900/20 h-8 w-8">
+                      <TrashIcon className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Traductions FR/EN */}
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                  <div>
+                    <Label className="text-xs text-foreground/60">Nom (FR)</Label>
+                    <Input
+                      value={getSkillT(skill.translations || [], "fr").name || ""}
+                      onChange={(e) => updateSkillTranslation(idx, "fr", e.target.value)}
+                      className="h-8 bg-card border-[var(--glass-border)] text-foreground"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs text-foreground/60">Name (EN)</Label>
+                    <Input
+                      value={getSkillT(skill.translations || [], "en").name || ""}
+                      onChange={(e) => updateSkillTranslation(idx, "en", e.target.value)}
+                      className="h-8 bg-card border-[var(--glass-border)] text-foreground"
+                    />
+                  </div>
+                </div>
+
+                {/* Niveau et options */}
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <Label className="text-xs text-foreground/60">Niveau</Label>
+                    <Select value={String(skill.level || 3)} onValueChange={(v) => updateSkill(idx, "level", Number(v))}>
+                      <SelectTrigger className="w-16 h-8 bg-card border-[var(--glass-border)] text-foreground">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {[1, 2, 3, 4, 5].map((n) => (
+                          <SelectItem key={n} value={String(n)}>{n}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={skill.showAsBar ?? true}
+                      onChange={(e) => updateSkill(idx, "showAsBar", e.target.checked)}
+                      className="w-4 h-4"
+                    />
+                    <Label className="text-xs text-foreground/60">Afficher barre</Label>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {data.skills.length === 0 && (
+              <p className="text-foreground/50 text-sm text-center py-4">Aucune compétence</p>
+            )}
+          </CardContent>
+        </Card>
+
         <Card className="bg-card border-[var(--glass-border)]">
           <CardHeader className="flex flex-row items-center justify-between py-3 border-b border-[var(--glass-border)]">
             <CardTitle className="text-foreground text-base">Versions du CV</CardTitle>
@@ -731,32 +872,22 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
         </Card>
       </div>
 
-      <div className="h-full sticky top-0 pb-4">
-        <Card className="bg-card border-[var(--glass-border)] h-full flex flex-col">
-          <CardHeader className="flex flex-row items-center justify-between py-4 shrink-0 bg-card z-20 border-b border-[var(--glass-border)]">
+      <div className="sticky top-4">
+        <Card className="bg-card border-[var(--glass-border)]">
+          <CardHeader className="flex flex-row items-center justify-between py-4 bg-card z-20 border-b border-[var(--glass-border)]">
             <CardTitle className="text-foreground">Prévisualisation PDF</CardTitle>
             <div className="flex items-center gap-3">
-              <PDFDownloadLinkClient
-                document={<CVDocument data={data} locale={previewLocale} />}
-                fileName={`loic-ghanem-cv-${previewLocale}.pdf`}
-              >
-                {({ loading }) => (
-                  <Button size="sm" variant="outline" disabled={loading} className="border-lime-400 text-lime-400 hover:bg-lime-400/10">
-                    <DownloadIcon className="h-4 w-4 mr-2" />
-                    {loading ? "..." : "Télécharger"}
-                  </Button>
-                )}
-              </PDFDownloadLinkClient>
+              <PDFDownloadButton data={data} locale={previewLocale} />
               <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
-                <TabsList className="bg-[var(--glass-active)] border border-[var(--glass-border)]">
-                  <TabsTrigger value="fr">FR</TabsTrigger>
-                  <TabsTrigger value="en">EN</TabsTrigger>
+                <TabsList className="bg-[var(--glass-active)] border border-lime-400/50">
+                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black">FR</TabsTrigger>
+                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black">EN</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
           </CardHeader>
-          <CardContent className="p-0 flex-1 bg-zinc-900/50 overflow-hidden relative">
-            <PDFViewerClient width="100%" height="100%" className="border-none w-full h-full">
+          <CardContent className="p-0 bg-zinc-900/50">
+            <PDFViewerClient width="100%" height={850} className="border-none w-full">
               <CVDocument data={data} locale={previewLocale} />
             </PDFViewerClient>
           </CardContent>
