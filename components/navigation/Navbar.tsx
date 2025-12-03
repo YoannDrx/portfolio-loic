@@ -60,8 +60,8 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="group flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform">
-                <div className="w-full h-full bg-background rounded-lg flex items-center justify-center transition-colors duration-300">
+              <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(0,255,0,0.4)]">
+                <div className="w-full h-full bg-zinc-900 dark:bg-zinc-950 rounded-lg flex items-center justify-center">
                   <span className="text-xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">LG</span>
                 </div>
               </div>
