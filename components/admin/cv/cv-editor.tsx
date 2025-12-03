@@ -344,8 +344,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   };
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 min-h-[800px]">
-      <div className="space-y-4 overflow-y-auto pr-2 max-h-[calc(100vh-8rem)] pb-8">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="space-y-4 pb-8">
         <Card className="bg-card border-[var(--glass-border)]">
           <div
             className="flex items-center justify-between p-4 cursor-pointer hover:bg-[var(--glass-subtle)] transition-colors"
@@ -453,7 +453,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
         </Card>
 
         <Card className="bg-card border-[var(--glass-border)]">
-          <CardHeader className="flex flex-row items-center justify-between sticky top-0 z-10 bg-card border-b border-[var(--glass-border)]">
+          <CardHeader className="flex flex-row items-center justify-between py-4 border-b border-[var(--glass-border)]">
             <CardTitle className="text-foreground">Sections</CardTitle>
             <Button onClick={handleSave} disabled={isSaving} className="bg-lime-300 text-black hover:bg-lime-400">
               <SaveIcon className="mr-2 h-4 w-4" />
@@ -872,7 +872,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
         </Card>
       </div>
 
-      <div className="sticky top-4">
+      <div className="xl:sticky xl:top-4 xl:self-start xl:max-h-[calc(100vh-2rem)]">
         <Card className="bg-card border-[var(--glass-border)]">
           <CardHeader className="flex flex-row items-center justify-between py-4 bg-card z-20 border-b border-[var(--glass-border)]">
             <CardTitle className="text-foreground">Prévisualisation PDF</CardTitle>
