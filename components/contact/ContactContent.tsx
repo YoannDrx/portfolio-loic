@@ -37,49 +37,49 @@ function ContactInfoCard() {
 
   return (
     <GlassCard variant="default" className="h-full">
-      <GlassCardContent className="p-8 space-y-6">
-        <h3 className="text-2xl font-bold text-foreground mb-6">{t('info.title')}</h3>
+      <GlassCardContent className="p-5 sm:p-8 space-y-4 sm:space-y-6">
+        <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">{t('info.title')}</h3>
 
         {/* Email */}
-        <div className="flex items-start gap-4 group">
-          <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-magenta/20 flex items-center justify-center group-hover:from-neon-cyan/30 group-hover:to-neon-magenta/30 transition-all">
-            <Mail className="w-6 h-6 text-neon-cyan" />
+        <div className="flex items-start gap-3 sm:gap-4 group">
+          <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-magenta/20 flex items-center justify-center group-hover:from-neon-cyan/30 group-hover:to-neon-magenta/30 transition-all">
+            <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-neon-cyan" />
           </div>
-          <div>
-            <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('info.email')}</h4>
-            <a href="mailto:loic.ghanem@outlook.com" className="text-foreground hover:text-neon-cyan transition-colors break-all">
+          <div className="min-w-0">
+            <h4 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-1">{t('info.email')}</h4>
+            <a href="mailto:loic.ghanem@outlook.com" className="text-sm sm:text-base text-foreground hover:text-neon-cyan transition-colors break-all">
               loic.ghanem@outlook.com
             </a>
           </div>
         </div>
 
         {/* Phone */}
-        <div className="flex items-start gap-4 group">
-          <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-neon-magenta/20 to-neon-purple/20 flex items-center justify-center group-hover:from-neon-magenta/30 group-hover:to-neon-purple/30 transition-all">
-            <Phone className="w-6 h-6 text-neon-magenta" />
+        <div className="flex items-start gap-3 sm:gap-4 group">
+          <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-neon-magenta/20 to-neon-purple/20 flex items-center justify-center group-hover:from-neon-magenta/30 group-hover:to-neon-purple/30 transition-all">
+            <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-neon-magenta" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('info.phone')}</h4>
-            <a href="tel:+33123456789" className="text-foreground hover:text-neon-magenta transition-colors">
+            <h4 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-1">{t('info.phone')}</h4>
+            <a href="tel:+33123456789" className="text-sm sm:text-base text-foreground hover:text-neon-magenta transition-colors">
               +33 6 00 00 00 00
             </a>
           </div>
         </div>
 
         {/* Location */}
-        <div className="flex items-start gap-4 group">
-          <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-blue/20 flex items-center justify-center group-hover:from-neon-purple/30 group-hover:to-neon-blue/30 transition-all">
-            <MapPin className="w-6 h-6 text-neon-purple" />
+        <div className="flex items-start gap-3 sm:gap-4 group">
+          <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-neon-purple/20 to-neon-blue/20 flex items-center justify-center group-hover:from-neon-purple/30 group-hover:to-neon-blue/30 transition-all">
+            <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-neon-purple" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('info.location')}</h4>
-            <p className="text-foreground">{t('info.locationValue')}</p>
+            <h4 className="text-xs sm:text-sm font-semibold text-muted-foreground mb-1">{t('info.location')}</h4>
+            <p className="text-sm sm:text-base text-foreground">{t('info.locationValue')}</p>
           </div>
         </div>
 
         {/* Availability Notice */}
-        <div className="mt-8 pt-6 border-t border-[var(--glass-border)]">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-[var(--glass-border)]">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             {t('info.availability')}
           </p>
         </div>
@@ -171,21 +171,21 @@ export default function ContactContent({ locale }: ContactContentProps) {
 
       {/* Contact Form Section */}
       <div id="contact-form">
-        <ImmersiveSection className="py-20 lg:py-32">
+        <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
           <div className="container-custom">
             {/* Section Title */}
             <ImmersiveTitle
               subtitle="CONTACT"
               gradient="lime"
               align="center"
-              className="mb-16"
+              className="mb-8 sm:mb-16"
             >
               {t('pageTitle')}
             </ImmersiveTitle>
 
             {/* Contact Grid */}
             <motion.div
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-50px' }}
@@ -213,7 +213,7 @@ export default function ContactContent({ locale }: ContactContentProps) {
 
               {/* Contact Info & Map */}
               <motion.div
-                className="space-y-8"
+                className="space-y-4 sm:space-y-8"
                 variants={{
                   hidden: { opacity: 0, y: 50 },
                   visible: { opacity: 1, y: 0 },
@@ -229,7 +229,7 @@ export default function ContactContent({ locale }: ContactContentProps) {
       </div>
 
       {/* Stats Section */}
-      <ImmersiveSection className="py-20 lg:py-32">
+      <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
         <div className="container-custom">
           <GlowingStats stats={stats} columns={3} />
         </div>

@@ -141,21 +141,21 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
 
       {/* Albums Grid Section */}
       <div id="albums-grid">
-        <ImmersiveSection className="py-20 lg:py-32">
+        <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
           <div className="container-custom">
             {/* Section Title */}
             <ImmersiveTitle
               subtitle="COLLECTION"
               gradient="magenta"
               align="center"
-              className="mb-12"
+              className="mb-6 sm:mb-12"
             >
               {t('pageTitle')}
             </ImmersiveTitle>
 
             {/* Filter Buttons */}
             <motion.div
-              className="mb-12"
+              className="mb-6 sm:mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -178,7 +178,7 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
             {/* Albums Grid */}
             {transformedAlbums.length > 0 ? (
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+                className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-50px' }}
@@ -220,7 +220,7 @@ export default function AlbumsContent({ albums, locale }: AlbumsContentProps) {
       </div>
 
       {/* Stats Section */}
-      <ImmersiveSection className="py-20 lg:py-32">
+      <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
         <div className="container-custom">
           <GlowingStats stats={stats} columns={4} />
         </div>

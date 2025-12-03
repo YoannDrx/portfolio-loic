@@ -95,14 +95,14 @@ export default function ServicesContent({ services, locale }: ServicesContentPro
 
       {/* Services Grid Section */}
       <div id="services-grid">
-      <ImmersiveSection className="py-20 lg:py-32">
+      <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
         <div className="container-custom">
           {/* Section Title */}
           <ImmersiveTitle
             subtitle="EXPERTISE"
             gradient="cyan"
             align="center"
-            className="mb-16"
+            className="mb-8 sm:mb-16"
           >
             {t('pageTitle')}
           </ImmersiveTitle>
@@ -110,7 +110,7 @@ export default function ServicesContent({ services, locale }: ServicesContentPro
           {/* Services Grid */}
           {services.length > 0 ? (
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-50px' }}
@@ -154,7 +154,7 @@ export default function ServicesContent({ services, locale }: ServicesContentPro
       <ServiceProcess />
 
       {/* Stats Section */}
-      <ImmersiveSection className="py-20 lg:py-32">
+      <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
         <div className="container-custom">
           <GlowingStats stats={stats} columns={4} />
         </div>

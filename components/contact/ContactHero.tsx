@@ -176,15 +176,15 @@ interface StatBadgeProps {
 function StatBadge({ value, label, icon, delay = 0 }: StatBadgeProps) {
   return (
     <motion.div
-      className="flex items-center gap-3 px-4 py-2 rounded-lg bg-[var(--glass-subtle)] backdrop-blur-sm border border-[var(--glass-border)]"
+      className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-[var(--glass-subtle)] backdrop-blur-sm border border-[var(--glass-border)]"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
     >
       <span className="text-neon-lime">{icon}</span>
       <div className="flex flex-col">
-        <span className="text-foreground font-bold text-lg leading-none">{value}</span>
-        <span className="text-muted-foreground text-xs uppercase tracking-wider">{label}</span>
+        <span className="text-foreground font-bold text-base sm:text-lg leading-none">{value}</span>
+        <span className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-wider">{label}</span>
       </div>
     </motion.div>
   );
@@ -200,76 +200,88 @@ export default function ContactHero({ locale }: ContactHeroProps) {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative min-h-[80vh] flex items-center py-16 lg:py-24">
+    <section ref={ref} className="relative py-6 sm:min-h-[80vh] sm:flex sm:items-center sm:py-16 lg:py-24">
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Column - Text Content */}
-          <div className="order-2 lg:order-1">
-            {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-lime/10 border border-neon-lime/30 mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <MessageSquare className="w-4 h-4 text-neon-lime" />
-              <span className="text-neon-lime text-sm font-medium uppercase tracking-wider">{t("hero.badge")}</span>
-            </motion.div>
-
-            {/* Title */}
-            <motion.h1
-              className={cn(
-                "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter mb-6",
-                "bg-gradient-to-r from-foreground via-primary to-neon-cyan bg-clip-text text-transparent"
-              )}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              {t("hero.title")}
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              className="text-lg text-foreground/85 mb-8 max-w-lg leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              {t("hero.description")}
-            </motion.p>
-
-            {/* Inline Stats */}
-            <motion.div
-              className="flex flex-wrap gap-4 mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <StatBadge value="24h" label={t("hero.stats.response")} icon={<Clock className="w-5 h-5" />} delay={0.5} />
-              <StatBadge value="100%" label={t("hero.stats.satisfaction")} icon={<MessageSquare className="w-5 h-5" />} delay={0.6} />
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <MagneticButton href="#contact-form" color="lime" variant="solid" size="lg" glow rightIcon={ArrowRight}>
-                {t("hero.cta")}
-              </MagneticButton>
-
-              <MagneticButton href={`/${locale}/services`} color="cyan" variant="outline" size="lg" rightIcon={ArrowRight}>
-                {t("hero.ctaSecondary")}
-              </MagneticButton>
-            </motion.div>
-          </div>
-
-          {/* Right Column - Visual */}
+        <div className="lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Left Column - Text Content in Glass Card on mobile */}
           <motion.div
-            className="order-1 lg:order-2 flex justify-center"
+            className=""
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+          >
+            {/* Glass Card Container for mobile */}
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-obsidian-900/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none border border-neon-lime/20 sm:border-transparent">
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-lime/5 via-transparent to-neon-cyan/5 pointer-events-none sm:hidden" />
+
+              <div className="relative p-5 sm:p-0">
+                {/* Badge */}
+                <motion.div
+                  className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neon-lime/10 border border-neon-lime/30 mb-3 sm:mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 text-neon-lime" />
+                  <span className="text-neon-lime text-xs sm:text-sm font-medium uppercase tracking-wider">{t("hero.badge")}</span>
+                </motion.div>
+
+                {/* Title */}
+                <motion.h1
+                  className={cn(
+                    "text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-3 sm:mb-6",
+                    "bg-gradient-to-r from-white via-neon-lime to-neon-cyan bg-clip-text text-transparent"
+                  )}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  {t("hero.title")}
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  className="text-sm sm:text-lg text-white/80 sm:text-foreground/85 mb-4 sm:mb-8 max-w-lg leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  {t("hero.description")}
+                </motion.p>
+
+                {/* Inline Stats */}
+                <motion.div
+                  className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <StatBadge value="24h" label={t("hero.stats.response")} icon={<Clock className="w-4 h-4 sm:w-5 sm:h-5" />} delay={0.5} />
+                  <StatBadge value="100%" label={t("hero.stats.satisfaction")} icon={<MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />} delay={0.6} />
+                </motion.div>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  className="flex flex-wrap gap-2 sm:gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
+                  <MagneticButton href="#contact-form" color="lime" variant="solid" size="md" glow rightIcon={ArrowRight}>
+                    {t("hero.cta")}
+                  </MagneticButton>
+
+                  <MagneticButton href={`/${locale}/services`} color="cyan" variant="outline" size="md" rightIcon={ArrowRight}>
+                    {t("hero.ctaSecondary")}
+                  </MagneticButton>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column - Visual (hidden on mobile) */}
+          <motion.div
+            className="hidden lg:flex justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -279,9 +291,9 @@ export default function ContactHero({ locale }: ContactHeroProps) {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hidden on mobile */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}

@@ -127,21 +127,21 @@ export default function VideosContent({ videos, locale }: VideosContentProps) {
 
       {/* Videos Grid Section */}
       <div id="videos-grid">
-        <ImmersiveSection className="py-20 lg:py-32">
+        <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
           <div className="container-custom">
             {/* Section Title */}
             <ImmersiveTitle
               subtitle="PORTFOLIO"
               gradient="cyan"
               align="center"
-              className="mb-12"
+              className="mb-6 sm:mb-12"
             >
               {t('pageTitle')}
             </ImmersiveTitle>
 
             {/* Filter Buttons */}
             <motion.div
-              className="mb-12"
+              className="mb-6 sm:mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -164,7 +164,7 @@ export default function VideosContent({ videos, locale }: VideosContentProps) {
             {/* Videos Grid */}
             {filteredVideos.length > 0 ? (
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-50px' }}
@@ -206,7 +206,7 @@ export default function VideosContent({ videos, locale }: VideosContentProps) {
       </div>
 
       {/* Stats Section */}
-      <ImmersiveSection className="py-20 lg:py-32">
+      <ImmersiveSection className="py-10 sm:py-20 lg:py-32">
         <div className="container-custom">
           <GlowingStats stats={stats} columns={4} />
         </div>
