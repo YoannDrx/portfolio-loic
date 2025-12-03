@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { PlusIcon, TrashIcon, SaveIcon, ArrowUpIcon, ArrowDownIcon, SettingsIcon, ChevronDown } from "lucide-react";
+import { PlusIcon, TrashIcon, SaveIcon, ArrowUpIcon, ArrowDownIcon, SettingsIcon, ChevronDown, DownloadIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -30,6 +30,11 @@ const defaultTheme: CVTheme = {
 const PDFViewerClient = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), {
   ssr: false,
   loading: () => <div className="h-[600px] w-full flex items-center justify-center bg-[var(--glass-subtle)] text-foreground">Chargement du PDF...</div>,
+});
+
+const PDFDownloadLinkClient = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink), {
+  ssr: false,
+  loading: () => <Button disabled size="sm" variant="outline"><DownloadIcon className="h-4 w-4 mr-2" />...</Button>,
 });
 
 const normalizeData = (input?: CVData | null): CVData => {
@@ -72,6 +77,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   const [isSaving, setIsSaving] = useState(false);
   const [previewLocale, setPreviewLocale] = useState(locale);
   const [openSections, setOpenSections] = useState<Record<number, boolean>>({});
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [versions, setVersions] = useState<CVVersion[]>([]);
   const [versionName, setVersionName] = useState("");
   const [isSavingVersion, setIsSavingVersion] = useState(false);
@@ -286,16 +292,23 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   };
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 h-[calc(100vh-12rem)]">
-      <div className="space-y-6 overflow-y-auto pr-2 h-full pb-20">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[calc(100vh-10rem)]">
+      <div className="space-y-4 overflow-y-auto pr-2 h-full pb-8 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
         <Card className="bg-card border-[var(--glass-border)]">
-          <CardHeader>
+          <div
+            className="flex items-center justify-between p-4 cursor-pointer hover:bg-[var(--glass-subtle)] transition-colors"
+            onClick={() => setSettingsOpen(!settingsOpen)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSettingsOpen(!settingsOpen); }}
+          >
             <CardTitle className="text-foreground flex items-center gap-2">
               <SettingsIcon className="w-5 h-5" />
               Paramètres Généraux
             </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+            <ChevronDown className={`h-5 w-5 text-foreground/60 transition-transform ${settingsOpen ? "rotate-180" : ""}`} />
+          </div>
+          {settingsOpen && <CardContent className="space-y-4 pt-0 border-t border-[var(--glass-border)]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label className="text-foreground/70">Nom complet</Label>
@@ -384,7 +397,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
               <Input placeholder="LinkedIn" value={data.linkedInUrl || ""} onChange={(e) => updateGlobal("linkedInUrl", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground col-span-2" />
               <Input placeholder="Photo (URL public/…)" value={data.photo || ""} onChange={(e) => updateGlobal("photo", e.target.value)} className="bg-card border-[var(--glass-border)] text-foreground col-span-2" />
             </div>
-          </CardContent>
+          </CardContent>}
         </Card>
 
         <Card className="bg-card border-[var(--glass-border)]">
@@ -671,29 +684,29 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
             </Button>
           </CardContent>
         </Card>
-      </div>
 
-      <div className="h-full sticky top-0 pb-4 space-y-4">
         <Card className="bg-card border-[var(--glass-border)]">
-          <CardHeader className="flex flex-row items-center justify-between py-4 border-b border-[var(--glass-border)]">
-            <CardTitle className="text-foreground">Versions du CV</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between py-3 border-b border-[var(--glass-border)]">
+            <CardTitle className="text-foreground text-base">Versions du CV</CardTitle>
+            <div className="flex gap-2">
+              <Button variant="outline" size="sm" onClick={fetchVersions} disabled={isLoadingVersions} className="border-[var(--glass-border-strong)] text-foreground h-8">
+                {isLoadingVersions ? "..." : "Rafraîchir"}
+              </Button>
+            </div>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex flex-col md:flex-row gap-2">
+          <CardContent className="space-y-3 pt-3">
+            <div className="flex gap-2">
               <Input
                 placeholder="Nom de la version"
                 value={versionName}
                 onChange={(e) => setVersionName(e.target.value)}
-                className="bg-card border-[var(--glass-border)] text-foreground"
+                className="bg-card border-[var(--glass-border)] text-foreground h-9"
               />
-              <Button onClick={handleSaveVersion} disabled={isSavingVersion} className="bg-lime-300 text-black hover:bg-lime-400">
-                {isSavingVersion ? "..." : "Enregistrer"}
-              </Button>
-              <Button variant="outline" onClick={fetchVersions} disabled={isLoadingVersions} className="border-[var(--glass-border-strong)] text-foreground">
-                {isLoadingVersions ? "..." : "Rafraîchir"}
+              <Button onClick={handleSaveVersion} disabled={isSavingVersion} size="sm" className="bg-lime-300 text-black hover:bg-lime-400 h-9 px-4">
+                {isSavingVersion ? "..." : "Sauver"}
               </Button>
             </div>
-            <div className="space-y-2 max-h-72 overflow-y-auto">
+            <div className="space-y-2 max-h-40 overflow-y-auto">
               {versions.map((version) => (
                 <div key={version.id} className="flex items-center justify-between rounded-md border border-[var(--glass-border)] px-3 py-2 bg-[var(--glass-subtle)]">
                   <div>
@@ -703,7 +716,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-[var(--glass-border-strong)] text-foreground"
+                    className="border-[var(--glass-border-strong)] text-foreground h-7 text-xs"
                     onClick={() => setData(normalizeData(version.data))}
                   >
                     Charger
@@ -711,21 +724,36 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                 </div>
               ))}
               {versions.length === 0 && !isLoadingVersions && (
-                <p className="text-foreground/50 text-sm">Aucune version enregistrée pour le moment.</p>
+                <p className="text-foreground/50 text-sm">Aucune version enregistrée.</p>
               )}
             </div>
           </CardContent>
         </Card>
+      </div>
 
+      <div className="h-full sticky top-0 pb-4">
         <Card className="bg-card border-[var(--glass-border)] h-full flex flex-col">
           <CardHeader className="flex flex-row items-center justify-between py-4 shrink-0 bg-card z-20 border-b border-[var(--glass-border)]">
             <CardTitle className="text-foreground">Prévisualisation PDF</CardTitle>
-            <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
-              <TabsList className="bg-[var(--glass-active)] border border-[var(--glass-border)]">
-                <TabsTrigger value="fr">FR</TabsTrigger>
-                <TabsTrigger value="en">EN</TabsTrigger>
-              </TabsList>
-            </Tabs>
+            <div className="flex items-center gap-3">
+              <PDFDownloadLinkClient
+                document={<CVDocument data={data} locale={previewLocale} />}
+                fileName={`loic-ghanem-cv-${previewLocale}.pdf`}
+              >
+                {({ loading }) => (
+                  <Button size="sm" variant="outline" disabled={loading} className="border-lime-400 text-lime-400 hover:bg-lime-400/10">
+                    <DownloadIcon className="h-4 w-4 mr-2" />
+                    {loading ? "..." : "Télécharger"}
+                  </Button>
+                )}
+              </PDFDownloadLinkClient>
+              <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
+                <TabsList className="bg-[var(--glass-active)] border border-[var(--glass-border)]">
+                  <TabsTrigger value="fr">FR</TabsTrigger>
+                  <TabsTrigger value="en">EN</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
           </CardHeader>
           <CardContent className="p-0 flex-1 bg-zinc-900/50 overflow-hidden relative">
             <PDFViewerClient width="100%" height="100%" className="border-none w-full h-full">
