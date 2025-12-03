@@ -45,13 +45,13 @@ function HeaderSection() {
             transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
             className="relative"
           >
-            {/* Glass Card Container - Dark transparent like skills cards */}
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-obsidian-900/60 backdrop-blur-sm border border-emerald-400/20">
-              {/* Subtle gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-transparent to-teal-400/5 pointer-events-none" />
+            {/* Glass Card Container - Only visible on mobile/tablet */}
+            <div className="relative rounded-2xl lg:rounded-none overflow-hidden bg-obsidian-900/60 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none border border-emerald-400/20 lg:border-transparent">
+              {/* Subtle gradient overlay - hidden on desktop */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-transparent to-teal-400/5 pointer-events-none lg:hidden" />
 
               {/* Content */}
-              <div className="relative p-5 sm:p-8 md:p-10">
+              <div className="relative p-5 lg:p-0">
                 {/* Subtitle + Title grouped together */}
                 <div className="mb-3 sm:mb-4">
                   <motion.span

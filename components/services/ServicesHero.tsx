@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Sparkles, Layers, Award, ArrowRight, Mail } from "lucide-react";
 import MagneticButton from "@/components/immersive/MagneticButton";
@@ -149,6 +149,10 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Scroll-based opacity for scroll indicator
+  const { scrollY } = useScroll();
+  const scrollIndicatorOpacity = useTransform(scrollY, [0, 100], [1, 0]);
+
   return (
     <section ref={ref} className="relative py-6 sm:min-h-[80vh] sm:flex sm:items-center sm:py-16 lg:py-24">
       <div className="container-custom">
@@ -161,10 +165,10 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
             transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
           >
             {/* Glass Card Container for mobile */}
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-obsidian-900/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none border border-neon-cyan/20 sm:border-transparent">
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/5 via-transparent to-neon-purple/5 pointer-events-none sm:hidden" />
+            <div className="relative rounded-2xl lg:rounded-none overflow-hidden bg-obsidian-900/60 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none border border-neon-cyan/20 lg:border-transparent">
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/5 via-transparent to-neon-purple/5 pointer-events-none lg:hidden" />
 
-              <div className="relative p-5 sm:p-0">
+              <div className="relative p-5 lg:p-0">
                 {/* Badge */}
                 <motion.div
                   className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 mb-3 sm:mb-6"
@@ -242,12 +246,13 @@ export default function ServicesHero({ servicesCount, locale }: ServicesHeroProp
         </div>
       </div>
 
-      {/* Scroll indicator - hidden on mobile */}
+      {/* Scroll indicator - visible on all screens, fades on scroll */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
+        className="fixed sm:absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
+        style={{ opacity: scrollIndicatorOpacity }}
       >
         <motion.div
           className="flex flex-col items-center gap-2 text-muted-foreground"
