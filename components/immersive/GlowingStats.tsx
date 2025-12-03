@@ -105,13 +105,12 @@ function StatCard({ stat, index }: StatCardProps) {
   return (
     <motion.div
       className={cn(
-        'relative group',
+        'relative group overflow-hidden',
         'bg-glass backdrop-blur-sm',
-        'border rounded-2xl p-8',
-        'transition-all duration-500',
-        'hover:bg-glass-strong',
-        config.border,
-        `hover:${config.glow}`
+        'border rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8',
+        'transition-all duration-300',
+        'hover:bg-glass-strong hover:border-opacity-50',
+        config.border
       )}
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -123,39 +122,37 @@ function StatCard({ stat, index }: StatCardProps) {
         stiffness: 300,
         damping: 25,
       }}
-      whileHover={{ scale: 1.02, y: -5 }}
+      whileHover={{ y: -3 }}
     >
-      {/* Glow background on hover */}
+      {/* Bottom accent line - appears on hover */}
       <div
         className={cn(
-          'absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500',
-          'bg-gradient-to-br',
-          config.gradient,
-          'blur-xl -z-10'
+          'absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-all duration-500 ease-out',
+          'bg-gradient-to-r',
+          config.gradient
         )}
-        style={{ transform: 'scale(0.8)' }}
       />
 
       {/* Icon */}
       <motion.div
         className={cn(
-          'w-14 h-14 rounded-xl flex items-center justify-center mb-6',
+          'w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 md:mb-6',
           'bg-gradient-to-br',
           config.gradient,
           'bg-opacity-10'
         )}
-        whileHover={{ rotate: 10, scale: 1.1 }}
+        whileHover={{ rotate: 5, scale: 1.05 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       >
-        <Icon className={cn('w-7 h-7', config.icon)} />
+        <Icon className={cn('w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7', config.icon)} />
       </motion.div>
 
       {/* Value with count-up animation */}
-      <div className="mb-2">
+      <div className="mb-1 sm:mb-2">
         <span
           ref={ref}
           className={cn(
-            'text-5xl font-black tracking-tighter',
+            'text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter',
             'bg-gradient-to-r bg-clip-text text-transparent',
             config.gradient
           )}
@@ -165,17 +162,17 @@ function StatCard({ stat, index }: StatCardProps) {
       </div>
 
       {/* Label */}
-      <p className="text-muted-foreground text-sm uppercase tracking-widest font-medium">
+      <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest font-medium">
         {stat.label}
       </p>
 
       {/* Decorative corner accent */}
       <div
         className={cn(
-          'absolute top-0 right-0 w-20 h-20 opacity-10',
+          'absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 opacity-10 group-hover:opacity-20 transition-opacity duration-300',
           'bg-gradient-to-bl',
           config.gradient,
-          'rounded-tr-2xl rounded-bl-[100px]'
+          'rounded-tr-xl sm:rounded-tr-2xl rounded-bl-[60px] sm:rounded-bl-[80px] md:rounded-bl-[100px]'
         )}
       />
     </motion.div>
@@ -191,15 +188,15 @@ export default function GlowingStats({ stats, className, columns = 4 }: GlowingS
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
 
   const gridCols = {
-    2: 'grid-cols-1 md:grid-cols-2',
-    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-    4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+    2: 'grid-cols-2 md:grid-cols-2',
+    3: 'grid-cols-2 md:grid-cols-3',
+    4: 'grid-cols-2 md:grid-cols-2 lg:grid-cols-4',
   };
 
   return (
     <motion.div
       ref={containerRef}
-      className={cn('grid gap-6', gridCols[columns], className)}
+      className={cn('grid gap-3 sm:gap-4 md:gap-6', gridCols[columns], className)}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
       variants={{
