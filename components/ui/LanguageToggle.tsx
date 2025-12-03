@@ -29,7 +29,7 @@ export default function LanguageToggle() {
   };
 
   return (
-    <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--glass-subtle)] border border-[var(--glass-border)]">
+    <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[var(--glass-subtle)] border border-[var(--glass-border)]">
       <Globe className="w-4 h-4 text-muted-foreground" />
 
       <div className="flex items-center gap-1">
@@ -41,9 +41,9 @@ export default function LanguageToggle() {
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
               disabled={isPending}
-              className={`relative px-2 py-1 text-xs font-semibold rounded transition-all ${
+              className={`relative px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${
                 isActive
-                  ? 'text-neon-cyan'
+                  ? 'text-neon-lime'
                   : 'text-muted-foreground hover:text-foreground disabled:opacity-50'
               }`}
               title={lang.name}
@@ -51,7 +51,7 @@ export default function LanguageToggle() {
               {isActive && (
                 <motion.div
                   layoutId="language-indicator"
-                  className="absolute inset-0 bg-gradient-to-r from-neon-cyan/20 to-neon-magenta/20 border border-neon-cyan/30 rounded"
+                  className="absolute inset-0 bg-neon-lime/20 border border-neon-lime/40 rounded-lg"
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
               )}

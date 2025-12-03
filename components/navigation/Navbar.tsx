@@ -3,19 +3,19 @@
 import { useState, useEffect } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { Menu, X, Lock, User } from 'lucide-react';
+import { Menu, X, Lock, User, Music, Disc, Film, Mail, Home, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageToggle from '@/components/ui/LanguageToggle';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { useSession } from '@/lib/auth-client';
 
 const navLinks = [
-  { href: '/', key: 'home' },
-  { href: '/about', key: 'about' },
-  { href: '/services', key: 'services' },
-  { href: '/albums', key: 'albums' },
-  { href: '/videos', key: 'videos' },
-  { href: '/contact', key: 'contact' },
+  { href: '/', key: 'home', icon: Home },
+  { href: '/about', key: 'about', icon: User },
+  { href: '/services', key: 'services', icon: Sparkles },
+  { href: '/albums', key: 'albums', icon: Disc },
+  { href: '/videos', key: 'videos', icon: Film },
+  { href: '/contact', key: 'contact', icon: Mail },
 ] as const;
 
 export default function Navbar() {
@@ -48,7 +48,7 @@ export default function Navbar() {
     <>
       <motion.nav
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        animate={{ y: isMobileMenuOpen ? -100 : 0 }}
         transition={{ duration: 0.3 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
@@ -154,107 +154,168 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Fullscreen Immersive */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-overlay-strong backdrop-blur-sm z-40 lg:hidden transition-colors duration-300"
-            />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] lg:hidden overflow-hidden"
+          >
+            {/* Animated Background - Solid opaque */}
+            <div className="absolute inset-0 bg-[#0a0a0f]">
+              {/* Gradient orbs */}
+              <motion.div
+                className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-neon-lime/10 blur-[100px]"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div
+                className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-neon-cyan/10 blur-[100px]"
+                animate={{
+                  scale: [1.2, 1, 1.2],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              />
+
+              {/* Grid pattern */}
+              <div
+                className="absolute inset-0 opacity-[0.03]"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                  backgroundSize: '50px 50px',
+                }}
+              />
+            </div>
+
+            {/* Header with logo and close button */}
+            <div className="absolute top-0 left-0 right-0 h-20 flex items-center justify-between px-4 z-10">
+              {/* Logo */}
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3">
+                <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px]">
+                  <div className="w-full h-full bg-[#0a0a0f] rounded-lg flex items-center justify-center">
+                    <span className="text-xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">LG</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Close button */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ delay: 0.1 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-neon-lime/50 transition-all duration-300 group"
+              >
+                <X className="w-5 h-5 text-white group-hover:text-neon-lime transition-colors" />
+              </motion.button>
+            </div>
 
             {/* Menu Content */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-20 right-0 bottom-0 w-[280px] bg-glass-strong backdrop-blur-xl border-l border-[var(--glass-border)] z-40 lg:hidden overflow-y-auto transition-colors duration-300"
-            >
-              <div className="p-6 space-y-4">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className={`block text-lg font-montserrat font-bold uppercase tracking-wider transition-all duration-300 ${
-                        isActive(link.href)
-                          ? 'text-primary dark:text-neon-lime pl-4 border-l-2 border-primary dark:border-neon-lime'
-                          : 'text-muted-foreground hover:text-foreground'
-                      }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {t(link.key)}
-                    </Link>
-                  </motion.div>
-                ))}
+            <div className="relative h-full flex flex-col justify-center px-6 pt-20 pb-8">
+              {/* Navigation Links */}
+              <nav className="space-y-1 flex-1 flex flex-col justify-center">
+                {navLinks.map((link, index) => {
+                  const Icon = link.icon;
+                  const isLinkActive = isActive(link.href);
 
-                <div className="h-px bg-[var(--glass-border)] my-6" />
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ x: -50, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: 50, opacity: 0 }}
+                      transition={{
+                        delay: index * 0.06,
+                        type: "spring",
+                        stiffness: 120,
+                        damping: 20
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="group flex items-center gap-4 py-3 relative"
+                      >
+                        {/* Icon */}
+                        <motion.div
+                          className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                            isLinkActive
+                              ? 'bg-neon-lime/20 border border-neon-lime/50 shadow-[0_0_20px_rgba(213,255,10,0.2)]'
+                              : 'bg-white/5 border border-white/10 group-hover:bg-white/10 group-hover:border-neon-lime/30'
+                          }`}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Icon className={`w-5 h-5 transition-colors duration-300 ${
+                            isLinkActive ? 'text-neon-lime' : 'text-white/60 group-hover:text-neon-lime'
+                          }`} />
+                        </motion.div>
 
-                {/* Admin Section - Mobile */}
-                <motion.div
-                  initial={{ x: 50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: navLinks.length * 0.1 }}
-                >
-                  {isPending ? (
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <div className="w-4 h-4 border-2 border-muted-foreground border-t-transparent rounded-full animate-spin" />
-                      <span className="text-sm font-medium uppercase tracking-wider">Loading...</span>
-                    </div>
-                  ) : session?.user ? (
+                        {/* Text */}
+                        <span className={`text-2xl font-black uppercase tracking-wide transition-all duration-300 ${
+                          isLinkActive
+                            ? 'text-neon-lime'
+                            : 'text-white/80 group-hover:text-white'
+                        }`}>
+                          {t(link.key)}
+                        </span>
+
+                        {/* Active indicator */}
+                        {isLinkActive && (
+                          <motion.div
+                            layoutId="mobile-nav-indicator"
+                            className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-neon-lime rounded-full shadow-[0_0_15px_rgba(213,255,10,0.6)]"
+                          />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              {/* Bottom Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="pt-6 border-t border-white/10"
+              >
+                {/* Row with Admin, Theme, Language */}
+                <div className="flex items-center justify-between">
+                  {/* Admin Link */}
+                  {!isPending && (
                     <Link
-                      href="/admin"
-                      className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-all duration-300"
+                      href={session?.user ? "/admin" : "/login"}
                       onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-neon-lime/10 hover:border-neon-lime/30 transition-all duration-300 group"
                     >
-                      <User className="w-4 h-4" />
-                      <span className="text-sm font-medium uppercase tracking-wider">Panel Admin</span>
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/login"
-                      className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-all duration-300"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <Lock className="w-4 h-4" />
-                      <span className="text-sm font-medium uppercase tracking-wider">Admin Portal</span>
+                      {session?.user ? (
+                        <User className="w-4 h-4 text-white/60 group-hover:text-neon-lime transition-colors" />
+                      ) : (
+                        <Lock className="w-4 h-4 text-white/60 group-hover:text-neon-lime transition-colors" />
+                      )}
+                      <span className="text-xs font-medium text-white/80 group-hover:text-white uppercase tracking-wider">
+                        {session?.user ? 'Admin' : 'Login'}
+                      </span>
                     </Link>
                   )}
-                </motion.div>
 
-                {/* Theme Switcher - Mobile */}
-                <motion.div
-                  initial={{ x: 50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
-                  className="pt-4"
-                >
-                  <div className="text-muted-foreground text-xs uppercase tracking-widest mb-2">Thème</div>
-                  <ThemeSwitcher className="w-9 h-9 rounded-lg bg-[var(--glass-hover)] border border-[var(--glass-border)] hover:bg-[var(--glass-active)]" />
-                </motion.div>
-
-                {/* Language Toggle - Mobile */}
-                <motion.div
-                  initial={{ x: 50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: (navLinks.length + 2) * 0.1 }}
-                  className="pt-4"
-                >
-                  <div className="text-muted-foreground text-xs uppercase tracking-widest mb-2">Language</div>
-                  <LanguageToggle />
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
+                  {/* Theme & Language */}
+                  <div className="flex items-center gap-3">
+                    <ThemeSwitcher className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-neon-lime/30 transition-all" />
+                    <LanguageToggle />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
