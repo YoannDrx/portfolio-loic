@@ -41,20 +41,21 @@ export function ServicesList({ services, locale }: ServicesListProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-foreground mb-2 font-montserrat tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-foreground mb-1 sm:mb-2 font-montserrat tracking-tight">
             Services Library
           </h1>
-          <p className="text-muted-foreground font-mono text-sm">
+          <p className="text-muted-foreground font-mono text-xs sm:text-sm">
             Manage your services / {services.length} total entries
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <ExportButton type="services" />
           <Button
             asChild
-            className="gap-2 bg-gradient-to-r from-[var(--admin-neon-purple)] to-[var(--admin-neon-cyan)] text-white font-bold hover:shadow-[0_0_20px_rgba(161,0,242,0.4)] transition-all border-none"
+            size="sm"
+            className="h-9 gap-2 bg-gradient-to-r from-[var(--admin-neon-purple)] to-[var(--admin-neon-cyan)] text-white font-bold hover:shadow-[0_0_20px_rgba(161,0,242,0.4)] transition-all border-none"
           >
             <Link href={`/${locale}/admin/services/new`}>
               <Plus className="h-4 w-4" />
@@ -79,7 +80,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
 
       {/* Table with fixed height and scroll */}
       <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden transition-colors duration-300">
-        <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
+        <div className="max-h-[calc(100vh-400px)] min-h-[200px] overflow-y-auto">
           <Table>
             <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)] transition-colors duration-300">
               <TableRow className="hover:bg-[var(--glass-subtle)] border-[var(--glass-border)]">

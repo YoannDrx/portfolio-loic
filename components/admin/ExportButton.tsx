@@ -59,7 +59,7 @@ const typeLabels: Record<ExportType, string> = {
   services: "les services",
 };
 
-export function ExportButton({ type, label = "Exporter" }: ExportButtonProps) {
+export function ExportButton({ type, label = "Exporter", iconOnly = false }: ExportButtonProps & { iconOnly?: boolean }) {
   const [exporting, setExporting] = useState<ExportFormat | null>(null);
 
   async function handleExport(format: ExportFormat) {
@@ -101,7 +101,11 @@ export function ExportButton({ type, label = "Exporter" }: ExportButtonProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="gap-2 border-[var(--glass-border)] bg-[var(--glass-subtle)] text-foreground/85 hover:bg-[var(--glass-active)] hover:border-[var(--glass-border-strong)] hover:text-foreground transition-all duration-200"
+          size={iconOnly ? "icon" : "default"}
+          className={iconOnly
+            ? "h-9 w-9 border-[var(--glass-border)] bg-[var(--glass-subtle)] text-foreground/85 hover:bg-[var(--glass-active)] hover:border-[var(--glass-border-strong)] hover:text-foreground transition-all duration-200"
+            : "gap-2 border-[var(--glass-border)] bg-[var(--glass-subtle)] text-foreground/85 hover:bg-[var(--glass-active)] hover:border-[var(--glass-border-strong)] hover:text-foreground transition-all duration-200"
+          }
           disabled={exporting !== null}
         >
           {exporting ? (
@@ -109,12 +113,18 @@ export function ExportButton({ type, label = "Exporter" }: ExportButtonProps) {
           ) : (
             <Download className="h-4 w-4" />
           )}
-          {label}
-          <ChevronDown className="h-3 w-3 opacity-50" />
+          {!iconOnly && (
+            <>
+              <span className="hidden sm:inline">{label}</span>
+              <ChevronDown className="h-3 w-3 opacity-50" />
+            </>
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align="end"
+        align="start"
+        sideOffset={4}
+        collisionPadding={16}
         className="w-48 bg-neutral-900 border-[var(--glass-border)]"
       >
         <DropdownMenuLabel className="text-xs text-muted-foreground">
