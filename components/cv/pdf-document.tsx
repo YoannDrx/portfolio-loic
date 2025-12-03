@@ -87,36 +87,39 @@ const createStyles = (theme: CVTheme) =>
     badge: {
       backgroundColor: theme.badge,
       color: "#FFFFFF",
-      fontSize: 8,
-      padding: "4 8",
-      borderRadius: 10,
-      letterSpacing: 1.5,
+      fontSize: 7,
+      padding: "3 8",
+      borderRadius: 8,
+      letterSpacing: 1,
       textTransform: "uppercase",
-      alignSelf: "flex-start",
-      right: 60,
+      marginTop: 5,
     },
-    photoOuter: {
+    photoBlock: {
       position: "absolute",
-      top: 12,
+      top: 10,
       right: 100,
-      width: 120,
-      height: 120,
-      borderRadius: 60,
-      backgroundColor: "#3A3A3A",
-      padding: 4,
+      flexDirection: "column",
+      alignItems: "center",
       zIndex: 5,
     },
+    photoOuter: {
+      width: 115,
+      height: 115,
+      borderRadius: 58,
+      backgroundColor: "#3A3A3A",
+      padding: 4,
+    },
     photoContainer: {
-      width: 112,
-      height: 112,
-      borderRadius: 56,
+      width: 107,
+      height: 107,
+      borderRadius: 54,
       border: "3 solid #5A5A5A",
       backgroundColor: "#0E0E14",
       overflow: "hidden",
     },
     photo: {
-      width: 112,
-      height: 112,
+      width: 107,
+      height: 107,
       objectFit: "cover",
     },
     body: {
@@ -568,15 +571,15 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
                 })}
               </View>
             </View>
-            <View>
-              <Text style={stylesWithTheme.badge}>{isFr ? "Dispo dès maintenant" : "Available now"}</Text>
-            </View>
           </View>
           {data.photo && (
-            <View style={stylesWithTheme.photoOuter}>
-              <View style={stylesWithTheme.photoContainer}>
-                <Image src={data.photo} style={stylesWithTheme.photo} />
+            <View style={stylesWithTheme.photoBlock}>
+              <View style={stylesWithTheme.photoOuter}>
+                <View style={stylesWithTheme.photoContainer}>
+                  <Image src={data.photo} style={stylesWithTheme.photo} />
+                </View>
               </View>
+              <Text style={stylesWithTheme.badge}>{isFr ? "Dispo dès maintenant" : "Available now"}</Text>
             </View>
           )}
         </View>
