@@ -93,22 +93,30 @@ const createStyles = (theme: CVTheme) =>
       letterSpacing: 1.5,
       textTransform: "uppercase",
       alignSelf: "flex-start",
+      right: 60,
     },
-    photoBadge: {
+    photoOuter: {
       position: "absolute",
-      bottom: -35,
-      left: 30,
-      width: 80,
-      height: 80,
-      borderRadius: 40,
-      border: `3 solid ${theme.primary}`,
+      top: 12,
+      right: 100,
+      width: 120,
+      height: 120,
+      borderRadius: 60,
+      backgroundColor: "#3A3A3A",
+      padding: 4,
+      zIndex: 5,
+    },
+    photoContainer: {
+      width: 112,
+      height: 112,
+      borderRadius: 56,
+      border: "3 solid #5A5A5A",
       backgroundColor: "#0E0E14",
       overflow: "hidden",
-      zIndex: 3,
     },
     photo: {
-      width: "100%",
-      height: "100%",
+      width: 112,
+      height: 112,
       objectFit: "cover",
     },
     body: {
@@ -358,9 +366,7 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
     .sort((a, b) => a.order - b.order)
     .map((section) => ({
       ...section,
-      items: (section.items || [])
-        .filter((i) => i.isActive !== false)
-        .sort((a, b) => a.order - b.order),
+      items: (section.items || []).filter((i) => i.isActive !== false).sort((a, b) => a.order - b.order),
     }));
 
   const experienceSection = activeSections.find((s) => s.type === "experience" && s.placement !== "sidebar");
@@ -383,7 +389,7 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
   const getShortName = (url: string, platform: string): string => {
     if (platform === "LinkedIn") {
       const match = url.match(/linkedin\.com\/in\/([^/]+)/);
-      return match ? `@${match[1].replace(/%C3%AF/gi, 'ï')}` : url;
+      return match ? `@${match[1].replace(/%C3%AF/gi, "ï")}` : url;
     }
     if (platform === "YouTube") {
       const match = url.match(/youtube\.com\/@([^/?\s]+)/);
@@ -405,12 +411,14 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
   const contactItems = [
     data.email ? { label: "email", value: data.email, isLink: true, href: `mailto:${data.email}` } : null,
     // Pas de téléphone sur le CV
-    data.linkedInUrl ? {
-      label: "linkedin",
-      value: getShortName(data.linkedInUrl, "LinkedIn"),
-      isLink: true,
-      href: data.linkedInUrl
-    } : null,
+    data.linkedInUrl
+      ? {
+          label: "linkedin",
+          value: getShortName(data.linkedInUrl, "LinkedIn"),
+          isLink: true,
+          href: data.linkedInUrl,
+        }
+      : null,
     data.website
       ? {
           label: "portfolio",
@@ -419,9 +427,9 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
           href: data.website.startsWith("http") ? data.website : `https://${data.website}`,
         }
       : null,
-    ...socialFromLinks.map(link => ({
+    ...socialFromLinks.map((link) => ({
       ...link,
-      label: link.label?.toLowerCase() || "youtube"
+      label: link.label?.toLowerCase() || "youtube",
     })),
   ].filter((x) => x && x.value) as { label?: string; value: string; isLink?: boolean; href?: string }[];
 
@@ -455,7 +463,9 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
               {item.startDate && (
                 <Text style={stylesWithTheme.listSubtitle}>
                   {formatDate(item.startDate)}
-                  {item.endDate || item.isCurrent ? ` — ${item.isCurrent ? (isFr ? "Présent" : "Present") : formatDate(item.endDate)}` : ""}
+                  {item.endDate || item.isCurrent
+                    ? ` — ${item.isCurrent ? (isFr ? "Présent" : "Present") : formatDate(item.endDate)}`
+                    : ""}
                 </Text>
               )}
             </View>
@@ -559,9 +569,16 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
               </View>
             </View>
             <View>
-              <Text style={stylesWithTheme.badge}>{badge || (isFr ? "Compositeur & producteur" : "Composer & producer")}</Text>
+              <Text style={stylesWithTheme.badge}>{isFr ? "Dispo dès maintenant" : "Available now"}</Text>
             </View>
           </View>
+          {data.photo && (
+            <View style={stylesWithTheme.photoOuter}>
+              <View style={stylesWithTheme.photoContainer}>
+                <Image src={data.photo} style={stylesWithTheme.photo} />
+              </View>
+            </View>
+          )}
         </View>
 
         <View style={stylesWithTheme.body} wrap={false}>
@@ -638,7 +655,9 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
             {experienceSection && experienceSection.items.length > 0 && (
               <View style={{ marginBottom: 18 }}>
                 <View style={stylesWithTheme.sectionHeader}>
-                  <View style={[stylesWithTheme.sectionSquare, { backgroundColor: experienceSection.color || mergedTheme.primary }]} />
+                  <View
+                    style={[stylesWithTheme.sectionSquare, { backgroundColor: experienceSection.color || mergedTheme.primary }]}
+                  />
                   <Text style={stylesWithTheme.sectionTitle}>
                     {t(experienceSection.translations)?.title || (isFr ? "Expériences" : "Experience")}
                   </Text>
@@ -655,7 +674,12 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
                         </Text>
                       </View>
                       <View style={stylesWithTheme.timelineRail}>
-                        <View style={[stylesWithTheme.timelineDot, { backgroundColor: experienceSection.color || mergedTheme.primary }]} />
+                        <View
+                          style={[
+                            stylesWithTheme.timelineDot,
+                            { backgroundColor: experienceSection.color || mergedTheme.primary },
+                          ]}
+                        />
                         {!isLast && <View style={stylesWithTheme.timelineLine} />}
                       </View>
                       <View style={stylesWithTheme.timelineContent}>
