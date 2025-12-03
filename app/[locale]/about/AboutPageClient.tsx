@@ -35,94 +35,106 @@ function HeaderSection() {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="py-12 md:py-20">
+    <section ref={ref} className="py-4 sm:py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left - Text Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Left - Text Content in Glass Card */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+            className="relative"
           >
-            {/* Subtitle */}
-            <motion.span
-              className="inline-block text-sm uppercase tracking-[0.3em] text-emerald-400 mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              Compositeur & Producteur Musical
-            </motion.span>
+            {/* Glass Card Container - Dark transparent like skills cards */}
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-obsidian-900/60 backdrop-blur-sm border border-emerald-400/20">
+              {/* Subtle gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-transparent to-teal-400/5 pointer-events-none" />
 
-            {/* Title */}
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <span className="bg-gradient-to-r from-foreground via-emerald-500 to-foreground bg-clip-text text-transparent">
-                {t('title')}
-              </span>
-            </motion.h1>
+              {/* Content */}
+              <div className="relative p-5 sm:p-8 md:p-10">
+                {/* Subtitle + Title grouped together */}
+                <div className="mb-3 sm:mb-4">
+                  <motion.span
+                    className="inline-block text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] text-emerald-400 mb-0.5"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    Compositeur & Producteur Musical
+                  </motion.span>
 
-            {/* Intro text */}
-            <motion.p
-              className="text-xl text-foreground/85 mb-8 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <span className="text-foreground font-semibold text-2xl">{t('intro')}</span>{' '}
-              {t('bio.paragraph1')}
-            </motion.p>
-
-            {/* Quick stats inline */}
-            <motion.div
-              className="flex flex-wrap gap-6 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center text-xl font-black text-obsidian-950">
-                  16
+                  {/* Title */}
+                  <motion.h1
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    <span className="bg-gradient-to-r from-white via-emerald-400 to-white bg-clip-text text-transparent">
+                      {t('title')}
+                    </span>
+                  </motion.h1>
                 </div>
-                <span className="text-sm text-muted-foreground">{t('achievements.albums')}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-xl font-black text-obsidian-950">
-                  34
-                </div>
-                <span className="text-sm text-muted-foreground">{t('achievements.projects')}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-xl font-black text-obsidian-950">
-                  15+
-                </div>
-                <span className="text-sm text-muted-foreground">{t('achievements.years')}</span>
-              </div>
-            </motion.div>
 
-            {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <MagneticButton href="/contact" color="emerald" variant="solid" size="md" glow>
-                {t('cta.contactMe')}
-              </MagneticButton>
-              <MagneticButton href="/albums" color="teal" variant="outline" size="md">
-                {t('cta.viewAlbums')}
-              </MagneticButton>
-            </motion.div>
+                {/* Intro text */}
+                <motion.p
+                  className="text-sm sm:text-base md:text-lg text-white/80 mb-4 sm:mb-6 leading-relaxed"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  <span className="text-white font-semibold">{t('intro')}</span>{' '}
+                  {t('bio.paragraph1')}
+                </motion.p>
+
+                {/* Quick stats inline */}
+                <motion.div
+                  className="flex flex-wrap gap-3 sm:gap-5 mb-4 sm:mb-6"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center text-sm sm:text-lg font-black text-obsidian-950">
+                      16
+                    </div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">{t('achievements.albums')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-sm sm:text-lg font-black text-obsidian-950">
+                      34
+                    </div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">{t('achievements.projects')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-sm sm:text-lg font-black text-obsidian-950">
+                      15+
+                    </div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">{t('achievements.years')}</span>
+                  </div>
+                </motion.div>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  className="flex flex-wrap gap-2 sm:gap-3"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
+                  <MagneticButton href="/contact" color="emerald" variant="solid" size="md" glow>
+                    {t('cta.contactMe')}
+                  </MagneticButton>
+                  <MagneticButton href="/albums" color="teal" variant="outline" size="md">
+                    {t('cta.viewAlbums')}
+                  </MagneticButton>
+                </motion.div>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Right - Image */}
+          {/* Right - Image (Hidden on mobile for cleaner layout) */}
           <motion.div
-            className="relative"
+            className="relative hidden lg:block"
             initial={{ opacity: 0, x: 50, scale: 0.95 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
@@ -183,9 +195,9 @@ function BioSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <ImmersiveSection className="py-20">
+    <ImmersiveSection className="py-12 sm:py-20">
       <div ref={ref} className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Main Bio */}
           <motion.div
             className="lg:col-span-2"
@@ -194,12 +206,12 @@ function BioSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <GlassCard variant="neon" className="h-full">
-              <GlassCardContent className="p-8 md:p-10">
-                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+              <GlassCardContent className="p-5 sm:p-8 md:p-10">
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6 flex items-center gap-3">
                   <span className="w-10 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full" />
                   À propos
                 </h2>
-                <div className="space-y-5 text-foreground/85 text-lg leading-relaxed">
+                <div className="space-y-4 sm:space-y-5 text-foreground/85 text-base sm:text-lg leading-relaxed">
                   <p>{t('bio.paragraph2')}</p>
                   <p>{t('bio.paragraph3')}</p>
                   <p className="text-emerald-400 font-medium border-l-4 border-emerald-400/50 pl-5 italic">
@@ -350,7 +362,7 @@ function SkillsSection() {
           {t('skills.title')}
         </ImmersiveTitle>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mt-8 sm:mt-12">
           {skills.map((skill, index) => (
             <SkillCard key={skill.title} skill={skill} index={index} />
           ))}
@@ -405,7 +417,7 @@ function SkillCard({ skill, index }: SkillCardProps) {
   return (
     <motion.div
       className={cn(
-        'group relative p-6 rounded-2xl',
+        'group relative p-4 sm:p-6 rounded-xl sm:rounded-2xl',
         'bg-obsidian-900/50 backdrop-blur-sm border',
         'transition-all duration-500',
         config.border,
@@ -420,22 +432,22 @@ function SkillCard({ skill, index }: SkillCardProps) {
     >
       {/* Icon */}
       <motion.div
-        className={cn('w-12 h-12 rounded-xl flex items-center justify-center mb-5', config.bg)}
+        className={cn('w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-5', config.bg)}
         whileHover={{ rotate: 10, scale: 1.1 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       >
-        <Icon className={cn('w-6 h-6', config.icon)} />
+        <Icon className={cn('w-5 h-5 sm:w-6 sm:h-6', config.icon)} />
       </motion.div>
 
       {/* Title */}
-      <h3 className="text-lg font-bold text-foreground mb-3">{skill.title}</h3>
+      <h3 className="text-sm sm:text-lg font-bold text-foreground mb-2 sm:mb-3">{skill.title}</h3>
 
       {/* Skills list */}
-      <ul className="space-y-1.5">
+      <ul className="space-y-1 sm:space-y-1.5">
         {skill.skills.map((item, i) => (
           <motion.li
             key={item}
-            className="text-muted-foreground text-sm flex items-center gap-2"
+            className="text-muted-foreground text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2"
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -458,7 +470,7 @@ function TimelineSection() {
   const t = useTranslations('about');
 
   return (
-    <ImmersiveSection className="py-24">
+    <ImmersiveSection className="py-12 sm:py-24">
       <div className="max-w-6xl mx-auto px-4">
         <ImmersiveTitle subtitle="Parcours" gradient="emerald">
           {t('timeline.title')}
@@ -487,7 +499,7 @@ function StatsSection() {
   ];
 
   return (
-    <ImmersiveSection className="py-20">
+    <ImmersiveSection className="py-12 sm:py-20">
       <div className="max-w-6xl mx-auto px-4">
         <GlowingStats stats={stats} columns={4} />
       </div>
@@ -503,7 +515,7 @@ function CTASection({ locale }: { locale: string }) {
   const t = useTranslations('about');
 
   return (
-    <ImmersiveSection className="py-24">
+    <ImmersiveSection className="py-12 sm:py-24">
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
           className="relative"
@@ -516,9 +528,9 @@ function CTASection({ locale }: { locale: string }) {
           <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 rounded-3xl blur-lg opacity-20" />
 
           <GlassCard variant="neon" className="relative">
-            <GlassCardContent className="p-10 md:p-14 text-center">
+            <GlassCardContent className="p-6 sm:p-10 md:p-14 text-center">
               <motion.h2
-                className="text-2xl md:text-4xl font-black tracking-tighter mb-5"
+                className="text-xl sm:text-2xl md:text-4xl font-black tracking-tighter mb-4 sm:mb-5"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -530,7 +542,7 @@ function CTASection({ locale }: { locale: string }) {
               </motion.h2>
 
               <motion.p
-                className="text-lg text-foreground/85 mb-8 max-w-2xl mx-auto"
+                className="text-base sm:text-lg text-foreground/85 mb-6 sm:mb-8 max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

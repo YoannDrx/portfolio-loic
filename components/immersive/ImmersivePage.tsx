@@ -265,7 +265,7 @@ export default function ImmersivePage({
       )}
 
       {/* Main Content */}
-      <main className={cn('relative z-10 pt-24 pb-20', className)}>
+      <main className={cn('relative z-10 pt-20 sm:pt-24 pb-20', className)}>
         {parallaxHero ? (
           <ParallaxWrapper offset={30}>{children}</ParallaxWrapper>
         ) : (
