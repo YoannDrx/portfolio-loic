@@ -6,11 +6,11 @@
     "badgeFr": "Compositeur & Producteur",
     "badgeEn": "Composer & Producer",
     "photo": "/img/loic-profile.jpg",
-    "phone": "06 14 51 75 92",
+    "phone": null,
     "email": "loic.ghanem@outlook.com",
-    "website": "loicghanem.com",
+    "website": "https://www.loic-ghanem.com",
     "location": "Paris, France",
-    "linkedInUrl": "https://www.linkedin.com/in/loïc-ghanem-b61487110/",
+    "linkedInUrl": "https://www.linkedin.com/in/loïc-ghanem/",
     "headlineFr": "Compositeur & Producteur de Musique",
     "headlineEn": "Music Composer & Producer",
     "bioFr": "Compositeur et producteur parisien passionné par la création de paysages sonores narratifs. Depuis plus de 10 ans, je crée des musiques originales pour le cinéma, la télévision, les publicités et les jeux vidéo. Mes compositions ont été utilisées par des marques prestigieuses comme Porsche, Mercedes, Netflix et HBO.",
@@ -380,18 +380,11 @@
   ],
   "socialLinks": [
     {
-      "id": "social_linkedin",
-      "platform": "LinkedIn",
-      "url": "https://www.linkedin.com/in/loïc-ghanem-b61487110/",
-      "label": "LinkedIn",
-      "order": 1
-    },
-    {
       "id": "social_youtube",
       "platform": "YouTube",
-      "url": "https://www.youtube.com/watch?v=KIlENe3JXfw&list=PLKZaQC_teLIw-DbkiImC9fCc54xuvis1h",
+      "url": "https://www.youtube.com/@LoicGhanem",
       "label": "YouTube",
-      "order": 2
+      "order": 1
     }
   ]
 }

@@ -400,10 +400,12 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
               const isOpen = openSections[sIndex] ?? true;
               return (
                 <div key={sIndex} className="border border-[var(--glass-border)] rounded-lg px-4 bg-[var(--glass-subtle)]">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between py-3"
+                  <div
+                    className="flex w-full items-center justify-between py-3 cursor-pointer"
                     onClick={() => toggleSection(sIndex)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleSection(sIndex); }}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-lg font-medium text-foreground">{getT(section.translations, "fr").title || "Nouvelle Section"}</span>
@@ -421,7 +423,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                       </Button>
                       <ChevronDown className={`h-4 w-4 transition-transform text-foreground/60 ${isOpen ? "rotate-180" : ""}`} />
                     </div>
-                  </button>
+                  </div>
 
                   {isOpen && (
                     <div className="space-y-6 pb-4">

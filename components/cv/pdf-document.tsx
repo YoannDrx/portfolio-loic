@@ -25,8 +25,8 @@ const createStyles = (theme: CVTheme) =>
     header: {
       position: "relative",
       backgroundColor: theme.header,
-      height: 140,
-      padding: "18 30 20 30",
+      height: 160,
+      padding: "18 30 16 30",
       justifyContent: "flex-end",
       overflow: "hidden",
     },
@@ -36,9 +36,11 @@ const createStyles = (theme: CVTheme) =>
       left: 0,
       width: "100%",
       height: "100%",
+      zIndex: 0,
     },
     headerContent: {
-      zIndex: 2,
+      position: "relative",
+      zIndex: 10,
       flexDirection: "row",
       alignItems: "flex-end",
       justifyContent: "space-between",
@@ -68,15 +70,19 @@ const createStyles = (theme: CVTheme) =>
       backgroundColor: theme.primary,
     },
     contactRow: {
-      flexDirection: "row",
-      flexWrap: "wrap",
+      flexDirection: "column",
+      marginTop: 4,
     },
     contactItem: {
       fontSize: 7.5,
       color: "#E7E7EC",
-      marginRight: 10,
-      marginTop: 4,
+      marginBottom: 2,
       textDecoration: "none",
+    },
+    contactLabel: {
+      fontSize: 7.5,
+      color: "#9EA0A8",
+      textTransform: "lowercase",
     },
     badge: {
       backgroundColor: theme.badge,
@@ -107,13 +113,14 @@ const createStyles = (theme: CVTheme) =>
     },
     body: {
       flexDirection: "row",
+      flex: 1,
     },
     sidebar: {
       width: "32%",
       backgroundColor: theme.sidebar,
       padding: "24 20 20 24",
       borderRight: `2 solid ${theme.primary}`,
-      minHeight: 702,
+      flexGrow: 1,
     },
     sidebarBlock: {
       marginBottom: 12,
@@ -299,18 +306,15 @@ const createStyles = (theme: CVTheme) =>
   });
 
 const HeaderShapes = ({ theme }: { theme: CVTheme }) => (
-  <Svg style={styles.headerShapes} viewBox="0 0 600 140">
-    {/* Triangle gauche - épuré */}
-    <Polygon points="0,0 120,0 0,140" fill="#11131C" opacity={0.7} />
-
-    {/* Triangle droit */}
-    <Polygon points="480,0 600,0 600,140" fill="#11131C" opacity={0.7} />
+  <Svg style={styles.headerShapes} viewBox="0 0 600 160">
+    {/* Triangle droit uniquement */}
+    <Polygon points="480,0 600,0 600,160" fill="#11131C" opacity={0.7} />
 
     {/* Accent vert coin droit */}
-    <Polygon points="540,0 600,0 600,70" fill={theme.primary} opacity={0.85} />
+    <Polygon points="540,0 600,0 600,80" fill={theme.primary} opacity={0.85} />
 
-    {/* Accent vert coin gauche bas */}
-    <Polygon points="0,100 40,140 0,140" fill={theme.primary} opacity={0.85} />
+    {/* Accent vert coin gauche bas - petit */}
+    <Polygon points="0,130 35,160 0,160" fill={theme.primary} opacity={0.85} />
   </Svg>
 );
 
@@ -375,29 +379,50 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
     .filter((s) => s.category === "language" && s.isActive !== false)
     .sort((a, b) => a.order - b.order);
 
+  // Fonction pour extraire un nom court d'une URL
+  const getShortName = (url: string, platform: string): string => {
+    if (platform === "LinkedIn") {
+      const match = url.match(/linkedin\.com\/in\/([^/]+)/);
+      return match ? `@${match[1].replace(/%C3%AF/gi, 'ï')}` : url;
+    }
+    if (platform === "YouTube") {
+      const match = url.match(/youtube\.com\/@([^/?\s]+)/);
+      return match ? `@${match[1]}` : "@LoicGhanem";
+    }
+    return url.replace(/^https?:\/\/(www\.)?/, "");
+  };
+
   const socialFromLinks = (data.socialLinks || [])
     .slice()
     .sort((a, b) => a.order - b.order)
     .map((link) => ({
       label: link.label || link.platform,
-      value: link.url,
+      value: getShortName(link.url, link.platform),
       isLink: true,
+      href: link.url,
     }));
 
   const contactItems = [
-    data.email ? { label: "Email", value: data.email, isLink: true, href: `mailto:${data.email}` } : null,
-    data.phone ? { label: isFr ? "Téléphone" : "Phone", value: data.phone } : null,
-    data.linkedInUrl ? { label: "LinkedIn", value: data.linkedInUrl, isLink: true, href: data.linkedInUrl } : null,
+    data.email ? { label: "email", value: data.email, isLink: true, href: `mailto:${data.email}` } : null,
+    // Pas de téléphone sur le CV
+    data.linkedInUrl ? {
+      label: "linkedin",
+      value: getShortName(data.linkedInUrl, "LinkedIn"),
+      isLink: true,
+      href: data.linkedInUrl
+    } : null,
     data.website
       ? {
-          label: isFr ? "Site" : "Website",
-          value: data.website.replace(/^https?:\/\//, ""),
+          label: "portfolio",
+          value: data.website.replace(/^https?:\/\/(www\.)?/, ""),
           isLink: true,
           href: data.website.startsWith("http") ? data.website : `https://${data.website}`,
         }
       : null,
-    data.location ? { label: isFr ? "Localisation" : "Location", value: data.location } : null,
-    ...socialFromLinks,
+    ...socialFromLinks.map(link => ({
+      ...link,
+      label: link.label?.toLowerCase() || "youtube"
+    })),
   ].filter((x) => x && x.value) as { label?: string; value: string; isLink?: boolean; href?: string }[];
 
   const seenContacts = new Set<string>();
@@ -503,8 +528,8 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
 
   return (
     <Document>
-      <Page size="A4" style={stylesWithTheme.page} wrap>
-        <View style={[stylesWithTheme.header, { backgroundColor: mergedTheme.header }]}>
+      <Page size="A4" style={stylesWithTheme.page} wrap={false}>
+        <View style={[stylesWithTheme.header, { backgroundColor: mergedTheme.header }]} wrap={false}>
           <HeaderShapes theme={mergedTheme} />
           <View style={stylesWithTheme.headerContent}>
             <View style={stylesWithTheme.headerLeft}>
@@ -513,24 +538,22 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
               <View style={stylesWithTheme.headerSeparator} />
               <View style={stylesWithTheme.contactRow}>
                 {dedupedContacts.slice(0, 4).map((item) => {
+                  const displayValue = item.value.replace(/^mailto:/, "").replace(/^tel:/, "");
                   if (item.isLink && item.href) {
                     return (
-                      <Link key={item.value} src={item.href} style={stylesWithTheme.contactItem}>
-                        {item.value.replace(/^mailto:/, "").replace(/^tel:/, "")}
-                      </Link>
-                    );
-                  }
-                  if (item.value.startsWith("http")) {
-                    return (
-                      <Link key={item.value} src={item.value} style={stylesWithTheme.contactItem}>
-                        {item.value.replace(/^https?:\/\//, "")}
-                      </Link>
+                      <View key={item.value} style={{ flexDirection: "row", marginBottom: 2 }}>
+                        <Text style={stylesWithTheme.contactLabel}>{item.label} : </Text>
+                        <Link src={item.href} style={stylesWithTheme.contactItem}>
+                          {displayValue}
+                        </Link>
+                      </View>
                     );
                   }
                   return (
-                    <Text key={item.value} style={stylesWithTheme.contactItem}>
-                      {item.value}
-                    </Text>
+                    <View key={item.value} style={{ flexDirection: "row", marginBottom: 2 }}>
+                      <Text style={stylesWithTheme.contactLabel}>{item.label} : </Text>
+                      <Text style={stylesWithTheme.contactItem}>{displayValue}</Text>
+                    </View>
                   );
                 })}
               </View>
@@ -539,28 +562,10 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
               <Text style={stylesWithTheme.badge}>{badge || (isFr ? "Compositeur & producteur" : "Composer & producer")}</Text>
             </View>
           </View>
-          {data.showPhoto && data.photo && (
-            <View style={stylesWithTheme.photoBadge}>
-              <Image src={data.photo} style={stylesWithTheme.photo} />
-            </View>
-          )}
         </View>
 
-        <View style={stylesWithTheme.body}>
-          <View style={stylesWithTheme.sidebar}>
-            {dedupedContacts.length > 0 && (
-              <View style={stylesWithTheme.sidebarBlock}>
-                <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "Coordonnées" : "Contact"}</Text>
-                <View style={stylesWithTheme.sidebarTitleBar} />
-                {dedupedContacts.map((item) => (
-                  <Text key={item.value} style={stylesWithTheme.contactLine}>
-                    {item.label ? `${item.label}: ` : ""}
-                    {item.value.replace(/^mailto:/, "").replace(/^tel:/, "")}
-                  </Text>
-                ))}
-              </View>
-            )}
-
+        <View style={stylesWithTheme.body} wrap={false}>
+          <View style={stylesWithTheme.sidebar} wrap={false}>
             {bio && (
               <View style={stylesWithTheme.sidebarBlock}>
                 <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "Profil" : "Profile"}</Text>
@@ -629,7 +634,7 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
             {customSidebarSections.filter((s) => s.id !== educationSection?.id).map((section) => renderSidebarSection(section))}
           </View>
 
-          <View style={stylesWithTheme.main}>
+          <View style={stylesWithTheme.main} wrap={false}>
             {experienceSection && experienceSection.items.length > 0 && (
               <View style={{ marginBottom: 18 }}>
                 <View style={stylesWithTheme.sectionHeader}>
