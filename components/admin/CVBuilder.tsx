@@ -247,14 +247,14 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
           <div className="flex flex-wrap gap-3">
             <Button
               onClick={() => downloadPDF("fr")}
-              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border border-[var(--glass-border-strong)]"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-foreground/10 text-white border border-[var(--glass-border-strong)]"
             >
               <Download className="h-4 w-4" />
               PDF FR
             </Button>
             <Button
               onClick={() => downloadPDF("en")}
-              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border border-[var(--glass-border-strong)]"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-foreground/10 text-white border border-[var(--glass-border-strong)]"
             >
               <Download className="h-4 w-4" />
               PDF EN
@@ -273,7 +273,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
         <div className="space-y-6 xl:col-span-1">
           <GlassCard className="p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white">Profil</h3>
+              <h3 className="text-xl font-bold text-foreground">Profil</h3>
               <NeonButton color="lime" onClick={handleProfileSave} disabled={savingProfile} className="px-4 py-2 text-sm">
                 <Save className="h-4 w-4" />
                 Sauvegarder
@@ -337,7 +337,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
 
           <GlassCard className="p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white">Thème</h3>
+              <h3 className="text-xl font-bold text-foreground">Thème</h3>
               <NeonButton color="cyan" onClick={handleThemeSave} disabled={savingTheme} className="px-4 py-2 text-sm">
                 <Save className="h-4 w-4" />
                 Sauvegarder
@@ -349,26 +349,26 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                 const stringValue = String(value ?? "");
                 return (
                   <div key={key} className="space-y-1">
-                    <label className="text-xs text-white/70 uppercase tracking-wide">{key}</label>
+                    <label className="text-xs text-foreground/70 uppercase tracking-wide">{key}</label>
                     {isColor ? (
                       <div className="flex items-center gap-2">
                         <input
                           type="color"
                           value={stringValue}
                           onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
-                          className="h-10 w-12 rounded-md border border-[var(--glass-border)] bg-obsidian"
+                          className="h-10 w-12 rounded-md border border-[var(--glass-border)] bg-background"
                         />
                         <Input
                           value={stringValue}
                           onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
-                          className="bg-[var(--glass-subtle)] text-white"
+                          className="bg-[var(--glass-subtle)] text-foreground"
                         />
                       </div>
                     ) : (
                       <Input
                         value={stringValue}
                         onChange={(e) => setTheme({ ...themeState, [key]: e.target.value })}
-                        className="bg-[var(--glass-subtle)] text-white"
+                        className="bg-[var(--glass-subtle)] text-foreground"
                       />
                     )}
                   </div>
@@ -382,8 +382,8 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
           <GlassCard className="p-6 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-bold text-white">Sections et blocs</h3>
-                <p className="text-sm text-white/60">Réorganisez les blocs, affectez des types et des sources d'entrées.</p>
+                <h3 className="text-xl font-bold text-foreground">Sections et blocs</h3>
+                <p className="text-sm text-foreground/60">Réorganisez les blocs, affectez des types et des sources d'entrées.</p>
               </div>
               <div className="flex gap-2">
                 <Button variant="secondary" onClick={addSection} className="gap-2">
@@ -402,7 +402,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                 <div key={section.id} className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-subtle)] p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-white/60">#{section.order ?? idx + 1}</span>
+                      <span className="text-xs font-bold text-foreground/60">#{section.order ?? idx + 1}</span>
                       <Input
                         value={section.slug}
                         onChange={(e) => {
@@ -435,7 +435,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         setSections(next);
                       }}
                       placeholder="Titre FR"
-                      className="bg-[var(--glass-subtle)] text-white"
+                      className="bg-[var(--glass-subtle)] text-foreground"
                     />
                     <Input
                       value={section.titleEn || ""}
@@ -445,7 +445,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         setSections(next);
                       }}
                       placeholder="Title EN"
-                      className="bg-[var(--glass-subtle)] text-white"
+                      className="bg-[var(--glass-subtle)] text-foreground"
                     />
                     <select
                       value={section.type}
@@ -454,7 +454,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         next[idx] = { ...next[idx], type: e.target.value };
                         setSections(next);
                       }}
-                      className="bg-[var(--glass-subtle)] text-white rounded-md border border-[var(--glass-border)] h-10 px-3"
+                      className="bg-[var(--glass-subtle)] text-foreground rounded-md border border-[var(--glass-border)] h-10 px-3"
                     >
                       <option value="TIMELINE">Timeline (main)</option>
                       <option value="SKILL_BARS">Skills (sidebar)</option>
@@ -469,7 +469,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                         setSections(next);
                       }}
                       placeholder="Type d'entrée (EXPERIENCE, AWARD...)"
-                      className="bg-[var(--glass-subtle)] text-white"
+                      className="bg-[var(--glass-subtle)] text-foreground"
                     />
                     <Input
                       value={(section.entryIds || []).join(", ")}
@@ -482,7 +482,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                       className="bg-[var(--glass-subtle)] text-white col-span-2"
                     />
                     <div className="flex items-center gap-3">
-                      <span className="text-sm text-white/70">Publié</span>
+                      <span className="text-sm text-foreground/70">Publié</span>
                       <Checkbox
                         checked={section.published ?? true}
                         onCheckedChange={(checked) => {
@@ -501,8 +501,8 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
           <GlassCard className="p-6 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-bold text-white">Entrées du CV</h3>
-                <p className="text-sm text-white/60">Gérez les entrées avant de les placer dans les sections.</p>
+                <h3 className="text-xl font-bold text-foreground">Entrées du CV</h3>
+                <p className="text-sm text-foreground/60">Gérez les entrées avant de les placer dans les sections.</p>
               </div>
               <Button asChild className="gap-2 bg-admin-primary-500 hover:bg-admin-primary-600">
                 <Link href={`/${locale}/admin/resume/new`}>
@@ -516,11 +516,11 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
               {orderedEntries.map((entry) => (
                 <div key={entry.id} className="rounded-lg border border-[var(--glass-border)] bg-[var(--glass-subtle)] p-3 space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs uppercase tracking-wide text-white/60">{entry.type}</span>
-                    <span className="text-[11px] text-white/60">#{entry.order}</span>
+                    <span className="text-xs uppercase tracking-wide text-foreground/60">{entry.type}</span>
+                    <span className="text-[11px] text-foreground/60">#{entry.order}</span>
                   </div>
-                  <div className="text-sm font-bold text-white leading-tight">{entry.titleEn}</div>
-                  <div className="text-xs text-white/60">{entry.subtitleEn}</div>
+                  <div className="text-sm font-bold text-foreground leading-tight">{entry.titleEn}</div>
+                  <div className="text-xs text-foreground/60">{entry.subtitleEn}</div>
                   <div className="flex items-center justify-between pt-2">
                     <Link
                       href={`/${locale}/admin/resume/${entry.id}`}
@@ -528,7 +528,7 @@ export function CVBuilder({ profile, theme, sections, entries, locale }: CVBuild
                     >
                       Modifier
                     </Link>
-                    <span className="text-[10px] text-white/50">{entry.published ? "Publié" : "Brouillon"}</span>
+                    <span className="text-[10px] text-foreground/50">{entry.published ? "Publié" : "Brouillon"}</span>
                   </div>
                 </div>
               ))}

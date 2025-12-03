@@ -114,7 +114,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
+          <h1 className="text-3xl font-black text-foreground mb-2 font-montserrat tracking-tight">
             Albums Library
           </h1>
           <p className="text-muted-foreground font-mono text-sm">
@@ -161,7 +161,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
         />
       ) : (
         <>
-          <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+          <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden">
             <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
               <Table>
                 <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)]">
@@ -192,7 +192,7 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <span className="font-bold text-white">{album.title}</span>
+                        <span className="font-bold text-foreground">{album.title}</span>
                       </TableCell>
                       <TableCell>
                         <span className="text-muted-foreground text-sm font-mono">{album.date}</span>

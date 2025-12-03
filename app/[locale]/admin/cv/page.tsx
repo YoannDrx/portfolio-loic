@@ -143,8 +143,8 @@ export default async function CVAdminPage({
   return (
     <div className="space-y-6 pb-10">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-white">Éditeur de CV</h1>
-        <p className="text-white/50">Gérez le contenu du CV et prévisualisez le PDF en temps réel.</p>
+        <h1 className="text-3xl font-bold text-foreground">Éditeur de CV</h1>
+        <p className="text-foreground/50">Gérez le contenu du CV et prévisualisez le PDF en temps réel.</p>
       </div>
       <CVEditor initialData={transformedCV} locale={locale} />
     </div>

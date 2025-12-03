@@ -66,7 +66,7 @@ export function SearchFilters({
             onChange={(e) =>
               onFiltersChange({ ...filters, search: e.target.value })
             }
-            className="pl-9 h-11 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white placeholder:text-muted-foreground focus:border-[var(--admin-neon-cyan)]/50 focus:ring-2 focus:ring-[var(--admin-neon-cyan)]/20 transition-all duration-200"
+            className="pl-9 h-11 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground placeholder:text-muted-foreground focus:border-[var(--admin-neon-cyan)]/50 focus:ring-2 focus:ring-[var(--admin-neon-cyan)]/20 transition-all duration-200"
           />
         </div>
 
@@ -100,7 +100,7 @@ export function SearchFilters({
 
       {/* Filtres avancés */}
       {showAdvanced && (
-        <div className="grid gap-4 rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm p-5 md:grid-cols-4">
+        <div className="grid gap-4 rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm p-5 md:grid-cols-4">
           {showStyleFilter && (
             <div className="space-y-2">
               <label className="text-sm font-bold text-[var(--admin-neon-cyan)]">Style</label>
@@ -113,7 +113,7 @@ export function SearchFilters({
                   })
                 }
               >
-                <SelectTrigger className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white">
+                <SelectTrigger className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground">
                   <SelectValue placeholder="All" />
                 </SelectTrigger>
                 <SelectContent className="bg-[var(--admin-bg)] border-[var(--glass-border)]">

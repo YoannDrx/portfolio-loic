@@ -90,7 +90,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
         
         {/* General Info Section */}
         <GlassCard className="p-6 space-y-6">
-          <h3 className="text-xl font-bold text-white border-b border-[var(--glass-border)] pb-2 mb-4">General Information</h3>
+          <h3 className="text-xl font-bold text-foreground border-b border-[var(--glass-border)] pb-2 mb-4">General Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
@@ -100,11 +100,11 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                   <FormLabel className="text-foreground/85">Type</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white">
+                      <SelectTrigger className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground">
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-obsidian border-[var(--glass-border)] text-white">
+                    <SelectContent className="bg-background border-[var(--glass-border)] text-foreground">
                       <SelectItem value="EXPERIENCE">Experience</SelectItem>
                       <SelectItem value="EDUCATION">Education</SelectItem>
                       <SelectItem value="SKILL">Skill</SelectItem>
@@ -127,7 +127,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 <FormItem>
                   <FormLabel className="text-foreground/85">Order</FormLabel>
                   <FormControl>
-                    <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
+                    <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -143,7 +143,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 <FormItem>
                   <FormLabel className="text-foreground/85">Value (0-100 for Skills)</FormLabel>
                   <FormControl>
-                     <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} value={field.value || 0} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
+                     <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} value={field.value || 0} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -157,7 +157,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 <FormItem>
                   <FormLabel className="text-foreground/85">Link (Optional)</FormLabel>
                   <FormControl>
-                    <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
+                    <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -177,7 +177,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 <FormItem>
                   <FormLabel className="text-foreground/85">Title (EN)</FormLabel>
                   <FormControl>
-                    <Input {...field} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="e.g. Music Producer" />
+                    <Input {...field} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" placeholder="e.g. Music Producer" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -192,7 +192,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                   <FormItem>
                     <FormLabel className="text-foreground/85">Subtitle (EN)</FormLabel>
                     <FormControl>
-                      <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="e.g. Sony Music" />
+                      <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" placeholder="e.g. Sony Music" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -205,7 +205,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                   <FormItem>
                     <FormLabel className="text-foreground/85">Date Range (EN)</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="e.g. 2020 - Present" value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
+                      <Input {...field} placeholder="e.g. 2020 - Present" value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -220,7 +220,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 <FormItem>
                   <FormLabel className="text-foreground/85">Description (EN)</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="h-24 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" value={field.value || ''} />
+                    <Textarea {...field} className="h-24 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" value={field.value || ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -240,7 +240,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 <FormItem>
                   <FormLabel className="text-foreground/85">Title (FR)</FormLabel>
                   <FormControl>
-                    <Input {...field} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="ex. Producteur de Musique" />
+                    <Input {...field} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" placeholder="ex. Producteur de Musique" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -255,7 +255,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                   <FormItem>
                     <FormLabel className="text-foreground/85">Subtitle (FR)</FormLabel>
                     <FormControl>
-                      <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" placeholder="ex. Sony Music" />
+                      <Input {...field} value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" placeholder="ex. Sony Music" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -268,7 +268,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                   <FormItem>
                     <FormLabel className="text-foreground/85">Date Range (FR)</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="ex. 2020 - Aujourd'hui" value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" />
+                      <Input {...field} placeholder="ex. 2020 - Aujourd'hui" value={field.value || ''} className="bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -283,7 +283,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                 <FormItem>
                   <FormLabel className="text-foreground/85">Description (FR)</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="h-24 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white" value={field.value || ''} />
+                    <Textarea {...field} className="h-24 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground" value={field.value || ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -307,7 +307,7 @@ export function ResumeForm({ initialData, locale, isEditing }: ResumeFormProps) 
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel className="text-white font-medium cursor-pointer">
+                  <FormLabel className="text-foreground font-medium cursor-pointer">
                     Published
                   </FormLabel>
                   <p className="text-sm text-muted-foreground">

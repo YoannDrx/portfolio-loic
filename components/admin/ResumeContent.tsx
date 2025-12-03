@@ -113,14 +113,14 @@ export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
           <div className="flex gap-3">
             <Button
               onClick={() => downloadPDF("fr")}
-              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border-2 border-[var(--glass-border-strong)] backdrop-blur-sm transition-all duration-200 hover:scale-105"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-foreground/10 text-white border-2 border-[var(--glass-border-strong)] backdrop-blur-sm transition-all duration-200 hover:scale-105"
             >
               <FileDown className="h-4 w-4" />
               PDF (FR)
             </Button>
             <Button
               onClick={() => downloadPDF("en")}
-              className="gap-2 bg-[var(--glass-active)] hover:bg-white/30 text-white border-2 border-[var(--glass-border-strong)] backdrop-blur-sm transition-all duration-200 hover:scale-105"
+              className="gap-2 bg-[var(--glass-active)] hover:bg-foreground/10 text-white border-2 border-[var(--glass-border-strong)] backdrop-blur-sm transition-all duration-200 hover:scale-105"
             >
               <FileDown className="h-4 w-4" />
               PDF (EN)
@@ -244,7 +244,7 @@ export function ResumeContent({ initialEntries, locale }: ResumeContentProps) {
 
                 {/* Badge d'ordre */}
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded">
+                  <div className="bg-background text-foreground text-xs font-bold px-2 py-1 rounded border border-[var(--glass-border)]">
                     #{entry.order}
                   </div>
                 </div>

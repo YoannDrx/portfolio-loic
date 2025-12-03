@@ -43,7 +43,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
+          <h1 className="text-3xl font-black text-foreground mb-2 font-montserrat tracking-tight">
             Services Library
           </h1>
           <p className="text-muted-foreground font-mono text-sm">
@@ -72,13 +72,13 @@ export function ServicesList({ services, locale }: ServicesListProps) {
             placeholder="Search services..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white focus:border-[var(--admin-neon-purple)]/50 focus:ring-[var(--admin-neon-purple)]/20"
+            className="pl-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground focus:border-[var(--admin-neon-purple)]/50 focus:ring-[var(--admin-neon-purple)]/20"
           />
         </div>
       </div>
 
       {/* Table with fixed height and scroll */}
-      <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-colors duration-300">
+      <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden transition-colors duration-300">
         <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
           <Table>
             <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)] transition-colors duration-300">
@@ -127,7 +127,7 @@ export function ServicesList({ services, locale }: ServicesListProps) {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <span className="font-bold text-white">{service.title}</span>
+                      <span className="font-bold text-foreground">{service.title}</span>
                     </TableCell>
                     <TableCell>
                       <span className="text-muted-foreground text-sm font-mono">{service.date}</span>

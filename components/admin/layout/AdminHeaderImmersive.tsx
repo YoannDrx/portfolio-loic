@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, type ReactNode } from 'react';
 import { signOut } from '@/lib/auth-client';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -34,6 +34,16 @@ import {
   adminNotificationBell,
 } from '@/lib/animations';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+
+/* ============================================
+   CLIENT ONLY WRAPPER - évite les erreurs d'hydratation Radix
+   ============================================ */
+
+function ClientOnly({ children, fallback = null }: { children: ReactNode; fallback?: ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted ? <>{children}</> : <>{fallback}</>;
+}
 
 /* ============================================
    TYPES
@@ -521,11 +531,27 @@ export function AdminHeaderImmersive({ user, locale }: AdminHeaderProps) {
         {/* Theme Switcher */}
         <ThemeSwitcher className="p-2.5 rounded-xl hover:bg-[var(--glass-hover)] text-muted-foreground hover:text-foreground" />
 
-        {/* Notifications */}
-        <NotificationBell locale={locale} />
+        {/* Notifications - wrapped in ClientOnly to avoid Radix hydration issues */}
+        <ClientOnly
+          fallback={
+            <div className="p-2.5 rounded-xl">
+              <Bell className="h-5 w-5 text-muted-foreground" />
+            </div>
+          }
+        >
+          <NotificationBell locale={locale} />
+        </ClientOnly>
 
-        {/* User Menu */}
-        <UserMenu user={user} locale={locale} onSignOut={handleSignOut} />
+        {/* User Menu - wrapped in ClientOnly to avoid Radix hydration issues */}
+        <ClientOnly
+          fallback={
+            <div className="flex items-center gap-3 pl-2 pr-4 py-1.5">
+              <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-[var(--admin-neon-purple)] to-[var(--admin-neon-cyan)]" />
+            </div>
+          }
+        >
+          <UserMenu user={user} locale={locale} onSignOut={handleSignOut} />
+        </ClientOnly>
       </div>
     </motion.header>
   );

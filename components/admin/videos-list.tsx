@@ -43,7 +43,7 @@ export function VideosList({ videos, locale }: VideosListProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-white mb-2 font-montserrat tracking-tight">
+          <h1 className="text-3xl font-black text-foreground mb-2 font-montserrat tracking-tight">
             Video Library
           </h1>
           <p className="text-muted-foreground font-mono text-sm">
@@ -72,13 +72,13 @@ export function VideosList({ videos, locale }: VideosListProps) {
             placeholder="Search videos..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-white focus:border-[var(--admin-neon-magenta)]/50 focus:ring-[var(--admin-neon-magenta)]/20"
+            className="pl-10 bg-[var(--glass-subtle)] border-[var(--glass-border)] text-foreground focus:border-[var(--admin-neon-magenta)]/50 focus:ring-[var(--admin-neon-magenta)]/20"
           />
         </div>
       </div>
 
       {/* Table with fixed height and scroll */}
-      <div className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-colors duration-300">
+      <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden transition-colors duration-300">
         <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
           <Table>
             <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)] transition-colors duration-300">
@@ -119,7 +119,7 @@ export function VideosList({ videos, locale }: VideosListProps) {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className="font-bold text-white">{video.title}</span>
+                    <span className="font-bold text-foreground">{video.title}</span>
                   </TableCell>
                   <TableCell>
                     <Badge
