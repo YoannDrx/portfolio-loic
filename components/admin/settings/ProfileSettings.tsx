@@ -163,15 +163,13 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
   return (
     <div className="space-y-6">
       {/* Informations du profil */}
-      <Card>
+      <Card className="xs:px-0">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <User className="h-5 w-5" />
             {t("title")}
           </CardTitle>
-          <CardDescription>
-            {t("description")}
-          </CardDescription>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -192,15 +190,13 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       </Card>
 
       {/* Changer l'email */}
-      <Card>
+      <Card className="xs:px-0">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Mail className="h-5 w-5" />
             {t("changeEmail")}
           </CardTitle>
-          <CardDescription>
-            {t("changeEmailDesc")}
-          </CardDescription>
+          <CardDescription>{t("changeEmailDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleEmailChange} className="space-y-4">
@@ -234,15 +230,13 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       </Card>
 
       {/* Changer le mot de passe */}
-      <Card>
+      <Card className="xs:px-0">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Lock className="h-5 w-5" />
             {t("changePassword")}
           </CardTitle>
-          <CardDescription>
-            {t("changePasswordDesc")}
-          </CardDescription>
+          <CardDescription>{t("changePasswordDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handlePasswordChange} className="space-y-4">
@@ -265,11 +259,7 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                   disabled={passwordLoading}
                 >
-                  {showCurrentPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>
@@ -293,16 +283,10 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
                   onClick={() => setShowNewPassword(!showNewPassword)}
                   disabled={passwordLoading}
                 >
-                  {showNewPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground">
-                {t("minChars")}
-              </p>
+              <p className="text-xs text-muted-foreground">{t("minChars")}</p>
             </div>
 
             <div className="space-y-2">
@@ -324,11 +308,7 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   disabled={passwordLoading}
                 >
-                  {showConfirmPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>

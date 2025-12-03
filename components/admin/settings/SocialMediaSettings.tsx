@@ -29,15 +29,13 @@ export function SocialMediaSettings({ settings, onChange }: SocialMediaSettingsP
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="xs:px-0">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Share2 className="h-5 w-5" />
             {t("title")}
           </CardTitle>
-          <CardDescription>
-            {t("description")}
-          </CardDescription>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -55,9 +53,7 @@ export function SocialMediaSettings({ settings, onChange }: SocialMediaSettingsP
             ))}
           </div>
 
-          <p className="text-sm text-muted-foreground mt-4">
-            {t("tip")}
-          </p>
+          <p className="text-sm text-muted-foreground mt-4">{t("tip")}</p>
         </CardContent>
       </Card>
     </div>

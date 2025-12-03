@@ -23,7 +23,7 @@ export function GeneralSettings({ settings, onChange }: GeneralSettingsProps) {
   const t = useTranslations("admin.settings.general");
 
   return (
-    <Card>
+    <Card className="xs:px-0">
       <CardHeader>
         <CardTitle>{t("title")}</CardTitle>
       </CardHeader>

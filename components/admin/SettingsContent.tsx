@@ -228,9 +228,7 @@ export function SettingsContent() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">{t("settings.title")}</h1>
-          <p className="text-admin-text-secondary">
-            {t("settings.description")}
-          </p>
+          <p className="text-admin-text-secondary">{t("settings.description")}</p>
         </div>
 
         {/* Indicateur de sauvegarde */}
@@ -288,15 +286,13 @@ export function SettingsContent() {
 
         {/* ONGLET EXPORT */}
         <TabsContent value="export" className="space-y-6">
-          <Card>
+          <Card className="xs:px-0">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Download className="h-5 w-5" />
                 {t("settings.export.title")}
               </CardTitle>
-              <CardDescription>
-                {t("settings.export.description")}
-              </CardDescription>
+              <CardDescription>{t("settings.export.description")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {exportCards.map((card) => (
@@ -325,15 +321,9 @@ export function SettingsContent() {
                           disabled={isLoading}
                           className="gap-2"
                         >
-                          {isLoading ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                          ) : (
-                            <btn.icon className="h-4 w-4" />
-                          )}
+                          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <btn.icon className="h-4 w-4" />}
                           {btn.label}
-                          <span className="text-xs text-muted-foreground ml-1">
-                            ({btn.description})
-                          </span>
+                          <span className="text-xs text-muted-foreground ml-1">({btn.description})</span>
                         </Button>
                       );
                     })}

@@ -28,15 +28,13 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="xs:px-0">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Sliders className="h-5 w-5" />
             {t("title")}
           </CardTitle>
-          <CardDescription>
-            {t("description")}
-          </CardDescription>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Homepage */}
@@ -45,9 +43,7 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="homepageFeaturedAlbumsCount">
-                  {t("homepageFeaturedCount")}
-                </Label>
+                <Label htmlFor="homepageFeaturedAlbumsCount">{t("homepageFeaturedCount")}</Label>
                 <Input
                   id="homepageFeaturedAlbumsCount"
                   type="number"
@@ -59,9 +55,7 @@ export function ContentSettings({ settings, onChange }: ContentSettingsProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="homepageLatestVideosCount">
-                  {t("homepageLatestCount")}
-                </Label>
+                <Label htmlFor="homepageLatestVideosCount">{t("homepageLatestCount")}</Label>
                 <Input
                   id="homepageLatestVideosCount"
                   type="number"
