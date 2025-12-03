@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
-import { PlusIcon, TrashIcon, SaveIcon, ArrowUpIcon, ArrowDownIcon, SettingsIcon, ChevronDown } from "lucide-react";
+import { PlusIcon, TrashIcon, SaveIcon, ArrowUpIcon, ArrowDownIcon, SettingsIcon, ChevronDown, EyeIcon } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -82,6 +84,45 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   const [versionName, setVersionName] = useState("");
   const [isSavingVersion, setIsSavingVersion] = useState(false);
   const [isLoadingVersions, setIsLoadingVersions] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [fabPosition, setFabPosition] = useState({ x: 24, y: 24 }); // distance from right/bottom
+  const [isDragging, setIsDragging] = useState(false);
+  const fabRef = useRef<HTMLButtonElement>(null);
+  const dragStartRef = useRef({ x: 0, y: 0, fabX: 0, fabY: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  // Pour le Portal (côté client uniquement)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Handlers pour le drag du FAB
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    dragStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      fabX: fabPosition.x,
+      fabY: fabPosition.y,
+    };
+    setIsDragging(true);
+  }, [fabPosition]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    const deltaX = dragStartRef.current.x - touch.clientX;
+    const deltaY = dragStartRef.current.y - touch.clientY;
+
+    const newX = Math.max(16, Math.min(window.innerWidth - 72, dragStartRef.current.fabX + deltaX));
+    const newY = Math.max(16, Math.min(window.innerHeight - 72, dragStartRef.current.fabY + deltaY));
+
+    setFabPosition({ x: newX, y: newY });
+  }, [isDragging]);
+
+  const handleTouchEnd = useCallback(() => {
+    setIsDragging(false);
+  }, []);
 
   const updateGlobal = (field: keyof CVData, value: unknown) => {
     setData({ ...data, [field]: value });
@@ -1032,19 +1073,19 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
         </Card>
       </div>
 
-      {/* Panneau droite - Preview PDF (en haut sur mobile, à droite sur desktop) */}
-      <div className="flex flex-col h-[calc(92vw*1.5)] sm:h-[500px] lg:h-full order-first lg:order-last overflow-hidden">
+      {/* Panneau droite - Preview PDF (masqué sur mobile, visible sur desktop) */}
+      <div className="hidden lg:flex flex-col lg:h-full overflow-hidden">
         <Card className="bg-card border-[var(--glass-border)] flex flex-col h-full overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between gap-2 py-2 sm:py-4 border-b border-[var(--glass-border)] shrink-0">
-            <CardTitle className="text-foreground text-sm sm:text-base">Prévisualisation PDF</CardTitle>
-            <div className="flex items-center gap-2 sm:gap-3">
+          <CardHeader className="flex flex-row items-center justify-between gap-2 py-4 border-b border-[var(--glass-border)] shrink-0">
+            <CardTitle className="text-foreground text-base">Prévisualisation PDF</CardTitle>
+            <div className="flex items-center gap-3">
               <PDFDownloadButton data={data} locale={previewLocale} />
               <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
                 <TabsList className="bg-[var(--glass-active)] border border-lime-400/50 h-8">
-                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
+                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-sm px-3">
                     FR
                   </TabsTrigger>
-                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
+                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-sm px-3">
                     EN
                   </TabsTrigger>
                 </TabsList>
@@ -1058,6 +1099,72 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
           </CardContent>
         </Card>
       </div>
+
+      {/* Bouton flottant mobile (FAB) draggable - rendu via Portal pour position fixe */}
+      {mounted && createPortal(
+        <Button
+          ref={fabRef}
+          onClick={() => !isDragging && setPreviewOpen(true)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className="lg:hidden h-14 w-14 rounded-full bg-lime-400 hover:bg-lime-500 text-black shadow-lg shadow-lime-400/25 touch-none"
+          style={{
+            position: 'fixed',
+            right: fabPosition.x,
+            bottom: fabPosition.y,
+            zIndex: 9999,
+            transition: isDragging ? 'none' : 'box-shadow 0.2s',
+          }}
+        >
+          <EyeIcon className="h-6 w-6" />
+        </Button>,
+        document.body
+      )}
+
+      {/* Dialog fullscreen pour preview mobile */}
+      <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
+        <DialogContent
+          size="full"
+          hideCloseButton
+          className="!inset-0 !translate-x-0 !translate-y-0 !max-w-none !max-h-none !rounded-none !p-0 !gap-0 flex flex-col"
+        >
+          <DialogHeader className="flex flex-row items-center gap-3 px-4 py-3 border-b border-[var(--glass-border)] shrink-0 bg-card">
+            {/* Bouton fermer à gauche */}
+            <button
+              onClick={() => setPreviewOpen(false)}
+              className="p-2 -ml-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[var(--glass-active)] transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+              </svg>
+            </button>
+
+            {/* Titre centré avec flex-1 */}
+            <DialogTitle className="text-foreground text-base flex-1">Prévisualisation</DialogTitle>
+
+            {/* Actions à droite */}
+            <div className="flex items-center gap-1.5">
+              <PDFDownloadButton data={data} locale={previewLocale} iconOnly />
+              <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
+                <TabsList className="bg-[var(--glass-active)] border border-lime-400/50 h-8">
+                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
+                    FR
+                  </TabsTrigger>
+                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
+                    EN
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+          </DialogHeader>
+          <div className="flex-1 min-h-0 bg-zinc-900/50">
+            <PDFViewerClient width="100%" height="100%" className="border-none w-full h-full">
+              <CVDocument data={data} locale={previewLocale} />
+            </PDFViewerClient>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

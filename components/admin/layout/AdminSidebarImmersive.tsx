@@ -162,27 +162,28 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
           className={cn(
             'group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300',
             isActive
-              ? 'text-foreground bg-[var(--glass-active)]'
+              ? 'text-foreground bg-[var(--glass-active)] border border-[var(--glass-border)]'
               : 'text-muted-foreground hover:text-foreground hover:bg-[var(--glass-subtle)]'
           )}
           variants={adminSidebarItem}
           initial="rest"
           whileHover="hover"
           animate={isActive ? 'active' : 'rest'}
-          style={{
-            boxShadow: isActive ? item.glowColor : 'none',
-          }}
         >
           {/* Active indicator */}
           {isActive && (
             <motion.div
-              className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full"
-              style={{
-                background: `linear-gradient(180deg, ${item.color.includes('cyan') ? 'var(--admin-neon-cyan)' : item.color.includes('lime') ? 'var(--admin-neon-lime)' : item.color.includes('magenta') ? 'var(--admin-neon-magenta)' : item.color.includes('purple') ? 'var(--admin-neon-purple)' : item.color.includes('orange') ? 'var(--admin-neon-orange)' : '#fff'} 0%, transparent 100%)`,
-              }}
+              className="absolute left-0 top-0 bottom-0 w-1.5 rounded-r-md flex items-center"
               layoutId="activeIndicator"
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            />
+            >
+              <div
+                className="w-full h-7 rounded-r-md"
+                style={{
+                  background: item.color.includes('cyan') ? 'var(--admin-neon-cyan)' : item.color.includes('lime') ? 'var(--admin-neon-lime)' : item.color.includes('magenta') ? 'var(--admin-neon-magenta)' : item.color.includes('purple') ? 'var(--admin-neon-purple)' : item.color.includes('orange') ? 'var(--admin-neon-orange)' : '#fff',
+                }}
+              />
+            </motion.div>
           )}
 
           {/* Icon */}

@@ -9,9 +9,10 @@ import type { CVData } from "@/types/cv";
 interface PDFDownloadButtonProps {
   data: CVData;
   locale: string;
+  iconOnly?: boolean;
 }
 
-export function PDFDownloadButton({ data, locale }: PDFDownloadButtonProps) {
+export function PDFDownloadButton({ data, locale, iconOnly = false }: PDFDownloadButtonProps) {
   const [isClient, setIsClient] = useState(false);
   const [PDFDownloadLink, setPDFDownloadLink] = useState<any>(null);
 
@@ -24,9 +25,9 @@ export function PDFDownloadButton({ data, locale }: PDFDownloadButtonProps) {
 
   if (!isClient || !PDFDownloadLink) {
     return (
-      <Button size="sm" variant="outline" disabled className="border-lime-400 text-lime-400">
-        <DownloadIcon className="h-4 w-4 mr-2" />
-        ...
+      <Button size="sm" variant="outline" disabled className={iconOnly ? "border-lime-400 text-lime-400 px-2" : "border-lime-400 text-lime-400"}>
+        <DownloadIcon className={iconOnly ? "h-4 w-4" : "h-4 w-4 mr-2"} />
+        {!iconOnly && "..."}
       </Button>
     );
   }
@@ -43,10 +44,10 @@ export function PDFDownloadButton({ data, locale }: PDFDownloadButtonProps) {
           size="sm"
           variant="outline"
           disabled={loading}
-          className="border-lime-400 text-lime-400 hover:bg-lime-400/10"
+          className={iconOnly ? "border-lime-400 text-lime-400 hover:bg-lime-400/10 px-2" : "border-lime-400 text-lime-400 hover:bg-lime-400/10"}
         >
-          <DownloadIcon className="h-4 w-4 mr-2" />
-          {loading ? "..." : "Télécharger"}
+          <DownloadIcon className={iconOnly ? "h-4 w-4" : "h-4 w-4 mr-2"} />
+          {!iconOnly && (loading ? "..." : "Télécharger")}
         </Button>
       )}
     </PDFDownloadLink>
