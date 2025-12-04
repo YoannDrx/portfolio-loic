@@ -1,7 +1,7 @@
-import FuturisticHome from '@/components/home/FuturisticHome';
+import NeoHome from '@/components/neo-brutalist/NeoHome';
 import { prisma } from '@/lib/prisma';
 
-// Force dynamic rendering for useSearchParams in FuturisticHome
+// Force dynamic rendering for useSearchParams
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
@@ -46,7 +46,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <FuturisticHome 
+    <NeoHome 
       albums={albums}
       videos={videos}
       services={services}

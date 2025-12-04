@@ -18,6 +18,11 @@ const config: Config = {
     },
     extend: {
       colors: {
+        /* ===== NEO-BRUTALIST ===== */
+        'neo-bg': '#F2F2F2',
+        'neo-black': '#000000',
+        'neo-orange': '#FF3300',
+
         /* ===== PRIMARY - Neon Yellow ===== */
         primary: {
           DEFAULT: '#D5FF0A',

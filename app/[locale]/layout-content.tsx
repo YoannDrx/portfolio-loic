@@ -8,8 +8,9 @@ import ScrollProgress from '@/components/ui/ScrollProgress';
 export function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdminRoute = pathname?.includes('/admin') || pathname?.includes('/login');
+  const isHomePage = pathname === '/en' || pathname === '/fr' || pathname === '/en/' || pathname === '/fr/';
 
-  if (isAdminRoute) {
+  if (isAdminRoute || isHomePage) {
     return <main className="min-h-screen">{children}</main>;
   }
 
