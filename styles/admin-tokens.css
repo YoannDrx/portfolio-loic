@@ -1,40 +1,48 @@
 /* ============================================
    ADMIN DASHBOARD DESIGN TOKENS
-   Immersive Dark Theme with Neon Accents
+   Neo-Brutalist Unified Design System
    ============================================ */
 
 :root {
-  /* ===== ADMIN SURFACES ===== */
-  --admin-bg: #09090b;
-  --admin-bg-rgb: 9, 9, 11;
-  --admin-surface: rgba(15, 15, 20, 0.8);
-  --admin-surface-solid: #0f0f14;
-  --admin-surface-elevated: rgba(20, 20, 28, 0.9);
-  --admin-surface-elevated-solid: #14141c;
-  --admin-surface-glass: rgba(255, 255, 255, 0.03);
-  --admin-surface-hover: rgba(255, 255, 255, 0.05);
-  --admin-surface-active: rgba(255, 255, 255, 0.08);
+  /* ===== ADMIN NEO-BRUTALIST SURFACES ===== */
+  /* Inherit from main neo-brutalist tokens */
+  --admin-bg: var(--neo-bg, #F2F2F2);
+  --admin-bg-rgb: 242, 242, 242;
+  --admin-surface: var(--neo-surface, #FFFFFF);
+  --admin-surface-solid: var(--neo-surface, #FFFFFF);
+  --admin-surface-elevated: var(--neo-bg-alt, #E8E8E8);
+  --admin-surface-elevated-solid: var(--neo-bg-alt, #E8E8E8);
+  --admin-surface-hover: var(--neo-bg-alt, #E8E8E8);
+  --admin-surface-active: var(--neo-surface, #FFFFFF);
 
-  /* ===== ADMIN BORDERS ===== */
-  --admin-border: rgba(255, 255, 255, 0.08);
-  --admin-border-subtle: rgba(255, 255, 255, 0.04);
-  --admin-border-strong: rgba(255, 255, 255, 0.12);
-  --admin-border-glow-cyan: rgba(0, 240, 255, 0.3);
-  --admin-border-glow-lime: rgba(213, 255, 10, 0.3);
-  --admin-border-glow-magenta: rgba(255, 0, 110, 0.3);
-  --admin-border-glow-purple: rgba(161, 0, 242, 0.3);
+  /* ===== ADMIN NEO-BRUTALIST BORDERS ===== */
+  --admin-border: var(--neo-border, #1A1A1A);
+  --admin-border-subtle: rgba(26, 26, 26, 0.3);
+  --admin-border-strong: var(--neo-border, #1A1A1A);
+  --admin-border-width: 2px;
 
-  /* ===== NEON ACCENT COLORS ===== */
+  /* ===== ADMIN NEO-BRUTALIST SHADOWS ===== */
+  --admin-neo-shadow: var(--neo-shadow, #1A1A1A);
+  --admin-shadow-sm: 2px 2px 0px 0px var(--admin-neo-shadow);
+  --admin-shadow-md: 4px 4px 0px 0px var(--admin-neo-shadow);
+  --admin-shadow-lg: 6px 6px 0px 0px var(--admin-neo-shadow);
+  --admin-shadow-xl: 8px 8px 0px 0px var(--admin-neo-shadow);
+
+  /* ===== ACCENT COLORS (from palette) ===== */
+  --admin-accent: var(--neo-accent, #FF3300);
+  --admin-accent-rgb: var(--neo-accent-rgb, 255, 51, 0);
+
+  /* ===== NEON ACCENT COLORS (for KPI cards) ===== */
   --admin-neon-cyan: #00F0FF;
   --admin-neon-cyan-rgb: 0, 240, 255;
   --admin-neon-lime: #D5FF0A;
   --admin-neon-lime-rgb: 213, 255, 10;
   --admin-neon-magenta: #FF006E;
   --admin-neon-magenta-rgb: 255, 0, 110;
-  --admin-neon-purple: #A100F2;
-  --admin-neon-purple-rgb: 161, 0, 242;
-  --admin-neon-orange: #FF6B35;
-  --admin-neon-orange-rgb: 255, 107, 53;
+  --admin-neon-purple: #8B5CF6;
+  --admin-neon-purple-rgb: 139, 92, 246;
+  --admin-neon-orange: #FF3300;
+  --admin-neon-orange-rgb: 255, 51, 0;
 
   /* ===== ADMIN GLOW EFFECTS ===== */
   /* Cyan Glow */

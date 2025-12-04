@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import ServicesContent from '@/components/services/ServicesContent';
+import { NeoServicesPage } from '@/components/neo-brutalist/services/NeoServicesPage';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -32,6 +32,7 @@ export default async function ServicesPage({
       no: true,
       title: true,
       text: true,
+      // We select only what we need for NeoServicesPage + keeping others available if needed later
       largeImg: true,
       largeTitle: true,
       poster: true,
@@ -43,5 +44,5 @@ export default async function ServicesPage({
     },
   });
 
-  return <ServicesContent services={services} locale={locale} />;
+  return <NeoServicesPage services={services} />;
 }

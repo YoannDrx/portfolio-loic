@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import VideosContent from '@/components/videos/VideosContent';
+import { NeoVideosPage } from '@/components/neo-brutalist/videos/NeoVideosPage';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -33,5 +33,5 @@ export default async function VideosPage({ params }: { params: Promise<{ locale:
     },
   });
 
-  return <VideosContent videos={videos} locale={locale} />;
+  return <NeoVideosPage videos={videos} />;
 }

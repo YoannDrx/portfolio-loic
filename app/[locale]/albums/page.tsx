@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import AlbumsContent from '@/components/albums/AlbumsContent';
+import { NeoAlbumsPage } from '@/components/neo-brutalist/albums/NeoAlbumsPage';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -43,5 +43,5 @@ export default async function AlbumsPage({
     },
   });
 
-  return <AlbumsContent albums={albums} locale={locale} />;
+  return <NeoAlbumsPage albums={albums} />;
 }

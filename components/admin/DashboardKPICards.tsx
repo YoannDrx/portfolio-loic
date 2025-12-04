@@ -1,6 +1,6 @@
 "use client";
 
-import { DashboardKPICard } from "./DashboardKPICard";
+import { NeoAdminKPICard } from "./neo";
 import {
   Image,
   Video,
@@ -31,8 +31,7 @@ export function DashboardKPICards({ stats, locale }: DashboardKPICardsProps) {
       icon: TrendingUp,
       description: `${stats.totalPublished} publiés, ${stats.totalContent - stats.totalPublished} brouillons`,
       href: undefined,
-      colorClass: "text-admin-primary-600",
-      bgColorClass: "bg-admin-primary-100",
+      accentColor: "orange" as const,
       trend: {
         value: stats.publishRate,
         isPositive: stats.publishRate > 50,
@@ -44,8 +43,7 @@ export function DashboardKPICards({ stats, locale }: DashboardKPICardsProps) {
       icon: Image,
       description: `${stats.publishedAlbumsCount} publiés sur ${stats.albumsCount}`,
       href: `/${locale}/admin/albums`,
-      colorClass: "text-admin-accent-600",
-      bgColorClass: "bg-admin-accent-100",
+      accentColor: "lime" as const,
       badge:
         stats.albumsCount - stats.publishedAlbumsCount > 0
           ? `${stats.albumsCount - stats.publishedAlbumsCount} brouillon${stats.albumsCount - stats.publishedAlbumsCount > 1 ? "s" : ""}`
@@ -57,8 +55,7 @@ export function DashboardKPICards({ stats, locale }: DashboardKPICardsProps) {
       icon: Video,
       description: `${stats.publishedVideosCount} publiées sur ${stats.videosCount}`,
       href: `/${locale}/admin/videos`,
-      colorClass: "text-neon-magenta",
-      bgColorClass: "bg-pink-100",
+      accentColor: "magenta" as const,
       badge:
         stats.videosCount - stats.publishedVideosCount > 0
           ? `${stats.videosCount - stats.publishedVideosCount} brouillon${stats.videosCount - stats.publishedVideosCount > 1 ? "s" : ""}`
@@ -70,8 +67,7 @@ export function DashboardKPICards({ stats, locale }: DashboardKPICardsProps) {
       icon: Briefcase,
       description: `${stats.publishedServicesCount} publiés sur ${stats.servicesCount}`,
       href: `/${locale}/admin/services`,
-      colorClass: "text-neon-cyan",
-      bgColorClass: "bg-cyan-100",
+      accentColor: "cyan" as const,
       badge:
         stats.servicesCount - stats.publishedServicesCount > 0
           ? `${stats.servicesCount - stats.publishedServicesCount} brouillon${stats.servicesCount - stats.publishedServicesCount > 1 ? "s" : ""}`
@@ -80,9 +76,9 @@ export function DashboardKPICards({ stats, locale }: DashboardKPICardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
       {kpis.map((kpi) => (
-        <DashboardKPICard key={kpi.title} {...kpi} />
+        <NeoAdminKPICard key={kpi.title} {...kpi} />
       ))}
     </div>
   );

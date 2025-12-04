@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import AboutPageClient from "./AboutPageClient";
+import { NeoAbout } from "@/components/neo-brutalist/about/NeoAbout";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -14,5 +14,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
-  return <AboutPageClient locale={locale} />;
+  return <NeoAbout locale={locale} />;
 }

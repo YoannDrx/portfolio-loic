@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Image as ImageIcon, Video as VideoIcon, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { NeoAdminCard } from "./neo";
 
 interface RecentItem {
   id: string;
@@ -28,24 +27,27 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
         return {
           icon: ImageIcon,
           label: "Album",
-          color: "text-[var(--admin-neon-lime)]",
-          bgColor: "bg-[var(--admin-neon-lime)]/10",
+          color: "text-[#D5FF0A]",
+          bgColor: "bg-[#D5FF0A]/10",
+          borderColor: "border-[#D5FF0A]/30",
           href: `/admin/albums`,
         };
       case "video":
         return {
           icon: VideoIcon,
           label: "Vidéo",
-          color: "text-[var(--admin-neon-magenta)]",
-          bgColor: "bg-[var(--admin-neon-magenta)]/10",
+          color: "text-[#FF006E]",
+          bgColor: "bg-[#FF006E]/10",
+          borderColor: "border-[#FF006E]/30",
           href: `/admin/videos`,
         };
       case "service":
         return {
           icon: Briefcase,
           label: "Service",
-          color: "text-[var(--admin-neon-cyan)]",
-          bgColor: "bg-[var(--admin-neon-cyan)]/10",
+          color: "text-[#00F0FF]",
+          bgColor: "bg-[#00F0FF]/10",
+          borderColor: "border-[#00F0FF]/30",
           href: `/admin/services`,
         };
     }
@@ -64,92 +66,100 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
   };
 
   return (
-    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden w-full">
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-[var(--glass-border)]">
-        <h3 className="text-lg font-bold text-foreground">
+    <NeoAdminCard size="sm" hover="none" className="w-full">
+      {/* Header */}
+      <div className="flex items-center justify-between pb-4 mb-4 border-b-2 border-neo-border">
+        <h3 className="text-lg font-black text-neo-text uppercase tracking-tight">
           Activité récente
         </h3>
-        <Button variant="ghost" size="sm" className="text-[var(--admin-neon-cyan)] hover:text-foreground hover:bg-[var(--glass-active)]" asChild>
-          <Link href={`/${locale}/admin/albums`}>
-            Voir tout
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+        <Link
+          href={`/${locale}/admin/albums`}
+          className={cn(
+            "flex items-center gap-1 px-3 py-1",
+            "font-mono text-xs font-bold uppercase",
+            "text-neo-accent hover:bg-neo-accent hover:text-neo-text-inverse",
+            "border-2 border-neo-border",
+            "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+            "transition-all duration-200"
+          )}
+        >
+          Voir tout
+          <ArrowRight className="h-3 w-3" />
+        </Link>
       </div>
-      <div className="p-3 sm:p-4">
-        <div className="space-y-2">
-          {items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-8 text-center">
-              <div className="rounded-full bg-[var(--glass-subtle)] p-4 mb-3">
-                <ImageIcon className="h-8 w-8 text-muted-foreground" />
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Aucune activité récente
-              </p>
+
+      {/* Content */}
+      <div className="space-y-3">
+        {items.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-8 text-center">
+            <div className="w-16 h-16 flex items-center justify-center border-2 border-neo-border bg-neo-surface mb-4">
+              <ImageIcon className="h-8 w-8 text-neo-text/30" />
             </div>
-          ) : (
-            items.map((item) => {
-              const config = getTypeConfig(item.type);
-              const Icon = config.icon;
+            <p className="font-mono text-sm text-neo-text/60">
+              Aucune activité récente
+            </p>
+          </div>
+        ) : (
+          items.map((item) => {
+            const config = getTypeConfig(item.type);
+            const Icon = config.icon;
 
-              return (
-                <div
-                  key={item.id}
-                  className="group flex items-center gap-3 rounded-xl p-2 sm:p-3 hover:bg-[var(--glass-subtle)] transition-colors duration-200 overflow-hidden"
-                >
-                  {/* Thumbnail or Icon */}
-                  <div className="relative h-12 w-12 flex-shrink-0">
-                    {item.img ? (
-                      <Image
-                        src={item.img}
-                        alt={item.title}
-                        fill
-                        className="rounded-lg object-cover ring-1 ring-white/10"
-                        sizes="48px"
-                      />
-                    ) : (
-                      <div
-                        className={cn(
-                          "flex h-full w-full items-center justify-center rounded-lg",
-                          config.bgColor
-                        )}
-                      >
-                        <Icon className={cn("h-5 w-5", config.color)} />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <p className="text-sm font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
-                        {item.title}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <Icon className={cn("h-3 w-3", config.color)} />
-                      <span>{config.label}</span>
-                      <span>•</span>
-                      <span>{formatDate(item.updatedAt)}</span>
-                    </div>
-                  </div>
-
-                  {/* Status Badge */}
-                  {item.published ? (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
-                      <span className="w-1 h-1 rounded-full bg-neon-green" />
-                    </span>
+            return (
+              <div
+                key={item.id}
+                className="group flex items-center gap-3 p-3 border-2 border-neo-border/50 hover:border-neo-border bg-neo-surface hover:bg-neo-bg transition-all duration-200"
+              >
+                {/* Thumbnail or Icon */}
+                <div className="relative h-12 w-12 flex-shrink-0 border-2 border-neo-border overflow-hidden">
+                  {item.img ? (
+                    <Image
+                      src={item.img}
+                      alt={item.title}
+                      fill
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                      sizes="48px"
+                    />
                   ) : (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
-                      <span className="w-1 h-1 rounded-full bg-neutral-500" />
-                    </span>
+                    <div
+                      className={cn(
+                        "flex h-full w-full items-center justify-center",
+                        config.bgColor
+                      )}
+                    >
+                      <Icon className={cn("h-5 w-5", config.color)} />
+                    </div>
                   )}
                 </div>
-              );
-            })
-          )}
-        </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-neo-text truncate uppercase">
+                    {item.title}
+                  </p>
+                  <div className="flex items-center gap-2 mt-1 font-mono text-xs text-neo-text/60">
+                    <Icon className={cn("h-3 w-3", config.color)} />
+                    <span>{config.label}</span>
+                    <span>•</span>
+                    <span>{formatDate(item.updatedAt)}</span>
+                  </div>
+                </div>
+
+                {/* Status Badge */}
+                <span
+                  className={cn(
+                    "px-2 py-1 font-mono text-[10px] font-bold uppercase border",
+                    item.published
+                      ? "bg-green-500/10 text-green-500 border-green-500/30"
+                      : "bg-neo-surface text-neo-text/50 border-neo-border"
+                  )}
+                >
+                  {item.published ? "Publié" : "Brouillon"}
+                </span>
+              </div>
+            );
+          })
+        )}
       </div>
-    </div>
+    </NeoAdminCard>
   );
 }

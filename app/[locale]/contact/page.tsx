@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import ContactContent from "@/components/contact/ContactContent";
+import { NeoContact } from "@/components/neo-brutalist/contact/NeoContact";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -11,8 +11,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-
-  return <ContactContent locale={locale} />;
+export default async function ContactPage() {
+  return <NeoContact />;
 }

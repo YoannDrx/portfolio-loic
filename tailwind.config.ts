@@ -18,10 +18,19 @@ const config: Config = {
     },
     extend: {
       colors: {
-        /* ===== NEO-BRUTALIST ===== */
-        'neo-bg': '#F2F2F2',
-        'neo-black': '#000000',
-        'neo-orange': '#FF3300',
+        /* ===== NEO-BRUTALIST (Dynamic CSS Variables) ===== */
+        'neo-bg': 'var(--neo-bg)',
+        'neo-bg-alt': 'var(--neo-bg-alt)',
+        'neo-black': 'var(--neo-text)',
+        'neo-text': 'var(--neo-text)',
+        'neo-text-inverse': 'var(--neo-text-inverse)',
+        'neo-accent': 'var(--neo-accent)',
+        'neo-accent-hover': 'var(--neo-accent-hover)',
+        'neo-orange': 'var(--neo-accent)', // Alias for compatibility
+        'neo-shadow': 'var(--neo-shadow)',
+        'neo-border': 'var(--neo-border)',
+        'neo-surface': 'var(--neo-surface)',
+        'neo-surface-hover': 'var(--neo-surface-hover)',
 
         /* ===== PRIMARY - Neon Yellow ===== */
         primary: {

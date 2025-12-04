@@ -10,7 +10,7 @@ export interface Album {
   title: string;
   img: string | null;
   style: string | null;
-  date: Date;
+  date: string;
   listenLink: string | null;
 }
 

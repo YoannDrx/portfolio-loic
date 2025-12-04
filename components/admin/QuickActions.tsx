@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Plus, Settings, Download, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { NeoAdminCard } from "./neo";
 
 interface QuickActionsProps {
   locale: string;
@@ -14,45 +15,35 @@ const actions = [
     description: "Créer un album photo",
     icon: Plus,
     href: "/admin/albums/new",
-    colorClass: "text-[var(--admin-neon-lime)]",
-    bgClass: "bg-[var(--admin-neon-lime)]/10 hover:bg-[var(--admin-neon-lime)]/20",
-    borderClass: "border-[var(--admin-neon-lime)]/20 hover:border-[var(--admin-neon-lime)]/40",
+    color: "#D5FF0A",
   },
   {
     label: "Nouvelle vidéo",
     description: "Ajouter une vidéo",
     icon: Plus,
     href: "/admin/videos/new",
-    colorClass: "text-[var(--admin-neon-magenta)]",
-    bgClass: "bg-[var(--admin-neon-magenta)]/10 hover:bg-[var(--admin-neon-magenta)]/20",
-    borderClass: "border-[var(--admin-neon-magenta)]/20 hover:border-[var(--admin-neon-magenta)]/40",
+    color: "#FF006E",
   },
   {
     label: "Nouveau service",
     description: "Créer un service",
     icon: Plus,
     href: "/admin/services/new",
-    colorClass: "text-[var(--admin-neon-cyan)]",
-    bgClass: "bg-[var(--admin-neon-cyan)]/10 hover:bg-[var(--admin-neon-cyan)]/20",
-    borderClass: "border-[var(--admin-neon-cyan)]/20 hover:border-[var(--admin-neon-cyan)]/40",
+    color: "#00F0FF",
   },
   {
     label: "Paramètres",
     description: "Gérer les paramètres",
     icon: Settings,
     href: "/admin/settings",
-    colorClass: "text-muted-foreground",
-    bgClass: "bg-[var(--glass-subtle)] hover:bg-[var(--glass-active)]",
-    borderClass: "border-[var(--glass-border)] hover:border-[var(--glass-border-strong)]",
+    color: "#64748B",
   },
   {
     label: "Voir le site",
     description: "Accéder au site public",
     icon: Eye,
     href: "/",
-    colorClass: "text-[var(--admin-neon-purple)]",
-    bgClass: "bg-[var(--admin-neon-purple)]/10 hover:bg-[var(--admin-neon-purple)]/20",
-    borderClass: "border-[var(--admin-neon-purple)]/20 hover:border-[var(--admin-neon-purple)]/40",
+    color: "#8B5CF6",
     external: true,
   },
   {
@@ -60,59 +51,63 @@ const actions = [
     description: "Télécharger les données",
     icon: Download,
     href: "/admin/settings?tab=export",
-    colorClass: "text-neon-green",
-    bgClass: "bg-neon-green/10 hover:bg-neon-green/20",
-    borderClass: "border-neon-green/20 hover:border-neon-green/40",
+    color: "#22C55E",
   },
 ];
 
 export function QuickActions({ locale }: QuickActionsProps) {
   return (
-    <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden w-full">
-      <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-[var(--glass-border)]">
-        <h3 className="text-lg font-bold text-foreground">
+    <NeoAdminCard size="sm" hover="none" className="w-full">
+      {/* Header */}
+      <div className="pb-4 mb-4 border-b-2 border-neo-border">
+        <h3 className="text-lg font-black text-neo-text uppercase tracking-tight">
           Actions rapides
         </h3>
       </div>
-      <div className="p-3 sm:p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-          {actions.map((action) => {
-            const Icon = action.icon;
-            const LinkWrapper = action.external ? "a" : Link;
-            const linkProps = action.external
-              ? { href: `/${locale}${action.href}`, target: "_blank", rel: "noopener noreferrer" }
-              : { href: `/${locale}${action.href}` };
 
-            return (
-              <LinkWrapper key={action.label} {...linkProps}>
+      {/* Actions Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {actions.map((action) => {
+          const Icon = action.icon;
+          const LinkWrapper = action.external ? "a" : Link;
+          const linkProps = action.external
+            ? { href: `/${locale}${action.href}`, target: "_blank", rel: "noopener noreferrer" }
+            : { href: `/${locale}${action.href}` };
+
+          return (
+            <LinkWrapper key={action.label} {...(linkProps as any)}>
+              <div
+                className={cn(
+                  "group flex items-center gap-3 p-3",
+                  "border-2 border-neo-border bg-neo-surface",
+                  "hover:bg-neo-bg hover:-translate-y-0.5",
+                  "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+                  "hover:shadow-[4px_4px_0px_0px_var(--neo-shadow)]",
+                  "transition-all duration-200 cursor-pointer"
+                )}
+              >
+                {/* Icon */}
                 <div
-                  className={cn(
-                    "group flex flex-col gap-2 sm:gap-3 rounded-xl p-3 sm:p-4 transition-all duration-300 cursor-pointer border w-full min-w-0",
-                    action.bgClass,
-                    action.borderClass
-                  )}
+                  className="flex h-10 w-10 items-center justify-center border-2 border-neo-border group-hover:scale-110 transition-transform"
+                  style={{ backgroundColor: `${action.color}20` }}
                 >
-                  <div className="flex items-center gap-2">
-                    <div className={cn(
-                      "flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--glass-active)] group-hover:scale-110 transition-all duration-200"
-                    )}>
-                      <Icon className={cn("h-4 w-4", action.colorClass)} />
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-foreground">
-                      {action.label}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {action.description}
-                    </p>
-                  </div>
+                  <Icon className="h-5 w-5" style={{ color: action.color }} />
                 </div>
-              </LinkWrapper>
-            );
-          })}
-        </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-neo-text uppercase truncate">
+                    {action.label}
+                  </p>
+                  <p className="font-mono text-xs text-neo-text/60 truncate">
+                    {action.description}
+                  </p>
+                </div>
+              </div>
+            </LinkWrapper>
+          );
+        })}
       </div>
-    </div>
+    </NeoAdminCard>
   );
 }

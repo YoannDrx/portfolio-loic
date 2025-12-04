@@ -8,9 +8,13 @@ import ScrollProgress from '@/components/ui/ScrollProgress';
 export function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdminRoute = pathname?.includes('/admin') || pathname?.includes('/login');
-  const isHomePage = pathname === '/en' || pathname === '/fr' || pathname === '/en/' || pathname === '/fr/';
+  
+  // Check if current route is one of the Neo-Brutalist pages
+  // This regex checks for /en or /fr followed optionally by /about, /services, /albums, /videos, /contact
+  // or just the root /en, /fr
+  const isNeoPage = /^\/(en|fr)(\/(about|services|albums|videos|contact))?\/?$/.test(pathname || '');
 
-  if (isAdminRoute || isHomePage) {
+  if (isAdminRoute || isNeoPage) {
     return <main className="min-h-screen">{children}</main>;
   }
 

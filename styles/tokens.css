@@ -241,6 +241,25 @@
   --accent-muted: rgba(213, 255, 10, 0.15);
   --accent-glow: rgba(213, 255, 10, 0.4);
 
+  /* ===== NEO-BRUTALIST VARIABLES (Dark) ===== */
+  --neo-accent: #FF3300;
+  --neo-accent-rgb: 255, 51, 0;
+  --neo-accent-hover: #E62E00;
+  --neo-bg: #F2F2F2;
+  --neo-bg-alt: #E8E8E8;
+  --neo-text: #000000;
+  --neo-text-inverse: #FFFFFF;
+  --neo-shadow: #000000;
+  --neo-border: #000000;
+  --neo-surface: #FFFFFF;
+  --neo-surface-hover: #F5F5F5;
+
+  /* DARK SECTIONS (pour sections à fond sombre dans les pages neo) */
+  --neo-dark-section-bg: #1a1a1a;
+  --neo-dark-section-text: #FFFFFF;
+  --neo-dark-section-text-muted: rgba(255, 255, 255, 0.6);
+  --neo-dark-section-border: rgba(255, 255, 255, 0.2);
+
   /* ===== GLASS VARIABLES (Dark) ===== */
   --glass-bg: rgba(24, 24, 27, 0.6);
   --glass-bg-subtle: rgba(24, 24, 27, 0.4);
@@ -286,6 +305,19 @@
   --accent-muted: rgba(79, 70, 229, 0.15);
   --accent-glow: rgba(79, 70, 229, 0.4);
 
+  /* ===== NEO-BRUTALIST VARIABLES (Light) ===== */
+  --neo-accent: #4f46e5;
+  --neo-accent-rgb: 79, 70, 229;
+  --neo-accent-hover: #4338ca;
+  --neo-bg: #FFFFFF;
+  --neo-bg-alt: #F8F8F8;
+  --neo-text: #000000;
+  --neo-text-inverse: #FFFFFF;
+  --neo-shadow: #000000;
+  --neo-border: #1a1a1a;
+  --neo-surface: #FFFFFF;
+  --neo-surface-hover: #F5F5F5;
+
   /* ===== GLASS VARIABLES (Light) ===== */
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-bg-subtle: rgba(255, 255, 255, 0.5);
@@ -316,4 +348,82 @@
   --gradient-brand: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
   --gradient-glow-primary: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.1), transparent);
   --gradient-glow-center: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(79, 70, 229, 0.06), transparent);
+}
+
+/* ============================================
+   PALETTES DE COULEURS (12 thèmes)
+   ============================================ */
+
+/* NEONS VIFS (6) */
+[data-palette="orange"] {
+  --neo-accent: #FF3300;
+  --neo-accent-rgb: 255, 51, 0;
+  --neo-accent-hover: #E62E00;
+}
+
+[data-palette="cyan"] {
+  --neo-accent: #00F0FF;
+  --neo-accent-rgb: 0, 240, 255;
+  --neo-accent-hover: #00D4E0;
+}
+
+[data-palette="magenta"] {
+  --neo-accent: #FF006E;
+  --neo-accent-rgb: 255, 0, 110;
+  --neo-accent-hover: #E00062;
+}
+
+[data-palette="lime"] {
+  --neo-accent: #D5FF0A;
+  --neo-accent-rgb: 213, 255, 10;
+  --neo-accent-hover: #C2E600;
+}
+
+[data-palette="purple"] {
+  --neo-accent: #8B5CF6;
+  --neo-accent-rgb: 139, 92, 246;
+  --neo-accent-hover: #7C4FE0;
+}
+
+[data-palette="pink"] {
+  --neo-accent: #FF69B4;
+  --neo-accent-rgb: 255, 105, 180;
+  --neo-accent-hover: #FF5AA0;
+}
+
+/* TONS SOBRES (6) */
+[data-palette="slate"] {
+  --neo-accent: #64748B;
+  --neo-accent-rgb: 100, 116, 139;
+  --neo-accent-hover: #475569;
+}
+
+[data-palette="stone"] {
+  --neo-accent: #78716C;
+  --neo-accent-rgb: 120, 113, 108;
+  --neo-accent-hover: #57534E;
+}
+
+[data-palette="indigo"] {
+  --neo-accent: #4F46E5;
+  --neo-accent-rgb: 79, 70, 229;
+  --neo-accent-hover: #4338CA;
+}
+
+[data-palette="teal"] {
+  --neo-accent: #14B8A6;
+  --neo-accent-rgb: 20, 184, 166;
+  --neo-accent-hover: #0D9488;
+}
+
+[data-palette="ocean"] {
+  --neo-accent: #0EA5E9;
+  --neo-accent-rgb: 14, 165, 233;
+  --neo-accent-hover: #0284C7;
+}
+
+[data-palette="charcoal"] {
+  --neo-accent: #374151;
+  --neo-accent-rgb: 55, 65, 81;
+  --neo-accent-hover: #1F2937;
 }

@@ -118,11 +118,11 @@ export default async function AdminDashboardPage({
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-admin-text-primary dark:text-dark-admin-text-primary tracking-tight transition-colors duration-300">
-          Bienvenue ! 👋
+      <div className="pb-6 border-b-4 border-neo-border">
+        <h1 className="text-3xl sm:text-4xl font-black text-neo-text uppercase tracking-tight">
+          Bienvenue
         </h1>
-        <p className="text-sm sm:text-base text-admin-text-secondary dark:text-dark-admin-text-secondary mt-1 transition-colors duration-300">
+        <p className="font-mono text-sm text-neo-text/60 mt-2 uppercase tracking-wider">
           Vue d'ensemble de votre portfolio et statistiques
         </p>
       </div>
