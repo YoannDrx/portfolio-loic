@@ -53,10 +53,10 @@
       "viewAllAlbums": "Voir tous les albums",
       "listenNow": "Écouter",
       "videos": "DERNIÈRES <span class=\"text-neon-magenta\">VIDÉOS</span>",
-      "videosSubtitle": "02 / RÉALISATIONS",
+      "videosSubtitle": "03 / RÉALISATIONS",
       "viewAllVideos": "Voir toutes les vidéos",
       "services": "SERVICES <span class=\"text-neon-purple\">SONORES</span>",
-      "servicesSubtitle": "EXPERTISE",
+      "servicesSubtitle": "04 / EXPERTISE",
       "viewAllServices": "Voir tous les services",
       "contact": "CRÉONS <br/><span class=\"text-neon-lime\">ENSEMBLE</span>",
       "contactText": "Une idée ? Un projet musical ? Transformons votre vision en réalité sonore.",
@@ -64,7 +64,7 @@
     },
     "soundcloud": {
       "title": "ÉCOUTEZ <span class=\"text-neon-green\">MES PRODS</span>",
-      "subtitle": "Streamez mes dernières créations",
+      "subtitle": "02 / STREAMING",
       "follow": "Suivre sur SoundCloud"
     }
   },

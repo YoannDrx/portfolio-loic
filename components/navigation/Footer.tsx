@@ -39,8 +39,8 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <Link href="/" className="group inline-flex items-center gap-3 mb-6">
-              <div className="relative w-12 h-12 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform">
-                <div className="w-full h-full bg-background rounded-lg flex items-center justify-center transition-colors duration-300">
+              <div className="relative w-12 h-12 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform shadow-[0_0_10px_rgba(0,255,0,0.2)]">
+                <div className="w-full h-full bg-zinc-900 dark:bg-zinc-950 rounded-lg flex items-center justify-center">
                   <span className="text-2xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">LG</span>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function Footer() {
             {/* CTA */}
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center w-full px-4 py-3 rounded-lg border-2 border-primary dark:border-neon-green bg-transparent text-primary dark:text-neon-green font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:bg-primary/10 hover:shadow-[0_0_20px_var(--accent-glow)] group"
+              className="inline-flex items-center justify-center w-full px-4 py-3 rounded-lg border-2 border-neon-lime bg-neon-lime/10 text-neon-lime font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:bg-neon-lime/20 hover:shadow-[0_0_20px_rgba(213,255,10,0.4)] group"
             >
               {tFooter("followMe")}
             </Link>

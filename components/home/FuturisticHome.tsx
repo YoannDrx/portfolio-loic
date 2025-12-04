@@ -614,32 +614,9 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
           />
 
           <ParallaxWrapper offset={40}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-16 text-center"
-            >
-              <motion.span
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="text-neon-purple font-mono tracking-[0.2em] mb-2 block"
-              >
-                {t('home.sections.servicesSubtitle')}
-              </motion.span>
-              <div className="overflow-hidden">
-                <motion.h2
-                  initial={{ y: 80 }}
-                  whileInView={{ y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-                  className="text-4xl md:text-6xl font-bold tracking-tighter"
-                  dangerouslySetInnerHTML={{ __html: t.raw('home.sections.services') }}
-                />
-              </div>
-            </motion.div>
+            <AnimatedSectionTitle subtitle={t('home.sections.servicesSubtitle')}>
+              {t.raw('home.sections.services')}
+            </AnimatedSectionTitle>
           </ParallaxWrapper>
 
           <motion.div

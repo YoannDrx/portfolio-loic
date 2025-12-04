@@ -53,10 +53,10 @@
       "viewAllAlbums": "View All Albums",
       "listenNow": "Listen",
       "videos": "LATEST <span class=\"text-neon-magenta\">VIDEOS</span>",
-      "videosSubtitle": "02 / VISUALS",
+      "videosSubtitle": "03 / VISUALS",
       "viewAllVideos": "View All Videos",
       "services": "SONIC <span class=\"text-neon-purple\">SERVICES</span>",
-      "servicesSubtitle": "EXPERTISE",
+      "servicesSubtitle": "04 / EXPERTISE",
       "viewAllServices": "View All Services",
       "contact": "LET'S CREATE <br/><span class=\"text-neon-lime\">TOGETHER</span>",
       "contactText": "An idea? A musical project? Let's transform your vision into sonic reality.",
@@ -64,7 +64,7 @@
     },
     "soundcloud": {
       "title": "LISTEN TO <span class=\"text-neon-green\">MY PRODS</span>",
-      "subtitle": "Stream My Latest Tracks",
+      "subtitle": "02 / STREAMING",
       "follow": "Follow on SoundCloud"
     }
   },
