@@ -31,7 +31,7 @@ export const CustomCursor = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-4 h-4 bg-neo-orange rounded-none pointer-events-none z-[9999] mix-blend-exclusion hidden md:block"
+      className="fixed top-0 left-0 w-4 h-4 bg-neo-accent rounded-none pointer-events-none z-[9999] mix-blend-difference hidden md:block"
       animate={{
         x: mousePosition.x - 8,
         y: mousePosition.y - 8,

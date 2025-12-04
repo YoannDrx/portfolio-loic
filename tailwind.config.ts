@@ -31,6 +31,11 @@ const config: Config = {
         'neo-border': 'var(--neo-border)',
         'neo-surface': 'var(--neo-surface)',
         'neo-surface-hover': 'var(--neo-surface-hover)',
+        /* Contrast sections (inverted colors for sections) */
+        'neo-contrast-bg': 'var(--neo-contrast-bg)',
+        'neo-contrast-text': 'var(--neo-contrast-text)',
+        'neo-contrast-text-muted': 'var(--neo-contrast-text-muted)',
+        'neo-contrast-border': 'var(--neo-contrast-border)',
 
         /* ===== PRIMARY - Neon Yellow ===== */
         primary: {

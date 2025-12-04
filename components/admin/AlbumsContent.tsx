@@ -4,25 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Plus, Eye, Pencil } from "lucide-react";
+import { Plus, Eye, Pencil, Image as ImageIcon } from "lucide-react";
 import { DeleteAlbumButton } from "@/components/admin/delete-album-button";
 import { SearchFilters, type FilterState } from "@/components/admin/SearchFilters";
 import { Pagination } from "@/components/admin/Pagination";
 import { TableSkeleton } from "@/components/admin/TableSkeleton";
 import { EmptyState } from "@/components/admin/EmptyState";
 import { ExportButton } from "@/components/admin/ExportButton";
-import { Image as ImageIcon } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { NeoAdminCard, NeoTableBadge } from "@/components/admin/neo";
 
 interface Album {
   id: string;
@@ -112,27 +103,33 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b-4 border-neo-border">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-foreground mb-1 sm:mb-2 font-montserrat tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-neo-text mb-1 sm:mb-2 uppercase tracking-tight">
             Albums Library
           </h1>
-          <p className="text-muted-foreground font-mono text-xs sm:text-sm">
-            Manage your photo albums / {total} total entries
+          <p className="text-neo-text/60 font-mono text-xs sm:text-sm uppercase tracking-wider">
+            Gérez vos albums photos / {total} éléments
           </p>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
           <ExportButton type="albums" />
-          <Button
-            asChild
-            size="sm"
-            className="h-9 gap-2 bg-gradient-to-r from-[var(--admin-neon-lime)] to-[var(--admin-neon-cyan)] text-black font-bold hover:shadow-[0_0_20px_rgba(213,255,10,0.4)] transition-all border-none"
+          <Link
+            href={`/${locale}/admin/albums/new`}
+            className={cn(
+              "flex items-center gap-2 h-10 px-4",
+              "bg-neo-accent text-neo-text-inverse",
+              "font-mono text-sm font-bold uppercase",
+              "border-2 border-neo-border",
+              "shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+              "hover:shadow-[4px_4px_0px_0px_var(--neo-shadow)]",
+              "hover:-translate-y-0.5",
+              "transition-all duration-200"
+            )}
           >
-            <Link href={`/${locale}/admin/albums/new`}>
-              <Plus className="h-4 w-4" />
-              Create New
-            </Link>
-          </Button>
+            <Plus className="h-4 w-4" />
+            Nouveau
+          </Link>
         </div>
       </div>
 
@@ -167,10 +164,10 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
             {albums.map((album) => (
               <div
                 key={album.id}
-                className="rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm p-3"
+                className="border-2 border-neo-border bg-neo-surface p-3 shadow-[3px_3px_0px_0px_var(--neo-shadow)]"
               >
                 <div className="flex gap-3">
-                  <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/10">
+                  <div className="relative h-16 w-20 shrink-0 overflow-hidden border-2 border-neo-border">
                     <Image
                       src={album.img}
                       alt={album.title}
@@ -180,50 +177,34 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-foreground text-sm truncate">{album.title}</h3>
+                    <h3 className="font-bold text-neo-text text-sm truncate uppercase">{album.title}</h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <Badge
-                        variant="outline"
-                        className="capitalize border-[var(--admin-neon-lime)]/30 bg-[var(--admin-neon-lime)]/10 text-[var(--admin-neon-lime)] font-bold text-xs"
-                      >
+                      <NeoTableBadge variant="accent">
                         {album.style}
-                      </Badge>
+                      </NeoTableBadge>
                       {album.published ? (
-                        <span className="inline-flex items-center gap-1 text-xs text-neon-green">
-                          <span className="w-1.5 h-1.5 rounded-full bg-neon-green" />
-                          Publié
-                        </span>
+                        <NeoTableBadge variant="success">Publié</NeoTableBadge>
                       ) : (
-                        <span className="text-xs text-muted-foreground">Brouillon</span>
+                        <NeoTableBadge variant="default">Brouillon</NeoTableBadge>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground font-mono mt-1">{album.date}</p>
+                    <p className="text-xs text-neo-text/60 font-mono mt-1">{album.date}</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-end gap-1 mt-2 pt-2 border-t border-[var(--glass-border-subtle)]">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    asChild
-                    className="h-8 w-8 p-0 text-muted-foreground hover:text-[var(--admin-neon-cyan)] hover:bg-[var(--admin-neon-cyan)]/10"
+                <div className="flex items-center justify-end gap-2 mt-2 pt-2 border-t-2 border-neo-border/50">
+                  <Link
+                    href={`/${locale}/albums/${album.id}${!album.published ? "?preview=true" : ""}`}
+                    target="_blank"
+                    className="w-8 h-8 flex items-center justify-center border-2 border-neo-border bg-neo-bg text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse transition-colors"
                   >
-                    <Link
-                      href={`/${locale}/albums/${album.id}${!album.published ? "?preview=true" : ""}`}
-                      target="_blank"
-                    >
-                      <Eye className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    asChild
-                    className="h-8 w-8 p-0 text-muted-foreground hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10"
+                    <Eye className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href={`/${locale}/admin/albums/${album.id}`}
+                    className="w-8 h-8 flex items-center justify-center border-2 border-neo-border bg-neo-bg text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse transition-colors"
                   >
-                    <Link href={`/${locale}/admin/albums/${album.id}`}>
-                      <Pencil className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                    <Pencil className="h-4 w-4" />
+                  </Link>
                   <DeleteAlbumButton
                     albumId={album.id}
                     albumTitle={album.title}
@@ -234,97 +215,96 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
           </div>
 
           {/* Desktop: Table view */}
-          <div className="hidden sm:block rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm overflow-hidden">
+          <div className="hidden sm:block border-2 border-neo-border bg-neo-bg shadow-[4px_4px_0px_0px_var(--neo-shadow)] overflow-hidden">
             <div className="max-h-[calc(100vh-400px)] min-h-[200px] overflow-y-auto">
-              <Table>
-                <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)]">
-                  <TableRow className="hover:bg-[var(--glass-subtle)] border-[var(--glass-border)]">
-                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Aperçu</TableHead>
-                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Titre</TableHead>
-                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Date</TableHead>
-                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Style</TableHead>
-                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Statut</TableHead>
-                    <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {albums.map((album) => (
-                    <TableRow
+              <table className="w-full">
+                <thead className="sticky top-0 bg-neo-surface border-b-2 border-neo-border z-10">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-wider text-neo-text">Aperçu</th>
+                    <th className="px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-wider text-neo-text">Titre</th>
+                    <th className="px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-wider text-neo-text">Date</th>
+                    <th className="px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-wider text-neo-text">Style</th>
+                    <th className="px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-wider text-neo-text">Statut</th>
+                    <th className="px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-wider text-neo-text">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {albums.map((album, index) => (
+                    <tr
                       key={album.id}
-                      className="group hover:bg-[var(--glass-subtle)] transition-colors duration-150 border-b border-[var(--glass-border-subtle)] last:border-b-0"
+                      className={cn(
+                        "group border-b border-neo-border/50 transition-colors hover:bg-neo-surface",
+                        index % 2 === 0 ? "bg-neo-bg" : "bg-neo-bg-alt/30"
+                      )}
                     >
-                      <TableCell>
-                        <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200 ring-1 ring-white/10">
+                      <td className="px-4 py-3">
+                        <div className="relative h-14 w-24 overflow-hidden border-2 border-neo-border group-hover:border-neo-accent transition-colors">
                           <Image
                             src={album.img}
                             alt={album.title}
                             fill
-                            className="object-cover"
+                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                             sizes="96px"
                           />
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <span className="font-bold text-foreground">{album.title}</span>
-                      </TableCell>
-                      <TableCell>
-                        <span className="text-muted-foreground text-sm font-mono">{album.date}</span>
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant="outline"
-                          className="capitalize border-[var(--admin-neon-lime)]/30 bg-[var(--admin-neon-lime)]/10 text-[var(--admin-neon-lime)] font-bold"
-                        >
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="font-bold text-neo-text uppercase">{album.title}</span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="text-neo-text/60 text-sm font-mono">{album.date}</span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <NeoTableBadge variant="accent">
                           {album.style}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
+                        </NeoTableBadge>
+                      </td>
+                      <td className="px-4 py-3">
                         {album.published ? (
-                          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
-                            <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
-                            Published
-                          </span>
+                          <NeoTableBadge variant="success">Publié</NeoTableBadge>
                         ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
-                            Draft
-                          </span>
+                          <NeoTableBadge variant="default">Brouillon</NeoTableBadge>
                         )}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            asChild
-                            className="h-9 w-9 p-0 text-muted-foreground hover:text-[var(--admin-neon-cyan)] hover:bg-[var(--admin-neon-cyan)]/10 transition-all duration-200"
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-2">
+                          <Link
+                            href={`/${locale}/albums/${album.id}${!album.published ? "?preview=true" : ""}`}
+                            target="_blank"
+                            className={cn(
+                              "w-8 h-8 flex items-center justify-center",
+                              "border-2 border-neo-border bg-neo-bg",
+                              "text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse",
+                              "shadow-[1px_1px_0px_0px_var(--neo-shadow)]",
+                              "hover:shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+                              "transition-all duration-200"
+                            )}
                           >
-                            <Link
-                              href={`/${locale}/albums/${album.id}${!album.published ? "?preview=true" : ""}`}
-                              target="_blank"
-                            >
-                              <Eye className="h-4 w-4" />
-                            </Link>
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            asChild
-                            className="h-9 w-9 p-0 text-muted-foreground hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
+                            <Eye className="h-4 w-4" />
+                          </Link>
+                          <Link
+                            href={`/${locale}/admin/albums/${album.id}`}
+                            className={cn(
+                              "w-8 h-8 flex items-center justify-center",
+                              "border-2 border-neo-border bg-neo-bg",
+                              "text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse",
+                              "shadow-[1px_1px_0px_0px_var(--neo-shadow)]",
+                              "hover:shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+                              "transition-all duration-200"
+                            )}
                           >
-                            <Link href={`/${locale}/admin/albums/${album.id}`}>
-                              <Pencil className="h-4 w-4" />
-                            </Link>
-                          </Button>
+                            <Pencil className="h-4 w-4" />
+                          </Link>
                           <DeleteAlbumButton
                             albumId={album.id}
                             albumTitle={album.title}
                           />
                         </div>
-                      </TableCell>
-                    </TableRow>
+                      </td>
+                    </tr>
                   ))}
-                </TableBody>
-              </Table>
+                </tbody>
+              </table>
             </div>
           </div>
 

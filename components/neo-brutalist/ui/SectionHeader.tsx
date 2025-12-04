@@ -10,13 +10,13 @@ interface SectionHeaderProps {
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({ number, title, subtitle }) => (
-  <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b-4 border-neo-black pb-6">
+  <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b-4 border-neo-border pb-6">
     <div>
-      <div className="font-mono font-bold text-neo-orange mb-2 flex items-center gap-2">
-        <span className="bg-neo-black text-white px-2 py-1">SECT. {number}</span>
+      <div className="font-mono font-bold text-neo-accent mb-2 flex items-center gap-2">
+        <span className="bg-neo-text text-neo-text-inverse px-2 py-1">SECT. {number}</span>
         <span>// {subtitle}</span>
       </div>
-      <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] text-neo-black">
+      <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] text-neo-text">
         {title}
       </h2>
     </div>

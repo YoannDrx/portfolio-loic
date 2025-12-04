@@ -42,7 +42,7 @@ export const NeoNavbar = () => {
     <nav className="fixed w-full z-40 bg-neo-bg border-b-2 border-neo-border px-4 py-4 md:px-6 flex justify-between items-center">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-1 group">
-        <div className="w-10 h-10 bg-neo-text text-neo-text-inverse flex items-center justify-center font-black text-xl border-2 border-transparent group-hover:bg-neo-accent transition-colors duration-150">
+        <div className="w-10 h-10 bg-neo-accent text-neo-text-inverse flex items-center justify-center font-black text-xl border-2 border-neo-border group-hover:bg-neo-text transition-colors duration-150">
           LG
         </div>
         <div className="hidden md:flex flex-col leading-none ml-2 text-neo-text">

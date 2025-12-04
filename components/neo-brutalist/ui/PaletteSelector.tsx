@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Palette } from 'lucide-react';
+import { Palette, Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -38,6 +39,7 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
   const [mounted, setMounted] = useState(false);
   const [currentPalette, setCurrentPalette] = useState('orange');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -60,7 +62,10 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
     setCurrentPalette(paletteId);
     localStorage.setItem('neo-palette', paletteId);
     document.documentElement.setAttribute('data-palette', paletteId);
-    setIsOpen(false);
+  };
+
+  const handleThemeToggle = (newTheme: 'light' | 'dark') => {
+    setTheme(newTheme);
   };
 
   if (!mounted) {
@@ -78,6 +83,7 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
   }
 
   const current = palettes.find(p => p.id === currentPalette);
+  const isDark = theme === 'dark';
 
   return (
     <div ref={dropdownRef} className="relative">
@@ -101,8 +107,44 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 mt-2 p-4 bg-neo-surface border-2 border-neo-border shadow-[6px_6px_0px_0px_var(--neo-shadow)] z-50 w-64"
+            className="absolute right-0 mt-2 p-4 bg-neo-surface border-2 border-neo-border shadow-[6px_6px_0px_0px_var(--neo-shadow)] z-50 w-72"
           >
+            {/* Mode d'affichage */}
+            <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
+              Mode d'affichage
+            </div>
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={() => handleThemeToggle('light')}
+                className={cn(
+                  "flex-1 flex items-center justify-center gap-2 px-3 py-2 border-2 transition-all duration-150",
+                  !isDark
+                    ? "border-neo-text bg-neo-accent text-neo-text-inverse shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
+                    : "border-neo-border bg-neo-bg hover:bg-neo-surface"
+                )}
+                aria-label="Mode clair"
+              >
+                <Sun className="w-4 h-4" />
+                <span className="font-mono text-xs font-bold uppercase">Light</span>
+              </button>
+              <button
+                onClick={() => handleThemeToggle('dark')}
+                className={cn(
+                  "flex-1 flex items-center justify-center gap-2 px-3 py-2 border-2 transition-all duration-150",
+                  isDark
+                    ? "border-neo-text bg-neo-accent text-neo-text-inverse shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
+                    : "border-neo-border bg-neo-bg hover:bg-neo-surface"
+                )}
+                aria-label="Mode sombre"
+              >
+                <Moon className="w-4 h-4" />
+                <span className="font-mono text-xs font-bold uppercase">Dark</span>
+              </button>
+            </div>
+
+            {/* Séparateur */}
+            <div className="border-t border-neo-border mb-4" />
+
             {/* Neons Vifs */}
             <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
               Neons Vifs
@@ -147,15 +189,20 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
               ))}
             </div>
 
-            {/* Palette active */}
+            {/* Résumé actif */}
             <div className="mt-4 pt-3 border-t border-neo-border">
-              <div className="flex items-center gap-2">
-                <div
-                  className="w-4 h-4 border border-neo-border"
-                  style={{ backgroundColor: current?.color }}
-                />
-                <span className="font-mono text-xs font-bold uppercase">
-                  {current?.name}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-4 h-4 border border-neo-border"
+                    style={{ backgroundColor: current?.color }}
+                  />
+                  <span className="font-mono text-xs font-bold uppercase text-neo-text">
+                    {current?.name}
+                  </span>
+                </div>
+                <span className="font-mono text-xs text-neo-text/50 uppercase">
+                  {isDark ? 'Dark' : 'Light'}
                 </span>
               </div>
             </div>

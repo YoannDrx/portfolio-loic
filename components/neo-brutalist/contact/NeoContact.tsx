@@ -15,7 +15,7 @@ export const NeoContact = () => {
   const t = useTranslations('contact');
 
   return (
-    <div className="min-h-screen bg-neo-bg selection:bg-neo-text selection:text-neo-accent">
+    <div className="min-h-screen bg-neo-bg text-neo-text selection:bg-neo-text selection:text-neo-accent">
       <NeoNavbar />
 
       <main className="pt-20">
@@ -38,7 +38,7 @@ export const NeoContact = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-2xl font-black uppercase tracking-tight mb-6 flex items-center gap-3"
+                  className="text-2xl font-black uppercase tracking-tight mb-6 flex items-center gap-3 text-neo-text"
                 >
                   <span className="font-mono text-sm bg-neo-text text-neo-accent px-2 py-1">
                     01
@@ -54,7 +54,7 @@ export const NeoContact = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-2xl font-black uppercase tracking-tight mb-6 flex items-center gap-3"
+                  className="text-2xl font-black uppercase tracking-tight mb-6 flex items-center gap-3 text-neo-text"
                 >
                   <span className="font-mono text-sm bg-neo-text text-neo-accent px-2 py-1">
                     02

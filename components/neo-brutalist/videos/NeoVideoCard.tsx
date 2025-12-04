@@ -34,13 +34,12 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
 
   return (
     <NeoCard
-      variant="dark-ghost"
-      hover="none"
+      hover="lift"
       padding="md"
       className="hover:border-neo-accent transition-colors duration-300"
     >
       {/* Container Video/Thumbnail */}
-      <div className="aspect-video bg-black relative overflow-hidden mb-6 border border-white/10">
+      <div className="aspect-video bg-neo-text relative overflow-hidden mb-6 border-2 border-neo-border">
         {isPlaying ? (
           // Iframe YouTube
           <iframe
@@ -55,7 +54,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
           // Thumbnail avec bouton play
           <>
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-70 hover:opacity-50 transition-opacity duration-300"
+              className="absolute inset-0 bg-cover bg-center grayscale hover:grayscale-0 transition-all duration-300"
               style={{ backgroundImage: `url(${thumbnailUrl})` }}
             />
             <button
@@ -63,11 +62,11 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
               className="absolute inset-0 flex items-center justify-center group"
               aria-label={`Lire ${video.title}`}
             >
-              <div className="w-20 h-20 border-2 border-white rounded-full flex items-center justify-center group-hover:bg-neo-accent group-hover:border-neo-accent transition-all duration-300">
+              <div className="w-20 h-20 border-4 border-neo-text-inverse rounded-full flex items-center justify-center bg-neo-text/50 group-hover:bg-neo-accent group-hover:border-neo-accent transition-all duration-300">
                 <Play
                   size={32}
                   fill="currentColor"
-                  className="ml-1 text-white group-hover:text-black"
+                  className="ml-1 text-neo-text-inverse group-hover:text-neo-text-inverse"
                 />
               </div>
             </button>
@@ -81,14 +80,14 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
           <>
             <button
               onClick={() => setIsPlaying(false)}
-              className="px-3 py-1.5 font-mono text-xs font-bold uppercase border border-white/30 hover:bg-neo-accent hover:text-black hover:border-neo-accent transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 font-mono text-xs font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent transition-colors flex items-center gap-1.5"
             >
               <X size={14} />
               Fermer
             </button>
             <button
               onClick={handleFullscreen}
-              className="px-3 py-1.5 font-mono text-xs font-bold uppercase border border-white/30 hover:bg-neo-accent hover:text-black hover:border-neo-accent transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 font-mono text-xs font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent transition-colors flex items-center gap-1.5"
             >
               <Maximize2 size={14} />
               Plein écran
@@ -99,7 +98,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
           href={`https://www.youtube.com/watch?v=${video.videoId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-3 py-1.5 font-mono text-xs font-bold uppercase border border-white/30 hover:bg-neo-accent hover:text-black hover:border-neo-accent transition-colors flex items-center gap-1.5"
+          className="px-3 py-1.5 font-mono text-xs font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent transition-colors flex items-center gap-1.5"
         >
           <ExternalLink size={14} />
           YouTube
@@ -109,14 +108,14 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
       {/* Info */}
       <div className="flex justify-between items-start gap-4">
         <div className="min-w-0">
-          <NeoTag variant="accent" size="sm" className="mb-2">
+          <NeoTag variant="default" size="sm" className="mb-2">
             {video.type}
           </NeoTag>
-          <h3 className="text-2xl md:text-3xl font-black uppercase leading-tight text-white">
+          <h3 className="text-2xl md:text-3xl font-black uppercase leading-tight text-neo-text">
             {video.title}
           </h3>
         </div>
-        <span className="font-mono text-xs opacity-50 border border-white/20 px-2 py-1 flex-shrink-0 text-white">
+        <span className="font-mono text-xs text-neo-text/50 border-2 border-neo-border px-2 py-1 flex-shrink-0">
           {new Date(video.date).getFullYear()}
         </span>
       </div>

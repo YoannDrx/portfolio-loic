@@ -9,7 +9,7 @@ export const AudioWaveform = () => {
       {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
-          className="w-1 bg-neo-orange"
+          className="w-1 bg-neo-accent"
           animate={{ height: ["20%", "100%", "20%"] }}
           transition={{
             duration: 0.8,

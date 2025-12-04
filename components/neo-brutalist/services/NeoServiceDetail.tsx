@@ -91,7 +91,7 @@ export default function NeoServiceDetail({
               className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase hover:text-neo-accent transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              {t('backToServices')}
+              {tCommon('backToServices')}
             </Link>
           </motion.div>
 

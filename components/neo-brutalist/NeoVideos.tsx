@@ -17,27 +17,27 @@ interface NeoVideosProps {
 
 export const NeoVideos: React.FC<NeoVideosProps> = ({ videos }) => {
   return (
-    <section id="videos" className="bg-neo-black text-neo-bg py-32">
+    <section id="videos" className="bg-neo-contrast-bg text-neo-contrast-text py-32">
       <div className="container mx-auto px-4 md:px-6">
-         <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b-4 border-neo-orange pb-6">
+         <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b-4 border-neo-accent pb-6">
             <div>
-              <div className="font-mono font-bold text-neo-orange mb-2">SECT. 02 // REALISATIONS</div>
-              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white">Visuals</h2>
+              <div className="font-mono font-bold text-neo-accent mb-2">SECT. 02 // REALISATIONS</div>
+              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-neo-contrast-text">Visuals</h2>
             </div>
             <BrutalistButton variant="primary" className="mb-2">YouTube Channel</BrutalistButton>
          </div>
 
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {videos.map((video) => (
-              <div key={video.id} className="group relative bg-[#1a1a1a] border-2 border-[#333] hover:border-neo-orange transition-colors p-4 pb-8">
-                 <div className="aspect-video bg-gray-800 mb-6 relative overflow-hidden cursor-pointer">
+              <div key={video.id} className="group relative bg-neo-surface border-2 border-neo-contrast-border hover:border-neo-accent transition-colors p-4 pb-8">
+                 <div className="aspect-video bg-neo-bg-alt mb-6 relative overflow-hidden cursor-pointer">
                     {/* Thumbnail or Video Placeholder */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                       <Play size={48} className="text-neo-orange" fill="currentColor"/>
+                    <div className="absolute inset-0 flex items-center justify-center bg-neo-text/50 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                       <Play size={48} className="text-neo-accent" fill="currentColor"/>
                     </div>
                     {/* If we had an image, we'd show it here. For now, use a placeholder with the video ID logic if possible, or just text */}
-                    <div 
-                      className="w-full h-full bg-neutral-800 flex items-center justify-center text-neutral-600 font-black text-4xl bg-cover bg-center"
+                    <div
+                      className="w-full h-full bg-neo-bg-alt flex items-center justify-center text-neo-text/40 font-black text-4xl bg-cover bg-center"
                       style={{ backgroundImage: `url(https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg)` }}
                     >
                        {!video.videoId && "VIDEO"}
@@ -45,11 +45,11 @@ export const NeoVideos: React.FC<NeoVideosProps> = ({ videos }) => {
                  </div>
                  <div className="flex justify-between items-start">
                     <div>
-                       <div className="font-mono text-neo-orange text-xs mb-1">{video.type}</div>
-                       <h3 className="text-2xl font-bold uppercase leading-tight mb-2 group-hover:underline decoration-neo-orange text-white">{video.title}</h3>
-                       <p className="font-mono text-sm text-gray-400">Official Video</p>
+                       <div className="font-mono text-neo-accent text-xs mb-1">{video.type}</div>
+                       <h3 className="text-2xl font-bold uppercase leading-tight mb-2 group-hover:underline decoration-neo-accent text-neo-contrast-text">{video.title}</h3>
+                       <p className="font-mono text-sm text-neo-contrast-text-muted">Official Video</p>
                     </div>
-                    <span className="font-mono text-xs border border-[#333] px-2 py-1 text-gray-500">2024</span>
+                    <span className="font-mono text-xs border border-neo-contrast-border px-2 py-1 text-neo-contrast-text-muted">2024</span>
                  </div>
               </div>
             ))}

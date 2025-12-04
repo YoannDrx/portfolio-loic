@@ -1,17 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-  DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
+import { useState, useRef, useEffect } from "react";
 import { Download, FileSpreadsheet, FileJson, FileText, Sheet, Loader2, ChevronDown } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 type ExportType = "albums" | "videos" | "services";
 type ExportFormat = "xlsx" | "csv" | "json" | "txt";
@@ -19,6 +11,7 @@ type ExportFormat = "xlsx" | "csv" | "json" | "txt";
 interface ExportButtonProps {
   type: ExportType;
   label?: string;
+  iconOnly?: boolean;
 }
 
 const formatOptions: {
@@ -59,11 +52,25 @@ const typeLabels: Record<ExportType, string> = {
   services: "les services",
 };
 
-export function ExportButton({ type, label = "Exporter", iconOnly = false }: ExportButtonProps & { iconOnly?: boolean }) {
+export function ExportButton({ type, label = "Exporter", iconOnly = false }: ExportButtonProps) {
   const [exporting, setExporting] = useState<ExportFormat | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Close on click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   async function handleExport(format: ExportFormat) {
     setExporting(format);
+    setIsOpen(false);
     try {
       const response = await fetch(`/api/admin/export?type=${type}&format=${format}`, {
         credentials: "include",
@@ -97,66 +104,71 @@ export function ExportButton({ type, label = "Exporter", iconOnly = false }: Exp
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size={iconOnly ? "icon" : "default"}
-          className={iconOnly
-            ? "h-9 w-9 border-[var(--glass-border)] bg-[var(--glass-subtle)] text-foreground/85 hover:bg-[var(--glass-active)] hover:border-[var(--glass-border-strong)] hover:text-foreground transition-all duration-200"
-            : "gap-2 border-[var(--glass-border)] bg-[var(--glass-subtle)] text-foreground/85 hover:bg-[var(--glass-active)] hover:border-[var(--glass-border-strong)] hover:text-foreground transition-all duration-200"
-          }
-          disabled={exporting !== null}
-        >
-          {exporting ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Download className="h-4 w-4" />
-          )}
-          {!iconOnly && (
-            <>
-              <span className="hidden sm:inline">{label}</span>
-              <ChevronDown className="h-3 w-3 opacity-50" />
-            </>
-          )}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="start"
-        sideOffset={4}
-        collisionPadding={16}
-        className="w-48 bg-neutral-900 border-[var(--glass-border)]"
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        disabled={exporting !== null}
+        className={cn(
+          "flex items-center gap-2",
+          "border-2 border-neo-border bg-neo-surface",
+          "text-neo-text font-mono text-sm",
+          "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+          "hover:bg-neo-bg transition-colors",
+          "disabled:opacity-50 disabled:cursor-not-allowed",
+          iconOnly ? "h-10 w-10 justify-center" : "h-10 px-3"
+        )}
       >
-        <DropdownMenuLabel className="text-xs text-muted-foreground">
-          Format d'export
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-[var(--glass-active)]" />
-        {formatOptions.map((option) => {
-          const Icon = option.icon;
-          const isLoading = exporting === option.format;
+        {exporting ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <Download className="h-4 w-4" />
+        )}
+        {!iconOnly && (
+          <>
+            <span className="hidden sm:inline font-bold uppercase">{label}</span>
+            <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
+          </>
+        )}
+      </button>
 
-          return (
-            <DropdownMenuItem
-              key={option.format}
-              onClick={() => handleExport(option.format)}
-              disabled={exporting !== null}
-              className="cursor-pointer hover:bg-[var(--glass-active)] focus:bg-[var(--glass-active)]"
-            >
-              <div className="flex items-center gap-3 w-full">
-                {isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin text-admin-accent" />
-                ) : (
-                  <Icon className="h-4 w-4 text-muted-foreground" />
+      {isOpen && (
+        <div className="absolute z-50 right-0 mt-1 w-52 bg-neo-bg border-2 border-neo-border shadow-[4px_4px_0px_0px_var(--neo-shadow)]">
+          <div className="px-3 py-2 border-b-2 border-neo-border bg-neo-surface">
+            <span className="font-mono text-xs font-bold text-neo-text/60 uppercase tracking-wider">
+              Format d'export
+            </span>
+          </div>
+          {formatOptions.map((option) => {
+            const Icon = option.icon;
+            const isLoading = exporting === option.format;
+
+            return (
+              <button
+                key={option.format}
+                type="button"
+                onClick={() => handleExport(option.format)}
+                disabled={exporting !== null}
+                className={cn(
+                  "w-full flex items-center gap-3 px-3 py-2",
+                  "hover:bg-neo-surface transition-colors",
+                  "disabled:opacity-50 disabled:cursor-not-allowed"
                 )}
-                <div className="flex flex-col">
-                  <span className="text-sm text-neutral-200">{option.label}</span>
-                  <span className="text-xs text-muted-foreground">{option.description}</span>
+              >
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin text-neo-accent" />
+                ) : (
+                  <Icon className="h-4 w-4 text-neo-text/60" />
+                )}
+                <div className="flex flex-col items-start">
+                  <span className="text-sm font-bold text-neo-text">{option.label}</span>
+                  <span className="text-xs font-mono text-neo-text/50">{option.description}</span>
                 </div>
-              </div>
-            </DropdownMenuItem>
-          );
-        })}
-      </DropdownMenuContent>
-    </DropdownMenu>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }

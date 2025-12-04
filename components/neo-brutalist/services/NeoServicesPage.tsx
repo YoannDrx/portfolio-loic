@@ -152,7 +152,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
 
                       {/* Content */}
                       <div className="flex-1">
-                        <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tight mb-6">
+                        <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tight mb-6 text-neo-text">
                           {service.title}
                         </h2>
                         <div
@@ -179,7 +179,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
             <div className="flex items-center gap-3 mb-8">
               <NeoTag variant="default">{t('process.subtitle')}</NeoTag>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-16">
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-16 text-neo-text">
               {t('process.title')}
             </h2>
 
@@ -196,10 +196,10 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
                     <div className="w-12 h-12 mx-auto mb-4 bg-neo-accent text-neo-text-inverse flex items-center justify-center font-black text-xl">
                       {step.icon}
                     </div>
-                    <h3 className="font-black uppercase text-lg mb-2">
+                    <h3 className="font-black uppercase text-lg mb-2 text-neo-text">
                       {t(`process.${step.key}.title`)}
                     </h3>
-                    <p className="font-mono text-xs opacity-60">
+                    <p className="font-mono text-xs text-neo-text/60">
                       {t(`process.${step.key}.description`)}
                     </p>
                   </NeoCard>

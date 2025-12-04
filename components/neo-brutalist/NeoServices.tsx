@@ -31,17 +31,17 @@ export const NeoServices: React.FC<NeoServicesProps> = ({ services }) => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
          {services.map((service, i) => (
-           <div key={service.id} className="border-2 border-neo-black p-8 hover:bg-neo-black hover:text-white transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_#FF3300] bg-white group">
+           <div key={service.id} className="border-2 border-neo-border p-8 hover:bg-neo-text hover:text-neo-text-inverse transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] bg-neo-surface group">
               <div className="flex justify-between items-start mb-8">
-                 <div className="p-3 bg-neo-bg border-2 border-neo-black text-neo-black group-hover:bg-white">
+                 <div className="p-3 bg-neo-bg border-2 border-neo-border text-neo-text group-hover:bg-neo-surface">
                     {getIconForService(service.title)}
                  </div>
-                 <span className="font-mono font-bold text-2xl text-neo-orange">/{i + 1}</span>
+                 <span className="font-mono font-bold text-2xl text-neo-accent">/{i + 1}</span>
               </div>
-              <h3 className="text-3xl font-black uppercase mb-4 tracking-tight text-neo-black group-hover:text-white">{service.title}</h3>
-              <div 
-                className="font-mono text-sm leading-relaxed opacity-80 text-neo-black group-hover:text-gray-300"
-                dangerouslySetInnerHTML={{ __html: service.text }} 
+              <h3 className="text-3xl font-black uppercase mb-4 tracking-tight text-neo-text group-hover:text-neo-text-inverse">{service.title}</h3>
+              <div
+                className="font-mono text-sm leading-relaxed text-neo-text/80 group-hover:text-neo-text-inverse/80"
+                dangerouslySetInnerHTML={{ __html: service.text }}
               />
            </div>
          ))}

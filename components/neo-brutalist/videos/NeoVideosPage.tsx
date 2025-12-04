@@ -73,12 +73,12 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
   };
 
   return (
-    <div className="min-h-screen bg-neo-text text-neo-text-inverse font-sans selection:bg-neo-accent selection:text-neo-text overflow-x-hidden">
+    <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <NeoNavbar />
 
       <main className="relative z-10 pt-20">
-        {/* Hero - Dark variant */}
-        <section className="min-h-[50vh] flex flex-col justify-center py-20 md:py-32 px-4 md:px-8 bg-neo-text">
+        {/* Hero - Light variant */}
+        <section className="min-h-[50vh] flex flex-col justify-center py-20 md:py-32 px-4 md:px-8 bg-neo-bg">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -86,17 +86,17 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
               transition={{ duration: 0.5 }}
               className="mb-6 flex items-center gap-3"
             >
-              <span className="font-mono text-sm font-bold bg-neo-text-inverse text-neo-accent px-2 py-1">
+              <span className="font-mono text-sm font-bold bg-neo-text text-neo-accent px-2 py-1">
                 05
               </span>
-              <NeoTag variant="accent">{t('hero.badge')}</NeoTag>
+              <NeoTag variant="default">{t('hero.badge')}</NeoTag>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[12vw] md:text-[8vw] lg:text-[6vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text-inverse"
+              className="text-[12vw] md:text-[8vw] lg:text-[6vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text"
             >
               {t('hero.title')}
             </motion.h1>
@@ -105,7 +105,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-6 text-lg max-w-2xl opacity-60"
+              className="mt-6 text-lg max-w-2xl text-neo-text/60"
             >
               {t('hero.description')}
             </motion.p>
@@ -117,7 +117,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
               className="mt-8 flex flex-wrap gap-4"
             >
               <BrutalistButton
-                variant="dark"
+                variant="primary"
                 size="lg"
                 icon={<Video className="w-5 h-5" />}
                 onClick={() => document.getElementById('videos-grid')?.scrollIntoView({ behavior: 'smooth' })}
@@ -125,7 +125,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
                 {t('hero.cta')}
               </BrutalistButton>
               <Link href="/contact">
-                <BrutalistButton variant="dark" size="lg">
+                <BrutalistButton variant="secondary" size="lg">
                   {t('hero.ctaSecondary')}
                 </BrutalistButton>
               </Link>
@@ -134,7 +134,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
         </section>
 
         {/* Stats Bar */}
-        <section className="border-y-4 border-neo-accent bg-neo-text py-12">
+        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-12">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
@@ -157,15 +157,15 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
         </section>
 
         {/* Filters */}
-        <section className="py-8 border-b-2 border-neo-text-inverse/20 sticky top-[72px] bg-neo-text z-30">
+        <section className="py-8 border-b-2 border-neo-border sticky top-[72px] bg-neo-bg z-30">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedType(null)}
-                className={`px-4 py-2 font-mono text-xs font-bold uppercase border-2 transition-all ${
+                className={`px-4 py-2 font-mono text-xs font-bold uppercase border-2 border-neo-border transition-all ${
                   !selectedType
                     ? 'bg-neo-accent text-neo-text-inverse border-neo-accent'
-                    : 'bg-transparent text-neo-text-inverse border-neo-text-inverse/30 hover:border-neo-accent hover:text-neo-accent'
+                    : 'bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent'
                 }`}
               >
                 {t('filterAll')} ({videos.length})
@@ -174,10 +174,10 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
                 <button
                   key={type}
                   onClick={() => setSelectedType(type)}
-                  className={`px-4 py-2 font-mono text-xs font-bold uppercase border-2 transition-all ${
+                  className={`px-4 py-2 font-mono text-xs font-bold uppercase border-2 border-neo-border transition-all ${
                     selectedType === type
                       ? 'bg-neo-accent text-neo-text-inverse border-neo-accent'
-                      : 'bg-transparent text-neo-text-inverse border-neo-text-inverse/30 hover:border-neo-accent hover:text-neo-accent'
+                      : 'bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent'
                   }`}
                 >
                   {getTypeLabel(type)} ({videos.filter(v => v.type === type).length})
@@ -188,7 +188,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
         </section>
 
         {/* Videos Grid */}
-        <section id="videos-grid" className="py-16 bg-neo-text">
+        <section id="videos-grid" className="py-16 bg-neo-bg">
           <div className="container mx-auto px-4 md:px-6">
             <AnimatePresence mode="wait">
               <motion.div
@@ -214,8 +214,8 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
                     variants={fadeInUp}
                     className="col-span-full text-center py-16"
                   >
-                    <Film className="w-16 h-16 mx-auto mb-4 opacity-20" />
-                    <p className="font-mono text-lg opacity-60">{t('noVideos')}</p>
+                    <Film className="w-16 h-16 mx-auto mb-4 text-neo-text/20" />
+                    <p className="font-mono text-lg text-neo-text/60">{t('noVideos')}</p>
                   </motion.div>
                 )}
               </motion.div>

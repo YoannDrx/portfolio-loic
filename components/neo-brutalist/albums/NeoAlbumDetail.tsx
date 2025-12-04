@@ -11,6 +11,7 @@ import { NeoFooter } from '../NeoFooter';
 import { NeoCard } from '../ui/NeoCard';
 import { NeoTag } from '../ui/NeoTag';
 import { BrutalistButton } from '../ui/BrutalistButton';
+import { NeoAlbumPlayer } from './NeoAlbumPlayer';
 
 interface Album {
   id: string;
@@ -129,7 +130,7 @@ export default function NeoAlbumDetail({
               </NeoTag>
 
               {/* Title */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] text-neo-text">
                 {album.title}
               </h1>
 
@@ -182,7 +183,7 @@ export default function NeoAlbumDetail({
             className="mt-16"
           >
             <NeoCard padding="lg" className="max-w-4xl">
-              <h2 className="text-2xl font-black uppercase mb-6 pb-4 border-b-2 border-neo-border">
+              <h2 className="text-2xl font-black uppercase mb-6 pb-4 border-b-2 border-neo-border text-neo-text">
                 {t('about')}
               </h2>
               <div
@@ -202,20 +203,21 @@ export default function NeoAlbumDetail({
               viewport={{ once: true }}
               className="mt-16"
             >
-              <NeoCard padding="md">
-                <h2 className="text-xl font-black uppercase mb-4 pb-2 border-b-2 border-neo-border">
-                  Player
+              <div className="flex items-center gap-3 mb-8">
+                <span className="font-mono text-sm font-bold bg-neo-text text-neo-accent px-2 py-1">
+                  02
+                </span>
+                <h2 className="text-2xl font-black uppercase tracking-tight text-neo-text">
+                  {t('listenNow')}
                 </h2>
-                <div className="aspect-video md:aspect-[21/9]">
-                  <iframe
-                    src={album.spotifyEmbed || album.youtubeEmbed || ''}
-                    className="w-full h-full border-2 border-neo-border"
-                    allow="encrypted-media; autoplay; clipboard-write; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    title={`${album.title} player`}
-                  />
-                </div>
-              </NeoCard>
+              </div>
+              <div className="max-w-3xl">
+                <NeoAlbumPlayer
+                  spotifyEmbed={album.spotifyEmbed}
+                  youtubeEmbed={album.youtubeEmbed}
+                  title={album.title}
+                />
+              </div>
             </motion.section>
           )}
 
@@ -231,7 +233,7 @@ export default function NeoAlbumDetail({
                 <span className="font-mono text-sm font-bold bg-neo-text text-neo-accent px-2 py-1">
                   RELATED
                 </span>
-                <h2 className="text-3xl font-black uppercase tracking-tight">
+                <h2 className="text-3xl font-black uppercase tracking-tight text-neo-text">
                   Albums similaires
                 </h2>
               </div>
@@ -252,7 +254,7 @@ export default function NeoAlbumDetail({
                       <NeoTag variant="default" size="sm" className="mb-2">
                         {relatedAlbum.style}
                       </NeoTag>
-                      <h3 className="text-xl font-black uppercase truncate">
+                      <h3 className="text-xl font-black uppercase truncate text-neo-text">
                         {relatedAlbum.title}
                       </h3>
                     </NeoCard>

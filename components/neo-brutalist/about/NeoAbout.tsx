@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Download, Mail, MapPin, Music, Headphones, Mic2, Sliders, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import { BrutalistButton } from '../ui/BrutalistButton';
 import { SectionHeader } from '../ui/SectionHeader';
 import { NeoNavbar } from '../NeoNavbar';
@@ -16,13 +17,38 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
   }
 };
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.4, 0.25, 1] as const
+    }
+  }
+};
+
+const photoReveal = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+    y: 20
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.4, 0.25, 1] as const,
+      delay: 0.2
+    }
+  }
 };
 
 export const NeoAbout = ({ locale }: { locale: string }) => {
@@ -65,73 +91,98 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
       <main className="relative z-10 pt-32">
 
-        {/* HERO BIO */}
+        {/* HERO BIO - Split Layout */}
         <section className="container mx-auto px-4 md:px-6 mb-32">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[70vh]"
           >
-            <motion.div variants={fadeInUp} className="font-mono font-bold text-neo-accent mb-4 flex items-center gap-2">
-              <span className="bg-neo-text text-neo-accent px-2 py-1">BIO.01</span>
-              <span className="text-neo-text/60">// {t('title').toUpperCase()}</span>
+            {/* Colonne GAUCHE - Tout le contenu texte */}
+            <motion.div variants={fadeInUp} className="order-2 lg:order-1">
+              {/* Badge */}
+              <div className="font-mono font-bold text-neo-accent mb-6 flex items-center gap-2">
+                <span className="bg-neo-text text-neo-accent px-2 py-1">BIO.01</span>
+                <span className="text-neo-text/60">// {t('title').toUpperCase()}</span>
+              </div>
+
+              {/* Titre */}
+              <h1 className="text-[12vw] lg:text-[6vw] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-neo-text">
+                Loïc{' '}
+                <span
+                  className="text-transparent block lg:inline"
+                  style={{ WebkitTextStroke: '2px var(--neo-text)', color: 'transparent' }}
+                >
+                  Ghanem
+                </span>
+              </h1>
+
+              {/* Bio */}
+              <div className="text-lg md:text-xl font-medium leading-relaxed space-y-6 border-l-4 border-neo-accent pl-6 mb-8">
+                <p>{t('bio.paragraph1')}</p>
+                <p className="opacity-80">{t('bio.paragraph2')}</p>
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-4">
+                <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
+                  <BrutalistButton variant="primary" size="lg" icon={<Download size={18} />}>
+                    {t('cta.downloadCV')}
+                  </BrutalistButton>
+                </a>
+                <Link href="/contact">
+                  <BrutalistButton variant="secondary" size="lg" icon={<Mail size={18} />}>
+                    {t('cta.contactMe')}
+                  </BrutalistButton>
+                </Link>
+              </div>
             </motion.div>
 
-            <motion.h1
-              variants={fadeInUp}
-              className="text-[10vw] leading-[0.85] font-black uppercase tracking-tighter mb-12 text-neo-text break-words"
+            {/* Colonne DROITE - Photo */}
+            <motion.div
+              variants={photoReveal}
+              className="relative order-1 lg:order-2 w-full"
             >
-              Loïc <br />
-              <span
-                className="text-transparent"
-                style={{ WebkitTextStroke: '2px var(--neo-text)', color: 'transparent' }}
-              >
-                Ghanem
-              </span>
-            </motion.h1>
-
-            {/* Grid inversé : texte à gauche, photo à droite */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              {/* Colonne GAUCHE - Texte */}
-              <motion.div
-                variants={fadeInUp}
-                className="text-lg md:text-xl font-medium leading-relaxed space-y-6 border-l-4 border-neo-accent pl-8 order-2 lg:order-1"
-              >
-                <p>{t('bio.paragraph1')}</p>
-                <p>{t('bio.paragraph2')}</p>
-                <div className="flex flex-wrap gap-4 pt-4">
-                  <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
-                    <BrutalistButton variant="primary" icon={<Download size={18} />}>
-                      {t('cta.downloadCV')}
-                    </BrutalistButton>
-                  </a>
-                  <Link href="/contact">
-                    <BrutalistButton variant="secondary" icon={<Mail size={18} />}>
-                      {t('cta.contactMe')}
-                    </BrutalistButton>
-                  </Link>
-                </div>
-              </motion.div>
-
-              {/* Colonne DROITE - Photo */}
-              <motion.div
-                variants={fadeInUp}
-                className="relative order-1 lg:order-2"
-              >
-                <NeoCard hover="lift" padding="sm" className="bg-neo-surface">
-                  <div className="aspect-[4/5] bg-neo-bg-alt relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
-                    <div
-                      className="w-full h-full bg-cover bg-center"
-                      style={{ backgroundImage: "url('/img/slider/loic-studio-front.jpg')" }}
+              <div className="relative max-w-sm lg:max-w-md mx-auto lg:mx-0">
+                <NeoCard hover="lift" padding="none" className="bg-neo-surface overflow-hidden">
+                  <div className="relative w-full" style={{ paddingBottom: '133%' }}>
+                    <Image
+                      src="/img/slider/loic-studio-front.jpg"
+                      alt="Loïc Ghanem"
+                      fill
+                      className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                      sizes="(max-width: 768px) 100vw, 400px"
+                      priority
                     />
-                    <div className="absolute bottom-0 left-0 right-0 bg-neo-accent text-neo-text-inverse p-3 font-mono text-xs font-bold flex items-center gap-2">
-                      <MapPin className="w-4 h-4" />
+                    {/* Location badge */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.6 }}
+                      className="absolute bottom-0 left-0 right-0 bg-neo-accent text-neo-text-inverse p-4 font-mono text-sm font-bold flex items-center gap-3 z-10"
+                    >
+                      <MapPin className="w-5 h-5" />
                       PARIS, FRANCE
-                    </div>
+                    </motion.div>
                   </div>
                 </NeoCard>
-              </motion.div>
-            </div>
+
+                {/* Decorative elements with staggered animation */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+                  className="hidden lg:block absolute -bottom-6 -right-6 w-32 h-32 border-4 border-neo-accent -z-10"
+                />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.9, ease: [0.25, 0.4, 0.25, 1] }}
+                  className="hidden lg:block absolute -top-6 -left-6 w-20 h-20 bg-neo-accent -z-10"
+                />
+              </div>
+            </motion.div>
           </motion.div>
         </section>
 
@@ -181,7 +232,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                     size={40}
                     className="mb-6 text-neo-accent group-hover:text-neo-text transition-colors"
                   />
-                  <h3 className="text-2xl font-black uppercase mb-4 group-hover:text-neo-text-inverse transition-colors">
+                  <h3 className="text-2xl font-black uppercase mb-4 text-neo-text group-hover:text-neo-text-inverse transition-colors">
                     {skill.title}
                   </h3>
                   <ul className="font-mono text-sm space-y-2 opacity-80">
@@ -219,7 +270,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                   <NeoTag variant="default" className="mb-4">
                     {t('contactInfo.title')}
                   </NeoTag>
-                  <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-6">
+                  <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-6 text-neo-text">
                     Travaillons <br /> Ensemble
                   </h2>
                   <p className="font-mono text-lg mb-8 max-w-md opacity-70">
@@ -248,7 +299,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                 </div>
                 <div className="flex-1 w-full">
                   <div className="border-2 border-neo-border p-6 bg-neo-bg-alt">
-                    <h3 className="font-black uppercase text-xl mb-4 border-b-2 border-neo-border pb-2">
+                    <h3 className="font-black uppercase text-xl mb-4 border-b-2 border-neo-border pb-2 text-neo-text">
                       Labels & Publishers
                     </h3>
                     <ul className="space-y-3 font-mono text-sm">

@@ -196,7 +196,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                       {/* Info */}
                       <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
-                          <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate">
+                          <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text">
                             {album.title}
                           </h3>
                           <NeoTag variant="default" size="sm">
