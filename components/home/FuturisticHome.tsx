@@ -336,13 +336,23 @@ export default function FuturisticHome({ albums, videos, services, initialLoginO
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="group relative max-w-xl mb-10 cursor-default"
+              className="max-w-xl mb-10"
             >
-              <div className="absolute -inset-3 bg-[var(--glass-subtle)] group-hover:bg-background/90 backdrop-blur-md group-hover:backdrop-blur-xl rounded-xl border border-[var(--glass-border)] group-hover:border-[var(--glass-border-strong)] transition-all duration-500 ease-out" />
-              <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-neon-lime/5 group-hover:from-neon-lime/10 via-transparent to-transparent transition-all duration-500" />
-              <p className="relative text-muted-foreground group-hover:text-foreground/90 max-w-xl text-lg md:text-xl font-light border-l-2 border-neon-lime pl-6 py-2 transition-colors duration-300">
-                {t('home.hero.description')}
-              </p>
+              <GlassCard
+                hover="glow"
+                glowColor="lime"
+                animated={false}
+                className="p-6 group cursor-default"
+              >
+                {/* Inner gradient overlay */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-neon-lime/5 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                <div className="relative z-10">
+                  <p className="text-foreground/85 text-lg md:text-xl leading-relaxed border-l-2 border-neon-lime pl-6">
+                    {t('home.hero.description')}
+                  </p>
+                </div>
+              </GlassCard>
             </motion.div>
 
             {/* CTA Buttons with stagger */}
