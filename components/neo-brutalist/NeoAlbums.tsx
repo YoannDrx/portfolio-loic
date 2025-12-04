@@ -5,6 +5,15 @@ import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { SectionHeader } from './ui/SectionHeader';
 
+// Format date consistently to avoid hydration mismatch
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 export interface Album {
   id: string;
   title: string;
@@ -46,7 +55,7 @@ export const NeoAlbums: React.FC<NeoAlbumsProps> = ({ albums }) => {
                    <div className="flex gap-4 font-mono text-xs mt-1">
                       <span>{album.style || 'Genre'}</span>
                       <span>—</span>
-                      <span>{new Date(album.date).toLocaleDateString()}</span>
+                      <span>{formatDate(album.date)}</span>
                    </div>
                 </div>
               </div>
