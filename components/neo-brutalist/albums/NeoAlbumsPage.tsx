@@ -170,55 +170,41 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                       layout
                       className="group relative"
                     >
-                      {/* Cover */}
-                      <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative mb-6 overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-shadow)] group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
-                        <div
-                          className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
-                          style={{ backgroundImage: album.img ? `url(${album.img})` : undefined }}
-                        />
-                        {!album.img && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <Disc className="w-20 h-20 opacity-20" />
-                          </div>
-                        )}
-                        {album.listenLink ? (
-                          <a
-                            href={album.listenLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="absolute inset-0 flex items-center justify-center bg-neo-text/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            aria-label={`Écouter ${album.title}`}
-                          >
-                            <div className="w-20 h-20 bg-neo-accent rounded-full flex items-center justify-center border-4 border-neo-border">
-                              <Play size={32} fill="currentColor" className="ml-1 text-neo-text-inverse" />
-                            </div>
-                          </a>
-                        ) : (
+                      <Link href={{ pathname: '/albums/[id]', params: { id: album.id } }} className="block">
+                        {/* Cover */}
+                        <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative mb-6 overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-shadow)] group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
                           <div
-                            className="absolute inset-0 flex items-center justify-center bg-neo-text/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-not-allowed"
-                            title="Bientôt disponible"
-                          >
-                            <div className="w-20 h-20 bg-neo-surface rounded-full flex items-center justify-center border-4 border-neo-border/50">
-                              <Play size={32} fill="currentColor" className="ml-1 text-neo-text/30" />
+                            className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
+                            style={{ backgroundImage: album.img ? `url(${album.img})` : undefined }}
+                          />
+                          {!album.img && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <Disc className="w-20 h-20 opacity-20" />
+                            </div>
+                          )}
+                          {/* Overlay with arrow icon */}
+                          <div className="absolute inset-0 flex items-center justify-center bg-neo-text/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="w-20 h-20 bg-neo-accent rounded-full flex items-center justify-center border-4 border-neo-border">
+                              <ArrowRight size={32} className="text-neo-text-inverse" />
                             </div>
                           </div>
-                        )}
-                      </div>
-
-                      {/* Info */}
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text">
-                            {album.title}
-                          </h3>
-                          <NeoTag variant="default" size="sm">
-                            {album.style || 'Genre'}
-                          </NeoTag>
                         </div>
-                        <span className="font-mono text-sm font-bold border-2 border-neo-border px-2 py-1 flex-shrink-0">
-                          {new Date(album.date).getFullYear()}
-                        </span>
-                      </div>
+
+                        {/* Info */}
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="min-w-0">
+                            <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text group-hover:text-neo-accent transition-colors">
+                              {album.title}
+                            </h3>
+                            <NeoTag variant="default" size="sm">
+                              {album.style || 'Genre'}
+                            </NeoTag>
+                          </div>
+                          <span className="font-mono text-sm font-bold border-2 border-neo-border px-2 py-1 flex-shrink-0">
+                            {new Date(album.date).getFullYear()}
+                          </span>
+                        </div>
+                      </Link>
                     </motion.div>
                   ))
                 ) : (

@@ -521,7 +521,10 @@
       "photoCount": "photos",
       "viewGallery": "View gallery",
       "albumPhotos": "Album photos",
-      "openFullscreen": "Open fullscreen"
+      "openFullscreen": "Open fullscreen",
+      "player": "Player",
+      "nowPlaying": "Now playing",
+      "listenOnPlatforms": "Listen on your favorite platforms"
     }
   },
   "videos": {
