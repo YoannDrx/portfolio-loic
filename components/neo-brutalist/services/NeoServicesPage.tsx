@@ -219,10 +219,10 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
             >
               <CheckCircle className="w-16 h-16 mx-auto mb-6 text-neo-accent" />
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text-inverse mb-4">
-                Prêt à démarrer votre projet ?
+                {t('cta.title')}
               </h2>
               <p className="font-mono text-lg text-neo-text-inverse/60 max-w-2xl mx-auto mb-8">
-                Discutons de vos besoins et créons ensemble quelque chose d&apos;unique.
+                {t('cta.description')}
               </p>
               <Link href="/contact">
                 <BrutalistButton

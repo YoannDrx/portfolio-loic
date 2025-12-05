@@ -162,7 +162,7 @@ export default function NeoAlbumDetail({
                 {album.listenLink && (
                   <a href={album.listenLink} target="_blank" rel="noopener noreferrer">
                     <BrutalistButton variant="primary" size="lg" icon={<ExternalLink size={18} />}>
-                      Écouter
+                      {t('listen')}
                     </BrutalistButton>
                   </a>
                 )}
@@ -208,7 +208,7 @@ export default function NeoAlbumDetail({
                   02
                 </span>
                 <h2 className="text-2xl font-black uppercase tracking-tight text-neo-text">
-                  {t('listenNow')}
+                  {t('listen')}
                 </h2>
               </div>
               <div className="max-w-3xl">
@@ -234,7 +234,7 @@ export default function NeoAlbumDetail({
                   RELATED
                 </span>
                 <h2 className="text-3xl font-black uppercase tracking-tight text-neo-text">
-                  Albums similaires
+                  {t('relatedAlbums')}
                 </h2>
               </div>
 
@@ -273,10 +273,10 @@ export default function NeoAlbumDetail({
           >
             <NeoCard variant="inverted" padding="lg" className="text-center">
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4">
-                Travaillons ensemble
+                {t('ctaTitle')}
               </h2>
               <p className="font-mono text-lg opacity-60 max-w-2xl mx-auto mb-8">
-                Vous avez un projet musical ? Discutons de vos besoins.
+                {t('ctaText', { title: album.title })}
               </p>
               <Link href="/contact">
                 <BrutalistButton variant="dark" size="lg">

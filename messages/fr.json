@@ -5,7 +5,11 @@
     "services": "Services",
     "albums": "Albums",
     "videos": "Vidéos",
-    "contact": "Contact"
+    "contact": "Contact",
+    "subtitle": "Compositeur de musique",
+    "admin": "Admin",
+    "dashboard": "Tableau de bord",
+    "logout": "Déconnexion"
   },
   "home": {
     "title": "Loïc Ghanem",
@@ -76,6 +80,7 @@
       "servicesTitle": "Expertise",
       "servicesSection": "Services Sonores",
       "viewAllServices": "Voir tous les services",
+      "learnMore": "En savoir plus",
       "contact": "CRÉONS <br/><span class=\"text-neon-lime\">ENSEMBLE</span>",
       "contactText": "Une idée ? Un projet musical ? Transformons votre vision en réalité sonore.",
       "getInTouch": "Me Contacter"
@@ -109,10 +114,22 @@
       "title": "Réalisations",
       "albums": "Albums Produits",
       "projects": "Projets Audiovisuels",
-      "years": "Années d'Expérience"
+      "years": "Années d'Expérience",
+      "collaborations": "Collaborations"
+    },
+    "contactSection": {
+      "title": "Travaillons Ensemble",
+      "labels": "Labels & Publishers"
+    },
+    "tools": {
+      "title": "Mes outils de prédilection"
+    },
+    "studio": {
+      "title": "Mon studio"
     },
     "skills": {
       "title": "Expertises & Compétences",
+      "subtitle": "Compétences Techniques",
       "composition": {
         "title": "Composition",
         "items": ["Metal", "Hip-Hop", "Ambient", "Electronic", "Orchestral"]
@@ -261,7 +278,19 @@
       "notFound": "Service non trouvé",
       "about": "À propos du service",
       "offeredOn": "Service offert le",
-      "relatedServices": "Autres Services"
+      "relatedServices": "Autres Services",
+      "whatYouGet": "Ce que vous obtenez",
+      "process": "Process de travail",
+      "examples": "Exemples de réalisations",
+      "listen": "Écouter",
+      "backToServices": "Retour aux services",
+      "requestQuote": "Demander un devis",
+      "step": "Étape",
+      "pricing": "Mes tarifs",
+      "startingFrom": "À partir de",
+      "onQuote": "Sur devis",
+      "customizable": "Personnalisable selon vos besoins",
+      "contact": "Contact"
     },
     "pageTitle": "Services",
     "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
@@ -429,7 +458,11 @@
       "ctaText": "Écoutez \"{title}\" sur toutes les plateformes de streaming.",
       "ctaButton": "Écouter maintenant",
       "backToAlbums": "Retour aux albums",
-      "relatedAlbums": "Albums similaires"
+      "relatedAlbums": "Albums similaires",
+      "photoCount": "photos",
+      "viewGallery": "Voir la galerie",
+      "albumPhotos": "Photos de l'album",
+      "openFullscreen": "Ouvrir en plein écran"
     }
   },
   "videos": {
@@ -464,14 +497,20 @@
     },
     "card": {
       "watch": "Regarder",
-      "viewMore": "Voir plus"
+      "viewMore": "Voir plus",
+      "close": "Fermer",
+      "fullscreen": "Plein écran",
+      "play": "Lire {title}"
+    },
+    "filter": {
+      "all": "Toutes"
     }
   },
   "contact": {
     "pageTitle": "Contact",
     "pageDescription": "Discutons de votre projet musical. Je suis toujours enthousiaste à l'idée de collaborer sur de nouvelles créations.",
     "getInTouch": "Prenons Contact",
-    "description": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous. Remplissez le formulaire ci-dessous et je vous répondrai dans les plus brefs délais.",
+    "description": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous.",
     "hero": {
       "badge": "CONTACTEZ-MOI",
       "title": "Créons Ensemble",
@@ -480,13 +519,20 @@
         "response": "Réponse",
         "satisfaction": "Satisfaction"
       },
-      "cta": "Envoyer un message",
+      "cta": "Me contacter",
       "ctaSecondary": "Voir mes services"
     },
     "stats": {
       "responseTime": "Temps de réponse",
       "satisfaction": "Satisfaction",
       "projects": "Projets réalisés"
+    },
+    "directContact": {
+      "title": "Contact Direct",
+      "tagline": "Pas de formulaire, pas de blabla. On s'appelle, on en parle, on crée !",
+      "callMe": "Appelez-moi direct",
+      "emailMe": "Ou par email",
+      "footer": "Promis, je décroche (sauf si je suis en studio... mais je rappelle vite !)"
     },
     "form": {
       "name": "Nom",
@@ -509,7 +555,8 @@
       "location": "Localisation",
       "locationValue": "Paris, France",
       "social": "Réseaux Sociaux",
-      "availability": "Je réponds généralement sous 24-48 heures. Pour les projets urgents, n'hésitez pas à me contacter par téléphone."
+      "availability": "Je réponds généralement sous 24-48 heures. Pour les projets urgents, n'hésitez pas à me contacter par téléphone.",
+      "findMe": "Retrouvez-moi"
     },
     "cta": {
       "text": "Vous préférez découvrir mes services avant de me contacter ?",
@@ -523,12 +570,30 @@
     "tagline": "Compositeur & Producteur Musical basé à Paris",
     "letsCreate": "Créons",
     "together": "Ensemble.",
-    "location": "PARIS, FRANCE"
+    "location": "PARIS, FRANCE",
+    "noForm": {
+      "title": "Un projet ? Parlons-en !",
+      "description": "Pas de formulaire ici, juste un coup de fil et on démarre l'aventure sonore.",
+      "callButton": "On s'appelle ?"
+    }
+  },
+  "cv": {
+    "pageTitle": "CV",
+    "pageDescription": "Découvrez mon parcours professionnel et mes compétences en tant que compositeur et producteur musical.",
+    "download": "Télécharger le CV",
+    "profile": "Profil",
+    "experience": "Expériences",
+    "skills": "Compétences",
+    "tools": "Logiciels",
+    "awards": "Récompenses",
+    "languages": "Langues",
+    "contact": "Me Contacter"
   },
   "common": {
     "loading": "Chargement...",
     "error": "Erreur",
     "close": "Fermer",
+    "fullscreen": "Plein écran",
     "readMore": "Lire la suite",
     "learnMore": "En savoir plus",
     "viewAll": "Tout voir",

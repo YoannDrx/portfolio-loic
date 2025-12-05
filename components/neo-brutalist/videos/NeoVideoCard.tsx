@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { Play, X, ExternalLink, Maximize2 } from 'lucide-react';
 import { NeoCard } from '../ui/NeoCard';
 import { NeoTag } from '../ui/NeoTag';
@@ -21,6 +22,7 @@ interface NeoVideoCardProps {
 export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const t = useTranslations('videos');
 
   const handleFullscreen = () => {
     if (iframeRef.current) {
@@ -60,7 +62,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
             <button
               onClick={() => setIsPlaying(true)}
               className="absolute inset-0 flex items-center justify-center group"
-              aria-label={`Lire ${video.title}`}
+              aria-label={t('card.play', { title: video.title })}
             >
               <div className="w-20 h-20 border-4 border-neo-text-inverse rounded-full flex items-center justify-center bg-neo-text/50 group-hover:bg-neo-accent group-hover:border-neo-accent transition-all duration-300">
                 <Play
@@ -83,14 +85,14 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
               className="px-3 py-1.5 font-mono text-xs font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent transition-colors flex items-center gap-1.5"
             >
               <X size={14} />
-              Fermer
+              {t('card.close')}
             </button>
             <button
               onClick={handleFullscreen}
               className="px-3 py-1.5 font-mono text-xs font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent transition-colors flex items-center gap-1.5"
             >
               <Maximize2 size={14} />
-              Plein écran
+              {t('card.fullscreen')}
             </button>
           </>
         )}
@@ -115,9 +117,11 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
             {video.title}
           </h3>
         </div>
-        <span className="font-mono text-xs text-neo-text/50 border-2 border-neo-border px-2 py-1 flex-shrink-0">
-          {new Date(video.date).getFullYear()}
-        </span>
+        {video.date && !isNaN(new Date(video.date).getTime()) && (
+          <span className="font-mono text-xs text-neo-text/50 border-2 border-neo-border px-2 py-1 flex-shrink-0">
+            {new Date(video.date).getFullYear()}
+          </span>
+        )}
       </div>
     </NeoCard>
   );

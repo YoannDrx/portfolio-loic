@@ -5,7 +5,11 @@
     "services": "Services",
     "albums": "Albums",
     "videos": "Videos",
-    "contact": "Contact"
+    "contact": "Contact",
+    "subtitle": "Music Composer",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
   },
   "home": {
     "title": "Loïc Ghanem",
@@ -76,6 +80,7 @@
       "servicesTitle": "Expertise",
       "servicesSection": "Sound Services",
       "viewAllServices": "View All Services",
+      "learnMore": "Learn more",
       "contact": "LET'S CREATE <br/><span class=\"text-neon-lime\">TOGETHER</span>",
       "contactText": "An idea? A musical project? Let's transform your vision into sonic reality.",
       "getInTouch": "Get In Touch"
@@ -109,10 +114,22 @@
       "title": "Achievements",
       "albums": "Albums Produced",
       "projects": "Audiovisual Projects",
-      "years": "Years of Experience"
+      "years": "Years of Experience",
+      "collaborations": "Collaborations"
+    },
+    "contactSection": {
+      "title": "Let's Work Together",
+      "labels": "Labels & Publishers"
+    },
+    "tools": {
+      "title": "My tools of choice"
+    },
+    "studio": {
+      "title": "My studio"
     },
     "skills": {
       "title": "Expertise & Skills",
+      "subtitle": "Technical Skills",
       "composition": {
         "title": "Composition",
         "items": ["Metal", "Hip-Hop", "Ambient", "Electronic", "Orchestral"]
@@ -261,7 +278,19 @@
       "notFound": "Service not found",
       "about": "About the service",
       "offeredOn": "Service offered on",
-      "relatedServices": "Related Services"
+      "relatedServices": "Related Services",
+      "whatYouGet": "What you get",
+      "process": "Work process",
+      "examples": "Example works",
+      "listen": "Listen",
+      "backToServices": "Back to services",
+      "requestQuote": "Request a quote",
+      "step": "Step",
+      "pricing": "My pricing",
+      "startingFrom": "Starting from",
+      "onQuote": "On quote",
+      "customizable": "Customizable to your needs",
+      "contact": "Contact"
     },
     "pageTitle": "Services",
     "pageDescription": "From composition to post-production, I support you at every stage of your musical project with expertise and passion.",
@@ -459,7 +488,11 @@
       "ctaText": "Listen to \"{title}\" on all streaming platforms.",
       "ctaButton": "Listen now",
       "backToAlbums": "Back to albums",
-      "relatedAlbums": "Related albums"
+      "relatedAlbums": "Related albums",
+      "photoCount": "photos",
+      "viewGallery": "View gallery",
+      "albumPhotos": "Album photos",
+      "openFullscreen": "Open fullscreen"
     }
   },
   "videos": {
@@ -494,14 +527,20 @@
     },
     "card": {
       "watch": "Watch",
-      "viewMore": "View more"
+      "viewMore": "View more",
+      "close": "Close",
+      "fullscreen": "Fullscreen",
+      "play": "Play {title}"
+    },
+    "filter": {
+      "all": "All"
     }
   },
   "contact": {
     "pageTitle": "Contact",
     "pageDescription": "Let's discuss your musical project. I'm always excited to collaborate on new creations.",
     "getInTouch": "Get in Touch",
-    "description": "Have a project in mind? I'd love to discuss it with you. Fill out the form below and I'll get back to you as soon as possible.",
+    "description": "Have a project in mind? I'd love to discuss it with you.",
     "hero": {
       "badge": "GET IN TOUCH",
       "title": "Let's Create Together",
@@ -510,13 +549,20 @@
         "response": "Response",
         "satisfaction": "Satisfaction"
       },
-      "cta": "Send a message",
+      "cta": "Contact me",
       "ctaSecondary": "View my services"
     },
     "stats": {
       "responseTime": "Response Time",
       "satisfaction": "Satisfaction",
       "projects": "Projects Completed"
+    },
+    "directContact": {
+      "title": "Direct Contact",
+      "tagline": "No forms, no fuss. Just call me, let's chat, and create together!",
+      "callMe": "Call me directly",
+      "emailMe": "Or email me",
+      "footer": "I promise I'll pick up (unless I'm in the studio... but I'll call back quickly!)"
     },
     "form": {
       "name": "Name",
@@ -539,7 +585,8 @@
       "location": "Location",
       "locationValue": "Paris, France",
       "social": "Social Media",
-      "availability": "I usually respond within 24-48 hours. For urgent projects, feel free to contact me by phone."
+      "availability": "I usually respond within 24-48 hours. For urgent projects, feel free to contact me by phone.",
+      "findMe": "Find me"
     },
     "cta": {
       "text": "Would you like to discover my services before contacting me?",
@@ -553,12 +600,30 @@
     "tagline": "Music Composer & Producer based in Paris",
     "letsCreate": "Let's",
     "together": "Create.",
-    "location": "PARIS, FRANCE"
+    "location": "PARIS, FRANCE",
+    "noForm": {
+      "title": "Got a project? Let's talk!",
+      "description": "No forms here, just a quick call and let's start the sonic adventure.",
+      "callButton": "Let's chat?"
+    }
+  },
+  "cv": {
+    "pageTitle": "Resume",
+    "pageDescription": "Discover my professional journey and skills as a music composer and producer.",
+    "download": "Download Resume",
+    "profile": "Profile",
+    "experience": "Experience",
+    "skills": "Skills",
+    "tools": "Tools",
+    "awards": "Awards",
+    "languages": "Languages",
+    "contact": "Contact Me"
   },
   "common": {
     "loading": "Loading...",
     "error": "Error",
     "close": "Close",
+    "fullscreen": "Fullscreen",
     "readMore": "Read more",
     "learnMore": "Learn more",
     "viewAll": "View all",

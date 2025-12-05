@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Clock, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, Clock, ExternalLink, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NeoCard } from '../ui/NeoCard';
 import { NeoTag } from '../ui/NeoTag';
@@ -23,10 +23,16 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
 
   const infoItems = [
     {
+      icon: <Phone className="w-5 h-5" />,
+      label: t('info.phone'),
+      value: '+33 6 14 51 75 92',
+      href: 'tel:+33614517592',
+    },
+    {
       icon: <Mail className="w-5 h-5" />,
       label: 'Email',
-      value: 'contact@loicghanem.com',
-      href: 'mailto:contact@loicghanem.com',
+      value: 'loic.ghanem@outlook.com',
+      href: 'mailto:loic.ghanem@outlook.com',
     },
     {
       icon: <MapPin className="w-5 h-5" />,
@@ -55,7 +61,7 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
             variant="default"
             hover="lift"
             padding="md"
-            className="flex items-center gap-4"
+            className="flex items-center gap-4 hover:border-neo-accent transition-colors"
           >
             <div className="w-12 h-12 bg-neo-text text-neo-accent flex items-center justify-center flex-shrink-0">
               {item.icon}
@@ -80,17 +86,22 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       </div>
 
       {/* Stats */}
-      <NeoCard variant="inverted" hover="none" padding="lg">
+      <NeoCard
+        variant="inverted"
+        hover="none"
+        padding="lg"
+        className="group cursor-pointer hover:bg-neo-accent hover:border-neo-accent transition-all duration-300"
+      >
         <div className="grid grid-cols-2 gap-6">
           <div className="text-center">
-            <p className="text-4xl font-black text-neo-accent">98%</p>
-            <p className="font-mono text-xs uppercase text-neo-text-inverse/60 mt-1">
+            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">98%</p>
+            <p className="font-mono text-xs uppercase text-neo-text-inverse/60 group-hover:text-neo-text/60 mt-1 transition-colors duration-300">
               {t('stats.satisfaction')}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-4xl font-black text-neo-accent">150+</p>
-            <p className="font-mono text-xs uppercase text-neo-text-inverse/60 mt-1">
+            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">150+</p>
+            <p className="font-mono text-xs uppercase text-neo-text-inverse/60 group-hover:text-neo-text/60 mt-1 transition-colors duration-300">
               {t('stats.projects')}
             </p>
           </div>
@@ -100,7 +111,7 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       {/* Social Links */}
       <div>
         <h3 className="font-mono text-xs uppercase tracking-wider text-neo-text/60 mb-4">
-          Retrouvez-moi
+          {t('info.findMe')}
         </h3>
         <div className="flex flex-wrap gap-2">
           {socialLinks.map((social) => (

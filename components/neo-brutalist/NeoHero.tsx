@@ -1,13 +1,20 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Download, ArrowDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { BrutalistButton } from './ui/BrutalistButton';
+import { VideoModal } from './ui/VideoModal';
 
-export const NeoHero = () => {
+interface NeoHeroProps {
+  showreelVideoId?: string;
+}
+
+export const NeoHero: React.FC<NeoHeroProps> = ({ showreelVideoId }) => {
   const t = useTranslations('home.hero');
+  const locale = useLocale();
+  const [isShowreelOpen, setIsShowreelOpen] = useState(false);
 
   return (
     <section className="container mx-auto px-4 md:px-6 mb-24 min-h-[calc(100vh-8rem)] flex flex-col justify-center relative">
@@ -49,12 +56,20 @@ export const NeoHero = () => {
            </p>
 
            <div className="flex gap-4">
-             <BrutalistButton variant="primary" icon={<Play size={16} />}>
-               {t('showreel')}
-             </BrutalistButton>
-             <BrutalistButton variant="secondary" icon={<Download size={16} />}>
-               {t('downloadCV')}
-             </BrutalistButton>
+             {showreelVideoId && (
+               <BrutalistButton
+                 variant="primary"
+                 icon={<Play size={16} />}
+                 onClick={() => setIsShowreelOpen(true)}
+               >
+                 {t('showreel')}
+               </BrutalistButton>
+             )}
+             <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
+               <BrutalistButton variant="secondary" icon={<Download size={16} />}>
+                 {t('downloadCV')}
+               </BrutalistButton>
+             </a>
            </div>
          </motion.div>
       </div>
@@ -68,6 +83,16 @@ export const NeoHero = () => {
            <ArrowDown size={32} />
          </motion.div>
       </div>
+
+      {/* Showreel Video Modal */}
+      {showreelVideoId && (
+        <VideoModal
+          isOpen={isShowreelOpen}
+          onClose={() => setIsShowreelOpen(false)}
+          videoId={showreelVideoId}
+          title={t('showreel')}
+        />
+      )}
     </section>
   );
 };

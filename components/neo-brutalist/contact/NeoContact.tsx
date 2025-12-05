@@ -5,9 +5,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { NeoNavbar } from '../NeoNavbar';
 import { NeoFooter } from '../NeoFooter';
-import { NeoHeroSection } from '../ui/NeoHeroSection';
-import { NeoContactForm } from './NeoContactForm';
 import { NeoContactInfo } from './NeoContactInfo';
+import { GeometricIllustration } from './GeometricIllustration';
 import { BrutalistButton } from '../ui/BrutalistButton';
 import { Link } from '@/i18n/routing';
 
@@ -19,50 +18,73 @@ export const NeoContact = () => {
       <NeoNavbar />
 
       <main className="pt-20">
-        {/* Hero Section */}
-        <NeoHeroSection
-          badgeNumber="06"
-          badge={t('hero.badge')}
-          title={t('hero.title')}
-          description={t('hero.description')}
-          align="center"
-        />
-
-        {/* Contact Content */}
-        <section className="py-16 md:py-24 px-4 md:px-8">
+        {/* Hero Split Screen */}
+        <section className="min-h-[80vh] py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-              {/* Form - Takes 3 columns */}
-              <div className="lg:col-span-3">
-                <motion.h2
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-2xl font-black uppercase tracking-tight mb-6 flex items-center gap-3 text-neo-text"
-                >
-                  <span className="font-mono text-sm bg-neo-text text-neo-accent px-2 py-1">
-                    01
-                  </span>
-                  {t('getInTouch')}
-                </motion.h2>
-                <NeoContactForm />
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
-              {/* Info - Takes 2 columns */}
-              <div className="lg:col-span-2">
-                <motion.h2
+              {/* LEFT - Accroche + Illustration */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="order-2 lg:order-1"
+              >
+                {/* Badge */}
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-2xl font-black uppercase tracking-tight mb-6 flex items-center gap-3 text-neo-text"
+                  className="flex items-center gap-3 mb-6"
                 >
                   <span className="font-mono text-sm bg-neo-text text-neo-accent px-2 py-1">
-                    02
+                    06
                   </span>
-                  Infos
-                </motion.h2>
+                  <span className="font-mono text-sm uppercase tracking-wider text-neo-text/60">
+                    {t('hero.badge')}
+                  </span>
+                </motion.div>
+
+                {/* Titre */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.85] mb-6 text-neo-text"
+                >
+                  {t('hero.title')}
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="font-mono text-lg opacity-70 max-w-md mb-12"
+                >
+                  {t('hero.description')}
+                </motion.p>
+
+                {/* Illustration géométrique */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <GeometricIllustration />
+                </motion.div>
+              </motion.div>
+
+              {/* RIGHT - Infos Contact */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="order-1 lg:order-2"
+              >
                 <NeoContactInfo />
-              </div>
+              </motion.div>
+
             </div>
           </div>
         </section>

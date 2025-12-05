@@ -1,8 +1,9 @@
 "use client";
 
 import React from 'react';
-import { Disc, Mic2, Sliders, Music4, Radio } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { Disc, Mic2, Sliders, Music4, Radio, ArrowRight } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 import { SectionHeader } from './ui/SectionHeader';
 
 export interface Service {
@@ -27,6 +28,7 @@ const getIconForService = (title: string) => {
 
 export const NeoServices: React.FC<NeoServicesProps> = ({ services }) => {
   const t = useTranslations('home.sections');
+  const locale = useLocale();
 
   return (
     <section id="services" className="container mx-auto px-4 md:px-6 py-32">
@@ -34,7 +36,11 @@ export const NeoServices: React.FC<NeoServicesProps> = ({ services }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
          {services.map((service, i) => (
-           <div key={service.id} className="border-2 border-neo-border p-8 hover:bg-neo-text hover:text-neo-text-inverse transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] bg-neo-surface group">
+           <Link
+             key={service.id}
+             href={`/${locale}/services/${service.id}`}
+             className="block border-2 border-neo-border p-8 hover:bg-neo-text hover:text-neo-text-inverse transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] bg-neo-surface group"
+           >
               <div className="flex justify-between items-start mb-8">
                  <div className="p-3 bg-neo-bg border-2 border-neo-border text-neo-text group-hover:bg-neo-surface">
                     {getIconForService(service.title)}
@@ -43,10 +49,14 @@ export const NeoServices: React.FC<NeoServicesProps> = ({ services }) => {
               </div>
               <h3 className="text-3xl font-black uppercase mb-4 tracking-tight text-neo-text group-hover:text-neo-text-inverse">{service.title}</h3>
               <div
-                className="font-mono text-sm leading-relaxed text-neo-text/80 group-hover:text-neo-text-inverse/80"
+                className="font-mono text-sm leading-relaxed text-neo-text/80 group-hover:text-neo-text-inverse/80 mb-4"
                 dangerouslySetInnerHTML={{ __html: service.text }}
               />
-           </div>
+              <div className="flex items-center gap-2 font-mono text-xs uppercase text-neo-accent group-hover:text-neo-accent">
+                <span>{t('learnMore') || 'En savoir plus'}</span>
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </div>
+           </Link>
          ))}
       </div>
     </section>

@@ -181,16 +181,28 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                             <Disc className="w-20 h-20 opacity-20" />
                           </div>
                         )}
-                        <a
-                          href={album.listenLink || '#'}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="absolute inset-0 flex items-center justify-center bg-neo-text/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        >
-                          <div className="w-20 h-20 bg-neo-accent rounded-full flex items-center justify-center border-4 border-neo-border">
-                            <Play size={32} fill="currentColor" className="ml-1 text-neo-text-inverse" />
+                        {album.listenLink ? (
+                          <a
+                            href={album.listenLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="absolute inset-0 flex items-center justify-center bg-neo-text/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            aria-label={`Écouter ${album.title}`}
+                          >
+                            <div className="w-20 h-20 bg-neo-accent rounded-full flex items-center justify-center border-4 border-neo-border">
+                              <Play size={32} fill="currentColor" className="ml-1 text-neo-text-inverse" />
+                            </div>
+                          </a>
+                        ) : (
+                          <div
+                            className="absolute inset-0 flex items-center justify-center bg-neo-text/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-not-allowed"
+                            title="Bientôt disponible"
+                          >
+                            <div className="w-20 h-20 bg-neo-surface rounded-full flex items-center justify-center border-4 border-neo-border/50">
+                              <Play size={32} fill="currentColor" className="ml-1 text-neo-text/30" />
+                            </div>
                           </div>
-                        </a>
+                        )}
                       </div>
 
                       {/* Info */}

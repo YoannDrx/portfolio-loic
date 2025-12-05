@@ -54,7 +54,7 @@ export default function NeoServiceDetail({
   locale,
   isPreview = false,
 }: NeoServiceDetailProps) {
-  const _t = useTranslations('services.detail');
+  const t = useTranslations('services.detail');
   const tCommon = useTranslations('common');
 
   // Filter related services (excluding current)
@@ -170,7 +170,7 @@ export default function NeoServiceDetail({
                 </Link>
                 <Link href="/services">
                   <BrutalistButton variant="secondary" size="lg">
-                    Tous les services
+                    {t('backToServices')}
                   </BrutalistButton>
                 </Link>
               </div>
@@ -186,7 +186,7 @@ export default function NeoServiceDetail({
           >
             <NeoCard padding="lg" className="max-w-4xl">
               <h2 className="text-2xl font-black uppercase mb-6 pb-4 border-b-2 border-neo-border">
-                Description complète
+                {t('about')}
               </h2>
               <div
                 className="prose prose-lg max-w-none text-neo-text font-mono leading-relaxed"
@@ -212,7 +212,7 @@ export default function NeoServiceDetail({
                   RELATED
                 </span>
                 <h2 className="text-3xl font-black uppercase tracking-tight">
-                  Autres services
+                  {t('relatedServices')}
                 </h2>
               </div>
 
@@ -247,10 +247,10 @@ export default function NeoServiceDetail({
           >
             <NeoCard variant="inverted" padding="lg" className="text-center">
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4">
-                Besoin de ce service ?
+                {t('requestQuote')}
               </h2>
               <p className="font-mono text-lg opacity-60 max-w-2xl mx-auto mb-8">
-                Contactez-moi pour discuter de votre projet et obtenir un devis personnalisé.
+                {t('customizable')}
               </p>
               <Link href="/contact">
                 <BrutalistButton variant="dark" size="lg" icon={<Mail size={18} />}>

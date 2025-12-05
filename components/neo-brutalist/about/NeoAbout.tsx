@@ -81,7 +81,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
   const stats = [
     { val: '16', label: t('achievements.albums') },
     { val: '34', label: t('achievements.projects') },
-    { val: '50+', label: 'Collaborations' },
+    { val: '50+', label: t('achievements.collaborations') },
     { val: '15+', label: t('achievements.years') }
   ];
 
@@ -213,7 +213,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
         {/* SKILLS GRID */}
         <section className="container mx-auto px-4 md:px-6 mb-32">
-          <SectionHeader number="02" title={t('skills.title')} subtitle="Compétences Techniques" />
+          <SectionHeader number="02" title={t('skills.title')} subtitle={t('skills.subtitle')} />
 
           <motion.div
             initial="hidden"
@@ -272,7 +272,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                     {t('contactInfo.title')}
                   </NeoTag>
                   <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-6 text-neo-text">
-                    Travaillons <br /> Ensemble
+                    {t('contactSection.title')}
                   </h2>
                   <p className="font-mono text-lg mb-8 max-w-md opacity-70">
                     {t('bio.paragraph4')}
@@ -301,7 +301,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                 <div className="flex-1 w-full">
                   <div className="border-2 border-neo-border p-6 bg-neo-bg-alt">
                     <h3 className="font-black uppercase text-xl mb-4 border-b-2 border-neo-border pb-2 text-neo-text">
-                      Labels & Publishers
+                      {t('contactSection.labels')}
                     </h3>
                     <ul className="space-y-3 font-mono text-sm">
                       {[

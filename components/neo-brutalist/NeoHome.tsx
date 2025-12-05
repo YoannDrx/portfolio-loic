@@ -39,7 +39,7 @@ export default function NeoHome({ albums, videos, services }: NeoHomeProps) {
       <NeoNavbar />
 
       <main className="relative z-10 pt-32">
-        <NeoHero />
+        <NeoHero showreelVideoId={videos[0]?.videoId} />
         <Marquee text="SOUNDTRACK — ORIGINAL SCORE — AUDIO BRANDING — MIXING —" />
         <NeoAlbums albums={albums} />
         <NeoVideos videos={videos} />

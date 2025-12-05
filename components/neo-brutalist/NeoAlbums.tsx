@@ -64,16 +64,25 @@ export const NeoAlbums: React.FC<NeoAlbumsProps> = ({ albums }) => {
               </div>
 
               <div className="flex items-center gap-8 self-end md:self-auto">
-                {/* Duration placeholder as it's not in DB yet */}
-                <span className="font-mono text-sm">--:--</span>
-                <a
-                  href={album.listenLink || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 border-2 border-neo-border group-hover:border-neo-accent flex items-center justify-center bg-neo-accent text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text-inverse transition-transform group-hover:scale-110 shadow-[4px_4px_0px_0px_var(--neo-shadow)] group-hover:shadow-[4px_4px_0px_0px_var(--neo-accent)]"
-                >
-                   <Play size={20} fill="currentColor" />
-                </a>
+                {album.listenLink ? (
+                  <a
+                    href={album.listenLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 border-2 border-neo-border group-hover:border-neo-accent flex items-center justify-center bg-neo-accent text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text-inverse transition-transform group-hover:scale-110 shadow-[4px_4px_0px_0px_var(--neo-shadow)] group-hover:shadow-[4px_4px_0px_0px_var(--neo-accent)]"
+                    aria-label={`Écouter ${album.title}`}
+                  >
+                    <Play size={20} fill="currentColor" />
+                  </a>
+                ) : (
+                  <div
+                    className="w-12 h-12 border-2 border-neo-border/50 flex items-center justify-center bg-neo-surface text-neo-text/30 cursor-not-allowed"
+                    title="Bientôt disponible"
+                    aria-label="Lien d'écoute bientôt disponible"
+                  >
+                    <Play size={20} fill="currentColor" />
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
@@ -81,7 +90,12 @@ export const NeoAlbums: React.FC<NeoAlbumsProps> = ({ albums }) => {
       </div>
 
       <div className="mt-8 flex justify-center">
-         <a href="#" className="font-mono font-bold text-sm uppercase underline decoration-2 decoration-neo-accent underline-offset-4 hover:bg-neo-text hover:text-neo-accent px-2 py-1 transition-colors text-neo-text">
+         <a
+           href="https://soundcloud.com/loic-ghanem"
+           target="_blank"
+           rel="noopener noreferrer"
+           className="font-mono font-bold text-sm uppercase underline decoration-2 decoration-neo-accent underline-offset-4 hover:bg-neo-text hover:text-neo-accent px-2 py-1 transition-colors text-neo-text"
+         >
            {t('viewAllAlbumsSoundcloud')}
          </a>
       </div>
