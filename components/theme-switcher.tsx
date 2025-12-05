@@ -1,29 +1,50 @@
-"use client";
+'use client';
 
-import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-export function ThemeSwitcher({ className }: { className?: string }) {
-  const [mounted, setMounted] = useState(false);
+interface ThemeSwitcherProps {
+  className?: string;
+}
+
+export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  // Toujours rendre la même structure pour éviter les erreurs d'hydratation
+  if (!mounted) {
+    return (
+      <button
+        className={cn(
+          'p-2 rounded-md bg-muted/50 text-muted-foreground',
+          className
+        )}
+        disabled
+      >
+        <Sun className="h-5 w-5" />
+      </button>
+    );
+  }
+
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={mounted ? () => setTheme(theme === "dark" ? "light" : "dark") : undefined}
-      className={className}
-      title={mounted ? (theme === "dark" ? "Mode clair" : "Mode sombre") : "Changer le thème"}
-      disabled={!mounted}
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className={cn(
+        'p-2 rounded-md bg-muted/50 hover:bg-muted text-foreground transition-colors',
+        className
+      )}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
-      <Sun className="h-5 w-5 rotate-0 scale-100 transition-all duration-300 dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all duration-300 dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Changer le thème</span>
-    </Button>
+      {theme === 'dark' ? (
+        <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
+      )}
+    </button>
   );
 }

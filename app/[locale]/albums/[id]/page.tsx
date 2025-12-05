@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { getTranslations } from 'next-intl/server';
-import AlbumDetailClient from '@/components/albums/AlbumDetailClient';
+import NeoAlbumDetail from '@/components/neo-brutalist/albums/NeoAlbumDetail';
 
 interface PageProps {
   params: Promise<{ id: string; locale: string }>;
@@ -102,7 +102,7 @@ export default async function AlbumDetailPage({ params, searchParams }: PageProp
   });
 
   return (
-    <AlbumDetailClient
+    <NeoAlbumDetail
       album={album}
       allAlbums={allAlbums}
       locale={locale}

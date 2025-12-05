@@ -1,29 +1,20 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Navbar from '@/components/navigation/Navbar';
-import Footer from '@/components/navigation/Footer';
-import ScrollProgress from '@/components/ui/ScrollProgress';
 
 export function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAdminRoute = pathname?.includes('/admin') || pathname?.includes('/login');
-  
-  // Check if current route is one of the Neo-Brutalist pages
-  // This regex checks for /en or /fr followed optionally by /about, /services, /albums, /videos, /contact
-  // or just the root /en, /fr
-  const isNeoPage = /^\/(en|fr)(\/(about|services|albums|videos|contact))?\/?$/.test(pathname || '');
 
-  if (isAdminRoute || isNeoPage) {
+  // Toutes les pages publiques utilisent le design Neo-Brutalist
+  // qui gère sa propre navbar et footer dans chaque composant de page
+  // Seules les routes admin nécessitent potentiellement un layout différent
+  const isAdminRoute = pathname?.includes('/admin');
+
+  if (isAdminRoute) {
+    // L'admin gère son propre layout
     return <main className="min-h-screen">{children}</main>;
   }
 
-  return (
-    <>
-      <ScrollProgress />
-      <Navbar />
-      <main className="min-h-screen">{children}</main>
-      <Footer />
-    </>
-  );
+  // Pages Neo-Brutalist - elles incluent leur propre NeoNavbar et NeoFooter
+  return <main className="min-h-screen">{children}</main>;
 }

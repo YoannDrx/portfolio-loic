@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { getTranslations } from 'next-intl/server';
-import ServiceDetailClient from '@/components/services/ServiceDetailClient';
+import NeoServiceDetail from '@/components/neo-brutalist/services/NeoServiceDetail';
 
 interface PageProps {
   params: Promise<{ id: string; locale: string }>;
@@ -104,7 +104,7 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
   });
 
   return (
-    <ServiceDetailClient
+    <NeoServiceDetail
       service={service}
       allServices={allServices}
       locale={locale}
