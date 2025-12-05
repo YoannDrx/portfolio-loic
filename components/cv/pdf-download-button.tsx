@@ -14,12 +14,13 @@ interface PDFDownloadButtonProps {
 
 export function PDFDownloadButton({ data, locale, iconOnly = false }: PDFDownloadButtonProps) {
   const [isClient, setIsClient] = useState(false);
-  const [PDFDownloadLink, setPDFDownloadLink] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [PDFDownloadLink, setPDFDownloadLink] = useState<React.ComponentType<any> | null>(null);
 
   useEffect(() => {
     setIsClient(true);
     import("@react-pdf/renderer").then((mod) => {
-      setPDFDownloadLink(() => mod.PDFDownloadLink);
+      setPDFDownloadLink(() => mod.PDFDownloadLink as React.ComponentType<any>);
     });
   }, []);
 

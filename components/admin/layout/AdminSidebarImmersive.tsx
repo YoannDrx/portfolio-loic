@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { adminLogger } from '@/lib/logger';
 import {
   LayoutDashboard,
   Image,
   Video,
   Briefcase,
   Settings,
-  TrendingUp,
   Home,
   FileText,
   Menu,
@@ -272,11 +272,11 @@ function QuickStatsCard() {
             publishRate: data.publishRate ?? 0,
           });
         } else {
-          console.error('Stats API error:', res.status);
+          adminLogger.error('Stats API error:', res.status);
           setError(true);
         }
       } catch (err) {
-        console.error('Erreur fetch stats:', err);
+        adminLogger.error('Erreur fetch stats:', err);
         setError(true);
       } finally {
         setLoading(false);

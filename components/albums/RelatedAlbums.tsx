@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { motion, useMotionValue, useAnimation, PanInfo } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
+import { motion, useMotionValue, useAnimation } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ImmersiveAlbumCard from './ImmersiveAlbumCard';

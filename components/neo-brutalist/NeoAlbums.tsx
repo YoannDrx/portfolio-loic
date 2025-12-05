@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { SectionHeader } from './ui/SectionHeader';
 
 // Format date consistently to avoid hydration mismatch
@@ -28,9 +29,11 @@ interface NeoAlbumsProps {
 }
 
 export const NeoAlbums: React.FC<NeoAlbumsProps> = ({ albums }) => {
+  const t = useTranslations('home.sections');
+
   return (
     <section id="albums" className="container mx-auto px-4 md:px-6 py-32">
-      <SectionHeader number="01" title="Discography" subtitle="Derniers Albums" />
+      <SectionHeader number="01" title={t('albumsTitle')} subtitle={t('albumsSection')} />
 
       <div className="border-t-4 border-neo-border">
         {albums.map((album, index) => (
@@ -53,13 +56,13 @@ export const NeoAlbums: React.FC<NeoAlbumsProps> = ({ albums }) => {
                 <div>
                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text group-hover:text-neo-accent">{album.title}</h3>
                    <div className="flex gap-4 font-mono text-xs mt-1">
-                      <span>{album.style || 'Genre'}</span>
+                      <span>{album.style || t('genre')}</span>
                       <span>—</span>
                       <span>{formatDate(album.date)}</span>
                    </div>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-8 self-end md:self-auto">
                 {/* Duration placeholder as it's not in DB yet */}
                 <span className="font-mono text-sm">--:--</span>
@@ -76,10 +79,10 @@ export const NeoAlbums: React.FC<NeoAlbumsProps> = ({ albums }) => {
           </motion.div>
         ))}
       </div>
-      
+
       <div className="mt-8 flex justify-center">
          <a href="#" className="font-mono font-bold text-sm uppercase underline decoration-2 decoration-neo-accent underline-offset-4 hover:bg-neo-text hover:text-neo-accent px-2 py-1 transition-colors text-neo-text">
-           Voir tous les albums sur Soundcloud
+           {t('viewAllAlbumsSoundcloud')}
          </a>
       </div>
     </section>

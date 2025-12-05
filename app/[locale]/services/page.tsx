@@ -17,7 +17,7 @@ export default async function ServicesPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale: _locale } = await params;
 
   // Récupérer tous les services publiés, triés par ordre
   const services = await prisma.service.findMany({

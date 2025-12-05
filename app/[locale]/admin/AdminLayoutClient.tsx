@@ -12,7 +12,7 @@ import {
 } from '@/components/admin/layout';
 import { useAdminShortcuts } from '@/hooks/useAdminShortcuts';
 import { cn } from '@/lib/utils';
-import { X, Menu } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface AdminLayoutClientProps {
   children: React.ReactNode;

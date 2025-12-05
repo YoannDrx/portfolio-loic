@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from '@/lib/utils';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 type NeoGridCols = 1 | 2 | 3 | 4 | 5 | 6;
 type NeoGridGap = 'none' | 'sm' | 'md' | 'lg' | 'xl';

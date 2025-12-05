@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Disc, Music, Users, Calendar, Layers, Star } from 'lucide-react';
+import { Disc, Music, Users, Calendar, Layers } from 'lucide-react';
 
 // Immersive components
 import ImmersivePage, { ImmersiveSection, ImmersiveTitle } from '@/components/immersive/ImmersivePage';

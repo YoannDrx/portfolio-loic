@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest} from "next/server";
+import { NextResponse } from "next/server";
 import { notifyContactMessage } from "@/lib/notifications";
+import { apiLogger } from "@/lib/logger";
 
 // ============================================
 // POST /api/contact/notify
@@ -28,7 +30,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Erreur notification contact:", error);
+    apiLogger.error("Erreur notification contact:", error);
     // Ne pas exposer l'erreur - c'est une route publique
     return NextResponse.json({ success: false }, { status: 500 });
   }

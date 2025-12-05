@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { Menu, X, Lock, User, Music, Disc, Film, Mail, Home, Sparkles } from 'lucide-react';
+import { Menu, X, Lock, User, Disc, Film, Mail, Home, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageToggle from '@/components/ui/LanguageToggle';
 import { ThemeSwitcher } from '@/components/theme-switcher';

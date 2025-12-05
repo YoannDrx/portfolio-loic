@@ -16,7 +16,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Command,
-  TrendingUp,
   Activity,
   type LucideIcon,
 } from 'lucide-react';

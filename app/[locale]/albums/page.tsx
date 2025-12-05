@@ -17,7 +17,7 @@ export default async function AlbumsPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale: _locale } = await params;
 
   // Récupérer tous les albums publiés, triés par date décroissante
   const albums = await prisma.album.findMany({

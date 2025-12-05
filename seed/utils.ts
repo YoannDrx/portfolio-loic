@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-// === COULEURS POUR LES LOGS ===
+// === COULEURS POUR LES LOGS CLI ===
 const colors = {
   green: "\x1b[32m",
   red: "\x1b[31m",
@@ -13,6 +13,8 @@ const colors = {
   bold: "\x1b[1m",
 };
 
+/* eslint-disable no-console */
+// Logger CLI avec couleurs pour les scripts de seeding
 export const logger = {
   success: (msg: string) =>
     console.log(`${colors.green}✅${colors.reset} ${msg}`),
@@ -29,6 +31,7 @@ export const logger = {
       `   ${colors.gray}└─${colors.reset} ${entity}: ${colors.green}${count}${colors.reset}`
     ),
 };
+/* eslint-enable no-console */
 
 // === CHEMINS ===
 export const SEED_DIR = path.join(process.cwd(), "seed");
@@ -41,7 +44,7 @@ export async function loadJSON<T>(filename: string): Promise<T[]> {
   try {
     const data = await fs.readFile(filePath, "utf-8");
     return JSON.parse(data);
-  } catch (error) {
+  } catch {
     logger.warn(`Fichier ${filename}.json non trouvé, retour tableau vide`);
     return [];
   }

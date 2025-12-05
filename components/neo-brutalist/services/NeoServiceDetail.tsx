@@ -54,7 +54,7 @@ export default function NeoServiceDetail({
   locale,
   isPreview = false,
 }: NeoServiceDetailProps) {
-  const t = useTranslations('services.detail');
+  const _t = useTranslations('services.detail');
   const tCommon = useTranslations('common');
 
   // Filter related services (excluding current)

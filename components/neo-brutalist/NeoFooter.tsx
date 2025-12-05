@@ -18,6 +18,7 @@ const socialLinks = [
 
 export const NeoFooter = () => {
   const t = useTranslations('footer');
+  const tNav = useTranslations('nav');
   const tContact = useTranslations('contact.form');
 
   return (
@@ -31,8 +32,8 @@ export const NeoFooter = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-[10vw] lg:text-[6vw] leading-[0.8] font-black uppercase tracking-tighter mb-8">
-              Let&apos;s <br /> <span className="text-neo-accent">Create.</span>
+            <h2 className="text-[10vw] lg:text-[6vw] leading-[0.8] font-black uppercase tracking-tighter mb-8 text-neo-text-inverse">
+              {t('letsCreate')} <br /> <span className="text-neo-accent">{t('together')}</span>
             </h2>
             <p className="font-mono text-lg max-w-md opacity-60 mb-8">
               {t('tagline')}
@@ -47,7 +48,7 @@ export const NeoFooter = () => {
               </a>
               <div className="font-mono text-sm opacity-50 flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                PARIS, FRANCE
+                {t('location')}
               </div>
             </div>
 
@@ -59,17 +60,17 @@ export const NeoFooter = () => {
               <div className="flex flex-wrap gap-3">
                 <Link href="/services">
                   <BrutalistButton variant="dark" size="sm">
-                    Services
+                    {tNav('services')}
                   </BrutalistButton>
                 </Link>
                 <Link href="/albums">
                   <BrutalistButton variant="dark" size="sm">
-                    Albums
+                    {tNav('albums')}
                   </BrutalistButton>
                 </Link>
                 <Link href="/videos">
                   <BrutalistButton variant="dark" size="sm">
-                    Videos
+                    {tNav('videos')}
                   </BrutalistButton>
                 </Link>
               </div>
@@ -82,7 +83,7 @@ export const NeoFooter = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-neo-text/50 border border-neo-text-inverse/20 p-8 md:p-12 relative"
+            className="bg-neo-text/50 border-2 border-neo-text-inverse p-8 md:p-12 relative"
           >
             {/* Corner Decorations */}
             <div className="absolute -top-3 -right-3 w-8 h-8 bg-neo-accent" />

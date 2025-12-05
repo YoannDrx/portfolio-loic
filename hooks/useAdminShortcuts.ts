@@ -7,7 +7,7 @@ import { useRouter, usePathname } from 'next/navigation';
    TYPES
    ============================================ */
 
-interface ShortcutAction {
+interface _ShortcutAction {
   key: string;
   meta?: boolean;
   shift?: boolean;
@@ -177,7 +177,7 @@ export function useAdminShortcuts({
           break;
 
         // Go to sections with G + letter
-        case 'g':
+        case 'g': {
           // Wait for next key
           const handleSecondKey = (e2: KeyboardEvent) => {
             switch (e2.key) {
@@ -211,6 +211,7 @@ export function useAdminShortcuts({
             window.removeEventListener('keydown', handleSecondKey);
           }, 1000);
           break;
+        }
       }
     };
 

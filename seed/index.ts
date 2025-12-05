@@ -1,11 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import type {
+  SeedEntity} from "./utils";
 import {
   logger,
   loadJSON,
   transformDates,
   parseArgs,
-  SEED_ORDER,
-  SeedEntity,
+  SEED_ORDER
 } from "./utils";
 
 const prisma = new PrismaClient();
@@ -35,11 +36,11 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     for (const item of transformed) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       await prisma.siteSettings.upsert({
         where: { id: (item as { id: string }).id },
-        update: item as any,
-        create: item as any,
+        update: item as Record<string, unknown>,
+        create: item as Record<string, unknown>,
       });
     }
     return data.length;
@@ -329,7 +330,7 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
       }
 
       return count;
-    } catch (error) {
+    } catch {
       logger.warn(`Fichier cv.json non trouvé ou invalide`);
       return 0;
     }

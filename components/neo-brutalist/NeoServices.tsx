@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Disc, Mic2, Sliders, Music4, Radio } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { SectionHeader } from './ui/SectionHeader';
 
 export interface Service {
@@ -25,10 +26,12 @@ const getIconForService = (title: string) => {
 };
 
 export const NeoServices: React.FC<NeoServicesProps> = ({ services }) => {
+  const t = useTranslations('home.sections');
+
   return (
     <section id="services" className="container mx-auto px-4 md:px-6 py-32">
-      <SectionHeader number="03" title="Expertise" subtitle="Services Sonores" />
-      
+      <SectionHeader number="03" title={t('servicesTitle')} subtitle={t('servicesSection')} />
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
          {services.map((service, i) => (
            <div key={service.id} className="border-2 border-neo-border p-8 hover:bg-neo-text hover:text-neo-text-inverse transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] bg-neo-surface group">

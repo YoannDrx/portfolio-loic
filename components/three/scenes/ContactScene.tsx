@@ -604,7 +604,7 @@ function PulseWaves() {
   ]);
 
   useFrame((state) => {
-    const time = state.clock.elapsedTime;
+    const _time = state.clock.elapsedTime;
 
     if (wavesRef.current) {
       wavesRef.current.children.forEach((wave, i) => {
@@ -936,8 +936,8 @@ function SceneContent() {
   }, []);
 
   const isDark = !mounted || resolvedTheme === 'dark';
-  const bgColor = isDark ? BACKGROUND_DARK : BACKGROUND_LIGHT;
-  const fogColor = isDark ? BACKGROUND_DARK : '#303042';
+  const _bgColor = isDark ? BACKGROUND_DARK : BACKGROUND_LIGHT;
+  const _fogColor = isDark ? BACKGROUND_DARK : '#303042';
 
   // Update smooth mouse and velocity
   useFrame(() => {

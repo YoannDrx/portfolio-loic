@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
@@ -14,11 +14,10 @@ import {
   FileText,
   Plus,
   Home,
-  LogOut,
   Command,
   ArrowRight,
-  Hash,
   Clock,
+  Hash,
 } from 'lucide-react';
 import {
   adminCommandBackdrop,
@@ -52,7 +51,7 @@ interface AdminCommandPaletteProps {
    COMMAND ITEMS
    ============================================ */
 
-const getCommandItems = (locale: string, router: ReturnType<typeof useRouter>): CommandItem[] => [
+const getCommandItems = (locale: string, _router: ReturnType<typeof useRouter>): CommandItem[] => [
   // Navigation
   {
     id: 'nav-dashboard',

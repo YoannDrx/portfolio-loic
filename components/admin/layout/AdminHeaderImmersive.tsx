@@ -3,8 +3,9 @@
 import { useState, useCallback, useEffect, type ReactNode } from 'react';
 import { signOut } from '@/lib/auth-client';
 import { useRouter, usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { adminLogger } from '@/lib/logger';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,7 +27,6 @@ import {
   FileText,
   LayoutDashboard,
   Mail,
-  Check,
   CheckCheck,
 } from 'lucide-react';
 import {
@@ -183,7 +183,7 @@ function NotificationBell({ locale }: { locale: string }) {
         setUnreadCount(data.unreadCount || 0);
       }
     } catch (error) {
-      console.error('Erreur fetch notifications:', error);
+      adminLogger.error('Erreur fetch notifications:', error);
     } finally {
       setIsLoading(false);
     }
@@ -207,7 +207,7 @@ function NotificationBell({ locale }: { locale: string }) {
       });
       fetchNotifications();
     } catch (error) {
-      console.error('Erreur markAsRead:', error);
+      adminLogger.error('Erreur markAsRead:', error);
     }
   };
 
@@ -222,7 +222,7 @@ function NotificationBell({ locale }: { locale: string }) {
       });
       fetchNotifications();
     } catch (error) {
-      console.error('Erreur markAllAsRead:', error);
+      adminLogger.error('Erreur markAllAsRead:', error);
     }
   };
 

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
+import { logger } from "@/lib/logger";
 
 // ============================================
 // Types
@@ -70,7 +71,7 @@ export async function logActivity(params: LogActivityParams): Promise<void> {
       },
     });
   } catch (error) {
-    console.error("[ActivityLogger] Erreur lors du logging:", error);
+    logger.error("[ActivityLogger] Erreur lors du logging:", error);
     // Ne pas throw - le logging ne doit pas bloquer l'opération principale
   }
 }

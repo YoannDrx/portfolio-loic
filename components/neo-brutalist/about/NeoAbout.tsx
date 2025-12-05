@@ -145,13 +145,14 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               className="relative order-1 lg:order-2 w-full"
             >
               <div className="relative max-w-sm lg:max-w-md mx-auto lg:mx-0">
-                <NeoCard hover="lift" padding="none" className="bg-neo-surface overflow-hidden">
+                {/* Card avec effet hover comme les cartes d'expertise */}
+                <div className="group border-2 border-neo-border bg-neo-surface overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] hover:border-black">
                   <div className="relative w-full" style={{ paddingBottom: '133%' }}>
                     <Image
                       src="/img/slider/loic-studio-front.jpg"
                       alt="Loïc Ghanem"
                       fill
-                      className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                       sizes="(max-width: 768px) 100vw, 400px"
                       priority
                     />
@@ -166,7 +167,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                       PARIS, FRANCE
                     </motion.div>
                   </div>
-                </NeoCard>
+                </div>
 
                 {/* Decorative elements with staggered animation */}
                 <motion.div

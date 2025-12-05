@@ -69,42 +69,47 @@ export function QuickActions({ locale }: QuickActionsProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {actions.map((action) => {
           const Icon = action.icon;
-          const LinkWrapper = action.external ? "a" : Link;
-          const linkProps = action.external
-            ? { href: `/${locale}${action.href}`, target: "_blank", rel: "noopener noreferrer" }
-            : { href: `/${locale}${action.href}` };
+          const fullHref = `/${locale}${action.href}`;
 
-          return (
-            <LinkWrapper key={action.label} {...(linkProps as any)}>
+          const content = (
+            <div
+              className={cn(
+                "group flex items-center gap-3 p-3",
+                "border-2 border-neo-border bg-neo-surface",
+                "hover:bg-neo-bg hover:-translate-y-0.5",
+                "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+                "hover:shadow-[4px_4px_0px_0px_var(--neo-shadow)]",
+                "transition-all duration-200 cursor-pointer"
+              )}
+            >
+              {/* Icon */}
               <div
-                className={cn(
-                  "group flex items-center gap-3 p-3",
-                  "border-2 border-neo-border bg-neo-surface",
-                  "hover:bg-neo-bg hover:-translate-y-0.5",
-                  "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
-                  "hover:shadow-[4px_4px_0px_0px_var(--neo-shadow)]",
-                  "transition-all duration-200 cursor-pointer"
-                )}
+                className="flex h-10 w-10 items-center justify-center border-2 border-neo-border group-hover:scale-110 transition-transform"
+                style={{ backgroundColor: `${action.color}20` }}
               >
-                {/* Icon */}
-                <div
-                  className="flex h-10 w-10 items-center justify-center border-2 border-neo-border group-hover:scale-110 transition-transform"
-                  style={{ backgroundColor: `${action.color}20` }}
-                >
-                  <Icon className="h-5 w-5" style={{ color: action.color }} />
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-neo-text uppercase truncate">
-                    {action.label}
-                  </p>
-                  <p className="font-mono text-xs text-neo-text/60 truncate">
-                    {action.description}
-                  </p>
-                </div>
+                <Icon className="h-5 w-5" style={{ color: action.color }} />
               </div>
-            </LinkWrapper>
+
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-neo-text uppercase truncate">
+                  {action.label}
+                </p>
+                <p className="font-mono text-xs text-neo-text/60 truncate">
+                  {action.description}
+                </p>
+              </div>
+            </div>
+          );
+
+          return action.external ? (
+            <a key={action.label} href={fullHref} target="_blank" rel="noopener noreferrer">
+              {content}
+            </a>
+          ) : (
+            <Link key={action.label} href={fullHref}>
+              {content}
+            </Link>
           );
         })}
       </div>

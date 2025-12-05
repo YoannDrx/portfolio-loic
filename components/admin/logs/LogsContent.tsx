@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { adminLogger } from "@/lib/logger";
 import {
   ClipboardList,
   RefreshCw,
@@ -122,7 +123,7 @@ interface LogsContentProps {
   locale: string;
 }
 
-export function LogsContent({ locale }: LogsContentProps) {
+export function LogsContent({ locale: _locale }: LogsContentProps) {
   // State pour les logs
   const [logs, setLogs] = useState<ActivityLog[]>([]);
   const [pagination, setPagination] = useState<Pagination | null>(null);
@@ -156,7 +157,7 @@ export function LogsContent({ locale }: LogsContentProps) {
         setPagination(data.pagination);
       }
     } catch (error) {
-      console.error("Erreur fetch logs:", error);
+      adminLogger.error("Erreur fetch logs:", error);
     } finally {
       setLoading(false);
     }
@@ -172,7 +173,7 @@ export function LogsContent({ locale }: LogsContentProps) {
         setExports(data.exports);
       }
     } catch (error) {
-      console.error("Erreur fetch exports:", error);
+      adminLogger.error("Erreur fetch exports:", error);
     } finally {
       setExportsLoading(false);
     }
@@ -202,7 +203,7 @@ export function LogsContent({ locale }: LogsContentProps) {
         document.body.removeChild(a);
       }
     } catch (error) {
-      console.error("Erreur download:", error);
+      adminLogger.error("Erreur download:", error);
     }
   };
 

@@ -1,8 +1,10 @@
 "use client";
 
 import { cn } from '@/lib/utils';
-import { motion, HTMLMotionProps } from 'framer-motion';
-import { forwardRef, ReactNode } from 'react';
+import type { HTMLMotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
 
 type NeoCardVariant = 'default' | 'accent' | 'inverted' | 'ghost' | 'dark-ghost';
 type NeoCardHover = 'lift' | 'scale' | 'glow' | 'none';

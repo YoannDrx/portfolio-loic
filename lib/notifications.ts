@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
+import { logger } from "@/lib/logger";
 
 export type NotificationType = "new_content" | "contact_message";
 
@@ -30,7 +31,7 @@ export async function createNotification(
     });
     return notification;
   } catch (error) {
-    console.error("Erreur création notification:", error);
+    logger.error("Erreur création notification:", error);
     // Ne pas throw - les notifications ne doivent pas bloquer les opérations principales
     return null;
   }

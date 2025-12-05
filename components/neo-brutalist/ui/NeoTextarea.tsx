@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from '@/lib/utils';
-import { forwardRef, TextareaHTMLAttributes } from 'react';
+import type { TextareaHTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 
 interface NeoTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;

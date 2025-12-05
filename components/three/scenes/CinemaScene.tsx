@@ -390,9 +390,9 @@ function LightMotes({ mouse }: LayerProps) {
 
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
-      let x = posArray[i3];
-      let y = posArray[i3 + 1];
-      let z = posArray[i3 + 2];
+      const x = posArray[i3];
+      const y = posArray[i3 + 1];
+      const z = posArray[i3 + 2];
 
       const dx = mouse3D.x - x;
       const dy = mouse3D.y - y;
@@ -612,7 +612,7 @@ interface CinemaSceneProps {
   highlightedVideo?: number;
 }
 
-export default function CinemaScene({ highlightedVideo }: CinemaSceneProps) {
+export default function CinemaScene({ highlightedVideo: _highlightedVideo }: CinemaSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mouse, setMouse] = useState<MouseState>({

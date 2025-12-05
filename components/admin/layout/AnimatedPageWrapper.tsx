@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { adminPageTransition } from '@/lib/animations';
 
 /* ============================================
    PAGE TRANSITION VARIANTS
@@ -66,7 +65,7 @@ interface AnimatedPageWrapperProps {
 export function AnimatedPageWrapper({
   children,
   className = '',
-  delay = 0,
+  delay: _delay = 0,
 }: AnimatedPageWrapperProps) {
   const pathname = usePathname();
 

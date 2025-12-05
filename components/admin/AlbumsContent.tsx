@@ -13,7 +13,7 @@ import { EmptyState } from "@/components/admin/EmptyState";
 import { ExportButton } from "@/components/admin/ExportButton";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { NeoAdminCard, NeoTableBadge } from "@/components/admin/neo";
+import { NeoTableBadge } from "@/components/admin/neo";
 
 interface Album {
   id: string;

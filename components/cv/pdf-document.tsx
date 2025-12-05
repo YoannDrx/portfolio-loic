@@ -343,7 +343,7 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
 
   const isFr = locale === "fr";
   const headline = isFr ? data.headlineFr : data.headlineEn;
-  const badge = isFr ? data.badgeFr : data.badgeEn;
+  const _badge = isFr ? data.badgeFr : data.badgeEn;
   const fullName = data.fullName || "Loïc Ghanem";
   const bio = isFr ? data.bioFr : data.bioEn;
 

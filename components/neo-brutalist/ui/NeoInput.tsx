@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from '@/lib/utils';
-import { forwardRef, InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 
 interface NeoInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
