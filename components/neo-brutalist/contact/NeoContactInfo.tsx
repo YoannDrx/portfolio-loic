@@ -13,7 +13,7 @@ interface NeoContactInfoProps {
 
 const socialLinks = [
   { name: 'SoundCloud', url: 'https://soundcloud.com/loicghanem', icon: '🎵' },
-  { name: 'Spotify', url: 'https://open.spotify.com/artist/loicghanem', icon: '🎧' },
+  { name: 'Spotify', url: 'https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA', icon: '🎧' },
   { name: 'Instagram', url: 'https://instagram.com/loicghanem', icon: '📸' },
   { name: 'LinkedIn', url: 'https://linkedin.com/in/loicghanem', icon: '💼' },
 ];

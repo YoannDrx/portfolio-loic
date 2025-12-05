@@ -246,7 +246,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                 {t('albumsCta.description')}
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a href="https://open.spotify.com/artist/loicghanem" target="_blank" rel="noopener noreferrer">
+                <a href="https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA" target="_blank" rel="noopener noreferrer">
                   <BrutalistButton
                     variant="dark"
                     size="lg"

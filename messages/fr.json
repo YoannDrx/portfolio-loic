@@ -89,6 +89,14 @@
       "title": "ÉCOUTEZ <span class=\"text-neon-green\">MES PRODS</span>",
       "subtitle": "02 / STREAMING",
       "follow": "Suivre sur SoundCloud"
+    },
+    "streaming": {
+      "title": "STREAMING",
+      "subtitle": "ÉCOUTEZ MES PRODS",
+      "playerTitle": "LOÏC GHANEM PRODUCTIONS",
+      "soundcloud": "Suivre sur SoundCloud",
+      "spotify": "Écouter sur Spotify",
+      "description": "Retrouvez toutes mes productions sur les plateformes de streaming. De la composition orchestrale au Metal en passant par l'Electronic et l'Ambient."
     }
   },
   "about": {
@@ -187,7 +195,8 @@
       }
     },
     "timeline": {
-      "title": "Parcours Professionnel",
+      "title": "PARCOURS",
+      "subtitle": "JOURNEY",
       "events": {
         "terra": {
           "title": "Terra - Album Orchestral Ambient",
@@ -261,9 +270,29 @@
       }
     },
     "labelsPublishers": {
-      "title": "Labels & Éditeurs",
+      "title": "LABELS & ÉDITEURS",
+      "subtitle": "PUBLISHERS",
       "labels": "Labels",
       "publishers": "Éditeurs"
+    },
+    "languages": {
+      "title": "LANGUES",
+      "subtitle": "LANGUAGES",
+      "french": {
+        "name": "Français",
+        "level": "Natif",
+        "percent": 100
+      },
+      "english": {
+        "name": "Anglais",
+        "level": "Courant",
+        "percent": 85
+      },
+      "arabic": {
+        "name": "Arabe Libanais",
+        "level": "Notions",
+        "percent": 40
+      }
     },
     "cta": {
       "title": "Prêt à créer ensemble ?",
@@ -276,20 +305,20 @@
   "services": {
     "detail": {
       "notFound": "Service non trouvé",
-      "about": "À propos du service",
+      "about": "À propos",
       "offeredOn": "Service offert le",
       "relatedServices": "Autres Services",
       "whatYouGet": "Ce que vous obtenez",
-      "process": "Process de travail",
-      "examples": "Exemples de réalisations",
+      "process": "Processus",
+      "examples": "Exemples",
       "listen": "Écouter",
       "backToServices": "Retour aux services",
       "requestQuote": "Demander un devis",
       "step": "Étape",
-      "pricing": "Mes tarifs",
+      "pricing": "Tarification",
       "startingFrom": "À partir de",
       "onQuote": "Sur devis",
-      "customizable": "Personnalisable selon vos besoins",
+      "customizable": "Chaque projet est unique. Discutons de vos besoins pour une offre personnalisée.",
       "contact": "Contact"
     },
     "pageTitle": "Services",

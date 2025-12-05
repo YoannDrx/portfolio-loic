@@ -3,7 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Download, Mail, MapPin, Music, Headphones, Mic2, Sliders, ArrowRight } from 'lucide-react';
+import { Download, Mail, MapPin, Music, Headphones, Mic2, Sliders, ArrowRight, Globe, Building2, BookOpen } from 'lucide-react';
 import Image from 'next/image';
 import { BrutalistButton } from '../ui/BrutalistButton';
 import { SectionHeader } from '../ui/SectionHeader';
@@ -11,6 +11,7 @@ import { NeoNavbar } from '../NeoNavbar';
 import { NeoFooter } from '../NeoFooter';
 import { NeoCard } from '../ui/NeoCard';
 import { NeoTag } from '../ui/NeoTag';
+import { NeoTimeline } from './NeoTimeline';
 import { Link } from '@/i18n/routing';
 
 const staggerContainer = {
@@ -83,6 +84,36 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     { val: '34', label: t('achievements.projects') },
     { val: '50+', label: t('achievements.collaborations') },
     { val: '15+', label: t('achievements.years') }
+  ];
+
+  const languages = [
+    { key: 'french', flag: '🇫🇷' },
+    { key: 'english', flag: '🇬🇧' },
+    { key: 'arabic', flag: '🇱🇧' }
+  ];
+
+  const labels = [
+    {
+      name: 'Infinity Scores',
+      publisher: 'Cezame Music Agency',
+      since: '2019',
+      tracks: '45+',
+      type: 'Label'
+    },
+    {
+      name: 'Montmorency Music',
+      publisher: 'MYMA',
+      since: '2020',
+      tracks: '28+',
+      type: 'Label'
+    },
+    {
+      name: 'Justement Music',
+      publisher: 'Self-published',
+      since: '2018',
+      tracks: '60+',
+      type: 'Label'
+    }
   ];
 
   return (
@@ -253,73 +284,164 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           </motion.div>
         </section>
 
-        {/* CONTACT INFO */}
-        <section className="container mx-auto px-4 md:px-6 mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <NeoCard
-              hover="none"
-              padding="lg"
-              className="shadow-[12px_12px_0px_0px_var(--neo-accent)]"
+        {/* TIMELINE - Parcours Professionnel */}
+        <NeoTimeline />
+
+        {/* LABELS & PUBLISHERS - Enriched */}
+        <section className="py-24 bg-neo-surface">
+          <div className="container mx-auto px-4 md:px-6">
+            <SectionHeader
+              number="04"
+              title={t('labelsPublishers.title')}
+              subtitle={t('labelsPublishers.subtitle')}
+            />
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              <div className="flex flex-col md:flex-row gap-12 items-center">
-                <div className="flex-1">
-                  <NeoTag variant="default" className="mb-4">
-                    {t('contactInfo.title')}
-                  </NeoTag>
-                  <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-6 text-neo-text">
-                    {t('contactSection.title')}
-                  </h2>
-                  <p className="font-mono text-lg mb-8 max-w-md opacity-70">
-                    {t('bio.paragraph4')}
-                  </p>
-                  <div className="space-y-4 font-mono font-bold">
-                    <a
-                      href="mailto:loic.ghanem@outlook.com"
-                      className="flex items-center gap-4 p-4 border-2 border-neo-border hover:bg-neo-bg-alt transition-colors"
-                    >
-                      <Mail className="text-neo-accent" />
-                      loic.ghanem@outlook.com
-                    </a>
-                    <div className="flex items-center gap-4 p-4 border-2 border-neo-border">
-                      <MapPin className="text-neo-accent" />
-                      Paris, France
+              {labels.map((label, i) => (
+                <motion.div key={label.name} variants={fadeInUp}>
+                  <NeoCard
+                    hover="lift"
+                    padding="lg"
+                    className="h-full group"
+                  >
+                    {/* Label Initials */}
+                    <div className="w-16 h-16 bg-neo-accent flex items-center justify-center mb-6 border-2 border-neo-border">
+                      <span className="text-2xl font-black text-neo-text-inverse">
+                        {label.name.split(' ').map(w => w[0]).join('')}
+                      </span>
                     </div>
-                  </div>
-                  <div className="mt-8">
-                    <Link href="/contact">
-                      <BrutalistButton variant="primary" icon={<ArrowRight size={18} />}>
-                        {tCommon('contact')}
-                      </BrutalistButton>
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex-1 w-full">
-                  <div className="border-2 border-neo-border p-6 bg-neo-bg-alt">
-                    <h3 className="font-black uppercase text-xl mb-4 border-b-2 border-neo-border pb-2 text-neo-text">
-                      {t('contactSection.labels')}
+
+                    {/* Label Name */}
+                    <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-neo-text">
+                      {label.name}
                     </h3>
-                    <ul className="space-y-3 font-mono text-sm">
-                      {[
-                        { name: 'Infinity Scores', pub: 'Cezame' },
-                        { name: 'Montmorency Music', pub: 'MYMA' },
-                        { name: 'Justement Music', pub: '--' },
-                      ].map((label) => (
-                        <li key={label.name} className="flex justify-between">
-                          <span>{label.name}</span>
-                          <span className="opacity-50">{label.pub}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+
+                    {/* Details */}
+                    <div className="space-y-3 font-mono text-sm">
+                      <div className="flex items-center gap-3">
+                        <Building2 className="w-4 h-4 text-neo-accent" />
+                        <span className="opacity-70">{label.publisher}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <BookOpen className="w-4 h-4 text-neo-accent" />
+                        <span className="opacity-70">{label.tracks} tracks</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs font-bold bg-neo-text text-neo-text-inverse px-2 py-1">
+                          Since {label.since}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Decorative corner */}
+                    <div className="absolute bottom-0 right-0 w-8 h-8 bg-neo-accent opacity-20 group-hover:opacity-40 transition-opacity" />
+                  </NeoCard>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* LANGUAGES */}
+        <section className="py-24 bg-neo-bg">
+          <div className="container mx-auto px-4 md:px-6">
+            <SectionHeader
+              number="05"
+              title={t('languages.title')}
+              subtitle={t('languages.subtitle')}
+            />
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            >
+              {languages.map((lang) => {
+                const langData = {
+                  name: t(`languages.${lang.key}.name`),
+                  level: t(`languages.${lang.key}.level`),
+                  percent: t.raw(`languages.${lang.key}.percent`) as number
+                };
+
+                return (
+                  <motion.div key={lang.key} variants={fadeInUp}>
+                    <NeoCard hover="lift" padding="lg" className="text-center group">
+                      {/* Flag */}
+                      <div className="text-5xl mb-4">{lang.flag}</div>
+
+                      {/* Language Name */}
+                      <h3 className="text-xl font-black uppercase tracking-tight mb-2 text-neo-text">
+                        {langData.name}
+                      </h3>
+
+                      {/* Progress Bar */}
+                      <div className="w-full h-4 bg-neo-surface border-2 border-neo-border mb-3">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${langData.percent}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                          className="h-full bg-neo-accent"
+                        />
+                      </div>
+
+                      {/* Level */}
+                      <span className="font-mono text-sm font-bold uppercase tracking-wider opacity-60">
+                        {langData.level}
+                      </span>
+                    </NeoCard>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CONTACT CTA */}
+        <section className="py-24 bg-neo-text">
+          <div className="container mx-auto px-4 md:px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <NeoCard
+                hover="none"
+                variant="inverted"
+                padding="lg"
+                className="text-center"
+              >
+                <Globe className="w-16 h-16 mx-auto mb-6 text-neo-accent" />
+                <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-4 text-neo-text-inverse">
+                  {t('cta.title')}
+                </h2>
+                <p className="font-mono text-lg mb-8 max-w-2xl mx-auto text-neo-text-inverse/60">
+                  {t('cta.description')}
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <Link href="/contact">
+                    <BrutalistButton variant="dark" size="lg" icon={<Mail size={18} />}>
+                      {t('cta.contactMe')}
+                    </BrutalistButton>
+                  </Link>
+                  <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
+                    <BrutalistButton variant="dark" size="lg" icon={<Download size={18} />}>
+                      {t('cta.downloadCV')}
+                    </BrutalistButton>
+                  </a>
                 </div>
-              </div>
-            </NeoCard>
-          </motion.div>
+              </NeoCard>
+            </motion.div>
+          </div>
         </section>
 
       </main>

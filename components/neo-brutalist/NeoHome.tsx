@@ -7,6 +7,7 @@ import { Marquee } from './ui/Marquee';
 import { NeoNavbar } from './NeoNavbar';
 import { NeoHero } from './NeoHero';
 import { NeoAlbums, type Album } from './NeoAlbums';
+import { NeoStreaming } from './NeoStreaming';
 import { NeoVideos, type Video } from './NeoVideos';
 import { NeoServices, type Service } from './NeoServices';
 import { NeoFooter } from './NeoFooter';
@@ -42,6 +43,7 @@ export default function NeoHome({ albums, videos, services }: NeoHomeProps) {
         <NeoHero showreelVideoId={videos[0]?.videoId} />
         <Marquee text="SOUNDTRACK — ORIGINAL SCORE — AUDIO BRANDING — MIXING —" />
         <NeoAlbums albums={albums} />
+        <NeoStreaming />
         <NeoVideos videos={videos} />
         <NeoServices services={services} />
         <NeoFooter />

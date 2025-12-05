@@ -89,6 +89,14 @@
       "title": "LISTEN TO <span class=\"text-neon-green\">MY PRODS</span>",
       "subtitle": "02 / STREAMING",
       "follow": "Follow on SoundCloud"
+    },
+    "streaming": {
+      "title": "STREAMING",
+      "subtitle": "LISTEN TO MY PRODS",
+      "playerTitle": "LOÏC GHANEM PRODUCTIONS",
+      "soundcloud": "Follow on SoundCloud",
+      "spotify": "Listen on Spotify",
+      "description": "Find all my productions on streaming platforms. From orchestral composition to Metal through Electronic and Ambient."
     }
   },
   "about": {
@@ -187,7 +195,8 @@
       }
     },
     "timeline": {
-      "title": "Professional Journey",
+      "title": "JOURNEY",
+      "subtitle": "PROFESSIONAL PATH",
       "events": {
         "terra": {
           "title": "Terra - Ambient Orchestral Album",
@@ -261,9 +270,29 @@
       }
     },
     "labelsPublishers": {
-      "title": "Labels & Publishers",
+      "title": "LABELS & PUBLISHERS",
+      "subtitle": "PUBLISHING",
       "labels": "Labels",
       "publishers": "Publishers"
+    },
+    "languages": {
+      "title": "LANGUAGES",
+      "subtitle": "SPOKEN",
+      "french": {
+        "name": "French",
+        "level": "Native",
+        "percent": 100
+      },
+      "english": {
+        "name": "English",
+        "level": "Fluent",
+        "percent": 85
+      },
+      "arabic": {
+        "name": "Lebanese Arabic",
+        "level": "Basic",
+        "percent": 40
+      }
     },
     "cta": {
       "title": "Ready to create together?",
@@ -276,20 +305,20 @@
   "services": {
     "detail": {
       "notFound": "Service not found",
-      "about": "About the service",
+      "about": "About",
       "offeredOn": "Service offered on",
       "relatedServices": "Related Services",
       "whatYouGet": "What you get",
-      "process": "Work process",
-      "examples": "Example works",
+      "process": "Process",
+      "examples": "Examples",
       "listen": "Listen",
       "backToServices": "Back to services",
       "requestQuote": "Request a quote",
       "step": "Step",
-      "pricing": "My pricing",
+      "pricing": "Pricing",
       "startingFrom": "Starting from",
       "onQuote": "On quote",
-      "customizable": "Customizable to your needs",
+      "customizable": "Every project is unique. Let's discuss your needs for a personalized offer.",
       "contact": "Contact"
     },
     "pageTitle": "Services",
