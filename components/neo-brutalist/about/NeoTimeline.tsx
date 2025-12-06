@@ -122,8 +122,12 @@ export const NeoTimeline = () => {
                       padding="lg"
                       className="relative group"
                     >
-                      {/* Year - Large display */}
-                      <div className={`absolute -top-4 ${isLeft ? 'md:-right-4' : 'md:-left-4'} -left-2`}>
+                      {/* Year - Large display - inside card, toward timeline side */}
+                      <div className={`absolute top-0 ${
+                        isLeft
+                          ? 'right-4 md:right-6'
+                          : 'left-4 md:left-6'
+                      }`}>
                         <span
                           className="text-5xl md:text-6xl font-black tracking-tighter"
                           style={{
@@ -135,8 +139,10 @@ export const NeoTimeline = () => {
                         </span>
                       </div>
 
-                      {/* Type Badge */}
-                      <div className="flex items-center gap-2 mb-4 pt-6">
+                      {/* Type Badge - aligned opposite to the year */}
+                      <div className={`flex items-center gap-2 mb-4 pt-8 ${
+                        isLeft ? '' : 'md:justify-end'
+                      }`}>
                         <NeoTag variant={config.tagVariant} size="sm">
                           <Icon className="w-3 h-3 mr-1" />
                           {t(`events.${event.key}.type`)}
