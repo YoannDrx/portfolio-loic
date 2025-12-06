@@ -8,10 +8,11 @@ import { BrutalistButton } from './ui/BrutalistButton';
 import { Link } from '@/i18n/routing';
 
 const socialLinks = [
-  { name: 'Twitter', url: 'https://twitter.com/loicghanem' },
-  { name: 'Instagram', url: 'https://instagram.com/loicghanem' },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/loicghanem' },
-  { name: 'SoundCloud', url: 'https://soundcloud.com/loicghanem' },
+  { name: 'Facebook', url: 'https://www.facebook.com/loic.leduc.54' },
+  { name: 'YouTube', url: 'https://www.youtube.com/@LoicGhanem' },
+  { name: 'SoundCloud', url: 'https://soundcloud.com/loic-ghanem' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/lo%C3%AFc-ghanem/' },
+  { name: 'SoundBetter', url: 'https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1' },
 ];
 
 export const NeoFooter = () => {

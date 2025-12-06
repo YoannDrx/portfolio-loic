@@ -2,6 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/routing';
+import { useParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 interface LanguageSwitcherProps {
@@ -16,10 +17,12 @@ export const LanguageSwitcher = ({
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const params = useParams();
 
   const switchLocale = (newLocale: 'fr' | 'en') => {
+    // For dynamic routes, we need to pass params
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    router.replace(pathname as any, { locale: newLocale });
+    router.replace({ pathname: pathname as any, params: params as any }, { locale: newLocale });
   };
 
   if (variant === 'minimal') {

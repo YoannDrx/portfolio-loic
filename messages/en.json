@@ -319,7 +319,24 @@
       "startingFrom": "Starting from",
       "onQuote": "On quote",
       "customizable": "Every project is unique. Let's discuss your needs for a personalized offer.",
-      "contact": "Contact"
+      "contact": "Contact",
+      "responseTime": "Response",
+      "readyToStart": "Ready?",
+      "also": "ALSO",
+      "examplesDescription": "Discover my work in the albums and videos sections.",
+      "viewAlbums": "View albums",
+      "viewVideos": "View videos",
+      "discoverWork": "Discover my work",
+      "discoverWorkDescription": "Explore my compositions through my albums and sync placement videos.",
+      "previousService": "Previous service",
+      "nextService": "Next service",
+      "whatYouGetItems": {
+        "item1": "100% custom original music",
+        "item2": "Fast delivery",
+        "item3": "Unlimited revisions",
+        "item4": "Professional quality",
+        "item5": "Full rights included"
+      }
     },
     "pageTitle": "Services",
     "pageDescription": "From composition to post-production, I support you at every stage of your musical project with expertise and passion.",
@@ -527,7 +544,10 @@
       "listenOnPlatforms": "Listen on your favorite platforms",
       "listenDescription": "This album is available on multiple streaming platforms. Click below to listen.",
       "previousAlbum": "Previous album",
-      "nextAlbum": "Next album"
+      "nextAlbum": "Next album",
+      "alsoAvailable": "Also available",
+      "otherPlatformsDescription": "Find this album on all your favorite streaming platforms: Spotify, Apple Music, Deezer, Tidal and more.",
+      "allPlatforms": "All platforms"
     }
   },
   "videos": {

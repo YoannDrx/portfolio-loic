@@ -319,7 +319,24 @@
       "startingFrom": "À partir de",
       "onQuote": "Sur devis",
       "customizable": "Chaque projet est unique. Discutons de vos besoins pour une offre personnalisée.",
-      "contact": "Contact"
+      "contact": "Contact",
+      "responseTime": "Réponse",
+      "readyToStart": "Prêt ?",
+      "also": "AUSSI",
+      "examplesDescription": "Découvrez mes réalisations dans la section albums et vidéos.",
+      "viewAlbums": "Voir les albums",
+      "viewVideos": "Voir les vidéos",
+      "discoverWork": "Découvrir mon travail",
+      "discoverWorkDescription": "Explorez mes compositions à travers mes albums et vidéos de synchronisation.",
+      "previousService": "Service précédent",
+      "nextService": "Service suivant",
+      "whatYouGetItems": {
+        "item1": "Musique originale 100% sur mesure",
+        "item2": "Livraison rapide",
+        "item3": "Révisions illimitées",
+        "item4": "Qualité professionnelle",
+        "item5": "Droits complets inclus"
+      }
     },
     "pageTitle": "Services",
     "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
@@ -497,7 +514,10 @@
       "listenOnPlatforms": "Écouter sur vos plateformes préférées",
       "listenDescription": "Cet album est disponible sur plusieurs plateformes de streaming. Cliquez ci-dessous pour l'écouter.",
       "previousAlbum": "Album précédent",
-      "nextAlbum": "Album suivant"
+      "nextAlbum": "Album suivant",
+      "alsoAvailable": "Aussi disponible",
+      "otherPlatformsDescription": "Retrouvez cet album sur toutes vos plateformes de streaming préférées : Spotify, Apple Music, Deezer, Tidal et plus encore.",
+      "allPlatforms": "Toutes les plateformes"
     }
   },
   "videos": {

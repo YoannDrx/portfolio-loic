@@ -277,46 +277,71 @@ export default function NeoAlbumDetail({
                 <div className="flex-1 h-1 bg-neo-border" />
               </div>
 
-              {/* Player Container */}
-              <NeoCard
-                variant="default"
-                padding="lg"
-                className="max-w-4xl border-4 shadow-[8px_8px_0px_0px_var(--neo-shadow)]"
-              >
-                <NeoAlbumPlayer
-                  spotifyEmbed={album.spotifyEmbed}
-                  youtubeEmbed={album.youtubeEmbed}
-                  title={album.title}
-                />
+              {/* Split Layout: Player + Other Platforms */}
+              <div className={`grid grid-cols-1 ${album.listenLink ? 'lg:grid-cols-[1fr_320px]' : ''} gap-6`}>
+                {/* Left: Player */}
+                <NeoCard
+                  variant="default"
+                  padding="lg"
+                  className="border-4 shadow-[8px_8px_0px_0px_var(--neo-shadow)]"
+                >
+                  <NeoAlbumPlayer
+                    spotifyEmbed={album.spotifyEmbed}
+                    youtubeEmbed={album.youtubeEmbed}
+                    title={album.title}
+                  />
 
-                {/* Now Playing Indicator */}
-                <div className="flex items-center justify-center gap-3 mt-6 pt-6 border-t-2 border-neo-border">
-                  <AudioWaveAnimation />
-                  <span className="font-mono text-xs font-bold uppercase text-neo-text/60">
-                    {t('nowPlaying')}
-                  </span>
-                  <AudioWaveAnimation />
-                </div>
-
-                {/* Listen Button - After player */}
-                {album.listenLink && (
-                  <div className="mt-6 pt-6 border-t-2 border-neo-border flex justify-center">
-                    <a
-                      href={album.listenLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-4 bg-neo-accent text-neo-text-inverse
-                        border-3 border-neo-border hover:bg-neo-text hover:text-neo-accent
-                        transition-colors font-mono text-sm font-bold uppercase shadow-[4px_4px_0px_0px_var(--neo-shadow)]
-                        hover:shadow-[6px_6px_0px_0px_var(--neo-shadow)]"
-                    >
-                      <Music className="w-5 h-5" />
-                      <span>{t('listenOnPlatforms')}</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                  {/* Now Playing Indicator */}
+                  <div className="flex items-center justify-center gap-3 mt-6 pt-6 border-t-2 border-neo-border">
+                    <AudioWaveAnimation />
+                    <span className="font-mono text-xs font-bold uppercase text-neo-text/60">
+                      {t('nowPlaying')}
+                    </span>
+                    <AudioWaveAnimation />
                   </div>
+                </NeoCard>
+
+                {/* Right: Other Platforms */}
+                {album.listenLink && (
+                  <NeoCard
+                    variant="inverted"
+                    padding="lg"
+                    className="border-4 shadow-[8px_8px_0px_0px_var(--neo-shadow)] hover:shadow-[8px_8px_0px_0px_var(--neo-accent)] transition-shadow duration-300 flex flex-col justify-center"
+                  >
+                    <div className="text-center space-y-5">
+                      {/* Icon */}
+                      <div className="w-14 h-14 bg-neo-accent mx-auto flex items-center justify-center rotate-3">
+                        <Headphones className="w-7 h-7 text-neo-text-inverse" />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="font-black text-xl uppercase tracking-tight text-neo-text-inverse">
+                        {t('alsoAvailable')}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="font-mono text-sm text-neo-text-inverse/70 leading-relaxed">
+                        {t('otherPlatformsDescription')}
+                      </p>
+
+                      {/* Button */}
+                      <a
+                        href={album.listenLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-3 bg-neo-accent text-neo-text-inverse
+                          border-2 border-neo-accent hover:bg-neo-bg hover:text-neo-text hover:border-neo-border
+                          transition-colors font-mono text-sm font-bold uppercase shadow-[4px_4px_0px_0px_var(--neo-accent)]
+                          hover:shadow-[4px_4px_0px_0px_var(--neo-shadow)]"
+                      >
+                        <Music className="w-4 h-4" />
+                        <span>{t('allPlatforms')}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </NeoCard>
                 )}
-              </NeoCard>
+              </div>
             </motion.section>
           )}
 
