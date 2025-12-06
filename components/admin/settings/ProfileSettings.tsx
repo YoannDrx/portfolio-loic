@@ -1,13 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { User, Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 interface ProfileSettingsProps {
   user: {
@@ -16,6 +13,83 @@ interface ProfileSettingsProps {
   };
   onUserUpdate: () => void;
 }
+
+// Neo-brutalist button component
+const NeoButton = ({ children, onClick, disabled, type = "button", variant = "default" }: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: "button" | "submit";
+  variant?: "default" | "accent";
+}) => (
+  <button
+    type={type}
+    onClick={onClick}
+    disabled={disabled}
+    className={cn(
+      "flex items-center gap-2 px-5 py-3",
+      "font-mono text-sm font-bold uppercase tracking-wide",
+      "border-2 border-neo-border",
+      "shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+      "hover:shadow-[4px_4px_0px_0px_var(--neo-shadow)]",
+      "hover:-translate-y-0.5",
+      "transition-all duration-200",
+      "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0",
+      variant === "default" && "bg-neo-surface text-neo-text",
+      variant === "accent" && "bg-neo-accent text-neo-text-inverse"
+    )}
+  >
+    {children}
+  </button>
+);
+
+// Neo-brutalist input component
+const NeoInput = ({ id, value, onChange, placeholder, type = "text", disabled, icon: Icon, rightElement }: {
+  id: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  type?: string;
+  disabled?: boolean;
+  icon?: typeof User;
+  rightElement?: React.ReactNode;
+}) => (
+  <div className="relative">
+    {Icon && <Icon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neo-text/40" />}
+    <input
+      id={id}
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      disabled={disabled}
+      className={cn(
+        "w-full py-3 bg-neo-surface border-2 border-neo-border",
+        "text-neo-text font-mono text-sm placeholder:text-neo-text/40",
+        "focus:outline-none focus:border-neo-accent",
+        "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+        "disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-neo-bg-alt",
+        Icon ? "pl-10 pr-4" : "px-4",
+        rightElement && "pr-12"
+      )}
+    />
+    {rightElement && (
+      <div className="absolute right-1 top-1/2 -translate-y-1/2">
+        {rightElement}
+      </div>
+    )}
+  </div>
+);
+
+// Neo-brutalist label component
+const NeoLabel = ({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) => (
+  <label
+    htmlFor={htmlFor}
+    className="block text-xs font-mono font-bold text-neo-text/70 uppercase tracking-wider mb-2"
+  >
+    {children}
+  </label>
+);
 
 export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
   const t = useTranslations("admin.settings.profile");
@@ -47,7 +121,6 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       return;
     }
 
-    // Validation email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(newEmail)) {
       toast({
@@ -73,7 +146,7 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       }
 
       toast({
-        title: `${t("successEmail")} ✓`,
+        title: `${t("successEmail")}`,
         description: t("successEmail"),
       });
 
@@ -95,7 +168,6 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
         variant: "destructive",
@@ -138,11 +210,10 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
       }
 
       toast({
-        title: `${t("successPassword")} ✓`,
+        title: `${t("successPassword")}`,
         description: t("successPassword"),
       });
 
-      // Reset form
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
@@ -160,175 +231,162 @@ export function ProfileSettings({ user, onUserUpdate }: ProfileSettingsProps) {
     }
   };
 
+  const PasswordToggle = ({ show, onToggle, disabled }: { show: boolean; onToggle: () => void; disabled: boolean }) => (
+    <button
+      type="button"
+      onClick={onToggle}
+      disabled={disabled}
+      className="p-2 text-neo-text/40 hover:text-neo-text transition-colors disabled:opacity-50"
+    >
+      {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+    </button>
+  );
+
   return (
     <div className="space-y-6">
       {/* Informations du profil */}
-      <Card className="xs:px-0">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <User className="h-5 w-5" />
-            {t("title")}
-          </CardTitle>
-          <CardDescription>{t("description")}</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label>{t("name")}</Label>
-            <Input value={user.name || "Administrateur"} disabled />
+      <div className="border-2 border-neo-border bg-neo-surface p-6 shadow-[3px_3px_0px_0px_var(--neo-shadow)]">
+        <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-neo-border">
+          <div className="w-10 h-10 flex items-center justify-center bg-[#00F0FF] border-2 border-neo-border">
+            <User className="h-5 w-5 text-neo-text" />
+          </div>
+          <div>
+            <h3 className="font-black text-neo-text uppercase tracking-tight">{t("title")}</h3>
+            <p className="text-xs font-mono text-neo-text/60">{t("description")}</p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <NeoLabel htmlFor="userName">{t("name")}</NeoLabel>
+            <NeoInput id="userName" value={user.name || "Administrateur"} onChange={() => {}} disabled icon={User} />
           </div>
 
-          <div className="space-y-2">
-            <Label>{t("currentEmail")}</Label>
-            <Input value={user.email} disabled />
+          <div>
+            <NeoLabel htmlFor="userEmail">{t("currentEmail")}</NeoLabel>
+            <NeoInput id="userEmail" value={user.email || ""} onChange={() => {}} disabled icon={Mail} />
           </div>
 
-          <div className="space-y-2">
-            <Label>{t("role")}</Label>
-            <Input value="Admin" disabled />
+          <div>
+            <NeoLabel htmlFor="userRole">{t("role")}</NeoLabel>
+            <NeoInput id="userRole" value="Admin" onChange={() => {}} disabled />
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Changer l'email */}
-      <Card className="xs:px-0">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Mail className="h-5 w-5" />
-            {t("changeEmail")}
-          </CardTitle>
-          <CardDescription>{t("changeEmailDesc")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleEmailChange} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="newEmail">{t("newEmail")}</Label>
-              <Input
-                id="newEmail"
-                type="email"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="nouveau@email.com"
-                disabled={emailLoading}
-              />
-            </div>
+      <div className="border-2 border-neo-border bg-neo-surface p-6 shadow-[3px_3px_0px_0px_var(--neo-shadow)]">
+        <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-neo-border">
+          <div className="w-10 h-10 flex items-center justify-center bg-[#D5FF0A] border-2 border-neo-border">
+            <Mail className="h-5 w-5 text-neo-text" />
+          </div>
+          <div>
+            <h3 className="font-black text-neo-text uppercase tracking-tight">{t("changeEmail")}</h3>
+            <p className="text-xs font-mono text-neo-text/60">{t("changeEmailDesc")}</p>
+          </div>
+        </div>
 
-            <Button type="submit" disabled={emailLoading} className="gap-2">
-              {emailLoading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  {t("updating")}
-                </>
-              ) : (
-                <>
-                  <Mail className="h-4 w-4" />
-                  {t("updateEmail")}
-                </>
-              )}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+        <form onSubmit={handleEmailChange} className="space-y-4">
+          <div>
+            <NeoLabel htmlFor="newEmail">{t("newEmail")}</NeoLabel>
+            <NeoInput
+              id="newEmail"
+              type="email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              placeholder="nouveau@email.com"
+              disabled={emailLoading}
+              icon={Mail}
+            />
+          </div>
+
+          <NeoButton type="submit" disabled={emailLoading} variant="accent">
+            {emailLoading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {t("updating")}
+              </>
+            ) : (
+              <>
+                <Mail className="h-4 w-4" />
+                {t("updateEmail")}
+              </>
+            )}
+          </NeoButton>
+        </form>
+      </div>
 
       {/* Changer le mot de passe */}
-      <Card className="xs:px-0">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Lock className="h-5 w-5" />
-            {t("changePassword")}
-          </CardTitle>
-          <CardDescription>{t("changePasswordDesc")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handlePasswordChange} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="currentPassword">{t("currentPassword")}</Label>
-              <div className="relative">
-                <Input
-                  id="currentPassword"
-                  type={showCurrentPassword ? "text" : "password"}
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  placeholder="••••••••"
-                  disabled={passwordLoading}
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  disabled={passwordLoading}
-                >
-                  {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </Button>
-              </div>
-            </div>
+      <div className="border-2 border-neo-border bg-neo-surface p-6 shadow-[3px_3px_0px_0px_var(--neo-shadow)]">
+        <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-neo-border">
+          <div className="w-10 h-10 flex items-center justify-center bg-[#FF006E] border-2 border-neo-border">
+            <Lock className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <h3 className="font-black text-neo-text uppercase tracking-tight">{t("changePassword")}</h3>
+            <p className="text-xs font-mono text-neo-text/60">{t("changePasswordDesc")}</p>
+          </div>
+        </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="newPassword">{t("newPassword")}</Label>
-              <div className="relative">
-                <Input
-                  id="newPassword"
-                  type={showNewPassword ? "text" : "password"}
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="••••••••"
-                  disabled={passwordLoading}
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                  onClick={() => setShowNewPassword(!showNewPassword)}
-                  disabled={passwordLoading}
-                >
-                  {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </Button>
-              </div>
-              <p className="text-xs text-muted-foreground">{t("minChars")}</p>
-            </div>
+        <form onSubmit={handlePasswordChange} className="space-y-4">
+          <div>
+            <NeoLabel htmlFor="currentPassword">{t("currentPassword")}</NeoLabel>
+            <NeoInput
+              id="currentPassword"
+              type={showCurrentPassword ? "text" : "password"}
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              placeholder="••••••••"
+              disabled={passwordLoading}
+              icon={Lock}
+              rightElement={<PasswordToggle show={showCurrentPassword} onToggle={() => setShowCurrentPassword(!showCurrentPassword)} disabled={passwordLoading} />}
+            />
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">{t("confirmPassword")}</Label>
-              <div className="relative">
-                <Input
-                  id="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="••••••••"
-                  disabled={passwordLoading}
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  disabled={passwordLoading}
-                >
-                  {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </Button>
-              </div>
-            </div>
+          <div>
+            <NeoLabel htmlFor="newPassword">{t("newPassword")}</NeoLabel>
+            <NeoInput
+              id="newPassword"
+              type={showNewPassword ? "text" : "password"}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="••••••••"
+              disabled={passwordLoading}
+              icon={Lock}
+              rightElement={<PasswordToggle show={showNewPassword} onToggle={() => setShowNewPassword(!showNewPassword)} disabled={passwordLoading} />}
+            />
+            <p className="text-xs font-mono text-neo-text/50 mt-1">{t("minChars")}</p>
+          </div>
 
-            <Button type="submit" disabled={passwordLoading} className="gap-2">
-              {passwordLoading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  {t("updating")}
-                </>
-              ) : (
-                <>
-                  <Lock className="h-4 w-4" />
-                  {t("updatePassword")}
-                </>
-              )}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+          <div>
+            <NeoLabel htmlFor="confirmPassword">{t("confirmPassword")}</NeoLabel>
+            <NeoInput
+              id="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="••••••••"
+              disabled={passwordLoading}
+              icon={Lock}
+              rightElement={<PasswordToggle show={showConfirmPassword} onToggle={() => setShowConfirmPassword(!showConfirmPassword)} disabled={passwordLoading} />}
+            />
+          </div>
+
+          <NeoButton type="submit" disabled={passwordLoading} variant="accent">
+            {passwordLoading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {t("updating")}
+              </>
+            ) : (
+              <>
+                <Lock className="h-4 w-4" />
+                {t("updatePassword")}
+              </>
+            )}
+          </NeoButton>
+        </form>
+      </div>
     </div>
   );
 }

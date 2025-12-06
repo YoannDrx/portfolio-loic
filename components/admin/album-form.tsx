@@ -60,6 +60,8 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
       sortedDate: "",
       style: "film",
       listenLink: "",
+      spotifyEmbed: "",
+      youtubeEmbed: "",
       collabName: "",
       collabLink: "",
       descriptionsFr: "",
@@ -269,13 +271,60 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                     <Input
                       {...field}
                       type="url"
-                      placeholder="https://open.spotify.com/..."
+                      placeholder="https://fanlink.tv/..."
                     />
                   </FormControl>
+                  <FormDescription>
+                    Lien principal (Fanlink, Linktree, etc.)
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="spotifyEmbed"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Spotify Embed</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="url"
+                        placeholder="https://open.spotify.com/embed/..."
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      URL d'intégration Spotify (optionnel)
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="youtubeEmbed"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>YouTube Embed</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="url"
+                        placeholder="https://www.youtube.com/embed/..."
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      URL d'intégration YouTube (optionnel)
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <FormField

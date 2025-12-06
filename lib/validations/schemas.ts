@@ -25,6 +25,8 @@ export const albumCreateSchema = z.object({
     .regex(/^\d{2}-\d{4}$/, "Format de date invalide (attendu: MM-YYYY)"),
   style: z.string().min(1, "Style requis"),
   listenLink: urlSchema,
+  spotifyEmbed: z.union([urlSchema, z.literal("")]).optional(),
+  youtubeEmbed: z.union([urlSchema, z.literal("")]).optional(),
   collabName: z.string().optional(),
   collabLink: z.union([urlSchema, z.literal("")]).optional(),
   descriptionsFr: htmlContentSchema,

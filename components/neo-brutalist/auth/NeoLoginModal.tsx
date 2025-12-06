@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Lock, Mail, Loader2, AlertCircle, LogIn } from 'lucide-react';
 import { signIn } from '@/lib/auth-client';
@@ -20,7 +21,12 @@ export function NeoLoginModal({ isOpen, onClose }: NeoLoginModalProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const params = useParams();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -46,26 +52,28 @@ export function NeoLoginModal({ isOpen, onClose }: NeoLoginModalProps) {
     }
   }
 
-  return (
+  if (!mounted) return null;
+
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+          {/* Backdrop with blur */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-neo-text/80 z-50"
+            className="absolute inset-0 bg-neo-text/90 backdrop-blur-sm"
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', duration: 0.4 }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md px-4"
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            transition={{ type: 'spring', duration: 0.4, bounce: 0.2 }}
+            className="relative z-10 w-full max-w-md mx-4"
           >
             <div className="bg-neo-bg border-4 border-neo-border shadow-[8px_8px_0px_0px_var(--neo-shadow)]">
               {/* Header */}
@@ -183,15 +191,17 @@ export function NeoLoginModal({ isOpen, onClose }: NeoLoginModalProps) {
               {/* Footer */}
               <div className="px-6 py-4 border-t-2 border-neo-border bg-neo-surface">
                 <p className="font-mono text-xs text-neo-text/60 text-center">
-                  Espace réservé aux administrateurs
+                  {t('adminOnly') || 'Espace réservé aux administrateurs'}
                 </p>
               </div>
             </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
 export default NeoLoginModal;

@@ -11,6 +11,7 @@ import { Pagination } from "@/components/admin/Pagination";
 import { TableSkeleton } from "@/components/admin/TableSkeleton";
 import { EmptyState } from "@/components/admin/EmptyState";
 import { ExportButton } from "@/components/admin/ExportButton";
+import { AlbumsLinksMonitor } from "@/components/admin/AlbumsLinksMonitor";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { NeoTableBadge } from "@/components/admin/neo";
@@ -132,6 +133,9 @@ export function AlbumsContent({ initialAlbums, locale }: AlbumsContentProps) {
           </Link>
         </div>
       </div>
+
+      {/* Monitoring Liens */}
+      <AlbumsLinksMonitor locale={locale} />
 
       {/* Filtres */}
       <SearchFilters filters={filters} onFiltersChange={handleFiltersChange} />

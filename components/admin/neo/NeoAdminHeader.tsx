@@ -11,7 +11,6 @@ import {
   Settings,
   Search,
   Menu,
-  Bell,
   X,
   ChevronDown,
 } from 'lucide-react';
@@ -147,19 +146,6 @@ export function NeoAdminHeader({ user, locale, onMenuToggle }: NeoAdminHeaderPro
         {/* Palette Selector */}
         <PaletteSelector />
 
-        {/* Notifications */}
-        <button
-          className={cn(
-            'relative flex items-center justify-center',
-            'w-10 h-10 border-2 border-neo-border bg-neo-surface',
-            'text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse',
-            'shadow-[2px_2px_0px_0px_var(--neo-shadow)]',
-            'transition-all duration-200'
-          )}
-        >
-          <Bell className="h-5 w-5" />
-          <span className="absolute -top-1 -right-1 h-3 w-3 bg-[#FF006E] border border-neo-border" />
-        </button>
 
         {/* User Profile Dropdown */}
         <div className="relative">
@@ -231,6 +217,10 @@ export function NeoAdminHeader({ user, locale, onMenuToggle }: NeoAdminHeaderPro
                   {/* Menu Items */}
                   <div className="py-2">
                     <button
+                      onClick={() => {
+                        router.push(`/${locale}/admin/settings?tab=profile`);
+                        setIsProfileOpen(false);
+                      }}
                       className={cn(
                         'w-full flex items-center gap-3 px-4 py-2',
                         'text-neo-text hover:bg-neo-surface',

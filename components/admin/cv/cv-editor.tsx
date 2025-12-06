@@ -3,20 +3,29 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
-import { PlusIcon, TrashIcon, SaveIcon, ArrowUpIcon, ArrowDownIcon, SettingsIcon, ChevronDown, EyeIcon } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Plus,
+  Trash2,
+  Save,
+  ArrowUp,
+  ArrowDown,
+  Settings,
+  ChevronDown,
+  Eye,
+  RefreshCw,
+  FileText,
+  Palette,
+  User,
+  Briefcase,
+  GraduationCap,
+  X
+} from "lucide-react";
 import { ColorPicker } from "@/components/admin/color-picker";
 import { CVDocument } from "@/components/cv/pdf-document";
 import { PDFDownloadButton } from "@/components/cv/pdf-download-button";
 import type { CVData, CVTheme, CVSection, CVItem, CVTranslation } from "@/types/cv";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const defaultTheme: CVTheme = {
   primary: "#D5FF0A",
@@ -33,8 +42,11 @@ const defaultTheme: CVTheme = {
 const PDFViewerClient = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), {
   ssr: false,
   loading: () => (
-    <div className="h-full w-full flex items-center justify-center bg-[var(--glass-subtle)] text-foreground">
-      Chargement du PDF...
+    <div className="h-full w-full flex items-center justify-center bg-neo-surface">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-8 h-8 border-4 border-neo-border border-t-neo-accent animate-spin" />
+        <span className="font-mono text-xs text-neo-text/60 uppercase">Chargement PDF...</span>
+      </div>
     </div>
   ),
 });
@@ -80,23 +92,23 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
   const [previewLocale, setPreviewLocale] = useState(locale);
   const [openSections, setOpenSections] = useState<Record<number, boolean>>({});
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [skillsOpen, setSkillsOpen] = useState(false);
+  const [versionsOpen, setVersionsOpen] = useState(false);
   const [versions, setVersions] = useState<CVVersion[]>([]);
   const [versionName, setVersionName] = useState("");
   const [isSavingVersion, setIsSavingVersion] = useState(false);
   const [isLoadingVersions, setIsLoadingVersions] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [fabPosition, setFabPosition] = useState({ x: 24, y: 24 }); // distance from right/bottom
+  const [fabPosition, setFabPosition] = useState({ x: 24, y: 24 });
   const [isDragging, setIsDragging] = useState(false);
   const fabRef = useRef<HTMLButtonElement>(null);
   const dragStartRef = useRef({ x: 0, y: 0, fabX: 0, fabY: 0 });
   const [mounted, setMounted] = useState(false);
 
-  // Pour le Portal (côté client uniquement)
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Handlers pour le drag du FAB
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     const touch = e.touches[0];
     dragStartRef.current = {
@@ -113,10 +125,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
     const touch = e.touches[0];
     const deltaX = dragStartRef.current.x - touch.clientX;
     const deltaY = dragStartRef.current.y - touch.clientY;
-
     const newX = Math.max(16, Math.min(window.innerWidth - 72, dragStartRef.current.fabX + deltaX));
     const newY = Math.max(16, Math.min(window.innerHeight - 72, dragStartRef.current.fabY + deltaY));
-
     setFabPosition({ x: newX, y: newY });
   }, [isDragging]);
 
@@ -145,7 +155,6 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
       const payload = (await res.json()) as CVVersion[];
       setVersions(payload);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
       toast({ title: "Impossible de charger les versions", variant: "destructive" });
     } finally {
@@ -164,10 +173,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
       const res = await fetch("/api/cv/versions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: versionName.trim() || defaultName,
-          data,
-        }),
+        body: JSON.stringify({ name: versionName.trim() || defaultName, data }),
       });
       if (!res.ok) throw new Error("Failed to save version");
       const created = (await res.json()) as CVVersion;
@@ -175,9 +181,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
       setVersionName("");
       toast({ title: "Version enregistrée" });
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
-      toast({ title: "Erreur lors de l'enregistrement de la version", variant: "destructive" });
+      toast({ title: "Erreur lors de l'enregistrement", variant: "destructive" });
     } finally {
       setIsSavingVersion(false);
     }
@@ -233,9 +238,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
     const newSections = [...data.sections];
     const targetIndex = direction === "up" ? index - 1 : index + 1;
     [newSections[index], newSections[targetIndex]] = [newSections[targetIndex], newSections[index]];
-    newSections.forEach((s, i) => {
-      s.order = i;
-    });
+    newSections.forEach((s, i) => { s.order = i; });
     setData({ ...data, sections: newSections });
   };
 
@@ -300,14 +303,11 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
     if (direction === "down" && itemIndex === items.length - 1) return;
     const targetIndex = direction === "up" ? itemIndex - 1 : itemIndex + 1;
     [items[itemIndex], items[targetIndex]] = [items[targetIndex], items[itemIndex]];
-    items.forEach((item, i) => {
-      item.order = i;
-    });
+    items.forEach((item, i) => { item.order = i; });
     newSections[sectionIndex].items = items;
     setData({ ...data, sections: newSections });
   };
 
-  // === GESTION DES COMPÉTENCES ===
   const addSkill = () => {
     const newSkill = {
       id: `skill_${Date.now()}`,
@@ -353,9 +353,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
     if (direction === "down" && index === newSkills.length - 1) return;
     const targetIndex = direction === "up" ? index - 1 : index + 1;
     [newSkills[index], newSkills[targetIndex]] = [newSkills[targetIndex], newSkills[index]];
-    newSkills.forEach((skill, i) => {
-      skill.order = i;
-    });
+    newSkills.forEach((skill, i) => { skill.order = i; });
     setData({ ...data, skills: newSkills });
   };
 
@@ -374,7 +372,6 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
       if (!res.ok) throw new Error("Failed to save");
       toast({ title: "CV sauvegardé" });
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
       toast({ title: "Erreur lors de la sauvegarde", variant: "destructive" });
     } finally {
@@ -388,503 +385,400 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
     setOpenSections((prev) => ({ ...prev, [idx]: !prev[idx] }));
   };
 
-  return (
-    <div className="flex flex-col lg:grid lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 min-h-0 lg:h-[calc(100vh-6rem)]">
-      {/* Panneau gauche - scrollable sur desktop */}
-      <div className="space-y-3 sm:space-y-4 pb-8 lg:overflow-y-auto lg:pr-2 order-last lg:order-first">
-        <Card className="bg-card border-[var(--glass-border)]">
+  // Neo-brutalist button component
+  const NeoButton = ({ children, onClick, disabled, variant = "default", size = "default", className = "" }: {
+    children: React.ReactNode;
+    onClick?: () => void;
+    disabled?: boolean;
+    variant?: "default" | "accent" | "danger" | "ghost";
+    size?: "default" | "sm" | "icon";
+    className?: string;
+  }) => (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        "font-mono font-bold uppercase tracking-wide transition-all duration-200",
+        "border-2 border-neo-border disabled:opacity-50 disabled:cursor-not-allowed",
+        variant === "default" && "bg-neo-surface text-neo-text hover:bg-neo-bg-alt shadow-[2px_2px_0px_0px_var(--neo-shadow)] hover:shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+        variant === "accent" && "bg-neo-accent text-neo-text-inverse hover:brightness-110 shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+        variant === "danger" && "bg-[#FF006E] text-white hover:brightness-110 shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+        variant === "ghost" && "bg-transparent border-transparent hover:bg-neo-surface hover:border-neo-border",
+        size === "default" && "px-4 py-2 text-xs",
+        size === "sm" && "px-3 py-1.5 text-xs",
+        size === "icon" && "w-8 h-8 flex items-center justify-center p-0",
+        className
+      )}
+    >
+      {children}
+    </button>
+  );
+
+  // Neo-brutalist input component
+  const NeoInput = ({ value, onChange, placeholder, type = "text", className = "" }: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    placeholder?: string;
+    type?: string;
+    className?: string;
+  }) => (
+    <input
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={cn(
+        "w-full px-3 py-2 bg-neo-surface border-2 border-neo-border",
+        "text-neo-text font-mono text-sm placeholder:text-neo-text/40",
+        "focus:outline-none focus:border-neo-accent",
+        "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+        className
+      )}
+    />
+  );
+
+  // Neo-brutalist textarea component
+  const NeoTextarea = ({ value, onChange, placeholder, className = "" }: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    placeholder?: string;
+    className?: string;
+  }) => (
+    <textarea
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={cn(
+        "w-full px-3 py-2 bg-neo-surface border-2 border-neo-border",
+        "text-neo-text font-mono text-sm placeholder:text-neo-text/40",
+        "focus:outline-none focus:border-neo-accent",
+        "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+        "min-h-[80px] resize-y",
+        className
+      )}
+    />
+  );
+
+  // Neo-brutalist select component
+  const NeoSelect = ({ value, onChange, options, className = "" }: {
+    value: string;
+    onChange: (value: string) => void;
+    options: { value: string; label: string }[];
+    className?: string;
+  }) => (
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className={cn(
+        "w-full px-3 py-2 bg-neo-surface border-2 border-neo-border",
+        "text-neo-text font-mono text-sm",
+        "focus:outline-none focus:border-neo-accent",
+        "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+        "cursor-pointer appearance-none",
+        className
+      )}
+      style={{ backgroundImage: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")", backgroundPosition: "right 0.5rem center", backgroundRepeat: "no-repeat", backgroundSize: "1.5em 1.5em", paddingRight: "2.5rem" }}
+    >
+      {options.map((opt) => (
+        <option key={opt.value} value={opt.value}>{opt.label}</option>
+      ))}
+    </select>
+  );
+
+  // Neo-brutalist collapsible card
+  const NeoCollapsible = ({ title, icon: Icon, isOpen, onToggle, accentColor, children }: {
+    title: string;
+    icon: typeof Settings;
+    isOpen: boolean;
+    onToggle: () => void;
+    accentColor?: string;
+    children: React.ReactNode;
+  }) => (
+    <div className="border-2 border-neo-border bg-neo-bg shadow-[4px_4px_0px_0px_var(--neo-shadow)]">
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between p-4 hover:bg-neo-surface transition-colors"
+      >
+        <div className="flex items-center gap-3">
           <div
-            className="flex items-center justify-between p-3 sm:p-4 cursor-pointer hover:bg-[var(--glass-subtle)] transition-colors"
-            onClick={() => setSettingsOpen(!settingsOpen)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") setSettingsOpen(!settingsOpen);
-            }}
+            className="w-10 h-10 flex items-center justify-center border-2 border-neo-border"
+            style={{ backgroundColor: accentColor || "var(--neo-accent)" }}
           >
-            <CardTitle className="text-foreground flex items-center gap-2">
-              <SettingsIcon className="w-5 h-5" />
-              Paramètres Généraux
-            </CardTitle>
-            <ChevronDown className={`h-5 w-5 text-foreground/60 transition-transform ${settingsOpen ? "rotate-180" : ""}`} />
+            <Icon className="h-5 w-5 text-neo-text" />
           </div>
-          {settingsOpen && (
-            <CardContent className="space-y-3 sm:space-y-4 pt-3 px-2 sm:px-4 border-t border-[var(--glass-border)]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Nom complet</Label>
-                  <Input
-                    value={data.fullName || ""}
-                    onChange={(e) => updateGlobal("fullName", e.target.value)}
-                    className="bg-card border-[var(--glass-border)] text-foreground"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Badge (FR)</Label>
-                  <Input
-                    value={data.badgeFr || ""}
-                    onChange={(e) => updateGlobal("badgeFr", e.target.value)}
-                    className="bg-card border-[var(--glass-border)] text-foreground"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Badge (EN)</Label>
-                  <Input
-                    value={data.badgeEn || ""}
-                    onChange={(e) => updateGlobal("badgeEn", e.target.value)}
-                    className="bg-card border-[var(--glass-border)] text-foreground"
-                  />
-                </div>
+          <span className="font-black text-neo-text uppercase tracking-tight">{title}</span>
+        </div>
+        <ChevronDown className={cn("h-5 w-5 text-neo-text/60 transition-transform", isOpen && "rotate-180")} />
+      </button>
+      {isOpen && (
+        <div className="border-t-2 border-neo-border p-4">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-6 min-h-0 lg:h-[calc(100vh-6rem)]">
+      {/* Left Panel - Editor */}
+      <div className="space-y-4 pb-8 lg:overflow-y-auto lg:pr-2 order-last lg:order-first">
+        {/* Header with Save Button */}
+        <div className="flex items-center justify-between pb-4 border-b-4 border-neo-border">
+          <div>
+            <h1 className="text-2xl font-black text-neo-text uppercase tracking-tight">CV Editor</h1>
+            <p className="text-xs font-mono text-neo-text/60 uppercase tracking-wider">Éditeur de curriculum vitae</p>
+          </div>
+          <NeoButton onClick={handleSave} disabled={isSaving} variant="accent">
+            <Save className="h-4 w-4 mr-2" />
+            {isSaving ? "..." : "Sauvegarder"}
+          </NeoButton>
+        </div>
+
+        {/* General Settings */}
+        <NeoCollapsible
+          title="Paramètres Généraux"
+          icon={Settings}
+          isOpen={settingsOpen}
+          onToggle={() => setSettingsOpen(!settingsOpen)}
+          accentColor="#00F0FF"
+        >
+          <div className="space-y-4">
+            {/* Identity */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-xs font-mono font-bold text-neo-text/60 uppercase tracking-wider">Nom complet</label>
+                <NeoInput value={data.fullName || ""} onChange={(e) => updateGlobal("fullName", e.target.value)} />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Accent principal</Label>
-                  <ColorPicker
-                    value={data.theme?.primary || data.accentColor || defaultTheme.primary}
-                    onChange={(c) => updateTheme("primary", c)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Accent secondaire</Label>
-                  <ColorPicker
-                    value={data.theme?.secondary || defaultTheme.secondary}
-                    onChange={(c) => updateTheme("secondary", c)}
-                  />
-                </div>
+              <div className="space-y-2">
+                <label className="text-xs font-mono font-bold text-neo-text/60 uppercase tracking-wider">Badge (FR)</label>
+                <NeoInput value={data.badgeFr || ""} onChange={(e) => updateGlobal("badgeFr", e.target.value)} />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="space-y-2">
+                <label className="text-xs font-mono font-bold text-neo-text/60 uppercase tracking-wider">Badge (EN)</label>
+                <NeoInput value={data.badgeEn || ""} onChange={(e) => updateGlobal("badgeEn", e.target.value)} />
+              </div>
+            </div>
+
+            {/* Colors */}
+            <div className="border-t-2 border-neo-border pt-4">
+              <h4 className="text-xs font-mono font-bold text-neo-text/60 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Palette className="h-4 w-4" /> Couleurs du thème
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-foreground/70">Fond du header</Label>
+                  <label className="text-xs font-mono text-neo-text/60">Accent principal</label>
+                  <ColorPicker value={data.theme?.primary || defaultTheme.primary} onChange={(c) => updateTheme("primary", c)} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-mono text-neo-text/60">Accent secondaire</label>
+                  <ColorPicker value={data.theme?.secondary || defaultTheme.secondary} onChange={(c) => updateTheme("secondary", c)} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-mono text-neo-text/60">Header</label>
                   <ColorPicker value={data.theme?.header || defaultTheme.header} onChange={(c) => updateTheme("header", c)} />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-foreground/70">Fond de la sidebar</Label>
+                  <label className="text-xs font-mono text-neo-text/60">Sidebar</label>
                   <ColorPicker value={data.theme?.sidebar || defaultTheme.sidebar} onChange={(c) => updateTheme("sidebar", c)} />
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Couleur du texte</Label>
-                  <ColorPicker value={data.theme?.text || defaultTheme.text} onChange={(c) => updateTheme("text", c)} />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Séparateurs / contours</Label>
-                  <ColorPicker value={data.theme?.border || defaultTheme.border} onChange={(c) => updateTheme("border", c)} />
-                </div>
-              </div>
-              <div className="flex items-center gap-2 pt-2">
-                <input
-                  type="checkbox"
-                  checked={data.showPhoto}
-                  onChange={(e) => updateGlobal("showPhoto", e.target.checked)}
-                  className="w-4 h-4"
-                />
-                <Label className="text-foreground">Afficher la photo</Label>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Titre (FR)</Label>
-                  <Input
-                    value={data.headlineFr || ""}
-                    onChange={(e) => updateGlobal("headlineFr", e.target.value)}
-                    className="bg-card border-[var(--glass-border)] text-foreground"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Titre (EN)</Label>
-                  <Input
-                    value={data.headlineEn || ""}
-                    onChange={(e) => updateGlobal("headlineEn", e.target.value)}
-                    className="bg-card border-[var(--glass-border)] text-foreground"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Bio (FR)</Label>
-                  <Textarea
-                    value={data.bioFr || ""}
-                    onChange={(e) => updateGlobal("bioFr", e.target.value)}
-                    className="bg-card border-[var(--glass-border)] text-foreground h-20"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-foreground/70">Bio (EN)</Label>
-                  <Textarea
-                    value={data.bioEn || ""}
-                    onChange={(e) => updateGlobal("bioEn", e.target.value)}
-                    className="bg-card border-[var(--glass-border)] text-foreground h-20"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4 border-t border-[var(--glass-border)]">
-                <Input
-                  placeholder="Email"
-                  value={data.email || ""}
-                  onChange={(e) => updateGlobal("email", e.target.value)}
-                  className="bg-card border-[var(--glass-border)] text-foreground"
-                />
-                <Input
-                  placeholder="Téléphone"
-                  value={data.phone || ""}
-                  onChange={(e) => updateGlobal("phone", e.target.value)}
-                  className="bg-card border-[var(--glass-border)] text-foreground"
-                />
-                <Input
-                  placeholder="Site Web"
-                  value={data.website || ""}
-                  onChange={(e) => updateGlobal("website", e.target.value)}
-                  className="bg-card border-[var(--glass-border)] text-foreground"
-                />
-                <Input
-                  placeholder="Localisation"
-                  value={data.location || ""}
-                  onChange={(e) => updateGlobal("location", e.target.value)}
-                  className="bg-card border-[var(--glass-border)] text-foreground"
-                />
-                <Input
-                  placeholder="LinkedIn"
-                  value={data.linkedInUrl || ""}
-                  onChange={(e) => updateGlobal("linkedInUrl", e.target.value)}
-                  className="bg-card border-[var(--glass-border)] text-foreground sm:col-span-2"
-                />
-                <Input
-                  placeholder="Photo (URL public/…)"
-                  value={data.photo || ""}
-                  onChange={(e) => updateGlobal("photo", e.target.value)}
-                  className="bg-card border-[var(--glass-border)] text-foreground sm:col-span-2"
-                />
-              </div>
-            </CardContent>
-          )}
-        </Card>
+            </div>
 
-        {/* <Card className="bg-card border-[var(--glass-border)]"> */}
-        <Card className="bg-card border-[var(--glass-border)] px-0">
-          <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 py-3 sm:py-4 border-b border-[var(--glass-border)]">
-            <CardTitle className="text-foreground text-base sm:text-lg">Sections</CardTitle>
-            <Button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="bg-lime-300 text-black hover:bg-lime-400 w-full sm:w-auto"
-            >
-              <SaveIcon className="mr-2 h-4 w-4" />
-              {isSaving ? "..." : "Sauvegarder"}
-            </Button>
-          </CardHeader>
-          <CardContent className="pt-3 sm:pt-4 space-y-2 sm:space-y-3 px-1 sm:px-4">
+            {/* Bio */}
+            <div className="border-t-2 border-neo-border pt-4">
+              <h4 className="text-xs font-mono font-bold text-neo-text/60 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <User className="h-4 w-4" /> Informations personnelles
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-xs font-mono text-neo-text/60">Titre (FR)</label>
+                  <NeoInput value={data.headlineFr || ""} onChange={(e) => updateGlobal("headlineFr", e.target.value)} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-mono text-neo-text/60">Titre (EN)</label>
+                  <NeoInput value={data.headlineEn || ""} onChange={(e) => updateGlobal("headlineEn", e.target.value)} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-mono text-neo-text/60">Bio (FR)</label>
+                  <NeoTextarea value={data.bioFr || ""} onChange={(e) => updateGlobal("bioFr", e.target.value)} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-mono text-neo-text/60">Bio (EN)</label>
+                  <NeoTextarea value={data.bioEn || ""} onChange={(e) => updateGlobal("bioEn", e.target.value)} />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                <NeoInput value={data.email || ""} onChange={(e) => updateGlobal("email", e.target.value)} placeholder="Email" />
+                <NeoInput value={data.phone || ""} onChange={(e) => updateGlobal("phone", e.target.value)} placeholder="Téléphone" />
+                <NeoInput value={data.website || ""} onChange={(e) => updateGlobal("website", e.target.value)} placeholder="Site Web" />
+                <NeoInput value={data.location || ""} onChange={(e) => updateGlobal("location", e.target.value)} placeholder="Localisation" />
+                <NeoInput value={data.linkedInUrl || ""} onChange={(e) => updateGlobal("linkedInUrl", e.target.value)} placeholder="LinkedIn URL" className="sm:col-span-2" />
+                <NeoInput value={data.photo || ""} onChange={(e) => updateGlobal("photo", e.target.value)} placeholder="Photo URL" className="sm:col-span-2" />
+              </div>
+              <div className="flex items-center gap-2 mt-4">
+                <input type="checkbox" checked={data.showPhoto} onChange={(e) => updateGlobal("showPhoto", e.target.checked)} className="w-4 h-4 border-2 border-neo-border" />
+                <label className="text-sm font-mono text-neo-text">Afficher la photo</label>
+              </div>
+            </div>
+          </div>
+        </NeoCollapsible>
+
+        {/* Sections */}
+        <div className="border-2 border-neo-border bg-neo-bg shadow-[4px_4px_0px_0px_var(--neo-shadow)]">
+          <div className="flex items-center justify-between p-4 border-b-2 border-neo-border">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 flex items-center justify-center bg-[#D5FF0A] border-2 border-neo-border">
+                <Briefcase className="h-5 w-5 text-neo-text" />
+              </div>
+              <div>
+                <span className="font-black text-neo-text uppercase tracking-tight">Sections</span>
+                <p className="text-xs font-mono text-neo-text/60">{data.sections.length} sections</p>
+              </div>
+            </div>
+            <NeoButton onClick={addSection} variant="accent" size="sm">
+              <Plus className="h-4 w-4 mr-1" /> Ajouter
+            </NeoButton>
+          </div>
+
+          <div className="p-4 space-y-3">
             {data.sections.map((section, sIndex) => {
-              const isOpen = openSections[sIndex] ?? true;
+              const isOpen = openSections[sIndex] ?? false;
               return (
-                <div
-                  key={sIndex}
-                  className="border border-[var(--glass-border)] rounded-lg px-1.5 sm:px-3 bg-[var(--glass-subtle)]"
-                >
+                <div key={sIndex} className="border-2 border-neo-border bg-neo-surface">
                   <div
-                    className="flex w-full items-center justify-between py-2 sm:py-3 gap-2 cursor-pointer"
-                    onClick={() => toggleSection(sIndex)}
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") toggleSection(sIndex);
-                    }}
+                    onClick={() => toggleSection(sIndex)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") toggleSection(sIndex); }}
+                    className="w-full flex items-center justify-between p-3 hover:bg-neo-bg-alt transition-colors cursor-pointer"
                   >
-                    <div className="flex items-center gap-2 min-w-0 flex-1">
-                      <span className="text-sm sm:text-lg font-medium text-foreground truncate">
-                        {getT(section.translations, "fr").title || "Nouvelle Section"}
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3" style={{ backgroundColor: section.color || "#D5FF0A" }} />
+                      <span className="font-bold text-neo-text uppercase text-sm">
+                        {getT(section.translations, "fr").title || "Section"}
                       </span>
-                      <span className="text-[10px] sm:text-xs bg-[var(--glass-active)] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-foreground/50 uppercase shrink-0">
+                      <span className="text-[10px] px-2 py-0.5 bg-neo-bg border border-neo-border text-neo-text/60 uppercase">
                         {section.placement || "main"}
                       </span>
                     </div>
-                    <div className="flex items-center shrink-0">
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-7 w-7 sm:h-8 sm:w-8"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          moveSection(sIndex, "up");
-                        }}
-                        disabled={sIndex === 0}
-                      >
-                        <ArrowUpIcon className="h-3 w-3 sm:h-4 sm:w-4 text-foreground/50" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-7 w-7 sm:h-8 sm:w-8"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          moveSection(sIndex, "down");
-                        }}
-                        disabled={sIndex === data.sections.length - 1}
-                      >
-                        <ArrowDownIcon className="h-3 w-3 sm:h-4 sm:w-4 text-foreground/50" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-7 w-7 sm:h-8 sm:w-8 text-red-400 hover:text-red-300 hover:bg-red-900/20"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          removeSection(sIndex);
-                        }}
-                      >
-                        <TrashIcon className="h-3 w-3 sm:h-4 sm:w-4" />
-                      </Button>
-                      <ChevronDown
-                        className={`h-3 w-3 sm:h-4 sm:w-4 transition-transform text-foreground/60 ${isOpen ? "rotate-180" : ""}`}
-                      />
+                    <div className="flex items-center gap-1">
+                      <NeoButton size="icon" variant="ghost" onClick={(e) => { e.stopPropagation(); moveSection(sIndex, "up"); }} disabled={sIndex === 0}>
+                        <ArrowUp className="h-3 w-3" />
+                      </NeoButton>
+                      <NeoButton size="icon" variant="ghost" onClick={(e) => { e.stopPropagation(); moveSection(sIndex, "down"); }} disabled={sIndex === data.sections.length - 1}>
+                        <ArrowDown className="h-3 w-3" />
+                      </NeoButton>
+                      <NeoButton size="icon" variant="ghost" onClick={(e) => { e.stopPropagation(); removeSection(sIndex); }} className="text-[#FF006E] hover:text-[#FF006E]">
+                        <Trash2 className="h-3 w-3" />
+                      </NeoButton>
+                      <ChevronDown className={cn("h-4 w-4 text-neo-text/60 transition-transform", isOpen && "rotate-180")} />
                     </div>
                   </div>
 
                   {isOpen && (
-                    <div className="space-y-3 sm:space-y-6 pb-3 sm:pb-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 p-2 sm:p-4 bg-muted/20 rounded-md mb-3 sm:mb-4">
-                        <div className="space-y-2">
-                          <Label className="text-foreground/70">Placement</Label>
-                          <Select
+                    <div className="p-4 border-t-2 border-neo-border space-y-4">
+                      {/* Section settings */}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="space-y-1">
+                          <label className="text-xs font-mono text-neo-text/60">Placement</label>
+                          <NeoSelect
                             value={section.placement || "main"}
-                            onValueChange={(v) => updateSection(sIndex, "placement", v)}
-                          >
-                            <SelectTrigger className="bg-card border-[var(--glass-border)] text-foreground">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="main">Principal (Main)</SelectItem>
-                              <SelectItem value="sidebar">Latéral (Sidebar)</SelectItem>
-                            </SelectContent>
-                          </Select>
+                            onChange={(v) => updateSection(sIndex, "placement", v)}
+                            options={[{ value: "main", label: "Principal" }, { value: "sidebar", label: "Sidebar" }]}
+                          />
                         </div>
-                        <div className="space-y-2">
-                          <Label className="text-foreground/70">Style d'affichage</Label>
-                          <Select
+                        <div className="space-y-1">
+                          <label className="text-xs font-mono text-neo-text/60">Style</label>
+                          <NeoSelect
                             value={section.layoutType || "list"}
-                            onValueChange={(v) => updateSection(sIndex, "layoutType", v)}
-                          >
-                            <SelectTrigger className="bg-card border-[var(--glass-border)] text-foreground">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="list">Liste Simple</SelectItem>
-                              <SelectItem value="timeline">Chronologie (Timeline)</SelectItem>
-                              <SelectItem value="grid">Grille</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="space-y-2">
-                          <Label className="text-foreground/70">Couleur du bloc</Label>
-                          <ColorPicker
-                            value={section.color || data.theme?.secondary || data.accentColor || defaultTheme.primary}
-                            onChange={(v) => updateSection(sIndex, "color", v)}
+                            onChange={(v) => updateSection(sIndex, "layoutType", v)}
+                            options={[{ value: "list", label: "Liste" }, { value: "timeline", label: "Timeline" }, { value: "grid", label: "Grille" }]}
                           />
                         </div>
-                        <div className="space-y-2 sm:col-span-2 lg:col-span-3">
-                          <Label className="text-foreground/70 text-sm">Icône (nom Lucide)</Label>
-                          <Input
-                            value={section.icon || ""}
-                            onChange={(e) => updateSection(sIndex, "icon", e.target.value)}
-                            placeholder="Briefcase, GraduationCap..."
-                            className="bg-card border-[var(--glass-border)] text-foreground"
-                          />
+                        <div className="space-y-1">
+                          <label className="text-xs font-mono text-neo-text/60">Couleur</label>
+                          <ColorPicker value={section.color || defaultTheme.primary} onChange={(v) => updateSection(sIndex, "color", v)} />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                        <div className="space-y-1 sm:space-y-2">
-                          <Label className="text-foreground/70 text-xs sm:text-sm">Titre (FR)</Label>
-                          <Input
-                            value={getT(section.translations, "fr").title ?? ""}
-                            onChange={(e) => {
-                              updateSectionTranslation(sIndex, "fr", e.target.value);
-                            }}
-                            className="bg-card border-[var(--glass-border)] text-foreground"
-                          />
+                      {/* Section titles */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <label className="text-xs font-mono text-neo-text/60">Titre (FR)</label>
+                          <NeoInput value={getT(section.translations, "fr").title ?? ""} onChange={(e) => updateSectionTranslation(sIndex, "fr", e.target.value)} />
                         </div>
-                        <div className="space-y-1 sm:space-y-2">
-                          <Label className="text-foreground/70 text-xs sm:text-sm">Titre (EN)</Label>
-                          <Input
-                            value={getT(section.translations, "en").title ?? ""}
-                            onChange={(e) => {
-                              updateSectionTranslation(sIndex, "en", e.target.value);
-                            }}
-                            className="bg-card border-[var(--glass-border)] text-foreground"
-                          />
+                        <div className="space-y-1">
+                          <label className="text-xs font-mono text-neo-text/60">Titre (EN)</label>
+                          <NeoInput value={getT(section.translations, "en").title ?? ""} onChange={(e) => updateSectionTranslation(sIndex, "en", e.target.value)} />
                         </div>
                       </div>
 
-                      <div className="space-y-3 sm:space-y-4 mt-3 sm:mt-4">
-                        <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
-                          <h4 className="text-sm font-medium text-foreground/70 uppercase">Éléments de contenu</h4>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => addItem(sIndex)}
-                            className="border-[var(--glass-border-strong)] text-foreground hover:bg-[var(--glass-active)]"
-                          >
-                            <PlusIcon className="mr-2 h-3 w-3" /> Ajouter un élément
-                          </Button>
+                      {/* Items */}
+                      <div className="border-t-2 border-neo-border pt-4">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-xs font-mono font-bold text-neo-text/60 uppercase">Éléments ({section.items?.length || 0})</span>
+                          <NeoButton size="sm" onClick={() => addItem(sIndex)}>
+                            <Plus className="h-3 w-3 mr-1" /> Élément
+                          </NeoButton>
                         </div>
 
                         {section.items?.map((item, iIndex) => (
-                          <div
-                            key={iIndex}
-                            className="p-2 sm:p-4 border border-[var(--glass-border)] rounded-md bg-muted/40 space-y-2 sm:space-y-4"
-                          >
-                            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                              <div className="grid grid-cols-2 gap-2 text-xs text-foreground/50 w-full">
-                                <div className="space-y-1">
-                                  <span>Début</span>
-                                  <input
-                                    type="date"
-                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-foreground p-1 text-xs sm:text-sm"
-                                    value={item.startDate ? new Date(item.startDate).toISOString().split("T")[0] : ""}
-                                    onChange={(e) => {
-                                      updateItem(sIndex, iIndex, "startDate", e.target.value);
-                                    }}
-                                  />
-                                </div>
-                                <div className="space-y-1">
-                                  <span>Fin</span>
-                                  <input
-                                    type="date"
-                                    className="w-full bg-[var(--glass-subtle)] rounded border border-[var(--glass-border)] text-foreground p-1 text-xs sm:text-sm"
-                                    value={item.endDate ? new Date(item.endDate).toISOString().split("T")[0] : ""}
-                                    onChange={(e) => {
-                                      updateItem(sIndex, iIndex, "endDate", e.target.value);
-                                    }}
-                                    disabled={item.isCurrent}
-                                  />
-                                </div>
-                                <div className="col-span-2 pt-2">
-                                  <label className="flex items-center gap-2 cursor-pointer hover:text-foreground text-xs">
-                                    <input
-                                      type="checkbox"
-                                      checked={item.isCurrent}
-                                      onChange={(e) => {
-                                        updateItem(sIndex, iIndex, "isCurrent", e.target.checked);
-                                      }}
-                                      className="rounded border-[var(--glass-border-strong)] bg-[var(--glass-subtle)]"
-                                    />
-                                    En poste actuellement
-                                  </label>
-                                </div>
+                          <div key={iIndex} className="border-2 border-neo-border/50 bg-neo-bg p-3 mb-2">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2 text-xs text-neo-text/60">
+                                <input
+                                  type="date"
+                                  className="bg-neo-surface border border-neo-border px-2 py-1 text-neo-text text-xs"
+                                  value={item.startDate ? new Date(item.startDate).toISOString().split("T")[0] : ""}
+                                  onChange={(e) => updateItem(sIndex, iIndex, "startDate", e.target.value)}
+                                />
+                                <span>→</span>
+                                <input
+                                  type="date"
+                                  className="bg-neo-surface border border-neo-border px-2 py-1 text-neo-text text-xs"
+                                  value={item.endDate ? new Date(item.endDate).toISOString().split("T")[0] : ""}
+                                  onChange={(e) => updateItem(sIndex, iIndex, "endDate", e.target.value)}
+                                  disabled={item.isCurrent}
+                                />
+                                <label className="flex items-center gap-1 cursor-pointer">
+                                  <input type="checkbox" checked={item.isCurrent} onChange={(e) => updateItem(sIndex, iIndex, "isCurrent", e.target.checked)} className="w-3 h-3" />
+                                  <span>Actuel</span>
+                                </label>
                               </div>
-                              <div className="flex sm:flex-col gap-1 justify-end shrink-0">
-                                <Button
-                                  size="icon"
-                                  variant="ghost"
-                                  className="h-6 w-6"
-                                  onClick={() => {
-                                    moveItem(sIndex, iIndex, "up");
-                                  }}
-                                  disabled={iIndex === 0}
-                                >
-                                  <ArrowUpIcon className="h-3 w-3" />
-                                </Button>
-                                <Button
-                                  size="icon"
-                                  variant="ghost"
-                                  className="h-6 w-6"
-                                  onClick={() => {
-                                    moveItem(sIndex, iIndex, "down");
-                                  }}
-                                  disabled={iIndex === section.items.length - 1}
-                                >
-                                  <ArrowDownIcon className="h-3 w-3" />
-                                </Button>
-                                <Button
-                                  size="icon"
-                                  variant="ghost"
-                                  className="h-6 w-6 text-red-400"
-                                  onClick={() => {
-                                    removeItem(sIndex, iIndex);
-                                  }}
-                                >
-                                  <TrashIcon className="h-3 w-3" />
-                                </Button>
+                              <div className="flex gap-1">
+                                <NeoButton size="icon" variant="ghost" onClick={() => moveItem(sIndex, iIndex, "up")} disabled={iIndex === 0}>
+                                  <ArrowUp className="h-3 w-3" />
+                                </NeoButton>
+                                <NeoButton size="icon" variant="ghost" onClick={() => moveItem(sIndex, iIndex, "down")} disabled={iIndex === section.items.length - 1}>
+                                  <ArrowDown className="h-3 w-3" />
+                                </NeoButton>
+                                <NeoButton size="icon" variant="ghost" onClick={() => removeItem(sIndex, iIndex)} className="text-[#FF006E]">
+                                  <Trash2 className="h-3 w-3" />
+                                </NeoButton>
                               </div>
                             </div>
 
-                            <Tabs defaultValue="fr" className="w-full">
-                              <TabsList className="bg-[var(--glass-active)] h-8 w-full justify-start">
-                                <TabsTrigger value="fr" className="text-xs h-7 px-4">
-                                  Français
-                                </TabsTrigger>
-                                <TabsTrigger value="en" className="text-xs h-7 px-4">
-                                  English
-                                </TabsTrigger>
-                              </TabsList>
-                              <TabsContent value="fr" className="space-y-3 mt-3">
-                                <Input
-                                  placeholder="Titre / Poste"
-                                  value={getT(item.translations, "fr").title ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "fr", "title", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground h-9"
-                                />
-                                <Input
-                                  placeholder="Sous-titre / Entreprise"
-                                  value={getT(item.translations, "fr").subtitle ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "fr", "subtitle", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground h-9"
-                                />
-                                <Input
-                                  placeholder="Lieu"
-                                  value={getT(item.translations, "fr").location ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "fr", "location", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground h-9"
-                                />
-                                <Textarea
-                                  placeholder="Description"
-                                  value={getT(item.translations, "fr").description ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "fr", "description", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground min-h-[80px]"
-                                />
-                              </TabsContent>
-                              <TabsContent value="en" className="space-y-3 mt-3">
-                                <Input
-                                  placeholder="Title / Position"
-                                  value={getT(item.translations, "en").title ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "en", "title", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground h-9"
-                                />
-                                <Input
-                                  placeholder="Subtitle / Company"
-                                  value={getT(item.translations, "en").subtitle ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "en", "subtitle", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground h-9"
-                                />
-                                <Input
-                                  placeholder="Location"
-                                  value={getT(item.translations, "en").location ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "en", "location", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground h-9"
-                                />
-                                <Textarea
-                                  placeholder="Description"
-                                  value={getT(item.translations, "en").description ?? ""}
-                                  onChange={(e) => {
-                                    updateItemTranslation(sIndex, iIndex, "en", "description", e.target.value);
-                                  }}
-                                  className="bg-card border-[var(--glass-border)] text-foreground min-h-[80px]"
-                                />
-                              </TabsContent>
-                            </Tabs>
+                            {/* FR fields */}
+                            <div className="space-y-2 mb-3">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-[10px] px-2 py-0.5 bg-neo-accent text-neo-text-inverse font-bold uppercase">FR</span>
+                              </div>
+                              <NeoInput placeholder="Titre / Poste" value={getT(item.translations, "fr").title ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "fr", "title", e.target.value)} />
+                              <NeoInput placeholder="Sous-titre / Entreprise" value={getT(item.translations, "fr").subtitle ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "fr", "subtitle", e.target.value)} />
+                              <NeoInput placeholder="Lieu" value={getT(item.translations, "fr").location ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "fr", "location", e.target.value)} />
+                              <NeoTextarea placeholder="Description" value={getT(item.translations, "fr").description ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "fr", "description", e.target.value)} />
+                            </div>
+
+                            {/* EN fields */}
+                            <div className="space-y-2">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-[10px] px-2 py-0.5 bg-[#FF006E] text-white font-bold uppercase">EN</span>
+                              </div>
+                              <NeoInput placeholder="Title / Position" value={getT(item.translations, "en").title ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "en", "title", e.target.value)} />
+                              <NeoInput placeholder="Subtitle / Company" value={getT(item.translations, "en").subtitle ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "en", "subtitle", e.target.value)} />
+                              <NeoInput placeholder="Location" value={getT(item.translations, "en").location ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "en", "location", e.target.value)} />
+                              <NeoTextarea placeholder="Description" value={getT(item.translations, "en").description ?? ""} onChange={(e) => updateItemTranslation(sIndex, iIndex, "en", "description", e.target.value)} />
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -894,277 +788,223 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
               );
             })}
 
-            <Button
-              variant="outline"
-              className="w-full border-dashed border-[var(--glass-border-strong)] hover:bg-[var(--glass-subtle)] text-foreground py-8 mt-4"
-              onClick={addSection}
-            >
-              <PlusIcon className="mr-2 h-4 w-4" /> Ajouter une nouvelle section
-            </Button>
-          </CardContent>
-        </Card>
+            {data.sections.length === 0 && (
+              <p className="text-center text-neo-text/50 font-mono text-sm py-8">Aucune section</p>
+            )}
+          </div>
+        </div>
 
-        {/* CARD COMPÉTENCES */}
-        <Card className="bg-card border-[var(--glass-border)] px-0">
-          <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 py-3 border-b border-[var(--glass-border)]">
-            <CardTitle className="text-foreground text-base">Compétences</CardTitle>
-            <Button size="sm" onClick={addSkill} className="bg-lime-300 text-black hover:bg-lime-400 w-full sm:w-auto">
-              <PlusIcon className="h-4 w-4 mr-1" /> Ajouter
-            </Button>
-          </CardHeader>
-          <CardContent className="pt-3 sm:pt-4 space-y-2 sm:space-y-3 px-0 sm:px-4 px-1">
+        {/* Skills */}
+        <NeoCollapsible
+          title="Compétences"
+          icon={GraduationCap}
+          isOpen={skillsOpen}
+          onToggle={() => setSkillsOpen(!skillsOpen)}
+          accentColor="#8B5CF6"
+        >
+          <div className="space-y-3">
+            <NeoButton onClick={addSkill} variant="accent" size="sm" className="w-full">
+              <Plus className="h-4 w-4 mr-1" /> Ajouter une compétence
+            </NeoButton>
+
             {data.skills.map((skill, idx) => (
-              <div
-                key={skill.id || idx}
-                className="border border-[var(--glass-border)] rounded-lg p-2 sm:p-3 bg-[var(--glass-subtle)]"
-              >
-                {/* Header avec catégorie et actions */}
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <Select value={skill.category || "technical"} onValueChange={(v) => updateSkill(idx, "category", v)}>
-                    <SelectTrigger className="w-32 h-8 bg-card border-[var(--glass-border)] text-foreground">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="technical">Technique</SelectItem>
-                      <SelectItem value="software">Logiciel</SelectItem>
-                      <SelectItem value="language">Langue</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <div className="flex items-center gap-1">
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => moveSkill(idx, "up")}
-                      disabled={idx === 0}
-                      className="h-8 w-8"
-                    >
-                      <ArrowUpIcon className="h-4 w-4 text-foreground/50" />
-                    </Button>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => moveSkill(idx, "down")}
-                      disabled={idx === data.skills.length - 1}
-                      className="h-8 w-8"
-                    >
-                      <ArrowDownIcon className="h-4 w-4 text-foreground/50" />
-                    </Button>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => removeSkill(idx)}
-                      className="text-red-400 hover:text-red-300 hover:bg-red-900/20 h-8 w-8"
-                    >
-                      <TrashIcon className="h-4 w-4" />
-                    </Button>
+              <div key={skill.id || idx} className="border-2 border-neo-border bg-neo-surface p-3">
+                <div className="flex items-center justify-between mb-3">
+                  <NeoSelect
+                    value={skill.category || "technical"}
+                    onChange={(v) => updateSkill(idx, "category", v)}
+                    options={[{ value: "technical", label: "Technique" }, { value: "software", label: "Logiciel" }, { value: "language", label: "Langue" }]}
+                    className="w-32"
+                  />
+                  <div className="flex gap-1">
+                    <NeoButton size="icon" variant="ghost" onClick={() => moveSkill(idx, "up")} disabled={idx === 0}>
+                      <ArrowUp className="h-3 w-3" />
+                    </NeoButton>
+                    <NeoButton size="icon" variant="ghost" onClick={() => moveSkill(idx, "down")} disabled={idx === data.skills.length - 1}>
+                      <ArrowDown className="h-3 w-3" />
+                    </NeoButton>
+                    <NeoButton size="icon" variant="ghost" onClick={() => removeSkill(idx)} className="text-[#FF006E]">
+                      <Trash2 className="h-3 w-3" />
+                    </NeoButton>
                   </div>
                 </div>
-
-                {/* Traductions FR/EN */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3">
-                  <div>
-                    <Label className="text-xs text-foreground/60">Nom (FR)</Label>
-                    <Input
-                      value={getSkillT(skill.translations || [], "fr").name || ""}
-                      onChange={(e) => updateSkillTranslation(idx, "fr", e.target.value)}
-                      className="h-8 bg-card border-[var(--glass-border)] text-foreground"
-                    />
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                  <div className="space-y-1">
+                    <label className="text-xs font-mono text-neo-text/60">Nom (FR)</label>
+                    <NeoInput value={getSkillT(skill.translations || [], "fr").name || ""} onChange={(e) => updateSkillTranslation(idx, "fr", e.target.value)} />
                   </div>
-                  <div>
-                    <Label className="text-xs text-foreground/60">Name (EN)</Label>
-                    <Input
-                      value={getSkillT(skill.translations || [], "en").name || ""}
-                      onChange={(e) => updateSkillTranslation(idx, "en", e.target.value)}
-                      className="h-8 bg-card border-[var(--glass-border)] text-foreground"
-                    />
+                  <div className="space-y-1">
+                    <label className="text-xs font-mono text-neo-text/60">Name (EN)</label>
+                    <NeoInput value={getSkillT(skill.translations || [], "en").name || ""} onChange={(e) => updateSkillTranslation(idx, "en", e.target.value)} />
                   </div>
                 </div>
-
-                {/* Niveau et options */}
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
-                    <Label className="text-xs text-foreground/60">Niveau</Label>
-                    <Select value={String(skill.level || 3)} onValueChange={(v) => updateSkill(idx, "level", Number(v))}>
-                      <SelectTrigger className="w-16 h-8 bg-card border-[var(--glass-border)] text-foreground">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {[1, 2, 3, 4, 5].map((n) => (
-                          <SelectItem key={n} value={String(n)}>
-                            {n}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={skill.showAsBar ?? true}
-                      onChange={(e) => updateSkill(idx, "showAsBar", e.target.checked)}
-                      className="w-4 h-4"
+                    <label className="text-xs font-mono text-neo-text/60">Niveau</label>
+                    <NeoSelect
+                      value={String(skill.level || 3)}
+                      onChange={(v) => updateSkill(idx, "level", Number(v))}
+                      options={[1, 2, 3, 4, 5].map((n) => ({ value: String(n), label: String(n) }))}
+                      className="w-16"
                     />
-                    <Label className="text-xs text-foreground/60">Afficher barre</Label>
                   </div>
+                  <label className="flex items-center gap-2 text-xs font-mono text-neo-text/60 cursor-pointer">
+                    <input type="checkbox" checked={skill.showAsBar ?? true} onChange={(e) => updateSkill(idx, "showAsBar", e.target.checked)} className="w-4 h-4" />
+                    Barre
+                  </label>
                 </div>
               </div>
             ))}
-            {data.skills.length === 0 && <p className="text-foreground/50 text-sm text-center py-4">Aucune compétence</p>}
-          </CardContent>
-        </Card>
 
-        <Card className="bg-card border-[var(--glass-border)]">
-          <CardHeader className="flex flex-row items-center justify-between py-3 border-b border-[var(--glass-border)]">
-            <CardTitle className="text-foreground text-base">Versions du CV</CardTitle>
+            {data.skills.length === 0 && (
+              <p className="text-center text-neo-text/50 font-mono text-sm py-4">Aucune compétence</p>
+            )}
+          </div>
+        </NeoCollapsible>
+
+        {/* Versions */}
+        <NeoCollapsible
+          title="Versions"
+          icon={FileText}
+          isOpen={versionsOpen}
+          onToggle={() => setVersionsOpen(!versionsOpen)}
+          accentColor="#FF3300"
+        >
+          <div className="space-y-3">
             <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={fetchVersions}
-                disabled={isLoadingVersions}
-                className="border-[var(--glass-border-strong)] text-foreground h-8"
-              >
-                {isLoadingVersions ? "..." : "Rafraîchir"}
-              </Button>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-2 sm:space-y-3 pt-3 px-0 sm:px-4">
-            <div className="flex gap-2">
-              <Input
-                placeholder="Nom de la version"
-                value={versionName}
-                onChange={(e) => setVersionName(e.target.value)}
-                className="bg-card border-[var(--glass-border)] text-foreground h-9"
-              />
-              <Button
-                onClick={handleSaveVersion}
-                disabled={isSavingVersion}
-                size="sm"
-                className="bg-lime-300 text-black hover:bg-lime-400 h-9 px-4"
-              >
+              <NeoInput value={versionName} onChange={(e) => setVersionName(e.target.value)} placeholder="Nom de la version" className="flex-1" />
+              <NeoButton onClick={handleSaveVersion} disabled={isSavingVersion} variant="accent">
                 {isSavingVersion ? "..." : "Sauver"}
-              </Button>
+              </NeoButton>
+              <NeoButton onClick={fetchVersions} disabled={isLoadingVersions} variant="ghost">
+                <RefreshCw className={cn("h-4 w-4", isLoadingVersions && "animate-spin")} />
+              </NeoButton>
             </div>
-            <div className="space-y-2 max-h-40 overflow-y-auto ">
+
+            <div className="max-h-40 overflow-y-auto space-y-2">
               {versions.map((version) => (
-                <div
-                  key={version.id}
-                  className="flex items-center justify-between rounded-md border border-[var(--glass-border)] px-3 py-2 bg-[var(--glass-subtle)]"
-                >
+                <div key={version.id} className="flex items-center justify-between border-2 border-neo-border bg-neo-surface p-3">
                   <div>
-                    <div className="text-foreground text-sm font-medium">{version.name}</div>
-                    <div className="text-foreground/50 text-xs">{new Date(version.createdAt).toLocaleString("fr-FR")}</div>
+                    <div className="font-bold text-neo-text text-sm">{version.name}</div>
+                    <div className="text-xs font-mono text-neo-text/60">{new Date(version.createdAt).toLocaleString("fr-FR")}</div>
                   </div>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border-[var(--glass-border-strong)] text-foreground h-7 text-xs"
-                    onClick={() => setData(normalizeData(version.data))}
-                  >
-                    Charger
-                  </Button>
+                  <NeoButton size="sm" onClick={() => setData(normalizeData(version.data))}>Charger</NeoButton>
                 </div>
               ))}
               {versions.length === 0 && !isLoadingVersions && (
-                <p className="text-foreground/50 text-sm">Aucune version enregistrée.</p>
+                <p className="text-neo-text/50 font-mono text-sm text-center py-4">Aucune version</p>
               )}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </NeoCollapsible>
       </div>
 
-      {/* Panneau droite - Preview PDF (masqué sur mobile, visible sur desktop) */}
+      {/* Right Panel - Preview (Desktop only) */}
       <div className="hidden lg:flex flex-col lg:h-full overflow-hidden">
-        <Card className="bg-card border-[var(--glass-border)] flex flex-col h-full overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between gap-2 py-4 border-b border-[var(--glass-border)] shrink-0">
-            <CardTitle className="text-foreground text-base">Prévisualisation PDF</CardTitle>
+        <div className="border-2 border-neo-border bg-neo-bg shadow-[4px_4px_0px_0px_var(--neo-shadow)] flex flex-col h-full overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b-2 border-neo-border">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 flex items-center justify-center bg-[#FF006E] border-2 border-neo-border">
+                <Eye className="h-5 w-5 text-white" />
+              </div>
+              <span className="font-black text-neo-text uppercase tracking-tight">Preview PDF</span>
+            </div>
             <div className="flex items-center gap-3">
               <PDFDownloadButton data={data} locale={previewLocale} />
-              <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
-                <TabsList className="bg-[var(--glass-active)] border border-lime-400/50 h-8">
-                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-sm px-3">
-                    FR
-                  </TabsTrigger>
-                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-sm px-3">
-                    EN
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
+              <div className="flex border-2 border-neo-border">
+                <button
+                  onClick={() => setPreviewLocale("fr")}
+                  className={cn(
+                    "px-4 py-2 font-mono text-xs font-bold uppercase",
+                    previewLocale === "fr" ? "bg-neo-accent text-neo-text-inverse" : "bg-neo-surface text-neo-text"
+                  )}
+                >
+                  FR
+                </button>
+                <button
+                  onClick={() => setPreviewLocale("en")}
+                  className={cn(
+                    "px-4 py-2 font-mono text-xs font-bold uppercase border-l-2 border-neo-border",
+                    previewLocale === "en" ? "bg-neo-accent text-neo-text-inverse" : "bg-neo-surface text-neo-text"
+                  )}
+                >
+                  EN
+                </button>
+              </div>
             </div>
-          </CardHeader>
-          <CardContent className="p-0 bg-zinc-900/50 flex-1 min-h-0">
+          </div>
+          <div className="flex-1 min-h-0 bg-neo-surface/50">
             <PDFViewerClient width="100%" height="100%" className="border-none w-full h-full min-h-[300px]">
               <CVDocument data={data} locale={previewLocale} />
             </PDFViewerClient>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
-      {/* Bouton flottant mobile (FAB) draggable - rendu via Portal pour position fixe */}
+      {/* Mobile FAB */}
       {mounted && createPortal(
-        <Button
+        <button
           ref={fabRef}
           onClick={() => !isDragging && setPreviewOpen(true)}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="lg:hidden h-14 w-14 rounded-full bg-lime-400 hover:bg-lime-500 text-black shadow-lg shadow-lime-400/25 touch-none"
+          className="lg:hidden h-14 w-14 flex items-center justify-center bg-neo-accent border-2 border-neo-border shadow-[4px_4px_0px_0px_var(--neo-shadow)] touch-none"
           style={{
             position: 'fixed',
             right: fabPosition.x,
             bottom: fabPosition.y,
             zIndex: 9999,
-            transition: isDragging ? 'none' : 'box-shadow 0.2s',
           }}
         >
-          <EyeIcon className="h-6 w-6" />
-        </Button>,
+          <Eye className="h-6 w-6 text-neo-text-inverse" />
+        </button>,
         document.body
       )}
 
-      {/* Dialog fullscreen pour preview mobile */}
-      <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
-        <DialogContent
-          size="full"
-          hideCloseButton
-          className="!inset-0 !translate-x-0 !translate-y-0 !max-w-none !max-h-none !rounded-none !p-0 !gap-0 flex flex-col"
-        >
-          <DialogHeader className="flex flex-row items-center gap-3 px-4 py-3 border-b border-[var(--glass-border)] shrink-0 bg-card">
-            {/* Bouton fermer à gauche */}
+      {/* Mobile Preview Dialog */}
+      {previewOpen && mounted && createPortal(
+        <div className="fixed inset-0 z-[9999] bg-neo-bg flex flex-col lg:hidden">
+          <div className="flex items-center justify-between p-4 border-b-2 border-neo-border">
             <button
               onClick={() => setPreviewOpen(false)}
-              className="p-2 -ml-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[var(--glass-active)] transition-colors"
+              className="w-10 h-10 flex items-center justify-center border-2 border-neo-border bg-neo-surface"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-              </svg>
+              <X className="h-5 w-5" />
             </button>
-
-            {/* Titre centré avec flex-1 */}
-            <DialogTitle className="text-foreground text-base flex-1">Prévisualisation</DialogTitle>
-
-            {/* Actions à droite */}
-            <div className="flex items-center gap-1.5">
+            <span className="font-black text-neo-text uppercase">Preview</span>
+            <div className="flex items-center gap-2">
               <PDFDownloadButton data={data} locale={previewLocale} iconOnly />
-              <Tabs value={previewLocale} onValueChange={setPreviewLocale}>
-                <TabsList className="bg-[var(--glass-active)] border border-lime-400/50 h-8">
-                  <TabsTrigger value="fr" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
-                    FR
-                  </TabsTrigger>
-                  <TabsTrigger value="en" className="data-[state=active]:bg-lime-400 data-[state=active]:text-black text-xs px-2">
-                    EN
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
+              <div className="flex border-2 border-neo-border">
+                <button
+                  onClick={() => setPreviewLocale("fr")}
+                  className={cn(
+                    "px-3 py-1.5 font-mono text-xs font-bold",
+                    previewLocale === "fr" ? "bg-neo-accent text-neo-text-inverse" : "bg-neo-surface"
+                  )}
+                >
+                  FR
+                </button>
+                <button
+                  onClick={() => setPreviewLocale("en")}
+                  className={cn(
+                    "px-3 py-1.5 font-mono text-xs font-bold border-l-2 border-neo-border",
+                    previewLocale === "en" ? "bg-neo-accent text-neo-text-inverse" : "bg-neo-surface"
+                  )}
+                >
+                  EN
+                </button>
+              </div>
             </div>
-          </DialogHeader>
-          <div className="flex-1 min-h-0 bg-zinc-900/50">
+          </div>
+          <div className="flex-1 min-h-0 bg-neo-surface/50">
             <PDFViewerClient width="100%" height="100%" className="border-none w-full h-full">
               <CVDocument data={data} locale={previewLocale} />
             </PDFViewerClient>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

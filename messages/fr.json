@@ -668,13 +668,14 @@
   "login": {
     "title": "Connexion Admin",
     "subtitle": "Accédez à l'interface d'administration",
-    "emailPlaceholder": "admin@loicghanem.com",
-    "passwordPlaceholder": "••••••••",
+    "emailPlaceholder": "Votre email",
+    "passwordPlaceholder": "Votre mot de passe",
     "email": "Email",
     "password": "Mot de passe",
     "submit": "Se connecter",
     "loading": "Connexion en cours...",
-    "error": "Erreur de connexion"
+    "error": "Erreur de connexion",
+    "adminOnly": "Espace réservé aux administrateurs"
   },
   "admin": {
     "sidebar": {

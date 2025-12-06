@@ -698,13 +698,14 @@
   "login": {
     "title": "Admin Login",
     "subtitle": "Access the administration interface",
-    "emailPlaceholder": "admin@loicghanem.com",
-    "passwordPlaceholder": "••••••••",
+    "emailPlaceholder": "Your email",
+    "passwordPlaceholder": "Your password",
     "email": "Email",
     "password": "Password",
     "submit": "Login",
     "loading": "Logging in...",
-    "error": "Login failed"
+    "error": "Login failed",
+    "adminOnly": "Reserved for administrators"
   },
   "admin": {
     "sidebar": {

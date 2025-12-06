@@ -16,7 +16,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Command,
-  Activity,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -231,37 +230,6 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
           );
         })}
       </nav>
-
-      {/* Quick Stats */}
-      <AnimatePresence>
-        {!isCollapsed && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            className="px-3 py-4 border-t-2 border-neo-border/50"
-          >
-            <div className="p-3 border-2 border-neo-border bg-neo-surface shadow-[3px_3px_0px_0px_var(--neo-shadow)]">
-              <div className="flex items-center gap-2 mb-3">
-                <Activity className="h-4 w-4 text-neo-accent" />
-                <span className="text-xs font-mono font-bold text-neo-accent uppercase tracking-widest">
-                  Activité
-                </span>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-neo-text/60">Vues aujourd'hui</span>
-                  <span className="font-bold text-neo-text">1,234</span>
-                </div>
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-neo-text/60">Publiés</span>
-                  <span className="font-bold text-neo-accent">42</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Footer */}
       <div className="px-3 py-4 border-t-4 border-neo-border bg-neo-surface">
