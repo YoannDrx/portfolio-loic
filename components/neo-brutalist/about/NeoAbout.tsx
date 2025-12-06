@@ -137,10 +137,10 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[70vh]"
+            className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-12 items-center min-h-[70vh]"
           >
-            {/* Colonne GAUCHE - Tout le contenu texte */}
-            <motion.div variants={fadeInUp} className="order-2 lg:order-1">
+            {/* Colonne GAUCHE - Tout le contenu texte (3/5) */}
+            <motion.div variants={fadeInUp} className="order-2 lg:order-1 lg:col-span-3">
               {/* Badge */}
               <div className="font-mono font-bold text-neo-accent mb-6 flex items-center gap-2">
                 <span className="bg-neo-text text-neo-accent px-2 py-1">BIO.01</span>
@@ -159,9 +159,11 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               </h1>
 
               {/* Bio */}
-              <div className="text-lg md:text-xl font-medium leading-relaxed space-y-6 border-l-4 border-neo-accent pl-6 mb-8">
+              <div className="text-base md:text-lg font-medium leading-relaxed space-y-4 border-l-4 border-neo-accent pl-6 mb-8">
                 <p>{t('bio.paragraph1')}</p>
                 <p className="opacity-80">{t('bio.paragraph2')}</p>
+                <p className="opacity-80">{t('bio.paragraph3')}</p>
+                <p className="opacity-70">{t('bio.paragraph4')}</p>
               </div>
 
               {/* CTAs */}
@@ -179,12 +181,12 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               </div>
             </motion.div>
 
-            {/* Colonne DROITE - Photo */}
+            {/* Colonne DROITE - Photo (2/5) */}
             <motion.div
               variants={photoReveal}
-              className="relative order-1 lg:order-2 w-full"
+              className="relative order-1 lg:order-2 w-full lg:col-span-2"
             >
-              <div className="relative max-w-sm lg:max-w-md mx-auto lg:mx-0">
+              <div className="relative max-w-xs lg:max-w-sm mx-auto lg:mx-0">
                 {/* Card avec effet hover comme les cartes d'expertise */}
                 <div className="group border-2 border-neo-border bg-neo-surface overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] hover:border-black">
                   <div className="relative w-full" style={{ paddingBottom: '133%' }}>
