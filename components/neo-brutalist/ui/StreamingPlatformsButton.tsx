@@ -92,27 +92,19 @@ export const StreamingPlatformsButton: React.FC<StreamingPlatformsButtonProps> =
       >
         {/* Main content */}
         <div className="flex flex-col items-center gap-4">
-          {/* Platform icons */}
+          {/* Platform icons - not individually clickable */}
           <motion.div
-            className="flex items-center gap-3"
+            className="flex items-center gap-2 pointer-events-none"
             variants={containerVariants}
           >
             {platforms.map((platform) => (
               <motion.div
                 key={platform.name}
-                className="w-10 h-10 bg-neo-text rounded-sm flex items-center justify-center
-                  transition-colors duration-200"
-                style={{
-                  '--platform-color': platform.color
-                } as React.CSSProperties}
+                className="w-9 h-9 bg-neo-text rounded-sm flex items-center justify-center"
                 variants={iconVariants}
-                whileHover={{
-                  backgroundColor: platform.color,
-                  scale: 1.1,
-                }}
                 title={platform.name}
               >
-                <span className="text-neo-accent group-hover:text-white transition-colors">
+                <span className="text-neo-accent">
                   <platform.icon />
                 </span>
               </motion.div>

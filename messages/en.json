@@ -524,7 +524,10 @@
       "openFullscreen": "Open fullscreen",
       "player": "Player",
       "nowPlaying": "Now playing",
-      "listenOnPlatforms": "Listen on your favorite platforms"
+      "listenOnPlatforms": "Listen on your favorite platforms",
+      "listenDescription": "This album is available on multiple streaming platforms. Click below to listen.",
+      "previousAlbum": "Previous album",
+      "nextAlbum": "Next album"
     }
   },
   "videos": {
