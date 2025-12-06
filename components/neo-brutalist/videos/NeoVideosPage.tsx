@@ -238,15 +238,17 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
               <p className="font-mono text-lg text-neo-text/60 max-w-2xl mx-auto mb-8">
                 {t('videosCta.description')}
               </p>
-              <Link href="/contact">
-                <BrutalistButton
-                  variant="primary"
-                  size="lg"
-                  icon={<ArrowRight className="w-5 h-5" />}
-                >
-                  {t('videosCta.button')}
-                </BrutalistButton>
-              </Link>
+              <div className="flex justify-center">
+                <Link href="/contact">
+                  <BrutalistButton
+                    variant="primary"
+                    size="lg"
+                    icon={<ArrowRight className="w-5 h-5" />}
+                  >
+                    {t('videosCta.button')}
+                  </BrutalistButton>
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>

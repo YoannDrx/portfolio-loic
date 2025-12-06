@@ -3,7 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Download, Mail, MapPin, Music, Headphones, Mic2, Sliders, ArrowRight, Globe, Building2, BookOpen } from 'lucide-react';
+import { Download, Mail, MapPin, Music, Headphones, Mic2, Sliders, ArrowRight, Globe, Building2, BookOpen, Instagram, Linkedin, Youtube, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { BrutalistButton } from '../ui/BrutalistButton';
 import { SectionHeader } from '../ui/SectionHeader';
@@ -86,33 +86,42 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     { val: '15+', label: t('achievements.years') }
   ];
 
-  const languages = [
-    { key: 'french', flag: '🇫🇷' },
-    { key: 'english', flag: '🇬🇧' },
-    { key: 'arabic', flag: '🇱🇧' }
-  ];
-
   const labels = [
     {
       name: 'Infinity Scores',
       publisher: 'Cezame Music Agency',
       since: '2019',
       tracks: '45+',
-      type: 'Label'
+      type: 'Label',
+      links: [
+        { icon: ExternalLink, url: 'https://www.cezamemusic.com/infinity-scores-label-141693.html', label: 'Cezame' },
+        { icon: Linkedin, url: 'https://www.linkedin.com/company/cezame-music-agency/', label: 'Cezame LinkedIn' },
+        { icon: Instagram, url: 'https://www.instagram.com/infinityscores/', label: 'Instagram' },
+        { icon: Linkedin, url: 'https://www.linkedin.com/company/infinity-scores/', label: 'LinkedIn' }
+      ]
     },
     {
       name: 'Montmorency Music',
       publisher: 'MYMA',
       since: '2020',
       tracks: '28+',
-      type: 'Label'
+      type: 'Label',
+      links: [
+        { icon: ExternalLink, url: 'https://www.myma-music.com/', label: 'Website' },
+        { icon: Linkedin, url: 'https://www.linkedin.com/company/mymasync/', label: 'LinkedIn' },
+        { icon: Instagram, url: 'https://www.instagram.com/myma_music/', label: 'Instagram' },
+        { icon: Youtube, url: 'https://www.youtube.com/channel/UCYDtNY3_1G30BVuTK_qbLuQ', label: 'YouTube' }
+      ]
     },
     {
       name: 'Justement Music',
       publisher: 'Self-published',
       since: '2018',
       tracks: '60+',
-      type: 'Label'
+      type: 'Label',
+      links: [
+        { icon: Youtube, url: 'https://www.youtube.com/playlist?list=PLJlRZETQILeOzFn01l_GqRtPoDWGtGdcg', label: 'YouTube' }
+      ]
     }
   ];
 
@@ -323,7 +332,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                     </h3>
 
                     {/* Details */}
-                    <div className="space-y-3 font-mono text-sm">
+                    <div className="space-y-3 font-mono text-sm mb-6">
                       <div className="flex items-center gap-3">
                         <Building2 className="w-4 h-4 text-neo-accent" />
                         <span className="opacity-70">{label.publisher}</span>
@@ -339,68 +348,27 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                       </div>
                     </div>
 
+                    {/* Social Links */}
+                    <div className="flex flex-wrap gap-2 pt-4 border-t-2 border-neo-border">
+                      {label.links.map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
+                          title={link.label}
+                        >
+                          <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
+                        </a>
+                      ))}
+                    </div>
+
                     {/* Decorative corner */}
                     <div className="absolute bottom-0 right-0 w-8 h-8 bg-neo-accent opacity-20 group-hover:opacity-40 transition-opacity" />
                   </NeoCard>
                 </motion.div>
               ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* LANGUAGES */}
-        <section className="py-24 bg-neo-bg">
-          <div className="container mx-auto px-4 md:px-6">
-            <SectionHeader
-              number="05"
-              title={t('languages.title')}
-              subtitle={t('languages.subtitle')}
-            />
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
-            >
-              {languages.map((lang) => {
-                const langData = {
-                  name: t(`languages.${lang.key}.name`),
-                  level: t(`languages.${lang.key}.level`),
-                  percent: t.raw(`languages.${lang.key}.percent`) as number
-                };
-
-                return (
-                  <motion.div key={lang.key} variants={fadeInUp}>
-                    <NeoCard hover="lift" padding="lg" className="text-center group">
-                      {/* Flag */}
-                      <div className="text-5xl mb-4">{lang.flag}</div>
-
-                      {/* Language Name */}
-                      <h3 className="text-xl font-black uppercase tracking-tight mb-2 text-neo-text">
-                        {langData.name}
-                      </h3>
-
-                      {/* Progress Bar */}
-                      <div className="w-full h-4 bg-neo-surface border-2 border-neo-border mb-3">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${langData.percent}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-                          className="h-full bg-neo-accent"
-                        />
-                      </div>
-
-                      {/* Level */}
-                      <span className="font-mono text-sm font-bold uppercase tracking-wider opacity-60">
-                        {langData.level}
-                      </span>
-                    </NeoCard>
-                  </motion.div>
-                );
-              })}
             </motion.div>
           </div>
         </section>

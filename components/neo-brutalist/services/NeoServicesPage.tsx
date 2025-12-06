@@ -224,15 +224,17 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
               <p className="font-mono text-lg text-neo-text-inverse/60 max-w-2xl mx-auto mb-8">
                 {t('cta.description')}
               </p>
-              <Link href="/contact">
-                <BrutalistButton
-                  variant="dark"
-                  size="lg"
-                  icon={<ArrowRight className="w-5 h-5" />}
-                >
-                  {t('hero.ctaSecondary')}
-                </BrutalistButton>
-              </Link>
+              <div className="flex justify-center">
+                <Link href="/contact">
+                  <BrutalistButton
+                    variant="dark"
+                    size="lg"
+                    icon={<ArrowRight className="w-5 h-5" />}
+                  >
+                    {t('hero.ctaSecondary')}
+                  </BrutalistButton>
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>
