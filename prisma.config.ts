@@ -81,12 +81,16 @@ function extractVarFromFile(filePath: string, varName: string): string | undefin
 
 const databaseUrl = getEnvVar("DATABASE_URL");
 
+// For CI environments without DATABASE_URL, use a dummy URL
+// This allows prisma commands like `migrate diff` to work
+const effectiveUrl = databaseUrl || "postgresql://dummy:dummy@localhost:5432/dummy";
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
   datasource: {
-    url: databaseUrl ?? "",
+    url: effectiveUrl,
   },
 });

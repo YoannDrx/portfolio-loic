@@ -1,9 +1,9 @@
-import { notFound } from 'next/navigation';
-import { headers } from 'next/headers';
-import { prisma } from '@/lib/prisma';
-import { auth } from '@/lib/auth';
-import { getTranslations } from 'next-intl/server';
-import NeoServiceDetail from '@/components/neo-brutalist/services/NeoServiceDetail';
+import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { getTranslations } from "next-intl/server";
+import NeoServiceDetail from "@/components/neo-brutalist/services/NeoServiceDetail";
 
 interface PageProps {
   params: Promise<{ id: string; locale: string }>;
@@ -11,20 +11,25 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const services = await prisma.service.findMany({
-    where: { published: true },
-    select: { id: true },
-  });
+  try {
+    const services = await prisma.service.findMany({
+      where: { published: true },
+      select: { id: true },
+    });
 
-  const locales = ['fr', 'en'];
+    const locales = ["fr", "en"];
 
-  // Générer les combinaisons locale + id
-  return services.flatMap((service) =>
-    locales.map((locale) => ({
-      locale,
-      id: service.id,
-    }))
-  );
+    // Générer les combinaisons locale + id
+    return services.flatMap((service) =>
+      locales.map((locale) => ({
+        locale,
+        id: service.id,
+      }))
+    );
+  } catch {
+    // Return empty array if DB is not available (CI build)
+    return [];
+  }
 }
 
 // Configuration du rendu
@@ -33,7 +38,7 @@ export const revalidate = 3600; // Revalider toutes les heures en production
 
 export async function generateMetadata({ params }: PageProps) {
   const { id, locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'services.detail' });
+  const t = await getTranslations({ locale, namespace: "services.detail" });
 
   try {
     const service = await prisma.service.findUnique({
@@ -46,17 +51,17 @@ export async function generateMetadata({ params }: PageProps) {
 
     if (!service) {
       return {
-        title: t('notFound'),
+        title: t("notFound"),
       };
     }
 
     return {
       title: `${service.title} | Loïc Ghanem`,
-      description: `${t('offeredOn')} ${service.date}`,
+      description: `${t("offeredOn")} ${service.date}`,
     };
   } catch {
     return {
-      title: 'Service | Loïc Ghanem',
+      title: "Service | Loïc Ghanem",
     };
   }
 }
@@ -64,7 +69,7 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function ServiceDetailPage({ params, searchParams }: PageProps) {
   const { id, locale } = await params;
   const { preview } = await searchParams;
-  const isPreview = preview === 'true';
+  const isPreview = preview === "true";
 
   // Si mode preview, vérifier l'authentification
   let isAdmin = false;
@@ -72,7 +77,7 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
     try {
       const headersList = await headers();
       const session = await auth.api.getSession({ headers: headersList });
-      isAdmin = session?.user?.role === 'admin';
+      isAdmin = session?.user?.role === "admin";
     } catch {
       isAdmin = false;
     }
@@ -100,7 +105,7 @@ export default async function ServiceDetailPage({ params, searchParams }: PagePr
   // Fetch all services for related section
   const allServices = await prisma.service.findMany({
     where: { published: true },
-    orderBy: { no: 'asc' },
+    orderBy: { no: "asc" },
   });
 
   return (

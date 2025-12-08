@@ -146,8 +146,9 @@ jobs:
       - name: Build Next.js
         run: yarn build
         env:
-          # Fake URL pour le build - pas de connexion DB nécessaire
+          # Fake values for CI build - no real connection needed
           DATABASE_URL: "postgresql://fake:fake@localhost:5432/fake"
+          BETTER_AUTH_SECRET: "ci-build-secret-not-used-in-production"
 
   # ============================================
   # Job 4: CI Success Summary

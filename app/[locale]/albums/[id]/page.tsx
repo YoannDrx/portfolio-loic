@@ -1,9 +1,9 @@
-import { notFound } from 'next/navigation';
-import { headers } from 'next/headers';
-import { prisma } from '@/lib/prisma';
-import { auth } from '@/lib/auth';
-import { getTranslations } from 'next-intl/server';
-import NeoAlbumDetail from '@/components/neo-brutalist/albums/NeoAlbumDetail';
+import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { getTranslations } from "next-intl/server";
+import NeoAlbumDetail from "@/components/neo-brutalist/albums/NeoAlbumDetail";
 
 interface PageProps {
   params: Promise<{ id: string; locale: string }>;
@@ -11,19 +11,24 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const albums = await prisma.album.findMany({
-    where: { published: true },
-    select: { id: true },
-  });
+  try {
+    const albums = await prisma.album.findMany({
+      where: { published: true },
+      select: { id: true },
+    });
 
-  const locales = ['fr', 'en'];
+    const locales = ["fr", "en"];
 
-  return albums.flatMap((album) =>
-    locales.map((locale) => ({
-      locale,
-      id: album.id,
-    }))
-  );
+    return albums.flatMap((album) =>
+      locales.map((locale) => ({
+        locale,
+        id: album.id,
+      }))
+    );
+  } catch {
+    // Return empty array if DB is not available (CI build)
+    return [];
+  }
 }
 
 export const dynamicParams = true;
@@ -31,7 +36,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata({ params }: PageProps) {
   const { id, locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'albums.detail' });
+  const t = await getTranslations({ locale, namespace: "albums.detail" });
 
   try {
     const album = await prisma.album.findUnique({
@@ -45,7 +50,7 @@ export async function generateMetadata({ params }: PageProps) {
 
     if (!album) {
       return {
-        title: t('notFound'),
+        title: t("notFound"),
       };
     }
 
@@ -55,7 +60,7 @@ export async function generateMetadata({ params }: PageProps) {
     };
   } catch {
     return {
-      title: 'Album | Loïc Ghanem',
+      title: "Album | Loïc Ghanem",
     };
   }
 }
@@ -63,7 +68,7 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function AlbumDetailPage({ params, searchParams }: PageProps) {
   const { id, locale } = await params;
   const { preview } = await searchParams;
-  const isPreview = preview === 'true';
+  const isPreview = preview === "true";
 
   // Si mode preview, vérifier l'authentification
   let isAdmin = false;
@@ -71,7 +76,7 @@ export default async function AlbumDetailPage({ params, searchParams }: PageProp
     try {
       const headersList = await headers();
       const session = await auth.api.getSession({ headers: headersList });
-      isAdmin = session?.user?.role === 'admin';
+      isAdmin = session?.user?.role === "admin";
     } catch {
       isAdmin = false;
     }
@@ -98,7 +103,7 @@ export default async function AlbumDetailPage({ params, searchParams }: PageProp
   // Fetch all albums for related section
   const allAlbums = await prisma.album.findMany({
     where: { published: true },
-    orderBy: { sortedDate: 'desc' },
+    orderBy: { sortedDate: "desc" },
   });
 
   return (
