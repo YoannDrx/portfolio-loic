@@ -20,6 +20,12 @@ import {
   ExternalLink,
   Award,
   Trophy,
+  Guitar,
+  Play,
+  Star,
+  Gamepad2,
+  Film,
+  Piano,
 } from "lucide-react";
 import Image from "next/image";
 import { BrutalistButton } from "../ui/BrutalistButton";
@@ -189,6 +195,57 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       icon: Award,
     },
   ];
+
+  const musicianExperience = [
+    {
+      name: "Voyager1",
+      period: t("musicianExperience.voyager1.period"),
+      role: t("musicianExperience.voyager1.role"),
+      genre: t("musicianExperience.voyager1.genre"),
+      description: t("musicianExperience.voyager1.description"),
+      link: "https://www.youtube.com/watch?v=aPJUTPMEukM",
+      isCurrent: true,
+    },
+    {
+      name: "Early Seasons",
+      period: t("musicianExperience.earlySeasons.period"),
+      role: t("musicianExperience.earlySeasons.role"),
+      genre: t("musicianExperience.earlySeasons.genre"),
+      description: t("musicianExperience.earlySeasons.description"),
+      link: "https://www.youtube.com/watch?v=o8c9h2Vzrhw",
+      isCurrent: false,
+    },
+    {
+      name: "Confront",
+      period: t("musicianExperience.confront.period"),
+      role: t("musicianExperience.confront.role"),
+      genre: t("musicianExperience.confront.genre"),
+      description: t("musicianExperience.confront.description"),
+      link: "https://www.youtube.com/watch?v=8m4W1IuVRco",
+      isCurrent: false,
+    },
+    {
+      name: "Rise of the Northstar",
+      period: t("musicianExperience.riseOfTheNorthstar.period"),
+      role: t("musicianExperience.riseOfTheNorthstar.role"),
+      genre: t("musicianExperience.riseOfTheNorthstar.genre"),
+      description: t("musicianExperience.riseOfTheNorthstar.description"),
+      link: "https://www.youtube.com/watch?v=NulC3-rQX24",
+      isCurrent: false,
+    },
+  ];
+
+  const personalInfo = {
+    instruments: [
+      { name: "Piano", icon: Piano },
+      { name: "Guitar", icon: Guitar },
+    ],
+    interests: [
+      { name: locale === "fr" ? "Musique" : "Music", icon: Music },
+      { name: locale === "fr" ? "Cinéma" : "Cinema", icon: Film },
+      { name: locale === "fr" ? "Jeux Vidéo" : "Video Games", icon: Gamepad2 },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -423,11 +480,154 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
         {/* TIMELINE - Parcours Professionnel */}
         <NeoTimeline />
 
+        {/* MUSICIAN EXPERIENCE */}
+        <section className="container mx-auto px-4 md:px-6 py-24">
+          <SectionHeader
+            number="04"
+            title={t("musicianExperience.title")}
+            subtitle={t("musicianExperience.subtitle")}
+          />
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {musicianExperience.map((project, i) => (
+              <motion.div key={i} variants={fadeInUp}>
+                <NeoCard hover="lift" padding="lg" className="h-full group relative">
+                  {/* Current badge */}
+                  {project.isCurrent && (
+                    <div className="absolute -top-3 -right-3 bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono text-xs font-bold border-2 border-neo-border">
+                      {locale === "fr" ? "ACTUEL" : "CURRENT"}
+                    </div>
+                  )}
+
+                  {/* Period */}
+                  <div className="font-mono text-xs text-neo-accent mb-2">{project.period}</div>
+
+                  {/* Project name */}
+                  <h3 className="text-xl font-black uppercase tracking-tight mb-2 text-neo-text group-hover:text-neo-accent transition-colors">
+                    {project.name}
+                  </h3>
+
+                  {/* Role */}
+                  <p className="font-mono text-sm text-neo-text/70 mb-1">{project.role}</p>
+
+                  {/* Genre badge */}
+                  <div className="inline-block bg-neo-text text-neo-text-inverse px-2 py-1 font-mono text-xs mb-4">
+                    {project.genre}
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm opacity-60 mb-4">{project.description}</p>
+
+                  {/* Listen link */}
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-sm font-bold text-neo-accent hover:text-neo-text transition-colors"
+                  >
+                    <Play className="w-4 h-4" />
+                    {t("musicianExperience.listenHere")}
+                  </a>
+                </NeoCard>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* PERSONAL INFO - Instruments & Interests */}
+        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-16">
+          <div className="container mx-auto px-4 md:px-6">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-2 gap-12"
+            >
+              {/* Instruments */}
+              <motion.div variants={fadeInUp}>
+                <h3 className="font-mono text-sm text-neo-accent mb-4 uppercase tracking-widest">
+                  {locale === "fr" ? "Instruments" : "Instruments"}
+                </h3>
+                <div className="flex flex-wrap gap-4">
+                  {personalInfo.instruments.map((instrument, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 bg-neo-text-inverse/10 border-2 border-neo-text-inverse/20 px-4 py-3"
+                    >
+                      <instrument.icon className="w-6 h-6 text-neo-accent" />
+                      <span className="font-bold text-lg">{instrument.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Interests */}
+              <motion.div variants={fadeInUp}>
+                <h3 className="font-mono text-sm text-neo-accent mb-4 uppercase tracking-widest">
+                  {locale === "fr" ? "Centres d'intérêt" : "Interests"}
+                </h3>
+                <div className="flex flex-wrap gap-4">
+                  {personalInfo.interests.map((interest, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 bg-neo-text-inverse/10 border-2 border-neo-text-inverse/20 px-4 py-3"
+                    >
+                      <interest.icon className="w-6 h-6 text-neo-accent" />
+                      <span className="font-bold text-lg">{interest.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* TESTIMONIALS - SoundBetter */}
+        <section className="container mx-auto px-4 md:px-6 py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <div className="font-mono font-bold text-neo-accent mb-4 flex items-center justify-center gap-2">
+              <Star className="w-5 h-5" />
+              <span>TESTIMONIALS</span>
+              <Star className="w-5 h-5" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4 text-neo-text">
+              {locale === "fr" ? "Avis Clients" : "Client Reviews"}
+            </h2>
+            <p className="font-mono text-lg mb-8 max-w-2xl mx-auto text-neo-text/60">
+              {locale === "fr"
+                ? "Découvrez les retours de mes clients sur SoundBetter"
+                : "Check out the reviews from my clients on SoundBetter"}
+            </p>
+            <a
+              href="https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BrutalistButton variant="primary" size="lg" icon={<ExternalLink size={18} />}>
+                {locale === "fr" ? "Voir les avis sur SoundBetter" : "View Reviews on SoundBetter"}
+              </BrutalistButton>
+            </a>
+          </motion.div>
+        </section>
+
         {/* LABELS & PUBLISHERS - Enriched */}
         <section className="py-24 bg-neo-surface">
           <div className="container mx-auto px-4 md:px-6">
             <SectionHeader
-              number="05"
+              number="06"
               title={t("labelsPublishers.title")}
               subtitle={t("labelsPublishers.subtitle")}
             />
