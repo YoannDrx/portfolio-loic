@@ -1,6 +1,9 @@
-import { prisma } from '@/lib/prisma';
-import { NeoServicesPage } from '@/components/neo-brutalist/services/NeoServicesPage';
-import { getTranslations } from 'next-intl/server';
+import { prisma } from "@/lib/prisma";
+import { NeoServicesPage } from "@/components/neo-brutalist/services/NeoServicesPage";
+import { getTranslations } from "next-intl/server";
+
+// Force dynamic rendering to avoid DB calls during static build
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -12,11 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function ServicesPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: _locale } = await params;
 
   // Récupérer tous les services publiés, triés par ordre
@@ -25,7 +24,7 @@ export default async function ServicesPage({
       published: true,
     },
     orderBy: {
-      order: 'asc',
+      order: "asc",
     },
     select: {
       id: true,

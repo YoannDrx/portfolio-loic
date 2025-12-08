@@ -1,6 +1,9 @@
-import { prisma } from '@/lib/prisma';
-import { NeoVideosPage } from '@/components/neo-brutalist/videos/NeoVideosPage';
-import { getTranslations } from 'next-intl/server';
+import { prisma } from "@/lib/prisma";
+import { NeoVideosPage } from "@/components/neo-brutalist/videos/NeoVideosPage";
+import { getTranslations } from "next-intl/server";
+
+// Force dynamic rendering to avoid DB calls during static build
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -21,7 +24,7 @@ export default async function VideosPage({ params }: { params: Promise<{ locale:
       published: true,
     },
     orderBy: {
-      createdAt: 'desc',
+      createdAt: "desc",
     },
     select: {
       id: true,

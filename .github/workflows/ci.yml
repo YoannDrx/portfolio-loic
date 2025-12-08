@@ -96,9 +96,18 @@ jobs:
       - name: Check for schema drift
         run: |
           echo "🔍 Checking for schema drift..."
+          # Use shadow database URL for migrate diff (same as test DB)
+          SHADOW_DB="postgresql://test:test@localhost:5432/test_shadow"
+
+          # Create shadow database
+          PGPASSWORD=test psql -h localhost -U test -d test -c "DROP DATABASE IF EXISTS test_shadow;" || true
+          PGPASSWORD=test psql -h localhost -U test -d test -c "CREATE DATABASE test_shadow;" || true
+
+          # Run migrate diff with shadow database
           if ! npx prisma migrate diff \
             --from-migrations ./prisma/migrations \
             --to-schema-datamodel ./prisma/schema.prisma \
+            --shadow-database-url "$SHADOW_DB" \
             --exit-code 2>/dev/null; then
             echo ""
             echo "❌ Schema drift detected!"
