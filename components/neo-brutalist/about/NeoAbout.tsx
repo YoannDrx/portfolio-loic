@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
@@ -26,6 +26,8 @@ import {
   Gamepad2,
   Film,
   Piano,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
 import { BrutalistButton } from "../ui/BrutalistButton";
@@ -72,6 +74,182 @@ const photoReveal = {
       delay: 0.2,
     },
   },
+};
+
+// Testimonials Carousel Component
+interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  avatar: string;
+  text: string;
+  date: string;
+}
+
+const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
+  <div className="bg-neo-bg border-2 border-neo-border p-6 md:p-8 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--neo-accent)]">
+    {/* Quote & Stars */}
+    <div className="flex items-start justify-between mb-4">
+      <div className="text-5xl md:text-6xl font-serif text-neo-accent/30 leading-none -mt-2">
+        &ldquo;
+      </div>
+      <div className="flex gap-0.5">
+        {[...Array(5)].map((_, starIdx) => (
+          <Star key={starIdx} className="w-4 h-4 fill-neo-accent text-neo-accent" />
+        ))}
+      </div>
+    </div>
+
+    {/* Text */}
+    <p className="text-sm md:text-base text-neo-text/80 mb-6 italic leading-relaxed line-clamp-4">
+      {testimonial.text}
+    </p>
+
+    {/* Author */}
+    <div className="flex items-center gap-3 pt-4 border-t-2 border-neo-border">
+      <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-neo-accent flex-shrink-0">
+        <Image src={testimonial.avatar} alt={testimonial.name} fill className="object-cover" />
+      </div>
+      <div className="min-w-0">
+        <h4 className="font-bold text-neo-text truncate">{testimonial.name}</h4>
+        <p className="font-mono text-xs text-neo-text/60 truncate">{testimonial.role}</p>
+        <p className="font-mono text-xs text-neo-accent">{testimonial.date}</p>
+      </div>
+    </div>
+  </div>
+);
+
+const TestimonialsCarousel = ({
+  testimonials,
+  locale,
+}: {
+  testimonials: Testimonial[];
+  locale: string;
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Duplicate array for infinite loop effect
+  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  const offset = testimonials.length; // Start from middle set
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, [testimonials.length]);
+
+  // Auto-scroll lent (6 secondes)
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(nextSlide, 6000);
+    return () => clearInterval(interval);
+  }, [isPaused, nextSlide]);
+
+  // Calculate the translateX percentage
+  // Each card is ~33.33% width on desktop with gap
+  const getTranslateX = () => {
+    // We show 3 cards at a time, so each step moves by 1 card width (~33.33%)
+    return `calc(-${(currentIndex + offset) * 33.333}% - ${(currentIndex + offset) * 8}px)`;
+  };
+
+  return (
+    <section
+      className="py-24 bg-neo-surface overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+          <div>
+            <div className="font-mono font-bold text-neo-accent mb-4 flex items-center gap-2">
+              <span className="bg-neo-text text-neo-accent px-2 py-1">05</span>
+              <span className="text-neo-text/60">
+                // {locale === "fr" ? "AVIS CLIENTS" : "CLIENT REVIEWS"}
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-neo-text">
+              {locale === "fr" ? "Témoignages" : "Testimonials"}
+            </h2>
+            <p className="font-mono text-sm text-neo-text/60 mt-2 max-w-md">
+              {locale === "fr"
+                ? "Retours de mes collaborateurs sur SoundBetter"
+                : "Feedback from my collaborators on SoundBetter"}
+            </p>
+          </div>
+
+          {/* Navigation Arrows */}
+          <div className="flex items-center gap-3 mt-6 md:mt-0">
+            <button
+              onClick={prevSlide}
+              className="w-12 h-12 bg-neo-text text-neo-text-inverse flex items-center justify-center border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text transition-colors"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="w-12 h-12 bg-neo-text text-neo-text-inverse flex items-center justify-center border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text transition-colors"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+
+        {/* Carousel - Sliding container */}
+        <div className="relative overflow-hidden py-2 -my-2">
+          <motion.div
+            className="flex gap-6 pt-2"
+            animate={{ x: getTranslateX() }}
+            transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+          >
+            {extendedTestimonials.map((testimonial, index) => (
+              <div
+                key={`${testimonial.id}-${index}`}
+                className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0"
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Progress Dots */}
+        <div className="flex justify-center gap-3 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`h-3 border-2 border-neo-border transition-all duration-300 ${
+                index === currentIndex ? "w-10 bg-neo-accent" : "w-3 bg-neo-bg hover:bg-neo-text/20"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* CTA SoundBetter - Orange accent button */}
+        <div className="text-center mt-12">
+          <a
+            href="https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-neo-accent text-neo-text-inverse px-8 py-4 font-bold uppercase tracking-wide border-2 border-neo-border hover:bg-neo-text hover:text-neo-accent transition-colors shadow-[4px_4px_0px_0px_var(--neo-text)] hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+          >
+            <Star className="w-5 h-5" />
+            {locale === "fr"
+              ? "Voir tous les avis sur SoundBetter"
+              : "View All Reviews on SoundBetter"}
+            <ExternalLink className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export const NeoAbout = ({ locale }: { locale: string }) => {
@@ -246,6 +424,49 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       { name: locale === "fr" ? "Jeux Vidéo" : "Video Games", icon: Gamepad2 },
     ],
   };
+
+  const testimonials = [
+    {
+      id: 1,
+      name: "Wild Fox",
+      role: "Topliner, Singer, Writer",
+      avatar: "/img/testimonials/1.jpg",
+      text: "Loïc is very easy and nice to work with! talented producer/songwriter. Hope to work with him again on other projects!",
+      date: "2 months ago",
+    },
+    {
+      id: 2,
+      name: "Amelia Bushell",
+      role: "Vocalist",
+      avatar: "/img/testimonials/2.jpg",
+      text: "Very fun working with Loïc. He knows exactly what he wants and together we made something awesome! He gave great feedback and was a very nice person. I hope to work together again!",
+      date: "4 months ago",
+    },
+    {
+      id: 3,
+      name: "Julaiah",
+      role: "Topliner, Singer, Writer",
+      avatar: "/img/testimonials/3.jpg",
+      text: "I had a great experience working with Loic! His production is well-elaborated, current and rich in sound! He is really supportive when working with artists, the communication is great and the whole process is exceptionally professional! Looking forward to working on more projects together!",
+      date: "about a year ago",
+    },
+    {
+      id: 4,
+      name: "Quincy Thompson",
+      role: "Songwriter-Vocalist-Producer",
+      avatar: "/img/testimonials/16.jpg",
+      text: "Great producer even better collaborator 😎10",
+      date: "2 years ago",
+    },
+    {
+      id: 5,
+      name: "Britney Jayy",
+      role: "Songwriter/Singer/R&B lover",
+      avatar: "/img/testimonials/11.jpg",
+      text: "AMAZING, patient, and super professional <3",
+      date: "2 years ago",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -589,45 +810,14 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           </div>
         </section>
 
-        {/* TESTIMONIALS - SoundBetter */}
-        <section className="container mx-auto px-4 md:px-6 py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <div className="font-mono font-bold text-neo-accent mb-4 flex items-center justify-center gap-2">
-              <Star className="w-5 h-5" />
-              <span>TESTIMONIALS</span>
-              <Star className="w-5 h-5" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4 text-neo-text">
-              {locale === "fr" ? "Avis Clients" : "Client Reviews"}
-            </h2>
-            <p className="font-mono text-lg mb-8 max-w-2xl mx-auto text-neo-text/60">
-              {locale === "fr"
-                ? "Découvrez les retours de mes clients sur SoundBetter"
-                : "Check out the reviews from my clients on SoundBetter"}
-            </p>
-            <a
-              href="https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <BrutalistButton variant="primary" size="lg" icon={<ExternalLink size={18} />}>
-                {locale === "fr" ? "Voir les avis sur SoundBetter" : "View Reviews on SoundBetter"}
-              </BrutalistButton>
-            </a>
-          </motion.div>
-        </section>
+        {/* TESTIMONIALS - SoundBetter Carousel */}
+        <TestimonialsCarousel testimonials={testimonials} locale={locale} />
 
         {/* LABELS & PUBLISHERS - Enriched */}
         <section className="py-24 bg-neo-surface">
           <div className="container mx-auto px-4 md:px-6">
             <SectionHeader
-              number="06"
+              number="07"
               title={t("labelsPublishers.title")}
               subtitle={t("labelsPublishers.subtitle")}
             />

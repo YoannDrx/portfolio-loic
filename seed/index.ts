@@ -395,6 +395,36 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
       throw error;
     }
   },
+
+  testimonials: async () => {
+    const { force } = parseArgs();
+    const data = await loadJSON<Record<string, unknown>>("testimonials");
+    if (data.length === 0) return 0;
+    const transformed = transformDates(data);
+    let localCreated = 0;
+
+    for (const item of transformed) {
+      const testimonialData = item as { id: string } & Record<string, unknown>;
+      const existing = await prisma.testimonial.findUnique({ where: { id: testimonialData.id } });
+
+      if (!existing) {
+        await prisma.testimonial.create({
+          data: testimonialData as Parameters<typeof prisma.testimonial.create>[0]["data"],
+        });
+        localCreated++;
+        createdCount++;
+      } else if (force) {
+        await prisma.testimonial.update({
+          where: { id: testimonialData.id },
+          data: testimonialData as Parameters<typeof prisma.testimonial.update>[0]["data"],
+        });
+        updatedCount++;
+      } else {
+        skippedCount++;
+      }
+    }
+    return localCreated;
+  },
 };
 
 // === SEEDING PRINCIPAL ===

@@ -4,7 +4,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -176,33 +175,33 @@ model NavigationItem {
 }
 
 model SiteSettings {
-  id        String   @id @default("site_settings")
+  id              String  @id @default("site_settings")
   // Informations générales
-  siteTitle       String   @default("Loïc Ghanem | Music Composer & Producer")
-  siteDescription String   @default("Award-winning music composer and producer")
-  contactEmail    String   @default("contact@loicghanem.com")
+  siteTitle       String  @default("Loïc Ghanem | Music Composer & Producer")
+  siteDescription String  @default("Award-winning music composer and producer")
+  contactEmail    String  @default("contact@loicghanem.com")
   contactPhone    String?
-  location        String   @default("Paris, France")
+  location        String  @default("Paris, France")
   footerBio       String?
 
   // Réseaux sociaux
-  socialYoutube     String?
-  socialInstagram   String?
-  socialFacebook    String?
-  socialTwitter     String?
-  socialLinkedin    String?
-  socialSoundcloud  String?
-  socialSpotify     String?
-  socialAppleMusic  String?
-  socialBandcamp    String?
-  socialTiktok      String?
+  socialYoutube    String?
+  socialInstagram  String?
+  socialFacebook   String?
+  socialTwitter    String?
+  socialLinkedin   String?
+  socialSoundcloud String?
+  socialSpotify    String?
+  socialAppleMusic String?
+  socialBandcamp   String?
+  socialTiktok     String?
 
   // Paramètres de contenu
-  homepageFeaturedAlbumsCount Int @default(6)
-  homepageLatestVideosCount   Int @default(6)
-  albumsPerPage               Int @default(12)
-  videosPerPage               Int @default(12)
-  servicesPerPage             Int @default(10)
+  homepageFeaturedAlbumsCount Int    @default(6)
+  homepageLatestVideosCount   Int    @default(6)
+  albumsPerPage               Int    @default(12)
+  videosPerPage               Int    @default(12)
+  servicesPerPage             Int    @default(10)
   defaultAlbumSort            String @default("date_desc")
   defaultVideoSort            String @default("date_desc")
 
@@ -223,8 +222,8 @@ model SiteSettings {
 }
 
 model ResumeEntry {
-  id            String   @id @default(cuid())
-  type          String   // EXPERIENCE, EDUCATION, SKILL, LANGUAGE, INTEREST, KNOWLEDGE
+  id            String  @id @default(cuid())
+  type          String // EXPERIENCE, EDUCATION, SKILL, LANGUAGE, INTEREST, KNOWLEDGE
   titleEn       String
   titleFr       String
   subtitleEn    String?
@@ -233,16 +232,16 @@ model ResumeEntry {
   dateRangeFr   String?
   descriptionEn String?
   descriptionFr String?
-  value         Int?     // 0-100 for progress bars
+  value         Int? // 0-100 for progress bars
   link          String?
-  order         Int      @default(0)
-  published     Boolean  @default(true)
-  
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  
-  createdById   String?
-  createdBy     User?    @relation(fields: [createdById], references: [id])
+  order         Int     @default(0)
+  published     Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdById String?
+  createdBy   User?   @relation(fields: [createdById], references: [id])
 
   @@index([type, order])
   @@map("resume_entries")
@@ -287,17 +286,17 @@ model ResumeTheme {
 }
 
 model ResumeSection {
-  id         String   @id @default(cuid())
-  slug       String   @unique
-  titleEn    String?
-  titleFr    String?
-  type       String   // PROFILE, TIMELINE, SKILL_BARS, TAG_CLOUD, SIDEBAR_LIST, QUOTE, STATS
-  entryType  String?
-  entryIds   Json?
-  order      Int      @default(0)
-  published  Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  titleEn   String?
+  titleFr   String?
+  type      String // PROFILE, TIMELINE, SKILL_BARS, TAG_CLOUD, SIDEBAR_LIST, QUOTE, STATS
+  entryType String?
+  entryIds  Json?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([published, order])
   @@map("resume_sections")
@@ -308,18 +307,18 @@ model ResumeSection {
 // ============================================
 
 model CV {
-  id        String   @id @default(cuid())
-  isActive  Boolean  @default(true)
+  id       String  @id @default(cuid())
+  isActive Boolean @default(true)
 
   // Personal info
-  fullName   String?
-  badgeFr    String?
-  badgeEn    String?
-  photo      String?
-  phone      String?
-  email      String?
-  website    String?
-  location   String?
+  fullName    String?
+  badgeFr     String?
+  badgeEn     String?
+  photo       String?
+  phone       String?
+  email       String?
+  website     String?
+  location    String?
   linkedInUrl String?
 
   // Bio/Headline (multilingual)
@@ -368,7 +367,7 @@ model CVSection {
 }
 
 model CVSectionTranslation {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   sectionId String
   section   CVSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   locale    String
@@ -399,13 +398,13 @@ model CVItem {
 }
 
 model CVItemTranslation {
-  id        String  @id @default(cuid())
-  itemId    String
-  item      CVItem  @relation(fields: [itemId], references: [id], onDelete: Cascade)
-  locale    String
-  title     String
-  subtitle  String?
-  location  String?
+  id          String  @id @default(cuid())
+  itemId      String
+  item        CVItem  @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  locale      String
+  title       String
+  subtitle    String?
+  location    String?
   description String? @db.Text
 
   @@unique([itemId, locale])
@@ -445,13 +444,13 @@ model CVSkillTranslation {
 }
 
 model CVSocialLink {
-  id       String @id @default(cuid())
-  cvId     String
-  cv       CV     @relation(fields: [cvId], references: [id], onDelete: Cascade)
-  platform String
-  url      String
-  label    String?
-  order    Int    @default(0)
+  id        String   @id @default(cuid())
+  cvId      String
+  cv        CV       @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  platform  String
+  url       String
+  label     String?
+  order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -477,11 +476,11 @@ model CVVersion {
 
 model Notification {
   id        String   @id @default(cuid())
-  type      String   // "new_content" | "contact_message"
+  type      String // "new_content" | "contact_message"
   title     String
   message   String
   read      Boolean  @default(false)
-  data      Json?    // { contentType: "album", contentId: "xxx", locale: "fr" }
+  data      Json? // { contentType: "album", contentId: "xxx", locale: "fr" }
   createdAt DateTime @default(now())
 
   @@index([read, createdAt(sort: Desc)])
@@ -494,14 +493,14 @@ model Notification {
 
 model ActivityLog {
   id          String   @id @default(cuid())
-  type        String   // "auth" | "export" | "crud" | "settings"
-  action      String   // "login" | "logout" | "create" | "update" | "delete" | "export" | "password_change" | "email_change"
+  type        String // "auth" | "export" | "crud" | "settings"
+  action      String // "login" | "logout" | "create" | "update" | "delete" | "export" | "password_change" | "email_change"
   userId      String?
   user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  entityType  String?  // "album" | "video" | "service" | null
+  entityType  String? // "album" | "video" | "service" | null
   entityId    String?
-  entityTitle String?  // Titre du contenu pour affichage
-  details     Json?    // Détails supplémentaires
+  entityTitle String? // Titre du contenu pour affichage
+  details     Json? // Détails supplémentaires
   ipAddress   String?
   userAgent   String?
   createdAt   DateTime @default(now())
@@ -516,14 +515,37 @@ model ExportLog {
   id        String   @id @default(cuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type      String   // "albums" | "videos" | "services" | "contacts"
-  format    String   // "csv" | "json" | "txt"
+  type      String // "albums" | "videos" | "services" | "contacts"
+  format    String // "csv" | "json" | "txt"
   filename  String
   content   String   @db.Text // Contenu de l'export stocké
-  fileSize  Int      // Taille en bytes
+  fileSize  Int // Taille en bytes
   createdAt DateTime @default(now())
 
   @@index([userId])
   @@index([createdAt(sort: Desc)])
   @@map("export_logs")
+}
+
+// ============================================
+// Testimonials (Avis clients)
+// ============================================
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String // Nom du client
+  role      String // Role/titre (ex: "Vocalist", "Topliner")
+  avatar    String? // Chemin vers l'image avatar
+  text      String   @db.Text // Contenu du témoignage
+  date      String? // Date affichée (ex: "2 months ago")
+  rating    Int      @default(5) // Note sur 5
+  source    String? // Source (ex: "SoundBetter")
+  sourceUrl String? // URL vers la source
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([published, order])
+  @@map("testimonials")
 }
