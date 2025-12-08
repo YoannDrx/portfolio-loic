@@ -20,6 +20,8 @@ export default async function EditAlbumPage({
   // Transform null values to undefined for form compatibility
   const formData = {
     ...album,
+    spotifyEmbed: album.spotifyEmbed ?? undefined,
+    youtubeEmbed: album.youtubeEmbed ?? undefined,
     collabName: album.collabName ?? undefined,
     collabLink: album.collabLink ?? undefined,
   };

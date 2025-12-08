@@ -149,7 +149,7 @@ const getCommandItems = (locale: string, _router: ReturnType<typeof useRouter>):
    CATEGORY HEADERS
    ============================================ */
 
-const categoryLabels: Record<string, { label: string; icon: typeof Hash }> = {
+const categoryLabels: Record<string, { label: string; icon: typeof ArrowRight }> = {
   navigation: { label: "Navigation", icon: ArrowRight },
   action: { label: "Actions rapides", icon: Plus },
   recent: { label: "Récemment visités", icon: Clock },

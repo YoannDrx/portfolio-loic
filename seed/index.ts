@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
 import type { SeedEntity } from "./utils";
 import { logger, loadJSON, transformDates, parseArgs, SEED_ORDER } from "./utils";
@@ -48,7 +49,7 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     await prisma.navigationItem.createMany({
-      data: transformed as Parameters<typeof prisma.navigationItem.createMany>[0]["data"],
+      data: transformed as Prisma.NavigationItemCreateManyInput[],
       skipDuplicates: true,
     });
     return data.length;

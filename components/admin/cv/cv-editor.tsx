@@ -524,7 +524,7 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
     className = "",
   }: {
     children: React.ReactNode;
-    onClick?: () => void;
+    onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
     disabled?: boolean;
     variant?: "default" | "accent" | "danger" | "ghost";
     size?: "default" | "sm" | "icon";
@@ -916,8 +916,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                       <NeoButton
                         size="icon"
                         variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={(e?: React.MouseEvent<HTMLButtonElement>) => {
+                          e?.stopPropagation();
                           moveSection(sIndex, "up");
                         }}
                         disabled={sIndex === 0}
@@ -927,8 +927,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                       <NeoButton
                         size="icon"
                         variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={(e?: React.MouseEvent<HTMLButtonElement>) => {
+                          e?.stopPropagation();
                           moveSection(sIndex, "down");
                         }}
                         disabled={sIndex === data.sections.length - 1}
@@ -938,8 +938,8 @@ export function CVEditor({ initialData, locale }: { initialData: CVData | null; 
                       <NeoButton
                         size="icon"
                         variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={(e?: React.MouseEvent<HTMLButtonElement>) => {
+                          e?.stopPropagation();
                           removeSection(sIndex);
                         }}
                         className="text-[#FF006E] hover:text-[#FF006E]"
