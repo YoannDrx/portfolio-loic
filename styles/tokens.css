@@ -1,0 +1,465 @@
+/* ============================================
+   DESIGN SYSTEM TOKENS V3 - Neo-Brutalist
+   Light/Dark Mode × 12 Palettes
+   ============================================ */
+
+/* ============================================
+   FALLBACK - Palette par défaut (AVANT les palettes)
+   ============================================ */
+:root {
+  --palette-accent: #FF3300;
+  --palette-accent-rgb: 255, 51, 0;
+  --palette-accent-hover: #E62E00;
+}
+
+/* ============================================
+   PALETTES DE COULEURS (12 thèmes)
+   Définissent UNIQUEMENT l'accent
+   ============================================ */
+
+/* NEONS VIFS (6) */
+[data-palette="orange"] {
+  --palette-accent: #FF3300;
+  --palette-accent-rgb: 255, 51, 0;
+  --palette-accent-hover: #E62E00;
+}
+
+[data-palette="cyan"] {
+  --palette-accent: #00F0FF;
+  --palette-accent-rgb: 0, 240, 255;
+  --palette-accent-hover: #00D4E0;
+}
+
+[data-palette="magenta"] {
+  --palette-accent: #FF006E;
+  --palette-accent-rgb: 255, 0, 110;
+  --palette-accent-hover: #E00062;
+}
+
+[data-palette="lime"] {
+  --palette-accent: #D5FF0A;
+  --palette-accent-rgb: 213, 255, 10;
+  --palette-accent-hover: #C2E600;
+}
+
+[data-palette="purple"] {
+  --palette-accent: #8B5CF6;
+  --palette-accent-rgb: 139, 92, 246;
+  --palette-accent-hover: #7C4FE0;
+}
+
+[data-palette="pink"] {
+  --palette-accent: #FF69B4;
+  --palette-accent-rgb: 255, 105, 180;
+  --palette-accent-hover: #FF5AA0;
+}
+
+/* TONS SOBRES (6) */
+[data-palette="slate"] {
+  --palette-accent: #64748B;
+  --palette-accent-rgb: 100, 116, 139;
+  --palette-accent-hover: #475569;
+}
+
+[data-palette="stone"] {
+  --palette-accent: #78716C;
+  --palette-accent-rgb: 120, 113, 108;
+  --palette-accent-hover: #57534E;
+}
+
+[data-palette="indigo"] {
+  --palette-accent: #4F46E5;
+  --palette-accent-rgb: 79, 70, 229;
+  --palette-accent-hover: #4338CA;
+}
+
+[data-palette="teal"] {
+  --palette-accent: #14B8A6;
+  --palette-accent-rgb: 20, 184, 166;
+  --palette-accent-hover: #0D9488;
+}
+
+[data-palette="ocean"] {
+  --palette-accent: #0EA5E9;
+  --palette-accent-rgb: 14, 165, 233;
+  --palette-accent-hover: #0284C7;
+}
+
+[data-palette="charcoal"] {
+  --palette-accent: #374151;
+  --palette-accent-rgb: 55, 65, 81;
+  --palette-accent-hover: #1F2937;
+}
+
+/* ============================================
+   MODE LIGHT (défaut) - Fond clair, texte noir
+   ============================================ */
+:root,
+.light {
+  /* Neo-Brutalist Core */
+  --neo-bg: #FAFAFA;
+  --neo-bg-alt: #F0F0F0;
+  --neo-text: #000000;
+  --neo-text-inverse: #FFFFFF;
+  --neo-border: #000000;
+  --neo-shadow: #000000;
+  --neo-surface: #FFFFFF;
+  --neo-surface-hover: #F5F5F5;
+
+  /* Accent hérite de la palette */
+  --neo-accent: var(--palette-accent);
+  --neo-accent-rgb: var(--palette-accent-rgb);
+  --neo-accent-hover: var(--palette-accent-hover);
+
+  /* Sections contrastées */
+  --neo-contrast-bg: #1a1a1a;
+  --neo-contrast-text: #FFFFFF;
+  --neo-contrast-text-muted: rgba(255, 255, 255, 0.6);
+  --neo-contrast-border: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   MODE DARK - Fond noir pur, texte blanc
+   ============================================ */
+.dark {
+  /* Neo-Brutalist Core */
+  --neo-bg: #0F0F0F;
+  --neo-bg-alt: #1A1A1A;
+  --neo-text: #FFFFFF;
+  --neo-text-inverse: #000000;
+  --neo-border: #FFFFFF;
+  --neo-shadow: #FFFFFF;
+  --neo-surface: #1F1F1F;
+  --neo-surface-hover: #2A2A2A;
+
+  /* Accent hérite de la palette */
+  --neo-accent: var(--palette-accent);
+  --neo-accent-rgb: var(--palette-accent-rgb);
+  --neo-accent-hover: var(--palette-accent-hover);
+
+  /* Sections contrastées (inversées en dark) */
+  --neo-contrast-bg: #FAFAFA;
+  --neo-contrast-text: #000000;
+  --neo-contrast-text-muted: rgba(0, 0, 0, 0.6);
+  --neo-contrast-border: rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   LEGACY TOKENS (compatibilité)
+   ============================================ */
+:root {
+  /* ===== COLOR PALETTE ===== */
+
+  /* Primary - Neon Yellow */
+  --color-primary: #D5FF0A;
+  --color-primary-rgb: 213, 255, 10;
+  --color-primary-50: #FDFFF0;
+  --color-primary-100: #F9FFD6;
+  --color-primary-200: #F2FFAB;
+  --color-primary-300: #E8FF75;
+  --color-primary-400: #D5FF0A;
+  --color-primary-500: #C2E600;
+  --color-primary-600: #9AB800;
+  --color-primary-700: #748A00;
+  --color-primary-800: #566900;
+  --color-primary-900: #2B3400;
+
+  /* Accent Colors */
+  --color-green: #5CE462;
+  --color-green-rgb: 92, 228, 98;
+  --color-emerald: #00C18B;
+  --color-emerald-rgb: 0, 193, 139;
+  --color-teal: #009998;
+  --color-teal-rgb: 0, 153, 152;
+  --color-ocean: #006F84;
+  --color-ocean-rgb: 0, 111, 132;
+  --color-slate: #2F4858;
+  --color-slate-rgb: 47, 72, 88;
+
+  /* Neutrals - Dark scale */
+  --color-neutral-950: #09090b;
+  --color-neutral-925: #121214;
+  --color-neutral-900: #18181b;
+  --color-neutral-850: #1f1f23;
+  --color-neutral-800: #27272a;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-600: #52525b;
+  --color-neutral-500: #71717a;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-50: #fafafa;
+
+  /* RGB values for dynamic opacity */
+  --color-neutral-950-rgb: 9, 9, 11;
+  --color-neutral-900-rgb: 24, 24, 27;
+  --color-neutral-850-rgb: 31, 31, 35;
+  --color-neutral-800-rgb: 39, 39, 42;
+  --color-neutral-100-rgb: 244, 244, 245;
+  --color-neutral-50-rgb: 250, 250, 250;
+  --color-white-rgb: 255, 255, 255;
+  --color-black-rgb: 0, 0, 0;
+
+  /* Indigo for light mode accent */
+  --color-indigo: #4f46e5;
+  --color-indigo-rgb: 79, 70, 229;
+  --color-indigo-hover: #4338ca;
+  --color-indigo-light: #6366f1;
+
+  /* Semantic Colors */
+  --color-success: #5CE462;
+  --color-warning: #FBBF24;
+  --color-error: #EF4444;
+  --color-info: #009998;
+
+  /* ===== SPACING SCALE ===== */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.125rem;   /* 2px */
+  --space-1: 0.25rem;      /* 4px */
+  --space-1-5: 0.375rem;   /* 6px */
+  --space-2: 0.5rem;       /* 8px */
+  --space-2-5: 0.625rem;   /* 10px */
+  --space-3: 0.75rem;      /* 12px */
+  --space-3-5: 0.875rem;   /* 14px */
+  --space-4: 1rem;         /* 16px */
+  --space-5: 1.25rem;      /* 20px */
+  --space-6: 1.5rem;       /* 24px */
+  --space-7: 1.75rem;      /* 28px */
+  --space-8: 2rem;         /* 32px */
+  --space-9: 2.25rem;      /* 36px */
+  --space-10: 2.5rem;      /* 40px */
+  --space-12: 3rem;        /* 48px */
+  --space-14: 3.5rem;      /* 56px */
+  --space-16: 4rem;        /* 64px */
+  --space-20: 5rem;        /* 80px */
+  --space-24: 6rem;        /* 96px */
+  --space-32: 8rem;        /* 128px */
+
+  /* ===== BORDER RADIUS ===== */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-2xl: 1.5rem;    /* 24px */
+  --radius-3xl: 2rem;      /* 32px */
+  --radius-full: 9999px;
+
+  /* ===== SHADOWS ===== */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+
+  /* Glow Shadows - Primary (Neon Yellow) */
+  --glow-primary-sm: 0 0 10px -2px rgba(213, 255, 10, 0.4);
+  --glow-primary-md: 0 0 20px -4px rgba(213, 255, 10, 0.5);
+  --glow-primary-lg: 0 0 30px -6px rgba(213, 255, 10, 0.6);
+  --glow-primary-xl: 0 0 50px -10px rgba(213, 255, 10, 0.5);
+  --glow-primary-intense: 0 0 40px rgba(213, 255, 10, 0.8);
+
+  /* Glow Shadows - Green */
+  --glow-green-sm: 0 0 10px -2px rgba(92, 228, 98, 0.4);
+  --glow-green-md: 0 0 20px -4px rgba(92, 228, 98, 0.5);
+  --glow-green-lg: 0 0 30px -6px rgba(92, 228, 98, 0.6);
+
+  /* Glow Shadows - Emerald */
+  --glow-emerald-sm: 0 0 10px -2px rgba(0, 193, 139, 0.4);
+  --glow-emerald-md: 0 0 20px -4px rgba(0, 193, 139, 0.5);
+  --glow-emerald-lg: 0 0 30px -6px rgba(0, 193, 139, 0.6);
+
+  /* Glow Shadows - Teal */
+  --glow-teal-sm: 0 0 10px -2px rgba(0, 153, 152, 0.4);
+  --glow-teal-md: 0 0 20px -4px rgba(0, 153, 152, 0.5);
+  --glow-teal-lg: 0 0 30px -6px rgba(0, 153, 152, 0.6);
+
+  /* Glow Shadows - Ocean */
+  --glow-ocean-sm: 0 0 10px -2px rgba(0, 111, 132, 0.4);
+  --glow-ocean-md: 0 0 20px -4px rgba(0, 111, 132, 0.5);
+  --glow-ocean-lg: 0 0 30px -6px rgba(0, 111, 132, 0.6);
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  --text-5xl: 3rem;        /* 48px */
+  --text-6xl: 3.75rem;     /* 60px */
+  --text-7xl: 4.5rem;      /* 72px */
+  --text-8xl: 6rem;        /* 96px */
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ===== TRANSITIONS ===== */
+  --duration-instant: 50ms;
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  --duration-slowest: 1000ms;
+
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* ===== Z-INDEX SCALE ===== */
+  --z-behind: -1;
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+  --z-toast: 80;
+
+  /* ===== GRADIENTS ===== */
+  --gradient-brand: linear-gradient(135deg, #D5FF0A 0%, #5CE462 25%, #00C18B 50%, #009998 75%, #006F84 100%);
+  --gradient-brand-short: linear-gradient(135deg, #D5FF0A 0%, #00C18B 100%);
+  --gradient-primary: linear-gradient(135deg, #D5FF0A 0%, #5CE462 100%);
+  --gradient-primary-teal: linear-gradient(135deg, #D5FF0A 0%, #009998 100%);
+  --gradient-teal: linear-gradient(135deg, #00C18B 0%, #006F84 100%);
+  --gradient-ocean: linear-gradient(135deg, #009998 0%, #2F4858 100%);
+  --gradient-surface: linear-gradient(180deg, #18181b 0%, #09090b 100%);
+
+  /* Glow Gradients (radial) */
+  --gradient-glow-primary: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(213, 255, 10, 0.15), transparent);
+  --gradient-glow-teal: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 193, 139, 0.12), transparent);
+  --gradient-glow-center: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(213, 255, 10, 0.08), transparent);
+}
+
+/* ===== LEGACY THEME VARIABLES ===== */
+/* Ces variables sont pour compatibilité avec l'ancien thème */
+.dark {
+  --background: var(--color-neutral-950);
+  --background-rgb: 9, 9, 11;
+  --foreground: var(--color-neutral-50);
+  --foreground-rgb: 250, 250, 250;
+
+  --surface: var(--color-neutral-900);
+  --surface-elevated: var(--color-neutral-850);
+  --surface-hover: var(--color-neutral-800);
+
+  --border: var(--color-neutral-800);
+  --border-subtle: var(--color-neutral-850);
+  --border-strong: var(--color-neutral-700);
+
+  --text-primary: var(--color-neutral-50);
+  --text-secondary: var(--color-neutral-400);
+  --text-muted: var(--color-neutral-500);
+  --text-inverse: var(--color-neutral-950);
+
+  --accent: var(--color-primary);
+  --accent-hover: var(--color-primary-300);
+  --accent-muted: rgba(213, 255, 10, 0.15);
+  --accent-glow: rgba(213, 255, 10, 0.4);
+
+  /* ===== GLASS VARIABLES (Dark) ===== */
+  --glass-bg: rgba(24, 24, 27, 0.6);
+  --glass-bg-subtle: rgba(24, 24, 27, 0.4);
+  --glass-bg-strong: rgba(24, 24, 27, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-subtle: rgba(255, 255, 255, 0.05);
+  --glass-border-strong: rgba(255, 255, 255, 0.15);
+  --glass-hover: rgba(255, 255, 255, 0.05);
+  --glass-active: rgba(255, 255, 255, 0.08);
+
+  /* ===== OVERLAY VARIABLES (Dark) ===== */
+  --overlay-bg: rgba(9, 9, 11, 0.8);
+  --overlay-bg-strong: rgba(9, 9, 11, 0.9);
+
+  /* ===== SHADOW COLOR (Dark) ===== */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-color-strong: rgba(0, 0, 0, 0.7);
+}
+
+.light {
+  --background: var(--color-neutral-50);
+  --background-rgb: 250, 250, 250;
+  --foreground: var(--color-neutral-950);
+  --foreground-rgb: 9, 9, 11;
+
+  --surface: var(--color-neutral-100);
+  --surface-elevated: white;
+  --surface-hover: var(--color-neutral-200);
+
+  --border: var(--color-neutral-200);
+  --border-subtle: var(--color-neutral-100);
+  --border-strong: var(--color-neutral-300);
+
+  --text-primary: var(--color-neutral-950);
+  --text-secondary: var(--color-neutral-600);
+  --text-muted: var(--color-neutral-600);
+  --text-inverse: var(--color-neutral-50);
+
+  /* ===== ACCENT INDIGO (Light) ===== */
+  --accent: var(--color-indigo);
+  --accent-hover: var(--color-indigo-hover);
+  --accent-muted: rgba(79, 70, 229, 0.15);
+  --accent-glow: rgba(79, 70, 229, 0.4);
+
+  /* ===== GLASS VARIABLES (Light) ===== */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.5);
+  --glass-bg-strong: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-border-subtle: rgba(0, 0, 0, 0.04);
+  --glass-border-strong: rgba(0, 0, 0, 0.12);
+  --glass-hover: rgba(0, 0, 0, 0.03);
+  --glass-active: rgba(0, 0, 0, 0.06);
+
+  /* ===== OVERLAY VARIABLES (Light) ===== */
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --overlay-bg-strong: rgba(0, 0, 0, 0.7);
+
+  /* ===== SHADOW COLOR (Light) ===== */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-strong: rgba(0, 0, 0, 0.2);
+
+  /* ===== GLOWS (Light - Indigo based) ===== */
+  --glow-primary-sm: 0 0 10px -2px rgba(79, 70, 229, 0.3);
+  --glow-primary-md: 0 0 20px -4px rgba(79, 70, 229, 0.4);
+  --glow-primary-lg: 0 0 30px -6px rgba(79, 70, 229, 0.5);
+  --glow-primary-xl: 0 0 50px -10px rgba(79, 70, 229, 0.4);
+  --glow-primary-intense: 0 0 40px rgba(79, 70, 229, 0.6);
+
+  /* ===== GRADIENTS (Light) ===== */
+  --gradient-surface: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
+  --gradient-brand: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+  --gradient-glow-primary: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.1), transparent);
+  --gradient-glow-center: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(79, 70, 229, 0.06), transparent);
+}
+
+/* Fin du fichier - Palettes définies en haut */

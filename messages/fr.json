@@ -1,0 +1,938 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "services": "Services",
+    "albums": "Albums",
+    "videos": "Vidéos",
+    "contact": "Contact",
+    "subtitle": "Compositeur de musique",
+    "admin": "Admin",
+    "dashboard": "Tableau de bord",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "title": "Loïc Ghanem",
+    "subtitle": "Compositeur & Producteur Musical",
+    "description": "Compositeur et producteur musical passionné, créant des univers sonores uniques pour vos projets audiovisuels depuis",
+    "yearsExperience": "plus de {years} ans",
+    "stats": {
+      "albums": "Albums",
+      "audiovisualProjects": "Projets Audiovisuels",
+      "collaborations": "Collaborations"
+    },
+    "cta": {
+      "listenAlbums": "Écouter mes albums",
+      "workTogether": "Travailler ensemble"
+    },
+    "scroll": "Scroll",
+    "featuredAlbums": {
+      "title": "Derniers Albums",
+      "description": "Découvrez mes dernières créations musicales couvrant différents genres, du Metal au Hip-Hop en passant par l'Ambient et l'Electronic.",
+      "viewAll": "Voir tous les albums ({count})"
+    },
+    "latestVideos": {
+      "badge": "Sync Placements",
+      "title": "Dernières Vidéos",
+      "description": "Mes compositions utilisées dans des productions professionnelles : sports, TV, publicités et plus encore.",
+      "viewAll": "Voir toutes les vidéos ({count})",
+      "notablePlacements": "Placements Notables"
+    },
+    "hero": {
+      "subtitle": "COMPOSITEUR & PRODUCTEUR MUSICAL",
+      "title": "BANDES<br />ORIGINALES",
+      "description": "Compositeur et producteur musical primé basé à Paris. Je crée de la musique pour le cinéma, la publicité et les jeux vidéo.",
+      "listenShowreel": "Écouter le Showreel",
+      "downloadResume": "Télécharger le CV",
+      "cyclicTitles": {
+        "musicProduction": "PRODUCTION\nMUSICALE",
+        "filmScoring": "MUSIQUE\nDE FILM",
+        "soundDesign": "DESIGN\nSONORE",
+        "immersiveAudio": "AUDIO\nIMMERSIF"
+      },
+      "basedIn": "BASÉ À PARIS",
+      "music": "Musique",
+      "producer": "Producteur",
+      "composer": "& Compositeur",
+      "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour le cinéma, la publicité et les jeux vidéo.",
+      "showreel": "Showreel",
+      "downloadCV": "CV (PDF)",
+      "scrollDown": "Défiler"
+    },
+    "sections": {
+      "albums": "DERNIERS <span class=\"text-neon-cyan\">ALBUMS</span>",
+      "albumsSubtitle": "01 / DISCOGRAPHIE",
+      "albumsTitle": "Discographie",
+      "albumsSection": "Derniers Albums",
+      "viewAllAlbums": "Voir tous les albums",
+      "viewAllAlbumsSoundcloud": "Voir tous les albums sur Soundcloud",
+      "listenNow": "Écouter",
+      "genre": "Genre",
+      "videos": "DERNIÈRES <span class=\"text-neon-magenta\">VIDÉOS</span>",
+      "videosSubtitle": "03 / RÉALISATIONS",
+      "videosTitle": "Visuals",
+      "videosSection": "Réalisations",
+      "viewAllVideos": "Voir toutes les vidéos",
+      "youtubeChannel": "Chaîne YouTube",
+      "officialVideo": "Vidéo Officielle",
+      "services": "SERVICES <span class=\"text-neon-purple\">SONORES</span>",
+      "servicesSubtitle": "04 / EXPERTISE",
+      "servicesTitle": "Expertise",
+      "servicesSection": "Services Sonores",
+      "viewAllServices": "Voir tous les services",
+      "learnMore": "En savoir plus",
+      "contact": "CRÉONS <br/><span class=\"text-neon-lime\">ENSEMBLE</span>",
+      "contactText": "Une idée ? Un projet musical ? Transformons votre vision en réalité sonore.",
+      "getInTouch": "Me Contacter"
+    },
+    "soundcloud": {
+      "title": "ÉCOUTEZ <span class=\"text-neon-green\">MES PRODS</span>",
+      "subtitle": "02 / STREAMING",
+      "follow": "Suivre sur SoundCloud"
+    },
+    "streaming": {
+      "title": "STREAMING",
+      "subtitle": "ÉCOUTEZ MES PRODS",
+      "playerTitle": "LOÏC GHANEM PRODUCTIONS",
+      "soundcloud": "Suivre sur SoundCloud",
+      "spotify": "Écouter sur Spotify",
+      "description": "Retrouvez toutes mes productions sur les plateformes de streaming. De la composition orchestrale au Metal en passant par l'Electronic et l'Ambient."
+    }
+  },
+  "about": {
+    "pageTitle": "À Propos",
+    "pageDescription": "Compositeur et producteur musical passionné, créant des univers sonores uniques pour vos projets audiovisuels depuis plus de 15 ans.",
+    "title": "Compositeur Musical, Producteur Musical",
+    "intro": "Hello !",
+    "bio": {
+      "paragraph1": "Je suis Loïc Ghanem, compositeur et producteur musical basé à Paris, passionné par la création de paysages sonores narratifs. Mon parcours dans le monde de la musique a commencé dès mon plus jeune âge, et depuis plus d'une décennie, c'est devenu ma vocation et ma profession.",
+      "paragraph2": "De la création de morceaux originaux à la composition de musiques pour médias visuels et l'édition musicale, j'ai apporté ma signature sonore à divers projets, les enrichissant de profondeur et d'émotion. L'une de mes forces réside dans ma capacité à transformer une idée brute en une expérience auditive complète. Mon travail n'existe pas simplement en arrière-plan ; il amplifie l'histoire, définit le ton et enrichit l'expérience du spectateur.",
+      "paragraph3": "Je suis fier de livrer des paysages sonores uniques, contemporains et engageants qui résonnent et créent des impressions durables. En exploitant ma compréhension approfondie des mécanismes complexes de la production musicale et du sound design, j'excelle à créer des compositions qui nécessitent un entretien minimal, tout en offrant des performances impeccables dans le temps.",
+      "paragraph4": "Je vous invite à explorer mon portfolio et à vous immerger dans les divers univers musicaux que j'ai eu le plaisir de créer. J'ai hâte de collaborer avec vous sur votre prochain projet, en l'élevant avec ma musique."
+    },
+    "contactInfo": {
+      "title": "Informations de Contact",
+      "address": "Adresse",
+      "location": "Paris, France",
+      "email": "Email",
+      "languages": "Langues",
+      "languageList": "Anglais, Français"
+    },
+    "achievements": {
+      "title": "Réalisations",
+      "albums": "Albums Produits",
+      "projects": "Projets Audiovisuels",
+      "years": "Années d'Expérience",
+      "collaborations": "Collaborations"
+    },
+    "contactSection": {
+      "title": "Travaillons Ensemble",
+      "labels": "Labels & Publishers"
+    },
+    "tools": {
+      "title": "Mes outils de prédilection"
+    },
+    "studio": {
+      "title": "Mon studio"
+    },
+    "skills": {
+      "title": "Expertises & Compétences",
+      "subtitle": "Compétences Techniques",
+      "composition": {
+        "title": "Composition",
+        "items": ["Metal", "Hip-Hop", "Ambient", "Electronic", "Orchestral"]
+      },
+      "production": {
+        "title": "Production",
+        "items": ["Mixing", "Mastering", "Sound Design", "Arrangement"]
+      },
+      "vocalProduction": {
+        "title": "Production Vocale",
+        "items": ["Direction", "Enregistrement", "Editing", "Traitement"]
+      },
+      "postProduction": {
+        "title": "Post-Production",
+        "items": ["Musique de Film", "Musique TV", "Publicités", "Audio pour Jeux"]
+      }
+    },
+    "awards": {
+      "title": "Dernières Récompenses & Nominations",
+      "subtitle": "Découvrez mes prix récents et réalisations musicales.",
+      "learnMore": "En savoir plus",
+      "visitWebsite": "Visiter le site officiel",
+      "pma2024": {
+        "year": "2024",
+        "title": "Production Music Awards",
+        "category": "Double Nomination - Metal",
+        "work": "\"Sparkle in the Dark\" & \"Revenge\" feat. Aaron Matts",
+        "album": "Albums : Dystopia & Metalcore2",
+        "description": "Honoré d'une double nomination dans la toute nouvelle catégorie Metal aux Production Music Awards 2024.",
+        "detail1": "\"Sparkle in the Dark\" de l'album Dystopia, sorti par Infinity Scores et publié par Cezame Agency",
+        "detail2": "\"Revenge\" feat. Aaron Matts de l'album Metalcore2, sorti par Justement Music et publié par MYMA",
+        "detail3": "Cette reconnaissance aux PMA 2024 souligne le pouvoir et l'énergie de mes compositions Metal, mon engagement envers la qualité de production, et ma passion pour repousser les limites de la musique de production moderne."
+      },
+      "pma2023": {
+        "year": "2023",
+        "title": "Production Music Awards",
+        "category": "Nomination - Electronic",
+        "work": "\"La Fontaine\" feat. Flovry",
+        "album": "Album : Electronic Chill",
+        "description": "Nominé dans la catégorie Electronic aux Production Music Awards 2023.",
+        "detail1": "\"La Fontaine\" feat. Flovry de l'album Electronic Chill, sorti par Infinity Scores et publié par Cezame Music Agency",
+        "detail2": "Cette nomination reconnaît mon approche innovante de la musique électronique, fusionnant des textures atmosphériques avec des rythmes contemporains.",
+        "detail3": "Cette reconnaissance valide ma capacité à créer des paysages sonores électroniques émotionnellement résonnants qui captent les auditeurs tout en servant parfaitement les besoins de musique de production."
+      },
+      "mark": {
+        "year": "2017",
+        "title": "Mark Awards",
+        "category": "Finaliste - Original Music",
+        "work": "Live at Bataclan w/ Rise of the Northstar",
+        "album": "Performance Live",
+        "description": "Finaliste aux Mark Awards pour la performance live au Bataclan avec Rise of the Northstar.",
+        "detail1": "Performance mémorable au mythique Bataclan de Paris avec Rise of the Northstar, fusionnant l'intensité du metal avec des éléments hip-hop.",
+        "detail2": "Cette performance live a présenté l'énergie brute et la présence scénique qui définissent mon approche de la musique live et de la performance.",
+        "detail3": "Être finaliste aux Mark Awards reconnaît l'impact et l'innovation de ce spectacle live, démontrant ma polyvalence en tant que musicien et performeur."
+      }
+    },
+    "timeline": {
+      "title": "PARCOURS",
+      "subtitle": "JOURNEY",
+      "events": {
+        "terra": {
+          "title": "Terra - Album Orchestral Ambient",
+          "description": "Album orchestral ambient pour les visuels de nature et d'environnement, publié par Cezame Music Agency sous le label Infinity Scores.",
+          "type": "Projet"
+        },
+        "metalcore": {
+          "title": "Metalcore II & Dystopia",
+          "description": "Double sortie : Metalcore II avec Aaron Matts et Terence Langlois, et Dystopia - une fusion unique de métal cinématique et d'ambient sous Infinity Scores.",
+          "type": "Projet"
+        },
+        "queens": {
+          "title": "The Queens Album",
+          "description": "Album ambitieux fusionnant punk rock et drill music avec 12 artistes internationaux. Sorti sous MYMA.",
+          "type": "Étape clé"
+        },
+        "bassMusic": {
+          "title": "Make Me Feel & Bass Music",
+          "description": "Deux albums Hip-Hop/RnB et Bass Music avec des collaborations internationales (Quincy Thompson, Novine, Lou.C).",
+          "type": "Projet"
+        },
+        "sync": {
+          "title": "Placements Sync Majeurs",
+          "description": "Placements sync sur NBA Countdown, NHL In the Room, MOTDx BBC, et WWE RAW.",
+          "type": "Récompense"
+        },
+        "prolific": {
+          "title": "Année Prolifique",
+          "description": "Sortie de 5 albums : Ambient Guitar, Cyberpunk, Hardcore, Fast Metal, et Kick-ass Metal Jacket.",
+          "type": "Étape clé"
+        },
+        "synthwave": {
+          "title": "Débuts Synthwave",
+          "description": "Premier album Synthwave - hommage au renouveau électro des années 80, publié par Stereoscopic et MYMA.",
+          "type": "Projet"
+        },
+        "metal": {
+          "title": "Débuts Metal",
+          "description": "Collaboration avec Rise of the Northstar, Confront, et Early Seasons - établissant une présence sur la scène metal.",
+          "type": "Collaboration"
+        }
+      }
+    },
+    "musicianExperience": {
+      "title": "Expérience Musicale en Groupe",
+      "subtitle": "Mon parcours à travers différents projets musicaux et groupes au fil des années.",
+      "listenHere": "Écouter ici",
+      "voyager1": {
+        "period": "2017 - Présent",
+        "role": "Producteur",
+        "genre": "Hip-Hop et Bass Music",
+        "description": "Projet Actuel"
+      },
+      "earlySeasons": {
+        "period": "2008 - 2017",
+        "role": "Guitariste, Compositeur",
+        "genre": "Metal / Metalcore",
+        "description": "Formation Metal Française"
+      },
+      "confront": {
+        "period": "2010 - 2014",
+        "role": "Guitariste",
+        "genre": "Hardcore / Metal",
+        "description": "Groupe Hardcore Parisien"
+      },
+      "riseOfTheNorthstar": {
+        "period": "2012 - 2017",
+        "role": "Guitariste Live",
+        "genre": "Hip-Hop Metal",
+        "description": "Tournées Internationales"
+      }
+    },
+    "labelsPublishers": {
+      "title": "LABELS & ÉDITEURS",
+      "subtitle": "PUBLISHERS",
+      "labels": "Labels",
+      "publishers": "Éditeurs"
+    },
+    "languages": {
+      "title": "LANGUES",
+      "subtitle": "LANGUAGES",
+      "french": {
+        "name": "Français",
+        "level": "Natif",
+        "percent": 100
+      },
+      "english": {
+        "name": "Anglais",
+        "level": "Courant",
+        "percent": 85
+      },
+      "arabic": {
+        "name": "Arabe Libanais",
+        "level": "Notions",
+        "percent": 40
+      }
+    },
+    "cta": {
+      "title": "Prêt à créer ensemble ?",
+      "description": "Discutons de votre projet et découvrez comment je peux donner vie à votre vision musicale.",
+      "contactMe": "Contactez-moi",
+      "viewAlbums": "Voir mes albums",
+      "downloadCV": "Télécharger CV"
+    }
+  },
+  "services": {
+    "detail": {
+      "notFound": "Service non trouvé",
+      "about": "À propos",
+      "offeredOn": "Service offert le",
+      "relatedServices": "Autres Services",
+      "whatYouGet": "Ce que vous obtenez",
+      "process": "Processus",
+      "examples": "Exemples",
+      "listen": "Écouter",
+      "backToServices": "Retour aux services",
+      "requestQuote": "Demander un devis",
+      "step": "Étape",
+      "pricing": "Tarification",
+      "startingFrom": "À partir de",
+      "onQuote": "Sur devis",
+      "customizable": "Chaque projet est unique. Discutons de vos besoins pour une offre personnalisée.",
+      "contact": "Contact",
+      "responseTime": "Réponse",
+      "readyToStart": "Prêt ?",
+      "also": "AUSSI",
+      "examplesDescription": "Découvrez mes réalisations dans la section albums et vidéos.",
+      "viewAlbums": "Voir les albums",
+      "viewVideos": "Voir les vidéos",
+      "discoverWork": "Découvrir mon travail",
+      "discoverWorkDescription": "Explorez mes compositions à travers mes albums et vidéos de synchronisation.",
+      "previousService": "Service précédent",
+      "nextService": "Service suivant",
+      "whatYouGetItems": {
+        "item1": "Musique originale 100% sur mesure",
+        "item2": "Livraison rapide",
+        "item3": "Révisions illimitées",
+        "item4": "Qualité professionnelle",
+        "item5": "Droits complets inclus"
+      }
+    },
+    "pageTitle": "Services",
+    "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
+    "noServices": "Aucun service disponible pour le moment",
+    "totalServices": "Services",
+    "satisfaction": "Satisfaction Client",
+    "availability": "Disponibilité",
+    "seeMore": "En savoir plus",
+    "writtenBy": "Écrit par",
+    "hero": {
+      "badge": "EXPERTISE SONORE",
+      "title": "L'Univers de la Création Musicale",
+      "description": "De la composition à la post-production, explorez mes services pour donner vie à vos projets audiovisuels avec créativité et professionnalisme.",
+      "cta": "Explorer mes services",
+      "ctaSecondary": "Me contacter"
+    },
+    "stats": {
+      "services": "Services",
+      "experience": "Années d'expérience",
+      "projects": "Projets réalisés",
+      "satisfaction": "Satisfaction"
+    },
+    "process": {
+      "title": "Comment je travaille",
+      "subtitle": "PROCESSUS",
+      "brief": {
+        "title": "Brief",
+        "description": "Comprendre votre vision et vos objectifs"
+      },
+      "composition": {
+        "title": "Composition",
+        "description": "Créer l'univers sonore unique"
+      },
+      "production": {
+        "title": "Production",
+        "description": "Donner vie à la musique"
+      },
+      "mixing": {
+        "title": "Mix & Master",
+        "description": "Peaufiner chaque détail"
+      },
+      "delivery": {
+        "title": "Livraison",
+        "description": "Votre projet finalisé"
+      }
+    },
+    "cosmicCta": {
+      "title": "Prêt à créer ensemble ?",
+      "description": "Chaque projet mérite une identité sonore unique. Transformons votre vision en musique.",
+      "button": "Parlons de votre projet"
+    },
+    "cta": {
+      "title": "Prêt à démarrer votre projet ?",
+      "description": "Contactez-moi pour discuter de votre vision musicale et découvrir comment je peux donner vie à vos idées.",
+      "button": "Contactez-moi",
+      "discuss": "Discutons de votre projet"
+    },
+    "composition": {
+      "title": "Composition",
+      "description": "Création de musiques originales sur mesure pour vos projets de film, TV, publicités et jeux vidéo.",
+      "largeTitle": "Composition : Créer des Mélodies Uniques et Captivantes",
+      "fullDescription": "En tant que compositeur professionnel, j'ai une passion profonde pour la création de mélodies uniques et captivantes. Mon expertise couvre divers genres, garantissant un large éventail de possibilités pour votre projet. J'aborde chaque projet avec une perspective fraîche, consacrant du temps et des efforts à comprendre vos besoins et préférences. Cette attention aux détails me permet de créer des compositions véritablement sur mesure et alignées avec votre vision créative.",
+      "details": {
+        "intro": "Je crée des **musiques originales** pour donner vie à vos projets audiovisuels. Que ce soit pour un film, une série TV, une publicité ou un jeu vidéo, je compose des bandes originales qui racontent votre histoire.",
+        "approach": "Mon approche allie **sensibilité artistique** et **vision narrative**, en créant des univers sonores uniques adaptés à chaque projet, du Metal au Hip-Hop, en passant par l'Ambient et l'Electronic.",
+        "services": ["Composition orchestrale et hybride", "Thèmes musicaux sur mesure", "Direction artistique sonore", "Adaptation tous genres musicaux"]
+      }
+    },
+    "production": {
+      "title": "Production",
+      "description": "Production musicale complète de A à Z, de l'arrangement à la post-production.",
+      "largeTitle": "Production Musicale : Du Concept au Mix Final",
+      "fullDescription": "Mes services de production musicale englobent chaque étape du processus. Avec une compréhension approfondie de la théorie musicale, une oreille attentive aux détails, et une maîtrise des derniers logiciels de production, je suis équipé pour concrétiser vos idées musicales. Que vous ayez besoin d'aide pour l'arrangement, l'enregistrement, le mixage ou le mastering, je fournis une solution complète adaptée aux besoins de votre projet.",
+      "details": {
+        "intro": "Je prends en charge la **production complète** de vos projets musicaux, de la conception à la réalisation finale. Mon expertise couvre tous les aspects de la production moderne.",
+        "approach": "Avec un studio équipé des dernières technologies et une connaissance approfondie de multiples genres musicaux, je transforme vos idées en productions professionnelles prêtes pour la diffusion.",
+        "services": ["Production multi-genres (Metal, Hip-Hop, Electronic, Ambient)", "Programmation et sound design", "Enregistrement et direction artistique", "Mastering pour tous supports"]
+      }
+    },
+    "arranging": {
+      "title": "Arranging",
+      "description": "Arrangements orchestraux et instrumentaux pour sublimer vos compositions.",
+      "largeTitle": "Arrangement : Sublimer Vos Compositions",
+      "fullDescription": "Mes compétences en arrangement ajouteront profondeur et complexité à votre musique. Avec ma connaissance approfondie de l'orchestration et de l'harmonie, je créerai des arrangements qui révèlent le meilleur de vos compositions. Que vous ayez une composition complète ou une simple mélodie, je peux la transformer en un morceau riche et pleinement réalisé.",
+      "details": {
+        "intro": "L'**arrangement** est l'art de structurer et d'habiller une composition pour en révéler tout le potentiel. Je travaille sur l'orchestration, l'harmonie et la texture sonore pour créer des arrangements riches et cohérents.",
+        "approach": "De l'orchestration symphonique aux arrangements électroniques modernes, je maîtrise une large palette de techniques pour donner vie à vos idées musicales.",
+        "services": ["Orchestration symphonique et moderne", "Arrangements pour ensembles acoustiques", "Réharmonisation et adaptation", "Création de textures hybrides"]
+      }
+    },
+    "vocalProducer": {
+      "title": "Vocal Producer",
+      "description": "Direction et production vocale pour des performances exceptionnelles.",
+      "largeTitle": "Production Vocale : Sublimer Vos Performances Vocales",
+      "fullDescription": "En tant que producteur vocal, je me spécialise dans l'extraction du meilleur d'une performance de chanteur. J'assiste les chanteurs avec leurs mélodies vocales, m'assurant qu'ils livrent la meilleure performance possible pour leurs enregistrements. J'offre des services spécialisés tels que la correction, le mixage et l'arrangement des voix. Je suis compétent en correction de hauteur, en comping vocal, et je peux améliorer les performances en utilisant des effets et des outils de traitement. Mon travail est de faire briller la voix, en m'assurant qu'elle s'intègre parfaitement dans le mix et contribue efficacement au ressenti et au message global de la chanson.",
+      "details": {
+        "intro": "En tant que **vocal producer**, je guide les artistes pour capturer les meilleures performances vocales. Mon rôle est d'extraire l'émotion et la puissance de chaque voix.",
+        "approach": "De la préproduction à l'enregistrement, j'accompagne les chanteurs dans leur processus créatif, en apportant une direction artistique précise et bienveillante.",
+        "services": ["Direction artistique vocale", "Préparation et coaching avant session", "Enregistrement et editing vocal", "Traitement et production des voix"]
+      }
+    },
+    "mixing": {
+      "title": "Mixing",
+      "description": "Mixage professionnel pour un son équilibré et percutant.",
+      "largeTitle": "Mixage : Peaufiner Votre Musique à la Perfection",
+      "fullDescription": "Le mixage est une étape critique du processus de production musicale, et c'est un domaine dans lequel j'excelle. Je vais équilibrer les éléments de votre morceau, m'assurant qu'aucun instrument ou voix n'est trop fort ou trop doux. Mes techniques de mixage ajouteront également profondeur et dimension à votre musique, créant un paysage sonore riche et engageant.",
+      "details": {
+        "intro": "Le **mixage** est l'étape cruciale qui transforme des pistes brutes en une production cohérente et professionnelle. Je balance, équilibre et façonne chaque élément pour créer un mix impactant.",
+        "approach": "Avec une approche analytique et créative, j'optimise la clarté, la profondeur et la dynamique de vos morceaux pour qu'ils sonnent parfaitement sur tous les supports d'écoute.",
+        "services": ["Mixage stéréo et surround", "Traitement dynamique et fréquentiel", "Spatialisation et effets créatifs", "Optimisation pour streaming et broadcast"]
+      }
+    },
+    "mastering": {
+      "title": "Mastering",
+      "description": "Mastering de haute qualité pour une finalisation optimale de vos productions.",
+      "largeTitle": "Mastering : La Touche Finale pour Votre Musique",
+      "fullDescription": "Le mastering est la dernière étape du processus de production musicale, et c'est une étape que je prends très au sérieux. Je m'assurerai que vos morceaux sont prêts pour la distribution, en les optimisant pour tous les systèmes de lecture. Mes services de mastering donneront à votre musique le polish final dont elle a besoin, garantissant qu'elle sonne professionnelle et rivalise avec les autres sorties commerciales.",
+      "details": {
+        "intro": "Le **mastering** est la touche finale qui donne à votre musique son éclat professionnel. Je prépare vos morceaux pour la diffusion en optimisant le niveau, la balance spectrale et la cohérence entre les pistes.",
+        "approach": "Mon approche du mastering garantit que votre musique sonne de manière optimale sur tous les systèmes d'écoute, des écouteurs aux systèmes hi-fi, en respectant les standards de l'industrie.",
+        "services": ["Mastering pour tous formats (streaming, CD, vinyl)", "Optimisation spectrale et dynamique", "Cohérence entre les morceaux d'un album", "Préparation pour distribution digitale"]
+      }
+    }
+  },
+  "albums": {
+    "pageTitle": "Albums & Projets",
+    "pageDescription": "Découvrez ma discographie complète, des productions Metal et Metalcore aux créations Hip-Hop, Electronic et Ambient.",
+    "filterAll": "Tous les Albums",
+    "sortBy": "Trier par",
+    "sortNewest": "Plus récent",
+    "sortOldest": "Plus ancien",
+    "listen": "Écouter",
+    "collaboration": "En collaboration avec",
+    "releaseDate": "Date de sortie",
+    "genre": "Genre",
+    "hero": {
+      "badge": "DISCOGRAPHIE",
+      "title": "Mes Créations Musicales",
+      "description": "Explorez ma discographie complète : productions Metal, Hip-Hop, Ambient, Electronic et bien plus. Chaque album raconte une histoire unique.",
+      "cta": "Explorer les albums",
+      "ctaSecondary": "Me contacter"
+    },
+    "stats": {
+      "total": "Albums",
+      "genres": "Genres",
+      "collaborations": "Collaborations",
+      "period": "Période"
+    },
+    "albumsCta": {
+      "title": "Envie d'écouter ?",
+      "description": "Découvrez l'ensemble de ma discographie sur les plateformes de streaming. Chaque album est une nouvelle aventure sonore.",
+      "button": "Écouter sur Spotify",
+      "buttonSecondary": "Me contacter"
+    },
+    "card": {
+      "listen": "Écouter",
+      "viewMore": "Voir plus"
+    },
+    "noAlbums": "Aucun album trouvé pour ce genre.",
+    "detail": {
+      "notFound": "Album non trouvé",
+      "listen": "Écouter l'album",
+      "about": "À propos de l'album",
+      "ctaTitle": "Prêt à découvrir cet album ?",
+      "ctaText": "Écoutez \"{title}\" sur toutes les plateformes de streaming.",
+      "ctaButton": "Écouter maintenant",
+      "backToAlbums": "Retour aux albums",
+      "relatedAlbums": "Albums similaires",
+      "photoCount": "photos",
+      "viewGallery": "Voir la galerie",
+      "albumPhotos": "Photos de l'album",
+      "openFullscreen": "Ouvrir en plein écran",
+      "player": "Lecteur",
+      "nowPlaying": "En lecture",
+      "listenOnPlatforms": "Écouter sur vos plateformes préférées",
+      "listenDescription": "Cet album est disponible sur plusieurs plateformes de streaming. Cliquez ci-dessous pour l'écouter.",
+      "previousAlbum": "Album précédent",
+      "nextAlbum": "Album suivant",
+      "alsoAvailable": "Aussi disponible",
+      "otherPlatformsDescription": "Retrouvez cet album sur toutes vos plateformes de streaming préférées : Spotify, Apple Music, Deezer, Tidal et plus encore.",
+      "allPlatforms": "Toutes les plateformes"
+    }
+  },
+  "videos": {
+    "pageTitle": "Projets Vidéo",
+    "pageDescription": "Explorez ma musique en action à travers des projets audiovisuels, synchronisations et compositions originales.",
+    "filterAll": "Tous les types",
+    "filterOriginalMusic": "Musique Originale",
+    "filterSync": "Synchronisation",
+    "filterMusicToPicture": "Music to Picture",
+    "watchOn": "Voir sur",
+    "date": "Date",
+    "categories": "Catégories",
+    "placements": "Placements Sync",
+    "noVideos": "Aucune vidéo disponible pour le moment",
+    "hero": {
+      "badge": "PROJETS AUDIOVISUELS",
+      "title": "Ma Musique en Images",
+      "description": "Découvrez mes compositions en action : synchronisations TV, publicités, clips musicaux et productions originales pour l'image.",
+      "cta": "Explorer les vidéos",
+      "ctaSecondary": "Me contacter"
+    },
+    "stats": {
+      "total": "Vidéos",
+      "categories": "Catégories",
+      "syncPlacements": "Sync Placements",
+      "brands": "Marques"
+    },
+    "videosCta": {
+      "title": "Un projet audiovisuel ?",
+      "description": "Que ce soit pour un film, une publicité, un documentaire ou un jeu vidéo, je crée la bande sonore qui sublimera votre projet.",
+      "button": "Discutons de votre projet"
+    },
+    "card": {
+      "watch": "Regarder",
+      "viewMore": "Voir plus",
+      "close": "Fermer",
+      "fullscreen": "Plein écran",
+      "play": "Lire {title}"
+    },
+    "filter": {
+      "all": "Toutes"
+    }
+  },
+  "contact": {
+    "pageTitle": "Contact",
+    "pageDescription": "Discutons de votre projet musical. Je suis toujours enthousiaste à l'idée de collaborer sur de nouvelles créations.",
+    "getInTouch": "Prenons Contact",
+    "description": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous.",
+    "hero": {
+      "badge": "CONTACTEZ-MOI",
+      "title": "Créons Ensemble",
+      "description": "Vous avez un projet musical en tête ? Je serais ravi d'en discuter avec vous et de donner vie à votre vision sonore.",
+      "stats": {
+        "response": "Réponse",
+        "satisfaction": "Satisfaction"
+      },
+      "cta": "Me contacter",
+      "ctaSecondary": "Voir mes services"
+    },
+    "stats": {
+      "responseTime": "Temps de réponse",
+      "satisfaction": "Satisfaction",
+      "projects": "Projets réalisés"
+    },
+    "directContact": {
+      "title": "Contact Direct",
+      "tagline": "Pas de formulaire, pas de blabla. On s'appelle, on en parle, on crée !",
+      "callMe": "Appelez-moi direct",
+      "emailMe": "Ou par email",
+      "footer": "Promis, je décroche (sauf si je suis en studio... mais je rappelle vite !)"
+    },
+    "form": {
+      "name": "Nom",
+      "namePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "subject": "Sujet",
+      "subjectPlaceholder": "Sujet de votre message",
+      "message": "Message",
+      "messagePlaceholder": "Parlez-moi de votre projet...",
+      "submit": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès !",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "info": {
+      "title": "Informations de Contact",
+      "email": "Email",
+      "phone": "Téléphone",
+      "location": "Localisation",
+      "locationValue": "Paris, France",
+      "social": "Réseaux Sociaux",
+      "availability": "Je réponds généralement sous 24-48 heures. Pour les projets urgents, n'hésitez pas à me contacter par téléphone.",
+      "findMe": "Retrouvez-moi"
+    },
+    "cta": {
+      "text": "Vous préférez découvrir mes services avant de me contacter ?",
+      "button": "Voir mes services"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} Loïc Ghanem. Tous droits réservés.",
+    "quickLinks": "Liens Rapides",
+    "followMe": "Parlons de votre projet",
+    "tagline": "Compositeur & Producteur Musical basé à Paris",
+    "letsCreate": "Créons",
+    "together": "Ensemble.",
+    "location": "PARIS, FRANCE",
+    "noForm": {
+      "title": "Un projet ? Parlons-en !",
+      "description": "Pas de formulaire ici, juste un coup de fil et on démarre l'aventure sonore.",
+      "callButton": "On s'appelle ?"
+    }
+  },
+  "cv": {
+    "pageTitle": "CV",
+    "pageDescription": "Découvrez mon parcours professionnel et mes compétences en tant que compositeur et producteur musical.",
+    "download": "Télécharger le CV",
+    "profile": "Profil",
+    "experience": "Expériences",
+    "skills": "Compétences",
+    "tools": "Logiciels",
+    "awards": "Récompenses",
+    "languages": "Langues",
+    "contact": "Me Contacter"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "close": "Fermer",
+    "fullscreen": "Plein écran",
+    "readMore": "Lire la suite",
+    "learnMore": "En savoir plus",
+    "viewAll": "Tout voir",
+    "backToHome": "Retour à l'accueil",
+    "backToAlbums": "Retour aux albums",
+    "backToServices": "Retour aux services",
+    "genre": "Genre",
+    "releaseDate": "Date de sortie",
+    "artist": "Artiste",
+    "collaborators": "Collaborateurs",
+    "author": "Auteur",
+    "contact": "Me contacter",
+    "seeAllServices": "Voir tous les services",
+    "notFound": "Page Non Trouvée",
+    "pageNotFoundDescription": "La page que vous recherchez n'existe pas ou a été déplacée."
+  },
+  "login": {
+    "title": "Connexion Admin",
+    "subtitle": "Accédez à l'interface d'administration",
+    "emailPlaceholder": "Votre email",
+    "passwordPlaceholder": "Votre mot de passe",
+    "email": "Email",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "loading": "Connexion en cours...",
+    "error": "Erreur de connexion",
+    "adminOnly": "Espace réservé aux administrateurs"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Tableau de bord",
+      "albums": "Albums",
+      "videos": "Vidéos",
+      "services": "Services",
+      "settings": "Paramètres",
+      "viewSite": "Voir le site",
+      "viewsToday": "Vues aujourd'hui",
+      "published": "Publié"
+    },
+    "header": {
+      "profile": "Profil",
+      "settings": "Paramètres",
+      "signOut": "Déconnexion",
+      "searchPlaceholder": "Rechercher..."
+    },
+    "table": {
+      "preview": "Aperçu",
+      "title": "Titre",
+      "type": "Type",
+      "date": "Date",
+      "status": "Statut",
+      "actions": "Actions",
+      "number": "N°"
+    },
+    "common": {
+      "save": "Enregistrer",
+      "saving": "Sauvegarde...",
+      "saved": "Sauvegardé",
+      "cancel": "Annuler",
+      "delete": "Supprimer",
+      "error": "Erreur",
+      "success": "Succès",
+      "loading": "Chargement...",
+      "actions": "Actions",
+      "back": "Retour",
+      "preview": "Prévisualiser",
+      "upload": "Upload",
+      "dirtyWarning": "Vous avez des modifications non enregistrées.",
+      "created": "créé",
+      "updated": "modifié"
+    },
+    "settings": {
+      "title": "Paramètres",
+      "description": "Gérez les paramètres et les exports de votre portfolio",
+      "tabs": {
+        "profile": "Profil",
+        "general": "Général",
+        "social": "Réseaux",
+        "content": "Contenu",
+        "export": "Export"
+      },
+      "export": {
+        "title": "Export de Données",
+        "description": "Téléchargez vos données dans différents formats pour backup ou analyse",
+        "success": "Export réussi",
+        "error": "Erreur d'export",
+        "successDesc": "Les {type} ont été exportés en {format}",
+        "formats": {
+          "csv": { "label": "CSV", "desc": "Format tableur" },
+          "json": { "label": "JSON", "desc": "Format structuré" },
+          "txt": { "label": "TXT", "desc": "Texte lisible" }
+        },
+        "info": {
+          "title": "À propos des formats d'export",
+          "csv": "Idéal pour Excel, Google Sheets, ou analyses de données",
+          "json": "Format structuré pour développeurs et APIs",
+          "txt": "Texte brut lisible, parfait pour archivage"
+        }
+      },
+      "general": {
+        "title": "Informations Générales",
+        "siteTitle": "Titre du site",
+        "description": "Description",
+        "footerBio": "Bio courte pour le footer (optionnel)",
+        "contactEmail": "Email de contact",
+        "contactPhone": "Téléphone de contact",
+        "location": "Localisation"
+      },
+      "social": {
+        "title": "Réseaux Sociaux",
+        "description": "Gérez les liens vers vos profils sociaux",
+        "platforms": "Plateformes",
+        "tip": "💡 Laissez vide les champs des réseaux que vous n'utilisez pas."
+      },
+      "content": {
+        "title": "Paramètres de Contenu",
+        "description": "Configurez l'affichage du contenu sur le site",
+        "homepage": "Page d'accueil",
+        "homepageFeaturedCount": "Nombre d'albums mis en avant",
+        "homepageLatestCount": "Nombre de dernières vidéos",
+        "features": {
+          "showFeaturedAlbums": "Afficher les derniers albums",
+          "showLatestVideos": "Afficher les dernières vidéos",
+          "showServices": "Afficher les services"
+        },
+        "pagination": "Pagination",
+        "perPage": {
+          "albums": "Albums par page",
+          "videos": "Vidéos par page",
+          "services": "Services par page"
+        },
+        "sorting": "Tri par défaut",
+        "sortLabel": {
+          "albums": "Albums",
+          "videos": "Vidéos"
+        },
+        "sortOptions": {
+          "date_desc": "Plus récent d'abord",
+          "date_asc": "Plus ancien d'abord",
+          "title_asc": "Titre A-Z",
+          "title_desc": "Titre Z-A"
+        }
+      },
+      "profile": {
+        "title": "Profil Administrateur",
+        "description": "Informations de votre compte admin",
+        "name": "Nom",
+        "currentEmail": "Email actuel",
+        "role": "Rôle",
+        "newEmail": "Nouvel email",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "confirmPassword": "Confirmer le nouveau mot de passe",
+        "updateEmail": "Mettre à jour l'email",
+        "updatePassword": "Mettre à jour le mot de passe",
+        "successEmail": "Votre email a été mis à jour avec succès",
+        "successPassword": "Votre mot de passe a été mis à jour avec succès",
+        "errorEmail": "Erreur lors du changement d'email",
+        "errorPassword": "Erreur lors du changement de mot de passe",
+        "changeEmail": "Changer l'Email",
+        "changeEmailDesc": "Modifiez l'adresse email de connexion",
+        "changePassword": "Changer le Mot de Passe",
+        "changePasswordDesc": "Modifiez votre mot de passe de connexion",
+        "updating": "Modification...",
+        "minChars": "Minimum 8 caractères",
+        "invalidEmail": "Email invalide",
+        "enterValidEmail": "Veuillez entrer un email valide",
+        "enterDifferentEmail": "Veuillez entrer un nouvel email différent",
+        "requiredFields": "Champs requis",
+        "fillAllFields": "Veuillez remplir tous les champs",
+        "passwordTooShort": "Mot de passe trop court",
+        "passwordShortDesc": "Le mot de passe doit contenir au moins 8 caractères",
+        "passwordMismatch": "Mots de passe différents",
+        "passwordMismatchDesc": "Les nouveaux mots de passe ne correspondent pas"
+      }
+    },
+    "media": {
+      "dropzone": "Glissez-déposez une image ou cliquez pour sélectionner",
+      "dropzoneDrag": "Déposez l'image ici",
+      "maxSize": "max 5MB",
+      "currentUrl": "URL actuelle",
+      "uploading": "Upload en cours...",
+      "success": "Image uploadée",
+      "error": "Erreur d'upload"
+    },
+    "albums": {
+      "create": "Créer un album",
+      "edit": "Modifier l'album",
+      "delete": {
+        "title": "Supprimer l'album",
+        "confirm": "Êtes-vous sûr de vouloir supprimer l'album \"{title}\" ? Cette action est irréversible.",
+        "success": "Album supprimé"
+      },
+      "form": {
+        "generalInfo": "Informations générales",
+        "title": "Titre",
+        "titlePlaceholder": "Nom de l'album",
+        "style": "Style",
+        "date": "Date affichée",
+        "datePlaceholder": "Ex: Septembre 2024",
+        "sortedDate": "Date de tri",
+        "sortedDatePlaceholder": "MM-YYYY",
+        "coverImage": "Image de couverture",
+        "poster": "Poster",
+        "listenLink": "Lien d'écoute",
+        "collabName": "Nom de la collaboration",
+        "collabNamePlaceholder": "Nom de l'artiste",
+        "collabLink": "Lien de la collaboration",
+        "collabLinkPlaceholder": "https://...",
+        "order": "Ordre d'affichage",
+        "published": "Statut",
+        "status": {
+          "published": "Publié",
+          "draft": "Brouillon"
+        },
+        "descFr": "Description en français",
+        "descEn": "Description en anglais",
+        "successCreate": "Album créé",
+        "successUpdate": "Album modifié",
+        "successDesc": "L'album \"{title}\" a été {action} avec succès."
+      }
+    },
+    "videos": {
+      "create": "Créer une vidéo",
+      "edit": "Modifier la vidéo",
+      "listTitle": "Vidéos",
+      "delete": {
+        "title": "Supprimer la vidéo",
+        "confirm": "Êtes-vous sûr de vouloir supprimer la vidéo \"{title}\" ? Cette action est irréversible.",
+        "success": "Vidéo supprimée"
+      },
+      "form": {
+        "info": "Informations de la vidéo",
+        "title": "Titre",
+        "titlePlaceholder": "Titre de la vidéo",
+        "type": "Type",
+        "youtubeId": "ID ou URL YouTube",
+        "youtubeIdPlaceholder": "dQw4w9WgXcQ ou https://youtube.com/...",
+        "date": "Date",
+        "datePlaceholder": "JJ/MM/AAAA",
+        "thumbnail": "URL du thumbnail",
+        "thumbnailPlaceholder": "https://img.youtube.com/vi/...",
+        "order": "Ordre d'affichage",
+        "published": "Statut",
+        "successCreate": "Vidéo créée",
+        "successUpdate": "Vidéo modifiée",
+        "successDesc": "La vidéo \"{title}\" a été {action} avec succès."
+      }
+    },
+    "services": {
+      "create": "Créer un service",
+      "edit": "Modifier le service",
+      "listTitle": "Services",
+      "delete": {
+        "title": "Supprimer le service",
+        "confirm": "Êtes-vous sûr de vouloir supprimer le service \"{title}\" ? Cette action est irréversible.",
+        "success": "Service supprimé"
+      },
+      "form": {
+        "generalInfo": "Informations générales",
+        "number": "Numéro",
+        "numberPlaceholder": "01",
+        "title": "Titre",
+        "titlePlaceholder": "Nom du service",
+        "largeTitle": "Titre large",
+        "largeTitlePlaceholder": "Titre de la section",
+        "shortDesc": "Description courte",
+        "shortDescPlaceholder": "Description courte visible sur la carte",
+        "fullDesc": "Description complète",
+        "fullDescPlaceholder": "Description détaillée du service",
+        "author": "Auteur",
+        "authorPlaceholder": "Nom de l'auteur",
+        "date": "Date",
+        "datePlaceholder": "Ex: Janvier 2024",
+        "order": "Ordre d'affichage",
+        "published": "Statut",
+        "descFr": "Description détaillée en français",
+        "descFrPlaceholder": "Description détaillée en français...",
+        "descEn": "Description détaillée en anglais",
+        "descEnPlaceholder": "Detailed description in English...",
+        "successCreate": "Service créé",
+        "successUpdate": "Service modifié",
+        "successDesc": "Le service \"{title}\" a été {action} avec succès."
+      }
+    }
+  }
+}

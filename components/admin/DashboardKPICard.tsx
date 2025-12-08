@@ -1,0 +1,118 @@
+"use client";
+
+import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { TrendingUp, TrendingDown } from "lucide-react";
+
+interface DashboardKPICardProps {
+  title: string;
+  value: number | string;
+  icon: LucideIcon;
+  description?: string;
+  href?: string;
+  colorClass: string;
+  bgColorClass: string;
+  trend?: {
+    value: number;
+    isPositive: boolean;
+  };
+  badge?: string;
+}
+
+export function DashboardKPICard({
+  title,
+  value,
+  icon: Icon,
+  description,
+  href,
+  colorClass,
+  bgColorClass,
+  trend,
+  badge,
+}: DashboardKPICardProps) {
+  const cardContent = (
+    <Card
+      className={cn(
+        "group relative overflow-hidden border border-[var(--glass-border)] bg-glass-subtle backdrop-blur-sm hover:bg-glass hover:border-[var(--glass-border-strong)] hover:shadow-[0_0_30px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-pointer",
+        href && "hover:border-[var(--admin-neon-cyan)]/30"
+      )}
+    >
+      {/* Background Gradient Decoration */}
+      <div
+        className={cn(
+          "absolute top-0 right-0 h-32 w-32 rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-300",
+          bgColorClass
+        )}
+      />
+
+      <CardContent className="relative p-3 sm:p-6">
+        <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4">
+          <div
+            className={cn(
+              "flex h-8 w-8 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl shadow-sm group-hover:scale-110 transition-transform duration-300 shrink-0",
+              bgColorClass
+            )}
+          >
+            <Icon className={cn("h-4 w-4 sm:h-6 sm:w-6", colorClass)} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-300">
+              {title}
+            </p>
+            {badge && (
+              <Badge
+                variant="outline"
+                className="mt-0.5 text-[10px] sm:text-xs border-admin-border-light"
+              >
+                {badge}
+              </Badge>
+            )}
+          </div>
+        </div>
+
+        <div className="space-y-1 sm:space-y-2">
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl sm:text-4xl font-bold text-foreground transition-colors duration-300">
+              {value}
+            </span>
+            {trend && (
+              <div
+                className={cn(
+                  "flex items-center gap-1 text-xs sm:text-sm font-semibold",
+                  trend.isPositive
+                    ? "text-admin-success-600"
+                    : "text-admin-danger-600"
+                )}
+              >
+                {trend.isPositive ? (
+                  <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
+                ) : (
+                  <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4" />
+                )}
+                <span>{Math.abs(trend.value)}%</span>
+              </div>
+            )}
+          </div>
+
+          {description && (
+            <p className="text-xs sm:text-sm text-muted-foreground transition-colors duration-300">{description}</p>
+          )}
+        </div>
+
+        {/* Hover indicator */}
+        {href && (
+          <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-admin-primary-500 to-admin-accent-500 group-hover:w-full transition-all duration-300" />
+        )}
+      </CardContent>
+    </Card>
+  );
+
+  if (href) {
+    return <Link href={href}>{cardContent}</Link>;
+  }
+
+  return cardContent;
+}

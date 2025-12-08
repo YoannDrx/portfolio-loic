@@ -1,0 +1,40 @@
+import { prisma } from "@/lib/prisma";
+import { NeoVideosPage } from "@/components/neo-brutalist/videos/NeoVideosPage";
+import { getTranslations } from "next-intl/server";
+
+// Force dynamic rendering to avoid DB calls during static build
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "videos" });
+
+  return {
+    title: `${t("pageTitle")} | Loïc Ghanem`,
+    description: t("pageDescription"),
+  };
+}
+
+export default async function VideosPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: _locale } = await params;
+
+  // Récupérer toutes les vidéos publiées, triées par date de création décroissante
+  const videos = await prisma.video.findMany({
+    where: {
+      published: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      img: true,
+      type: true,
+      videoId: true,
+      title: true,
+      date: true,
+    },
+  });
+
+  return <NeoVideosPage videos={videos} />;
+}

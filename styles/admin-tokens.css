@@ -1,0 +1,286 @@
+/* ============================================
+   ADMIN DASHBOARD DESIGN TOKENS
+   Neo-Brutalist Unified Design System
+   ============================================ */
+
+:root {
+  /* ===== ADMIN NEO-BRUTALIST SURFACES ===== */
+  /* Inherit from main neo-brutalist tokens */
+  --admin-bg: var(--neo-bg, #F2F2F2);
+  --admin-bg-rgb: 242, 242, 242;
+  --admin-surface: var(--neo-surface, #FFFFFF);
+  --admin-surface-solid: var(--neo-surface, #FFFFFF);
+  --admin-surface-elevated: var(--neo-bg-alt, #E8E8E8);
+  --admin-surface-elevated-solid: var(--neo-bg-alt, #E8E8E8);
+  --admin-surface-hover: var(--neo-bg-alt, #E8E8E8);
+  --admin-surface-active: var(--neo-surface, #FFFFFF);
+
+  /* ===== ADMIN NEO-BRUTALIST BORDERS ===== */
+  --admin-border: var(--neo-border, #1A1A1A);
+  --admin-border-subtle: rgba(26, 26, 26, 0.3);
+  --admin-border-strong: var(--neo-border, #1A1A1A);
+  --admin-border-width: 2px;
+
+  /* ===== ADMIN NEO-BRUTALIST SHADOWS ===== */
+  --admin-neo-shadow: var(--neo-shadow, #1A1A1A);
+  --admin-shadow-sm: 2px 2px 0px 0px var(--admin-neo-shadow);
+  --admin-shadow-md: 4px 4px 0px 0px var(--admin-neo-shadow);
+  --admin-shadow-lg: 6px 6px 0px 0px var(--admin-neo-shadow);
+  --admin-shadow-xl: 8px 8px 0px 0px var(--admin-neo-shadow);
+
+  /* ===== ACCENT COLORS (from palette) ===== */
+  --admin-accent: var(--neo-accent, #FF3300);
+  --admin-accent-rgb: var(--neo-accent-rgb, 255, 51, 0);
+
+  /* ===== NEON ACCENT COLORS (for KPI cards) ===== */
+  --admin-neon-cyan: #00F0FF;
+  --admin-neon-cyan-rgb: 0, 240, 255;
+  --admin-neon-lime: #D5FF0A;
+  --admin-neon-lime-rgb: 213, 255, 10;
+  --admin-neon-magenta: #FF006E;
+  --admin-neon-magenta-rgb: 255, 0, 110;
+  --admin-neon-purple: #8B5CF6;
+  --admin-neon-purple-rgb: 139, 92, 246;
+  --admin-neon-orange: #FF3300;
+  --admin-neon-orange-rgb: 255, 51, 0;
+
+  /* ===== ADMIN GLOW EFFECTS ===== */
+  /* Cyan Glow */
+  --admin-glow-cyan-sm: 0 0 10px -2px rgba(0, 240, 255, 0.4);
+  --admin-glow-cyan-md: 0 0 20px -4px rgba(0, 240, 255, 0.5);
+  --admin-glow-cyan-lg: 0 0 30px -6px rgba(0, 240, 255, 0.6);
+  --admin-glow-cyan-xl: 0 0 50px -10px rgba(0, 240, 255, 0.5);
+  --admin-glow-cyan-intense: 0 0 40px rgba(0, 240, 255, 0.8);
+
+  /* Lime Glow */
+  --admin-glow-lime-sm: 0 0 10px -2px rgba(213, 255, 10, 0.4);
+  --admin-glow-lime-md: 0 0 20px -4px rgba(213, 255, 10, 0.5);
+  --admin-glow-lime-lg: 0 0 30px -6px rgba(213, 255, 10, 0.6);
+  --admin-glow-lime-intense: 0 0 40px rgba(213, 255, 10, 0.8);
+
+  /* Magenta Glow */
+  --admin-glow-magenta-sm: 0 0 10px -2px rgba(255, 0, 110, 0.4);
+  --admin-glow-magenta-md: 0 0 20px -4px rgba(255, 0, 110, 0.5);
+  --admin-glow-magenta-lg: 0 0 30px -6px rgba(255, 0, 110, 0.6);
+  --admin-glow-magenta-intense: 0 0 40px rgba(255, 0, 110, 0.8);
+
+  /* Purple Glow */
+  --admin-glow-purple-sm: 0 0 10px -2px rgba(161, 0, 242, 0.4);
+  --admin-glow-purple-md: 0 0 20px -4px rgba(161, 0, 242, 0.5);
+  --admin-glow-purple-lg: 0 0 30px -6px rgba(161, 0, 242, 0.6);
+  --admin-glow-purple-intense: 0 0 40px rgba(161, 0, 242, 0.8);
+
+  /* State Glows */
+  --admin-glow-success: 0 0 20px rgba(92, 228, 98, 0.4);
+  --admin-glow-error: 0 0 20px rgba(239, 68, 68, 0.4);
+  --admin-glow-warning: 0 0 20px rgba(251, 191, 36, 0.4);
+  --admin-glow-info: 0 0 20px rgba(0, 240, 255, 0.4);
+
+  /* ===== ADMIN GRADIENTS ===== */
+  /* Background Gradients */
+  --gradient-admin-bg: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 240, 255, 0.08), transparent 50%);
+  --gradient-admin-bg-alt: radial-gradient(ellipse 60% 40% at 80% 20%, rgba(161, 0, 242, 0.05), transparent 50%);
+  --gradient-admin-surface: linear-gradient(180deg, rgba(15, 15, 20, 0.95) 0%, rgba(9, 9, 11, 0.98) 100%);
+
+  /* Card Gradients */
+  --gradient-admin-card: linear-gradient(135deg, rgba(20, 20, 28, 0.9) 0%, rgba(15, 15, 20, 0.95) 100%);
+  --gradient-admin-card-hover: linear-gradient(135deg, rgba(25, 25, 35, 0.95) 0%, rgba(18, 18, 25, 0.98) 100%);
+
+  /* Sidebar Gradient */
+  --gradient-admin-sidebar: linear-gradient(180deg, rgba(15, 15, 20, 0.98) 0%, rgba(9, 9, 11, 0.95) 100%);
+
+  /* KPI Card Gradients */
+  --gradient-kpi-cyan: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(0, 240, 255, 0.02) 100%);
+  --gradient-kpi-lime: linear-gradient(135deg, rgba(213, 255, 10, 0.1) 0%, rgba(213, 255, 10, 0.02) 100%);
+  --gradient-kpi-magenta: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(255, 0, 110, 0.02) 100%);
+  --gradient-kpi-purple: linear-gradient(135deg, rgba(161, 0, 242, 0.1) 0%, rgba(161, 0, 242, 0.02) 100%);
+
+  /* Neon Border Gradients */
+  --gradient-border-cyan: linear-gradient(135deg, var(--admin-neon-cyan) 0%, rgba(0, 240, 255, 0.3) 100%);
+  --gradient-border-lime: linear-gradient(135deg, var(--admin-neon-lime) 0%, rgba(213, 255, 10, 0.3) 100%);
+  --gradient-border-magenta: linear-gradient(135deg, var(--admin-neon-magenta) 0%, rgba(255, 0, 110, 0.3) 100%);
+  --gradient-border-purple: linear-gradient(135deg, var(--admin-neon-purple) 0%, rgba(161, 0, 242, 0.3) 100%);
+
+  /* ===== ADMIN SHADOWS ===== */
+  --admin-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --admin-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --admin-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --admin-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+  /* Elevated shadows with subtle color */
+  --admin-shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --admin-shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  /* ===== ADMIN Z-INDEX SCALE ===== */
+  --admin-z-background: -10;
+  --admin-z-base: 0;
+  --admin-z-content: 10;
+  --admin-z-sidebar: 20;
+  --admin-z-header: 30;
+  --admin-z-dropdown: 40;
+  --admin-z-modal-backdrop: 50;
+  --admin-z-modal: 60;
+  --admin-z-command-palette: 70;
+  --admin-z-toast: 80;
+  --admin-z-tooltip: 90;
+
+  /* ===== ADMIN TRANSITIONS ===== */
+  --admin-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --admin-transition-bounce: 600ms cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* ===== ADMIN BLUR VALUES ===== */
+  --admin-blur-sm: 8px;
+  --admin-blur-md: 16px;
+  --admin-blur-lg: 24px;
+  --admin-blur-xl: 40px;
+}
+
+/* ===== ADMIN LIGHT MODE ===== */
+.light {
+  /* ===== ADMIN SURFACES (Light) ===== */
+  --admin-bg: #fafafa;
+  --admin-bg-rgb: 250, 250, 250;
+  --admin-surface: rgba(255, 255, 255, 0.8);
+  --admin-surface-solid: #ffffff;
+  --admin-surface-elevated: rgba(255, 255, 255, 0.95);
+  --admin-surface-elevated-solid: #ffffff;
+  --admin-surface-glass: rgba(0, 0, 0, 0.02);
+  --admin-surface-hover: rgba(0, 0, 0, 0.03);
+  --admin-surface-active: rgba(0, 0, 0, 0.05);
+
+  /* ===== ADMIN BORDERS (Light) ===== */
+  --admin-border: rgba(0, 0, 0, 0.08);
+  --admin-border-subtle: rgba(0, 0, 0, 0.04);
+  --admin-border-strong: rgba(0, 0, 0, 0.12);
+  --admin-border-glow-primary: rgba(79, 70, 229, 0.3);
+  --admin-border-glow-cyan: rgba(6, 182, 212, 0.3);
+  --admin-border-glow-magenta: rgba(236, 72, 153, 0.3);
+  --admin-border-glow-purple: rgba(139, 92, 246, 0.3);
+
+  /* ===== ACCENT COLORS (Light - Indigo based) ===== */
+  --admin-neon-primary: #4f46e5;
+  --admin-neon-primary-rgb: 79, 70, 229;
+  --admin-neon-cyan: #0891b2;
+  --admin-neon-cyan-rgb: 8, 145, 178;
+  --admin-neon-lime: #65a30d;
+  --admin-neon-lime-rgb: 101, 163, 13;
+  --admin-neon-magenta: #db2777;
+  --admin-neon-magenta-rgb: 219, 39, 119;
+  --admin-neon-purple: #7c3aed;
+  --admin-neon-purple-rgb: 124, 58, 237;
+
+  /* ===== ADMIN GLOW EFFECTS (Light - softer) ===== */
+  --admin-glow-primary-sm: 0 0 10px -2px rgba(79, 70, 229, 0.25);
+  --admin-glow-primary-md: 0 0 20px -4px rgba(79, 70, 229, 0.35);
+  --admin-glow-primary-lg: 0 0 30px -6px rgba(79, 70, 229, 0.45);
+  --admin-glow-cyan-sm: 0 0 10px -2px rgba(8, 145, 178, 0.25);
+  --admin-glow-cyan-md: 0 0 20px -4px rgba(8, 145, 178, 0.35);
+  --admin-glow-lime-md: 0 0 20px -4px rgba(101, 163, 13, 0.35);
+  --admin-glow-magenta-md: 0 0 20px -4px rgba(219, 39, 119, 0.35);
+  --admin-glow-purple-md: 0 0 20px -4px rgba(124, 58, 237, 0.35);
+
+  /* State Glows (Light) */
+  --admin-glow-success: 0 0 20px rgba(34, 197, 94, 0.3);
+  --admin-glow-error: 0 0 20px rgba(239, 68, 68, 0.3);
+  --admin-glow-warning: 0 0 20px rgba(245, 158, 11, 0.3);
+  --admin-glow-info: 0 0 20px rgba(8, 145, 178, 0.3);
+
+  /* ===== ADMIN GRADIENTS (Light) ===== */
+  --gradient-admin-bg: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.06), transparent 50%);
+  --gradient-admin-bg-alt: radial-gradient(ellipse 60% 40% at 80% 20%, rgba(124, 58, 237, 0.04), transparent 50%);
+  --gradient-admin-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.98) 100%);
+  --gradient-admin-card: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(250, 250, 250, 0.95) 100%);
+  --gradient-admin-sidebar: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 250, 250, 0.95) 100%);
+
+  /* KPI Card Gradients (Light) */
+  --gradient-kpi-primary: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(79, 70, 229, 0.02) 100%);
+  --gradient-kpi-cyan: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(8, 145, 178, 0.02) 100%);
+  --gradient-kpi-lime: linear-gradient(135deg, rgba(101, 163, 13, 0.08) 0%, rgba(101, 163, 13, 0.02) 100%);
+  --gradient-kpi-magenta: linear-gradient(135deg, rgba(219, 39, 119, 0.08) 0%, rgba(219, 39, 119, 0.02) 100%);
+  --gradient-kpi-purple: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0.02) 100%);
+
+  /* ===== ADMIN SHADOWS (Light - softer) ===== */
+  --admin-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --admin-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --admin-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --admin-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --admin-shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --admin-shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   ADMIN KEYFRAMES
+   ============================================ */
+@keyframes admin-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes admin-pulse-cyan {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.6);
+  }
+}
+
+@keyframes admin-pulse-lime {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(213, 255, 10, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(213, 255, 10, 0.6);
+  }
+}
+
+@keyframes admin-pulse-magenta {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 0, 110, 0.6);
+  }
+}
+
+@keyframes admin-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes admin-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes admin-success-bounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

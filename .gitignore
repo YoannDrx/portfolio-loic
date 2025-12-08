@@ -27,6 +27,15 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.development
+.env.production
 
 # vercel
 .vercel
+
+/lib/generated/prisma
+
+# seed backups (horodatés, ne pas versionner)
+/seed/backups/
+tsconfig.tsbuildinfo

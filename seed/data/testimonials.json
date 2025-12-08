@@ -1,0 +1,67 @@
+[
+  {
+    "id": "testimonial_1",
+    "name": "Wild Fox",
+    "role": "Topliner, Singer, Writer",
+    "avatar": "/img/testimonials/1.jpg",
+    "text": "Loïc is very easy and nice to work with! talented producer/songwriter. Hope to work with him again on other projects!",
+    "date": "2 months ago",
+    "rating": 5,
+    "source": "SoundBetter",
+    "sourceUrl": "https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1",
+    "order": 1,
+    "published": true
+  },
+  {
+    "id": "testimonial_2",
+    "name": "Amelia Bushell",
+    "role": "Vocalist",
+    "avatar": "/img/testimonials/2.jpg",
+    "text": "Very fun working with Loïc. He knows exactly what he wants and together we made something awesome! He gave great feedback and was a very nice person. I hope to work together again!",
+    "date": "4 months ago",
+    "rating": 5,
+    "source": "SoundBetter",
+    "sourceUrl": "https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1",
+    "order": 2,
+    "published": true
+  },
+  {
+    "id": "testimonial_3",
+    "name": "Julaiah",
+    "role": "Topliner, Singer, Writer",
+    "avatar": "/img/testimonials/3.jpg",
+    "text": "I had a great experience working with Loic! His production is well-elaborated, current and rich in sound! He is really supportive when working with artists, the communication is great and the whole process is exceptionally professional! Looking forward to working on more projects together!",
+    "date": "about a year ago",
+    "rating": 5,
+    "source": "SoundBetter",
+    "sourceUrl": "https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1",
+    "order": 3,
+    "published": true
+  },
+  {
+    "id": "testimonial_4",
+    "name": "Quincy Thompson",
+    "role": "Songwriter-Vocalist-Producer",
+    "avatar": "/img/testimonials/16.jpg",
+    "text": "Great producer even better collaborator 😎10",
+    "date": "2 years ago",
+    "rating": 5,
+    "source": "SoundBetter",
+    "sourceUrl": "https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1",
+    "order": 4,
+    "published": true
+  },
+  {
+    "id": "testimonial_5",
+    "name": "Britney Jayy",
+    "role": "Songwriter/Singer/R&B lover",
+    "avatar": "/img/testimonials/11.jpg",
+    "text": "AMAZING, patient, and super professional <3",
+    "date": "2 years ago",
+    "rating": 5,
+    "source": "SoundBetter",
+    "sourceUrl": "https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1",
+    "order": 5,
+    "published": true
+  }
+]
