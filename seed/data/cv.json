@@ -388,11 +388,39 @@
             ]
           },
           {
-            "id": "award_markawards",
-            "startDate": null,
+            "id": "award_pma2023",
+            "startDate": "2023-01-01T00:00:00.000Z",
             "endDate": null,
             "isCurrent": false,
             "order": 2,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "award_pma2023_fr",
+                "itemId": "award_pma2023",
+                "locale": "fr",
+                "title": "Production Music Awards 2023",
+                "subtitle": "Nomination - Catégorie Electronic",
+                "location": null,
+                "description": "\"La Fontaine\" feat. Flovry (Infinity Scores/Cezame Music Agency)"
+              },
+              {
+                "id": "award_pma2023_en",
+                "itemId": "award_pma2023",
+                "locale": "en",
+                "title": "Production Music Awards 2023",
+                "subtitle": "Nomination - Electronic Category",
+                "location": null,
+                "description": "\"La Fontaine\" feat. Flovry (Infinity Scores/Cezame Music Agency)"
+              }
+            ]
+          },
+          {
+            "id": "award_markawards",
+            "startDate": "2017-01-01T00:00:00.000Z",
+            "endDate": null,
+            "isCurrent": false,
+            "order": 3,
             "isActive": true,
             "translations": [
               {
@@ -400,18 +428,18 @@
                 "itemId": "award_markawards",
                 "locale": "fr",
                 "title": "The Mark Awards",
-                "subtitle": "Accomplissement Exceptionnel",
+                "subtitle": "Finaliste - Musique Originale",
                 "location": null,
-                "description": "Reconnaissance pour les réalisations exceptionnelles dans la musique de production."
+                "description": "Live at Bataclan avec Rise of the Northstar - Performance mémorable au mythique Bataclan de Paris."
               },
               {
                 "id": "cmipxo1fz000zskdcm8czib6t",
                 "itemId": "award_markawards",
                 "locale": "en",
                 "title": "The Mark Awards",
-                "subtitle": "Outstanding Achievement",
+                "subtitle": "Finalist - Original Music",
                 "location": null,
-                "description": "Recognition for outstanding achievements in production music."
+                "description": "Live at Bataclan w/ Rise of the Northstar - Memorable performance at the legendary Bataclan in Paris."
               }
             ]
           }

@@ -18,6 +18,8 @@ import {
   Linkedin,
   Youtube,
   ExternalLink,
+  Award,
+  Trophy,
 } from "lucide-react";
 import Image from "next/image";
 import { BrutalistButton } from "../ui/BrutalistButton";
@@ -155,6 +157,36 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           label: "YouTube",
         },
       ],
+    },
+  ];
+
+  const awards = [
+    {
+      title: t("awards.pma2024.title"),
+      subtitle: t("awards.pma2024.category"),
+      description: t("awards.pma2024.description"),
+      image: "/img/about/PMA-2024-Metal-nomination.jpg",
+      link: "https://www.productionmusicawards.com/",
+      year: t("awards.pma2024.year"),
+      icon: Trophy,
+    },
+    {
+      title: t("awards.pma2023.title"),
+      subtitle: t("awards.pma2023.category"),
+      description: t("awards.pma2023.description"),
+      image: "/img/about/PMA-2023-Rock-nomination.jpg",
+      link: "https://www.productionmusicawards.com/",
+      year: t("awards.pma2023.year"),
+      icon: Award,
+    },
+    {
+      title: t("awards.mark.title"),
+      subtitle: t("awards.mark.category"),
+      description: t("awards.mark.description"),
+      image: "/img/about/Marks-Awards.jpg",
+      link: "https://markawards.com/",
+      year: t("awards.mark.year"),
+      icon: Award,
     },
   ];
 
@@ -331,6 +363,63 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           </motion.div>
         </section>
 
+        {/* LATEST ACHIEVEMENTS */}
+        <section className="py-24 bg-neo-surface">
+          <div className="container mx-auto px-4 md:px-6">
+            <SectionHeader number="03" title={t("awards.title")} subtitle={t("awards.subtitle")} />
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            >
+              {awards.map((award, i) => (
+                <motion.div key={i} variants={fadeInUp}>
+                  <NeoCard hover="lift" padding="none" className="h-full group overflow-hidden">
+                    {/* Image */}
+                    <div className="relative h-64 overflow-hidden bg-neo-text/5">
+                      <Image
+                        src={award.image}
+                        alt={award.title}
+                        fill
+                        className="object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                      />
+                      {/* Year badge */}
+                      <div className="absolute top-4 left-4 bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono font-bold text-sm">
+                        {award.year}
+                      </div>
+                      {/* Icon overlay */}
+                      <div className="absolute bottom-4 right-4 w-12 h-12 bg-neo-text flex items-center justify-center">
+                        <award.icon className="w-6 h-6 text-neo-accent" />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      <h3 className="text-xl font-black uppercase tracking-tight mb-2 text-neo-text">
+                        {award.title}
+                      </h3>
+                      <p className="font-mono text-sm text-neo-accent mb-3">{award.subtitle}</p>
+                      <p className="text-sm opacity-70 mb-4 line-clamp-3">{award.description}</p>
+                      <a
+                        href={award.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 font-mono text-sm font-bold text-neo-text hover:text-neo-accent transition-colors"
+                      >
+                        {t("awards.learnMore")}
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </NeoCard>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
         {/* TIMELINE - Parcours Professionnel */}
         <NeoTimeline />
 
@@ -338,7 +427,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
         <section className="py-24 bg-neo-surface">
           <div className="container mx-auto px-4 md:px-6">
             <SectionHeader
-              number="04"
+              number="05"
               title={t("labelsPublishers.title")}
               subtitle={t("labelsPublishers.subtitle")}
             />

@@ -206,6 +206,25 @@ const createStyles = (theme: CVTheme) =>
       textTransform: "uppercase",
       letterSpacing: 0.5,
     },
+    // Clients grid badges
+    clientsGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+    },
+    clientBadge: {
+      backgroundColor: "#FFFFFF",
+      border: `2 solid ${theme.border}`,
+      padding: "6 12",
+      marginRight: 6,
+      marginBottom: 6,
+    },
+    clientBadgeText: {
+      fontSize: 8,
+      fontFamily: "Helvetica-Bold",
+      color: theme.text,
+      textTransform: "uppercase",
+      letterSpacing: 0.5,
+    },
 
     // ============ MAIN CONTENT ============
     main: {
@@ -348,7 +367,7 @@ const createStyles = (theme: CVTheme) =>
     },
   });
 
-const styles = createStyles(defaultTheme);
+const _styles = createStyles(defaultTheme);
 
 export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) => {
   const mergedTheme: CVTheme = {
@@ -551,6 +570,19 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
               </View>
             );
           })}
+
+        {section.layoutType === "grid" && (
+          <View style={stylesWithTheme.clientsGrid}>
+            {section.items.map((item) => {
+              const it = t(item.translations);
+              return (
+                <View key={item.id || it?.title} style={stylesWithTheme.clientBadge}>
+                  <Text style={stylesWithTheme.clientBadgeText}>{it?.title}</Text>
+                </View>
+              );
+            })}
+          </View>
+        )}
       </View>
     );
   };
