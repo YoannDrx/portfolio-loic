@@ -1,390 +1,697 @@
-{
-  "cv": {
-    "id": "loic_ghanem_cv",
-    "isActive": true,
-    "fullName": "Loïc Ghanem",
-    "badgeFr": "Compositeur & Producteur",
-    "badgeEn": "Composer & Producer",
-    "photo": "/img/slider/loic-studio-front.jpg",
-    "phone": null,
-    "email": "loic.ghanem@outlook.com",
-    "website": "https://www.loic-ghanem.com",
-    "location": "Paris, France",
-    "linkedInUrl": "https://www.linkedin.com/in/loïc-ghanem/",
-    "headlineFr": "Compositeur & Producteur de Musique",
-    "headlineEn": "Music Composer & Producer",
-    "bioFr": "Compositeur et producteur parisien passionné par la création de paysages sonores narratifs. Depuis plus de 10 ans, je crée des musiques originales pour le cinéma, la télévision, les publicités et les jeux vidéo. Mes compositions ont été utilisées par des marques prestigieuses comme Porsche, Mercedes, Netflix et HBO.",
-    "bioEn": "Paris-based composer and music producer with a passion for soundscaping narratives. For over a decade, I've been creating original music for film, TV, advertising, and video games. My compositions have been featured by prestigious brands like Porsche, Mercedes, Netflix, and HBO.",
-    "layout": "creative",
-    "accentColor": "#D5FF0A",
-    "showPhoto": true,
-    "theme": {
-      "primary": "#D5FF0A",
-      "secondary": "#9EF01A",
-      "header": "#0B0C12",
-      "sidebar": "#F4F5F7",
-      "surface": "#FFFFFF",
-      "text": "#0D0E11",
-      "muted": "#60626A",
-      "border": "#E2E4EA",
-      "badge": "#0F1118"
-    }
-  },
-  "sections": [
-    {
-      "id": "section_experience",
-      "type": "experience",
-      "icon": "Briefcase",
-      "color": "#D5FF0A",
-      "placement": "main",
-      "layoutType": "timeline",
-      "order": 1,
+[
+  {
+    "cv": {
+      "id": "loic_ghanem_cv",
       "isActive": true,
-      "translations": [
-        { "locale": "fr", "title": "Expériences" },
-        { "locale": "en", "title": "Experience" }
-      ],
-      "items": [
-        {
-          "id": "exp_freelance",
-          "startDate": "2015-01-01",
-          "endDate": null,
-          "isCurrent": true,
-          "order": 1,
-          "isActive": true,
-          "translations": [
-            {
-              "locale": "fr",
-              "title": "Compositeur & Producteur",
-              "subtitle": "Freelance",
-              "location": "Paris, France",
-              "description": "Composition et production pour des librairies musicales (Cezame Music Agency, MYMA, Justement Music). Spécialisé en Trailer Music, Metal et hybrides orchestraux. Plus de 16 albums produits."
-            },
-            {
-              "locale": "en",
-              "title": "Composer & Producer",
-              "subtitle": "Freelance",
-              "location": "Paris, France",
-              "description": "Composition and production for music libraries (Cezame Music Agency, MYMA, Justement Music). Specialized in Trailer Music, Metal, and Orchestral hybrids. Over 16 albums produced."
-            }
-          ]
-        },
-        {
-          "id": "exp_voyager1",
-          "startDate": "2017-01-01",
-          "endDate": null,
-          "isCurrent": true,
-          "order": 2,
-          "isActive": true,
-          "translations": [
-            {
-              "locale": "fr",
-              "title": "Producteur / Artiste",
-              "subtitle": "Voyager1",
-              "location": "Paris, France",
-              "description": "Projet Musique Électronique, Hip-hop et Bass Music. Production musicale, mixage et direction artistique."
-            },
-            {
-              "locale": "en",
-              "title": "Producer / Artist",
-              "subtitle": "Voyager1",
-              "location": "Paris, France",
-              "description": "Electronic, Hip-hop and Bass Music project. Music production, mixing, and artistic direction."
-            }
-          ]
-        },
-        {
-          "id": "exp_earlyseasons",
-          "startDate": "2011-01-01",
-          "endDate": "2015-12-31",
-          "isCurrent": false,
-          "order": 3,
-          "isActive": true,
-          "translations": [
-            {
-              "locale": "fr",
-              "title": "Guitariste",
-              "subtitle": "Early Seasons",
-              "location": "France / USA",
-              "description": "Groupe de Metalcore. Tournées internationales, composition et enregistrement studio. Signé chez Artery Recordings."
-            },
-            {
-              "locale": "en",
-              "title": "Guitarist",
-              "subtitle": "Early Seasons",
-              "location": "France / USA",
-              "description": "Metalcore band. International touring, composition, and studio recording. Signed to Artery Recordings."
-            }
-          ]
-        },
-        {
-          "id": "exp_confront",
-          "startDate": "2011-01-01",
-          "endDate": "2014-12-31",
-          "isCurrent": false,
-          "order": 4,
-          "isActive": true,
-          "translations": [
-            {
-              "locale": "fr",
-              "title": "Producteur & Guitariste",
-              "subtitle": "Confront",
-              "location": "France",
-              "description": "Projet fusion Electronic / Metal. Composition et performance live."
-            },
-            {
-              "locale": "en",
-              "title": "Producer & Guitarist",
-              "subtitle": "Confront",
-              "location": "France",
-              "description": "Electronic / Metal fusion project. Composition and live performance."
-            }
-          ]
-        },
-        {
-          "id": "exp_rotn",
-          "startDate": "2010-01-01",
-          "endDate": "2012-12-31",
-          "isCurrent": false,
-          "order": 5,
-          "isActive": true,
-          "translations": [
-            {
-              "locale": "fr",
-              "title": "Guitariste",
-              "subtitle": "Rise of the Northstar",
-              "location": "France",
-              "description": "Groupe de Hardcore. Concerts et travaux de composition."
-            },
-            {
-              "locale": "en",
-              "title": "Guitarist",
-              "subtitle": "Rise of the Northstar",
-              "location": "France",
-              "description": "Hardcore band. Live performances and early composition work."
-            }
-          ]
-        }
-      ]
+      "fullName": "Loïc Ghanem",
+      "badgeFr": "Compositeur & Producteur",
+      "badgeEn": "Composer & Producer",
+      "photo": "/img/slider/loic-studio-front.jpg",
+      "phone": null,
+      "email": "loic.ghanem@outlook.com",
+      "website": "https://www.loic-ghanem.com",
+      "location": "Paris, France",
+      "linkedInUrl": "https://www.linkedin.com/in/loïc-ghanem/",
+      "headlineFr": "Compositeur & Producteur",
+      "headlineEn": "Composer & Producer",
+      "bioFr": "Compositeur et producteur basé à Paris, passionné par la création de paysages sonores narratifs. Depuis plus d'une décennie, je transforme des idées brutes en expériences auditives complètes. De la musique originale aux compositions pour médias visuels et l'édition musicale, j'apporte ma signature sonore à chaque projet, amplifiant l'histoire et enrichissant l'expérience du spectateur. Je crée des paysages sonores uniques, contemporains et engageants qui résonnent et laissent une impression durable.",
+      "bioEn": "Paris-based composer and music producer with a passion for soundscaping narratives. For over a decade, I've been transforming raw ideas into full-blown auditory experiences. From original music to compelling compositions for visual media and music publishing, I bring my sonic signature to every project, amplifying the story and enriching the viewer's experience. I deliver unique, contemporary, and engaging soundscapes that resonate and create lasting impressions.",
+      "layout": "creative",
+      "accentColor": "#F73604",
+      "showPhoto": true,
+      "theme": {
+        "text": "#0B0C12",
+        "badge": "#F73604",
+        "muted": "#666666",
+        "border": "#0B0C12",
+        "header": "#0B0C12",
+        "primary": "#F73604",
+        "sidebar": "#F4F5F7",
+        "surface": "#FFFFFF",
+        "secondary": "#F73604"
+      },
+      "createdAt": "2025-12-03T11:38:14.796Z",
+      "updatedAt": "2025-12-03T13:27:41.728Z"
     },
-    {
-      "id": "section_awards",
-      "type": "awards",
-      "icon": "Award",
-      "color": "#FFD700",
-      "placement": "main",
-      "layoutType": "list",
-      "order": 2,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "title": "Récompenses" },
-        { "locale": "en", "title": "Awards" }
-      ],
-      "items": [
-        {
-          "id": "award_pma2024",
-          "startDate": "2024-01-01",
-          "endDate": null,
-          "isCurrent": false,
-          "order": 1,
-          "isActive": true,
-          "translations": [
-            {
-              "locale": "fr",
-              "title": "Production Music Awards 2024",
-              "subtitle": "Double Nomination - Catégorie Metal",
-              "location": null,
-              "description": "\"Sparkle in the Dark\" (Infinity Scores/Cezame) et \"Revenge\" feat. Aaron Matts (Justement Music/MYMA)"
-            },
-            {
-              "locale": "en",
-              "title": "Production Music Awards 2024",
-              "subtitle": "Double Nomination - Metal Category",
-              "location": null,
-              "description": "\"Sparkle in the Dark\" (Infinity Scores/Cezame) and \"Revenge\" feat. Aaron Matts (Justement Music/MYMA)"
-            }
-          ]
-        },
-        {
-          "id": "award_markawards",
-          "startDate": null,
-          "endDate": null,
-          "isCurrent": false,
-          "order": 2,
-          "isActive": true,
-          "translations": [
-            {
-              "locale": "fr",
-              "title": "The Mark Awards",
-              "subtitle": "Accomplissement Exceptionnel",
-              "location": null,
-              "description": "Reconnaissance pour les réalisations exceptionnelles dans la musique de production."
-            },
-            {
-              "locale": "en",
-              "title": "The Mark Awards",
-              "subtitle": "Outstanding Achievement",
-              "location": null,
-              "description": "Recognition for outstanding achievements in production music."
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "skills": [
-    {
-      "id": "skill_composition",
-      "category": "technical",
-      "level": 5,
-      "showAsBar": true,
-      "order": 1,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Composition Musicale" },
-        { "locale": "en", "name": "Music Composition" }
-      ]
-    },
-    {
-      "id": "skill_production",
-      "category": "technical",
-      "level": 5,
-      "showAsBar": true,
-      "order": 2,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Production Musicale" },
-        { "locale": "en", "name": "Music Production" }
-      ]
-    },
-    {
-      "id": "skill_mixing",
-      "category": "technical",
-      "level": 5,
-      "showAsBar": true,
-      "order": 3,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Mixage & Mastering" },
-        { "locale": "en", "name": "Mixing & Mastering" }
-      ]
-    },
-    {
-      "id": "skill_filmscoring",
-      "category": "technical",
-      "level": 5,
-      "showAsBar": true,
-      "order": 4,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Musique de Film" },
-        { "locale": "en", "name": "Film Scoring" }
-      ]
-    },
-    {
-      "id": "skill_arranging",
-      "category": "technical",
-      "level": 5,
-      "showAsBar": true,
-      "order": 5,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Arrangement / Orchestration" },
-        { "locale": "en", "name": "Arranging / Orchestration" }
-      ]
-    },
-    {
-      "id": "skill_sounddesign",
-      "category": "technical",
-      "level": 4,
-      "showAsBar": true,
-      "order": 6,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Design Sonore" },
-        { "locale": "en", "name": "Sound Design" }
-      ]
-    },
-    {
-      "id": "software_protools",
-      "category": "software",
-      "level": 5,
-      "showAsBar": false,
-      "order": 10,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Pro Tools" },
-        { "locale": "en", "name": "Pro Tools" }
-      ]
-    },
-    {
-      "id": "software_logicpro",
-      "category": "software",
-      "level": 5,
-      "showAsBar": false,
-      "order": 11,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Logic Pro X" },
-        { "locale": "en", "name": "Logic Pro X" }
-      ]
-    },
-    {
-      "id": "software_ableton",
-      "category": "software",
-      "level": 5,
-      "showAsBar": false,
-      "order": 12,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Ableton Live" },
-        { "locale": "en", "name": "Ableton Live" }
-      ]
-    },
-    {
-      "id": "software_cubase",
-      "category": "software",
-      "level": 5,
-      "showAsBar": false,
-      "order": 13,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Cubase" },
-        { "locale": "en", "name": "Cubase" }
-      ]
-    },
-    {
-      "id": "lang_french",
-      "category": "language",
-      "level": 5,
-      "showAsBar": false,
-      "order": 20,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Français (Natif)" },
-        { "locale": "en", "name": "French (Native)" }
-      ]
-    },
-    {
-      "id": "lang_english",
-      "category": "language",
-      "level": 4,
-      "showAsBar": false,
-      "order": 21,
-      "isActive": true,
-      "translations": [
-        { "locale": "fr", "name": "Anglais (Courant)" },
-        { "locale": "en", "name": "English (Fluent)" }
-      ]
-    }
-  ],
-  "socialLinks": [
-    {
-      "id": "social_youtube",
-      "platform": "YouTube",
-      "url": "https://www.youtube.com/@LoicGhanem",
-      "label": "YouTube",
-      "order": 1
-    }
-  ]
-}
+    "sections": [
+      {
+        "id": "section_experience",
+        "type": "experience",
+        "icon": "Briefcase",
+        "color": "#F73604",
+        "placement": "main",
+        "layoutType": "timeline",
+        "order": 1,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1070001skdcv93d8aiw",
+            "sectionId": "section_experience",
+            "locale": "fr",
+            "title": "Expériences"
+          },
+          {
+            "id": "cmipxo11n0003skdcd3450n55",
+            "sectionId": "section_experience",
+            "locale": "en",
+            "title": "Experience"
+          }
+        ],
+        "items": [
+          {
+            "id": "exp_freelance",
+            "startDate": "2015-01-01T00:00:00.000Z",
+            "endDate": null,
+            "isCurrent": true,
+            "order": 1,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "cmipxo13f0005skdcudmb5n1i",
+                "itemId": "exp_freelance",
+                "locale": "fr",
+                "title": "Compositeur & Producteur",
+                "subtitle": "Freelance",
+                "location": "Paris, France",
+                "description": "Composition et production pour des librairies musicales (Cezame Music Agency, MYMA, Justement Music). Spécialisé en Trailer Music, Metal et hybrides orchestraux. Plus de 16 albums produits."
+              },
+              {
+                "id": "cmipxo14w0007skdcue0dl65n",
+                "itemId": "exp_freelance",
+                "locale": "en",
+                "title": "Composer & Producer",
+                "subtitle": "Freelance",
+                "location": "Paris, France",
+                "description": "Composition and production for music libraries (Cezame Music Agency, MYMA, Justement Music). Specialized in Trailer Music, Metal, and Orchestral hybrids. Over 16 albums produced."
+              }
+            ]
+          },
+          {
+            "id": "exp_voyager1",
+            "startDate": "2017-01-01T00:00:00.000Z",
+            "endDate": null,
+            "isCurrent": true,
+            "order": 2,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "cmipxo15z0009skdcar3ohfxk",
+                "itemId": "exp_voyager1",
+                "locale": "fr",
+                "title": "Producteur / Artiste",
+                "subtitle": "Voyager1",
+                "location": "Paris, France",
+                "description": "Projet Musique Électronique, Hip-hop et Bass Music. Production musicale, mixage et direction artistique."
+              },
+              {
+                "id": "cmipxo16k000bskdcrcxvil5d",
+                "itemId": "exp_voyager1",
+                "locale": "en",
+                "title": "Producer / Artist",
+                "subtitle": "Voyager1",
+                "location": "Paris, France",
+                "description": "Electronic, Hip-hop and Bass Music project. Music production, mixing, and artistic direction."
+              }
+            ]
+          },
+          {
+            "id": "exp_earlyseasons",
+            "startDate": "2011-01-01T00:00:00.000Z",
+            "endDate": "2015-12-31T00:00:00.000Z",
+            "isCurrent": false,
+            "order": 3,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "cmipxo17k000dskdcmuytxs9t",
+                "itemId": "exp_earlyseasons",
+                "locale": "fr",
+                "title": "Guitariste",
+                "subtitle": "Early Seasons",
+                "location": "France / USA",
+                "description": "Groupe de Metalcore. Tournées internationales, composition et enregistrement studio. Signé chez Artery Recordings."
+              },
+              {
+                "id": "cmipxo182000fskdcfp90e26d",
+                "itemId": "exp_earlyseasons",
+                "locale": "en",
+                "title": "Guitarist",
+                "subtitle": "Early Seasons",
+                "location": "France / USA",
+                "description": "Metalcore band. International touring, composition, and studio recording. Signed to Artery Recordings."
+              }
+            ]
+          },
+          {
+            "id": "exp_confront",
+            "startDate": "2011-01-01T00:00:00.000Z",
+            "endDate": "2014-12-31T00:00:00.000Z",
+            "isCurrent": false,
+            "order": 4,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "cmipxo190000hskdcza4x0tfp",
+                "itemId": "exp_confront",
+                "locale": "fr",
+                "title": "Producteur & Guitariste",
+                "subtitle": "Confront",
+                "location": "France",
+                "description": "Projet fusion Electronic / Metal. Composition et performance live."
+              },
+              {
+                "id": "cmipxo19k000jskdcg8cda7bz",
+                "itemId": "exp_confront",
+                "locale": "en",
+                "title": "Producer & Guitarist",
+                "subtitle": "Confront",
+                "location": "France",
+                "description": "Electronic / Metal fusion project. Composition and live performance."
+              }
+            ]
+          },
+          {
+            "id": "exp_rotn",
+            "startDate": "2010-01-01T00:00:00.000Z",
+            "endDate": "2012-12-31T00:00:00.000Z",
+            "isCurrent": false,
+            "order": 5,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "cmipxo1an000lskdczqq6q58c",
+                "itemId": "exp_rotn",
+                "locale": "fr",
+                "title": "Guitariste",
+                "subtitle": "Rise of the Northstar",
+                "location": "France",
+                "description": "Groupe de Hardcore. Concerts et travaux de composition."
+              },
+              {
+                "id": "cmipxo1b5000nskdcqv68nk6g",
+                "itemId": "exp_rotn",
+                "locale": "en",
+                "title": "Guitarist",
+                "subtitle": "Rise of the Northstar",
+                "location": "France",
+                "description": "Hardcore band. Live performances and early composition work."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "section_clients",
+        "type": "clients",
+        "icon": "Users",
+        "color": "#0A66C2",
+        "placement": "main",
+        "layoutType": "grid",
+        "order": 2,
+        "isActive": true,
+        "translations": [
+          { "locale": "fr", "title": "Clients & Sync" },
+          { "locale": "en", "title": "Clients & Sync" }
+        ],
+        "items": [
+          {
+            "order": 0,
+            "translations": [
+              { "locale": "fr", "title": "Porsche" },
+              { "locale": "en", "title": "Porsche" }
+            ]
+          },
+          {
+            "order": 1,
+            "translations": [
+              { "locale": "fr", "title": "Mercedes" },
+              { "locale": "en", "title": "Mercedes" }
+            ]
+          },
+          {
+            "order": 2,
+            "translations": [
+              { "locale": "fr", "title": "Burger King" },
+              { "locale": "en", "title": "Burger King" }
+            ]
+          },
+          {
+            "order": 3,
+            "translations": [
+              { "locale": "fr", "title": "Lululemon" },
+              { "locale": "en", "title": "Lululemon" }
+            ]
+          },
+          {
+            "order": 4,
+            "translations": [
+              { "locale": "fr", "title": "BBC" },
+              { "locale": "en", "title": "BBC" }
+            ]
+          },
+          {
+            "order": 5,
+            "translations": [
+              { "locale": "fr", "title": "ESPN" },
+              { "locale": "en", "title": "ESPN" }
+            ]
+          },
+          {
+            "order": 6,
+            "translations": [
+              { "locale": "fr", "title": "NHL" },
+              { "locale": "en", "title": "NHL" }
+            ]
+          },
+          {
+            "order": 7,
+            "translations": [
+              { "locale": "fr", "title": "NFL" },
+              { "locale": "en", "title": "NFL" }
+            ]
+          },
+          {
+            "order": 8,
+            "translations": [
+              { "locale": "fr", "title": "NBA" },
+              { "locale": "en", "title": "NBA" }
+            ]
+          },
+          {
+            "order": 9,
+            "translations": [
+              { "locale": "fr", "title": "MLB" },
+              { "locale": "en", "title": "MLB" }
+            ]
+          },
+          {
+            "order": 10,
+            "translations": [
+              { "locale": "fr", "title": "WWE" },
+              { "locale": "en", "title": "WWE" }
+            ]
+          },
+          {
+            "order": 11,
+            "translations": [
+              { "locale": "fr", "title": "Netflix" },
+              { "locale": "en", "title": "Netflix" }
+            ]
+          },
+          {
+            "order": 12,
+            "translations": [
+              { "locale": "fr", "title": "HBO" },
+              { "locale": "en", "title": "HBO" }
+            ]
+          },
+          {
+            "order": 13,
+            "translations": [
+              { "locale": "fr", "title": "Amazon Prime" },
+              { "locale": "en", "title": "Amazon Prime" }
+            ]
+          },
+          {
+            "order": 14,
+            "translations": [
+              { "locale": "fr", "title": "Disney+" },
+              { "locale": "en", "title": "Disney+" }
+            ]
+          },
+          {
+            "order": 15,
+            "translations": [
+              { "locale": "fr", "title": "Apple TV+" },
+              { "locale": "en", "title": "Apple TV+" }
+            ]
+          },
+          {
+            "order": 16,
+            "translations": [
+              { "locale": "fr", "title": "Spotify" },
+              { "locale": "en", "title": "Spotify" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "section_awards",
+        "type": "awards",
+        "icon": "Award",
+        "color": "#7C3AED",
+        "placement": "main",
+        "layoutType": "list",
+        "order": 3,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1ci000pskdcp1vp6vno",
+            "sectionId": "section_awards",
+            "locale": "fr",
+            "title": "Récompenses"
+          },
+          {
+            "id": "cmipxo1cy000rskdc1ftdlq91",
+            "sectionId": "section_awards",
+            "locale": "en",
+            "title": "Awards"
+          }
+        ],
+        "items": [
+          {
+            "id": "award_pma2024",
+            "startDate": "2024-01-01T00:00:00.000Z",
+            "endDate": null,
+            "isCurrent": false,
+            "order": 1,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "cmipxo1dz000tskdc16pxfvn6",
+                "itemId": "award_pma2024",
+                "locale": "fr",
+                "title": "Production Music Awards 2024",
+                "subtitle": "Double Nomination - Catégorie Metal",
+                "location": null,
+                "description": "\"Sparkle in the Dark\" (Infinity Scores/Cezame) et \"Revenge\" feat. Aaron Matts (Justement Music/MYMA)"
+              },
+              {
+                "id": "cmipxo1eh000vskdc80ca9ih8",
+                "itemId": "award_pma2024",
+                "locale": "en",
+                "title": "Production Music Awards 2024",
+                "subtitle": "Double Nomination - Metal Category",
+                "location": null,
+                "description": "\"Sparkle in the Dark\" (Infinity Scores/Cezame) and \"Revenge\" feat. Aaron Matts (Justement Music/MYMA)"
+              }
+            ]
+          },
+          {
+            "id": "award_markawards",
+            "startDate": null,
+            "endDate": null,
+            "isCurrent": false,
+            "order": 2,
+            "isActive": true,
+            "translations": [
+              {
+                "id": "cmipxo1fi000xskdc2n2h3ig6",
+                "itemId": "award_markawards",
+                "locale": "fr",
+                "title": "The Mark Awards",
+                "subtitle": "Accomplissement Exceptionnel",
+                "location": null,
+                "description": "Reconnaissance pour les réalisations exceptionnelles dans la musique de production."
+              },
+              {
+                "id": "cmipxo1fz000zskdcm8czib6t",
+                "itemId": "award_markawards",
+                "locale": "en",
+                "title": "The Mark Awards",
+                "subtitle": "Outstanding Achievement",
+                "location": null,
+                "description": "Recognition for outstanding achievements in production music."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "id": "skill_composition",
+        "category": "technical",
+        "level": 5,
+        "showAsBar": true,
+        "order": 1,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1jw0015skdcdcx3057k",
+            "skillId": "skill_composition",
+            "locale": "fr",
+            "name": "Composition Musicale"
+          },
+          {
+            "id": "cmipxo1lj0017skdcsmrxn94h",
+            "skillId": "skill_composition",
+            "locale": "en",
+            "name": "Music Composition"
+          }
+        ]
+      },
+      {
+        "id": "skill_production",
+        "category": "technical",
+        "level": 5,
+        "showAsBar": true,
+        "order": 2,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1mt0019skdcz193nc7c",
+            "skillId": "skill_production",
+            "locale": "fr",
+            "name": "Production Musicale"
+          },
+          {
+            "id": "cmipxo1ne001bskdc2imzofxt",
+            "skillId": "skill_production",
+            "locale": "en",
+            "name": "Music Production"
+          }
+        ]
+      },
+      {
+        "id": "skill_mixing",
+        "category": "technical",
+        "level": 5,
+        "showAsBar": true,
+        "order": 3,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1oh001dskdcirm9oyq1",
+            "skillId": "skill_mixing",
+            "locale": "fr",
+            "name": "Mixage & Mastering"
+          },
+          {
+            "id": "cmipxo1oz001fskdc8zlnm436",
+            "skillId": "skill_mixing",
+            "locale": "en",
+            "name": "Mixing & Mastering"
+          }
+        ]
+      },
+      {
+        "id": "skill_filmscoring",
+        "category": "technical",
+        "level": 5,
+        "showAsBar": true,
+        "order": 4,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1qe001hskdcsxtiuaay",
+            "skillId": "skill_filmscoring",
+            "locale": "fr",
+            "name": "Musique de Film"
+          },
+          {
+            "id": "cmipxo1r8001jskdc0nzeb3hc",
+            "skillId": "skill_filmscoring",
+            "locale": "en",
+            "name": "Film Scoring"
+          }
+        ]
+      },
+      {
+        "id": "skill_arranging",
+        "category": "technical",
+        "level": 5,
+        "showAsBar": true,
+        "order": 5,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1se001lskdcrgzxvpqv",
+            "skillId": "skill_arranging",
+            "locale": "fr",
+            "name": "Arrangement / Orchestration"
+          },
+          {
+            "id": "cmipxo1t3001nskdcs5hxv4gz",
+            "skillId": "skill_arranging",
+            "locale": "en",
+            "name": "Arranging / Orchestration"
+          }
+        ]
+      },
+      {
+        "id": "skill_sounddesign",
+        "category": "technical",
+        "level": 4,
+        "showAsBar": true,
+        "order": 6,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1u6001pskdcgiol45yv",
+            "skillId": "skill_sounddesign",
+            "locale": "fr",
+            "name": "Design Sonore"
+          },
+          {
+            "id": "cmipxo1up001rskdcgn2rlzw1",
+            "skillId": "skill_sounddesign",
+            "locale": "en",
+            "name": "Sound Design"
+          }
+        ]
+      },
+      {
+        "id": "software_protools",
+        "category": "software",
+        "level": 5,
+        "showAsBar": false,
+        "order": 10,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1wa001tskdci8m1maj4",
+            "skillId": "software_protools",
+            "locale": "fr",
+            "name": "Pro Tools"
+          },
+          {
+            "id": "cmipxo1wz001vskdc23374i7c",
+            "skillId": "software_protools",
+            "locale": "en",
+            "name": "Pro Tools"
+          }
+        ]
+      },
+      {
+        "id": "software_logicpro",
+        "category": "software",
+        "level": 5,
+        "showAsBar": false,
+        "order": 11,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1y0001xskdcoqkhqa27",
+            "skillId": "software_logicpro",
+            "locale": "fr",
+            "name": "Logic Pro X"
+          },
+          {
+            "id": "cmipxo1yj001zskdcd11v50pl",
+            "skillId": "software_logicpro",
+            "locale": "en",
+            "name": "Logic Pro X"
+          }
+        ]
+      },
+      {
+        "id": "software_ableton",
+        "category": "software",
+        "level": 5,
+        "showAsBar": false,
+        "order": 12,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo1zi0021skdcd0ceq7c1",
+            "skillId": "software_ableton",
+            "locale": "fr",
+            "name": "Ableton Live"
+          },
+          {
+            "id": "cmipxo2010023skdcjtgk30rg",
+            "skillId": "software_ableton",
+            "locale": "en",
+            "name": "Ableton Live"
+          }
+        ]
+      },
+      {
+        "id": "software_cubase",
+        "category": "software",
+        "level": 5,
+        "showAsBar": false,
+        "order": 13,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo2130025skdc1k2kkjbp",
+            "skillId": "software_cubase",
+            "locale": "fr",
+            "name": "Cubase"
+          },
+          {
+            "id": "cmipxo21l0027skdc30tzc3og",
+            "skillId": "software_cubase",
+            "locale": "en",
+            "name": "Cubase"
+          }
+        ]
+      },
+      {
+        "id": "lang_french",
+        "category": "language",
+        "level": 5,
+        "showAsBar": false,
+        "order": 20,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo22m0029skdcgfysrxnd",
+            "skillId": "lang_french",
+            "locale": "fr",
+            "name": "Français (Natif)"
+          },
+          {
+            "id": "cmipxo235002bskdcwnbq021l",
+            "skillId": "lang_french",
+            "locale": "en",
+            "name": "French (Native)"
+          }
+        ]
+      },
+      {
+        "id": "lang_english",
+        "category": "language",
+        "level": 4,
+        "showAsBar": false,
+        "order": 21,
+        "isActive": true,
+        "translations": [
+          {
+            "id": "cmipxo24n002dskdcodorh9hb",
+            "skillId": "lang_english",
+            "locale": "fr",
+            "name": "Anglais (Courant)"
+          },
+          {
+            "id": "cmipxo256002fskdcruj2b3fv",
+            "skillId": "lang_english",
+            "locale": "en",
+            "name": "English (Fluent)"
+          }
+        ]
+      }
+    ],
+    "socialLinks": [
+      {
+        "id": "social_youtube",
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/@LoicGhanem",
+        "label": "YouTube",
+        "order": 2
+      }
+    ]
+  }
+]

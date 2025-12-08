@@ -1,30 +1,29 @@
-import { NeoCVPage } from '@/components/neo-brutalist/cv/NeoCVPage';
-import { NeoNavbar } from '@/components/neo-brutalist/NeoNavbar';
-import type { CVData } from '@/types/cv';
+import { NeoCVPage } from "@/components/neo-brutalist/cv/NeoCVPage";
+import { NeoNavbar } from "@/components/neo-brutalist/NeoNavbar";
+import type { CVData } from "@/types/cv";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 async function getCVData(): Promise<CVData> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
   try {
     const response = await fetch(`${baseUrl}/api/cv`, {
-      cache: 'no-store',
+      cache: "no-store",
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch CV data');
+      throw new Error("Failed to fetch CV data");
     }
 
     return response.json();
-  } catch (error) {
-    console.error('Error fetching CV data:', error);
+  } catch {
     // Return default data structure
     return {
-      fullName: 'Loïc Ghanem',
-      headlineFr: 'Compositeur & Producteur',
-      headlineEn: 'Composer & Producer',
+      fullName: "Loïc Ghanem",
+      headlineFr: "Compositeur & Producteur",
+      headlineEn: "Composer & Producer",
       sections: [],
       skills: [],
       socialLinks: [],

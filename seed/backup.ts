@@ -10,14 +10,10 @@ interface BackupOptions {
 
 async function backup(options: BackupOptions = { timestamped: true }) {
   const timestamp = getTimestamp();
-  const backupDir = options.timestamped
-    ? path.join(BACKUPS_DIR, timestamp)
-    : DATA_DIR;
+  const backupDir = options.timestamped ? path.join(BACKUPS_DIR, timestamp) : DATA_DIR;
 
   logger.title(
-    options.timestamped
-      ? `📦 Backup horodaté → ${timestamp}`
-      : "📦 Backup vers seed/data/"
+    options.timestamped ? `📦 Backup horodaté → ${timestamp}` : "📦 Backup vers seed/data/"
   );
 
   try {
@@ -100,6 +96,101 @@ async function backup(options: BackupOptions = { timestamped: true }) {
       }
     } catch {
       // Model peut ne pas exister
+    }
+
+    // 12. CV complet avec toutes les relations
+    try {
+      const cvs = await prisma.cV.findMany({
+        include: {
+          sections: {
+            include: {
+              translations: true,
+              items: {
+                include: { translations: true },
+              },
+            },
+            orderBy: { order: "asc" },
+          },
+          skills: {
+            include: { translations: true },
+            orderBy: { order: "asc" },
+          },
+          socialLinks: {
+            orderBy: { order: "asc" },
+          },
+        },
+      });
+
+      if (cvs.length > 0) {
+        // Transformer en structure plate compatible avec le seeder
+        const cvData = cvs.map((cv) => ({
+          cv: {
+            id: cv.id,
+            isActive: cv.isActive,
+            fullName: cv.fullName,
+            badgeFr: cv.badgeFr,
+            badgeEn: cv.badgeEn,
+            photo: cv.photo,
+            phone: cv.phone,
+            email: cv.email,
+            website: cv.website,
+            location: cv.location,
+            linkedInUrl: cv.linkedInUrl,
+            headlineFr: cv.headlineFr,
+            headlineEn: cv.headlineEn,
+            bioFr: cv.bioFr,
+            bioEn: cv.bioEn,
+            layout: cv.layout,
+            accentColor: cv.accentColor,
+            showPhoto: cv.showPhoto,
+            theme: cv.theme,
+            createdAt: cv.createdAt,
+            updatedAt: cv.updatedAt,
+          },
+          sections: cv.sections.map((section) => ({
+            id: section.id,
+            type: section.type,
+            icon: section.icon,
+            color: section.color,
+            placement: section.placement,
+            layoutType: section.layoutType,
+            order: section.order,
+            isActive: section.isActive,
+            translations: section.translations,
+            items: section.items.map((item) => ({
+              id: item.id,
+              startDate: item.startDate,
+              endDate: item.endDate,
+              isCurrent: item.isCurrent,
+              order: item.order,
+              isActive: item.isActive,
+              translations: item.translations,
+            })),
+          })),
+          skills: cv.skills.map((skill) => ({
+            id: skill.id,
+            category: skill.category,
+            level: skill.level,
+            showAsBar: skill.showAsBar,
+            order: skill.order,
+            isActive: skill.isActive,
+            translations: skill.translations,
+          })),
+          socialLinks: cv.socialLinks.map((link) => ({
+            id: link.id,
+            platform: link.platform,
+            url: link.url,
+            label: link.label,
+            order: link.order,
+          })),
+        }));
+
+        // Sauvegarder comme un seul objet (le premier CV actif)
+        await saveJSON("cv", cvData[0] ? [cvData[0]] : [], backupDir);
+        logger.count("cv (avec sections/skills/links)", cvs.length);
+      }
+    } catch (error) {
+      logger.warn(`Backup CV échoué: ${error}`);
     }
 
     logger.success(

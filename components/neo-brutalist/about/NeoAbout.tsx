@@ -1,25 +1,39 @@
 "use client";
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
-import { Download, Mail, MapPin, Music, Headphones, Mic2, Sliders, ArrowRight, Globe, Building2, BookOpen, Instagram, Linkedin, Youtube, ExternalLink } from 'lucide-react';
-import Image from 'next/image';
-import { BrutalistButton } from '../ui/BrutalistButton';
-import { SectionHeader } from '../ui/SectionHeader';
-import { NeoNavbar } from '../NeoNavbar';
-import { NeoFooter } from '../NeoFooter';
-import { NeoCard } from '../ui/NeoCard';
-import { NeoTag } from '../ui/NeoTag';
-import { NeoTimeline } from './NeoTimeline';
-import { Link } from '@/i18n/routing';
+import React from "react";
+import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
+import {
+  Download,
+  Mail,
+  MapPin,
+  Music,
+  Headphones,
+  Mic2,
+  Sliders,
+  Globe,
+  Building2,
+  BookOpen,
+  Instagram,
+  Linkedin,
+  Youtube,
+  ExternalLink,
+} from "lucide-react";
+import Image from "next/image";
+import { BrutalistButton } from "../ui/BrutalistButton";
+import { SectionHeader } from "../ui/SectionHeader";
+import { NeoNavbar } from "../NeoNavbar";
+import { NeoFooter } from "../NeoFooter";
+import { NeoCard } from "../ui/NeoCard";
+import { NeoTimeline } from "./NeoTimeline";
+import { Link } from "@/i18n/routing";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
 };
 
 const fadeInUp = {
@@ -29,16 +43,16 @@ const fadeInUp = {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: [0.25, 0.4, 0.25, 1] as const
-    }
-  }
+      ease: [0.25, 0.4, 0.25, 1] as const,
+    },
+  },
 };
 
 const photoReveal = {
   hidden: {
     opacity: 0,
     scale: 0.95,
-    y: 20
+    y: 20,
   },
   visible: {
     opacity: 1,
@@ -47,82 +61,101 @@ const photoReveal = {
     transition: {
       duration: 0.8,
       ease: [0.25, 0.4, 0.25, 1] as const,
-      delay: 0.2
-    }
-  }
+      delay: 0.2,
+    },
+  },
 };
 
 export const NeoAbout = ({ locale }: { locale: string }) => {
-  const t = useTranslations('about');
-  const tCommon = useTranslations('common');
+  const t = useTranslations("about");
 
   const skills = [
     {
-      title: t('skills.composition.title'),
+      title: t("skills.composition.title"),
       icon: Music,
-      items: t.raw('skills.composition.items') as string[]
+      items: t.raw("skills.composition.items") as string[],
     },
     {
-      title: t('skills.production.title'),
+      title: t("skills.production.title"),
       icon: Headphones,
-      items: t.raw('skills.production.items') as string[]
+      items: t.raw("skills.production.items") as string[],
     },
     {
-      title: t('skills.vocalProduction.title'),
+      title: t("skills.vocalProduction.title"),
       icon: Mic2,
-      items: t.raw('skills.vocalProduction.items') as string[]
+      items: t.raw("skills.vocalProduction.items") as string[],
     },
     {
-      title: t('skills.postProduction.title'),
+      title: t("skills.postProduction.title"),
       icon: Sliders,
-      items: t.raw('skills.postProduction.items') as string[]
-    }
+      items: t.raw("skills.postProduction.items") as string[],
+    },
   ];
 
   const stats = [
-    { val: '16', label: t('achievements.albums') },
-    { val: '34', label: t('achievements.projects') },
-    { val: '50+', label: t('achievements.collaborations') },
-    { val: '15+', label: t('achievements.years') }
+    { val: "16", label: t("achievements.albums") },
+    { val: "34", label: t("achievements.projects") },
+    { val: "50+", label: t("achievements.collaborations") },
+    { val: "15+", label: t("achievements.years") },
   ];
 
   const labels = [
     {
-      name: 'Infinity Scores',
-      publisher: 'Cezame Music Agency',
-      since: '2019',
-      tracks: '45+',
-      type: 'Label',
+      name: "Infinity Scores",
+      publisher: "Cezame Music Agency",
+      since: "2019",
+      tracks: "45+",
+      type: "Label",
       links: [
-        { icon: ExternalLink, url: 'https://www.cezamemusic.com/infinity-scores-label-141693.html', label: 'Cezame' },
-        { icon: Linkedin, url: 'https://www.linkedin.com/company/cezame-music-agency/', label: 'Cezame LinkedIn' },
-        { icon: Instagram, url: 'https://www.instagram.com/infinityscores/', label: 'Instagram' },
-        { icon: Linkedin, url: 'https://www.linkedin.com/company/infinity-scores/', label: 'LinkedIn' }
-      ]
+        {
+          icon: ExternalLink,
+          url: "https://www.cezamemusic.com/infinity-scores-label-141693.html",
+          label: "Cezame",
+        },
+        {
+          icon: Linkedin,
+          url: "https://www.linkedin.com/company/cezame-music-agency/",
+          label: "Cezame LinkedIn",
+        },
+        { icon: Instagram, url: "https://www.instagram.com/infinityscores/", label: "Instagram" },
+        {
+          icon: Linkedin,
+          url: "https://www.linkedin.com/company/infinity-scores/",
+          label: "LinkedIn",
+        },
+      ],
     },
     {
-      name: 'Montmorency Music',
-      publisher: 'MYMA',
-      since: '2020',
-      tracks: '28+',
-      type: 'Label',
+      name: "Montmorency Music",
+      publisher: "MYMA",
+      since: "2020",
+      tracks: "28+",
+      type: "Label",
       links: [
-        { icon: ExternalLink, url: 'https://www.myma-music.com/', label: 'Website' },
-        { icon: Linkedin, url: 'https://www.linkedin.com/company/mymasync/', label: 'LinkedIn' },
-        { icon: Instagram, url: 'https://www.instagram.com/myma_music/', label: 'Instagram' },
-        { icon: Youtube, url: 'https://www.youtube.com/channel/UCYDtNY3_1G30BVuTK_qbLuQ', label: 'YouTube' }
-      ]
+        { icon: ExternalLink, url: "https://www.myma-music.com/", label: "Website" },
+        { icon: Linkedin, url: "https://www.linkedin.com/company/mymasync/", label: "LinkedIn" },
+        { icon: Instagram, url: "https://www.instagram.com/myma_music/", label: "Instagram" },
+        {
+          icon: Youtube,
+          url: "https://www.youtube.com/channel/UCYDtNY3_1G30BVuTK_qbLuQ",
+          label: "YouTube",
+        },
+      ],
     },
     {
-      name: 'Justement Music',
-      publisher: 'Self-published',
-      since: '2018',
-      tracks: '60+',
-      type: 'Label',
+      name: "Justement Music",
+      publisher: "Self-published",
+      since: "2018",
+      tracks: "60+",
+      type: "Label",
       links: [
-        { icon: Youtube, url: 'https://www.youtube.com/playlist?list=PLJlRZETQILeOzFn01l_GqRtPoDWGtGdcg', label: 'YouTube' }
-      ]
-    }
+        {
+          icon: Youtube,
+          url: "https://www.youtube.com/playlist?list=PLJlRZETQILeOzFn01l_GqRtPoDWGtGdcg",
+          label: "YouTube",
+        },
+      ],
+    },
   ];
 
   return (
@@ -130,7 +163,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       <NeoNavbar />
 
       <main className="relative z-10 pt-32">
-
         {/* HERO BIO - Split Layout */}
         <section className="container mx-auto px-4 md:px-6 mb-32">
           <motion.div
@@ -144,15 +176,15 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               {/* Badge */}
               <div className="font-mono font-bold text-neo-accent mb-6 flex items-center gap-2">
                 <span className="bg-neo-text text-neo-accent px-2 py-1">BIO.01</span>
-                <span className="text-neo-text/60">// {t('title').toUpperCase()}</span>
+                <span className="text-neo-text/60">// {t("title").toUpperCase()}</span>
               </div>
 
               {/* Titre */}
               <h1 className="text-[12vw] lg:text-[6vw] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-neo-text">
-                Loïc{' '}
+                Loïc{" "}
                 <span
                   className="text-transparent block lg:inline"
-                  style={{ WebkitTextStroke: '2px var(--neo-text)', color: 'transparent' }}
+                  style={{ WebkitTextStroke: "2px var(--neo-text)", color: "transparent" }}
                 >
                   Ghanem
                 </span>
@@ -160,22 +192,26 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
               {/* Bio */}
               <div className="text-base md:text-lg font-medium leading-relaxed space-y-4 border-l-4 border-neo-accent pl-6 mb-8">
-                <p>{t('bio.paragraph1')}</p>
-                <p className="opacity-80">{t('bio.paragraph2')}</p>
-                <p className="opacity-80">{t('bio.paragraph3')}</p>
-                <p className="opacity-70">{t('bio.paragraph4')}</p>
+                <p>{t("bio.paragraph1")}</p>
+                <p className="opacity-80">{t("bio.paragraph2")}</p>
+                <p className="opacity-80">{t("bio.paragraph3")}</p>
+                <p className="opacity-70">{t("bio.paragraph4")}</p>
               </div>
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
-                <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={`/api/cv/download?locale=${locale}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <BrutalistButton variant="primary" size="lg" icon={<Download size={18} />}>
-                    {t('cta.downloadCV')}
+                    {t("cta.downloadCV")}
                   </BrutalistButton>
                 </a>
                 <Link href="/contact">
                   <BrutalistButton variant="secondary" size="lg" icon={<Mail size={18} />}>
-                    {t('cta.contactMe')}
+                    {t("cta.contactMe")}
                   </BrutalistButton>
                 </Link>
               </div>
@@ -189,7 +225,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               <div className="relative max-w-xs lg:max-w-sm mx-auto lg:mx-0">
                 {/* Card avec effet hover comme les cartes d'expertise */}
                 <div className="group border-2 border-neo-border bg-neo-surface overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] hover:border-black">
-                  <div className="relative w-full" style={{ paddingBottom: '133%' }}>
+                  <div className="relative w-full" style={{ paddingBottom: "133%" }}>
                     <Image
                       src="/img/slider/loic-studio-front.jpg"
                       alt="Loïc Ghanem"
@@ -255,7 +291,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
         {/* SKILLS GRID */}
         <section className="container mx-auto px-4 md:px-6 mb-32">
-          <SectionHeader number="02" title={t('skills.title')} subtitle={t('skills.subtitle')} />
+          <SectionHeader number="02" title={t("skills.title")} subtitle={t("skills.subtitle")} />
 
           <motion.div
             initial="hidden"
@@ -303,8 +339,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           <div className="container mx-auto px-4 md:px-6">
             <SectionHeader
               number="04"
-              title={t('labelsPublishers.title')}
-              subtitle={t('labelsPublishers.subtitle')}
+              title={t("labelsPublishers.title")}
+              subtitle={t("labelsPublishers.subtitle")}
             />
 
             <motion.div
@@ -314,17 +350,16 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               variants={staggerContainer}
               className="grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              {labels.map((label, i) => (
+              {labels.map((label) => (
                 <motion.div key={label.name} variants={fadeInUp}>
-                  <NeoCard
-                    hover="lift"
-                    padding="lg"
-                    className="h-full group"
-                  >
+                  <NeoCard hover="lift" padding="lg" className="h-full group">
                     {/* Label Initials */}
                     <div className="w-16 h-16 bg-neo-accent flex items-center justify-center mb-6 border-2 border-neo-border">
                       <span className="text-2xl font-black text-neo-text-inverse">
-                        {label.name.split(' ').map(w => w[0]).join('')}
+                        {label.name
+                          .split(" ")
+                          .map((w) => w[0])
+                          .join("")}
                       </span>
                     </div>
 
@@ -384,28 +419,27 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <NeoCard
-                hover="none"
-                variant="inverted"
-                padding="lg"
-                className="text-center"
-              >
+              <NeoCard hover="none" variant="inverted" padding="lg" className="text-center">
                 <Globe className="w-16 h-16 mx-auto mb-6 text-neo-accent" />
                 <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-4 text-neo-text-inverse">
-                  {t('cta.title')}
+                  {t("cta.title")}
                 </h2>
                 <p className="font-mono text-lg mb-8 max-w-2xl mx-auto text-neo-text-inverse/60">
-                  {t('cta.description')}
+                  {t("cta.description")}
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Link href="/contact">
                     <BrutalistButton variant="dark" size="lg" icon={<Mail size={18} />}>
-                      {t('cta.contactMe')}
+                      {t("cta.contactMe")}
                     </BrutalistButton>
                   </Link>
-                  <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={`/api/cv/download?locale=${locale}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <BrutalistButton variant="dark" size="lg" icon={<Download size={18} />}>
-                      {t('cta.downloadCV')}
+                      {t("cta.downloadCV")}
                     </BrutalistButton>
                   </a>
                 </div>
@@ -413,7 +447,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             </motion.div>
           </div>
         </section>
-
       </main>
       <NeoFooter />
     </div>

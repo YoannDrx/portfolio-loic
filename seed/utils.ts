@@ -16,16 +16,12 @@ const colors = {
 /* eslint-disable no-console */
 // Logger CLI avec couleurs pour les scripts de seeding
 export const logger = {
-  success: (msg: string) =>
-    console.log(`${colors.green}✅${colors.reset} ${msg}`),
+  success: (msg: string) => console.log(`${colors.green}✅${colors.reset} ${msg}`),
   error: (msg: string) => console.log(`${colors.red}❌${colors.reset} ${msg}`),
-  warn: (msg: string) =>
-    console.log(`${colors.yellow}⚠️${colors.reset} ${msg}`),
+  warn: (msg: string) => console.log(`${colors.yellow}⚠️${colors.reset} ${msg}`),
   info: (msg: string) => console.log(`${colors.blue}ℹ️${colors.reset} ${msg}`),
-  step: (msg: string) =>
-    console.log(`${colors.cyan}→${colors.reset} ${msg}`),
-  title: (msg: string) =>
-    console.log(`\n${colors.bold}${colors.blue}${msg}${colors.reset}\n`),
+  step: (msg: string) => console.log(`${colors.cyan}→${colors.reset} ${msg}`),
+  title: (msg: string) => console.log(`\n${colors.bold}${colors.blue}${msg}${colors.reset}\n`),
   count: (entity: string, count: number) =>
     console.log(
       `   ${colors.gray}└─${colors.reset} ${entity}: ${colors.green}${count}${colors.reset}`
@@ -69,9 +65,7 @@ export function getTimestamp(): string {
 }
 
 // === TRANSFORMATION DES DATES ISO → Date ===
-export function transformDates<T extends Record<string, unknown>>(
-  data: T[]
-): T[] {
+export function transformDates<T extends Record<string, unknown>>(data: T[]): T[] {
   const dateFields = [
     "createdAt",
     "updatedAt",
@@ -84,14 +78,8 @@ export function transformDates<T extends Record<string, unknown>>(
   return data.map((item) => {
     const transformed = { ...item };
     for (const field of dateFields) {
-      if (
-        field in transformed &&
-        transformed[field] &&
-        typeof transformed[field] === "string"
-      ) {
-        (transformed as Record<string, unknown>)[field] = new Date(
-          transformed[field] as string
-        );
+      if (field in transformed && transformed[field] && typeof transformed[field] === "string") {
+        (transformed as Record<string, unknown>)[field] = new Date(transformed[field] as string);
       }
     }
     return transformed;
@@ -99,11 +87,21 @@ export function transformDates<T extends Record<string, unknown>>(
 }
 
 // === PARSING DES ARGUMENTS CLI ===
-export function parseArgs(): { only?: string } {
+export interface ParsedArgs {
+  only?: string;
+  force: boolean;
+  overwrite: boolean;
+  yes: boolean;
+}
+
+export function parseArgs(): ParsedArgs {
   const args = process.argv.slice(2);
   const onlyArg = args.find((arg) => arg.startsWith("--only="));
   return {
     only: onlyArg?.split("=")[1],
+    force: args.includes("--force"),
+    overwrite: args.includes("--overwrite"),
+    yes: args.includes("--yes"),
   };
 }
 

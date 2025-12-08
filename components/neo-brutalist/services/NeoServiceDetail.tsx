@@ -1,10 +1,10 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import React from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import {
   ArrowLeft,
   Eye,
@@ -21,13 +21,13 @@ import {
   Send,
   Music,
   Wand2,
-  Layers
-} from 'lucide-react';
-import { NeoNavbar } from '../NeoNavbar';
-import { NeoFooter } from '../NeoFooter';
-import { NeoCard } from '../ui/NeoCard';
-import { NeoTag } from '../ui/NeoTag';
-import { BrutalistButton } from '../ui/BrutalistButton';
+  Layers,
+} from "lucide-react";
+import { NeoNavbar } from "../NeoNavbar";
+import { NeoFooter } from "../NeoFooter";
+import { NeoCard } from "../ui/NeoCard";
+import { NeoTag } from "../ui/NeoTag";
+import { BrutalistButton } from "../ui/BrutalistButton";
 
 interface Service {
   id: string;
@@ -52,36 +52,31 @@ interface NeoServiceDetailProps {
   isPreview?: boolean;
 }
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] as const } }
-};
-
 const fadeInLeft = {
   hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
 const fadeInRight = {
   hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
 };
 
 // Process steps avec icônes
 const processSteps = [
-  { icon: MessageSquare, key: 'brief' },
-  { icon: Wand2, key: 'composition' },
-  { icon: Headphones, key: 'production' },
-  { icon: Sparkles, key: 'mixing' },
-  { icon: Send, key: 'delivery' }
+  { icon: MessageSquare, key: "brief" },
+  { icon: Wand2, key: "composition" },
+  { icon: Headphones, key: "production" },
+  { icon: Sparkles, key: "mixing" },
+  { icon: Send, key: "delivery" },
 ];
 
 export default function NeoServiceDetail({
@@ -90,18 +85,21 @@ export default function NeoServiceDetail({
   locale,
   isPreview = false,
 }: NeoServiceDetailProps) {
-  const t = useTranslations('services');
-  const tDetail = useTranslations('services.detail');
-  const tCommon = useTranslations('common');
+  const t = useTranslations("services");
+  const tDetail = useTranslations("services.detail");
+  const tCommon = useTranslations("common");
 
-  const description = locale === 'fr'
-    ? (service.descriptionsFr || service.fullDescription)
-    : (service.descriptionsEn || service.fullDescription);
+  const description =
+    locale === "fr"
+      ? service.descriptionsFr || service.fullDescription
+      : service.descriptionsEn || service.fullDescription;
 
   // Find previous and next services for navigation
-  const currentIndex = allServices.findIndex(s => s.id === service.id);
-  const prevService = currentIndex > 0 ? allServices[currentIndex - 1] : allServices[allServices.length - 1];
-  const nextService = currentIndex < allServices.length - 1 ? allServices[currentIndex + 1] : allServices[0];
+  const currentIndex = allServices.findIndex((s) => s.id === service.id);
+  const prevService =
+    currentIndex > 0 ? allServices[currentIndex - 1] : allServices[allServices.length - 1];
+  const nextService =
+    currentIndex < allServices.length - 1 ? allServices[currentIndex + 1] : allServices[0];
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -114,7 +112,7 @@ export default function NeoServiceDetail({
             <div className="flex items-center gap-2 px-4 py-2 bg-neo-accent text-neo-text-inverse border-2 border-neo-border shadow-[4px_4px_0px_0px_var(--neo-shadow)]">
               <Eye className="w-4 h-4" />
               <span className="font-mono text-xs font-bold uppercase">
-                Prévisualisation - {service.published ? 'Publié' : 'Brouillon'}
+                Prévisualisation - {service.published ? "Publié" : "Brouillon"}
               </span>
             </div>
           </div>
@@ -132,7 +130,7 @@ export default function NeoServiceDetail({
               className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase hover:text-neo-accent transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              {tCommon('backToServices')}
+              {tCommon("backToServices")}
             </Link>
           </motion.div>
 
@@ -145,7 +143,10 @@ export default function NeoServiceDetail({
               className="grid grid-cols-1 lg:grid-cols-[minmax(280px,400px)_1fr] gap-8 lg:gap-12 items-start w-full"
             >
               {/* Left Column - Service Image */}
-              <motion.div variants={fadeInLeft} className="relative max-w-[320px] sm:max-w-[360px] lg:max-w-none mx-auto lg:mx-0">
+              <motion.div
+                variants={fadeInLeft}
+                className="relative max-w-[320px] sm:max-w-[360px] lg:max-w-none mx-auto lg:mx-0"
+              >
                 {/* Decorative background element */}
                 <div className="absolute -inset-4 bg-neo-accent/10 rotate-2 -z-10 hidden lg:block" />
                 <div className="absolute -inset-2 bg-neo-text/5 -rotate-1 -z-10 hidden lg:block" />
@@ -202,15 +203,17 @@ export default function NeoServiceDetail({
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y-4 border-neo-border">
                   {[
-                    { value: '15+', label: t('stats.experience'), icon: Clock },
-                    { value: '150+', label: t('stats.projects'), icon: Target },
-                    { value: '98%', label: t('stats.satisfaction'), icon: Sparkles },
-                    { value: '24h', label: tDetail('responseTime'), icon: Zap }
+                    { value: "15+", label: t("stats.experience"), icon: Clock },
+                    { value: "150+", label: t("stats.projects"), icon: Target },
+                    { value: "98%", label: t("stats.satisfaction"), icon: Sparkles },
+                    { value: "24h", label: tDetail("responseTime"), icon: Zap },
                   ].map((stat, i) => (
                     <div key={i} className="text-center">
                       <stat.icon className="w-5 h-5 mx-auto mb-2 text-neo-accent" />
                       <p className="text-2xl font-black text-neo-text">{stat.value}</p>
-                      <p className="font-mono text-xs uppercase tracking-wider opacity-60">{stat.label}</p>
+                      <p className="font-mono text-xs uppercase tracking-wider opacity-60">
+                        {stat.label}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -219,7 +222,7 @@ export default function NeoServiceDetail({
                 <div className="flex flex-wrap gap-4">
                   <Link href="/contact">
                     <BrutalistButton variant="primary" size="lg" icon={<Mail size={20} />}>
-                      {tDetail('requestQuote')}
+                      {tDetail("requestQuote")}
                     </BrutalistButton>
                   </Link>
                 </div>
@@ -240,7 +243,7 @@ export default function NeoServiceDetail({
                 01
               </span>
               <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neo-text">
-                {tDetail('about')}
+                {tDetail("about")}
               </h2>
               <div className="flex-1 h-1 bg-neo-border" />
             </div>
@@ -260,18 +263,21 @@ export default function NeoServiceDetail({
               </NeoCard>
 
               {/* What You Get */}
-              <NeoCard padding="lg" className="bg-neo-text border-4 shadow-[8px_8px_0px_0px_var(--neo-shadow)]">
+              <NeoCard
+                padding="lg"
+                className="bg-neo-text border-4 shadow-[8px_8px_0px_0px_var(--neo-shadow)]"
+              >
                 <h3 className="text-xl font-black uppercase mb-6 flex items-center gap-2 text-neo-text-inverse">
                   <Check className="w-5 h-5 text-neo-accent" />
-                  {tDetail('whatYouGet')}
+                  {tDetail("whatYouGet")}
                 </h3>
                 <ul className="space-y-4">
                   {[
-                    tDetail('whatYouGetItems.item1'),
-                    tDetail('whatYouGetItems.item2'),
-                    tDetail('whatYouGetItems.item3'),
-                    tDetail('whatYouGetItems.item4'),
-                    tDetail('whatYouGetItems.item5')
+                    tDetail("whatYouGetItems.item1"),
+                    tDetail("whatYouGetItems.item2"),
+                    tDetail("whatYouGetItems.item3"),
+                    tDetail("whatYouGetItems.item4"),
+                    tDetail("whatYouGetItems.item5"),
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 group">
                       <span className="w-6 h-6 bg-neo-accent text-neo-text flex items-center justify-center font-mono text-xs font-bold flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -286,8 +292,12 @@ export default function NeoServiceDetail({
                 <Link href="/contact" className="block mt-8">
                   <div className="flex items-center justify-between p-4 bg-neo-accent/20 hover:bg-neo-accent transition-colors group cursor-pointer">
                     <div>
-                      <p className="font-mono text-xs uppercase opacity-60 mb-1 text-neo-text-inverse">{tDetail('readyToStart')}</p>
-                      <p className="font-black text-lg uppercase text-neo-text-inverse">{tDetail('requestQuote')}</p>
+                      <p className="font-mono text-xs uppercase opacity-60 mb-1 text-neo-text-inverse">
+                        {tDetail("readyToStart")}
+                      </p>
+                      <p className="font-black text-lg uppercase text-neo-text-inverse">
+                        {tDetail("requestQuote")}
+                      </p>
                     </div>
                     <ChevronRight className="w-8 h-8 text-neo-accent group-hover:text-neo-text-inverse group-hover:translate-x-2 transition-all" />
                   </div>
@@ -309,7 +319,7 @@ export default function NeoServiceDetail({
                 02
               </span>
               <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neo-text">
-                {tDetail('process')}
+                {tDetail("process")}
               </h2>
               <div className="flex-1 h-1 bg-neo-border" />
             </div>
@@ -329,11 +339,7 @@ export default function NeoServiceDetail({
                     transition={{ delay: i * 0.1 }}
                     className="relative"
                   >
-                    <NeoCard
-                      padding="lg"
-                      hover="lift"
-                      className="text-center h-full group"
-                    >
+                    <NeoCard padding="lg" hover="lift" className="text-center h-full group">
                       {/* Step Number */}
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 flex items-center justify-center font-mono text-sm font-black bg-neo-accent text-neo-text-inverse group-hover:bg-neo-text group-hover:text-neo-accent transition-colors">
                         {i + 1}
@@ -367,7 +373,7 @@ export default function NeoServiceDetail({
                 03
               </span>
               <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neo-text">
-                {tDetail('discoverWork')}
+                {tDetail("discoverWork")}
               </h2>
               <div className="flex-1 h-1 bg-neo-border" />
             </div>
@@ -386,10 +392,10 @@ export default function NeoServiceDetail({
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-black uppercase mb-1 group-hover:text-neo-accent transition-colors">
-                        {tDetail('viewAlbums')}
+                        {tDetail("viewAlbums")}
                       </h3>
                       <p className="font-mono text-sm opacity-60">
-                        {tDetail('discoverWorkDescription')}
+                        {tDetail("discoverWorkDescription")}
                       </p>
                     </div>
                     <ChevronRight className="w-6 h-6 text-neo-accent group-hover:translate-x-2 transition-transform" />
@@ -410,10 +416,10 @@ export default function NeoServiceDetail({
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-black uppercase mb-1 group-hover:text-neo-accent transition-colors">
-                        {tDetail('viewVideos')}
+                        {tDetail("viewVideos")}
                       </h3>
                       <p className="font-mono text-sm opacity-60">
-                        {tDetail('discoverWorkDescription')}
+                        {tDetail("discoverWorkDescription")}
                       </p>
                     </div>
                     <ChevronRight className="w-6 h-6 text-neo-accent group-hover:translate-x-2 transition-transform" />
@@ -436,7 +442,7 @@ export default function NeoServiceDetail({
                 04
               </span>
               <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neo-text">
-                {tDetail('relatedServices')}
+                {tDetail("relatedServices")}
               </h2>
               <div className="flex-1 h-1 bg-neo-border" />
             </div>
@@ -444,14 +450,10 @@ export default function NeoServiceDetail({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {/* Previous Service */}
               <Link
-                href={{ pathname: '/services/[id]', params: { id: prevService.id } }}
+                href={{ pathname: "/services/[id]", params: { id: prevService.id } }}
                 className="group"
               >
-                <NeoCard
-                  hover="lift"
-                  padding="none"
-                  className="h-full border-4 overflow-hidden"
-                >
+                <NeoCard hover="lift" padding="none" className="h-full border-4 overflow-hidden">
                   <div className="flex items-stretch h-full">
                     {/* Arrow */}
                     <div className="flex items-center justify-center w-16 md:w-20 bg-neo-text group-hover:bg-neo-accent transition-colors flex-shrink-0">
@@ -464,7 +466,7 @@ export default function NeoServiceDetail({
                       </div>
                       <div className="min-w-0 flex-1">
                         <span className="font-mono text-xs uppercase text-neo-text/60 block">
-                          {tDetail('previousService')}
+                          {tDetail("previousService")}
                         </span>
                         <h3 className="font-black text-lg md:text-xl uppercase truncate text-neo-text group-hover:text-neo-accent transition-colors">
                           {prevService.title}
@@ -480,14 +482,10 @@ export default function NeoServiceDetail({
 
               {/* Next Service */}
               <Link
-                href={{ pathname: '/services/[id]', params: { id: nextService.id } }}
+                href={{ pathname: "/services/[id]", params: { id: nextService.id } }}
                 className="group"
               >
-                <NeoCard
-                  hover="lift"
-                  padding="none"
-                  className="h-full border-4 overflow-hidden"
-                >
+                <NeoCard hover="lift" padding="none" className="h-full border-4 overflow-hidden">
                   <div className="flex items-stretch h-full flex-row-reverse">
                     {/* Arrow */}
                     <div className="flex items-center justify-center w-16 md:w-20 bg-neo-text group-hover:bg-neo-accent transition-colors flex-shrink-0">
@@ -500,7 +498,7 @@ export default function NeoServiceDetail({
                       </div>
                       <div className="min-w-0 flex-1">
                         <span className="font-mono text-xs uppercase text-neo-text/60 block">
-                          {tDetail('nextService')}
+                          {tDetail("nextService")}
                         </span>
                         <h3 className="font-black text-lg md:text-xl uppercase truncate text-neo-text group-hover:text-neo-accent transition-colors">
                           {nextService.title}
@@ -522,7 +520,7 @@ export default function NeoServiceDetail({
                 className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase hover:text-neo-accent transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                {tCommon('backToServices')}
+                {tCommon("backToServices")}
               </Link>
             </div>
           </motion.section>
@@ -548,26 +546,26 @@ export default function NeoServiceDetail({
               <div className="relative z-10 text-center">
                 <NeoTag variant="accent" size="lg" className="mb-8 inline-flex">
                   <Zap className="w-4 h-4 mr-2" />
-                  {tDetail('pricing')}
+                  {tDetail("pricing")}
                 </NeoTag>
 
                 <p className="text-4xl md:text-6xl font-black text-neo-accent mb-6">
-                  {tDetail('onQuote')}
+                  {tDetail("onQuote")}
                 </p>
 
                 <p className="font-mono text-lg text-neo-text-inverse/60 max-w-2xl mx-auto mb-12">
-                  {tDetail('customizable')}
+                  {tDetail("customizable")}
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-6">
                   <Link href="/contact">
                     <BrutalistButton variant="dark" size="lg" icon={<Mail size={20} />}>
-                      {tDetail('requestQuote')}
+                      {tDetail("requestQuote")}
                     </BrutalistButton>
                   </Link>
                   <Link href="/services">
                     <BrutalistButton variant="dark" size="lg">
-                      {tDetail('backToServices')}
+                      {tDetail("backToServices")}
                     </BrutalistButton>
                   </Link>
                 </div>

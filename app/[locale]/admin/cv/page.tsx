@@ -3,22 +3,18 @@ import { CVEditor } from "@/components/admin/cv/cv-editor";
 import type { CVData, CVTheme } from "@/types/cv";
 
 const defaultTheme: CVTheme = {
-  primary: "#D5FF0A",
-  secondary: "#9EF01A",
-  header: "#0B0C12",
-  sidebar: "#F4F5F7",
-  surface: "#FFFFFF",
-  text: "#0D0E11",
-  muted: "#60626A",
-  border: "#E2E4EA",
-  badge: "#0F1118",
+  primary: "#F73604", // Orange vif (accent unique)
+  secondary: "#F73604", // Même accent
+  header: "#0B0C12", // Noir
+  sidebar: "#F4F5F7", // Gris clair
+  surface: "#FFFFFF", // Blanc
+  text: "#0B0C12", // Noir
+  muted: "#666666", // Gris
+  border: "#0B0C12", // Bordure noire
+  badge: "#F73604", // Même accent
 };
 
-export default async function CVAdminPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function CVAdminPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
   const cv = await prisma.cV.findFirst({
@@ -66,7 +62,10 @@ export default async function CVAdminPage({
         bioFr: cv.bioFr,
         bioEn: cv.bioEn,
         layout: cv.layout,
-        accentColor: cv.accentColor || (cv.theme as { primary?: string } | null)?.primary || defaultTheme.primary,
+        accentColor:
+          cv.accentColor ||
+          (cv.theme as { primary?: string } | null)?.primary ||
+          defaultTheme.primary,
         showPhoto: cv.showPhoto,
         theme: (cv as { theme?: unknown }).theme as CVTheme | null,
         sections: cv.sections.map((section) => ({
@@ -144,7 +143,9 @@ export default async function CVAdminPage({
     <div className="space-y-6 pb-10">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold text-foreground">Éditeur de CV</h1>
-        <p className="text-foreground/50">Gérez le contenu du CV et prévisualisez le PDF en temps réel.</p>
+        <p className="text-foreground/50">
+          Gérez le contenu du CV et prévisualisez le PDF en temps réel.
+        </p>
       </div>
       <CVEditor initialData={transformedCV} locale={locale} />
     </div>

@@ -20,13 +20,21 @@ export function PDFDownloadButton({ data, locale, iconOnly = false }: PDFDownloa
   useEffect(() => {
     setIsClient(true);
     import("@react-pdf/renderer").then((mod) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setPDFDownloadLink(() => mod.PDFDownloadLink as React.ComponentType<any>);
     });
   }, []);
 
   if (!isClient || !PDFDownloadLink) {
     return (
-      <Button size="sm" variant="outline" disabled className={iconOnly ? "border-lime-400 text-lime-400 px-2" : "border-lime-400 text-lime-400"}>
+      <Button
+        size="sm"
+        variant="outline"
+        disabled
+        className={
+          iconOnly ? "border-lime-400 text-lime-400 px-2" : "border-lime-400 text-lime-400"
+        }
+      >
         <DownloadIcon className={iconOnly ? "h-4 w-4" : "h-4 w-4 mr-2"} />
         {!iconOnly && "..."}
       </Button>
@@ -36,16 +44,17 @@ export function PDFDownloadButton({ data, locale, iconOnly = false }: PDFDownloa
   const fileName = `loic-ghanem-cv-${locale}.pdf`;
 
   return (
-    <PDFDownloadLink
-      document={<CVDocument data={data} locale={locale} />}
-      fileName={fileName}
-    >
+    <PDFDownloadLink document={<CVDocument data={data} locale={locale} />} fileName={fileName}>
       {({ loading }: { loading: boolean }) => (
         <Button
           size="sm"
           variant="outline"
           disabled={loading}
-          className={iconOnly ? "border-lime-400 text-lime-400 hover:bg-lime-400/10 px-2" : "border-lime-400 text-lime-400 hover:bg-lime-400/10"}
+          className={
+            iconOnly
+              ? "border-lime-400 text-lime-400 hover:bg-lime-400/10 px-2"
+              : "border-lime-400 text-lime-400 hover:bg-lime-400/10"
+          }
         >
           <DownloadIcon className={iconOnly ? "h-4 w-4" : "h-4 w-4 mr-2"} />
           {!iconOnly && (loading ? "..." : "Télécharger")}

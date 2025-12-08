@@ -1,0 +1,7 @@
+.next
+node_modules
+.vercel
+prisma/migrations
+seed/backups
+*.min.js
+*.min.css

@@ -1,17 +1,18 @@
 import React from "react";
-import { Document, Page, Text, View, StyleSheet, Image, Link, Svg, Polygon } from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Image, Link } from "@react-pdf/renderer";
 import type { CVData, CVTheme, CVTranslation, CVItem, CVSection } from "@/types/cv";
 
+// Neo-brutalist theme - single accent
 const defaultTheme: CVTheme = {
-  primary: "#D5FF0A",
-  secondary: "#9EF01A",
-  header: "#0B0C12",
-  sidebar: "#F4F5F7",
-  surface: "#FFFFFF",
-  text: "#0D0E11",
-  muted: "#60626A",
-  border: "#E2E4EA",
-  badge: "#0F1118",
+  primary: "#F73604", // Orange-rouge (accent unique)
+  secondary: "#F73604", // Même accent
+  header: "#0B0C12", // Noir
+  sidebar: "#F4F5F7", // Gris clair
+  surface: "#FFFFFF", // Blanc
+  text: "#0B0C12", // Noir
+  muted: "#666666", // Gris
+  border: "#0B0C12", // Bordure noire
+  badge: "#F73604", // Même accent
 };
 
 const createStyles = (theme: CVTheme) =>
@@ -22,314 +23,330 @@ const createStyles = (theme: CVTheme) =>
       fontFamily: "Helvetica",
       color: theme.text,
     },
+    // ============ HEADER ============
     header: {
-      position: "relative",
       backgroundColor: theme.header,
-      height: 170,
-      padding: "20 30 18 30",
-      justifyContent: "flex-end",
-      overflow: "hidden",
-      borderBottom: `4 solid ${theme.primary}`,
-    },
-    headerShapes: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      zIndex: 0,
+      padding: "24 28",
+      borderBottom: `6 solid ${theme.primary}`,
     },
     headerContent: {
-      position: "relative",
-      zIndex: 10,
       flexDirection: "row",
-      alignItems: "flex-end",
       justifyContent: "space-between",
+      alignItems: "flex-start",
     },
     headerLeft: {
       flex: 1,
+      paddingRight: 20,
     },
     name: {
-      fontSize: 26,
+      fontSize: 32,
       fontFamily: "Helvetica-Bold",
-      letterSpacing: 3,
+      letterSpacing: 2,
       color: "#FFFFFF",
       textTransform: "uppercase",
+      marginBottom: 6,
     },
     headline: {
       fontSize: 11,
       color: theme.primary,
-      letterSpacing: 2,
+      letterSpacing: 3,
       textTransform: "uppercase",
-      marginTop: 6,
       fontFamily: "Helvetica-Bold",
+      marginBottom: 16,
     },
-    headerSeparator: {
-      marginTop: 8,
-      marginBottom: 10,
-      height: 3,
-      width: 80,
-      backgroundColor: theme.primary,
+    // Contact info with neo-brutalist blocks
+    contactGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 8,
     },
-    contactRow: {
-      flexDirection: "column",
-      marginTop: 4,
-    },
-    contactItem: {
-      fontSize: 7.5,
-      color: "#E7E7EC",
-      marginBottom: 2,
-      textDecoration: "none",
+    contactBlock: {
+      backgroundColor: "#111111",
+      border: `2 solid #333333`,
+      padding: "6 10",
+      marginRight: 6,
+      marginBottom: 6,
     },
     contactLabel: {
-      fontSize: 7.5,
-      color: "#9EA0A8",
-      textTransform: "lowercase",
-    },
-    badge: {
-      backgroundColor: theme.badge,
-      color: "#FFFFFF",
-      fontSize: 7,
-      padding: "3 8",
-      borderRadius: 8,
-      letterSpacing: 1,
+      fontSize: 6,
+      color: theme.primary,
       textTransform: "uppercase",
-      marginTop: 5,
+      letterSpacing: 1,
+      marginBottom: 2,
     },
+    contactValue: {
+      fontSize: 8,
+      color: "#FFFFFF",
+      textDecoration: "none",
+    },
+    // Photo block - neo-brutalist square
     photoBlock: {
-      position: "absolute",
-      top: 10,
-      right: 100,
-      flexDirection: "column",
       alignItems: "center",
-      zIndex: 5,
-    },
-    photoOuter: {
-      width: 115,
-      height: 115,
-      borderRadius: 58,
-      backgroundColor: "#3A3A3A",
-      padding: 4,
     },
     photoContainer: {
-      width: 107,
-      height: 107,
-      borderRadius: 54,
-      border: "3 solid #5A5A5A",
-      backgroundColor: "#0E0E14",
-      overflow: "hidden",
+      width: 100,
+      height: 100,
+      border: `4 solid ${theme.primary}`,
+      backgroundColor: theme.header,
+      padding: 4,
     },
     photo: {
-      width: 107,
-      height: 107,
+      width: 88,
+      height: 88,
       objectFit: "cover",
     },
+    availableBadge: {
+      backgroundColor: theme.primary,
+      padding: "4 8",
+      marginTop: 8,
+    },
+    availableText: {
+      fontSize: 7,
+      fontFamily: "Helvetica-Bold",
+      color: theme.header,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+    },
+
+    // ============ BODY ============
     body: {
       flexDirection: "row",
       flex: 1,
     },
+
+    // ============ SIDEBAR ============
     sidebar: {
       width: "32%",
       backgroundColor: theme.sidebar,
-      padding: "24 20 20 24",
-      borderRight: `3 solid ${theme.primary}`,
-      flexGrow: 1,
+      padding: "20 16",
+      borderRight: `4 solid ${theme.border}`,
     },
     sidebarBlock: {
-      marginBottom: 14,
+      marginBottom: 18,
+    },
+    sidebarHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 10,
+      borderBottom: `3 solid ${theme.border}`,
+      paddingBottom: 6,
+    },
+    sidebarSquare: {
+      width: 12,
+      height: 12,
+      backgroundColor: theme.primary,
+      marginRight: 8,
     },
     sidebarTitle: {
       fontSize: 10,
       fontFamily: "Helvetica-Bold",
-      letterSpacing: 1.6,
+      letterSpacing: 2,
       color: theme.text,
       textTransform: "uppercase",
     },
-    sidebarTitleBar: {
-      width: 32,
-      height: 3,
-      backgroundColor: theme.primary,
-      marginBottom: 8,
-      marginTop: 4,
-    },
-    paragraph: {
-      fontSize: 7.5,
-      lineHeight: 1.4,
+    bioText: {
+      fontSize: 8,
+      lineHeight: 1.5,
       color: theme.muted,
       textAlign: "justify",
     },
-    contactLine: {
-      fontSize: 7.5,
-      color: theme.text,
-      marginBottom: 4,
-    },
+    // Skills with neo-brutalist bars
     skillItem: {
-      marginBottom: 6,
+      marginBottom: 8,
     },
     skillLabel: {
       fontSize: 8,
       fontFamily: "Helvetica-Bold",
       color: theme.text,
-      marginBottom: 2,
+      marginBottom: 3,
+      textTransform: "uppercase",
+      letterSpacing: 0.5,
     },
     skillBar: {
       width: "100%",
-      height: 5,
-      backgroundColor: theme.border,
-      borderRadius: 3,
-      overflow: "hidden",
+      height: 8,
+      backgroundColor: "#EEEEEE",
+      border: `2 solid ${theme.border}`,
     },
     skillBarFill: {
-      height: 5,
-      borderRadius: 3,
+      height: 4,
       backgroundColor: theme.primary,
     },
+    // Tool badges - neo-brutalist style
     badgeRow: {
       flexDirection: "row",
       flexWrap: "wrap",
-      marginTop: 4,
     },
-    softBadge: {
+    toolBadge: {
       backgroundColor: "#FFFFFF",
-      border: `1 solid ${theme.primary}`,
-      color: theme.text,
-      padding: "3 6",
-      fontSize: 7,
-      borderRadius: 8,
+      border: `2 solid ${theme.border}`,
+      padding: "4 8",
       marginRight: 4,
       marginBottom: 4,
-      textTransform: "uppercase",
-      letterSpacing: 0.3,
     },
-    listItem: {
-      marginBottom: 5,
-    },
-    listTitle: {
-      fontSize: 8,
+    toolBadgeText: {
+      fontSize: 7,
       fontFamily: "Helvetica-Bold",
       color: theme.text,
+      textTransform: "uppercase",
+      letterSpacing: 0.5,
     },
-    listSubtitle: {
+    // Language badges with color accent
+    langBadge: {
+      backgroundColor: theme.primary,
+      border: `2 solid ${theme.border}`,
+      padding: "4 10",
+      marginRight: 4,
+      marginBottom: 4,
+    },
+    langBadgeText: {
       fontSize: 7,
-      fontFamily: "Helvetica-Oblique",
-      color: theme.muted,
+      fontFamily: "Helvetica-Bold",
+      color: theme.header,
+      textTransform: "uppercase",
+      letterSpacing: 0.5,
     },
+
+    // ============ MAIN CONTENT ============
     main: {
       width: "68%",
-      padding: "24 24 20 22",
+      padding: "20 20",
     },
+    // Section header
     sectionHeader: {
       flexDirection: "row",
       alignItems: "center",
-      marginBottom: 10,
+      marginBottom: 14,
+      paddingBottom: 8,
+      borderBottom: `4 solid ${theme.border}`,
     },
     sectionSquare: {
-      width: 10,
-      height: 10,
-      backgroundColor: theme.primary,
-      marginRight: 6,
+      width: 14,
+      height: 14,
+      marginRight: 10,
     },
     sectionTitle: {
-      fontSize: 10,
+      fontSize: 12,
       fontFamily: "Helvetica-Bold",
-      letterSpacing: 1.8,
+      letterSpacing: 2.5,
       textTransform: "uppercase",
       color: theme.text,
     },
+    // Timeline items
     timelineItem: {
       flexDirection: "row",
-      marginBottom: 12,
+      marginBottom: 16,
       position: "relative",
     },
-    timelineRail: {
-      width: 14,
-      alignItems: "center",
-      position: "relative",
+    timelineDateCol: {
+      width: 58,
+      paddingRight: 8,
     },
-    timelineLine: {
-      position: "absolute",
-      top: 10,
-      bottom: -12,
-      width: 1,
-      backgroundColor: theme.border,
-    },
-    timelineDot: {
-      width: 8,
-      height: 8,
-      borderRadius: 4,
-      backgroundColor: theme.primary,
-      border: `1.5 solid ${theme.surface}`,
-      marginTop: 2,
-      zIndex: 2,
-    },
-    timelineYear: {
+    timelineDate: {
       fontSize: 7,
       fontFamily: "Helvetica-Bold",
       color: theme.muted,
-      marginBottom: 1,
       textAlign: "right",
+    },
+    timelineRail: {
+      width: 20,
+      alignItems: "center",
+      position: "relative",
+    },
+    timelineDot: {
+      width: 12,
+      height: 12,
+      backgroundColor: theme.primary,
+      border: `2 solid ${theme.border}`,
+      marginTop: 2,
+      zIndex: 2,
+    },
+    timelineLine: {
+      position: "absolute",
+      top: 14,
+      bottom: -16,
+      width: 3,
+      backgroundColor: "#CCCCCC",
+      left: 8.5,
     },
     timelineContent: {
       flex: 1,
-      paddingLeft: 8,
+      paddingLeft: 10,
     },
+    // Experience card - neo-brutalist
     expTitle: {
-      fontSize: 9,
+      fontSize: 10,
       fontFamily: "Helvetica-Bold",
       color: theme.text,
       textTransform: "uppercase",
+      letterSpacing: 0.5,
+      marginBottom: 2,
     },
     expSubtitle: {
-      fontSize: 7.5,
+      fontSize: 8,
       fontFamily: "Helvetica-Oblique",
       color: theme.muted,
-      marginBottom: 1,
+      marginBottom: 2,
     },
     expMeta: {
       fontSize: 7,
       color: theme.muted,
-      marginBottom: 3,
-    },
-    expDesc: {
-      fontSize: 7,
-      color: "#2F3035",
-      lineHeight: 1.35,
-      textAlign: "justify",
-    },
-    card: {
-      padding: 8,
-      borderRadius: 6,
-      border: `1 solid ${theme.border}`,
-      marginBottom: 8,
-      backgroundColor: "#FFFFFF",
-    },
-    pillRow: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-    },
-    pill: {
-      border: `1 solid ${theme.border}`,
-      borderRadius: 8,
-      padding: "2 5",
-      fontSize: 7,
-      color: theme.text,
-      marginRight: 4,
       marginBottom: 4,
     },
+    expDesc: {
+      fontSize: 7.5,
+      color: theme.muted,
+      lineHeight: 1.4,
+      textAlign: "justify",
+    },
+    // Award/Achievement cards
+    awardCard: {
+      border: `3 solid ${theme.border}`,
+      padding: 10,
+      marginBottom: 10,
+      backgroundColor: "#FFFFFF",
+    },
+    awardTitle: {
+      fontSize: 9,
+      fontFamily: "Helvetica-Bold",
+      color: theme.text,
+      textTransform: "uppercase",
+      marginBottom: 2,
+    },
+    awardSubtitle: {
+      fontSize: 7,
+      fontFamily: "Helvetica-Oblique",
+      color: theme.muted,
+      marginBottom: 2,
+    },
+    awardDesc: {
+      fontSize: 7,
+      color: theme.muted,
+      lineHeight: 1.3,
+    },
+    // Education items in sidebar
+    eduItem: {
+      marginBottom: 8,
+      paddingBottom: 8,
+      borderBottom: `1 solid #CCCCCC`,
+    },
+    eduTitle: {
+      fontSize: 8,
+      fontFamily: "Helvetica-Bold",
+      color: theme.text,
+      textTransform: "uppercase",
+    },
+    eduSubtitle: {
+      fontSize: 7,
+      fontFamily: "Helvetica-Oblique",
+      color: theme.muted,
+    },
+    eduMeta: {
+      fontSize: 6,
+      color: theme.muted,
+      marginTop: 2,
+    },
   });
-
-const HeaderShapes = ({ theme }: { theme: CVTheme }) => (
-  <Svg style={styles.headerShapes} viewBox="0 0 600 160">
-    {/* Triangle droit uniquement */}
-    <Polygon points="480,0 600,0 600,160" fill="#11131C" opacity={0.7} />
-
-    {/* Accent vert coin droit */}
-    <Polygon points="540,0 600,0 600,80" fill={theme.primary} opacity={0.85} />
-
-    {/* Accent vert coin gauche bas - petit */}
-    <Polygon points="0,130 35,160 0,160" fill={theme.primary} opacity={0.85} />
-  </Svg>
-);
 
 const styles = createStyles(defaultTheme);
 
@@ -345,7 +362,6 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
 
   const isFr = locale === "fr";
   const headline = isFr ? data.headlineFr : data.headlineEn;
-  const _badge = isFr ? data.badgeFr : data.badgeEn;
   const fullName = data.fullName || "Loïc Ghanem";
   const bio = isFr ? data.bioFr : data.bioEn;
 
@@ -371,14 +387,18 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
     .sort((a, b) => a.order - b.order)
     .map((section) => ({
       ...section,
-      items: (section.items || []).filter((i) => i.isActive !== false).sort((a, b) => a.order - b.order),
+      items: (section.items || [])
+        .filter((i) => i.isActive !== false)
+        .sort((a, b) => a.order - b.order),
     }));
 
-  const experienceSection = activeSections.find((s) => s.type === "experience" && s.placement !== "sidebar");
-  const mainSections = activeSections.filter((s) => s.type !== "experience" && s.placement !== "sidebar");
+  const experienceSection = activeSections.find(
+    (s) => s.type === "experience" && s.placement !== "sidebar"
+  );
+  const mainSections = activeSections.filter(
+    (s) => s.type !== "experience" && s.placement !== "sidebar"
+  );
   const sidebarSections = activeSections.filter((s) => s.placement === "sidebar");
-  const educationSection = sidebarSections.find((s) => s.type === "education");
-  const customSidebarSections = sidebarSections.filter((s) => s.type !== "education");
 
   const technicalSkills = (data.skills || [])
     .filter((s) => s.category === "technical" && s.isActive !== false)
@@ -390,7 +410,6 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
     .filter((s) => s.category === "language" && s.isActive !== false)
     .sort((a, b) => a.order - b.order);
 
-  // Fonction pour extraire un nom court d'une URL
   const getShortName = (url: string, platform: string): string => {
     if (platform === "LinkedIn") {
       const match = url.match(/linkedin\.com\/in\/([^/]+)/);
@@ -409,34 +428,31 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
     .map((link) => ({
       label: link.label || link.platform,
       value: getShortName(link.url, link.platform),
-      isLink: true,
       href: link.url,
     }));
 
   const contactItems = [
-    data.email ? { label: "email", value: data.email, isLink: true, href: `mailto:${data.email}` } : null,
-    // Pas de téléphone sur le CV
+    data.email ? { label: "EMAIL", value: data.email, href: `mailto:${data.email}` } : null,
     data.linkedInUrl
       ? {
-          label: "linkedin",
+          label: "LINKEDIN",
           value: getShortName(data.linkedInUrl, "LinkedIn"),
-          isLink: true,
           href: data.linkedInUrl,
         }
       : null,
     data.website
       ? {
-          label: "portfolio",
+          label: "PORTFOLIO",
           value: data.website.replace(/^https?:\/\/(www\.)?/, ""),
-          isLink: true,
           href: data.website.startsWith("http") ? data.website : `https://${data.website}`,
         }
       : null,
     ...socialFromLinks.map((link) => ({
-      ...link,
-      label: link.label?.toLowerCase() || "youtube",
+      label: link.label?.toUpperCase() || "SOCIAL",
+      value: link.value,
+      href: link.href,
     })),
-  ].filter((x) => x && x.value) as { label?: string; value: string; isLink?: boolean; href?: string }[];
+  ].filter((x) => x && x.value) as { label: string; value: string; href: string }[];
 
   const seenContacts = new Set<string>();
   const dedupedContacts = contactItems.filter((item) => {
@@ -453,24 +469,22 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
     return (
       <View key={section.id || sectionTitle} style={stylesWithTheme.sidebarBlock}>
         {sectionTitle && (
-          <View>
+          <View style={stylesWithTheme.sidebarHeader}>
+            <View style={[stylesWithTheme.sidebarSquare, { backgroundColor: sectionColor }]} />
             <Text style={stylesWithTheme.sidebarTitle}>{sectionTitle}</Text>
-            <View style={[stylesWithTheme.sidebarTitleBar, { backgroundColor: sectionColor }]} />
           </View>
         )}
         {section.items.map((item) => {
           const it = t(item.translations);
           return (
-            <View key={item.id || it?.title} style={stylesWithTheme.listItem}>
-              {it?.title && <Text style={stylesWithTheme.listTitle}>{it.title}</Text>}
-              {it?.subtitle && <Text style={stylesWithTheme.listSubtitle}>{it.subtitle}</Text>}
-              {it?.location && <Text style={stylesWithTheme.listSubtitle}>{it.location}</Text>}
-              {item.startDate && (
-                <Text style={stylesWithTheme.listSubtitle}>
-                  {formatDate(item.startDate)}
-                  {item.endDate || item.isCurrent
-                    ? ` — ${item.isCurrent ? (isFr ? "Présent" : "Present") : formatDate(item.endDate)}`
-                    : ""}
+            <View key={item.id || it?.title} style={stylesWithTheme.eduItem}>
+              {it?.title && <Text style={stylesWithTheme.eduTitle}>{it.title}</Text>}
+              {it?.subtitle && <Text style={stylesWithTheme.eduSubtitle}>{it.subtitle}</Text>}
+              {(it?.location || item.startDate) && (
+                <Text style={stylesWithTheme.eduMeta}>
+                  {it?.location}
+                  {it?.location && item.startDate ? " • " : ""}
+                  {item.startDate && formatRange(item)}
                 </Text>
               )}
             </View>
@@ -497,9 +511,9 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
             const isLast = idx === section.items.length - 1;
             return (
               <View key={item.id || it?.title} style={stylesWithTheme.timelineItem}>
-                <View style={{ width: 52, paddingTop: 2 }}>
-                  <Text style={stylesWithTheme.timelineYear}>{formatDate(item.startDate)}</Text>
-                  <Text style={stylesWithTheme.timelineYear}>
+                <View style={stylesWithTheme.timelineDateCol}>
+                  <Text style={stylesWithTheme.timelineDate}>{formatDate(item.startDate)}</Text>
+                  <Text style={stylesWithTheme.timelineDate}>
                     {item.isCurrent ? (isFr ? "Présent" : "Present") : formatDate(item.endDate)}
                   </Text>
                 </View>
@@ -524,16 +538,16 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
           section.items.map((item) => {
             const it = t(item.translations);
             return (
-              <View key={item.id || it?.title} style={stylesWithTheme.card}>
-                {it?.title && <Text style={stylesWithTheme.expTitle}>{it.title}</Text>}
-                {it?.subtitle && <Text style={stylesWithTheme.expSubtitle}>{it.subtitle}</Text>}
+              <View key={item.id || it?.title} style={stylesWithTheme.awardCard}>
+                {it?.title && <Text style={stylesWithTheme.awardTitle}>{it.title}</Text>}
+                {it?.subtitle && <Text style={stylesWithTheme.awardSubtitle}>{it.subtitle}</Text>}
                 {(it?.location || item.startDate) && (
                   <Text style={stylesWithTheme.expMeta}>
                     {formatRange(item)}
                     {it?.location ? ` • ${it.location}` : ""}
                   </Text>
                 )}
-                {it?.description && <Text style={stylesWithTheme.expDesc}>{it.description}</Text>}
+                {it?.description && <Text style={stylesWithTheme.awardDesc}>{it.description}</Text>}
               </View>
             );
           })}
@@ -544,62 +558,89 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
   return (
     <Document>
       <Page size="A4" style={stylesWithTheme.page} wrap={false}>
-        <View style={[stylesWithTheme.header, { backgroundColor: mergedTheme.header }]} wrap={false}>
-          <HeaderShapes theme={mergedTheme} />
+        {/* ============ HEADER ============ */}
+        <View
+          style={[stylesWithTheme.header, { backgroundColor: mergedTheme.header }]}
+          wrap={false}
+        >
           <View style={stylesWithTheme.headerContent}>
             <View style={stylesWithTheme.headerLeft}>
               <Text style={stylesWithTheme.name}>{fullName}</Text>
-              {headline && <Text style={stylesWithTheme.headline}>{headline}</Text>}
-              <View style={stylesWithTheme.headerSeparator} />
-              <View style={stylesWithTheme.contactRow}>
-                {dedupedContacts.slice(0, 4).map((item) => {
-                  const displayValue = item.value.replace(/^mailto:/, "").replace(/^tel:/, "");
-                  if (item.isLink && item.href) {
-                    return (
-                      <View key={item.value} style={{ flexDirection: "row", marginBottom: 2 }}>
-                        <Text style={stylesWithTheme.contactLabel}>{item.label} : </Text>
-                        <Link src={item.href} style={stylesWithTheme.contactItem}>
-                          {displayValue}
-                        </Link>
-                      </View>
-                    );
-                  }
-                  return (
-                    <View key={item.value} style={{ flexDirection: "row", marginBottom: 2 }}>
-                      <Text style={stylesWithTheme.contactLabel}>{item.label} : </Text>
-                      <Text style={stylesWithTheme.contactItem}>{displayValue}</Text>
-                    </View>
-                  );
-                })}
+              {headline && (
+                <Text style={[stylesWithTheme.headline, { color: mergedTheme.primary }]}>
+                  {headline}
+                </Text>
+              )}
+
+              {/* Contact blocks */}
+              <View style={stylesWithTheme.contactGrid}>
+                {dedupedContacts.slice(0, 4).map((item) => (
+                  <View key={item.value} style={stylesWithTheme.contactBlock}>
+                    <Text style={[stylesWithTheme.contactLabel, { color: mergedTheme.primary }]}>
+                      {item.label}
+                    </Text>
+                    <Link src={item.href} style={stylesWithTheme.contactValue}>
+                      {item.value}
+                    </Link>
+                  </View>
+                ))}
               </View>
             </View>
-          </View>
-          {data.photo && (
-            <View style={stylesWithTheme.photoBlock}>
-              <View style={stylesWithTheme.photoOuter}>
-                <View style={stylesWithTheme.photoContainer}>
+
+            {/* Photo */}
+            {data.photo && data.showPhoto !== false && (
+              <View style={stylesWithTheme.photoBlock}>
+                <View
+                  style={[stylesWithTheme.photoContainer, { borderColor: mergedTheme.primary }]}
+                >
                   <Image src={data.photo} style={stylesWithTheme.photo} />
                 </View>
+                <View
+                  style={[stylesWithTheme.availableBadge, { backgroundColor: mergedTheme.primary }]}
+                >
+                  <Text style={[stylesWithTheme.availableText, { color: mergedTheme.header }]}>
+                    {isFr ? "DISPONIBLE" : "AVAILABLE"}
+                  </Text>
+                </View>
               </View>
-              <Text style={stylesWithTheme.badge}>{isFr ? "Dispo dès maintenant" : "Available now"}</Text>
-            </View>
-          )}
+            )}
+          </View>
         </View>
 
+        {/* ============ BODY ============ */}
         <View style={stylesWithTheme.body} wrap={false}>
+          {/* ============ SIDEBAR ============ */}
           <View style={stylesWithTheme.sidebar} wrap={false}>
+            {/* Profile/Bio */}
             {bio && (
               <View style={stylesWithTheme.sidebarBlock}>
-                <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "Profil" : "Profile"}</Text>
-                <View style={stylesWithTheme.sidebarTitleBar} />
-                <Text style={stylesWithTheme.paragraph}>{bio}</Text>
+                <View style={stylesWithTheme.sidebarHeader}>
+                  <View
+                    style={[
+                      stylesWithTheme.sidebarSquare,
+                      { backgroundColor: mergedTheme.primary },
+                    ]}
+                  />
+                  <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "PROFIL" : "PROFILE"}</Text>
+                </View>
+                <Text style={stylesWithTheme.bioText}>{bio}</Text>
               </View>
             )}
 
+            {/* Skills */}
             {technicalSkills.length > 0 && (
               <View style={stylesWithTheme.sidebarBlock}>
-                <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "Compétences" : "Skills"}</Text>
-                <View style={stylesWithTheme.sidebarTitleBar} />
+                <View style={stylesWithTheme.sidebarHeader}>
+                  <View
+                    style={[
+                      stylesWithTheme.sidebarSquare,
+                      { backgroundColor: mergedTheme.primary },
+                    ]}
+                  />
+                  <Text style={stylesWithTheme.sidebarTitle}>
+                    {isFr ? "COMPÉTENCES" : "SKILLS"}
+                  </Text>
+                </View>
                 {technicalSkills.map((skill) => {
                   const st = t(skill.translations);
                   const percent = `${(skill.level / 5) * 100}%`;
@@ -608,7 +649,12 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
                       <Text style={stylesWithTheme.skillLabel}>{st?.name}</Text>
                       {skill.showAsBar && (
                         <View style={stylesWithTheme.skillBar}>
-                          <View style={[stylesWithTheme.skillBarFill, { width: percent }]} />
+                          <View
+                            style={[
+                              stylesWithTheme.skillBarFill,
+                              { width: percent, backgroundColor: mergedTheme.primary },
+                            ]}
+                          />
                         </View>
                       )}
                     </View>
@@ -617,54 +663,85 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
               </View>
             )}
 
+            {/* Tools/Software */}
             {softwareSkills.length > 0 && (
               <View style={stylesWithTheme.sidebarBlock}>
-                <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "Logiciels" : "Tools"}</Text>
-                <View style={stylesWithTheme.sidebarTitleBar} />
+                <View style={stylesWithTheme.sidebarHeader}>
+                  <View
+                    style={[
+                      stylesWithTheme.sidebarSquare,
+                      { backgroundColor: mergedTheme.primary },
+                    ]}
+                  />
+                  <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "OUTILS" : "TOOLS"}</Text>
+                </View>
                 <View style={stylesWithTheme.badgeRow}>
                   {softwareSkills.map((skill) => {
                     const st = t(skill.translations);
                     return (
-                      <Text key={skill.id || st?.name} style={stylesWithTheme.softBadge}>
-                        {st?.name}
-                      </Text>
+                      <View key={skill.id || st?.name} style={stylesWithTheme.toolBadge}>
+                        <Text style={stylesWithTheme.toolBadgeText}>{st?.name}</Text>
+                      </View>
                     );
                   })}
                 </View>
               </View>
             )}
 
+            {/* Languages */}
             {languages.length > 0 && (
               <View style={stylesWithTheme.sidebarBlock}>
-                <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "Langues" : "Languages"}</Text>
-                <View style={stylesWithTheme.sidebarTitleBar} />
+                <View style={stylesWithTheme.sidebarHeader}>
+                  <View
+                    style={[
+                      stylesWithTheme.sidebarSquare,
+                      { backgroundColor: mergedTheme.primary },
+                    ]}
+                  />
+                  <Text style={stylesWithTheme.sidebarTitle}>{isFr ? "LANGUES" : "LANGUAGES"}</Text>
+                </View>
                 <View style={stylesWithTheme.badgeRow}>
                   {languages.map((lang) => {
                     const st = t(lang.translations);
                     return (
-                      <Text key={lang.id || st?.name} style={stylesWithTheme.softBadge}>
-                        {st?.name}
-                      </Text>
+                      <View
+                        key={lang.id || st?.name}
+                        style={[
+                          stylesWithTheme.langBadge,
+                          { backgroundColor: mergedTheme.primary },
+                        ]}
+                      >
+                        <Text
+                          style={[stylesWithTheme.langBadgeText, { color: mergedTheme.header }]}
+                        >
+                          {st?.name}
+                        </Text>
+                      </View>
                     );
                   })}
                 </View>
               </View>
             )}
 
-            {educationSection && educationSection.items.length > 0 && renderSidebarSection(educationSection)}
-
-            {customSidebarSections.filter((s) => s.id !== educationSection?.id).map((section) => renderSidebarSection(section))}
+            {/* Sidebar sections (education, etc.) */}
+            {sidebarSections.map((section) => renderSidebarSection(section))}
           </View>
 
+          {/* ============ MAIN CONTENT ============ */}
           <View style={stylesWithTheme.main} wrap={false}>
+            {/* Experience section */}
             {experienceSection && experienceSection.items.length > 0 && (
-              <View style={{ marginBottom: 18 }}>
+              <View style={{ marginBottom: 20 }}>
                 <View style={stylesWithTheme.sectionHeader}>
                   <View
-                    style={[stylesWithTheme.sectionSquare, { backgroundColor: experienceSection.color || mergedTheme.primary }]}
+                    style={[
+                      stylesWithTheme.sectionSquare,
+                      { backgroundColor: experienceSection.color || mergedTheme.primary },
+                    ]}
                   />
                   <Text style={stylesWithTheme.sectionTitle}>
-                    {t(experienceSection.translations)?.title || (isFr ? "Expériences" : "Experience")}
+                    {t(experienceSection.translations)?.title ||
+                      (isFr ? "EXPÉRIENCE" : "EXPERIENCE")}
                   </Text>
                 </View>
                 {experienceSection.items.map((item, idx) => {
@@ -672,10 +749,16 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
                   const isLast = idx === experienceSection.items.length - 1;
                   return (
                     <View key={item.id || it?.title} style={stylesWithTheme.timelineItem}>
-                      <View style={{ width: 52, paddingTop: 2 }}>
-                        <Text style={stylesWithTheme.timelineYear}>{formatDate(item.startDate)}</Text>
-                        <Text style={stylesWithTheme.timelineYear}>
-                          {item.isCurrent ? (isFr ? "Présent" : "Present") : formatDate(item.endDate)}
+                      <View style={stylesWithTheme.timelineDateCol}>
+                        <Text style={stylesWithTheme.timelineDate}>
+                          {formatDate(item.startDate)}
+                        </Text>
+                        <Text style={stylesWithTheme.timelineDate}>
+                          {item.isCurrent
+                            ? isFr
+                              ? "Présent"
+                              : "Present"
+                            : formatDate(item.endDate)}
                         </Text>
                       </View>
                       <View style={stylesWithTheme.timelineRail}>
@@ -689,12 +772,16 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
                       </View>
                       <View style={stylesWithTheme.timelineContent}>
                         {it?.title && <Text style={stylesWithTheme.expTitle}>{it.title}</Text>}
-                        {it?.subtitle && <Text style={stylesWithTheme.expSubtitle}>{it.subtitle}</Text>}
+                        {it?.subtitle && (
+                          <Text style={stylesWithTheme.expSubtitle}>{it.subtitle}</Text>
+                        )}
                         <Text style={stylesWithTheme.expMeta}>
                           {formatRange(item)}
                           {it?.location ? ` • ${it.location}` : ""}
                         </Text>
-                        {it?.description && <Text style={stylesWithTheme.expDesc}>{it.description}</Text>}
+                        {it?.description && (
+                          <Text style={stylesWithTheme.expDesc}>{it.description}</Text>
+                        )}
                       </View>
                     </View>
                   );
@@ -702,6 +789,7 @@ export const CVDocument = ({ data, locale }: { data: CVData; locale: string }) =
               </View>
             )}
 
+            {/* Other main sections */}
             {mainSections.map((section) => renderMainSection(section))}
           </View>
         </View>

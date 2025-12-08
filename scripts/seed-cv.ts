@@ -7,6 +7,16 @@ const date = (iso: string) => new Date(iso);
 async function main() {
   const fullName = "Loïc Ghanem";
 
+  // Palette de couleurs recommandées pour les sections
+  const SECTION_COLORS = {
+    experience: "#F73604", // Orange (dominante)
+    awards: "#7C3AED", // Violet
+    clients: "#0A66C2", // Bleu
+    interests: "#00A67E", // Vert
+    education: "#0A66C2", // Bleu
+    skills: "#00A67E", // Vert
+  };
+
   const cvData = {
     fullName,
     badgeFr: "Compositeur & Producteur",
@@ -14,26 +24,26 @@ async function main() {
     email: "loic.ghanem@outlook.com",
     website: "loicghanem.com",
     location: "Paris, France",
-    headlineFr: "Compositeur & producteur spécialisé en hybrid trailer music, metal et textures orchestrales.",
-    headlineEn: "Composer & producer crafting hybrid trailer music, metal and orchestral textures.",
+    headlineFr: "Compositeur & Producteur",
+    headlineEn: "Composer & Producer",
     bioFr:
-      "Compositeur et producteur pour l'image, spécialisé dans les univers hybrides (trailer, metal, orchestral). Diffusion TV/streaming, jeux vidéo et publicités pour des marques internationales.",
+      "Compositeur et producteur basé à Paris, passionné par la création de paysages sonores narratifs. Depuis plus d'une décennie, je transforme des idées brutes en expériences auditives complètes. De la musique originale aux compositions pour médias visuels et l'édition musicale, j'apporte ma signature sonore à chaque projet, amplifiant l'histoire et enrichissant l'expérience du spectateur. Je crée des paysages sonores uniques, contemporains et engageants qui résonnent et laissent une impression durable.",
     bioEn:
-      "Composer and producer for picture, focused on hybrid (trailer, metal, orchestral) sounds. Placements across TV/streaming, games and advertising for global brands.",
-    accentColor: "#D5FF0A",
+      "Paris-based composer and music producer with a passion for soundscaping narratives. For over a decade, I've been transforming raw ideas into full-blown auditory experiences. From original music to compelling compositions for visual media and music publishing, I bring my sonic signature to every project, amplifying the story and enriching the viewer's experience. I deliver unique, contemporary, and engaging soundscapes that resonate and create lasting impressions.",
+    accentColor: "#F73604",
     layout: "creative",
     showPhoto: true,
     photo: "/img/slider/loic-studio-front.jpg",
     theme: {
-      primary: "#D5FF0A",
-      secondary: "#9EF01A",
-      header: "#0B0C12",
-      sidebar: "#F4F5F7",
-      surface: "#FFFFFF",
-      text: "#0D0E11",
-      muted: "#60626A",
-      border: "#E2E4EA",
-      badge: "#0F1118",
+      primary: "#F73604", // Orange vif (accent unique)
+      secondary: "#F73604", // Même accent
+      header: "#0B0C12", // Noir
+      sidebar: "#F4F5F7", // Gris clair
+      surface: "#FFFFFF", // Blanc
+      text: "#0B0C12", // Noir
+      muted: "#666666", // Gris
+      border: "#0B0C12", // Bordure noire
+      badge: "#F73604", // Même accent
     },
   };
 
@@ -61,7 +71,7 @@ async function main() {
       placement: "main",
       layoutType: "timeline",
       order: 0,
-      color: cvData.theme.primary,
+      color: SECTION_COLORS.experience,
       translations: [
         { locale: "fr", title: "Expériences" },
         { locale: "en", title: "Experience" },
@@ -101,13 +111,15 @@ async function main() {
               locale: "fr",
               title: "Producteur / Artiste",
               subtitle: "Voyager1",
-              description: "Projet électronique, hip-hop et bass music. Production, mixage et direction artistique.",
+              description:
+                "Projet électronique, hip-hop et bass music. Production, mixage et direction artistique.",
             },
             {
               locale: "en",
               title: "Producer / Artist",
               subtitle: "Voyager1",
-              description: "Electronic, hip-hop and bass music project. Production, mixing and creative direction.",
+              description:
+                "Electronic, hip-hop and bass music project. Production, mixing and creative direction.",
             },
           ],
         },
@@ -121,13 +133,15 @@ async function main() {
               locale: "fr",
               title: "Guitariste",
               subtitle: "Early Seasons",
-              description: "Metalcore. Tournées, composition et enregistrement studio (Artery Recordings).",
+              description:
+                "Metalcore. Tournées, composition et enregistrement studio (Artery Recordings).",
             },
             {
               locale: "en",
               title: "Guitarist",
               subtitle: "Early Seasons",
-              description: "Metalcore band. Touring, songwriting and studio recording (Artery Recordings).",
+              description:
+                "Metalcore band. Touring, songwriting and studio recording (Artery Recordings).",
             },
           ],
         },
@@ -174,11 +188,50 @@ async function main() {
       ],
     },
     {
+      type: "clients",
+      placement: "main",
+      layoutType: "grid",
+      order: 1,
+      color: SECTION_COLORS.clients,
+      translations: [
+        { locale: "fr", title: "Clients & Sync" },
+        { locale: "en", title: "Clients & Sync" },
+      ],
+      items: [
+        // Marques
+        "Porsche",
+        "Mercedes",
+        "Burger King",
+        "Lululemon",
+        // TV Sport
+        "BBC",
+        "ESPN",
+        "NHL",
+        "NFL",
+        "NBA",
+        "MLB",
+        "WWE",
+        // Streaming
+        "Netflix",
+        "HBO",
+        "Amazon Prime",
+        "Disney+",
+        "Apple TV+",
+        "Spotify",
+      ].map((label, idx) => ({
+        order: idx,
+        translations: [
+          { locale: "fr", title: label },
+          { locale: "en", title: label },
+        ],
+      })),
+    },
+    {
       type: "awards",
       placement: "main",
       layoutType: "list",
-      order: 1,
-      color: cvData.theme.secondary,
+      order: 2,
+      color: SECTION_COLORS.awards,
       translations: [
         { locale: "fr", title: "Prix & Récompenses" },
         { locale: "en", title: "Awards" },
@@ -244,42 +297,11 @@ async function main() {
       ],
     },
     {
-      type: "clients",
-      placement: "sidebar",
-      layoutType: "grid",
-      order: 2,
-      color: cvData.theme.primary,
-      translations: [
-        { locale: "fr", title: "Clients & Sync" },
-        { locale: "en", title: "Clients & Sync" },
-      ],
-      items: [
-        "Porsche",
-        "Mercedes",
-        "Burger King",
-        "NHL",
-        "NFL",
-        "NBA",
-        "MLB",
-        "Spotify",
-        "HBO",
-        "Netflix",
-        "Amazon Prime",
-        "Disney+",
-      ].map((label, idx) => ({
-        order: idx,
-        translations: [
-          { locale: "fr", title: label },
-          { locale: "en", title: label },
-        ],
-      })),
-    },
-    {
       type: "interests",
       placement: "sidebar",
       layoutType: "grid",
       order: 3,
-      color: cvData.theme.secondary,
+      color: SECTION_COLORS.interests,
       translations: [
         { locale: "fr", title: "Centres d'intérêt" },
         { locale: "en", title: "Interests" },
@@ -311,9 +333,9 @@ async function main() {
         translations: { create: section.translations },
         items: {
           create: section.items.map((item) => ({
-            startDate: 'startDate' in item ? item.startDate : null,
-            endDate: 'endDate' in item ? item.endDate : null,
-            isCurrent: 'isCurrent' in item ? item.isCurrent : false,
+            startDate: "startDate" in item ? item.startDate : null,
+            endDate: "endDate" in item ? item.endDate : null,
+            isCurrent: "isCurrent" in item ? item.isCurrent : false,
             order: item.order,
             isActive: true,
             translations: { create: item.translations },
@@ -325,10 +347,20 @@ async function main() {
 
   // Skills (bars + badges)
   const skills = [
-    { nameFr: "Composition Musicale", nameEn: "Music Composition", level: 5, category: "technical" },
+    {
+      nameFr: "Composition Musicale",
+      nameEn: "Music Composition",
+      level: 5,
+      category: "technical",
+    },
     { nameFr: "Production Musicale", nameEn: "Music Production", level: 5, category: "technical" },
     { nameFr: "Mixage & Mastering", nameEn: "Mixing & Mastering", level: 5, category: "technical" },
-    { nameFr: "Arrangement / Orchestration", nameEn: "Arrangement / Orchestration", level: 5, category: "technical" },
+    {
+      nameFr: "Arrangement / Orchestration",
+      nameEn: "Arrangement / Orchestration",
+      level: 5,
+      category: "technical",
+    },
     { nameFr: "Musique de Film", nameEn: "Film Scoring", level: 5, category: "technical" },
     { nameFr: "Musique de Jeu Vidéo", nameEn: "Video Game Music", level: 4, category: "technical" },
     { nameFr: "Design Sonore", nameEn: "Sound Design", level: 4, category: "technical" },

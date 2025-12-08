@@ -1,6 +1,6 @@
 "use client";
 
-import { Sliders, Home, LayoutGrid, ArrowUpDown } from "lucide-react";
+import { Home, LayoutGrid, ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,14 @@ interface ContentSettingsProps {
 }
 
 // Neo-brutalist input component
-const NeoInput = ({ id, value, onChange, type = "text", min, max }: {
+const NeoInput = ({
+  id,
+  value,
+  onChange,
+  type = "text",
+  min,
+  max,
+}: {
   id: string;
   value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -47,7 +54,12 @@ const NeoInput = ({ id, value, onChange, type = "text", min, max }: {
 );
 
 // Neo-brutalist select component
-const NeoSelect = ({ id, value, onChange, options }: {
+const NeoSelect = ({
+  id,
+  value,
+  onChange,
+  options,
+}: {
   id: string;
   value: string;
   onChange: (value: string) => void;
@@ -66,15 +78,18 @@ const NeoSelect = ({ id, value, onChange, options }: {
       "transition-all duration-200"
     )}
     style={{
-      backgroundImage: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")",
+      backgroundImage:
+        "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")",
       backgroundPosition: "right 0.75rem center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "1.5em 1.5em",
-      paddingRight: "2.5rem"
+      paddingRight: "2.5rem",
     }}
   >
     {options.map((opt) => (
-      <option key={opt.value} value={opt.value}>{opt.label}</option>
+      <option key={opt.value} value={opt.value}>
+        {opt.label}
+      </option>
     ))}
   </select>
 );

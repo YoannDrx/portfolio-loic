@@ -1,25 +1,14 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import {
-  Download,
-  Mail,
-  Globe,
-  Linkedin,
-  Youtube,
-  MapPin,
-  Briefcase,
-  Award,
-  GraduationCap,
-  Languages
-} from 'lucide-react';
-import { useTranslations, useLocale } from 'next-intl';
-import { BrutalistButton } from '../ui/BrutalistButton';
-import { NeoTag } from '../ui/NeoTag';
-import { SectionHeader } from '../ui/SectionHeader';
-import type { CVData, CVSection, CVSkill, CVTranslation } from '@/types/cv';
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Download, Mail, Globe, Linkedin, Youtube, MapPin, Award, Languages } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { BrutalistButton } from "../ui/BrutalistButton";
+import { NeoTag } from "../ui/NeoTag";
+import { SectionHeader } from "../ui/SectionHeader";
+import type { CVData, CVTranslation } from "@/types/cv";
 
 interface NeoCVPageProps {
   data: CVData;
@@ -27,32 +16,22 @@ interface NeoCVPageProps {
 
 // Helper to get translation by locale
 const t = (translations: CVTranslation[], locale: string) => {
-  return translations.find(x => x.locale === locale) || translations[0] || {};
+  return translations.find((x) => x.locale === locale) || translations[0] || {};
 };
 
 // Format date
 const formatDate = (dateStr: string | null | undefined, locale: string) => {
-  if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
-    year: 'numeric',
-    month: 'short',
+  if (!dateStr) return "";
+  return new Date(dateStr).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
+    year: "numeric",
+    month: "short",
   });
 };
 
-// Get icon for section type
-const getSectionIcon = (type: string) => {
-  switch (type) {
-    case 'experience': return <Briefcase size={24} />;
-    case 'awards': return <Award size={24} />;
-    case 'education': return <GraduationCap size={24} />;
-    default: return <Briefcase size={24} />;
-  }
-};
-
 export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
-  const tPage = useTranslations('cv');
+  const tPage = useTranslations("cv");
   const locale = useLocale();
-  const isFr = locale === 'fr';
+  const isFr = locale === "fr";
 
   const headline = isFr ? data.headlineFr : data.headlineEn;
   const badge = isFr ? data.badgeFr : data.badgeEn;
@@ -60,23 +39,23 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
 
   // Filter and sort sections
   const activeSections = (data.sections || [])
-    .filter(s => s.isActive !== false)
+    .filter((s) => s.isActive !== false)
     .sort((a, b) => a.order - b.order);
 
-  const experienceSection = activeSections.find(s => s.type === 'experience');
-  const awardsSection = activeSections.find(s => s.type === 'awards');
+  const experienceSection = activeSections.find((s) => s.type === "experience");
+  const awardsSection = activeSections.find((s) => s.type === "awards");
 
   // Skills by category
   const technicalSkills = (data.skills || [])
-    .filter(s => s.category === 'technical' && s.isActive !== false)
+    .filter((s) => s.category === "technical" && s.isActive !== false)
     .sort((a, b) => a.order - b.order);
 
   const softwareSkills = (data.skills || [])
-    .filter(s => s.category === 'software' && s.isActive !== false)
+    .filter((s) => s.category === "software" && s.isActive !== false)
     .sort((a, b) => a.order - b.order);
 
   const languages = (data.skills || [])
-    .filter(s => s.category === 'language' && s.isActive !== false)
+    .filter((s) => s.category === "language" && s.isActive !== false)
     .sort((a, b) => a.order - b.order);
 
   return (
@@ -99,7 +78,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
                 <div className="w-40 h-40 md:w-48 md:h-48 border-4 border-neo-accent relative overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-accent)]">
                   <Image
                     src={data.photo}
-                    alt={data.fullName || 'Profile'}
+                    alt={data.fullName || "Profile"}
                     fill
                     className="object-cover"
                     unoptimized
@@ -108,7 +87,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
                 {/* Badge */}
                 {badge && (
                   <div className="absolute -bottom-4 -right-4 bg-neo-accent text-neo-text px-4 py-2 font-mono text-xs uppercase font-bold border-2 border-neo-text shadow-[4px_4px_0px_0px_var(--neo-text)]">
-                    {isFr ? 'Dispo' : 'Available'}
+                    {isFr ? "Dispo" : "Available"}
                   </div>
                 )}
               </motion.div>
@@ -116,10 +95,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
 
             {/* Info */}
             <div className="flex-1">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4">
                   {data.fullName}
                 </h1>
@@ -148,7 +124,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
                       className="flex items-center gap-2 font-mono text-sm hover:text-neo-accent transition-colors"
                     >
                       <Globe size={16} />
-                      {data.website.replace(/^https?:\/\/(www\.)?/, '')}
+                      {data.website.replace(/^https?:\/\/(www\.)?/, "")}
                     </a>
                   )}
                   {data.linkedInUrl && (
@@ -173,7 +149,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
                 {/* Social Links */}
                 {data.socialLinks && data.socialLinks.length > 0 && (
                   <div className="flex gap-3 mt-4">
-                    {data.socialLinks.map(link => (
+                    {data.socialLinks.map((link) => (
                       <a
                         key={link.id || link.url}
                         href={link.url}
@@ -182,7 +158,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
                         className="p-2 border-2 border-neo-text-inverse/30 hover:border-neo-accent hover:bg-neo-accent hover:text-neo-text transition-colors"
                         aria-label={link.label || link.platform}
                       >
-                        {link.platform === 'YouTube' && <Youtube size={18} />}
+                        {link.platform === "YouTube" && <Youtube size={18} />}
                       </a>
                     ))}
                   </div>
@@ -192,9 +168,13 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
 
             {/* Download Button */}
             <div className="md:self-start">
-              <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
+              <a
+                href={`/api/cv/download?locale=${locale}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BrutalistButton variant="primary" size="lg" icon={<Download size={20} />}>
-                  {tPage('download')}
+                  {tPage("download")}
                 </BrutalistButton>
               </a>
             </div>
@@ -211,7 +191,9 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
             viewport={{ once: true }}
             className="max-w-4xl"
           >
-            <div className="font-mono text-xs uppercase text-neo-accent mb-4">// {tPage('profile')}</div>
+            <div className="font-mono text-xs uppercase text-neo-accent mb-4">
+              // {tPage("profile")}
+            </div>
             <p className="text-xl md:text-2xl font-medium leading-relaxed border-l-4 border-neo-accent pl-6 text-neo-text">
               {bio}
             </p>
@@ -224,17 +206,19 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
         <section className="container mx-auto px-4 md:px-6 py-16 border-t-4 border-neo-border">
           <SectionHeader
             number="01"
-            title={t(experienceSection.translations, locale).title || (isFr ? 'Expériences' : 'Experience')}
-            subtitle={isFr ? 'Parcours Professionnel' : 'Career Path'}
+            title={
+              t(experienceSection.translations, locale).title ||
+              (isFr ? "Expériences" : "Experience")
+            }
+            subtitle={isFr ? "Parcours Professionnel" : "Career Path"}
           />
 
           <div className="mt-12 space-y-0">
             {experienceSection.items
-              .filter(item => item.isActive !== false)
+              .filter((item) => item.isActive !== false)
               .sort((a, b) => a.order - b.order)
               .map((item, idx) => {
                 const itemT = t(item.translations, locale);
-                const isLast = idx === experienceSection.items.length - 1;
 
                 return (
                   <motion.div
@@ -250,7 +234,12 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
 
                     {/* Date */}
                     <div className="font-mono text-xs text-neo-text/60 mb-2">
-                      {formatDate(item.startDate, locale)} — {item.isCurrent ? (isFr ? 'Présent' : 'Present') : formatDate(item.endDate, locale)}
+                      {formatDate(item.startDate, locale)} —{" "}
+                      {item.isCurrent
+                        ? isFr
+                          ? "Présent"
+                          : "Present"
+                        : formatDate(item.endDate, locale)}
                     </div>
 
                     {/* Content */}
@@ -270,9 +259,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
                         </div>
                       )}
                       {itemT.description && (
-                        <p className="text-neo-text/80 leading-relaxed">
-                          {itemT.description}
-                        </p>
+                        <p className="text-neo-text/80 leading-relaxed">{itemT.description}</p>
                       )}
                     </div>
                   </motion.div>
@@ -287,8 +274,8 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
         <section className="container mx-auto px-4 md:px-6 py-16 border-t-4 border-neo-border">
           <SectionHeader
             number="02"
-            title={isFr ? 'Compétences' : 'Skills'}
-            subtitle={isFr ? 'Expertise Technique' : 'Technical Expertise'}
+            title={isFr ? "Compétences" : "Skills"}
+            subtitle={isFr ? "Expertise Technique" : "Technical Expertise"}
           />
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -332,8 +319,8 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
         <section className="container mx-auto px-4 md:px-6 py-16 border-t-4 border-neo-border">
           <SectionHeader
             number="03"
-            title={isFr ? 'Logiciels' : 'Tools'}
-            subtitle={isFr ? 'Outils Maîtrisés' : 'Mastered Tools'}
+            title={isFr ? "Logiciels" : "Tools"}
+            subtitle={isFr ? "Outils Maîtrisés" : "Mastered Tools"}
           />
 
           <div className="mt-12 flex flex-wrap gap-3">
@@ -362,13 +349,13 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
         <section className="container mx-auto px-4 md:px-6 py-16 border-t-4 border-neo-border">
           <SectionHeader
             number="04"
-            title={t(awardsSection.translations, locale).title || (isFr ? 'Récompenses' : 'Awards')}
-            subtitle={isFr ? 'Distinctions' : 'Recognition'}
+            title={t(awardsSection.translations, locale).title || (isFr ? "Récompenses" : "Awards")}
+            subtitle={isFr ? "Distinctions" : "Recognition"}
           />
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
             {awardsSection.items
-              .filter(item => item.isActive !== false)
+              .filter((item) => item.isActive !== false)
               .sort((a, b) => a.order - b.order)
               .map((item, idx) => {
                 const itemT = t(item.translations, locale);
@@ -401,9 +388,7 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
                           </div>
                         )}
                         {itemT.description && (
-                          <p className="text-sm text-neo-text/80">
-                            {itemT.description}
-                          </p>
+                          <p className="text-sm text-neo-text/80">{itemT.description}</p>
                         )}
                       </div>
                     </div>
@@ -419,8 +404,8 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
         <section className="container mx-auto px-4 md:px-6 py-16 border-t-4 border-neo-border">
           <SectionHeader
             number="05"
-            title={isFr ? 'Langues' : 'Languages'}
-            subtitle={isFr ? 'Communication' : 'Communication'}
+            title={isFr ? "Langues" : "Languages"}
+            subtitle={isFr ? "Communication" : "Communication"}
           />
 
           <div className="mt-12 flex flex-wrap gap-4">
@@ -448,20 +433,22 @@ export const NeoCVPage: React.FC<NeoCVPageProps> = ({ data }) => {
       <section className="bg-neo-text text-neo-text-inverse py-16">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6">
-            {isFr ? 'Intéressé ?' : 'Interested?'}
+            {isFr ? "Intéressé ?" : "Interested?"}
           </h2>
           <p className="font-mono text-lg mb-8 text-neo-text-inverse/80">
-            {isFr ? 'Téléchargez mon CV complet ou contactez-moi directement.' : 'Download my full CV or contact me directly.'}
+            {isFr
+              ? "Téléchargez mon CV complet ou contactez-moi directement."
+              : "Download my full CV or contact me directly."}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a href={`/api/cv/download?locale=${locale}`} target="_blank" rel="noopener noreferrer">
               <BrutalistButton variant="primary" size="lg" icon={<Download size={20} />}>
-                {tPage('download')}
+                {tPage("download")}
               </BrutalistButton>
             </a>
             <a href={`/${locale}/contact`}>
               <BrutalistButton variant="dark" size="lg" icon={<Mail size={20} />}>
-                {isFr ? 'Me Contacter' : 'Contact Me'}
+                {isFr ? "Me Contacter" : "Contact Me"}
               </BrutalistButton>
             </a>
           </div>

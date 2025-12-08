@@ -5,15 +5,25 @@ import { auth } from "@/lib/auth";
 import type { CVData, CVTheme } from "@/types/cv";
 
 const defaultTheme: CVTheme = {
-  primary: "#D5FF0A",
-  secondary: "#9EF01A",
-  header: "#0B0C12",
-  sidebar: "#F4F5F7",
-  surface: "#FFFFFF",
-  text: "#0D0E11",
-  muted: "#60626A",
-  border: "#E2E4EA",
-  badge: "#0F1118",
+  primary: "#F73604", // Orange vif (accent unique)
+  secondary: "#F73604", // Même accent
+  header: "#0B0C12", // Noir
+  sidebar: "#F4F5F7", // Gris clair
+  surface: "#FFFFFF", // Blanc
+  text: "#0B0C12", // Noir
+  muted: "#666666", // Gris
+  border: "#0B0C12", // Bordure noire
+  badge: "#F73604", // Même accent
+};
+
+// Palette de couleurs pour les sections
+const SECTION_PALETTE = {
+  experience: "#F73604", // Orange
+  education: "#0A66C2", // Bleu
+  skills: "#00A67E", // Vert
+  achievements: "#7C3AED", // Violet
+  languages: "#EC4899", // Rose
+  default: "#06B6D4", // Cyan
 };
 
 const sampleSections = [
@@ -23,7 +33,7 @@ const sampleSections = [
     layoutType: "timeline",
     order: 0,
     isActive: true,
-    color: defaultTheme.primary,
+    color: SECTION_PALETTE.experience,
     translations: [
       { locale: "fr", title: "Expériences" },
       { locale: "en", title: "Experience" },
@@ -35,8 +45,20 @@ const sampleSections = [
         isCurrent: true,
         startDate: new Date().toISOString(),
         translations: [
-          { locale: "fr", title: "Compositeur freelance", subtitle: "Projets cinéma, jeux, pub", location: "Paris", description: "Création de bandes originales et supervision musicale." },
-          { locale: "en", title: "Freelance Composer", subtitle: "Film, game & ad projects", location: "Paris", description: "Original scores, sound design and music supervision." },
+          {
+            locale: "fr",
+            title: "Compositeur freelance",
+            subtitle: "Projets cinéma, jeux, pub",
+            location: "Paris",
+            description: "Création de bandes originales et supervision musicale.",
+          },
+          {
+            locale: "en",
+            title: "Freelance Composer",
+            subtitle: "Film, game & ad projects",
+            location: "Paris",
+            description: "Original scores, sound design and music supervision.",
+          },
         ],
       },
     ],
@@ -47,7 +69,7 @@ const sampleSections = [
     layoutType: "list",
     order: 1,
     isActive: true,
-    color: defaultTheme.secondary,
+    color: SECTION_PALETTE.education,
     translations: [
       { locale: "fr", title: "Formation" },
       { locale: "en", title: "Education" },
@@ -57,8 +79,18 @@ const sampleSections = [
         order: 0,
         isActive: true,
         translations: [
-          { locale: "fr", title: "Master Musique à l'image", subtitle: "Paris", description: "Orchestration & sound design" },
-          { locale: "en", title: "Master in Scoring", subtitle: "Paris", description: "Orchestration & sound design" },
+          {
+            locale: "fr",
+            title: "Master Musique à l'image",
+            subtitle: "Paris",
+            description: "Orchestration & sound design",
+          },
+          {
+            locale: "en",
+            title: "Master in Scoring",
+            subtitle: "Paris",
+            description: "Orchestration & sound design",
+          },
         ],
       },
     ],
@@ -108,8 +140,10 @@ const buildFallback = async (): Promise<CVData> => {
     fullName: profile?.name ?? "Loïc Ghanem",
     badgeFr: profile?.roleFr ?? "Compositeur & producteur",
     badgeEn: profile?.roleEn ?? "Composer & producer",
-    headlineFr: profile?.headlineFr ?? "Compositeur pour l'image, superviseur musical et sound designer.",
-    headlineEn: profile?.headlineEn ?? "Composer & producer crafting cinematic and electronic textures.",
+    headlineFr:
+      profile?.headlineFr ?? "Compositeur pour l'image, superviseur musical et sound designer.",
+    headlineEn:
+      profile?.headlineEn ?? "Composer & producer crafting cinematic and electronic textures.",
     bioFr:
       profile?.headlineFr ??
       "Compositeur et producteur basé à Paris, spécialisé dans les univers hybrides mêlant électronique et orchestral.",

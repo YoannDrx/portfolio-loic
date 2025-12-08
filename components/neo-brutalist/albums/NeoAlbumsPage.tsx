@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
-import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Music, ArrowRight, Disc } from 'lucide-react';
-import { NeoNavbar } from '../NeoNavbar';
-import { NeoFooter } from '../NeoFooter';
-import { NeoHeroSection } from '../ui/NeoHeroSection';
-import { NeoCard } from '../ui/NeoCard';
-import { BrutalistButton } from '../ui/BrutalistButton';
-import { NeoTag } from '../ui/NeoTag';
-import { Link } from '@/i18n/routing';
+import React, { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
+import { Music, ArrowRight, Disc } from "lucide-react";
+import { NeoNavbar } from "../NeoNavbar";
+import { NeoFooter } from "../NeoFooter";
+import { NeoHeroSection } from "../ui/NeoHeroSection";
+import { NeoCard } from "../ui/NeoCard";
+import { BrutalistButton } from "../ui/BrutalistButton";
+import { NeoTag } from "../ui/NeoTag";
+import { Link } from "@/i18n/routing";
 
 interface Album {
   id: string;
@@ -30,24 +30,24 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
 };
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4 } },
-  exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.3 } }
+  exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.3 } },
 };
 
 export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
-  const t = useTranslations('albums');
+  const t = useTranslations("albums");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
 
   // Extract unique genres
   const genres = useMemo(() => {
     const genreSet = new Set<string>();
-    albums.forEach(album => {
+    albums.forEach((album) => {
       if (album.style) genreSet.add(album.style);
     });
     return Array.from(genreSet).sort();
@@ -56,16 +56,19 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
   // Filter albums by genre
   const filteredAlbums = useMemo(() => {
     if (!selectedGenre) return albums;
-    return albums.filter(album => album.style === selectedGenre);
+    return albums.filter((album) => album.style === selectedGenre);
   }, [albums, selectedGenre]);
 
   // Stats
-  const stats = useMemo(() => ({
-    total: albums.length,
-    genres: genres.length,
-    collaborations: albums.filter(a => a.collabName).length,
-    years: `${Math.min(...albums.map(a => new Date(a.date).getFullYear()))}-${Math.max(...albums.map(a => new Date(a.date).getFullYear()))}`
-  }), [albums, genres]);
+  const stats = useMemo(
+    () => ({
+      total: albums.length,
+      genres: genres.length,
+      collaborations: albums.filter((a) => a.collabName).length,
+      years: `${Math.min(...albums.map((a) => new Date(a.date).getFullYear()))}-${Math.max(...albums.map((a) => new Date(a.date).getFullYear()))}`,
+    }),
+    [albums, genres]
+  );
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -75,22 +78,24 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
         {/* Hero */}
         <NeoHeroSection
           badgeNumber="04"
-          badge={t('hero.badge')}
-          title={t('hero.title')}
-          description={t('hero.description')}
+          badge={t("hero.badge")}
+          title={t("hero.title")}
+          description={t("hero.description")}
         >
           <div className="flex flex-wrap gap-4">
             <BrutalistButton
               variant="primary"
               size="lg"
               icon={<Music className="w-5 h-5" />}
-              onClick={() => document.getElementById('albums-grid')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document.getElementById("albums-grid")?.scrollIntoView({ behavior: "smooth" })
+              }
             >
-              {t('hero.cta')}
+              {t("hero.cta")}
             </BrutalistButton>
             <Link href="/contact">
               <BrutalistButton variant="secondary" size="lg">
-                {t('hero.ctaSecondary')}
+                {t("hero.ctaSecondary")}
               </BrutalistButton>
             </Link>
           </div>
@@ -101,10 +106,10 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { val: stats.total.toString(), label: t('stats.total') },
-                { val: stats.genres.toString(), label: t('stats.genres') },
-                { val: stats.collaborations.toString(), label: t('stats.collaborations') },
-                { val: stats.years, label: t('stats.period') },
+                { val: stats.total.toString(), label: t("stats.total") },
+                { val: stats.genres.toString(), label: t("stats.genres") },
+                { val: stats.collaborations.toString(), label: t("stats.collaborations") },
+                { val: stats.years, label: t("stats.period") },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center">
                   <span className="text-4xl md:text-5xl font-black text-neo-accent tracking-tighter">
@@ -127,23 +132,23 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                 onClick={() => setSelectedGenre(null)}
                 className={`px-4 py-2 font-mono text-xs font-bold uppercase border-2 border-neo-border transition-all ${
                   !selectedGenre
-                    ? 'bg-neo-accent text-neo-text-inverse border-neo-accent'
-                    : 'bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent'
+                    ? "bg-neo-accent text-neo-text-inverse border-neo-accent"
+                    : "bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent"
                 }`}
               >
-                {t('filterAll')} ({albums.length})
+                {t("filterAll")} ({albums.length})
               </button>
-              {genres.map(genre => (
+              {genres.map((genre) => (
                 <button
                   key={genre}
                   onClick={() => setSelectedGenre(genre)}
                   className={`px-4 py-2 font-mono text-xs font-bold uppercase border-2 border-neo-border transition-all ${
                     selectedGenre === genre
-                      ? 'bg-neo-accent text-neo-text-inverse border-neo-accent'
-                      : 'bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent'
+                      ? "bg-neo-accent text-neo-text-inverse border-neo-accent"
+                      : "bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent"
                   }`}
                 >
-                  {genre} ({albums.filter(a => a.style === genre).length})
+                  {genre} ({albums.filter((a) => a.style === genre).length})
                 </button>
               ))}
             </div>
@@ -155,7 +160,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
           <div className="container mx-auto px-4 md:px-6">
             <AnimatePresence mode="wait">
               <motion.div
-                key={selectedGenre || 'all'}
+                key={selectedGenre || "all"}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
@@ -170,7 +175,10 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                       layout
                       className="group relative"
                     >
-                      <Link href={{ pathname: '/albums/[id]', params: { id: album.id } }} className="block">
+                      <Link
+                        href={{ pathname: "/albums/[id]", params: { id: album.id } }}
+                        className="block"
+                      >
                         {/* Cover */}
                         <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative mb-6 overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-shadow)] group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
                           <div
@@ -197,7 +205,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                               {album.title}
                             </h3>
                             <NeoTag variant="default" size="sm">
-                              {album.style || 'Genre'}
+                              {album.style || "Genre"}
                             </NeoTag>
                           </div>
                           <span className="font-mono text-sm font-bold border-2 border-neo-border px-2 py-1 flex-shrink-0">
@@ -208,12 +216,9 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                     </motion.div>
                   ))
                 ) : (
-                  <motion.div
-                    variants={fadeInUp}
-                    className="col-span-full text-center py-16"
-                  >
+                  <motion.div variants={fadeInUp} className="col-span-full text-center py-16">
                     <Disc className="w-16 h-16 mx-auto mb-4 opacity-20" />
-                    <p className="font-mono text-lg opacity-60">{t('noAlbums')}</p>
+                    <p className="font-mono text-lg opacity-60">{t("noAlbums")}</p>
                   </motion.div>
                 )}
               </motion.div>
@@ -226,24 +231,28 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
           <div className="container mx-auto px-4 md:px-6">
             <NeoCard variant="inverted" hover="none" padding="lg" className="text-center">
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text-inverse mb-4">
-                {t('albumsCta.title')}
+                {t("albumsCta.title")}
               </h2>
               <p className="font-mono text-lg text-neo-text-inverse/60 max-w-2xl mx-auto mb-8">
-                {t('albumsCta.description')}
+                {t("albumsCta.description")}
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a href="https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA" target="_blank" rel="noopener noreferrer">
-                  <BrutalistButton
-                    variant="dark"
-                    size="lg"
-                    icon={<Music className="w-5 h-5" />}
-                  >
-                    {t('albumsCta.button')}
+                <a
+                  href="https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BrutalistButton variant="dark" size="lg" icon={<Music className="w-5 h-5" />}>
+                    {t("albumsCta.button")}
                   </BrutalistButton>
                 </a>
                 <Link href="/contact">
-                  <BrutalistButton variant="dark" size="lg" icon={<ArrowRight className="w-5 h-5" />}>
-                    {t('albumsCta.buttonSecondary')}
+                  <BrutalistButton
+                    variant="dark"
+                    size="lg"
+                    icon={<ArrowRight className="w-5 h-5" />}
+                  >
+                    {t("albumsCta.buttonSecondary")}
                   </BrutalistButton>
                 </Link>
               </div>

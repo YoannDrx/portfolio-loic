@@ -8,10 +8,9 @@ import {
   Youtube,
   CheckCircle2,
   XCircle,
-  AlertCircle,
   ChevronDown,
   ChevronUp,
-  ExternalLink
+  ExternalLink,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -43,7 +42,7 @@ export function AlbumsLinksMonitor({ locale }: AlbumsLinksMonitorProps) {
         const data = await response.json();
         setAlbums(data.items || []);
       } catch {
-        console.error("Erreur chargement albums");
+        // Silently fail
       } finally {
         setLoading(false);
       }
@@ -56,12 +55,8 @@ export function AlbumsLinksMonitor({ locale }: AlbumsLinksMonitorProps) {
     withListen: albums.filter((a) => a.listenLink).length,
     withSpotify: albums.filter((a) => a.spotifyEmbed).length,
     withYoutube: albums.filter((a) => a.youtubeEmbed).length,
-    complete: albums.filter(
-      (a) => a.listenLink && a.spotifyEmbed && a.youtubeEmbed
-    ).length,
-    incomplete: albums.filter(
-      (a) => !a.listenLink || !a.spotifyEmbed || !a.youtubeEmbed
-    ).length,
+    complete: albums.filter((a) => a.listenLink && a.spotifyEmbed && a.youtubeEmbed).length,
+    incomplete: albums.filter((a) => !a.listenLink || !a.spotifyEmbed || !a.youtubeEmbed).length,
   };
 
   const getCompletionStatus = (album: AlbumLinks) => {
@@ -92,9 +87,7 @@ export function AlbumsLinksMonitor({ locale }: AlbumsLinksMonitorProps) {
             <Link2 className="h-5 w-5 text-neo-text-inverse" />
           </div>
           <div className="text-left">
-            <h3 className="font-black text-neo-text uppercase tracking-tight">
-              Monitoring Liens
-            </h3>
+            <h3 className="font-black text-neo-text uppercase tracking-tight">Monitoring Liens</h3>
             <p className="text-xs font-mono text-neo-text/60">
               {stats.complete}/{stats.total} albums complets
             </p>
@@ -103,10 +96,12 @@ export function AlbumsLinksMonitor({ locale }: AlbumsLinksMonitorProps) {
         <div className="flex items-center gap-4">
           {/* Quick stats badges */}
           <div className="hidden sm:flex items-center gap-2">
-            <span className={cn(
-              "px-2 py-1 text-xs font-mono font-bold border-2 border-neo-border",
-              stats.incomplete > 0 ? "bg-[#FF006E] text-white" : "bg-[#00F0FF] text-neo-text"
-            )}>
+            <span
+              className={cn(
+                "px-2 py-1 text-xs font-mono font-bold border-2 border-neo-border",
+                stats.incomplete > 0 ? "bg-[#FF006E] text-white" : "bg-[#00F0FF] text-neo-text"
+              )}
+            >
               {stats.incomplete} incomplets
             </span>
           </div>
@@ -211,8 +206,8 @@ export function AlbumsLinksMonitor({ locale }: AlbumsLinksMonitorProps) {
                             completion.count === 3
                               ? "bg-[#D5FF0A] text-neo-text"
                               : completion.count >= 1
-                              ? "bg-neo-surface text-neo-text"
-                              : "bg-[#FF006E] text-white"
+                                ? "bg-neo-surface text-neo-text"
+                                : "bg-[#FF006E] text-white"
                           )}
                         >
                           {completion.count}/{completion.total}

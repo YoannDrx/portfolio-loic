@@ -1,15 +1,13 @@
 import { PrismaClient } from "@prisma/client";
-import type {
-  SeedEntity} from "./utils";
-import {
-  logger,
-  loadJSON,
-  transformDates,
-  parseArgs,
-  SEED_ORDER
-} from "./utils";
+import type { SeedEntity } from "./utils";
+import { logger, loadJSON, transformDates, parseArgs, SEED_ORDER } from "./utils";
 
 const prisma = new PrismaClient();
+
+// Compteurs globaux pour le rapport final
+let createdCount = 0;
+let updatedCount = 0;
+let skippedCount = 0;
 
 // === SEEDERS PAR ENTITÉ ===
 const seeders: Record<SeedEntity, () => Promise<number>> = {
@@ -36,7 +34,6 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
     for (const item of transformed) {
-       
       await prisma.siteSettings.upsert({
         where: { id: (item as { id: string }).id },
         update: item as Record<string, unknown>,
@@ -50,72 +47,131 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
     const data = await loadJSON<Record<string, unknown>>("navigation_items");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await prisma.navigationItem.createMany({
-      data: transformed as any,
+      data: transformed as Parameters<typeof prisma.navigationItem.createMany>[0]["data"],
       skipDuplicates: true,
     });
     return data.length;
   },
 
   albums: async () => {
+    const { force } = parseArgs();
     const data = await loadJSON<Record<string, unknown>>("albums");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
+    let localCreated = 0;
+
     for (const item of transformed) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await prisma.album.upsert({
-        where: { id: (item as { id: string }).id },
-        update: item as any,
-        create: item as any,
-      });
+      const albumData = item as { id: string } & Record<string, unknown>;
+      const existing = await prisma.album.findUnique({ where: { id: albumData.id } });
+
+      if (!existing) {
+        await prisma.album.create({
+          data: albumData as Parameters<typeof prisma.album.create>[0]["data"],
+        });
+        localCreated++;
+        createdCount++;
+      } else if (force) {
+        await prisma.album.update({
+          where: { id: albumData.id },
+          data: albumData as Parameters<typeof prisma.album.update>[0]["data"],
+        });
+        updatedCount++;
+      } else {
+        skippedCount++;
+      }
     }
-    return data.length;
+    return localCreated;
   },
 
   videos: async () => {
+    const { force } = parseArgs();
     const data = await loadJSON<Record<string, unknown>>("videos");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
+    let localCreated = 0;
+
     for (const item of transformed) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await prisma.video.upsert({
-        where: { id: (item as { id: string }).id },
-        update: item as any,
-        create: item as any,
-      });
+      const videoData = item as { id: string } & Record<string, unknown>;
+      const existing = await prisma.video.findUnique({ where: { id: videoData.id } });
+
+      if (!existing) {
+        await prisma.video.create({
+          data: videoData as Parameters<typeof prisma.video.create>[0]["data"],
+        });
+        localCreated++;
+        createdCount++;
+      } else if (force) {
+        await prisma.video.update({
+          where: { id: videoData.id },
+          data: videoData as Parameters<typeof prisma.video.update>[0]["data"],
+        });
+        updatedCount++;
+      } else {
+        skippedCount++;
+      }
     }
-    return data.length;
+    return localCreated;
   },
 
   services: async () => {
+    const { force } = parseArgs();
     const data = await loadJSON<Record<string, unknown>>("services");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
+    let localCreated = 0;
+
     for (const item of transformed) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await prisma.service.upsert({
-        where: { id: (item as { id: string }).id },
-        update: item as any,
-        create: item as any,
-      });
+      const serviceData = item as { id: string } & Record<string, unknown>;
+      const existing = await prisma.service.findUnique({ where: { id: serviceData.id } });
+
+      if (!existing) {
+        await prisma.service.create({
+          data: serviceData as Parameters<typeof prisma.service.create>[0]["data"],
+        });
+        localCreated++;
+        createdCount++;
+      } else if (force) {
+        await prisma.service.update({
+          where: { id: serviceData.id },
+          data: serviceData as Parameters<typeof prisma.service.update>[0]["data"],
+        });
+        updatedCount++;
+      } else {
+        skippedCount++;
+      }
     }
-    return data.length;
+    return localCreated;
   },
 
   resume_entries: async () => {
+    const { force } = parseArgs();
     const data = await loadJSON<Record<string, unknown>>("resume_entries");
     if (data.length === 0) return 0;
     const transformed = transformDates(data);
+    let localCreated = 0;
+
     for (const item of transformed) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await prisma.resumeEntry.upsert({
-        where: { id: (item as { id: string }).id },
-        update: item as any,
-        create: item as any,
-      });
+      const entryData = item as { id: string } & Record<string, unknown>;
+      const existing = await prisma.resumeEntry.findUnique({ where: { id: entryData.id } });
+
+      if (!existing) {
+        await prisma.resumeEntry.create({
+          data: entryData as Parameters<typeof prisma.resumeEntry.create>[0]["data"],
+        });
+        localCreated++;
+        createdCount++;
+      } else if (force) {
+        await prisma.resumeEntry.update({
+          where: { id: entryData.id },
+          data: entryData as Parameters<typeof prisma.resumeEntry.update>[0]["data"],
+        });
+        updatedCount++;
+      } else {
+        skippedCount++;
+      }
     }
-    return data.length;
+    return localCreated;
   },
 
   cv: async () => {
@@ -125,8 +181,9 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
 
     try {
       const raw = await fs.readFile(filePath, "utf-8");
-      const data = JSON.parse(raw);
-      if (!data.cv) return 0;
+      const parsed = JSON.parse(raw);
+      const data = Array.isArray(parsed) ? parsed[0] : parsed;
+      if (!data?.cv) return 0;
 
       // Créer ou mettre à jour le CV principal
       const cvData = {
@@ -208,9 +265,11 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
 
           // Créer les items de section
           if (section.items && Array.isArray(section.items)) {
-            for (const item of section.items) {
+            for (const [idx, item] of section.items.entries()) {
+              const itemId = item.id || `${section.id}_item_${item.order ?? idx}`;
+
               await prisma.cVItem.upsert({
-                where: { id: item.id },
+                where: { id: itemId },
                 update: {
                   sectionId: section.id,
                   startDate: item.startDate ? new Date(item.startDate) : null,
@@ -220,7 +279,7 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
                   isActive: item.isActive ?? true,
                 },
                 create: {
-                  id: item.id,
+                  id: itemId,
                   sectionId: section.id,
                   startDate: item.startDate ? new Date(item.startDate) : null,
                   endDate: item.endDate ? new Date(item.endDate) : null,
@@ -236,7 +295,7 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
                 for (const trans of item.translations) {
                   await prisma.cVItemTranslation.upsert({
                     where: {
-                      itemId_locale: { itemId: item.id, locale: trans.locale },
+                      itemId_locale: { itemId, locale: trans.locale },
                     },
                     update: {
                       title: trans.title,
@@ -245,7 +304,7 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
                       description: trans.description,
                     },
                     create: {
-                      itemId: item.id,
+                      itemId,
                       locale: trans.locale,
                       title: trans.title,
                       subtitle: trans.subtitle,
@@ -330,23 +389,33 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
       }
 
       return count;
-    } catch {
-      logger.warn(`Fichier cv.json non trouvé ou invalide`);
-      return 0;
+    } catch (error) {
+      logger.error(`Seed CV échoué: ${error instanceof Error ? error.message : String(error)}`);
+      logger.warn("Vérifiez seed/data/cv.json et la connexion DATABASE_URL");
+      throw error;
     }
   },
 };
 
 // === SEEDING PRINCIPAL ===
 async function seed() {
-  const { only } = parseArgs();
+  const { only, force } = parseArgs();
 
   logger.title("🌱 Seeding de la base de données");
 
+  if (force) {
+    logger.warn("Mode --force activé : les données existantes seront mises à jour");
+  } else {
+    logger.info("Mode additif : seules les nouvelles entités seront créées");
+  }
+
+  // Réinitialiser les compteurs
+  createdCount = 0;
+  updatedCount = 0;
+  skippedCount = 0;
+
   // Déterminer les entités à seeder
-  const entitiesToSeed: SeedEntity[] = only
-    ? [only as SeedEntity]
-    : [...SEED_ORDER];
+  const entitiesToSeed: SeedEntity[] = only ? [only as SeedEntity] : [...SEED_ORDER];
 
   // Vérifier que l'entité demandée existe
   if (only && !SEED_ORDER.includes(only as SeedEntity)) {
@@ -356,24 +425,34 @@ async function seed() {
   }
 
   try {
-    let totalSeeded = 0;
-
     for (const entity of entitiesToSeed) {
       const seeder = seeders[entity];
       if (seeder) {
         logger.step(`Seeding ${entity}...`);
-        const count = await seeder();
-        if (count > 0) {
-          logger.count(entity, count);
-          totalSeeded += count;
-        }
+        await seeder();
       }
     }
 
-    if (totalSeeded === 0) {
-      logger.warn("Aucune donnée à seeder. Vérifiez seed/data/*.json");
+    // Rapport final
+    logger.title("📊 Rapport de seeding");
+    if (createdCount > 0) {
+      logger.count("créés", createdCount);
+    }
+    if (updatedCount > 0) {
+      logger.count("mis à jour (--force)", updatedCount);
+    }
+    if (skippedCount > 0) {
+      logger.count("ignorés (existants)", skippedCount);
+    }
+
+    if (createdCount === 0 && updatedCount === 0) {
+      if (skippedCount > 0) {
+        logger.info("Toutes les entités existent déjà. Utilisez --force pour les mettre à jour.");
+      } else {
+        logger.warn("Aucune donnée à seeder. Vérifiez seed/data/*.json");
+      }
     } else {
-      logger.success(`Seeding terminé! ${totalSeeded} enregistrements créés.`);
+      logger.success("Seeding terminé!");
     }
   } catch (error) {
     logger.error(`Seeding échoué: ${error}`);

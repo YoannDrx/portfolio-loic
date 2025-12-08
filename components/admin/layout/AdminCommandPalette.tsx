@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 import {
   Search,
   LayoutDashboard,
@@ -17,13 +17,8 @@ import {
   Command,
   ArrowRight,
   Clock,
-  Hash,
-} from 'lucide-react';
-import {
-  adminCommandBackdrop,
-  adminCommandContent,
-  adminCommandItem,
-} from '@/lib/animations';
+} from "lucide-react";
+import { adminCommandBackdrop, adminCommandContent, adminCommandItem } from "@/lib/animations";
 
 /* ============================================
    TYPES
@@ -33,7 +28,7 @@ interface CommandItem {
   id: string;
   label: string;
   description?: string;
-  category: 'navigation' | 'action' | 'recent';
+  category: "navigation" | "action" | "recent";
   icon: typeof LayoutDashboard;
   shortcut?: string;
   href?: string;
@@ -54,99 +49,99 @@ interface AdminCommandPaletteProps {
 const getCommandItems = (locale: string, _router: ReturnType<typeof useRouter>): CommandItem[] => [
   // Navigation
   {
-    id: 'nav-dashboard',
-    label: 'Dashboard',
-    description: 'Vue d\'ensemble',
-    category: 'navigation',
+    id: "nav-dashboard",
+    label: "Dashboard",
+    description: "Vue d'ensemble",
+    category: "navigation",
     icon: LayoutDashboard,
     href: `/${locale}/admin`,
-    color: 'text-[var(--admin-neon-cyan)]',
+    color: "text-[var(--admin-neon-cyan)]",
   },
   {
-    id: 'nav-albums',
-    label: 'Albums',
-    description: 'Gérer les albums photos',
-    category: 'navigation',
+    id: "nav-albums",
+    label: "Albums",
+    description: "Gérer les albums photos",
+    category: "navigation",
     icon: Image,
     href: `/${locale}/admin/albums`,
-    color: 'text-[var(--admin-neon-lime)]',
+    color: "text-[var(--admin-neon-lime)]",
   },
   {
-    id: 'nav-videos',
-    label: 'Vidéos',
-    description: 'Gérer les vidéos',
-    category: 'navigation',
+    id: "nav-videos",
+    label: "Vidéos",
+    description: "Gérer les vidéos",
+    category: "navigation",
     icon: Video,
     href: `/${locale}/admin/videos`,
-    color: 'text-[var(--admin-neon-magenta)]',
+    color: "text-[var(--admin-neon-magenta)]",
   },
   {
-    id: 'nav-services',
-    label: 'Services',
-    description: 'Gérer les services',
-    category: 'navigation',
+    id: "nav-services",
+    label: "Services",
+    description: "Gérer les services",
+    category: "navigation",
     icon: Briefcase,
     href: `/${locale}/admin/services`,
-    color: 'text-[var(--admin-neon-purple)]',
+    color: "text-[var(--admin-neon-purple)]",
   },
   {
-    id: 'nav-cv',
-    label: 'CV / Resume',
-    description: 'Éditer le CV',
-    category: 'navigation',
+    id: "nav-cv",
+    label: "CV / Resume",
+    description: "Éditer le CV",
+    category: "navigation",
     icon: FileText,
     href: `/${locale}/admin/cv`,
-    color: 'text-[var(--admin-neon-orange)]',
+    color: "text-[var(--admin-neon-orange)]",
   },
   {
-    id: 'nav-settings',
-    label: 'Paramètres',
-    description: 'Configuration du système',
-    category: 'navigation',
+    id: "nav-settings",
+    label: "Paramètres",
+    description: "Configuration du système",
+    category: "navigation",
     icon: Settings,
     href: `/${locale}/admin/settings`,
-    color: 'text-muted-foreground',
+    color: "text-muted-foreground",
   },
 
   // Actions
   {
-    id: 'action-new-album',
-    label: 'Nouvel album',
-    description: 'Créer un nouvel album',
-    category: 'action',
+    id: "action-new-album",
+    label: "Nouvel album",
+    description: "Créer un nouvel album",
+    category: "action",
     icon: Plus,
     href: `/${locale}/admin/albums/new`,
-    shortcut: '⌘+Shift+A',
-    color: 'text-[var(--admin-neon-lime)]',
+    shortcut: "⌘+Shift+A",
+    color: "text-[var(--admin-neon-lime)]",
   },
   {
-    id: 'action-new-video',
-    label: 'Nouvelle vidéo',
-    description: 'Ajouter une vidéo',
-    category: 'action',
+    id: "action-new-video",
+    label: "Nouvelle vidéo",
+    description: "Ajouter une vidéo",
+    category: "action",
     icon: Plus,
     href: `/${locale}/admin/videos/new`,
-    shortcut: '⌘+Shift+V',
-    color: 'text-[var(--admin-neon-magenta)]',
+    shortcut: "⌘+Shift+V",
+    color: "text-[var(--admin-neon-magenta)]",
   },
   {
-    id: 'action-new-service',
-    label: 'Nouveau service',
-    description: 'Créer un service',
-    category: 'action',
+    id: "action-new-service",
+    label: "Nouveau service",
+    description: "Créer un service",
+    category: "action",
     icon: Plus,
     href: `/${locale}/admin/services/new`,
-    shortcut: '⌘+Shift+S',
-    color: 'text-[var(--admin-neon-purple)]',
+    shortcut: "⌘+Shift+S",
+    color: "text-[var(--admin-neon-purple)]",
   },
   {
-    id: 'action-site',
-    label: 'Voir le site',
-    description: 'Ouvrir le site public',
-    category: 'action',
+    id: "action-site",
+    label: "Voir le site",
+    description: "Ouvrir le site public",
+    category: "action",
     icon: Home,
     href: `/${locale}`,
-    color: 'text-muted-foreground',
+    color: "text-muted-foreground",
   },
 ];
 
@@ -155,9 +150,9 @@ const getCommandItems = (locale: string, _router: ReturnType<typeof useRouter>):
    ============================================ */
 
 const categoryLabels: Record<string, { label: string; icon: typeof Hash }> = {
-  navigation: { label: 'Navigation', icon: ArrowRight },
-  action: { label: 'Actions rapides', icon: Plus },
-  recent: { label: 'Récemment visités', icon: Clock },
+  navigation: { label: "Navigation", icon: ArrowRight },
+  action: { label: "Actions rapides", icon: Plus },
+  recent: { label: "Récemment visités", icon: Clock },
 };
 
 /* ============================================
@@ -178,22 +173,22 @@ function CommandItemRow({ item, isSelected, onSelect }: CommandItemProps) {
       variants={adminCommandItem}
       onClick={onSelect}
       className={cn(
-        'w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all',
+        "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all",
         isSelected
-          ? 'bg-[var(--glass-active)] text-white'
-          : 'text-muted-foreground hover:bg-[var(--glass-subtle)] hover:text-foreground'
+          ? "bg-[var(--glass-active)] text-white"
+          : "text-muted-foreground hover:bg-[var(--glass-subtle)] hover:text-foreground"
       )}
       style={{
-        boxShadow: isSelected ? 'var(--admin-glow-cyan-sm)' : 'none',
+        boxShadow: isSelected ? "var(--admin-glow-cyan-sm)" : "none",
       }}
     >
       <div
         className={cn(
-          'flex items-center justify-center w-10 h-10 rounded-lg transition-colors',
-          isSelected ? 'bg-[var(--glass-active)]' : 'bg-[var(--glass-subtle)]'
+          "flex items-center justify-center w-10 h-10 rounded-lg transition-colors",
+          isSelected ? "bg-[var(--glass-active)]" : "bg-[var(--glass-subtle)]"
         )}
       >
-        <Icon className={cn('h-5 w-5', item.color || 'text-white')} />
+        <Icon className={cn("h-5 w-5", item.color || "text-white")} />
       </div>
       <div className="flex-1 min-w-0">
         <div className="font-medium text-sm">{item.label}</div>
@@ -206,9 +201,7 @@ function CommandItemRow({ item, isSelected, onSelect }: CommandItemProps) {
           {item.shortcut}
         </div>
       )}
-      {isSelected && (
-        <ArrowRight className="h-4 w-4 text-[var(--admin-neon-cyan)]" />
-      )}
+      {isSelected && <ArrowRight className="h-4 w-4 text-[var(--admin-neon-cyan)]" />}
     </motion.button>
   );
 }
@@ -220,7 +213,7 @@ function CommandItemRow({ item, isSelected, onSelect }: CommandItemProps) {
 export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPaletteProps) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const commandItems = useMemo(() => getCommandItems(locale, router), [locale, router]);
@@ -262,7 +255,7 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
         item.action();
       }
       onClose();
-      setQuery('');
+      setQuery("");
       setSelectedIndex(0);
     },
     [router, onClose]
@@ -274,29 +267,29 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
       if (!isOpen) return;
 
       switch (e.key) {
-        case 'ArrowDown':
+        case "ArrowDown":
           e.preventDefault();
           setSelectedIndex((prev) => (prev + 1) % flatItems.length);
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           e.preventDefault();
           setSelectedIndex((prev) => (prev - 1 + flatItems.length) % flatItems.length);
           break;
-        case 'Enter':
+        case "Enter":
           e.preventDefault();
           if (flatItems[selectedIndex]) {
             handleSelect(flatItems[selectedIndex]);
           }
           break;
-        case 'Escape':
+        case "Escape":
           e.preventDefault();
           onClose();
           break;
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, flatItems, selectedIndex, handleSelect, onClose]);
 
   // Focus input when opening
@@ -309,7 +302,7 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
   // Reset state when closing
   useEffect(() => {
     if (!isOpen) {
-      setQuery('');
+      setQuery("");
       setSelectedIndex(0);
     }
   }, [isOpen]);
@@ -326,7 +319,7 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
             animate="visible"
             exit="exit"
             onClick={onClose}
-            style={{ backdropFilter: 'blur(8px)' }}
+            style={{ backdropFilter: "blur(8px)" }}
           />
 
           {/* Command Palette */}
@@ -340,8 +333,8 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
             <div
               className="overflow-hidden rounded-2xl border border-[var(--glass-border)]"
               style={{
-                background: 'var(--admin-surface-elevated-solid)',
-                boxShadow: 'var(--admin-shadow-modal), var(--admin-glow-cyan-sm)',
+                background: "var(--admin-surface-elevated-solid)",
+                boxShadow: "var(--admin-shadow-modal), var(--admin-glow-cyan-sm)",
               }}
             >
               {/* Search Input */}
@@ -409,12 +402,18 @@ export function AdminCommandPalette({ isOpen, onClose, locale }: AdminCommandPal
               <div className="flex items-center justify-between px-4 py-3 border-t border-[var(--glass-border)] text-xs text-muted-foreground">
                 <div className="flex items-center gap-4">
                   <span className="flex items-center gap-1">
-                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">↑</kbd>
-                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">↓</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">
+                      ↑
+                    </kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">
+                      ↓
+                    </kbd>
                     <span className="ml-1">pour naviguer</span>
                   </span>
                   <span className="flex items-center gap-1">
-                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">↵</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-[var(--glass-active)] font-mono">
+                      ↵
+                    </kbd>
                     <span className="ml-1">pour sélectionner</span>
                   </span>
                 </div>
@@ -440,14 +439,14 @@ export function useCommandPalette() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setIsOpen((prev) => !prev);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return {
