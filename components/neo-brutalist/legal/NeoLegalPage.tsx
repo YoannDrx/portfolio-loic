@@ -53,6 +53,7 @@ export const NeoLegalPage: React.FC<{ type: LegalPageType }> = ({ type }) => {
           description={hero?.description}
           variant="dark"
           align="left"
+          titleClassName="text-neo-text-inverse"
         >
           <div className="flex flex-wrap items-center gap-3">
             <NeoTag variant="accent">
@@ -109,10 +110,12 @@ export const NeoLegalPage: React.FC<{ type: LegalPageType }> = ({ type }) => {
                       className="h-full border-2 border-neo-text-inverse/30 bg-neo-text text-neo-text-inverse p-6 shadow-[6px_6px_0px_0px_var(--neo-accent)]"
                     >
                       <Icon className="w-8 h-8 text-neo-accent mb-4" />
-                      <h3 className="text-xl font-black uppercase tracking-tight mb-2">
+                      <h3 className="text-xl font-black uppercase tracking-tight mb-2 text-neo-text-inverse">
                         {highlight.title}
                       </h3>
-                      <p className="text-sm opacity-80 leading-relaxed">{highlight.description}</p>
+                      <p className="text-sm opacity-80 leading-relaxed text-neo-text-inverse">
+                        {highlight.description}
+                      </p>
                     </div>
                   );
                 })}
