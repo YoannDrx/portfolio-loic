@@ -47,7 +47,7 @@ export const NeoNavbar = () => {
           <NeoLogo className="w-9 h-9 lg:w-10 lg:h-10" />
           <div className="hidden lg:flex flex-col leading-none ml-2 text-neo-text">
             <span className="font-black tracking-tighter text-lg">LOÏC.GHANEM</span>
-            <span className="font-mono text-[10px] uppercase tracking-widest opacity-60">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-neo-border">
               {t("subtitle")}
             </span>
           </div>

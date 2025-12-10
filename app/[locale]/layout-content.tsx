@@ -5,15 +5,18 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { ConsentProvider } from "@/components/neo-brutalist/legal/ConsentProvider";
+import { NeoCookieConsent } from "@/components/neo-brutalist/legal/NeoCookieConsent";
 
 export function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const t = useTranslations("home.splitHero");
-  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const [scrollIndicatorProgress, setScrollIndicatorProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollIndicator(window.scrollY < 24);
+      const progress = Math.min(window.scrollY / 200, 1);
+      setScrollIndicatorProgress(progress);
     };
 
     handleScroll();
@@ -28,29 +31,38 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
 
   if (isAdminRoute) {
     // L'admin gère son propre layout
-    return <main className="min-h-screen">{children}</main>;
+    return (
+      <ConsentProvider>
+        <main className="min-h-screen">{children}</main>
+      </ConsentProvider>
+    );
   }
 
   // Pages Neo-Brutalist - elles incluent leur propre NeoNavbar et NeoFooter
   return (
-    <>
+    <ConsentProvider>
       <main className="min-h-screen">{children}</main>
-      {showScrollIndicator && (
-        <div className="fixed inset-x-0 bottom-24 md:bottom-16 flex justify-center pointer-events-none z-50">
-          <div className="flex flex-col items-center gap-2 text-neo-text">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em]">
-              {t("scrollDown")}
-            </span>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="drop-shadow-[0_4px_0_rgba(0,0,0,0.25)]"
-            >
-              <ArrowDown size={30} />
-            </motion.div>
-          </div>
+      <motion.div
+        initial={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1 - scrollIndicatorProgress, y: scrollIndicatorProgress * 12 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="fixed inset-x-0 bottom-2 md:bottom-4 pb-[env(safe-area-inset-bottom)] flex justify-center pointer-events-none z-50"
+        aria-hidden="true"
+      >
+        <div className="flex flex-col items-center gap-2 text-neo-text">
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em]">
+            {t("scrollDown")}
+          </span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="drop-shadow-[0_4px_0_rgba(0,0,0,0.25)]"
+          >
+            <ArrowDown size={30} />
+          </motion.div>
         </div>
-      )}
-    </>
+      </motion.div>
+      <NeoCookieConsent />
+    </ConsentProvider>
   );
 }

@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
-import type { ReactNode } from 'react';
-import { NeoTag } from './NeoTag';
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import type { ReactNode } from "react";
+import { NeoTag } from "./NeoTag";
 
 interface NeoHeroSectionProps {
   badge?: string;
@@ -12,16 +12,17 @@ interface NeoHeroSectionProps {
   subtitle?: string;
   description?: string;
   children?: ReactNode;
-  variant?: 'default' | 'dark' | 'accent';
-  align?: 'left' | 'center';
+  variant?: "default" | "dark" | "accent";
+  align?: "left" | "center";
   className?: string;
   titleClassName?: string;
+  fullViewport?: boolean;
 }
 
 const variantStyles = {
-  default: 'bg-neo-bg text-neo-text',
-  dark: 'bg-neo-text text-neo-text-inverse',
-  accent: 'bg-neo-accent text-neo-text-inverse',
+  default: "bg-neo-bg text-neo-text",
+  dark: "bg-neo-text text-neo-text-inverse",
+  accent: "bg-neo-accent text-neo-text-inverse",
 };
 
 export const NeoHeroSection = ({
@@ -31,21 +32,28 @@ export const NeoHeroSection = ({
   subtitle,
   description,
   children,
-  variant = 'default',
-  align = 'left',
+  variant = "default",
+  align = "left",
   className,
   titleClassName,
+  fullViewport = false,
 }: NeoHeroSectionProps) => {
   return (
     <section
       className={cn(
-        'min-h-[50vh] flex flex-col justify-center py-20 md:py-32 px-4 md:px-8',
+        fullViewport ? "min-h-[calc(100vh-160px)] md:min-h-[calc(100vh-256px)]" : "min-h-[50vh]",
+        "flex flex-col justify-center py-20 md:py-32 px-4 md:px-8",
         variantStyles[variant],
-        align === 'center' && 'items-center text-center',
+        align === "center" && "items-center text-center",
         className
       )}
     >
-      <div className={cn('max-w-6xl mx-auto w-full', align === 'center' && 'flex flex-col items-center')}>
+      <div
+        className={cn(
+          "max-w-6xl mx-auto w-full",
+          align === "center" && "flex flex-col items-center"
+        )}
+      >
         {/* Badge */}
         {(badge || badgeNumber) && (
           <motion.div
@@ -59,11 +67,7 @@ export const NeoHeroSection = ({
                 {badgeNumber}
               </span>
             )}
-            {badge && (
-              <NeoTag variant={variant === 'dark' ? 'accent' : 'default'}>
-                {badge}
-              </NeoTag>
-            )}
+            {badge && <NeoTag variant={variant === "dark" ? "accent" : "default"}>{badge}</NeoTag>}
           </motion.div>
         )}
 
@@ -73,7 +77,7 @@ export const NeoHeroSection = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className={cn(
-            'text-[12vw] md:text-[8vw] lg:text-[6vw] font-black leading-[0.85] tracking-tighter uppercase',
+            "text-[12vw] md:text-[8vw] lg:text-[6vw] font-black leading-[0.85] tracking-tighter uppercase",
             titleClassName
           )}
         >
@@ -99,8 +103,8 @@ export const NeoHeroSection = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className={cn(
-              'mt-6 text-lg max-w-2xl',
-              variant === 'default' ? 'text-neo-text/70' : 'opacity-80'
+              "mt-6 text-lg max-w-2xl",
+              variant === "default" ? "text-neo-text/70" : "opacity-80"
             )}
           >
             {description}

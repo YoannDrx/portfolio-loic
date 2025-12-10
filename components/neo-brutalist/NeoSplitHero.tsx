@@ -2,8 +2,9 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { usePlayerPreference, type PlayerType } from "@/lib/hooks/usePlayerPreference";
+import { ConsentGate } from "./legal/ConsentGate";
 
 // SoundCloud icon component
 const SoundCloudIcon = ({ className }: { className?: string }) => (
@@ -139,7 +140,9 @@ const PlayerTab: React.FC<PlayerTabProps> = ({ player, activePlayer, onClick, ic
 
 export const NeoSplitHero: React.FC = () => {
   const t = useTranslations("home.splitHero");
+  const locale = useLocale();
   const { player, setPlayer, isLoaded } = usePlayerPreference();
+  const isFrench = locale === "fr";
 
   // Player configuration per platform
   const playersConfig: PlayerConfig[] = [
@@ -226,7 +229,9 @@ export const NeoSplitHero: React.FC = () => {
             {t("title.line2")}
           </motion.span>{" "}
           <br />
-          <span className="whitespace-nowrap">{t("title.line3")}</span>
+          <span className={`whitespace-nowrap${isFrench ? " inline-block mt-1" : ""}`}>
+            {t("title.line3")}
+          </span>
         </h1>
 
         {/* Tagline */}
@@ -269,51 +274,58 @@ export const NeoSplitHero: React.FC = () => {
             </div>
 
             {/* Player Content */}
-            <div
+            <ConsentGate
+              category="media"
+              variant="plain"
               className="bg-neo-bg"
-              role="tabpanel"
-              style={{ minHeight: activePlayerConfig.height ?? 560 }}
+              minHeight={activePlayerConfig.height ?? 560}
             >
-              <AnimatePresence mode="wait">
-                {isLoaded && (
-                  <motion.div
-                    key={activePlayerConfig.id}
-                    variants={playerVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    transition={{ duration: 0.3 }}
-                    className="w-full h-full"
-                  >
-                    <iframe
-                      src={activePlayerConfig.embedUrl}
-                      width="100%"
-                      height={activePlayerConfig.height ?? 560}
-                      frameBorder="0"
-                      allow={
-                        activePlayerConfig.allow ??
-                        "autoplay; encrypted-media; fullscreen; picture-in-picture"
-                      }
-                      loading="lazy"
-                      className="w-full bg-neo-bg"
-                      title={`${activePlayerConfig.label} Player`}
-                      allowFullScreen
-                      referrerPolicy={activePlayerConfig.referrerPolicy}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div
+                className="bg-neo-bg"
+                role="tabpanel"
+                style={{ minHeight: activePlayerConfig.height ?? 560 }}
+              >
+                <AnimatePresence mode="wait">
+                  {isLoaded && (
+                    <motion.div
+                      key={activePlayerConfig.id}
+                      variants={playerVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full"
+                    >
+                      <iframe
+                        src={activePlayerConfig.embedUrl}
+                        width="100%"
+                        height={activePlayerConfig.height ?? 560}
+                        frameBorder="0"
+                        allow={
+                          activePlayerConfig.allow ??
+                          "autoplay; encrypted-media; fullscreen; picture-in-picture"
+                        }
+                        loading="lazy"
+                        className="w-full bg-neo-bg"
+                        title={`${activePlayerConfig.label} Player`}
+                        allowFullScreen
+                        referrerPolicy={activePlayerConfig.referrerPolicy}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-              {/* Loading state */}
-              {!isLoaded && (
-                <div
-                  className="flex items-center justify-center"
-                  style={{ height: activePlayerConfig.height ?? 560 }}
-                >
-                  <div className="w-8 h-8 border-4 border-neo-accent border-t-transparent animate-spin" />
-                </div>
-              )}
-            </div>
+                {/* Loading state */}
+                {!isLoaded && (
+                  <div
+                    className="flex items-center justify-center"
+                    style={{ height: activePlayerConfig.height ?? 560 }}
+                  >
+                    <div className="w-8 h-8 border-4 border-neo-accent border-t-transparent animate-spin" />
+                  </div>
+                )}
+              </div>
+            </ConsentGate>
           </div>
         </div>
       </motion.div>

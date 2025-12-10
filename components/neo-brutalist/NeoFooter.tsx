@@ -17,6 +17,10 @@ import {
 import { motion } from "framer-motion";
 import { NeoLogo } from "./NeoLogo";
 import { Link } from "@/i18n/routing";
+import { useConsent } from "./legal/ConsentProvider";
+
+const legalLinkClass =
+  "font-mono text-[10px] uppercase tracking-[0.2em] hover:text-neo-accent transition-colors";
 
 const socialLinks = [
   { name: "Facebook", url: "https://www.facebook.com/loic.leduc.54" },
@@ -50,6 +54,8 @@ const listenLinks = [
 
 export const NeoFooter = () => {
   const t = useTranslations("footer");
+  const tConsent = useTranslations("consent");
+  const { openManager } = useConsent();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -85,6 +91,9 @@ export const NeoFooter = () => {
                 <h3 className="text-xl font-black uppercase leading-none mb-1 text-neo-text-inverse">
                   Loïc Ghanem
                 </h3>
+                <p className="text-sm font-medium text-neo-text/60 dark:text-neo-text-inverse/60">
+                  {t("role")}
+                </p>
                 <div className="flex items-center gap-2 text-xs font-bold text-neo-accent">
                   <MapPin className="w-3 h-3" />
                   <span className="uppercase">
@@ -205,12 +214,15 @@ export const NeoFooter = () => {
             <span>{currentYear} LOÏC GHANEM</span>
           </div>
           <div className="flex gap-6">
-            <Link href="/privacy-policy" className="hover:text-neo-accent transition-colors">
+            <Link href="/privacy-policy" className={legalLinkClass}>
               {t("privacyPolicy")}
             </Link>
-            <Link href="/terms-of-use" className="hover:text-neo-accent transition-colors">
+            <Link href="/terms-of-use" className={legalLinkClass}>
               {t("termsOfUse")}
             </Link>
+            <button type="button" onClick={openManager} className={legalLinkClass}>
+              {tConsent("manageCookies")}
+            </button>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
     "albums": "Albums",
     "videos": "Vidéos",
     "contact": "Contact",
-    "subtitle": "Compositeur de musique",
+    "subtitle": "Compositeur et producteur de musique",
     "admin": "Admin",
     "dashboard": "Tableau de bord",
     "logout": "Déconnexion"
@@ -698,6 +698,7 @@
     "streaming": "Streaming",
     "social": "Social",
     "listen": "Écouter",
+    "role": "Compositeur et producteur de musique",
     "ctaTitle1": "Créons",
     "ctaTitle2": "Quelque Chose d'Unique",
     "startProject": "Lancer un projet",
@@ -970,6 +971,44 @@
           "href": "tel:+33614517592"
         }
       ]
+    }
+  },
+  "consent": {
+    "badge": "Confidentialité",
+    "title": "Gestion des cookies",
+    "description": "J'utilise des cookies et services tiers pour faire fonctionner le site, lire les médias externes (YouTube, players) et, si vous l'autorisez, mesurer l'audience.",
+    "lastUpdated": "10 décembre 2025",
+    "lastUpdatedLabel": "Mise à jour : {date}",
+    "categoriesTitle": "Choix par catégorie",
+    "manageCookies": "Gérer les cookies",
+    "actions": {
+      "acceptAll": "Tout accepter",
+      "rejectAll": "Tout refuser",
+      "customize": "Personnaliser",
+      "save": "Enregistrer",
+      "close": "Fermer"
+    },
+    "categories": {
+      "essential": {
+        "title": "Essentiels",
+        "description": "Indispensables au fonctionnement du site (sécurité, préférences de langue/thème)."
+      },
+      "media": {
+        "title": "Médias (YouTube & players)",
+        "description": "Active les lecteurs externes (YouTube, SoundCloud, Spotify, etc.) susceptibles de déposer des cookies."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Mesure d'audience sobre pour améliorer le site (désactivé par défaut)."
+      }
+    },
+    "gate": {
+      "badge": "Consentement",
+      "mediaTitle": "Activer les médias",
+      "mediaDescription": "Le player charge un service tiers qui nécessite l'acceptation des cookies.",
+      "mediaDescriptionShort": "Ce lecteur charge un service tiers nécessitant l'acceptation des cookies.",
+      "mediaCta": "Autoriser les médias",
+      "manage": "Gérer mes choix"
     }
   },
   "cv": {

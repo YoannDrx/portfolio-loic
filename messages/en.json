@@ -6,7 +6,7 @@
     "albums": "Albums",
     "videos": "Videos",
     "contact": "Contact",
-    "subtitle": "Music Composer",
+    "subtitle": "Music composer & producer",
     "admin": "Admin",
     "dashboard": "Dashboard",
     "logout": "Logout"
@@ -698,6 +698,7 @@
     "streaming": "Streaming",
     "social": "Social",
     "listen": "Listen",
+    "role": "Music composer & producer",
     "ctaTitle1": "Let's Create",
     "ctaTitle2": "Something Unique",
     "startProject": "Start a Project",
@@ -970,6 +971,44 @@
           "href": "tel:+33614517592"
         }
       ]
+    }
+  },
+  "consent": {
+    "badge": "Privacy",
+    "title": "Cookie & media consent",
+    "description": "I use cookies and third-party services to run the site, play external media (YouTube players) and, if you allow, measure audience.",
+    "lastUpdated": "December 10, 2025",
+    "lastUpdatedLabel": "Updated: {date}",
+    "categoriesTitle": "Category choices",
+    "manageCookies": "Manage cookies",
+    "actions": {
+      "acceptAll": "Accept all",
+      "rejectAll": "Reject all",
+      "customize": "Customize",
+      "save": "Save",
+      "close": "Close"
+    },
+    "categories": {
+      "essential": {
+        "title": "Essential",
+        "description": "Required for the site to work (security, language/theme preferences)."
+      },
+      "media": {
+        "title": "Media (YouTube & players)",
+        "description": "Enables external players (YouTube, SoundCloud, Spotify, etc.) that may set cookies."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Lightweight audience measurement to improve the site (off by default)."
+      }
+    },
+    "gate": {
+      "badge": "Consent",
+      "mediaTitle": "Enable media",
+      "mediaDescription": "This player loads a third-party service that requires cookie consent.",
+      "mediaDescriptionShort": "This player needs third-party cookies to load.",
+      "mediaCta": "Allow media",
+      "manage": "Manage choices"
     }
   },
   "cv": {
