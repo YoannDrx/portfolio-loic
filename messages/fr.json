@@ -51,9 +51,9 @@
         "immersiveAudio": "AUDIO\nIMMERSIF"
       },
       "basedIn": "BASÉ À PARIS",
-      "music": "Musique",
-      "producer": "Producteur",
-      "composer": "& Compositeur",
+      "music": "Compositeur",
+      "producer": "Musical",
+      "composer": "& Producteur",
       "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour le cinéma, la publicité et les jeux vidéo.",
       "showreel": "Showreel",
       "downloadCV": "CV (PDF)",
@@ -402,7 +402,12 @@
       "details": {
         "intro": "Je crée des **musiques originales** pour donner vie à vos projets audiovisuels. Que ce soit pour un film, une série TV, une publicité ou un jeu vidéo, je compose des bandes originales qui racontent votre histoire.",
         "approach": "Mon approche allie **sensibilité artistique** et **vision narrative**, en créant des univers sonores uniques adaptés à chaque projet, du Metal au Hip-Hop, en passant par l'Ambient et l'Electronic.",
-        "services": ["Composition orchestrale et hybride", "Thèmes musicaux sur mesure", "Direction artistique sonore", "Adaptation tous genres musicaux"]
+        "services": [
+          "Composition orchestrale et hybride",
+          "Thèmes musicaux sur mesure",
+          "Direction artistique sonore",
+          "Adaptation tous genres musicaux"
+        ]
       }
     },
     "production": {
@@ -413,7 +418,12 @@
       "details": {
         "intro": "Je prends en charge la **production complète** de vos projets musicaux, de la conception à la réalisation finale. Mon expertise couvre tous les aspects de la production moderne.",
         "approach": "Avec un studio équipé des dernières technologies et une connaissance approfondie de multiples genres musicaux, je transforme vos idées en productions professionnelles prêtes pour la diffusion.",
-        "services": ["Production multi-genres (Metal, Hip-Hop, Electronic, Ambient)", "Programmation et sound design", "Enregistrement et direction artistique", "Mastering pour tous supports"]
+        "services": [
+          "Production multi-genres (Metal, Hip-Hop, Electronic, Ambient)",
+          "Programmation et sound design",
+          "Enregistrement et direction artistique",
+          "Mastering pour tous supports"
+        ]
       }
     },
     "arranging": {
@@ -424,7 +434,12 @@
       "details": {
         "intro": "L'**arrangement** est l'art de structurer et d'habiller une composition pour en révéler tout le potentiel. Je travaille sur l'orchestration, l'harmonie et la texture sonore pour créer des arrangements riches et cohérents.",
         "approach": "De l'orchestration symphonique aux arrangements électroniques modernes, je maîtrise une large palette de techniques pour donner vie à vos idées musicales.",
-        "services": ["Orchestration symphonique et moderne", "Arrangements pour ensembles acoustiques", "Réharmonisation et adaptation", "Création de textures hybrides"]
+        "services": [
+          "Orchestration symphonique et moderne",
+          "Arrangements pour ensembles acoustiques",
+          "Réharmonisation et adaptation",
+          "Création de textures hybrides"
+        ]
       }
     },
     "vocalProducer": {
@@ -435,7 +450,12 @@
       "details": {
         "intro": "En tant que **vocal producer**, je guide les artistes pour capturer les meilleures performances vocales. Mon rôle est d'extraire l'émotion et la puissance de chaque voix.",
         "approach": "De la préproduction à l'enregistrement, j'accompagne les chanteurs dans leur processus créatif, en apportant une direction artistique précise et bienveillante.",
-        "services": ["Direction artistique vocale", "Préparation et coaching avant session", "Enregistrement et editing vocal", "Traitement et production des voix"]
+        "services": [
+          "Direction artistique vocale",
+          "Préparation et coaching avant session",
+          "Enregistrement et editing vocal",
+          "Traitement et production des voix"
+        ]
       }
     },
     "mixing": {
@@ -446,7 +466,12 @@
       "details": {
         "intro": "Le **mixage** est l'étape cruciale qui transforme des pistes brutes en une production cohérente et professionnelle. Je balance, équilibre et façonne chaque élément pour créer un mix impactant.",
         "approach": "Avec une approche analytique et créative, j'optimise la clarté, la profondeur et la dynamique de vos morceaux pour qu'ils sonnent parfaitement sur tous les supports d'écoute.",
-        "services": ["Mixage stéréo et surround", "Traitement dynamique et fréquentiel", "Spatialisation et effets créatifs", "Optimisation pour streaming et broadcast"]
+        "services": [
+          "Mixage stéréo et surround",
+          "Traitement dynamique et fréquentiel",
+          "Spatialisation et effets créatifs",
+          "Optimisation pour streaming et broadcast"
+        ]
       }
     },
     "mastering": {
@@ -457,7 +482,12 @@
       "details": {
         "intro": "Le **mastering** est la touche finale qui donne à votre musique son éclat professionnel. Je prépare vos morceaux pour la diffusion en optimisant le niveau, la balance spectrale et la cohérence entre les pistes.",
         "approach": "Mon approche du mastering garantit que votre musique sonne de manière optimale sur tous les systèmes d'écoute, des écouteurs aux systèmes hi-fi, en respectant les standards de l'industrie.",
-        "services": ["Mastering pour tous formats (streaming, CD, vinyl)", "Optimisation spectrale et dynamique", "Cohérence entre les morceaux d'un album", "Préparation pour distribution digitale"]
+        "services": [
+          "Mastering pour tous formats (streaming, CD, vinyl)",
+          "Optimisation spectrale et dynamique",
+          "Cohérence entre les morceaux d'un album",
+          "Préparation pour distribution digitale"
+        ]
       }
     }
   },
@@ -566,6 +596,7 @@
     "pageDescription": "Discutons de votre projet musical. Je suis toujours enthousiaste à l'idée de collaborer sur de nouvelles créations.",
     "getInTouch": "Prenons Contact",
     "description": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous.",
+    "downloadCV": "Télécharger CV",
     "hero": {
       "badge": "CONTACTEZ-MOI",
       "title": "Créons Ensemble",

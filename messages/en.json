@@ -52,8 +52,8 @@
       },
       "basedIn": "BASED IN PARIS",
       "music": "Music",
-      "producer": "Producer",
-      "composer": "& Composer",
+      "producer": "& Producer",
+      "composer": "Composer",
       "tagline": "Award-winning composer. I create immersive sonic universes for film, advertising and video games.",
       "showreel": "Showreel",
       "downloadCV": "CV (PDF)",
@@ -596,6 +596,7 @@
     "pageDescription": "Let's discuss your musical project. I'm always excited to collaborate on new creations.",
     "getInTouch": "Get in Touch",
     "description": "Have a project in mind? I'd love to discuss it with you.",
+    "downloadCV": "Download CV",
     "hero": {
       "badge": "GET IN TOUCH",
       "title": "Let's Create Together",
