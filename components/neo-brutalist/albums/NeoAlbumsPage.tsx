@@ -81,6 +81,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
           badge={t("hero.badge")}
           title={t("hero.title")}
           description={t("hero.description")}
+          fullViewport
         >
           <div className="flex flex-wrap gap-4">
             <BrutalistButton

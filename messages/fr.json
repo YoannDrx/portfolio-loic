@@ -6,7 +6,7 @@
     "albums": "Albums",
     "videos": "Vidéos",
     "contact": "Contact",
-    "subtitle": "Compositeur de musique",
+    "subtitle": "Compositeur et producteur de musique",
     "admin": "Admin",
     "dashboard": "Tableau de bord",
     "logout": "Déconnexion"
@@ -26,6 +26,23 @@
       "workTogether": "Travailler ensemble"
     },
     "scroll": "Scroll",
+    "marquee": {
+      "items": [
+        "BANDE-SON",
+        "MUSIQUE ORIGINALE",
+        "IDENTITÉ SONORE",
+        "MIXAGE",
+        "MASTERING",
+        "SOUND DESIGN",
+        "DIRECTION VOIX",
+        "SUPERVISION MUSICALE",
+        "POST-PRODUCTION AUDIO",
+        "PRODUCTION PODCAST",
+        "ORCHESTRATION",
+        "BRUITAGES FOLEY",
+        "MONTAGE MUSICAL"
+      ]
+    },
     "featuredAlbums": {
       "title": "Derniers Albums",
       "description": "Découvrez mes dernières créations musicales couvrant différents genres, du Metal au Hip-Hop en passant par l'Ambient et l'Electronic.",
@@ -51,9 +68,9 @@
         "immersiveAudio": "AUDIO\nIMMERSIF"
       },
       "basedIn": "BASÉ À PARIS",
-      "music": "Musique",
-      "producer": "Producteur",
-      "composer": "& Compositeur",
+      "music": "Compositeur",
+      "producer": "Musical",
+      "composer": "& Producteur",
       "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour le cinéma, la publicité et les jeux vidéo.",
       "showreel": "Showreel",
       "downloadCV": "CV (PDF)",
@@ -97,6 +114,27 @@
       "soundcloud": "Suivre sur SoundCloud",
       "spotify": "Écouter sur Spotify",
       "description": "Retrouvez toutes mes productions sur les plateformes de streaming. De la composition orchestrale au Metal en passant par l'Electronic et l'Ambient."
+    },
+    "splitHero": {
+      "basedIn": "BASÉ À PARIS",
+      "title": {
+        "line1": "Compositeur",
+        "line2": "& Producteur",
+        "line3": "Musical"
+      },
+      "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour le cinéma, la publicité et les jeux vidéo.",
+      "scrollDown": "Défiler",
+      "player": {
+        "title": "LOÏC GHANEM PRODUCTIONS",
+        "soundcloud": "SoundCloud",
+        "spotify": "Spotify",
+        "appleMusic": "Apple Music",
+        "deezer": "Deezer",
+        "tidal": "Tidal",
+        "youtube": "YouTube",
+        "followSoundcloud": "Suivre sur SoundCloud",
+        "listenSpotify": "Écouter sur Spotify"
+      }
     }
   },
   "about": {
@@ -402,7 +440,12 @@
       "details": {
         "intro": "Je crée des **musiques originales** pour donner vie à vos projets audiovisuels. Que ce soit pour un film, une série TV, une publicité ou un jeu vidéo, je compose des bandes originales qui racontent votre histoire.",
         "approach": "Mon approche allie **sensibilité artistique** et **vision narrative**, en créant des univers sonores uniques adaptés à chaque projet, du Metal au Hip-Hop, en passant par l'Ambient et l'Electronic.",
-        "services": ["Composition orchestrale et hybride", "Thèmes musicaux sur mesure", "Direction artistique sonore", "Adaptation tous genres musicaux"]
+        "services": [
+          "Composition orchestrale et hybride",
+          "Thèmes musicaux sur mesure",
+          "Direction artistique sonore",
+          "Adaptation tous genres musicaux"
+        ]
       }
     },
     "production": {
@@ -413,7 +456,12 @@
       "details": {
         "intro": "Je prends en charge la **production complète** de vos projets musicaux, de la conception à la réalisation finale. Mon expertise couvre tous les aspects de la production moderne.",
         "approach": "Avec un studio équipé des dernières technologies et une connaissance approfondie de multiples genres musicaux, je transforme vos idées en productions professionnelles prêtes pour la diffusion.",
-        "services": ["Production multi-genres (Metal, Hip-Hop, Electronic, Ambient)", "Programmation et sound design", "Enregistrement et direction artistique", "Mastering pour tous supports"]
+        "services": [
+          "Production multi-genres (Metal, Hip-Hop, Electronic, Ambient)",
+          "Programmation et sound design",
+          "Enregistrement et direction artistique",
+          "Mastering pour tous supports"
+        ]
       }
     },
     "arranging": {
@@ -424,7 +472,12 @@
       "details": {
         "intro": "L'**arrangement** est l'art de structurer et d'habiller une composition pour en révéler tout le potentiel. Je travaille sur l'orchestration, l'harmonie et la texture sonore pour créer des arrangements riches et cohérents.",
         "approach": "De l'orchestration symphonique aux arrangements électroniques modernes, je maîtrise une large palette de techniques pour donner vie à vos idées musicales.",
-        "services": ["Orchestration symphonique et moderne", "Arrangements pour ensembles acoustiques", "Réharmonisation et adaptation", "Création de textures hybrides"]
+        "services": [
+          "Orchestration symphonique et moderne",
+          "Arrangements pour ensembles acoustiques",
+          "Réharmonisation et adaptation",
+          "Création de textures hybrides"
+        ]
       }
     },
     "vocalProducer": {
@@ -435,7 +488,12 @@
       "details": {
         "intro": "En tant que **vocal producer**, je guide les artistes pour capturer les meilleures performances vocales. Mon rôle est d'extraire l'émotion et la puissance de chaque voix.",
         "approach": "De la préproduction à l'enregistrement, j'accompagne les chanteurs dans leur processus créatif, en apportant une direction artistique précise et bienveillante.",
-        "services": ["Direction artistique vocale", "Préparation et coaching avant session", "Enregistrement et editing vocal", "Traitement et production des voix"]
+        "services": [
+          "Direction artistique vocale",
+          "Préparation et coaching avant session",
+          "Enregistrement et editing vocal",
+          "Traitement et production des voix"
+        ]
       }
     },
     "mixing": {
@@ -446,7 +504,12 @@
       "details": {
         "intro": "Le **mixage** est l'étape cruciale qui transforme des pistes brutes en une production cohérente et professionnelle. Je balance, équilibre et façonne chaque élément pour créer un mix impactant.",
         "approach": "Avec une approche analytique et créative, j'optimise la clarté, la profondeur et la dynamique de vos morceaux pour qu'ils sonnent parfaitement sur tous les supports d'écoute.",
-        "services": ["Mixage stéréo et surround", "Traitement dynamique et fréquentiel", "Spatialisation et effets créatifs", "Optimisation pour streaming et broadcast"]
+        "services": [
+          "Mixage stéréo et surround",
+          "Traitement dynamique et fréquentiel",
+          "Spatialisation et effets créatifs",
+          "Optimisation pour streaming et broadcast"
+        ]
       }
     },
     "mastering": {
@@ -457,7 +520,12 @@
       "details": {
         "intro": "Le **mastering** est la touche finale qui donne à votre musique son éclat professionnel. Je prépare vos morceaux pour la diffusion en optimisant le niveau, la balance spectrale et la cohérence entre les pistes.",
         "approach": "Mon approche du mastering garantit que votre musique sonne de manière optimale sur tous les systèmes d'écoute, des écouteurs aux systèmes hi-fi, en respectant les standards de l'industrie.",
-        "services": ["Mastering pour tous formats (streaming, CD, vinyl)", "Optimisation spectrale et dynamique", "Cohérence entre les morceaux d'un album", "Préparation pour distribution digitale"]
+        "services": [
+          "Mastering pour tous formats (streaming, CD, vinyl)",
+          "Optimisation spectrale et dynamique",
+          "Cohérence entre les morceaux d'un album",
+          "Préparation pour distribution digitale"
+        ]
       }
     }
   },
@@ -566,6 +634,7 @@
     "pageDescription": "Discutons de votre projet musical. Je suis toujours enthousiaste à l'idée de collaborer sur de nouvelles créations.",
     "getInTouch": "Prenons Contact",
     "description": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous.",
+    "downloadCV": "Télécharger CV",
     "hero": {
       "badge": "CONTACTEZ-MOI",
       "title": "Créons Ensemble",
@@ -626,10 +695,330 @@
     "letsCreate": "Créons",
     "together": "Ensemble.",
     "location": "PARIS, FRANCE",
+    "streaming": "Streaming",
+    "social": "Social",
+    "listen": "Écouter",
+    "role": "Compositeur et producteur de musique",
+    "ctaTitle1": "Créons",
+    "ctaTitle2": "Quelque Chose d'Unique",
+    "startProject": "Lancer un projet",
+    "basedIn": "Basé à",
+    "navigation": "Navigation",
+    "streamNow": "Écouter maintenant",
+    "privacyPolicy": "POLITIQUE DE CONFIDENTIALITÉ",
+    "termsOfUse": "CONDITIONS D'UTILISATION",
     "noForm": {
       "title": "Un projet ? Parlons-en !",
       "description": "Pas de formulaire ici, juste un coup de fil et on démarre l'aventure sonore.",
       "callButton": "On s'appelle ?"
+    }
+  },
+  "legal": {
+    "common": {
+      "summaryTitle": "L'essentiel à retenir",
+      "highlightsTitle": "Principes clés",
+      "sectionsTitle": "Détails complets",
+      "contactTitle": "Contact direct",
+      "lastUpdatedLabel": "Dernière mise à jour"
+    },
+    "privacy": {
+      "pageTitle": "Politique de confidentialité",
+      "pageDescription": "Comment vos données sont collectées, utilisées et protégées lorsque vous utilisez ce site ou me contactez.",
+      "lastUpdated": "10 décembre 2025",
+      "hero": {
+        "badge": "Confidentialité",
+        "title": "Politique de confidentialité",
+        "description": "Je ne collecte que ce qui est nécessaire pour répondre à vos demandes et je traite vos données avec transparence."
+      },
+      "summary": [
+        "Données limitées au formulaire de contact, aux échanges et à des statistiques d'audience anonymisées.",
+        "Aucune vente ni cession commerciale de vos données : elles servent uniquement à l'échange autour de vos projets.",
+        "Vos droits (accès, rectification, suppression, opposition) sont activables à tout moment par simple demande."
+      ],
+      "highlights": [
+        {
+          "title": "Finalité claire",
+          "description": "Les informations sont utilisées pour vous répondre, préparer un devis, améliorer le site et assurer sa sécurité."
+        },
+        {
+          "title": "Sécurité et hébergement",
+          "description": "Chiffrement TLS, accès restreint et conservation limitée des journaux techniques nécessaires à la protection du site."
+        },
+        {
+          "title": "Transparence",
+          "description": "Bases légales identifiées, durées de conservation définies et recours à des sous-traitants strictement nécessaires."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Éditeur du site et contact",
+          "description": "Le site est édité et maintenu par Yoann Andrieux (société Yodev), votre point de contact pour les aspects techniques et légaux.",
+          "bullets": [
+            "Webmaster / responsable de la publication : Yoann Andrieux - Yodev.",
+            "Contact dédié pour les questions techniques ou légales : yoann.andrieux@gmail.com.",
+            "Les données envoyées via le formulaire sont traitées par Loïc Ghanem pour répondre aux demandes liées aux prestations."
+          ]
+        },
+        {
+          "title": "Données collectées",
+          "description": "Je recueille uniquement ce dont j'ai besoin pour vous répondre ou maintenir le site en sécurité.",
+          "bullets": [
+            "Coordonnées et contenu des messages envoyés via le formulaire (nom, email, sujet, message).",
+            "Données techniques minimales pour la sécurité (journaux serveur, adresses IP tronquées, navigateur/appareil).",
+            "Statistiques de consultation agrégées et anonymisées (pages vues, origine de trafic, type d'appareil)."
+          ]
+        },
+        {
+          "title": "Finalités et bases légales",
+          "description": "Chaque traitement repose sur une base juridique identifiée.",
+          "bullets": [
+            "Répondre à vos demandes et préparer une collaboration (intérêt légitime et mesures précontractuelles).",
+            "Assurer la sécurité, la prévention de fraude et la maintenance du site (intérêt légitime).",
+            "Mesurer l'audience de manière anonymisée pour améliorer l'expérience (consentement lorsque requis).",
+            "Respecter mes obligations légales ou gérer d'éventuels litiges."
+          ]
+        },
+        {
+          "title": "Durées de conservation",
+          "description": "Les données sont conservées le temps strictement nécessaire.",
+          "bullets": [
+            "Messages et échanges : jusqu'à 24 mois après le dernier contact ou la fin d'un projet.",
+            "Journaux techniques et de sécurité : jusqu'à 12 mois, puis suppression ou anonymisation.",
+            "Statistiques anonymisées : conservées sous forme agrégée sans limite d'identification."
+          ]
+        },
+        {
+          "title": "Partage et sous-traitance",
+          "description": "Je ne vends jamais vos données. Seuls des prestataires indispensables peuvent y accéder.",
+          "bullets": [
+            "Hébergement et base de données nécessaires au fonctionnement du site.",
+            "Outils d'emailing ou de mesure d'audience lorsque vous y consentez.",
+            "Professionnels soumis à la confidentialité (comptable, conseil) si besoin."
+          ]
+        },
+        {
+          "title": "Vos droits",
+          "description": "Vous pouvez exercer vos droits à tout moment par email.",
+          "bullets": [
+            "Accès, rectification, mise à jour ou suppression de vos données.",
+            "Retrait du consentement et limitation du traitement lorsque applicable.",
+            "Portabilité des données fournies lorsque la loi l'autorise.",
+            "Opposition aux traitements fondés sur l'intérêt légitime.",
+            "Réclamation auprès de la CNIL si nécessaire."
+          ]
+        },
+        {
+          "title": "Cookies et mesure d'audience",
+          "description": "Le site utilise des cookies strictement nécessaires et, avec votre accord, des outils de mesure.",
+          "bullets": [
+            "Cookies essentiels pour la sécurité et la navigation.",
+            "Mesure d'audience anonymisée ; vous pouvez configurer votre navigateur pour bloquer les traceurs.",
+            "Aucun cookie publicitaire ni revente de données."
+          ]
+        },
+        {
+          "title": "Sécurité",
+          "description": "Des mesures techniques et organisationnelles sont appliquées pour protéger vos données.",
+          "bullets": [
+            "Chiffrement des échanges (HTTPS/TLS) et contrôle des accès limités.",
+            "Sauvegardes sécurisées et tests réguliers pour limiter les risques.",
+            "Procédure en cas d'incident de sécurité avec information si nécessaire."
+          ]
+        }
+      ],
+      "contactIntro": "Pour toute question juridique ou contractuelle, utilisez les coordonnées habituelles de Loïc. Pour un sujet technique lié au site, contactez l'agence de développement",
+      "contactChannels": [
+        {
+          "label": "Yodev",
+          "subtitle": "Agence de développement",
+          "value": "yoann.andrieux@gmail.com",
+          "href": "mailto:yoann.andrieux@gmail.com"
+        }
+      ]
+    },
+    "terms": {
+      "pageTitle": "Conditions d'utilisation",
+      "pageDescription": "Les règles d'accès au site, d'utilisation des contenus et le cadre des collaborations proposées par Loïc Ghanem.",
+      "lastUpdated": "10 décembre 2025",
+      "hero": {
+        "badge": "Légal",
+        "title": "Conditions d'utilisation",
+        "description": "En accédant à ce site, vous acceptez ces conditions. Elles précisent comment nous collaborons et protégeons nos créations."
+      },
+      "summary": [
+        "Site vitrine présentant mes services de composition, production et sound design.",
+        "Toute prestation est formalisée par un devis ou un contrat avant de démarrer.",
+        "Aucune utilisation commerciale ou reproduction des contenus sans autorisation écrite."
+      ],
+      "highlights": [
+        {
+          "title": "Transparence",
+          "description": "Les conditions couvrent l'accès au site, la propriété intellectuelle, les demandes de prestations et les responsabilités."
+        },
+        {
+          "title": "Cadre de collaboration",
+          "description": "Chaque projet suit un devis ou contrat précisant périmètre, délais, tarifs, droits et livrables."
+        },
+        {
+          "title": "Droit applicable",
+          "description": "Le droit français s'applique. Nous privilégions un règlement amiable avant tout recours judiciaire."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Éditeur et responsable de la publication",
+          "description": "Le site est administré par Yoann Andrieux (Yodev) qui assure la maintenance et la conformité éditoriale.",
+          "bullets": [
+            "Webmaster / responsable de la publication : Yoann Andrieux - Yodev.",
+            "Contact pour tout sujet légal ou technique lié au site : yoann.andrieux@gmail.com.",
+            "Les contenus et services présentés concernent l'activité de Loïc Ghanem ; la maintenance est assurée par Yodev."
+          ]
+        },
+        {
+          "title": "Objet du site",
+          "description": "Ce site présente mon activité et permet d'entrer en contact pour discuter d'un projet.",
+          "bullets": [
+            "Présentation des services de composition, production, mix/mastering et supervision musicale.",
+            "Mise à disposition d'exemples (albums, vidéos, références) pour illustrer mon travail.",
+            "Formulaire de contact pour obtenir des informations ou un devis."
+          ]
+        },
+        {
+          "title": "Accès et disponibilité",
+          "description": "J'œuvre pour maintenir le site accessible mais certaines interruptions peuvent survenir.",
+          "bullets": [
+            "Accès possible 24/7 sous réserve de maintenance ou de mise à jour.",
+            "Modification, suspension ou retrait temporaire possible sans préavis en cas d'évolution du service.",
+            "Aucune garantie d'absence d'erreur ; signalez tout dysfonctionnement pour correction."
+          ]
+        },
+        {
+          "title": "Propriété intellectuelle",
+          "description": "Les contenus du site sont protégés par le droit d'auteur et autres droits applicables.",
+          "bullets": [
+            "Textes, images, logos, maquettes et extraits audio restent ma propriété ou celle de mes partenaires.",
+            "Toute reproduction, diffusion ou adaptation sans autorisation écrite est interdite.",
+            "Les licences d'utilisation des œuvres sont définies dans le devis ou le contrat associé au projet."
+          ]
+        },
+        {
+          "title": "Utilisation acceptable",
+          "description": "Vous vous engagez à utiliser le site dans le respect des lois et des droits des tiers.",
+          "bullets": [
+            "Ne pas tenter d'accéder aux zones non publiques ni perturber le fonctionnement du site.",
+            "Ne pas extraire, indexer ou réutiliser massivement les contenus sans accord.",
+            "Respecter les droits de propriété intellectuelle et la confidentialité des informations échangées."
+          ]
+        },
+        {
+          "title": "Demandes de prestations",
+          "description": "Toute collaboration est cadrée contractuellement.",
+          "bullets": [
+            "Validation d'un devis/contrat précisant périmètre, calendrier, tarifs, droits et livrables avant démarrage.",
+            "Blocage des dates uniquement après confirmation écrite et, le cas échéant, versement d'un acompte.",
+            "Cession ou licence des droits d'utilisation des œuvres limitée aux usages définis contractuellement."
+          ]
+        },
+        {
+          "title": "Tarifs et paiements",
+          "description": "Les conditions financières sont communiquées par écrit.",
+          "bullets": [
+            "Les tarifs figurent dans les devis ou bons de commande acceptés.",
+            "Les modalités de paiement (acompte, échéances, pénalités) sont précisées et acceptées avant lancement.",
+            "En cas de retard de paiement, la prestation peut être suspendue après notification."
+          ]
+        },
+        {
+          "title": "Responsabilité",
+          "description": "J'agis avec soin mais certaines limites s'appliquent.",
+          "bullets": [
+            "Je ne peux garantir l'absence totale d'interruption ou d'erreur sur le site.",
+            "Je ne suis pas responsable des dommages indirects liés à l'utilisation ou l'impossibilité d'utilisation du site.",
+            "Vous êtes responsable de votre équipement et de la sécurité de votre connexion."
+          ]
+        },
+        {
+          "title": "Liens externes",
+          "description": "Le site peut contenir des liens vers des services tiers.",
+          "bullets": [
+            "Je ne contrôle pas le contenu ou les pratiques de ces sites externes.",
+            "Consultez leurs politiques et conditions avant utilisation.",
+            "Je ne saurais être tenu responsable des dommages résultant de ces sites tiers."
+          ]
+        },
+        {
+          "title": "Protection des données",
+          "description": "Le traitement des données personnelles est détaillé dans la Politique de confidentialité.",
+          "bullets": [
+            "En utilisant le site ou en me contactant, vous acceptez les principes décrits dans ce document.",
+            "Vous pouvez exercer vos droits à tout moment via les modalités précisées dans la Politique de confidentialité."
+          ]
+        },
+        {
+          "title": "Modifications des conditions",
+          "description": "Ces conditions peuvent évoluer pour refléter les mises à jour du site ou les exigences légales.",
+          "bullets": [
+            "La date de dernière mise à jour figure en haut de page.",
+            "En continuant à utiliser le site après modification, vous acceptez les nouvelles conditions."
+          ]
+        },
+        {
+          "title": "Loi applicable et litiges",
+          "description": "Le cadre juridique applicable est la loi française.",
+          "bullets": [
+            "Nous chercherons d'abord une solution amiable en cas de désaccord.",
+            "À défaut, les tribunaux compétents de Paris pourront être saisis.",
+            "Si une clause est jugée invalide, les autres continuent de s'appliquer."
+          ]
+        }
+      ],
+      "contactIntro": "Pour toute question juridique ou contractuelle, utilisez les coordonnées habituelles de Loïc. Pour un sujet technique lié au site, contactez l'agence de développement",
+      "contactChannels": [
+        {
+          "label": "Yodev",
+          "subtitle": "Agence de développement",
+          "value": "yoann.andrieux@gmail.com",
+          "href": "mailto:yoann.andrieux@gmail.com"
+        }
+      ]
+    }
+  },
+  "consent": {
+    "badge": "Confidentialité",
+    "title": "Gestion des cookies",
+    "description": "J'utilise des cookies et services tiers pour faire fonctionner le site, lire les médias externes (YouTube, players) et, si vous l'autorisez, mesurer l'audience.",
+    "lastUpdated": "10 décembre 2025",
+    "lastUpdatedLabel": "Mise à jour : {date}",
+    "categoriesTitle": "Choix par catégorie",
+    "manageCookies": "Gérer les cookies",
+    "actions": {
+      "acceptAll": "Tout accepter",
+      "rejectAll": "Tout refuser",
+      "customize": "Personnaliser",
+      "save": "Enregistrer",
+      "close": "Fermer"
+    },
+    "categories": {
+      "essential": {
+        "title": "Essentiels",
+        "description": "Indispensables au fonctionnement du site (sécurité, préférences de langue/thème)."
+      },
+      "media": {
+        "title": "Médias (YouTube & players)",
+        "description": "Active les lecteurs externes (YouTube, SoundCloud, Spotify, etc.) susceptibles de déposer des cookies."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Mesure d'audience sobre pour améliorer le site (désactivé par défaut)."
+      }
+    },
+    "gate": {
+      "badge": "Consentement",
+      "mediaTitle": "Activer les médias",
+      "mediaDescription": "Le player charge un service tiers qui nécessite l'acceptation des cookies.",
+      "mediaDescriptionShort": "Ce lecteur charge un service tiers nécessitant l'acceptation des cookies.",
+      "mediaCta": "Autoriser les médias",
+      "manage": "Gérer mes choix"
     }
   },
   "cv": {

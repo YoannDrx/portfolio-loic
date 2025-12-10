@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
-import { useTranslations } from 'next-intl';
-import { Play, X, ExternalLink, Maximize2 } from 'lucide-react';
-import { NeoCard } from '../ui/NeoCard';
-import { NeoTag } from '../ui/NeoTag';
+import React, { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
+import { Play, X, ExternalLink, Maximize2 } from "lucide-react";
+import { NeoCard } from "../ui/NeoCard";
+import { NeoTag } from "../ui/NeoTag";
+import { useConsent } from "../legal/ConsentProvider";
 
 interface VideoItem {
   id: string;
@@ -22,7 +23,10 @@ interface NeoVideoCardProps {
 export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const t = useTranslations('videos');
+  const t = useTranslations("videos");
+  const tConsent = useTranslations("consent");
+  const { state, setCategory, openManager } = useConsent();
+  const allowMedia = state.media;
 
   const handleFullscreen = () => {
     if (iframeRef.current) {
@@ -42,7 +46,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
     >
       {/* Container Video/Thumbnail */}
       <div className="aspect-video bg-neo-text relative overflow-hidden mb-6 border-2 border-neo-border">
-        {isPlaying ? (
+        {isPlaying && allowMedia ? (
           // Iframe YouTube
           <iframe
             ref={iframeRef}
@@ -60,9 +64,14 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
               style={{ backgroundImage: `url(${thumbnailUrl})` }}
             />
             <button
-              onClick={() => setIsPlaying(true)}
+              onClick={() => {
+                if (!allowMedia) {
+                  setCategory("media", true);
+                }
+                setIsPlaying(true);
+              }}
               className="absolute inset-0 flex items-center justify-center group"
-              aria-label={t('card.play', { title: video.title })}
+              aria-label={t("card.play", { title: video.title })}
             >
               <div className="w-20 h-20 border-4 border-neo-text-inverse rounded-full flex items-center justify-center bg-neo-text/50 group-hover:bg-neo-accent group-hover:border-neo-accent transition-all duration-300">
                 <Play
@@ -72,6 +81,33 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
                 />
               </div>
             </button>
+            {!allowMedia && (
+              <div className="absolute inset-0 bg-neo-text/70 text-neo-text-inverse flex flex-col items-center justify-center gap-3 p-4 text-center">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em]">
+                  {tConsent("gate.mediaTitle")}
+                </p>
+                <p className="text-xs md:text-sm text-neo-text-inverse/80 max-w-xs leading-relaxed">
+                  {tConsent("gate.mediaDescriptionShort")}
+                </p>
+                <div className="flex gap-2 flex-wrap justify-center">
+                  <button
+                    onClick={() => {
+                      setCategory("media", true);
+                      setIsPlaying(true);
+                    }}
+                    className="px-4 py-2 bg-neo-accent text-neo-text font-mono text-[10px] uppercase font-bold border-2 border-neo-border shadow-[3px_3px_0px_0px_var(--neo-border)] hover:-translate-y-0.5 transition-transform"
+                  >
+                    {tConsent("gate.mediaCta")}
+                  </button>
+                  <button
+                    onClick={openManager}
+                    className="px-4 py-2 bg-neo-text text-neo-text-inverse font-mono text-[10px] uppercase font-bold border-2 border-neo-border shadow-[3px_3px_0px_0px_var(--neo-border)] hover:-translate-y-0.5 transition-transform"
+                  >
+                    {tConsent("gate.manage")}
+                  </button>
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -85,14 +121,14 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
               className="px-3 py-1.5 font-mono text-xs font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent transition-colors flex items-center gap-1.5"
             >
               <X size={14} />
-              {t('card.close')}
+              {t("card.close")}
             </button>
             <button
               onClick={handleFullscreen}
               className="px-3 py-1.5 font-mono text-xs font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent transition-colors flex items-center gap-1.5"
             >
               <Maximize2 size={14} />
-              {t('card.fullscreen')}
+              {t("card.fullscreen")}
             </button>
           </>
         )}

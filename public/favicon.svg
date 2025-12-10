@@ -1,25 +1,5 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Neo-brutalist style: sharp edges, bold colors, offset shadow -->
-
-  <!-- Shadow/offset rectangle -->
-  <rect x="40" y="40" width="432" height="432" fill="#1a1a1a"/>
-
-  <!-- Main rectangle with accent color -->
-  <rect x="20" y="20" width="432" height="432" fill="#ff6b35"/>
-
-  <!-- Border -->
-  <rect x="20" y="20" width="432" height="432" fill="none" stroke="#1a1a1a" stroke-width="12"/>
-
-  <!-- LG Text - bold, uppercase, neo-brutalist -->
-  <text
-    x="236"
-    y="236"
-    font-family="Arial Black, Helvetica, sans-serif"
-    font-size="220"
-    font-weight="900"
-    fill="#1a1a1a"
-    text-anchor="middle"
-    dominant-baseline="central"
-    letter-spacing="-10"
-  >LG</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="4" y="4" width="56" height="56" fill="#D5FF0A" stroke="black" stroke-width="2"/>
+  <rect x="0" y="0" width="56" height="56" fill="white" stroke="black" stroke-width="2"/>
+  <text x="28" y="38" font-family="sans-serif" font-weight="900" font-size="24" text-anchor="middle" fill="black">LG</text>
 </svg>

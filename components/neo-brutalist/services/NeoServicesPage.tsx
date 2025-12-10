@@ -1,16 +1,16 @@
 "use client";
 
-import React from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import { motion } from 'framer-motion';
-import { Music4, Disc, Sliders, Mic2, Radio, ArrowRight, CheckCircle } from 'lucide-react';
-import { NeoNavbar } from '../NeoNavbar';
-import { NeoFooter } from '../NeoFooter';
-import { NeoHeroSection } from '../ui/NeoHeroSection';
-import { NeoCard } from '../ui/NeoCard';
-import { BrutalistButton } from '../ui/BrutalistButton';
-import { NeoTag } from '../ui/NeoTag';
-import { Link } from '@/i18n/routing';
+import React from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { motion } from "framer-motion";
+import { Music4, Disc, Sliders, Mic2, Radio, ArrowRight, CheckCircle } from "lucide-react";
+import { NeoNavbar } from "../NeoNavbar";
+import { NeoFooter } from "../NeoFooter";
+import { NeoHeroSection } from "../ui/NeoHeroSection";
+import { NeoCard } from "../ui/NeoCard";
+import { BrutalistButton } from "../ui/BrutalistButton";
+import { NeoTag } from "../ui/NeoTag";
+import { Link } from "@/i18n/routing";
 
 interface Service {
   id: string;
@@ -27,11 +27,11 @@ interface NeoServicesPageProps {
 
 const getIconForService = (title: string) => {
   const lowerTitle = title.toLowerCase();
-  if (lowerTitle.includes('compo')) return Music4;
-  if (lowerTitle.includes('produc')) return Disc;
-  if (lowerTitle.includes('mix')) return Sliders;
-  if (lowerTitle.includes('master')) return Radio;
-  if (lowerTitle.includes('vocal')) return Mic2;
+  if (lowerTitle.includes("compo")) return Music4;
+  if (lowerTitle.includes("produc")) return Disc;
+  if (lowerTitle.includes("mix")) return Sliders;
+  if (lowerTitle.includes("master")) return Radio;
+  if (lowerTitle.includes("vocal")) return Mic2;
   return Disc;
 };
 
@@ -39,31 +39,31 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-  }
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
 };
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) => {
-  const t = useTranslations('services');
+  const t = useTranslations("services");
   const locale = useLocale();
 
   const getDescription = (service: Service) => {
-    if (locale === 'fr' && service.descriptionsFr) return service.descriptionsFr;
-    if (locale === 'en' && service.descriptionsEn) return service.descriptionsEn;
+    if (locale === "fr" && service.descriptionsFr) return service.descriptionsFr;
+    if (locale === "en" && service.descriptionsEn) return service.descriptionsEn;
     return service.text;
   };
 
   const processSteps = [
-    { key: 'brief', icon: '01' },
-    { key: 'composition', icon: '02' },
-    { key: 'production', icon: '03' },
-    { key: 'mixing', icon: '04' },
-    { key: 'delivery', icon: '05' },
+    { key: "brief", icon: "01" },
+    { key: "composition", icon: "02" },
+    { key: "production", icon: "03" },
+    { key: "mixing", icon: "04" },
+    { key: "delivery", icon: "05" },
   ];
 
   return (
@@ -74,22 +74,25 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
         {/* Hero */}
         <NeoHeroSection
           badgeNumber="03"
-          badge={t('hero.badge')}
-          title={t('hero.title')}
-          description={t('hero.description')}
+          badge={t("hero.badge")}
+          title={t("hero.title")}
+          description={t("hero.description")}
+          fullViewport
         >
           <div className="flex flex-wrap gap-4">
             <BrutalistButton
               variant="primary"
               size="lg"
               icon={<ArrowRight className="w-5 h-5" />}
-              onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document.getElementById("services-list")?.scrollIntoView({ behavior: "smooth" })
+              }
             >
-              {t('hero.cta')}
+              {t("hero.cta")}
             </BrutalistButton>
             <Link href="/contact">
               <BrutalistButton variant="secondary" size="lg">
-                {t('hero.ctaSecondary')}
+                {t("hero.ctaSecondary")}
               </BrutalistButton>
             </Link>
           </div>
@@ -100,10 +103,10 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { val: services.length.toString(), label: t('stats.services') },
-                { val: '15+', label: t('stats.experience') },
-                { val: '150+', label: t('stats.projects') },
-                { val: '98%', label: t('stats.satisfaction') },
+                { val: services.length.toString(), label: t("stats.services") },
+                { val: "15+", label: t("stats.experience") },
+                { val: "150+", label: t("stats.projects") },
+                { val: "98%", label: t("stats.satisfaction") },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center">
                   <span className="text-4xl md:text-5xl font-black text-neo-accent tracking-tighter">
@@ -141,7 +144,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
                       <div className="flex lg:flex-col items-center lg:items-start gap-6 lg:w-48 shrink-0">
                         <span
                           className="text-6xl lg:text-8xl font-black text-transparent"
-                          style={{ WebkitTextStroke: '2px var(--neo-text)' }}
+                          style={{ WebkitTextStroke: "2px var(--neo-text)" }}
                         >
                           0{i + 1}
                         </span>
@@ -159,9 +162,16 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
                           className="font-mono text-lg leading-relaxed max-w-3xl border-l-4 border-neo-accent pl-6 opacity-80"
                           dangerouslySetInnerHTML={{ __html: getDescription(service) }}
                         />
-                        <Link href={{ pathname: '/services/[id]', params: { id: service.id } }} className="inline-block mt-6">
-                          <BrutalistButton variant="ghost" size="sm" icon={<ArrowRight className="w-4 h-4" />}>
-                            {t('seeMore')}
+                        <Link
+                          href={{ pathname: "/services/[id]", params: { id: service.id } }}
+                          className="inline-block mt-6"
+                        >
+                          <BrutalistButton
+                            variant="ghost"
+                            size="sm"
+                            icon={<ArrowRight className="w-4 h-4" />}
+                          >
+                            {t("seeMore")}
                           </BrutalistButton>
                         </Link>
                       </div>
@@ -177,10 +187,10 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
         <section className="py-24 bg-neo-bg-alt border-y-2 border-neo-border">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex items-center gap-3 mb-8">
-              <NeoTag variant="default">{t('process.subtitle')}</NeoTag>
+              <NeoTag variant="default">{t("process.subtitle")}</NeoTag>
             </div>
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-16 text-neo-text">
-              {t('process.title')}
+              {t("process.title")}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
@@ -219,10 +229,10 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
             >
               <CheckCircle className="w-16 h-16 mx-auto mb-6 text-neo-accent" />
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text-inverse mb-4">
-                {t('cta.title')}
+                {t("cta.title")}
               </h2>
               <p className="font-mono text-lg text-neo-text-inverse/60 max-w-2xl mx-auto mb-8">
-                {t('cta.description')}
+                {t("cta.description")}
               </p>
               <div className="flex justify-center">
                 <Link href="/contact">
@@ -231,7 +241,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
                     size="lg"
                     icon={<ArrowRight className="w-5 h-5" />}
                   >
-                    {t('hero.ctaSecondary')}
+                    {t("hero.ctaSecondary")}
                   </BrutalistButton>
                 </Link>
               </div>

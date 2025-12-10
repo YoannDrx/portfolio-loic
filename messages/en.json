@@ -6,7 +6,7 @@
     "albums": "Albums",
     "videos": "Videos",
     "contact": "Contact",
-    "subtitle": "Music Composer",
+    "subtitle": "Music composer & producer",
     "admin": "Admin",
     "dashboard": "Dashboard",
     "logout": "Logout"
@@ -26,6 +26,23 @@
       "workTogether": "Work together"
     },
     "scroll": "Scroll",
+    "marquee": {
+      "items": [
+        "SOUNDTRACK",
+        "ORIGINAL SCORE",
+        "AUDIO BRANDING",
+        "MIXING",
+        "MASTERING",
+        "SOUND DESIGN",
+        "VOICEOVER DIRECTION",
+        "MUSIC SUPERVISION",
+        "AUDIO POST-PRODUCTION",
+        "PODCAST PRODUCTION",
+        "ORCHESTRATION",
+        "FOLEY",
+        "MUSIC EDITING"
+      ]
+    },
     "featuredAlbums": {
       "title": "Latest Albums",
       "description": "Discover my latest musical creations covering different genres, from Metal to Hip-Hop through Ambient and Electronic.",
@@ -52,8 +69,8 @@
       },
       "basedIn": "BASED IN PARIS",
       "music": "Music",
-      "producer": "Producer",
-      "composer": "& Composer",
+      "producer": "& Producer",
+      "composer": "Composer",
       "tagline": "Award-winning composer. I create immersive sonic universes for film, advertising and video games.",
       "showreel": "Showreel",
       "downloadCV": "CV (PDF)",
@@ -97,6 +114,27 @@
       "soundcloud": "Follow on SoundCloud",
       "spotify": "Listen on Spotify",
       "description": "Find all my productions on streaming platforms. From orchestral composition to Metal through Electronic and Ambient."
+    },
+    "splitHero": {
+      "basedIn": "BASED IN PARIS",
+      "title": {
+        "line1": "Music",
+        "line2": "Composer",
+        "line3": "& Producer"
+      },
+      "tagline": "Award-winning composer. I create immersive sonic universes for film, advertising and video games.",
+      "scrollDown": "Scroll Down",
+      "player": {
+        "title": "LOÏC GHANEM PRODUCTIONS",
+        "soundcloud": "SoundCloud",
+        "spotify": "Spotify",
+        "appleMusic": "Apple Music",
+        "deezer": "Deezer",
+        "tidal": "Tidal",
+        "youtube": "YouTube",
+        "followSoundcloud": "Follow on SoundCloud",
+        "listenSpotify": "Listen on Spotify"
+      }
     }
   },
   "about": {
@@ -596,6 +634,7 @@
     "pageDescription": "Let's discuss your musical project. I'm always excited to collaborate on new creations.",
     "getInTouch": "Get in Touch",
     "description": "Have a project in mind? I'd love to discuss it with you.",
+    "downloadCV": "Download CV",
     "hero": {
       "badge": "GET IN TOUCH",
       "title": "Let's Create Together",
@@ -656,10 +695,339 @@
     "letsCreate": "Let's",
     "together": "Create.",
     "location": "PARIS, FRANCE",
+    "streaming": "Streaming",
+    "social": "Social",
+    "listen": "Listen",
+    "role": "Music composer & producer",
+    "ctaTitle1": "Let's Create",
+    "ctaTitle2": "Something Unique",
+    "startProject": "Start a Project",
+    "basedIn": "Based in",
+    "navigation": "Navigation",
+    "streamNow": "Stream Now",
+    "privacyPolicy": "PRIVACY POLICY",
+    "termsOfUse": "TERMS OF USE",
     "noForm": {
       "title": "Got a project? Let's talk!",
       "description": "No forms here, just a quick call and let's start the sonic adventure.",
       "callButton": "Let's chat?"
+    }
+  },
+  "legal": {
+    "common": {
+      "summaryTitle": "Key points",
+      "highlightsTitle": "Core principles",
+      "sectionsTitle": "Full details",
+      "contactTitle": "Direct contact",
+      "lastUpdatedLabel": "Last updated"
+    },
+    "privacy": {
+      "pageTitle": "Privacy Policy",
+      "pageDescription": "How your data is collected, used, and protected when you browse this site or contact me.",
+      "lastUpdated": "December 10, 2025",
+      "hero": {
+        "badge": "Privacy",
+        "title": "Privacy Policy",
+        "description": "I only collect what I need to reply to you and handle your requests transparently."
+      },
+      "summary": [
+        "Data is limited to the contact form, our exchanges, and anonymized audience analytics.",
+        "No sale or commercial transfer of your data: it is used solely to discuss and deliver your projects.",
+        "You can exercise your rights (access, rectification, deletion, objection) at any time by request."
+      ],
+      "highlights": [
+        {
+          "title": "Clear purpose",
+          "description": "Information is used to answer you, prepare a quote, improve the site, and keep it secure."
+        },
+        {
+          "title": "Security & hosting",
+          "description": "TLS encryption, restricted access, and limited retention of technical logs required to protect the site."
+        },
+        {
+          "title": "Transparency",
+          "description": "Defined legal bases, set retention periods, and reliance on strictly necessary processors."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Identity and contact",
+          "description": "The site is published and maintained by Yoann Andrieux (company Yodev), your point of contact for technical and legal matters.",
+          "bullets": [
+            "Webmaster / publisher: Yoann Andrieux - Yodev.",
+            "Dedicated contact for technical or legal questions: yoann.andrieux@gmail.com.",
+            "Data sent through the form is handled by Loïc Ghanem to respond to service-related requests."
+          ]
+        },
+        {
+          "title": "Data collected",
+          "description": "I only collect what is needed to respond to you or keep the site safe.",
+          "bullets": [
+            "Contact details and message content sent through the form (name, email, subject, message).",
+            "Minimal technical data for security (server logs, truncated IP addresses, browser/device).",
+            "Aggregated and anonymized analytics (pages viewed, traffic source, device type)."
+          ]
+        },
+        {
+          "title": "Purposes and legal bases",
+          "description": "Each processing activity relies on a clear legal basis.",
+          "bullets": [
+            "Responding to your requests and preparing a collaboration (legitimate interest and pre-contractual steps).",
+            "Keeping the site secure, preventing fraud, and performing maintenance (legitimate interest).",
+            "Measuring anonymized audience to improve the experience (consent when required).",
+            "Meeting legal obligations or handling potential disputes."
+          ]
+        },
+        {
+          "title": "Retention periods",
+          "description": "Data is kept only for the time strictly necessary.",
+          "bullets": [
+            "Messages and exchanges: up to 24 months after the last contact or the end of a project.",
+            "Technical and security logs: up to 12 months, then deletion or anonymization.",
+            "Anonymized statistics: kept in aggregated form without identification limits."
+          ]
+        },
+        {
+          "title": "Sharing and processors",
+          "description": "I never sell your data. Only essential service providers may access it.",
+          "bullets": [
+            "Hosting and database services required for the site to operate.",
+            "Emailing tools or analytics when you agree to them.",
+            "Confidentiality-bound professionals (accounting, advisory) if needed."
+          ]
+        },
+        {
+          "title": "Your rights",
+          "description": "You can exercise your rights at any time via email.",
+          "bullets": [
+            "Access, rectification, update, or deletion of your data.",
+            "Withdrawal of consent and restriction of processing where applicable.",
+            "Portability of data you provided when the law allows it.",
+            "Objection to processing based on legitimate interest.",
+            "Right to lodge a complaint with the supervisory authority."
+          ]
+        },
+        {
+          "title": "Cookies and analytics",
+          "description": "The site uses strictly necessary cookies and, with your consent, measurement tools.",
+          "bullets": [
+            "Essential cookies for security and navigation.",
+            "Anonymized audience measurement; you can configure your browser to block trackers.",
+            "No advertising cookies or commercial resale of data."
+          ]
+        },
+        {
+          "title": "Security",
+          "description": "Technical and organizational measures protect your data.",
+          "bullets": [
+            "Encrypted connections (HTTPS/TLS) and limited access controls.",
+            "Secure backups and regular checks to mitigate risks.",
+            "Incident response procedure to inform you if required."
+          ]
+        }
+      ],
+      "contactIntro": "For any question or to exercise your rights, reach out directly. For legal or technical matters about the site, you can also contact the webmaster (Yodev).",
+      "contactChannels": [
+        {
+          "label": "Email",
+          "value": "loic.ghanem@outlook.com",
+          "href": "mailto:loic.ghanem@outlook.com"
+        },
+        {
+          "label": "Phone",
+          "value": "+33 6 14 51 75 92",
+          "href": "tel:+33614517592"
+        },
+        {
+          "label": "Webmaster email (Yodev)",
+          "value": "yoann.andrieux@gmail.com",
+          "href": "mailto:yoann.andrieux@gmail.com"
+        }
+      ]
+    },
+    "terms": {
+      "pageTitle": "Terms of Use",
+      "pageDescription": "Rules for accessing the site, using its content, and the framework for collaborations with Loïc Ghanem.",
+      "lastUpdated": "December 10, 2025",
+      "hero": {
+        "badge": "Legal",
+        "title": "Terms of Use",
+        "description": "By accessing this site, you agree to these terms. They explain how we collaborate and protect our work."
+      },
+      "summary": [
+        "Showcase site presenting my composition, production, and sound design services.",
+        "Every engagement is formalized with a quote or contract before work begins.",
+        "No commercial use or reproduction of content without written approval."
+      ],
+      "highlights": [
+        {
+          "title": "Transparency",
+          "description": "These terms cover site access, intellectual property, project requests, and responsibilities."
+        },
+        {
+          "title": "Collaboration framework",
+          "description": "Each project follows a quote or contract detailing scope, timing, pricing, rights, and deliverables."
+        },
+        {
+          "title": "Governing law",
+          "description": "French law applies. We favor amicable resolution before any court action."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Publisher and publication director",
+          "description": "The site is administered by Yoann Andrieux (Yodev), who oversees maintenance and editorial compliance.",
+          "bullets": [
+            "Webmaster / publication director: Yoann Andrieux - Yodev.",
+            "Contact for any legal or technical matter about the site: yoann.andrieux@gmail.com.",
+            "The content and services showcased relate to Loïc Ghanem's activity; upkeep is handled by Yodev."
+          ]
+        },
+        {
+          "title": "Purpose of the site",
+          "description": "This site presents my activity and lets you get in touch to discuss a project.",
+          "bullets": [
+            "Showcase of composition, production, mixing/mastering, and music supervision services.",
+            "Examples (albums, videos, references) to illustrate my work.",
+            "Contact form to request information or a quote."
+          ]
+        },
+        {
+          "title": "Access and availability",
+          "description": "I work to keep the site accessible, but interruptions may occur.",
+          "bullets": [
+            "Access intended 24/7 subject to maintenance or updates.",
+            "Service may be modified, suspended, or temporarily removed without notice when needed.",
+            "No guarantee of error-free operation; please report issues so I can fix them."
+          ]
+        },
+        {
+          "title": "Intellectual property",
+          "description": "Site content is protected by copyright and other applicable rights.",
+          "bullets": [
+            "Texts, images, logos, layouts, and audio excerpts remain my property or that of my partners.",
+            "Any reproduction, distribution, or adaptation without written consent is prohibited.",
+            "Usage rights for works are defined in the quote or contract associated with the project."
+          ]
+        },
+        {
+          "title": "Acceptable use",
+          "description": "You agree to use the site lawfully and respect third-party rights.",
+          "bullets": [
+            "Do not try to access non-public areas or disrupt site operation.",
+            "Do not extract, index, or massively reuse content without agreement.",
+            "Respect intellectual property and keep exchanged information confidential."
+          ]
+        },
+        {
+          "title": "Project requests",
+          "description": "Every collaboration is contractually framed.",
+          "bullets": [
+            "A quote/contract detailing scope, schedule, pricing, rights, and deliverables is validated before work starts.",
+            "Dates are blocked only after written confirmation and, when applicable, agreed deposits.",
+            "Transfer or license of usage rights for the works is limited to the uses defined in the contract."
+          ]
+        },
+        {
+          "title": "Pricing and payments",
+          "description": "Financial terms are shared in writing.",
+          "bullets": [
+            "Prices are stated in accepted quotes or purchase orders.",
+            "Payment terms (deposit, milestones, late fees) are defined and accepted before kickoff.",
+            "If payment is late, work may be paused after notification."
+          ]
+        },
+        {
+          "title": "Liability",
+          "description": "I act with care, with certain limits.",
+          "bullets": [
+            "I cannot guarantee the site will be entirely free of interruptions or errors.",
+            "I am not liable for indirect damages linked to using or being unable to use the site.",
+            "You are responsible for your equipment and the security of your connection."
+          ]
+        },
+        {
+          "title": "External links",
+          "description": "The site may contain links to third-party services.",
+          "bullets": [
+            "I do not control the content or practices of those external sites.",
+            "Review their policies and terms before using them.",
+            "I cannot be held responsible for damages arising from those third-party sites."
+          ]
+        },
+        {
+          "title": "Data protection",
+          "description": "Data processing is described in the Privacy Policy.",
+          "bullets": [
+            "By using the site or contacting me, you agree to the principles described there.",
+            "You can exercise your rights at any time via the methods listed in the Privacy Policy."
+          ]
+        },
+        {
+          "title": "Changes to these terms",
+          "description": "These terms may evolve to reflect site updates or legal requirements.",
+          "bullets": [
+            "The last updated date appears at the top of the page.",
+            "By continuing to use the site after changes, you accept the new terms."
+          ]
+        },
+        {
+          "title": "Governing law and disputes",
+          "description": "French law applies to these terms.",
+          "bullets": [
+            "We will first seek an amicable solution to any disagreement.",
+            "Failing that, the competent courts of Paris may be seized.",
+            "If one clause is invalid, the others remain in force."
+          ]
+        }
+      ],
+      "contactIntro": "For legal questions or contract requests, use Loïc's usual contact details. For technical matters about the site, reach the Yodev development agency below.",
+      "contactChannels": [
+        {
+          "label": "Yodev",
+          "subtitle": "Development agency",
+          "value": "yoann.andrieux@gmail.com",
+          "href": "mailto:yoann.andrieux@gmail.com"
+        }
+      ]
+    }
+  },
+  "consent": {
+    "badge": "Privacy",
+    "title": "Cookie & media consent",
+    "description": "I use cookies and third-party services to run the site, play external media (YouTube players) and, if you allow, measure audience.",
+    "lastUpdated": "December 10, 2025",
+    "lastUpdatedLabel": "Updated: {date}",
+    "categoriesTitle": "Category choices",
+    "manageCookies": "Manage cookies",
+    "actions": {
+      "acceptAll": "Accept all",
+      "rejectAll": "Reject all",
+      "customize": "Customize",
+      "save": "Save",
+      "close": "Close"
+    },
+    "categories": {
+      "essential": {
+        "title": "Essential",
+        "description": "Required for the site to work (security, language/theme preferences)."
+      },
+      "media": {
+        "title": "Media (YouTube & players)",
+        "description": "Enables external players (YouTube, SoundCloud, Spotify, etc.) that may set cookies."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Lightweight audience measurement to improve the site (off by default)."
+      }
+    },
+    "gate": {
+      "badge": "Consent",
+      "mediaTitle": "Enable media",
+      "mediaDescription": "This player loads a third-party service that requires cookie consent.",
+      "mediaDescriptionShort": "This player needs third-party cookies to load.",
+      "mediaCta": "Allow media",
+      "manage": "Manage choices"
     }
   },
   "cv": {

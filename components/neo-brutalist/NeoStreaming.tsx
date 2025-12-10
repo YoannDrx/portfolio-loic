@@ -4,7 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Headphones } from "lucide-react";
-import { SectionHeader } from "./ui/SectionHeader";
 import { BrutalistButton } from "./ui/BrutalistButton";
 
 // SoundCloud icon component
@@ -34,16 +33,14 @@ export const NeoStreaming = () => {
   const t = useTranslations("home.streaming");
 
   return (
-    <section className="py-24 bg-neo-bg">
+    <section className="py-12 bg-neo-bg">
       <div className="container mx-auto px-4 md:px-6">
-        <SectionHeader number="02" title={t("title")} subtitle={t("subtitle")} />
-
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
-          className="space-y-8"
+          className="space-y-4"
         >
           {/* SoundCloud Player Container */}
           <div className="border-4 border-neo-border bg-neo-surface shadow-[8px_8px_0px_0px_var(--neo-accent)] overflow-hidden">
@@ -65,7 +62,7 @@ export const NeoStreaming = () => {
             {/* SoundCloud Iframe */}
             <iframe
               width="100%"
-              height="450"
+              height="166"
               scrolling="no"
               frameBorder="no"
               allow="autoplay"
@@ -79,8 +76,8 @@ export const NeoStreaming = () => {
             <a href="https://soundcloud.com/loic-ghanem" target="_blank" rel="noopener noreferrer">
               <BrutalistButton
                 variant="primary"
-                size="lg"
-                icon={<SoundCloudIcon className="w-5 h-5" />}
+                size="md"
+                icon={<SoundCloudIcon className="w-4 h-4" />}
               >
                 {t("soundcloud")}
               </BrutalistButton>
@@ -92,8 +89,8 @@ export const NeoStreaming = () => {
             >
               <BrutalistButton
                 variant="secondary"
-                size="lg"
-                icon={<SpotifyIcon className="w-5 h-5" />}
+                size="md"
+                icon={<SpotifyIcon className="w-4 h-4" />}
               >
                 {t("spotify")}
               </BrutalistButton>

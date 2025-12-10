@@ -35,7 +35,6 @@ import { SectionHeader } from "../ui/SectionHeader";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoCard } from "../ui/NeoCard";
-import { NeoTimeline } from "./NeoTimeline";
 import { Link } from "@/i18n/routing";
 
 const staggerContainer = {
@@ -697,9 +696,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             </motion.div>
           </div>
         </section>
-
-        {/* TIMELINE - Parcours Professionnel */}
-        <NeoTimeline />
 
         {/* MUSICIAN EXPERIENCE */}
         <section className="container mx-auto px-4 md:px-6 py-24">

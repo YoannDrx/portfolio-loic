@@ -1,48 +1,54 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
-import { Mail, MapPin, Clock, ExternalLink, Phone } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { NeoCard } from '../ui/NeoCard';
-import { NeoTag } from '../ui/NeoTag';
+import { useTranslations, useLocale } from "next-intl";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Clock, ExternalLink, Phone, Download } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { NeoCard } from "../ui/NeoCard";
+import { NeoTag } from "../ui/NeoTag";
+import { BrutalistButton } from "../ui/BrutalistButton";
 
 interface NeoContactInfoProps {
   className?: string;
 }
 
 const socialLinks = [
-  { name: 'SoundCloud', url: 'https://soundcloud.com/loicghanem', icon: '🎵' },
-  { name: 'Spotify', url: 'https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA', icon: '🎧' },
-  { name: 'Instagram', url: 'https://instagram.com/loicghanem', icon: '📸' },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/loicghanem', icon: '💼' },
+  { name: "SoundCloud", url: "https://soundcloud.com/loicghanem", icon: "🎵" },
+  {
+    name: "Spotify",
+    url: "https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA",
+    icon: "🎧",
+  },
+  { name: "Instagram", url: "https://instagram.com/loicghanem", icon: "📸" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/loicghanem", icon: "💼" },
 ];
 
 export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
-  const t = useTranslations('contact');
+  const t = useTranslations("contact");
+  const locale = useLocale();
 
   const infoItems = [
     {
       icon: <Phone className="w-5 h-5" />,
-      label: t('info.phone'),
-      value: '+33 6 14 51 75 92',
-      href: 'tel:+33614517592',
+      label: t("info.phone"),
+      value: "+33 6 14 51 75 92",
+      href: "tel:+33614517592",
     },
     {
       icon: <Mail className="w-5 h-5" />,
-      label: 'Email',
-      value: 'loic.ghanem@outlook.com',
-      href: 'mailto:loic.ghanem@outlook.com',
+      label: "Email",
+      value: "loic.ghanem@outlook.com",
+      href: "mailto:loic.ghanem@outlook.com",
     },
     {
       icon: <MapPin className="w-5 h-5" />,
-      label: t('info.location'),
-      value: 'Paris, France',
+      label: t("info.location"),
+      value: "Paris, France",
     },
     {
       icon: <Clock className="w-5 h-5" />,
-      label: t('stats.responseTime'),
-      value: '< 24h',
+      label: t("stats.responseTime"),
+      value: "< 24h",
     },
   ];
 
@@ -51,7 +57,7 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className={cn('space-y-6', className)}
+      className={cn("space-y-6", className)}
     >
       {/* Contact Info Cards */}
       <div className="space-y-4">
@@ -85,6 +91,23 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
         ))}
       </div>
 
+      {/* Download CV Button */}
+      <a
+        href={`/api/cv/download?locale=${locale}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
+        <BrutalistButton
+          variant="primary"
+          size="lg"
+          icon={<Download className="w-5 h-5" />}
+          className="w-full justify-center"
+        >
+          {t("downloadCV")}
+        </BrutalistButton>
+      </a>
+
       {/* Stats */}
       <NeoCard
         variant="inverted"
@@ -94,15 +117,19 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       >
         <div className="grid grid-cols-2 gap-6">
           <div className="text-center">
-            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">98%</p>
+            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">
+              98%
+            </p>
             <p className="font-mono text-xs uppercase text-neo-text-inverse/60 group-hover:text-neo-text/60 mt-1 transition-colors duration-300">
-              {t('stats.satisfaction')}
+              {t("stats.satisfaction")}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">150+</p>
+            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">
+              150+
+            </p>
             <p className="font-mono text-xs uppercase text-neo-text-inverse/60 group-hover:text-neo-text/60 mt-1 transition-colors duration-300">
-              {t('stats.projects')}
+              {t("stats.projects")}
             </p>
           </div>
         </div>
@@ -111,7 +138,7 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       {/* Social Links */}
       <div>
         <h3 className="font-mono text-xs uppercase tracking-wider text-neo-text/60 mb-4">
-          {t('info.findMe')}
+          {t("info.findMe")}
         </h3>
         <div className="flex flex-wrap gap-2">
           {socialLinks.map((social) => (
@@ -138,9 +165,7 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
 
       {/* Availability Note */}
       <div className="border-l-4 border-neo-accent pl-4 py-2">
-        <p className="text-sm text-neo-text/80">
-          {t('info.availability')}
-        </p>
+        <p className="text-sm text-neo-text/80">{t("info.availability")}</p>
       </div>
     </motion.div>
   );
