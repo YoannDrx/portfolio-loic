@@ -8,6 +8,7 @@ import { Settings, LogOut, User } from "lucide-react";
 import { LanguageSwitcher } from "./ui/LanguageSwitcher";
 import { PaletteSelector } from "./ui/PaletteSelector";
 import { NeoLogo } from "./NeoLogo";
+import { NeoLoginModal } from "./auth/NeoLoginModal";
 import { useSession, signOut } from "@/lib/auth-client";
 
 interface NavItem {
