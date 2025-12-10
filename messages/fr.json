@@ -97,6 +97,27 @@
       "soundcloud": "Suivre sur SoundCloud",
       "spotify": "Écouter sur Spotify",
       "description": "Retrouvez toutes mes productions sur les plateformes de streaming. De la composition orchestrale au Metal en passant par l'Electronic et l'Ambient."
+    },
+    "splitHero": {
+      "basedIn": "BASÉ À PARIS",
+      "title": {
+        "line1": "Compositeur",
+        "line2": "& Producteur",
+        "line3": "Musical"
+      },
+      "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour le cinéma, la publicité et les jeux vidéo.",
+      "scrollDown": "Défiler",
+      "player": {
+        "title": "LOÏC GHANEM PRODUCTIONS",
+        "soundcloud": "SoundCloud",
+        "spotify": "Spotify",
+        "appleMusic": "Apple Music",
+        "deezer": "Deezer",
+        "tidal": "Tidal",
+        "youtube": "YouTube",
+        "followSoundcloud": "Suivre sur SoundCloud",
+        "listenSpotify": "Écouter sur Spotify"
+      }
     }
   },
   "about": {
@@ -657,6 +678,9 @@
     "letsCreate": "Créons",
     "together": "Ensemble.",
     "location": "PARIS, FRANCE",
+    "streaming": "Streaming",
+    "social": "Social",
+    "listen": "Écouter",
     "noForm": {
       "title": "Un projet ? Parlons-en !",
       "description": "Pas de formulaire ici, juste un coup de fil et on démarre l'aventure sonore.",

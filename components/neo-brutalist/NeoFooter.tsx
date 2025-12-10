@@ -9,13 +9,22 @@ import { Link } from "@/i18n/routing";
 
 const socialLinks = [
   { name: "Facebook", url: "https://www.facebook.com/loic.leduc.54" },
-  { name: "YouTube", url: "https://www.youtube.com/@LoicGhanem" },
-  { name: "SoundCloud", url: "https://soundcloud.com/loic-ghanem" },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/lo%C3%AFc-ghanem/" },
   {
     name: "SoundBetter",
     url: "https://soundbetter.com/profiles/402365-lo%C3%AFc-ghanem--voyager1",
   },
+];
+
+const listenLinks = [
+  { name: "Spotify", url: "https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA" },
+  { name: "Deezer", url: "https://www.deezer.com/fr/artist/5642263/top_track" },
+  {
+    name: "Apple Music",
+    url: "https://music.apple.com/fr/artist/loic-ghanem/464997920/see-all?section=top-songs",
+  },
+  { name: "YouTube", url: "https://www.youtube.com/channel/UCLbxfVx61feUL3uw2me9tSA" },
+  { name: "Tidal", url: "https://tidal.com/artist/10603532/u" },
 ];
 
 export const NeoFooter = () => {
@@ -48,7 +57,17 @@ export const NeoFooter = () => {
               <span className="font-bold text-lg text-neo-text-inverse">Loïc Ghanem</span>
             </div>
             <p className="font-mono text-xs text-neo-text-inverse/60 mb-6">{t("tagline")}</p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mb-4">
+              <Link href="/">
+                <BrutalistButton variant="dark" size="sm">
+                  {tNav("home")}
+                </BrutalistButton>
+              </Link>
+              <Link href="/about">
+                <BrutalistButton variant="dark" size="sm">
+                  {tNav("about")}
+                </BrutalistButton>
+              </Link>
               <Link href="/services">
                 <BrutalistButton variant="dark" size="sm">
                   {tNav("services")}
@@ -62,6 +81,11 @@ export const NeoFooter = () => {
               <Link href="/videos">
                 <BrutalistButton variant="dark" size="sm">
                   {tNav("videos")}
+                </BrutalistButton>
+              </Link>
+              <Link href="/contact">
+                <BrutalistButton variant="dark" size="sm">
+                  {tNav("contact")}
                 </BrutalistButton>
               </Link>
             </div>
@@ -88,19 +112,52 @@ export const NeoFooter = () => {
             >
               loic.ghanem@outlook.com
             </a>
-            <div className="flex gap-4 md:justify-end">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="opacity-50 hover:opacity-100 hover:text-neo-accent transition-all text-sm flex items-center gap-1"
-                >
-                  {social.name}
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              ))}
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-[0.2em] opacity-80 hover:opacity-100 hover:text-neo-accent transition-colors mb-4"
+            >
+              {tNav("contact")}
+              <ExternalLink className="w-3 h-3" />
+            </Link>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:justify-end w-full md:w-auto">
+              <div className="space-y-2">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-neo-text-inverse/60">
+                  {t("social")}
+                </p>
+                <div className="flex flex-col gap-2">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="opacity-80 hover:opacity-100 hover:text-neo-accent transition-all text-sm flex items-center gap-1"
+                    >
+                      {social.name}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-neo-text-inverse/60">
+                  {t("listen")}
+                </p>
+                <div className="flex flex-col gap-2">
+                  {listenLinks.map((platform) => (
+                    <a
+                      key={platform.name}
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="opacity-80 hover:opacity-100 hover:text-neo-accent transition-all text-sm flex items-center gap-1"
+                    >
+                      {platform.name}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

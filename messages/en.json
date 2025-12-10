@@ -97,6 +97,27 @@
       "soundcloud": "Follow on SoundCloud",
       "spotify": "Listen on Spotify",
       "description": "Find all my productions on streaming platforms. From orchestral composition to Metal through Electronic and Ambient."
+    },
+    "splitHero": {
+      "basedIn": "BASED IN PARIS",
+      "title": {
+        "line1": "Music",
+        "line2": "Composer",
+        "line3": "& Producer"
+      },
+      "tagline": "Award-winning composer. I create immersive sonic universes for film, advertising and video games.",
+      "scrollDown": "Scroll Down",
+      "player": {
+        "title": "LOÏC GHANEM PRODUCTIONS",
+        "soundcloud": "SoundCloud",
+        "spotify": "Spotify",
+        "appleMusic": "Apple Music",
+        "deezer": "Deezer",
+        "tidal": "Tidal",
+        "youtube": "YouTube",
+        "followSoundcloud": "Follow on SoundCloud",
+        "listenSpotify": "Listen on Spotify"
+      }
     }
   },
   "about": {
@@ -657,6 +678,9 @@
     "letsCreate": "Let's",
     "together": "Create.",
     "location": "PARIS, FRANCE",
+    "streaming": "Streaming",
+    "social": "Social",
+    "listen": "Listen",
     "noForm": {
       "title": "Got a project? Let's talk!",
       "description": "No forms here, just a quick call and let's start the sonic adventure.",

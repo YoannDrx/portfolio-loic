@@ -5,8 +5,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { CustomCursor } from "./ui/CustomCursor";
 import { Marquee } from "./ui/Marquee";
 import { NeoNavbar } from "./NeoNavbar";
-import { NeoHero } from "./NeoHero";
-import { NeoStreaming } from "./NeoStreaming";
+import { NeoSplitHero } from "./NeoSplitHero";
 import { NeoFooter } from "./NeoFooter";
 
 export default function NeoHome() {
@@ -36,9 +35,8 @@ export default function NeoHome() {
       <NeoNavbar />
 
       <main className="relative z-10 pt-32">
-        <NeoHero />
+        <NeoSplitHero />
         <Marquee text="SOUNDTRACK — ORIGINAL SCORE — AUDIO BRANDING — MIXING —" />
-        <NeoStreaming />
         <NeoFooter />
       </main>
     </div>

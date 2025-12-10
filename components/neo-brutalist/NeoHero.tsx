@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export const NeoHero: React.FC = () => {
@@ -47,15 +46,6 @@ export const NeoHero: React.FC = () => {
           <p className="font-mono text-sm md:text-base font-medium max-w-md border-l-4 border-neo-accent pl-6 bg-neo-surface p-4 shadow-neo text-neo-text">
             {t("tagline")}
           </p>
-        </motion.div>
-      </div>
-
-      <div className="absolute bottom-10 right-4 md:right-10 flex flex-col items-center gap-2 text-neo-text">
-        <span className="font-mono text-[10px] uppercase rotate-90 origin-right translate-x-4 mb-8">
-          {t("scrollDown")}
-        </span>
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
-          <ArrowDown size={32} />
         </motion.div>
       </div>
     </section>
