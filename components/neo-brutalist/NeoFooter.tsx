@@ -20,7 +20,7 @@ import { Link } from "@/i18n/routing";
 import { useConsent } from "./legal/ConsentProvider";
 
 const legalLinkClass =
-  "font-mono text-[10px] uppercase tracking-[0.2em] hover:text-neo-accent transition-colors";
+  "font-mono text-[10px] uppercase hover:text-neo-accent transition-colors sm:tracking-[0.2em]";
 
 const socialLinks = [
   { name: "Facebook", url: "https://www.facebook.com/loic.leduc.54" },
@@ -108,10 +108,10 @@ export const NeoFooter = () => {
 
           {/* RIGHT COLUMN: Listen, Social, Contact (7 cols) */}
 
-          <div className="lg:col-span-7 p-8 flex flex-col sm:flex-row justify-between gap-8 content-start w-full">
+          <div className="lg:col-span-7 p-8 grid grid-cols-2 gap-8 content-start w-full sm:grid-cols-3 sm:flex sm:flex-row sm:justify-between">
             {/* Listen Column */}
 
-            <div className="space-y-4">
+            <div className="space-y-4 col-span-2 sm:col-span-1">
               <h3 className="font-mono text-[10px] text-neo-accent uppercase tracking-[0.2em] flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-neo-accent animate-pulse" />
 
@@ -210,12 +210,11 @@ export const NeoFooter = () => {
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="px-8 py-4 border-t border-neo-text-inverse/20 flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[10px] opacity-40">
+        <div className="px-8 py-4 border-t border-neo-text-inverse/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-4 font-mono text-[10px] opacity-40">
           <div className="flex items-center gap-1">
-            <Copyright className="w-3 h-3" />
-            <span>{currentYear} LOÏC GHANEM</span>
+            <span>{t("copyright", { year: currentYear })}</span>
           </div>
-          <div className="flex gap-6">
+          <div className="flex flex-col gap-2 items-start md:flex-row md:items-center md:gap-6">
             <Link href="/privacy-policy" className={legalLinkClass}>
               {t("privacyPolicy")}
             </Link>

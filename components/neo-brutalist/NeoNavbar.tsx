@@ -263,7 +263,7 @@ export const NeoNavbar = () => {
               />
 
               {/* Navigation content */}
-              <div className="min-h-screen flex flex-col justify-center px-8 pt-20 pb-16">
+              <div className="min-h-screen flex flex-col justify-start px-8 pt-4 pb-16">
                 <motion.nav
                   variants={menuContainerVariants}
                   initial="hidden"
@@ -278,10 +278,8 @@ export const NeoNavbar = () => {
                         onClick={() => setIsMenuOpen(false)}
                         className={cn(
                           "block py-3 text-3xl sm:text-4xl font-black uppercase tracking-tight transition-all duration-200",
-                          "border-b-2 border-neo-border/20 hover:border-neo-accent hover:pl-4",
-                          isActive(item.path)
-                            ? "text-neo-accent"
-                            : "text-neo-text hover:text-neo-accent"
+                          "hover:text-neo-accent hover:pl-4",
+                          isActive(item.path) ? "text-neo-accent" : "text-neo-text"
                         )}
                       >
                         <span className="font-mono text-sm text-neo-accent mr-4">0{index + 1}</span>
@@ -296,7 +294,7 @@ export const NeoNavbar = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="mt-6 pt-4 border-t-2 border-neo-border/30"
+                  className="mt-8 pt-6 border-t-2 border-neo-accent"
                 >
                   {/* Icons row: Language, Palette, Admin */}
                   <div className="flex items-center gap-3">

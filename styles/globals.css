@@ -101,6 +101,12 @@
     opacity: 0.8;
   }
 
+  /* Force scrollbar on all elements that scroll */
+  * {
+    scrollbar-color: var(--neo-accent) var(--surface);
+    scrollbar-width: thin;
+  }
+
   /* Selection */
   ::selection {
     background: rgba(213, 255, 10, 0.3);
