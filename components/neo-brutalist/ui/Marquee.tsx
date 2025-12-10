@@ -1,14 +1,19 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 interface MarqueeProps {
-  text: string;
+  items: string[];
   direction?: 1 | -1;
 }
 
-export const Marquee: React.FC<MarqueeProps> = ({ text, direction = 1 }) => {
+export const Marquee: React.FC<MarqueeProps> = ({ items, direction = 1 }) => {
+  const repeatedItems = React.useMemo(
+    () => Array.from({ length: 6 }, () => (items.length ? items : [""])).flat(),
+    [items]
+  );
+
   return (
     <div className="relative flex overflow-hidden border-y-4 border-neo-border bg-neo-surface py-4 select-none">
       <motion.div
@@ -16,8 +21,8 @@ export const Marquee: React.FC<MarqueeProps> = ({ text, direction = 1 }) => {
         animate={{ x: direction === 1 ? [0, -1000] : [-1000, 0] }}
         transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
       >
-        {Array(8).fill(text).map((item, i) => (
-          <span key={i} className="mx-8 flex items-center gap-6">
+        {repeatedItems.map((item, index) => (
+          <span key={`${item}-${index}`} className="mx-8 flex items-center gap-6">
             {item} <span className="w-8 h-8 bg-neo-accent block rounded-full" />
           </span>
         ))}

@@ -26,6 +26,20 @@
       "workTogether": "Work together"
     },
     "scroll": "Scroll",
+    "marquee": {
+      "items": [
+        "SOUNDTRACK",
+        "ORIGINAL SCORE",
+        "AUDIO BRANDING",
+        "MIXING",
+        "MASTERING",
+        "SOUND DESIGN",
+        "VOICEOVER DIRECTION",
+        "MUSIC SUPERVISION",
+        "AUDIO POST-PRODUCTION",
+        "PODCAST PRODUCTION"
+      ]
+    },
     "featuredAlbums": {
       "title": "Latest Albums",
       "description": "Discover my latest musical creations covering different genres, from Metal to Hip-Hop through Ambient and Electronic.",

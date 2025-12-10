@@ -26,6 +26,20 @@
       "workTogether": "Travailler ensemble"
     },
     "scroll": "Scroll",
+    "marquee": {
+      "items": [
+        "BANDE-SON",
+        "MUSIQUE ORIGINALE",
+        "IDENTITÉ SONORE",
+        "MIXAGE",
+        "MASTERING",
+        "SOUND DESIGN",
+        "DIRECTION VOIX",
+        "SUPERVISION MUSICALE",
+        "POST-PRODUCTION AUDIO",
+        "PRODUCTION PODCAST"
+      ]
+    },
     "featuredAlbums": {
       "title": "Derniers Albums",
       "description": "Découvrez mes dernières créations musicales couvrant différents genres, du Metal au Hip-Hop en passant par l'Ambient et l'Electronic.",

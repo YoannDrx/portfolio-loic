@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { CustomCursor } from "./ui/CustomCursor";
 import { Marquee } from "./ui/Marquee";
 import { NeoNavbar } from "./NeoNavbar";
@@ -11,6 +12,8 @@ import { NeoFooter } from "./NeoFooter";
 export default function NeoHome() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const marqueeTranslations = useTranslations("home.marquee");
+  const marqueeItems = (marqueeTranslations.raw("items") as string[]) ?? [];
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -36,7 +39,7 @@ export default function NeoHome() {
 
       <main className="relative z-10 pt-32">
         <NeoSplitHero />
-        <Marquee text="SOUNDTRACK — ORIGINAL SCORE — AUDIO BRANDING — MIXING —" />
+        <Marquee items={marqueeItems} />
         <NeoFooter />
       </main>
     </div>
