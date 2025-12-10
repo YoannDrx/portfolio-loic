@@ -751,6 +751,15 @@
       ],
       "sections": [
         {
+          "title": "Identity and contact",
+          "description": "The site is published and maintained by Yoann Andrieux (company Yodev), your point of contact for technical and legal matters.",
+          "bullets": [
+            "Webmaster / publisher: Yoann Andrieux - Yodev.",
+            "Dedicated contact for technical or legal questions: yoann.andrieux@gmail.com.",
+            "Data sent through the form is handled by Loïc Ghanem to respond to service-related requests."
+          ]
+        },
+        {
           "title": "Data collected",
           "description": "I only collect what is needed to respond to you or keep the site safe.",
           "bullets": [
@@ -817,7 +826,7 @@
           ]
         }
       ],
-      "contactIntro": "For any question or to exercise your rights, reach out directly.",
+      "contactIntro": "For any question or to exercise your rights, reach out directly. For legal or technical matters about the site, you can also contact the webmaster (Yodev).",
       "contactChannels": [
         {
           "label": "Email",
@@ -828,6 +837,11 @@
           "label": "Phone",
           "value": "+33 6 14 51 75 92",
           "href": "tel:+33614517592"
+        },
+        {
+          "label": "Webmaster email (Yodev)",
+          "value": "yoann.andrieux@gmail.com",
+          "href": "mailto:yoann.andrieux@gmail.com"
         }
       ]
     },
@@ -860,6 +874,15 @@
         }
       ],
       "sections": [
+        {
+          "title": "Publisher and publication director",
+          "description": "The site is administered by Yoann Andrieux (Yodev), who oversees maintenance and editorial compliance.",
+          "bullets": [
+            "Webmaster / publication director: Yoann Andrieux - Yodev.",
+            "Contact for any legal or technical matter about the site: yoann.andrieux@gmail.com.",
+            "The content and services showcased relate to Loïc Ghanem's activity; upkeep is handled by Yodev."
+          ]
+        },
         {
           "title": "Purpose of the site",
           "description": "This site presents my activity and lets you get in touch to discuss a project.",
@@ -958,17 +981,13 @@
           ]
         }
       ],
-      "contactIntro": "For any legal question or contract request, contact me directly.",
+      "contactIntro": "For legal questions or contract requests, use Loïc's usual contact details. For technical matters about the site, reach the Yodev development agency below.",
       "contactChannels": [
         {
-          "label": "Email",
-          "value": "loic.ghanem@outlook.com",
-          "href": "mailto:loic.ghanem@outlook.com"
-        },
-        {
-          "label": "Phone",
-          "value": "+33 6 14 51 75 92",
-          "href": "tel:+33614517592"
+          "label": "Yodev",
+          "subtitle": "Development agency",
+          "value": "yoann.andrieux@gmail.com",
+          "href": "mailto:yoann.andrieux@gmail.com"
         }
       ]
     }

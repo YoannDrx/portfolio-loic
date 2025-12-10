@@ -3,11 +3,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { CheckCircle2, Lock, Mail, Phone, Scale, ScrollText, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Lock, Scale, ScrollText, ShieldCheck } from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
 import { NeoTag } from "../ui/NeoTag";
+import type { ContactChannel } from "./NeoLegalContactBanner";
+import { NeoLegalContactBanner } from "./NeoLegalContactBanner";
 
 type LegalPageType = "privacy" | "terms";
 
@@ -15,12 +17,6 @@ interface LegalSection {
   title: string;
   description?: string;
   bullets?: string[];
-}
-
-interface ContactChannel {
-  label: string;
-  value: string;
-  href?: string;
 }
 
 interface Highlight {
@@ -178,40 +174,12 @@ export const NeoLegalPage: React.FC<{ type: LegalPageType }> = ({ type }) => {
         </section>
 
         <section className="container mx-auto px-4 md:px-6 pb-20">
-          <div className="border-2 border-neo-border bg-neo-accent text-neo-text p-8 md:p-10 shadow-[8px_8px_0px_0px_var(--neo-border)]">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-              <div className="space-y-2">
-                <p className="font-mono text-xs uppercase tracking-[0.25em] text-neo-text">
-                  {common("contactTitle")}
-                </p>
-                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">
-                  {t("pageTitle")}
-                </h3>
-                <p className="text-sm md:text-base max-w-2xl">{t("contactIntro")}</p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full md:w-auto">
-                {contactChannels.map((channel) => (
-                  <a
-                    key={channel.value}
-                    href={channel.href || "#"}
-                    className="flex items-center gap-3 bg-neo-text text-neo-text-inverse px-4 py-3 border-2 border-neo-border hover:-translate-y-1 transition-transform shadow-[4px_4px_0px_0px_var(--neo-border)]"
-                  >
-                    {channel.label.toLowerCase().includes("mail") ? (
-                      <Mail className="w-4 h-4" />
-                    ) : (
-                      <Phone className="w-4 h-4" />
-                    )}
-                    <div className="flex flex-col leading-tight">
-                      <span className="text-xs uppercase font-mono opacity-70">
-                        {channel.label}
-                      </span>
-                      <span className="font-bold text-sm">{channel.value}</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+          <NeoLegalContactBanner
+            contactTitle={common("contactTitle")}
+            pageTitle={t("pageTitle")}
+            contactIntro={t("contactIntro")}
+            contactChannels={contactChannels}
+          />
         </section>
       </main>
 

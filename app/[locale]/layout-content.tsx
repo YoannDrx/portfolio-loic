@@ -44,13 +44,13 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
       <main className="min-h-screen">{children}</main>
       <motion.div
         initial={{ opacity: 1, y: 0 }}
-        animate={{ opacity: 1 - scrollIndicatorProgress, y: scrollIndicatorProgress * 12 }}
+        animate={{ opacity: 1 - scrollIndicatorProgress }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed inset-x-0 bottom-2 md:bottom-4 pb-[env(safe-area-inset-bottom)] flex justify-center pointer-events-none z-50"
+        className="fixed right-2 md:right-4 top-1/2 -translate-y-1/2 pr-[env(safe-area-inset-right)] pointer-events-none z-50"
         aria-hidden="true"
       >
-        <div className="flex flex-col items-center gap-2 text-neo-text">
-          <span className="font-mono text-[10px] uppercase tracking-[0.25em]">
+        <div className="flex flex-col items-center gap-2 text-neo-text/70">
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] [writing-mode:vertical-rl]">
             {t("scrollDown")}
           </span>
           <motion.div
@@ -58,7 +58,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
             transition={{ repeat: Infinity, duration: 2 }}
             className="drop-shadow-[0_4px_0_rgba(0,0,0,0.25)]"
           >
-            <ArrowDown size={30} />
+            <ArrowDown size={24} className="text-white mix-blend-difference" />
           </motion.div>
         </div>
       </motion.div>

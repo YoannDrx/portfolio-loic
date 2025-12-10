@@ -91,7 +91,9 @@ export const NeoFooter = () => {
                 <h3 className="text-xl font-black uppercase leading-none mb-1 text-neo-text-inverse">
                   Loïc Ghanem
                 </h3>
-                <p className="text-sm font-medium text-neo-text/60 dark:text-neo-text-inverse/60">
+                <p
+                  className={`${legalLinkClass} text-neo-text-inverse/70 dark:text-neo-text-inverse/60`}
+                >
                   {t("role")}
                 </p>
                 <div className="flex items-center gap-2 text-xs font-bold text-neo-accent">
