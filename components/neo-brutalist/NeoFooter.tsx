@@ -56,20 +56,18 @@ export const NeoFooter = () => {
       className="bg-neo-text text-neo-text-inverse border-t-4 border-neo-accent relative overflow-hidden transition-colors duration-500"
     >
       <div className="container mx-auto px-0">
-        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[400px]">
-          {/* LEFT COLUMN: CTA & Identity (6 cols) */}
-          <div className="lg:col-span-6 border-b lg:border-b-0 lg:border-r border-neo-text-inverse/20 flex flex-col justify-between relative">
-            {/* Top: Large CTA */}
-            <div className="p-8 md:p-12 lg:p-16 flex-grow flex items-center justify-center lg:justify-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12">
+          {/* LEFT COLUMN: CTA & Identity (5 cols) */}
+          <div className="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-neo-text-inverse/20 p-8 flex flex-col justify-between gap-8">
+            {/* CTA */}
+            <div>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="relative z-10"
               >
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-sans font-black uppercase leading-[0.9] mb-4 transition-all duration-300">
-                  {/* Light Mode: Stroke White, Fill Transparent. Hover: Fill White */}
-                  {/* Dark Mode: Fill Black. Hover: Stroke Black, Fill Transparent */}
+                <h2 className="text-4xl md:text-5xl font-sans font-black uppercase leading-[0.9] transition-all duration-300">
                   <span className="block cta-text transition-colors duration-500 cursor-default">
                     {t("ctaTitle1")}
                   </span>
@@ -78,40 +76,34 @@ export const NeoFooter = () => {
               </motion.div>
             </div>
 
-            {/* Bottom: Identity */}
-            <div className="p-8 border-t border-neo-text-inverse/20 bg-neo-text-inverse/5 backdrop-blur-sm">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-                <div className="w-16 h-16 bg-neo-accent text-neo-text flex items-center justify-center font-black text-2xl border-2 border-neo-accent shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)]">
-                  LG
-                </div>
-                <div>
-                  <h3 className="text-2xl font-black uppercase leading-none mb-1 text-neo-text-inverse">
-                    Loïc Ghanem
-                  </h3>
-                  <p className="font-mono text-xs opacity-60 uppercase tracking-widest mb-2 text-neo-text-inverse">
-                    Composer & Producer
-                  </p>
-                  <div className="flex items-center gap-2 text-sm font-bold text-neo-accent">
-                    <MapPin className="w-4 h-4" />
-                    <span className="uppercase">
-                      {t("basedIn")} {t("location")}
-                    </span>
-                  </div>
+            {/* Identity */}
+            <div className="flex flex-row items-center gap-4">
+              <div className="w-12 h-12 bg-neo-accent text-neo-text flex items-center justify-center font-black text-xl border-2 border-neo-accent shadow-[3px_3px_0px_0px_rgba(0,0,0,0.2)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)]">
+                LG
+              </div>
+              <div>
+                <h3 className="text-xl font-black uppercase leading-none mb-1 text-neo-text-inverse">
+                  Loïc Ghanem
+                </h3>
+                <div className="flex items-center gap-2 text-xs font-bold text-neo-accent">
+                  <MapPin className="w-3 h-3" />
+                  <span className="uppercase">
+                    {t("basedIn")} {t("location")}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Listen & Social (6 cols) */}
-          <div className="lg:col-span-6 flex flex-col md:flex-row">
-            {/* Listen Section */}
-            <div className="flex-1 p-8 border-b md:border-b-0 md:border-r border-neo-text-inverse/20">
-              <h3 className="font-mono text-xs text-neo-accent uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
-                <span className="w-2 h-2 bg-neo-accent animate-pulse" />
+          {/* RIGHT COLUMN: Listen, Social, Contact (7 cols) */}
+          <div className="lg:col-span-7 p-8 grid grid-cols-1 sm:grid-cols-3 gap-8 content-start">
+            {/* Listen Column */}
+            <div className="space-y-4">
+              <h3 className="font-mono text-[10px] text-neo-accent uppercase tracking-[0.2em] flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-neo-accent animate-pulse" />
                 {t("listen")}
               </h3>
-
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-2">
                 {listenLinks.map((platform) => {
                   const Icon = platform.icon;
                   return (
@@ -120,12 +112,12 @@ export const NeoFooter = () => {
                       href={platform.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex flex-col items-center justify-center gap-2 p-4 border border-neo-text-inverse/10 bg-neo-text hover:bg-neo-accent hover:border-neo-accent transition-all duration-300 aspect-square"
+                      className="flex items-center gap-3 text-xs font-bold uppercase hover:text-neo-accent transition-colors group"
                     >
-                      <div className="w-8 h-8 bg-neo-text-inverse/10 rounded-full flex items-center justify-center group-hover:bg-neo-text group-hover:text-neo-accent transition-colors">
-                        <Icon className="w-4 h-4" />
+                      <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
+                        <Icon className="w-3 h-3" />
                       </div>
-                      <span className="font-bold text-[10px] uppercase tracking-wider group-hover:text-neo-text transition-colors text-center">
+                      <span className="group-hover:translate-x-1 transition-transform">
                         {platform.name}
                       </span>
                     </a>
@@ -134,76 +126,77 @@ export const NeoFooter = () => {
               </div>
             </div>
 
-            {/* Social & Contact Section */}
-            <div className="flex-1 p-8 flex flex-col justify-between bg-neo-text-inverse/5">
-              <div className="space-y-8">
-                <div>
-                  <h3 className="font-mono text-xs text-neo-accent uppercase tracking-[0.2em] mb-4">
-                    {t("social")}
-                  </h3>
-                  <div className="flex flex-col gap-3">
-                    {socialLinks.map((social) => (
-                      <a
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-sm hover:text-neo-accent transition-colors group p-2 border border-transparent hover:border-neo-text-inverse/10 bg-neo-text/0 hover:bg-neo-text"
-                      >
-                        <div className="w-6 h-6 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
-                          <Share2 className="w-3 h-3" />
-                        </div>
-                        <span className="uppercase font-bold tracking-wider text-xs group-hover:text-neo-text-inverse">
-                          {social.name}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="font-mono text-xs text-neo-accent uppercase tracking-[0.2em] mb-4">
-                    Contact
-                  </h3>
-                  <div className="flex flex-col gap-3">
-                    <a
-                      href="mailto:loic.ghanem@outlook.com"
-                      className="flex items-center gap-3 group"
-                    >
-                      <div className="w-6 h-6 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
-                        <Mail className="w-3 h-3" />
-                      </div>
-                      <span className="text-xs font-mono font-bold hover:text-neo-accent transition-colors break-all">
-                        loic.ghanem@outlook.com
-                      </span>
-                    </a>
-                    <a href="tel:+33614517592" className="flex items-center gap-3 group">
-                      <div className="w-6 h-6 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
-                        <Phone className="w-3 h-3" />
-                      </div>
-                      <span className="text-xs font-mono font-bold hover:text-neo-accent transition-colors">
-                        +33 6 14 51 75 92
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-8 mt-8 border-t border-neo-text-inverse/20 text-[10px] font-mono opacity-40">
-                <div className="flex items-center gap-1 mb-2">
-                  <Copyright className="w-3 h-3" />
-                  <span>{currentYear} LOÏC GHANEM</span>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <a href="#" className="hover:text-neo-accent transition-colors">
-                    {t("privacyPolicy")}
+            {/* Social Column */}
+            <div className="space-y-4">
+              <h3 className="font-mono text-[10px] text-neo-accent uppercase tracking-[0.2em]">
+                {t("social")}
+              </h3>
+              <div className="flex flex-col gap-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-xs font-bold uppercase hover:text-neo-accent transition-colors group"
+                  >
+                    <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
+                      <Share2 className="w-3 h-3" />
+                    </div>
+                    <span className="group-hover:translate-x-1 transition-transform">
+                      {social.name}
+                    </span>
                   </a>
-                  <a href="#" className="hover:text-neo-accent transition-colors">
-                    {t("termsOfUse")}
-                  </a>
-                </div>
+                ))}
               </div>
             </div>
+
+            {/* Contact Column */}
+            <div className="space-y-4">
+              <h3 className="font-mono text-[10px] text-neo-accent uppercase tracking-[0.2em]">
+                Contact
+              </h3>
+              <div className="flex flex-col gap-2">
+                <a
+                  href="mailto:loic.ghanem@outlook.com"
+                  className="flex items-center gap-3 text-xs font-bold hover:text-neo-accent transition-colors group"
+                >
+                  <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
+                    <Mail className="w-3 h-3" />
+                  </div>
+                  <span className="truncate group-hover:translate-x-1 transition-transform">
+                    Email Me
+                  </span>
+                </a>
+                <a
+                  href="tel:+33614517592"
+                  className="flex items-center gap-3 text-xs font-bold hover:text-neo-accent transition-colors group"
+                >
+                  <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
+                    <Phone className="w-3 h-3" />
+                  </div>
+                  <span className="group-hover:translate-x-1 transition-transform">
+                    +33 6 14 51 75 92
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM BAR */}
+        <div className="px-8 py-4 border-t border-neo-text-inverse/20 flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[10px] opacity-40">
+          <div className="flex items-center gap-1">
+            <Copyright className="w-3 h-3" />
+            <span>{currentYear} LOÏC GHANEM</span>
+          </div>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-neo-accent transition-colors">
+              {t("privacyPolicy")}
+            </a>
+            <a href="#" className="hover:text-neo-accent transition-colors">
+              {t("termsOfUse")}
+            </a>
           </div>
         </div>
       </div>
