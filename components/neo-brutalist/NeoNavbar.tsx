@@ -224,17 +224,19 @@ export const NeoNavbar = () => {
               exit="exit"
               className="fixed inset-0 z-[60] lg:hidden bg-neo-bg overflow-y-auto"
             >
-              {/* Close Button */}
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="fixed top-[calc(1.5rem+env(safe-area-inset-top))] right-[calc(1.5rem+env(safe-area-inset-right))] w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 z-[70]"
-                aria-label={t("close")}
-              >
-                <div className="relative w-5 h-5">
-                  <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-neo-text-inverse -translate-x-1/2 -translate-y-1/2 rotate-45 origin-center" />
-                  <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-neo-text-inverse -translate-x-1/2 -translate-y-1/2 -rotate-45 origin-center" />
-                </div>
-              </button>
+              {/* Header Mirror for accurate button positioning */}
+              <div className="container mx-auto px-3 sm:px-4 py-3 lg:py-4 flex justify-end items-center pointer-events-none sticky top-0 z-[70]">
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 pointer-events-auto"
+                  aria-label={t("close")}
+                >
+                  <div className="relative w-5 h-5">
+                    <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-neo-text-inverse -translate-x-1/2 -translate-y-1/2 rotate-45 origin-center" />
+                    <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-neo-text-inverse -translate-x-1/2 -translate-y-1/2 -rotate-45 origin-center" />
+                  </div>
+                </button>
+              </div>
 
               {/* Grid pattern background */}
               <div
