@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { NeoLogo } from "./NeoLogo";
+import { Link } from "@/i18n/routing";
 
 const socialLinks = [
   { name: "Facebook", url: "https://www.facebook.com/loic.leduc.54" },
@@ -204,12 +205,12 @@ export const NeoFooter = () => {
             <span>{currentYear} LOÏC GHANEM</span>
           </div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-neo-accent transition-colors">
+            <Link href="/privacy-policy" className="hover:text-neo-accent transition-colors">
               {t("privacyPolicy")}
-            </a>
-            <a href="#" className="hover:text-neo-accent transition-colors">
+            </Link>
+            <Link href="/terms-of-use" className="hover:text-neo-accent transition-colors">
               {t("termsOfUse")}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import { adminLogger } from '@/lib/logger';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { adminLogger } from "@/lib/logger";
 import {
   LayoutDashboard,
   Image,
@@ -21,12 +21,8 @@ import {
   Command,
   Search,
   ClipboardList,
-} from 'lucide-react';
-import {
-  adminSidebarItem,
-  staggerContainer,
-  staggerItem,
-} from '@/lib/animations';
+} from "lucide-react";
+import { adminSidebarItem, staggerContainer, staggerItem } from "@/lib/animations";
 
 /* ============================================
    TYPES
@@ -53,52 +49,52 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   {
     icon: LayoutDashboard,
-    label: 'Dashboard',
-    href: '/admin',
-    color: 'text-[var(--admin-neon-cyan)]',
-    glowColor: 'var(--admin-glow-cyan-md)',
+    label: "Dashboard",
+    href: "/admin",
+    color: "text-[var(--admin-neon-cyan)]",
+    glowColor: "var(--admin-glow-cyan-md)",
   },
   {
     icon: Image,
-    label: 'Albums',
-    href: '/admin/albums',
-    color: 'text-[var(--admin-neon-lime)]',
-    glowColor: 'var(--admin-glow-lime-md)',
+    label: "Albums",
+    href: "/admin/albums",
+    color: "text-[var(--admin-neon-lime)]",
+    glowColor: "var(--admin-glow-lime-md)",
   },
   {
     icon: Video,
-    label: 'Vidéos',
-    href: '/admin/videos',
-    color: 'text-[var(--admin-neon-magenta)]',
-    glowColor: 'var(--admin-glow-magenta-md)',
+    label: "Vidéos",
+    href: "/admin/videos",
+    color: "text-[var(--admin-neon-magenta)]",
+    glowColor: "var(--admin-glow-magenta-md)",
   },
   {
     icon: Briefcase,
-    label: 'Services',
-    href: '/admin/services',
-    color: 'text-[var(--admin-neon-purple)]',
-    glowColor: 'var(--admin-glow-purple-md)',
+    label: "Services",
+    href: "/admin/services",
+    color: "text-[var(--admin-neon-purple)]",
+    glowColor: "var(--admin-glow-purple-md)",
   },
   {
     icon: FileText,
-    label: 'CV / Resume',
-    href: '/admin/cv',
-    color: 'text-[var(--admin-neon-orange)]',
-    glowColor: '0 0 20px rgba(255, 107, 53, 0.5)',
+    label: "CV / Resume",
+    href: "/admin/cv",
+    color: "text-neon-orange",
+    glowColor: "var(--admin-glow-orange-md)",
   },
   {
     icon: ClipboardList,
-    label: 'Journal',
-    href: '/admin/logs',
-    color: 'text-[var(--admin-neon-cyan)]',
-    glowColor: 'var(--admin-glow-cyan-md)',
+    label: "Journal",
+    href: "/admin/logs",
+    color: "text-[var(--admin-neon-cyan)]",
+    glowColor: "var(--admin-glow-cyan-md)",
   },
   {
     icon: Settings,
-    label: 'Paramètres',
-    href: '/admin/settings',
-    color: 'text-muted-foreground',
-    glowColor: '0 0 20px rgba(255, 255, 255, 0.2)',
+    label: "Paramètres",
+    href: "/admin/settings",
+    color: "text-muted-foreground",
+    glowColor: "0 0 20px rgba(255, 255, 255, 0.2)",
   },
 ];
 
@@ -149,38 +145,41 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
   const Icon = item.icon;
 
   return (
-    <motion.div
-      variants={staggerItem}
-      custom={index}
-    >
-      <Link
-        href={`/${locale}${item.href}`}
-        onClick={onClick}
-        className="block"
-      >
+    <motion.div variants={staggerItem} custom={index}>
+      <Link href={`/${locale}${item.href}`} onClick={onClick} className="block">
         <motion.div
           className={cn(
-            'group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300',
+            "group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300",
             isActive
-              ? 'text-foreground bg-[var(--glass-active)] border border-[var(--glass-border)]'
-              : 'text-muted-foreground hover:text-foreground hover:bg-[var(--glass-subtle)]'
+              ? "text-foreground bg-[var(--glass-active)] border border-[var(--glass-border)]"
+              : "text-muted-foreground hover:text-foreground hover:bg-[var(--glass-subtle)]"
           )}
           variants={adminSidebarItem}
           initial="rest"
           whileHover="hover"
-          animate={isActive ? 'active' : 'rest'}
+          animate={isActive ? "active" : "rest"}
         >
           {/* Active indicator */}
           {isActive && (
             <motion.div
               className="absolute left-0 top-0 bottom-0 w-1.5 rounded-r-md flex items-center"
               layoutId="activeIndicator"
-              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
             >
               <div
                 className="w-full h-7 rounded-r-md"
                 style={{
-                  background: item.color.includes('cyan') ? 'var(--admin-neon-cyan)' : item.color.includes('lime') ? 'var(--admin-neon-lime)' : item.color.includes('magenta') ? 'var(--admin-neon-magenta)' : item.color.includes('purple') ? 'var(--admin-neon-purple)' : item.color.includes('orange') ? 'var(--admin-neon-orange)' : '#fff',
+                  background: item.color.includes("cyan")
+                    ? "var(--admin-neon-cyan)"
+                    : item.color.includes("lime")
+                      ? "var(--admin-neon-lime)"
+                      : item.color.includes("magenta")
+                        ? "var(--admin-neon-magenta)"
+                        : item.color.includes("purple")
+                          ? "var(--admin-neon-purple)"
+                          : item.color.includes("orange")
+                            ? "var(--admin-neon-orange)"
+                            : "#fff",
                 }}
               />
             </motion.div>
@@ -189,16 +188,18 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
           {/* Icon */}
           <motion.div
             className={cn(
-              'relative z-10 flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300',
-              isActive ? 'bg-[var(--glass-active)]' : 'bg-transparent group-hover:bg-[var(--glass-subtle)]'
+              "relative z-10 flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300",
+              isActive
+                ? "bg-[var(--glass-active)]"
+                : "bg-transparent group-hover:bg-[var(--glass-subtle)]"
             )}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
             <Icon
               className={cn(
-                'h-5 w-5 transition-all duration-300',
-                isActive ? item.color : 'text-muted-foreground group-hover:text-foreground'
+                "h-5 w-5 transition-all duration-300",
+                isActive ? item.color : "text-muted-foreground group-hover:text-foreground"
               )}
             />
           </motion.div>
@@ -210,12 +211,14 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
           {item.badge && (
             <motion.span
               className={cn(
-                'px-2 py-0.5 text-xs font-bold rounded-full',
-                isActive ? 'bg-[var(--glass-active)] text-foreground' : 'bg-[var(--glass-active)] text-muted-foreground'
+                "px-2 py-0.5 text-xs font-bold rounded-full",
+                isActive
+                  ? "bg-[var(--glass-active)] text-foreground"
+                  : "bg-[var(--glass-active)] text-muted-foreground"
               )}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
               {item.badge}
             </motion.span>
@@ -234,7 +237,7 @@ function SidebarMenuItem({ item, isActive, locale, index, onClick }: SidebarMenu
           <motion.div
             className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
             style={{
-              background: `radial-gradient(circle at 20% 50%, ${item.color.includes('cyan') ? 'rgba(0, 240, 255, 0.1)' : item.color.includes('lime') ? 'rgba(213, 255, 10, 0.1)' : item.color.includes('magenta') ? 'rgba(255, 0, 110, 0.1)' : item.color.includes('purple') ? 'rgba(161, 0, 242, 0.1)' : 'rgba(255, 255, 255, 0.05)'} 0%, transparent 70%)`,
+              background: `radial-gradient(circle at 20% 50%, ${item.color.includes("cyan") ? "rgba(0, 240, 255, 0.1)" : item.color.includes("lime") ? "rgba(213, 255, 10, 0.1)" : item.color.includes("magenta") ? "rgba(255, 0, 110, 0.1)" : item.color.includes("purple") ? "rgba(161, 0, 242, 0.1)" : item.color.includes("orange") ? "rgba(255, 51, 0, 0.1)" : "rgba(255, 255, 255, 0.05)"} 0%, transparent 70%)`,
             }}
           />
         </motion.div>
@@ -261,8 +264,8 @@ function QuickStatsCard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch('/api/admin/dashboard/stats', {
-          credentials: 'include',
+        const res = await fetch("/api/admin/dashboard/stats", {
+          credentials: "include",
         });
         if (res.ok) {
           const data = await res.json();
@@ -272,11 +275,11 @@ function QuickStatsCard() {
             publishRate: data.publishRate ?? 0,
           });
         } else {
-          adminLogger.error('Stats API error:', res.status);
+          adminLogger.error("Stats API error:", res.status);
           setError(true);
         }
       } catch (err) {
-        adminLogger.error('Erreur fetch stats:', err);
+        adminLogger.error("Erreur fetch stats:", err);
         setError(true);
       } finally {
         setLoading(false);
@@ -297,7 +300,8 @@ function QuickStatsCard() {
         <div
           className="absolute inset-0 rounded-xl"
           style={{
-            background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(161, 0, 242, 0.1) 50%, rgba(213, 255, 10, 0.1) 100%)',
+            background:
+              "linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(161, 0, 242, 0.1) 50%, rgba(213, 255, 10, 0.1) 100%)",
           }}
         />
       </div>
@@ -307,11 +311,11 @@ function QuickStatsCard() {
         <div className="flex items-center gap-2 mb-4">
           <motion.div
             animate={{ rotate: [0, 360] }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
-            <Sparkles className="h-4 w-4 text-[var(--admin-neon-lime)]" />
+            <Sparkles className="h-4 w-4 text-neon-orange" />
           </motion.div>
-          <span className="text-xs font-bold text-[var(--admin-neon-lime)] uppercase tracking-widest">
+          <span className="text-xs font-bold text-neon-orange uppercase tracking-widest">
             Contenus
           </span>
         </div>
@@ -337,10 +341,10 @@ function QuickStatsCard() {
             </div>
             <div className="w-full h-1 rounded-full bg-[var(--glass-active)] overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-[var(--admin-neon-cyan)] to-[var(--admin-neon-lime)]"
+                className="h-full bg-gradient-to-r from-neon-cyan to-neon-orange"
                 initial={{ width: 0 }}
-                animate={{ width: '100%' }}
-                transition={{ delay: 0.8, duration: 1, ease: 'easeOut' }}
+                animate={{ width: "100%" }}
+                transition={{ delay: 0.8, duration: 1, ease: "easeOut" }}
               />
             </div>
 
@@ -352,10 +356,10 @@ function QuickStatsCard() {
             </div>
             <div className="w-full h-1 rounded-full bg-[var(--glass-active)] overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-[var(--admin-neon-magenta)] to-[var(--admin-neon-purple)]"
+                className="h-full bg-gradient-to-r from-neon-orange to-neon-magenta"
                 initial={{ width: 0 }}
                 animate={{ width: `${stats.publishRate}%` }}
-                transition={{ delay: 1, duration: 1, ease: 'easeOut' }}
+                transition={{ delay: 1, duration: 1, ease: "easeOut" }}
               />
             </div>
 
@@ -402,10 +406,10 @@ function MobileSidebar({
           {/* Sidebar */}
           <motion.div
             className="fixed left-0 top-0 bottom-0 w-72 bg-[var(--admin-bg)] border-r border-[var(--glass-border)] z-50 lg:hidden"
-            initial={{ x: '-100%' }}
+            initial={{ x: "-100%" }}
             animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'spring', stiffness: 400, damping: 40 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", stiffness: 400, damping: 40 }}
           >
             {/* Close button */}
             <button
@@ -419,17 +423,25 @@ function MobileSidebar({
             <div className="flex flex-col h-full">
               {/* Logo */}
               <div className="flex h-20 items-center px-6 border-b border-[var(--glass-border)]">
-                <Link href={`/${locale}/admin`} onClick={onClose} className="flex items-center gap-3 group">
-                  <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform">
+                <Link
+                  href={`/${locale}/admin`}
+                  onClick={onClose}
+                  className="flex items-center gap-3 group"
+                >
+                  <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-orange to-neon-orange p-[2px] group-hover:scale-110 transition-transform">
                     <div className="w-full h-full bg-[var(--admin-bg)] rounded-lg flex items-center justify-center">
-                      <span className="text-xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">
+                      <span className="text-xl font-black bg-gradient-to-br from-neon-orange to-neon-orange bg-clip-text text-transparent">
                         LG
                       </span>
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-lg font-bold text-foreground tracking-tight">Loïc Ghanem</span>
-                    <span className="text-xs text-neon-lime uppercase tracking-widest">Admin Panel</span>
+                    <span className="text-lg font-bold text-foreground tracking-tight">
+                      Loïc Ghanem
+                    </span>
+                    <span className="text-xs text-neon-orange uppercase tracking-widest">
+                      Admin Panel
+                    </span>
                   </div>
                 </Link>
               </div>
@@ -445,7 +457,7 @@ function MobileSidebar({
                   {menuItems.map((item, index) => {
                     const isActive =
                       pathname === `/${locale}${item.href}` ||
-                      (item.href !== '/admin' && pathname.startsWith(`/${locale}${item.href}`));
+                      (item.href !== "/admin" && pathname.startsWith(`/${locale}${item.href}`));
 
                     return (
                       <SidebarMenuItem
@@ -498,24 +510,20 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
       {/* Mobile menu button - z-40 to be above header (z-30) */}
       <button
         onClick={() => setIsMobileOpen(true)}
-        className="fixed top-4 left-4 z-40 p-2.5 rounded-lg bg-[var(--glass-active)] backdrop-blur-xl border border-lime-400/50 text-foreground lg:hidden admin-hover-glow-cyan shadow-lg"
+        className="fixed top-4 left-4 z-40 p-2.5 rounded-lg bg-[var(--glass-active)] backdrop-blur-xl border border-orange-400/50 text-foreground lg:hidden admin-hover-glow-cyan shadow-lg"
       >
         <Menu className="h-5 w-5" />
       </button>
 
       {/* Mobile sidebar */}
-      <MobileSidebar
-        locale={locale}
-        isOpen={isMobileOpen}
-        onClose={() => setIsMobileOpen(false)}
-      />
+      <MobileSidebar locale={locale} isOpen={isMobileOpen} onClose={() => setIsMobileOpen(false)} />
 
       {/* Desktop sidebar */}
       <motion.div
         className="hidden w-72 flex-col border-r border-[var(--glass-border)] lg:flex z-20"
         style={{
-          background: 'var(--gradient-admin-sidebar)',
-          backdropFilter: 'blur(24px)',
+          background: "var(--gradient-admin-sidebar)",
+          backdropFilter: "blur(24px)",
         }}
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -525,13 +533,13 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
         <div className="flex h-20 items-center px-6 border-b border-[var(--glass-border)]">
           <Link href={`/${locale}/admin`} className="flex items-center gap-3 group">
             <motion.div
-              className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-green to-neon-lime p-[2px] group-hover:scale-110 transition-transform"
+              className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-neon-orange to-neon-orange p-[2px] group-hover:scale-110 transition-transform"
               whileHover={{ rotate: 5 }}
               whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <div className="w-full h-full bg-[var(--admin-bg)] rounded-lg flex items-center justify-center">
-                <span className="text-xl font-black bg-gradient-to-br from-neon-green to-neon-lime bg-clip-text text-transparent">
+                <span className="text-xl font-black bg-gradient-to-br from-neon-orange to-neon-orange bg-clip-text text-transparent">
                   LG
                 </span>
               </div>
@@ -539,7 +547,7 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
               <motion.div
                 className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
                 style={{
-                  boxShadow: '0 0 30px rgba(213, 255, 10, 0.5)',
+                  boxShadow: "0 0 30px var(--admin-glow-orange-md)",
                 }}
               />
             </motion.div>
@@ -547,7 +555,7 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
               <span className="text-lg font-bold text-foreground tracking-tight font-montserrat">
                 Loïc Ghanem
               </span>
-              <span className="text-xs text-neon-lime uppercase tracking-widest">
+              <span className="text-xs text-neon-orange uppercase tracking-widest">
                 Admin Panel
               </span>
             </div>
@@ -585,7 +593,7 @@ export function AdminSidebarImmersive({ locale, onOpenCommandPalette }: AdminSid
             {menuItems.map((item, index) => {
               const isActive =
                 pathname === `/${locale}${item.href}` ||
-                (item.href !== '/admin' && pathname.startsWith(`/${locale}${item.href}`));
+                (item.href !== "/admin" && pathname.startsWith(`/${locale}${item.href}`));
 
               return (
                 <SidebarMenuItem
