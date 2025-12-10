@@ -46,16 +46,8 @@ const CategoryCard = ({ title, description, enabled, onToggle, locked }: Categor
 export const NeoCookieConsent = () => {
   const t = useTranslations("consent");
   const locale = useLocale();
-  const {
-    state,
-    isReady,
-    hasChoice,
-    isManagerOpen,
-    closeManager,
-    acceptAll,
-    rejectAll,
-    setCategory,
-  } = useConsent();
+  const { state, isReady, isManagerOpen, closeManager, acceptAll, rejectAll, setCategory } =
+    useConsent();
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
