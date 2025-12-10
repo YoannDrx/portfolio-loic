@@ -95,16 +95,21 @@ export const NeoFooter = () => {
           </div>
 
           {/* RIGHT COLUMN: Listen, Social, Contact (7 cols) */}
-          <div className="lg:col-span-7 p-8 grid grid-cols-1 sm:grid-cols-3 gap-8 content-start">
+
+          <div className="lg:col-span-7 p-8 flex flex-col sm:flex-row justify-between gap-8 content-start w-full">
             {/* Listen Column */}
+
             <div className="space-y-4">
               <h3 className="font-mono text-[10px] text-neo-accent uppercase tracking-[0.2em] flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-neo-accent animate-pulse" />
+
                 {t("listen")}
               </h3>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+
+              <div className="grid grid-cols-2 gap-x-8 gap-y-2">
                 {listenLinks.map((platform) => {
                   const Icon = platform.icon;
+
                   return (
                     <a
                       key={platform.name}
@@ -116,6 +121,7 @@ export const NeoFooter = () => {
                       <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm flex-shrink-0">
                         <Icon className="w-3 h-3" />
                       </div>
+
                       <span className="truncate group-hover:translate-x-1 transition-transform">
                         {platform.name}
                       </span>
@@ -126,10 +132,12 @@ export const NeoFooter = () => {
             </div>
 
             {/* Social Column */}
+
             <div className="space-y-4">
               <h3 className="font-mono text-[10px] text-neo-accent uppercase tracking-[0.2em]">
                 {t("social")}
               </h3>
+
               <div className="flex flex-col gap-2">
                 {socialLinks.map((social) => (
                   <a
@@ -142,6 +150,7 @@ export const NeoFooter = () => {
                     <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
                       <Share2 className="w-3 h-3" />
                     </div>
+
                     <span className="group-hover:translate-x-1 transition-transform">
                       {social.name}
                     </span>
@@ -151,10 +160,12 @@ export const NeoFooter = () => {
             </div>
 
             {/* Contact Column */}
+
             <div className="space-y-4">
               <h3 className="font-mono text-[10px] text-neo-accent uppercase tracking-[0.2em]">
                 Contact
               </h3>
+
               <div className="flex flex-col gap-2">
                 <a
                   href="mailto:loic.ghanem@outlook.com"
@@ -163,10 +174,12 @@ export const NeoFooter = () => {
                   <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
                     <Mail className="w-3 h-3" />
                   </div>
+
                   <span className="truncate group-hover:translate-x-1 transition-transform">
                     Email Me
                   </span>
                 </a>
+
                 <a
                   href="tel:+33614517592"
                   className="flex items-center gap-3 text-xs font-bold hover:text-neo-accent transition-colors group"
@@ -174,6 +187,7 @@ export const NeoFooter = () => {
                   <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
                     <Phone className="w-3 h-3" />
                   </div>
+
                   <span className="group-hover:translate-x-1 transition-transform">
                     +33 6 14 51 75 92
                   </span>
