@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Palette, Sun, Moon } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Palette, Sun, Moon, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -49,13 +50,10 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    setMounted(true);
+    const saved = localStorage.getItem("neo-palette") || "orange";
+    setCurrentPalette(saved);
+    document.documentElement.setAttribute("data-palette", saved);
   }, []);
 
   const handleSelect = (paletteId: string) => {
@@ -83,150 +81,164 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
   const isDark = theme === "dark";
 
   return (
-    <div ref={dropdownRef} className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={cn(
-          "w-9 h-9 flex items-center justify-center border-2 border-neo-border",
-          "transition-colors duration-150",
-          isOpen
-            ? "bg-neo-accent"
-            : "bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse",
-          className
-        )}
-        aria-label="Choisir une palette de couleurs"
-      >
-        <Palette className="w-4 h-4" style={{ color: isOpen ? "white" : current?.color }} />
-      </button>
+    <>
+      <div ref={dropdownRef} className="relative">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={cn(
+            "w-9 h-9 flex items-center justify-center border-2 border-neo-border",
+            "transition-colors duration-150",
+            isOpen
+              ? "bg-neo-accent"
+              : "bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse",
+            className
+          )}
+          aria-label="Choisir une palette de couleurs"
+        >
+          <Palette className="w-4 h-4" style={{ color: isOpen ? "white" : current?.color }} />
+        </button>
+      </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Backdrop overlay with centered modal */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
-              onClick={() => setIsOpen(false)}
-            >
-              {/* Modal centered */}
+      {createPortal(
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              {/* Backdrop overlay with centered modal */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className="bg-neo-surface border-4 border-neo-border shadow-[4px_4px_0px_0px_var(--neo-shadow)] md:shadow-[8px_8px_0px_0px_var(--neo-shadow)] p-4 w-full max-w-xs md:max-w-sm"
-                onClick={(e) => e.stopPropagation()}
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+                onClick={() => setIsOpen(false)}
               >
-                {/* Mode d'affichage */}
-                <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
-                  Mode d'affichage
-                </div>
-                <div className="flex gap-2 mb-4">
+                {/* Modal centered */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="relative bg-neo-surface border-4 border-neo-border shadow-[4px_4px_0px_0px_var(--neo-shadow)] md:shadow-[8px_8px_0px_0px_var(--neo-shadow)] p-4 w-full max-w-xs md:max-w-sm"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Close Button */}
                   <button
-                    onClick={() => handleThemeToggle("light")}
-                    className={cn(
-                      "flex-1 flex items-center justify-center gap-2 px-3 py-2 border-2 transition-all duration-150",
-                      !isDark
-                        ? "border-neo-text bg-neo-accent text-neo-text-inverse shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
-                        : "border-neo-border bg-neo-bg hover:bg-neo-surface"
-                    )}
-                    aria-label="Mode clair"
+                    onClick={() => setIsOpen(false)}
+                    className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-neo-surface text-neo-text border-2 border-transparent hover:border-neo-border hover:bg-neo-accent hover:text-white transition-all duration-200"
+                    aria-label="Fermer"
                   >
-                    <Sun className="w-4 h-4" />
-                    <span className="font-mono text-xs font-bold uppercase">Light</span>
+                    <X strokeWidth={3} className="w-5 h-5" />
                   </button>
-                  <button
-                    onClick={() => handleThemeToggle("dark")}
-                    className={cn(
-                      "flex-1 flex items-center justify-center gap-2 px-3 py-2 border-2 transition-all duration-150",
-                      isDark
-                        ? "border-neo-text bg-neo-accent text-neo-text-inverse shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
-                        : "border-neo-border bg-neo-bg hover:bg-neo-surface"
-                    )}
-                    aria-label="Mode sombre"
-                  >
-                    <Moon className="w-4 h-4" />
-                    <span className="font-mono text-xs font-bold uppercase">Dark</span>
-                  </button>
-                </div>
 
-                {/* Séparateur */}
-                <div className="border-t border-neo-border mb-4" />
+                  {/* Mode d'affichage */}
+                  <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
+                    Mode d'affichage
+                  </div>
+                  <div className="flex gap-2 mb-4">
+                    <button
+                      onClick={() => handleThemeToggle("light")}
+                      className={cn(
+                        "flex-1 flex items-center justify-center gap-2 px-3 py-2 border-2 transition-all duration-150",
+                        !isDark
+                          ? "border-neo-text bg-neo-accent text-neo-text-inverse shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
+                          : "border-neo-border bg-neo-bg hover:bg-neo-surface"
+                      )}
+                      aria-label="Mode clair"
+                    >
+                      <Sun className="w-4 h-4" />
+                      <span className="font-mono text-xs font-bold uppercase">Light</span>
+                    </button>
+                    <button
+                      onClick={() => handleThemeToggle("dark")}
+                      className={cn(
+                        "flex-1 flex items-center justify-center gap-2 px-3 py-2 border-2 transition-all duration-150",
+                        isDark
+                          ? "border-neo-text bg-neo-accent text-neo-text-inverse shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
+                          : "border-neo-border bg-neo-bg hover:bg-neo-surface"
+                      )}
+                      aria-label="Mode sombre"
+                    >
+                      <Moon className="w-4 h-4" />
+                      <span className="font-mono text-xs font-bold uppercase">Dark</span>
+                    </button>
+                  </div>
 
-                {/* Neons Vifs */}
-                <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
-                  Neons Vifs
-                </div>
-                <div className="grid grid-cols-6 gap-2 mb-4">
-                  {palettes
-                    .filter((p) => p.category === "neon")
-                    .map((palette) => (
-                      <button
-                        key={palette.id}
-                        onClick={() => handleSelect(palette.id)}
-                        className={cn(
-                          "w-8 h-8 border-2 transition-all duration-150 hover:scale-110",
-                          currentPalette === palette.id
-                            ? "border-neo-text scale-110 shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
-                            : "border-transparent hover:border-neo-border"
-                        )}
-                        style={{ backgroundColor: palette.color }}
-                        title={palette.name}
-                        aria-label={`Palette ${palette.name}`}
-                      />
-                    ))}
-                </div>
+                  {/* Séparateur */}
+                  <div className="border-t border-neo-border mb-4" />
 
-                {/* Tons Sobres */}
-                <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
-                  Tons Sobres
-                </div>
-                <div className="grid grid-cols-6 gap-2">
-                  {palettes
-                    .filter((p) => p.category === "sober")
-                    .map((palette) => (
-                      <button
-                        key={palette.id}
-                        onClick={() => handleSelect(palette.id)}
-                        className={cn(
-                          "w-8 h-8 border-2 transition-all duration-150 hover:scale-110",
-                          currentPalette === palette.id
-                            ? "border-neo-text scale-110 shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
-                            : "border-transparent hover:border-neo-border"
-                        )}
-                        style={{ backgroundColor: palette.color }}
-                        title={palette.name}
-                        aria-label={`Palette ${palette.name}`}
-                      />
-                    ))}
-                </div>
+                  {/* Neons Vifs */}
+                  <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
+                    Neons Vifs
+                  </div>
+                  <div className="grid grid-cols-6 gap-2 mb-4">
+                    {palettes
+                      .filter((p) => p.category === "neon")
+                      .map((palette) => (
+                        <button
+                          key={palette.id}
+                          onClick={() => handleSelect(palette.id)}
+                          className={cn(
+                            "w-8 h-8 border-2 transition-all duration-150 hover:scale-110",
+                            currentPalette === palette.id
+                              ? "border-neo-text scale-110 shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
+                              : "border-transparent hover:border-neo-border"
+                          )}
+                          style={{ backgroundColor: palette.color }}
+                          title={palette.name}
+                          aria-label={`Palette ${palette.name}`}
+                        />
+                      ))}
+                  </div>
 
-                {/* Résumé actif */}
-                <div className="mt-4 pt-3 border-t border-neo-border">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="w-4 h-4 border border-neo-border"
-                        style={{ backgroundColor: current?.color }}
-                      />
-                      <span className="font-mono text-xs font-bold uppercase text-neo-text">
-                        {current?.name}
+                  {/* Tons Sobres */}
+                  <div className="font-mono text-xs font-bold uppercase mb-3 text-neo-text/60">
+                    Tons Sobres
+                  </div>
+                  <div className="grid grid-cols-6 gap-2">
+                    {palettes
+                      .filter((p) => p.category === "sober")
+                      .map((palette) => (
+                        <button
+                          key={palette.id}
+                          onClick={() => handleSelect(palette.id)}
+                          className={cn(
+                            "w-8 h-8 border-2 transition-all duration-150 hover:scale-110",
+                            currentPalette === palette.id
+                              ? "border-neo-text scale-110 shadow-[2px_2px_0px_0px_var(--neo-shadow)]"
+                              : "border-transparent hover:border-neo-border"
+                          )}
+                          style={{ backgroundColor: palette.color }}
+                          title={palette.name}
+                          aria-label={`Palette ${palette.name}`}
+                        />
+                      ))}
+                  </div>
+
+                  {/* Résumé actif */}
+                  <div className="mt-4 pt-3 border-t border-neo-border">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div
+                          className="w-4 h-4 border border-neo-border"
+                          style={{ backgroundColor: current?.color }}
+                        />
+                        <span className="font-mono text-xs font-bold uppercase text-neo-text">
+                          {current?.name}
+                        </span>
+                      </div>
+                      <span className="font-mono text-xs text-neo-text/50 uppercase">
+                        {isDark ? "Dark" : "Light"}
                       </span>
                     </div>
-                    <span className="font-mono text-xs text-neo-text/50 uppercase">
-                      {isDark ? "Dark" : "Light"}
-                    </span>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 };
 

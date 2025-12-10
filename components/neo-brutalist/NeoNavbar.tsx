@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -59,6 +60,18 @@ export const NeoNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 50 && !isMenuOpen) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+  });
+
   const t = useTranslations("nav");
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -82,7 +95,12 @@ export const NeoNavbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className="fixed w-full z-40 bg-neo-bg border-b-2 border-neo-border">
+    <nav
+      className={cn(
+        "fixed w-full z-40 bg-neo-bg border-b-2 border-neo-border transition-transform duration-300",
+        !isVisible && !isMenuOpen ? "-translate-y-full lg:translate-y-0" : "translate-y-0"
+      )}
+    >
       <div className="container mx-auto px-3 sm:px-4 py-3 lg:py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1 group flex-shrink-0">
@@ -196,118 +214,133 @@ export const NeoNavbar = () => {
       </div>
 
       {/* Mobile Menu - Fullscreen Neo-Brutalist */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            variants={menuOverlayVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="fixed inset-0 z-50 lg:hidden bg-neo-bg overflow-y-auto"
-          >
-            {/* Grid pattern background */}
-            <div
-              className="absolute inset-0 pointer-events-none opacity-[0.03]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(var(--neo-border) 1px, transparent 1px), linear-gradient(90deg, var(--neo-border) 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-              }}
-            />
-
-            {/* Geometric decorations */}
+      {isMenuOpen &&
+        createPortal(
+          <AnimatePresence>
             <motion.div
-              initial={{ scale: 0, rotate: -45 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="absolute top-20 right-8 w-20 h-20 border-4 border-neo-accent opacity-20"
-            />
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute bottom-32 left-8 w-16 h-16 bg-neo-accent opacity-10"
-            />
-
-            {/* Navigation content */}
-            <div className="min-h-screen flex flex-col justify-center px-8 pt-20 pb-16">
-              <motion.nav
-                variants={menuContainerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="space-y-2"
+              variants={menuOverlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 z-[60] lg:hidden bg-neo-bg overflow-y-auto"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="fixed top-4 right-4 w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 z-[70]"
+                aria-label={t("close")}
               >
-                {navItems.map((item, index) => (
-                  <motion.div key={item.key} variants={menuItemVariants}>
-                    <Link
-                      href={item.path}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={cn(
-                        "block py-3 text-3xl sm:text-4xl font-black uppercase tracking-tight transition-all duration-200",
-                        "border-b-2 border-neo-border/20 hover:border-neo-accent hover:pl-4",
-                        isActive(item.path)
-                          ? "text-neo-accent"
-                          : "text-neo-text hover:text-neo-accent"
-                      )}
-                    >
-                      <span className="font-mono text-sm text-neo-accent mr-4">0{index + 1}</span>
-                      {t(item.key)}
-                    </Link>
-                  </motion.div>
-                ))}
-              </motion.nav>
+                <div className="flex flex-col justify-center items-center gap-1">
+                  <div className="w-5 h-0.5 bg-neo-text-inverse rotate-45 translate-y-[3px] origin-center" />
+                  <div className="w-5 h-0.5 bg-neo-text-inverse opacity-0 scale-0" />
+                  <div className="w-5 h-0.5 bg-neo-text-inverse -rotate-45 -translate-y-[3px] origin-center" />
+                </div>
+              </button>
 
-              {/* Actions section */}
+              {/* Grid pattern background */}
+              <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(var(--neo-border) 1px, transparent 1px), linear-gradient(90deg, var(--neo-border) 1px, transparent 1px)",
+                  backgroundSize: "40px 40px",
+                }}
+              />
+
+              {/* Geometric decorations */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-6 pt-4 border-t-2 border-neo-border/30"
-              >
-                {/* Icons row: Language, Palette, Admin */}
-                <div className="flex items-center gap-3">
-                  <LanguageSwitcher />
-                  <PaletteSelector />
-                  {isLoggedIn ? (
-                    <>
+                initial={{ scale: 0, rotate: -45 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="absolute top-20 right-8 w-20 h-20 border-4 border-neo-accent opacity-20"
+              />
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="absolute bottom-32 left-8 w-16 h-16 bg-neo-accent opacity-10"
+              />
+
+              {/* Navigation content */}
+              <div className="min-h-screen flex flex-col justify-center px-8 pt-20 pb-16">
+                <motion.nav
+                  variants={menuContainerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="space-y-2"
+                >
+                  {navItems.map((item, index) => (
+                    <motion.div key={item.key} variants={menuItemVariants}>
                       <Link
-                        href="/admin"
+                        href={item.path}
                         onClick={() => setIsMenuOpen(false)}
-                        className="p-2 border-2 border-neo-border bg-neo-accent text-white hover:bg-neo-accent/80 transition-colors"
-                        aria-label={t("dashboard")}
+                        className={cn(
+                          "block py-3 text-3xl sm:text-4xl font-black uppercase tracking-tight transition-all duration-200",
+                          "border-b-2 border-neo-border/20 hover:border-neo-accent hover:pl-4",
+                          isActive(item.path)
+                            ? "text-neo-accent"
+                            : "text-neo-text hover:text-neo-accent"
+                        )}
                       >
-                        <Settings className="w-4 h-4" />
+                        <span className="font-mono text-sm text-neo-accent mr-4">0{index + 1}</span>
+                        {t(item.key)}
                       </Link>
+                    </motion.div>
+                  ))}
+                </motion.nav>
+
+                {/* Actions section */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="mt-6 pt-4 border-t-2 border-neo-border/30"
+                >
+                  {/* Icons row: Language, Palette, Admin */}
+                  <div className="flex items-center gap-3">
+                    <LanguageSwitcher />
+                    <PaletteSelector />
+                    {isLoggedIn ? (
+                      <>
+                        <Link
+                          href="/admin"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="p-2 border-2 border-neo-border bg-neo-accent text-white hover:bg-neo-accent/80 transition-colors"
+                          aria-label={t("dashboard")}
+                        >
+                          <Settings className="w-4 h-4" />
+                        </Link>
+                        <button
+                          onClick={() => {
+                            setIsMenuOpen(false);
+                            signOut();
+                          }}
+                          className="p-2 border-2 border-neo-border bg-neo-surface text-neo-text hover:bg-red-500 hover:text-white transition-colors"
+                          aria-label={t("logout")}
+                        >
+                          <LogOut className="w-4 h-4" />
+                        </button>
+                      </>
+                    ) : (
                       <button
                         onClick={() => {
                           setIsMenuOpen(false);
-                          signOut();
+                          setIsLoginModalOpen(true);
                         }}
-                        className="p-2 border-2 border-neo-border bg-neo-surface text-neo-text hover:bg-red-500 hover:text-white transition-colors"
-                        aria-label={t("logout")}
+                        className="p-2 border-2 border-neo-border bg-neo-surface text-neo-text hover:bg-neo-accent hover:text-white transition-colors"
+                        aria-label={t("admin")}
                       >
-                        <LogOut className="w-4 h-4" />
+                        <Lock className="w-4 h-4" />
                       </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        setIsLoginModalOpen(true);
-                      }}
-                      className="p-2 border-2 border-neo-border bg-neo-surface text-neo-text hover:bg-neo-accent hover:text-white transition-colors"
-                      aria-label={t("admin")}
-                    >
-                      <Lock className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
 
       {/* Login Modal */}
       <NeoLoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />

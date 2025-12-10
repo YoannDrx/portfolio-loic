@@ -47,7 +47,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1 - scrollIndicatorProgress }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex fixed right-1 md:right-4 top-1/2 -translate-y-1/2 pr-[env(safe-area-inset-right)] pointer-events-none z-50"
+        className="hidden md:flex fixed right-1 md:right-4 top-1/2 -translate-y-1/2 pr-[env(safe-area-inset-right)] pointer-events-none z-50"
         aria-hidden="true"
       >
         <div className="flex flex-col items-center gap-2">

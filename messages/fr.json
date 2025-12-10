@@ -9,7 +9,8 @@
     "subtitle": "Compositeur et producteur de musique",
     "admin": "Admin",
     "dashboard": "Tableau de bord",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "close": "Fermer"
   },
   "home": {
     "title": "Loïc Ghanem",
