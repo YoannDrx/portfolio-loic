@@ -17,13 +17,14 @@ export const Marquee: React.FC<MarqueeProps> = ({ items, direction = 1 }) => {
   return (
     <div className="relative flex overflow-hidden border-y-4 border-neo-border bg-neo-surface py-4 select-none">
       <motion.div
-        className="flex whitespace-nowrap font-black text-6xl md:text-8xl uppercase tracking-tighter text-neo-text"
+        className="flex whitespace-nowrap font-black text-4xl md:text-8xl uppercase tracking-tighter text-neo-text"
         animate={{ x: direction === 1 ? [0, -1000] : [-1000, 0] }}
         transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
       >
         {repeatedItems.map((item, index) => (
-          <span key={`${item}-${index}`} className="mx-8 flex items-center gap-6">
-            {item} <span className="w-8 h-8 bg-neo-accent block rounded-full" />
+          <span key={`${item}-${index}`} className="flex items-center">
+            <span className="mx-4 md:mx-8">{item}</span>
+            <span className="w-4 h-4 md:w-8 md:h-8 bg-neo-accent block rounded-full" />
           </span>
         ))}
       </motion.div>

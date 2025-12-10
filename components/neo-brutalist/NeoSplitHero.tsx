@@ -204,23 +204,20 @@ export const NeoSplitHero: React.FC = () => {
       animate="visible"
     >
       {/* Left Panel - Text Content */}
-      <motion.div
-        className="flex flex-col justify-center relative w-full"
-        variants={leftPanelVariants}
-      >
+      <motion.div className="flex flex-col justify-center w-full" variants={leftPanelVariants}>
         {/* Decorative label */}
-        <div className="absolute -top-8 lg:-top-12 left-0 font-mono text-xs font-bold text-neo-accent flex items-center gap-2">
+        <div className="font-mono text-xs font-bold text-neo-accent flex items-center gap-2 mb-4">
           <div className="w-2 h-2 bg-neo-accent animate-pulse" />
           {t("basedIn")}
         </div>
 
         {/* Massive Title */}
-        <h1 className="text-[14vw] md:text-[12vw] lg:text-[7vw] leading-[0.85] font-black tracking-tighter uppercase break-words mb-6 text-neo-text">
+        <h1 className="text-[9vw] sm:text-[10vw] lg:text-[7vw] xl:text-[6vw] leading-[0.9] font-black tracking-tighter uppercase break-words mb-6 text-neo-text max-w-full">
           {t("title.line1")} <br />
           {/* Stamp Effect */}
           <motion.span
             variants={stampVariants}
-            className="inline-block relative px-3 md:px-4 py-1 md:py-2 bg-neo-accent text-neo-text-inverse border-4 border-neo-text shadow-[8px_8px_0px_0px_var(--neo-text)] my-2 whitespace-nowrap origin-center"
+            className="inline-block relative px-3 md:px-4 py-1 md:py-2 bg-neo-accent text-neo-text-inverse border-4 border-neo-text shadow-[8px_8px_0px_0px_var(--neo-text)] my-2 whitespace-nowrap origin-center text-center"
             style={{
               fontStretch: "condensed",
               letterSpacing: "-0.03em",
@@ -229,7 +226,7 @@ export const NeoSplitHero: React.FC = () => {
             {t("title.line2")}
           </motion.span>{" "}
           <br />
-          <span className={`whitespace-nowrap${isFrench ? " inline-block mt-1" : ""}`}>
+          <span className={`inline-block whitespace-nowrap${isFrench ? " mt-1 sm:mt-0" : ""}`}>
             {t("title.line3")}
           </span>
         </h1>
@@ -255,7 +252,7 @@ export const NeoSplitHero: React.FC = () => {
           <div className="absolute -top-2 -left-2 w-full h-full border-4 border-neo-border bg-neo-bg -z-10" />
 
           {/* Main container */}
-          <div className="border-4 border-neo-border bg-neo-surface shadow-[12px_12px_0px_0px_var(--neo-accent)] overflow-hidden">
+          <div className="border-4 border-neo-border bg-neo-surface shadow-[12px_12px_0px_0px_var(--neo-accent)] overflow-hidden min-w-[300px]">
             {/* Player Switch Tabs */}
             <div
               className="grid grid-cols-3 sm:grid-cols-5 border-b-4 border-neo-border"

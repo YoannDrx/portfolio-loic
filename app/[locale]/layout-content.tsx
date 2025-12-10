@@ -47,7 +47,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1 - scrollIndicatorProgress }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed right-2 md:right-4 top-1/2 -translate-y-1/2 pr-[env(safe-area-inset-right)] pointer-events-none z-50"
+        className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 pr-[env(safe-area-inset-right)] pointer-events-none z-50"
         aria-hidden="true"
       >
         <div className="flex flex-col items-center gap-2">
@@ -63,7 +63,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
             transition={{ repeat: Infinity, duration: 2 }}
             className="drop-shadow-[0_4px_0_rgba(0,0,0,0.25)]"
           >
-            <ArrowDown size={24} className={isLegalPage ? "text-white" : "text-neo-text/60"} />
+            <ArrowDown size={24} className={isLegalPage ? "text-white" : "text-neo-accent"} />
           </motion.div>
         </div>
       </motion.div>

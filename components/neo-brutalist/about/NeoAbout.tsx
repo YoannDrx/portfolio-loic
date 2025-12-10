@@ -471,7 +471,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <NeoNavbar />
 
-      <main className="relative z-10 pt-32">
+      <main className="relative z-10 pt-20 md:pt-32">
         {/* HERO BIO - Split Layout */}
         <section className="container mx-auto px-4 md:px-6 mb-32">
           <motion.div

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { Settings, LogOut, User } from "lucide-react";
+import { Settings, LogOut, User, Lock } from "lucide-react";
 import { LanguageSwitcher } from "./ui/LanguageSwitcher";
 import { PaletteSelector } from "./ui/PaletteSelector";
 import { NeoLogo } from "./NeoLogo";
@@ -25,6 +26,35 @@ const navItems: NavItem[] = [
   { key: "contact", path: "/contact" },
 ];
 
+// Animation variants for fullscreen menu
+const menuOverlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
+};
+
+const menuContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+const menuItemVariants = {
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4 },
+  },
+  exit: { opacity: 0, x: 40, transition: { duration: 0.2 } },
+};
+
 export const NeoNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -38,6 +68,18 @@ export const NeoNavbar = () => {
     if (path === "/") return pathname === "/";
     return pathname.startsWith(path);
   };
+
+  // Block scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <nav className="fixed w-full z-40 bg-neo-bg border-b-2 border-neo-border">
@@ -73,23 +115,15 @@ export const NeoNavbar = () => {
         </div>
 
         {/* Right side controls */}
-        <div className="flex items-center gap-2 lg:gap-3 text-neo-text flex-shrink-0">
+        <div className="flex items-center gap-2 text-neo-text flex-shrink-0">
           {/* Admin Button */}
           {isLoggedIn ? (
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className={cn(
-                  "flex items-center gap-2 px-3 py-2",
-                  "font-mono text-xs font-bold uppercase",
-                  "bg-neo-accent text-neo-text-inverse border-2 border-neo-border",
-                  "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
-                  "hover:shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
-                  "transition-all duration-150"
-                )}
+                className="w-9 h-9 flex items-center justify-center bg-neo-accent text-neo-text-inverse border-2 border-neo-border hover:bg-neo-accent/80 transition-colors duration-150"
               >
                 <User className="w-4 h-4" />
-                <span className="hidden sm:inline">{t("admin")}</span>
               </button>
 
               {/* User Menu Dropdown */}
@@ -122,18 +156,9 @@ export const NeoNavbar = () => {
           ) : (
             <button
               onClick={() => setIsLoginModalOpen(true)}
-              className={cn(
-                "hidden sm:flex items-center gap-2 px-3 py-2",
-                "font-mono text-xs font-bold uppercase",
-                "bg-neo-surface text-neo-text border-2 border-neo-border",
-                "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
-                "hover:bg-neo-accent hover:text-neo-text-inverse",
-                "hover:shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
-                "transition-all duration-150"
-              )}
+              className="hidden lg:flex w-9 h-9 items-center justify-center bg-neo-surface text-neo-text border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse transition-colors duration-150"
             >
-              <User className="w-4 h-4" />
-              <span>{t("admin")}</span>
+              <Lock className="w-4 h-4" />
             </button>
           )}
 
@@ -143,26 +168,26 @@ export const NeoNavbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 bg-neo-text hover:bg-neo-accent transition-colors duration-150"
+            className="lg:hidden w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 relative z-[60]"
             aria-label="Toggle menu"
           >
-            <div className="space-y-1.5">
+            <div className="flex flex-col justify-center items-center gap-1">
               <div
                 className={cn(
-                  "w-6 h-0.5 bg-neo-text-inverse transition-transform duration-150",
-                  isMenuOpen && "rotate-45 translate-y-2"
+                  "w-5 h-0.5 bg-neo-text-inverse transition-all duration-150 origin-center",
+                  isMenuOpen && "rotate-45 translate-y-[3px]"
                 )}
               />
               <div
                 className={cn(
-                  "w-6 h-0.5 bg-neo-text-inverse transition-opacity duration-150",
-                  isMenuOpen && "opacity-0"
+                  "w-5 h-0.5 bg-neo-text-inverse transition-all duration-150",
+                  isMenuOpen && "opacity-0 scale-0"
                 )}
               />
               <div
                 className={cn(
-                  "w-6 h-0.5 bg-neo-text-inverse transition-transform duration-150",
-                  isMenuOpen && "-rotate-45 -translate-y-2"
+                  "w-5 h-0.5 bg-neo-text-inverse transition-all duration-150 origin-center",
+                  isMenuOpen && "-rotate-45 -translate-y-[3px]"
                 )}
               />
             </div>
@@ -170,69 +195,119 @@ export const NeoNavbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={cn(
-          "absolute top-full left-0 w-full bg-neo-bg border-b-2 border-neo-border p-6 flex flex-col gap-4 lg:hidden z-50 transition-all duration-300",
-          isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
-        )}
-      >
-        {navItems.map((item) => (
-          <Link
-            key={item.key}
-            href={item.path}
-            onClick={() => setIsMenuOpen(false)}
-            className={cn(
-              "text-2xl font-black uppercase transition-colors duration-150",
-              isActive(item.path) ? "text-neo-accent" : "text-neo-text hover:text-neo-accent"
-            )}
+      {/* Mobile Menu - Fullscreen Neo-Brutalist */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            variants={menuOverlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-50 lg:hidden bg-neo-bg overflow-y-auto"
           >
-            {t(item.key)}
-          </Link>
-        ))}
-
-        {/* Mobile language switcher */}
-        <div className="pt-4 border-t-2 border-neo-border">
-          <LanguageSwitcher />
-        </div>
-
-        {/* Mobile Admin Button */}
-        <div className="pt-4 border-t-2 border-neo-border">
-          {isLoggedIn ? (
-            <div className="space-y-3">
-              <Link
-                href="/admin"
-                onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-2 text-xl font-black uppercase text-neo-accent"
-              >
-                <Settings className="w-5 h-5" />
-                {t("dashboard")}
-              </Link>
-              <button
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  signOut();
-                }}
-                className="flex items-center gap-2 text-xl font-black uppercase text-neo-text hover:text-red-500 transition-colors"
-              >
-                <LogOut className="w-5 h-5" />
-                {t("logout")}
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                setIsMenuOpen(false);
-                setIsLoginModalOpen(true);
+            {/* Grid pattern background */}
+            <div
+              className="absolute inset-0 pointer-events-none opacity-[0.03]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(var(--neo-border) 1px, transparent 1px), linear-gradient(90deg, var(--neo-border) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
               }}
-              className="flex items-center gap-2 text-xl font-black uppercase text-neo-text hover:text-neo-accent transition-colors"
-            >
-              <User className="w-5 h-5" />
-              {t("admin")}
-            </button>
-          )}
-        </div>
-      </div>
+            />
+
+            {/* Geometric decorations */}
+            <motion.div
+              initial={{ scale: 0, rotate: -45 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="absolute top-20 right-8 w-20 h-20 border-4 border-neo-accent opacity-20"
+            />
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="absolute bottom-32 left-8 w-16 h-16 bg-neo-accent opacity-10"
+            />
+
+            {/* Navigation content */}
+            <div className="min-h-screen flex flex-col justify-center px-8 pt-20 pb-16">
+              <motion.nav
+                variants={menuContainerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="space-y-2"
+              >
+                {navItems.map((item, index) => (
+                  <motion.div key={item.key} variants={menuItemVariants}>
+                    <Link
+                      href={item.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={cn(
+                        "block py-3 text-3xl sm:text-4xl font-black uppercase tracking-tight transition-all duration-200",
+                        "border-b-2 border-neo-border/20 hover:border-neo-accent hover:pl-4",
+                        isActive(item.path)
+                          ? "text-neo-accent"
+                          : "text-neo-text hover:text-neo-accent"
+                      )}
+                    >
+                      <span className="font-mono text-sm text-neo-accent mr-4">0{index + 1}</span>
+                      {t(item.key)}
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.nav>
+
+              {/* Actions section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mt-6 pt-4 border-t-2 border-neo-border/30"
+              >
+                {/* Icons row: Language, Palette, Admin */}
+                <div className="flex items-center gap-3">
+                  <LanguageSwitcher />
+                  <PaletteSelector />
+                  {isLoggedIn ? (
+                    <>
+                      <Link
+                        href="/admin"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="p-2 border-2 border-neo-border bg-neo-accent text-white hover:bg-neo-accent/80 transition-colors"
+                        aria-label={t("dashboard")}
+                      >
+                        <Settings className="w-4 h-4" />
+                      </Link>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          signOut();
+                        }}
+                        className="p-2 border-2 border-neo-border bg-neo-surface text-neo-text hover:bg-red-500 hover:text-white transition-colors"
+                        aria-label={t("logout")}
+                      >
+                        <LogOut className="w-4 h-4" />
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setIsLoginModalOpen(true);
+                      }}
+                      className="p-2 border-2 border-neo-border bg-neo-surface text-neo-text hover:bg-neo-accent hover:text-white transition-colors"
+                      aria-label={t("admin")}
+                    >
+                      <Lock className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Login Modal */}
       <NeoLoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
