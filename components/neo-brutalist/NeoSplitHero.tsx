@@ -204,7 +204,10 @@ export const NeoSplitHero: React.FC = () => {
       animate="visible"
     >
       {/* Left Panel - Text Content */}
-      <motion.div className="flex flex-col justify-center w-full" variants={leftPanelVariants}>
+      <motion.div
+        className="flex flex-col justify-center w-full pt-8 md:pt-0"
+        variants={leftPanelVariants}
+      >
         {/* Decorative label */}
         <div className="font-mono text-xs font-bold text-neo-accent flex items-center gap-2 mb-4">
           <div className="w-2 h-2 bg-neo-accent animate-pulse" />

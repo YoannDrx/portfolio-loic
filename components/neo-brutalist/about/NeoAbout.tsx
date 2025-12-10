@@ -35,6 +35,7 @@ import { SectionHeader } from "../ui/SectionHeader";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoCard } from "../ui/NeoCard";
+import { NeoTag } from "../ui/NeoTag";
 import { Link } from "@/i18n/routing";
 
 const staggerContainer = {
@@ -471,9 +472,9 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <NeoNavbar />
 
-      <main className="relative z-10 pt-20 md:pt-32">
+      <main className="relative z-10 pt-16 md:pt-20">
         {/* HERO BIO - Split Layout */}
-        <section className="container mx-auto px-4 md:px-6 mb-32">
+        <section className="container mx-auto px-4 md:px-6 mb-32 pt-8 md:pt-0">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -481,15 +482,22 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-12 items-center min-h-[70vh]"
           >
             {/* Colonne GAUCHE - Tout le contenu texte (3/5) */}
-            <motion.div variants={fadeInUp} className="order-2 lg:order-1 lg:col-span-3">
+            <motion.div variants={fadeInUp} className="lg:col-span-3">
               {/* Badge */}
-              <div className="font-mono font-bold text-neo-accent mb-6 flex items-center gap-2">
-                <span className="bg-neo-text text-neo-accent px-2 py-1">BIO.01</span>
-                <span className="text-neo-text/60">// {t("title").toUpperCase()}</span>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mb-6 flex items-center gap-3"
+              >
+                <span className="font-mono text-sm font-bold bg-neo-text text-neo-accent px-2 py-1">
+                  02
+                </span>
+                <NeoTag>{t("title")}</NeoTag>
+              </motion.div>
 
               {/* Titre */}
-              <h1 className="text-[12vw] lg:text-[6vw] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-neo-text">
+              <h1 className="text-[10vw] sm:text-[12vw] lg:text-[6vw] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-neo-text">
                 Loïc{" "}
                 <span
                   className="text-transparent block lg:inline"
@@ -527,10 +535,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             </motion.div>
 
             {/* Colonne DROITE - Photo (2/5) */}
-            <motion.div
-              variants={photoReveal}
-              className="relative order-1 lg:order-2 w-full lg:col-span-2"
-            >
+            <motion.div variants={photoReveal} className="relative w-full lg:col-span-2">
               <div className="relative max-w-xs lg:max-w-sm mx-auto lg:mx-0">
                 {/* Card avec effet hover comme les cartes d'expertise */}
                 <div className="group border-2 border-neo-border bg-neo-surface overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] hover:border-black">

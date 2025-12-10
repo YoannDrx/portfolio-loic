@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import { AudioWaveform } from './AudioWaveform';
+import React from "react";
+import { AudioWaveform } from "./AudioWaveform";
 
 interface SectionHeaderProps {
   number: string;
@@ -16,7 +16,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({ number, title, sub
         <span className="bg-neo-text text-neo-text-inverse px-2 py-1">SECT. {number}</span>
         <span>// {subtitle}</span>
       </div>
-      <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] text-neo-text">
+      <h2 className="text-4xl sm:text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] text-neo-text">
         {title}
       </h2>
     </div>

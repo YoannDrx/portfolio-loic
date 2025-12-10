@@ -41,8 +41,8 @@ export const NeoHeroSection = ({
   return (
     <section
       className={cn(
-        fullViewport ? "min-h-[calc(100vh-160px)] md:min-h-[calc(100vh-256px)]" : "min-h-[50vh]",
-        "flex flex-col justify-center py-20 md:py-32 px-4 md:px-8",
+        fullViewport ? "min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)]" : "min-h-[50vh]",
+        "flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8",
         variantStyles[variant],
         align === "center" && "items-center text-center",
         className

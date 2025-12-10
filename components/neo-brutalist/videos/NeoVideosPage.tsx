@@ -80,9 +80,9 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <NeoNavbar />
 
-      <main className="relative z-10 pt-20">
+      <main className="relative z-10 pt-16 md:pt-20">
         {/* Hero - Light variant */}
-        <section className="min-h-[calc(100vh-160px)] md:min-h-[calc(100vh-256px)] flex flex-col justify-center py-20 md:py-32 px-4 md:px-8 bg-neo-bg">
+        <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8 bg-neo-bg">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

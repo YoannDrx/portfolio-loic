@@ -83,7 +83,7 @@ export const NeoNavbar = () => {
 
   return (
     <nav className="fixed w-full z-40 bg-neo-bg border-b-2 border-neo-border">
-      <div className="container mx-auto px-4 py-3 lg:py-4 flex justify-between items-center">
+      <div className="container mx-auto px-3 sm:px-4 py-3 lg:py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1 group flex-shrink-0">
           <NeoLogo className="w-9 h-9 lg:w-10 lg:h-10" />
@@ -168,7 +168,7 @@ export const NeoNavbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 relative z-[60]"
+            className="lg:hidden w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 relative z-[60] overflow-visible"
             aria-label="Toggle menu"
           >
             <div className="flex flex-col justify-center items-center gap-1">

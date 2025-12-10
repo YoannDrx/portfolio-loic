@@ -38,7 +38,7 @@ export default function NeoHome() {
 
       <NeoNavbar />
 
-      <main className="relative z-10 pt-20 md:pt-32">
+      <main className="relative z-10 pt-16 md:pt-20">
         <NeoSplitHero />
         <Marquee items={marqueeContent} />
         <NeoFooter />

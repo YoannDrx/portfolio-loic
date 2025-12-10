@@ -74,7 +74,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <NeoNavbar />
 
-      <main className="relative z-10 pt-20">
+      <main className="relative z-10 pt-16 md:pt-20">
         {/* Hero */}
         <NeoHeroSection
           badgeNumber="04"
