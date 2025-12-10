@@ -32,11 +32,7 @@ export const NeoLegalContactBanner: React.FC<NeoLegalContactBannerProps> = ({
           <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neo-text mt-2">
             {pageTitle}
           </h3>
-          <p className="mt-5 text-sm md:text-base leading-relaxed">
-            <span className="inline-flex w-fit items-center rounded-sm border-2 border-neo-border bg-white px-5 py-3 text-neo-accent font-black shadow-[inset_0_0_0_1px_var(--neo-border)]">
-              {contactIntro}
-            </span>
-          </p>
+          <p className="mt-5 text-sm md:text-base leading-relaxed text-white">{contactIntro}</p>
         </div>
 
         <div className="flex w-full flex-col items-end gap-4 md:w-auto md:flex-shrink-0">

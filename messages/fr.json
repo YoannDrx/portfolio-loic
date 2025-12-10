@@ -826,20 +826,11 @@
           ]
         }
       ],
-      "contactIntro": "Pour toute question ou pour exercer vos droits, contactez-moi directement. Pour un point légal ou technique sur le site, vous pouvez aussi écrire au webmaster (Yodev).",
+      "contactIntro": "Pour toute question juridique ou contractuelle, utilisez les coordonnées habituelles de Loïc. Pour un sujet technique lié au site, contactez l'agence de développement",
       "contactChannels": [
         {
-          "label": "Email",
-          "value": "loic.ghanem@outlook.com",
-          "href": "mailto:loic.ghanem@outlook.com"
-        },
-        {
-          "label": "Téléphone",
-          "value": "+33 6 14 51 75 92",
-          "href": "tel:+33614517592"
-        },
-        {
-          "label": "Email webmaster (Yodev)",
+          "label": "Yodev",
+          "subtitle": "Agence de développement",
           "value": "yoann.andrieux@gmail.com",
           "href": "mailto:yoann.andrieux@gmail.com"
         }
@@ -981,7 +972,7 @@
           ]
         }
       ],
-      "contactIntro": "Pour toute question juridique ou contractuelle, utilisez les coordonnées habituelles de Loïc. Pour un sujet technique lié au site, contactez l'agence de développement Yodev ci-dessous.",
+      "contactIntro": "Pour toute question juridique ou contractuelle, utilisez les coordonnées habituelles de Loïc. Pour un sujet technique lié au site, contactez l'agence de développement",
       "contactChannels": [
         {
           "label": "Yodev",
