@@ -227,7 +227,7 @@ export const NeoNavbar = () => {
               {/* Close Button */}
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="fixed top-4 right-4 w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 z-[70]"
+                className="fixed top-[calc(1.5rem+env(safe-area-inset-top))] right-[calc(1.5rem+env(safe-area-inset-right))] w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 z-[70]"
                 aria-label={t("close")}
               >
                 <div className="flex flex-col justify-center items-center gap-1">
