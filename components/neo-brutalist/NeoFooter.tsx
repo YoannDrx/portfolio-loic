@@ -15,6 +15,7 @@ import {
   Mail,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { NeoLogo } from "./NeoLogo";
 
 const socialLinks = [
   { name: "Facebook", url: "https://www.facebook.com/loic.leduc.54" },
@@ -78,9 +79,7 @@ export const NeoFooter = () => {
 
             {/* Identity */}
             <div className="flex flex-row items-center gap-4">
-              <div className="w-12 h-12 bg-neo-accent text-neo-text flex items-center justify-center font-black text-xl border-2 border-neo-accent shadow-[3px_3px_0px_0px_rgba(0,0,0,0.2)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)]">
-                LG
-              </div>
+              <NeoLogo className="w-12 h-12" />
               <div>
                 <h3 className="text-xl font-black uppercase leading-none mb-1 text-neo-text-inverse">
                   Loïc Ghanem
@@ -103,7 +102,7 @@ export const NeoFooter = () => {
                 <span className="w-1.5 h-1.5 bg-neo-accent animate-pulse" />
                 {t("listen")}
               </h3>
-              <div className="flex flex-col gap-2">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 {listenLinks.map((platform) => {
                   const Icon = platform.icon;
                   return (
@@ -112,12 +111,12 @@ export const NeoFooter = () => {
                       href={platform.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs font-bold uppercase hover:text-neo-accent transition-colors group"
+                      className="flex items-center gap-2 text-xs font-bold uppercase hover:text-neo-accent transition-colors group"
                     >
-                      <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm">
+                      <div className="w-5 h-5 flex items-center justify-center bg-neo-text-inverse/10 text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-text transition-colors rounded-sm flex-shrink-0">
                         <Icon className="w-3 h-3" />
                       </div>
-                      <span className="group-hover:translate-x-1 transition-transform">
+                      <span className="truncate group-hover:translate-x-1 transition-transform">
                         {platform.name}
                       </span>
                     </a>

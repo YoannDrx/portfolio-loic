@@ -13,7 +13,8 @@ export default function NeoHome() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   const marqueeTranslations = useTranslations("home.marquee");
-  const marqueeItems = (marqueeTranslations.raw("items") as string[]) ?? [];
+  const marqueeItems = marqueeTranslations.raw("items");
+  const marqueeContent = Array.isArray(marqueeItems) ? marqueeItems : [];
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -39,7 +40,7 @@ export default function NeoHome() {
 
       <main className="relative z-10 pt-32">
         <NeoSplitHero />
-        <Marquee items={marqueeItems} />
+        <Marquee items={marqueeContent} />
         <NeoFooter />
       </main>
     </div>

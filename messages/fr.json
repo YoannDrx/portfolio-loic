@@ -37,7 +37,10 @@
         "DIRECTION VOIX",
         "SUPERVISION MUSICALE",
         "POST-PRODUCTION AUDIO",
-        "PRODUCTION PODCAST"
+        "PRODUCTION PODCAST",
+        "ORCHESTRATION",
+        "BRUITAGES FOLEY",
+        "MONTAGE MUSICAL"
       ]
     },
     "featuredAlbums": {
