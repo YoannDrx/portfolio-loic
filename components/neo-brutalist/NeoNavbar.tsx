@@ -230,10 +230,9 @@ export const NeoNavbar = () => {
                 className="fixed top-[calc(1.5rem+env(safe-area-inset-top))] right-[calc(1.5rem+env(safe-area-inset-right))] w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 z-[70]"
                 aria-label={t("close")}
               >
-                <div className="flex flex-col justify-center items-center gap-1">
-                  <div className="w-5 h-0.5 bg-neo-text-inverse rotate-45 translate-y-[3px] origin-center" />
-                  <div className="w-5 h-0.5 bg-neo-text-inverse opacity-0 scale-0" />
-                  <div className="w-5 h-0.5 bg-neo-text-inverse -rotate-45 -translate-y-[3px] origin-center" />
+                <div className="relative w-5 h-5">
+                  <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-neo-text-inverse -translate-x-1/2 -translate-y-1/2 rotate-45 origin-center" />
+                  <div className="absolute top-1/2 left-1/2 w-full h-0.5 bg-neo-text-inverse -translate-x-1/2 -translate-y-1/2 -rotate-45 origin-center" />
                 </div>
               </button>
 
