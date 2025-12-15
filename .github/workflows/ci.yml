@@ -26,23 +26,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "yarn"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
-        run: npx prisma generate
+        run: pnpm prisma generate
 
       - name: Run ESLint
-        run: yarn lint
+        run: pnpm lint
 
       - name: TypeScript Check
-        run: npx tsc --noEmit
+        run: pnpm tsc --noEmit
 
   # ============================================
   # Job 2: Prisma Schema Validation
@@ -75,23 +78,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "yarn"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Apply migrations to test DB
-        run: npx prisma migrate deploy
+        run: pnpm prisma migrate deploy
 
       - name: Validate schema
-        run: npx prisma validate
+        run: pnpm prisma validate
 
       - name: Format check
-        run: npx prisma format --check || echo "Prisma schema needs formatting"
+        run: pnpm prisma format --check || echo "Prisma schema needs formatting"
 
       - name: Check for schema drift
         run: |
@@ -104,7 +110,7 @@ jobs:
           PGPASSWORD=test psql -h localhost -U test -d test -c "CREATE DATABASE test_shadow;" || true
 
           # Run migrate diff with shadow database
-          if ! npx prisma migrate diff \
+          if ! pnpm prisma migrate diff \
             --from-migrations ./prisma/migrations \
             --to-schema-datamodel ./prisma/schema.prisma \
             --shadow-database-url "$SHADOW_DB" \
@@ -113,7 +119,7 @@ jobs:
             echo "❌ Schema drift detected!"
             echo ""
             echo "Your schema.prisma doesn't match your migrations."
-            echo "Please run: yarn db:migrate"
+            echo "Please run: pnpm db:migrate"
             echo "Then commit and push the new migration."
             exit 1
           fi
@@ -132,28 +138,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "yarn"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
-        run: npx prisma generate
+        run: pnpm prisma generate
 
       - name: Cache Next.js build
         uses: actions/cache@v4
         with:
           path: .next/cache
-          key: nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.ts', '**/*.tsx') }}
+          key: nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.ts', '**/*.tsx') }}
           restore-keys: |
-            nextjs-${{ hashFiles('**/yarn.lock') }}-
+            nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
       - name: Build Next.js
-        run: yarn build
+        run: pnpm build
         env:
           # Fake values for CI build - no real connection needed
           DATABASE_URL: "postgresql://fake:fake@localhost:5432/fake"
