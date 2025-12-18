@@ -50,6 +50,11 @@ const listenLinks = [
     icon: Headphones,
   },
   { name: "SoundCloud", url: "https://soundcloud.com/loic-ghanem", icon: Radio },
+  {
+    name: "Qobuz",
+    url: "https://www.qobuz.com/fr-fr/interpreter/loic-ghanem/678944",
+    icon: Headphones,
+  },
 ];
 
 export const NeoFooter = () => {

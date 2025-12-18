@@ -32,12 +32,6 @@ const AppleMusicIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const YoutubeIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M21.6 7.2c-.2-.8-.8-1.5-1.6-1.7C18.4 5.2 12 5.2 12 5.2s-6.4 0-8 .3c-.8.2-1.4.9-1.6 1.7-.4 1.6-.4 4.8-.4 4.8s0 3.2.4 4.8c.2.8.8 1.5 1.6 1.6 1.6.4 8 .4 8 .4s6.4 0 8-.4c.8-.1 1.4-.8 1.6-1.6.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM9.75 14.7v-5l4.5 2.5-4.5 2.5Z" />
-  </svg>
-);
-
 // Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -160,7 +154,7 @@ export const NeoSplitHero: React.FC = () => {
       label: t("player.spotify"),
       icon: <SpotifyIcon className="w-6 h-6" />,
       embedUrl:
-        "https://open.spotify.com/embed/artist/3PPQlrmOzl6QUBSP3gcyLA?utm_source=generator&theme=0",
+        "https://open.spotify.com/embed/album/0hPOMMDq8xNKFvzdvTnP1S?utm_source=generator&theme=0",
       allow: "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture",
       height: 560,
     },
@@ -168,8 +162,7 @@ export const NeoSplitHero: React.FC = () => {
       id: "appleMusic",
       label: t("player.appleMusic"),
       icon: <AppleMusicIcon className="w-6 h-6" />,
-      embedUrl:
-        "https://embed.music.apple.com/fr/artist/loic-ghanem/464997920/see-all?section=top-songs",
+      embedUrl: "https://embed.music.apple.com/fr/album/terra/1807034037",
       allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
       height: 560,
       referrerPolicy: "origin",
@@ -178,19 +171,9 @@ export const NeoSplitHero: React.FC = () => {
       id: "deezer",
       label: t("player.deezer"),
       icon: <DeezerIcon className="w-6 h-6" />,
-      embedUrl: "https://widget.deezer.com/widget/dark/artist/5642263/top_tracks",
+      embedUrl: "https://widget.deezer.com/widget/dark/album/738853121",
       allow: "autoplay; clipboard-write; encrypted-media; fullscreen",
       height: 560,
-    },
-    {
-      id: "youtube",
-      label: t("player.youtube"),
-      icon: <YoutubeIcon className="w-6 h-6" />,
-      embedUrl: "https://www.youtube.com/embed/qVTMst6UAlA?list=UULbxfVx61feUL3uw2me9tSA&start=52",
-      allow:
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-      height: 560,
-      referrerPolicy: "strict-origin-when-cross-origin",
     },
   ];
 
@@ -258,7 +241,7 @@ export const NeoSplitHero: React.FC = () => {
           <div className="border-4 border-neo-border bg-neo-surface shadow-[12px_12px_0px_0px_var(--neo-accent)] overflow-hidden min-w-[300px]">
             {/* Player Switch Tabs */}
             <div
-              className="grid grid-cols-3 sm:grid-cols-5 border-b-4 border-neo-border"
+              className="grid grid-cols-2 sm:grid-cols-4 border-b-4 border-neo-border"
               role="tablist"
             >
               {playersConfig.map((playerConfig) => (

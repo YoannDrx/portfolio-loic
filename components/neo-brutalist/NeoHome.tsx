@@ -2,19 +2,28 @@
 
 import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useTranslations } from "next-intl";
 import { CustomCursor } from "./ui/CustomCursor";
 import { Marquee } from "./ui/Marquee";
 import { NeoNavbar } from "./NeoNavbar";
 import { NeoSplitHero } from "./NeoSplitHero";
 import { NeoFooter } from "./NeoFooter";
 
+// Partner logos for the marquee
+const partnerLogos = [
+  { src: "/img/partners/cezame-logo.png", alt: "Cezame Music Agency", size: "large" as const },
+  { src: "/img/partners/gum-logo.png", alt: "GUM", size: "large" as const },
+  { src: "/img/partners/myma-logo.png", alt: "MYMA", size: "normal" as const },
+  { src: "/img/partners/superpitch-logo.png", alt: "Superpitch", size: "normal" as const },
+  {
+    src: "/img/partners/universal-production.png",
+    alt: "Universal Production Music",
+    size: "large" as const,
+  },
+];
+
 export default function NeoHome() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
-  const marqueeTranslations = useTranslations("home.marquee");
-  const marqueeItems = marqueeTranslations.raw("items");
-  const marqueeContent = Array.isArray(marqueeItems) ? marqueeItems : [];
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -40,7 +49,7 @@ export default function NeoHome() {
 
       <main className="relative z-10 pt-16 md:pt-20">
         <NeoSplitHero />
-        <Marquee items={marqueeContent} />
+        <Marquee logos={partnerLogos} />
         <NeoFooter />
       </main>
     </div>
