@@ -9,6 +9,7 @@ import { SOUND_CLOUD_PROFILE_URL, useGlobalAudioPlayer } from "@/lib/player/glob
 import { useSoundCloudWaveform } from "@/lib/hooks/useSoundCloudWaveform";
 import { ConsentGate } from "./legal/ConsentGate";
 import { SoundCloudIcon } from "./player/SoundCloudIcon";
+import { SoundCloudTrackList } from "./player/SoundCloudTrackList";
 import { SoundCloudWaveform } from "./player/SoundCloudWaveform";
 import { formatTime } from "./player/utils";
 import { cn } from "@/lib/utils";
@@ -69,8 +70,19 @@ export const NeoSplitHero: React.FC = () => {
   const locale = useLocale();
   const isFrench = locale === "fr";
 
-  const { status, mediaAllowed, isPlaying, track, positionMs, durationMs, volume, error, actions } =
-    useGlobalAudioPlayer();
+  const {
+    status,
+    mediaAllowed,
+    isPlaying,
+    track,
+    queue,
+    currentIndex,
+    positionMs,
+    durationMs,
+    volume,
+    error,
+    actions,
+  } = useGlobalAudioPlayer();
 
   const [lastNonZeroVolume, setLastNonZeroVolume] = useState(80);
 
@@ -162,23 +174,18 @@ export const NeoSplitHero: React.FC = () => {
                   <SoundCloudIcon className="w-6 h-6 text-neo-text-inverse" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/70">
-                    {t("player.soundcloud")}
-                  </div>
                   <div className="font-black text-lg uppercase tracking-tight truncate">
-                    {t("player.title")}
+                    {t("player.soundcloud")}
                   </div>
                 </div>
                 <a
                   href={externalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3 py-2 bg-neo-accent text-neo-text-inverse border-2 border-neo-border shadow-[3px_3px_0px_0px_var(--neo-shadow)] hover:-translate-y-0.5 transition-transform"
+                  aria-label={tPlayer("controls.openOnSoundcloud")}
+                  className="h-10 w-10 inline-flex items-center justify-center bg-neo-accent text-neo-text-inverse border-2 border-neo-border shadow-[3px_3px_0px_0px_var(--neo-shadow)] hover:-translate-y-0.5 transition-transform"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest hidden sm:inline">
-                    {tPlayer("controls.open")}
-                  </span>
                 </a>
               </div>
             </div>
@@ -308,11 +315,6 @@ export const NeoSplitHero: React.FC = () => {
                           className="hidden md:block w-28 accent-neo-accent"
                         />
                       </div>
-                      <span className="hidden lg:inline-block text-neo-text/60">
-                        {isWaveformLoading
-                          ? tPlayer("status.waveformLoading")
-                          : tPlayer("status.waveformReady")}
-                      </span>
                     </div>
                     <span>
                       -{formatTime(remainingMs)} / {formatTime(durationMs)}
@@ -326,9 +328,26 @@ export const NeoSplitHero: React.FC = () => {
                   )}
                 </div>
 
-                {/* Hint */}
-                <div className="font-mono text-xs text-neo-text/60 leading-relaxed">
-                  {tPlayer("hints.persistent")}
+                {/* Track list */}
+                <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] overflow-hidden">
+                  <div className="px-4 py-3 border-b-2 border-neo-border bg-neo-text text-neo-text-inverse flex items-center justify-between">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
+                      {tPlayer("tracklist.title")}
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
+                      {queue.length}
+                    </span>
+                  </div>
+                  <SoundCloudTrackList
+                    tracks={queue}
+                    currentTrackId={track?.id ?? null}
+                    currentIndex={currentIndex}
+                    isPlaying={isPlaying}
+                    isLoading={mediaAllowed && status === "loading"}
+                    disabled={isPlayerUnavailable}
+                    onSelect={(index) => actions.selectTrack(index)}
+                    className="max-h-56 bg-neo-bg"
+                  />
                 </div>
               </div>
             </ConsentGate>

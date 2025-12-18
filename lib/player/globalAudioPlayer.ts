@@ -16,6 +16,7 @@ export type GlobalAudioTrack = {
   artworkUrl?: string | null;
   waveformUrl?: string | null;
   permalinkUrl?: string | null;
+  durationMs?: number;
 };
 
 export type GlobalAudioPlayerState = {
@@ -25,6 +26,8 @@ export type GlobalAudioPlayerState = {
   isDismissed: boolean;
   isPlaying: boolean;
   track: GlobalAudioTrack | null;
+  queue: GlobalAudioTrack[];
+  currentIndex: number | null;
   positionMs: number;
   durationMs: number;
   volume: number;
@@ -40,6 +43,8 @@ const DEFAULT_STATE: GlobalAudioPlayerState = {
   isDismissed: false,
   isPlaying: false,
   track: null,
+  queue: [],
+  currentIndex: null,
   positionMs: 0,
   durationMs: 0,
   volume: 80,
@@ -71,7 +76,10 @@ export const subscribeGlobalAudioPlayer = (listener: () => void) => {
 };
 
 type PendingActionType = "play" | "toggle";
-type PendingAction = { type: PendingActionType; requestedAt: number } | null;
+type PendingAction =
+  | { type: PendingActionType; requestedAt: number }
+  | { type: "select"; requestedAt: number; index: number }
+  | null;
 
 const PENDING_ACTION_TTL_MS = 15000;
 let pendingAction: PendingAction = null;
@@ -131,6 +139,14 @@ export const setGlobalAudioPlayerTrack = (track: GlobalAudioTrack | null) => {
   });
 };
 
+export const setGlobalAudioPlayerQueue = (queue: GlobalAudioTrack[]) => {
+  setState({ queue });
+};
+
+export const setGlobalAudioPlayerCurrentIndex = (currentIndex: number | null) => {
+  setState({ currentIndex });
+};
+
 export const setGlobalAudioPlayerProgress = (positionMs: number, durationMs?: number) => {
   setState({
     positionMs,
@@ -175,6 +191,15 @@ export const queueGlobalAudioPlayerAction = (type: PendingActionType) => {
   markGlobalAudioPlayerStarted();
 };
 
+export const queueGlobalAudioPlayerSelectTrack = (index: number) => {
+  pendingAction = {
+    type: "select",
+    index: Math.max(0, Math.floor(index)),
+    requestedAt: Date.now(),
+  };
+  markGlobalAudioPlayerStarted();
+};
+
 export const tryConsumePendingGlobalAudioPlayerAction = () => {
   if (!widget) return false;
   if (!pendingAction) return false;
@@ -182,6 +207,16 @@ export const tryConsumePendingGlobalAudioPlayerAction = () => {
   const action = pendingAction;
   pendingAction = null;
   if (!isFresh) return false;
+
+  if (action.type === "select") {
+    try {
+      widget.skip(action.index);
+      widget.play();
+      return true;
+    } catch {
+      return false;
+    }
+  }
 
   if (action.type === "play") {
     widget.play();
@@ -223,6 +258,23 @@ export const globalAudioPlayerActions = {
     markGlobalAudioPlayerStarted();
     if (!canControlWidget()) return;
     widget?.prev();
+  },
+  selectTrack: (index: number) => {
+    const safeIndex = Math.max(0, Math.floor(index));
+    markGlobalAudioPlayerStarted();
+    setGlobalAudioPlayerCurrentIndex(safeIndex);
+    const nextTrack = state.queue[safeIndex];
+    if (nextTrack) setGlobalAudioPlayerTrack(nextTrack);
+    setGlobalAudioPlayerProgress(0);
+
+    queueGlobalAudioPlayerSelectTrack(safeIndex);
+    if (!canControlWidget()) return;
+    try {
+      widget?.skip(safeIndex);
+      widget?.play();
+    } catch {
+      // noop
+    }
   },
   open: () => {
     setGlobalAudioPlayerDismissed(false);

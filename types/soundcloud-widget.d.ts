@@ -41,10 +41,13 @@ type SoundCloudWidget = {
   toggle: () => void;
   next: () => void;
   prev: () => void;
+  skip: (index: number) => void;
   seekTo: (milliseconds: number) => void;
   setVolume: (volume: number) => void;
   getVolume: (callback: (volume: number) => void) => void;
   getCurrentSound: (callback: (sound: SoundCloudSound) => void) => void;
+  getSounds: (callback: (sounds: SoundCloudSound[]) => void) => void;
+  getCurrentSoundIndex: (callback: (index: number) => void) => void;
   getDuration: (callback: (duration: number) => void) => void;
   getPosition: (callback: (position: number) => void) => void;
 };

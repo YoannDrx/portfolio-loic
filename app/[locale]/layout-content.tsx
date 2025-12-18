@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ConsentProvider } from "@/components/neo-brutalist/legal/ConsentProvider";
 import { NeoCookieConsent } from "@/components/neo-brutalist/legal/NeoCookieConsent";
 import { GlobalAudioPlayerMount } from "@/components/neo-brutalist/player/GlobalAudioPlayerMount";
 
@@ -34,16 +33,12 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
 
   if (isAdminRoute || isLoginRoute) {
     // L'admin gère son propre layout
-    return (
-      <ConsentProvider>
-        <main className="min-h-screen">{children}</main>
-      </ConsentProvider>
-    );
+    return <main className="min-h-screen">{children}</main>;
   }
 
   // Pages Neo-Brutalist - elles incluent leur propre NeoNavbar et NeoFooter
   return (
-    <ConsentProvider>
+    <>
       <main className="min-h-screen">{children}</main>
       <GlobalAudioPlayerMount />
       <motion.div
@@ -71,6 +66,6 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
         </div>
       </motion.div>
       <NeoCookieConsent />
-    </ConsentProvider>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
@@ -22,6 +22,7 @@ import { useSoundCloudWaveform } from "@/lib/hooks/useSoundCloudWaveform";
 import { SOUND_CLOUD_PROFILE_URL, useGlobalAudioPlayer } from "@/lib/player/globalAudioPlayer";
 import { cn } from "@/lib/utils";
 import { SoundCloudIcon } from "./SoundCloudIcon";
+import { SoundCloudTrackList } from "./SoundCloudTrackList";
 import { SoundCloudWaveform } from "./SoundCloudWaveform";
 import { formatTime } from "./utils";
 
@@ -48,6 +49,8 @@ export const GlobalAudioPlayerBar = () => {
     isDismissed,
     isPlaying,
     track,
+    queue,
+    currentIndex,
     positionMs,
     durationMs,
     volume,
@@ -119,7 +122,35 @@ export const GlobalAudioPlayerBar = () => {
     return isPlaying ? t("status.playing") : t("status.paused");
   }, [isPlayerUnavailable, isPlaying, mediaAllowed, status, t]);
 
-  const spacerHeightPx = isCollapsed ? 96 : 176;
+  const bottomOffsetPx = 12;
+  const pageGapPx = 12;
+  const barMeasureRef = useRef<HTMLDivElement | null>(null);
+  const [measuredHeightPx, setMeasuredHeightPx] = useState(0);
+
+  useEffect(() => {
+    if (!shouldShowBar) {
+      setMeasuredHeightPx(0);
+      return;
+    }
+
+    const el = barMeasureRef.current;
+    if (!el) return;
+
+    const update = () => setMeasuredHeightPx(Math.ceil(el.getBoundingClientRect().height));
+    update();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", update);
+      return () => window.removeEventListener("resize", update);
+    }
+
+    const ro = new ResizeObserver(() => update());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [shouldShowBar]);
+
+  const fallbackHeightPx = isCollapsed ? 96 : 320;
+  const spacerHeightPx = (measuredHeightPx || fallbackHeightPx) + bottomOffsetPx + pageGapPx;
 
   return (
     <>
@@ -137,13 +168,17 @@ export const GlobalAudioPlayerBar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 120, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
-            className="fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)] px-3 md:px-6"
+            className="fixed inset-x-0 z-40 px-3 md:px-6"
+            style={{ bottom: `calc(${bottomOffsetPx}px + env(safe-area-inset-bottom))` }}
           >
             <div className="mx-auto max-w-6xl">
               <div className="relative">
                 <div className="absolute -top-2 -left-2 w-full h-full border-4 border-neo-border bg-neo-bg -z-10" />
 
-                <div className="border-4 border-neo-border bg-neo-surface shadow-[10px_10px_0px_0px_var(--neo-accent)] overflow-hidden">
+                <div
+                  ref={barMeasureRef}
+                  className="border-4 border-neo-border bg-neo-surface shadow-[10px_10px_0px_0px_var(--neo-accent)] overflow-hidden"
+                >
                   <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4">
                     {/* Track info */}
                     <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -373,11 +408,6 @@ export const GlobalAudioPlayerBar = () => {
                         />
                         <div className="mt-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-neo-text/60">
                           <span>{formatTime(positionMs)}</span>
-                          <span className="hidden sm:inline-block">
-                            {isWaveformLoading
-                              ? t("status.waveformLoading")
-                              : t("status.waveformReady")}
-                          </span>
                           <span>
                             -{formatTime(remainingMs)} / {formatTime(durationMs)}
                           </span>
@@ -388,6 +418,30 @@ export const GlobalAudioPlayerBar = () => {
                             {t("status.errorHint")}
                           </div>
                         )}
+
+                        <div className="mt-3 border-2 border-neo-border bg-neo-surface shadow-[4px_4px_0px_0px_var(--neo-shadow)] overflow-hidden">
+                          <div className="px-3 py-2 border-b-2 border-neo-border bg-neo-text text-neo-text-inverse flex items-center justify-between">
+                            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
+                              {t("tracklist.title")}
+                            </span>
+                            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
+                              {queue.length}
+                            </span>
+                          </div>
+                          <SoundCloudTrackList
+                            tracks={queue}
+                            currentTrackId={track?.id ?? null}
+                            currentIndex={currentIndex}
+                            isPlaying={isPlaying}
+                            isLoading={mediaAllowed && status === "loading"}
+                            disabled={isPlayerUnavailable}
+                            onSelect={(index) => {
+                              if (!mediaAllowed) openManager();
+                              actions.selectTrack(index);
+                            }}
+                            className="max-h-40 bg-neo-bg"
+                          />
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -411,9 +465,9 @@ export const GlobalAudioPlayerBar = () => {
             className={cn(
               "fixed right-3 md:right-6 z-40",
               "h-14 w-14 border-4 border-neo-border bg-neo-accent text-neo-text-inverse",
-              "shadow-[6px_6px_0px_0px_var(--neo-shadow)] hover:-translate-y-0.5 transition-transform"
+              "shadow-[6px_6px_0px_0px_var(--neo-accent)] hover:-translate-y-0.5 transition-transform"
             )}
-            style={{ bottom: "calc(12px + env(safe-area-inset-bottom))" }}
+            style={{ bottom: `calc(${bottomOffsetPx}px + env(safe-area-inset-bottom))` }}
           >
             <SoundCloudIcon className="w-7 h-7 mx-auto" />
           </motion.button>

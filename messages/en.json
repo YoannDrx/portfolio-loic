@@ -1362,6 +1362,11 @@
       "waveformReady": "Waveform",
       "errorHint": "If the player doesn’t load, it may be blocked by an ad blocker."
     },
+    "tracklist": {
+      "title": "Tracks",
+      "loading": "Loading tracks…",
+      "empty": "No tracks found."
+    },
     "hints": {
       "persistent": "Music keeps playing while you browse the site."
     }

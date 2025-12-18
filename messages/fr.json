@@ -1353,6 +1353,11 @@
       "waveformReady": "Waveform",
       "errorHint": "Si le player ne charge pas, il est peut-être bloqué par un ad blocker."
     },
+    "tracklist": {
+      "title": "Titres",
+      "loading": "Chargement des titres…",
+      "empty": "Aucun titre."
+    },
     "hints": {
       "persistent": "La musique continue pendant votre navigation sur le site."
     }

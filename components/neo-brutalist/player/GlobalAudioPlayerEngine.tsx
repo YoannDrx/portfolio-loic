@@ -11,7 +11,9 @@ import {
   setGlobalAudioPlayerMediaAllowed,
   setGlobalAudioPlayerPlaying,
   setGlobalAudioPlayerProgress,
+  setGlobalAudioPlayerQueue,
   setGlobalAudioPlayerStatus,
+  setGlobalAudioPlayerCurrentIndex,
   setGlobalAudioPlayerTrack,
   setGlobalAudioPlayerWidget,
   tryConsumePendingGlobalAudioPlayerAction,
@@ -29,6 +31,7 @@ const mapSound = (sound: SoundCloudSound | null | undefined) => {
     artworkUrl: sound.artwork_url ?? null,
     waveformUrl: sound.waveform_url ?? null,
     permalinkUrl: sound.permalink_url ?? null,
+    durationMs: typeof sound.duration === "number" ? sound.duration : undefined,
   };
 };
 
@@ -48,6 +51,12 @@ export const GlobalAudioPlayerEngine = () => {
   useEffect(() => {
     hydrateGlobalAudioPlayerVolume();
   }, []);
+
+  useEffect(() => {
+    if (!mediaAllowed) return;
+    if (scriptStatus !== "idle") return;
+    if (window.SC?.Widget) setScriptStatus("loaded");
+  }, [mediaAllowed, scriptStatus]);
 
   useEffect(() => {
     setGlobalAudioPlayerMediaAllowed(mediaAllowed);
@@ -115,6 +124,11 @@ export const GlobalAudioPlayerEngine = () => {
           const track = mapSound(sound);
           if (track) {
             setGlobalAudioPlayerTrack(track);
+            const { queue, currentIndex } = getGlobalAudioPlayerState();
+            if (queue.length) {
+              const idx = queue.findIndex((t) => t.id === track.id);
+              if (idx >= 0 && idx !== currentIndex) setGlobalAudioPlayerCurrentIndex(idx);
+            }
             if (soundIdRef.current !== track.id) {
               soundIdRef.current = track.id;
               setGlobalAudioPlayerProgress(0);
@@ -135,6 +149,34 @@ export const GlobalAudioPlayerEngine = () => {
       }
     };
 
+    const refreshQueue = () => {
+      try {
+        widget.getSounds((sounds: SoundCloudSound[]) => {
+          if (!Array.isArray(sounds) || sounds.length === 0) return;
+          const queue = sounds
+            .map((sound) => mapSound(sound))
+            .filter((track): track is NonNullable<typeof track> => !!track);
+          setGlobalAudioPlayerQueue(queue);
+          const currentId = getGlobalAudioPlayerState().track?.id;
+          if (typeof currentId === "number") {
+            const idx = queue.findIndex((t) => t.id === currentId);
+            if (idx >= 0) setGlobalAudioPlayerCurrentIndex(idx);
+          } else {
+            try {
+              widget.getCurrentSoundIndex((idx: number) => {
+                if (!Number.isFinite(idx)) return;
+                setGlobalAudioPlayerCurrentIndex(Math.max(0, Math.floor(idx)));
+              });
+            } catch {
+              // noop
+            }
+          }
+        });
+      } catch {
+        // noop
+      }
+    };
+
     widget.bind(events.READY, () => {
       clearReadyTimeout();
       setGlobalAudioPlayerStatus("ready");
@@ -144,12 +186,14 @@ export const GlobalAudioPlayerEngine = () => {
       } catch {
         // noop
       }
+      refreshQueue();
       refreshSound();
       tryConsumePendingGlobalAudioPlayerAction();
     });
 
     widget.bind(events.PLAY, () => {
       setGlobalAudioPlayerPlaying(true);
+      if (getGlobalAudioPlayerState().queue.length === 0) refreshQueue();
       refreshSound();
     });
 
@@ -195,6 +239,8 @@ export const GlobalAudioPlayerEngine = () => {
       setGlobalAudioPlayerWidget(null);
       durationRef.current = 0;
       soundIdRef.current = null;
+      setGlobalAudioPlayerStatus("idle");
+      setGlobalAudioPlayerPlaying(false);
     };
   }, [canInitWidget]);
 
@@ -205,6 +251,7 @@ export const GlobalAudioPlayerEngine = () => {
       <Script
         src="https://w.soundcloud.com/player/api.js"
         strategy="afterInteractive"
+        onReady={() => setScriptStatus("loaded")}
         onLoad={() => setScriptStatus("loaded")}
         onError={() => {
           setScriptStatus("error");
