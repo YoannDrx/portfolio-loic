@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Pause, Play, SkipBack, SkipForward } from "lucide-react";
+import { ExternalLink, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { SOUND_CLOUD_PROFILE_URL, useGlobalAudioPlayer } from "@/lib/player/globalAudioPlayer";
@@ -69,8 +69,14 @@ export const NeoSplitHero: React.FC = () => {
   const locale = useLocale();
   const isFrench = locale === "fr";
 
-  const { status, mediaAllowed, isPlaying, track, positionMs, durationMs, error, actions } =
+  const { status, mediaAllowed, isPlaying, track, positionMs, durationMs, volume, error, actions } =
     useGlobalAudioPlayer();
+
+  const [lastNonZeroVolume, setLastNonZeroVolume] = useState(80);
+
+  useEffect(() => {
+    if (volume > 0) setLastNonZeroVolume(volume);
+  }, [volume]);
 
   const progress = durationMs > 0 ? Math.min(1, positionMs / durationMs) : 0;
   const remainingMs = Math.max(0, durationMs - positionMs);
@@ -141,11 +147,14 @@ export const NeoSplitHero: React.FC = () => {
       </motion.div>
 
       {/* Right Panel - Persistent SoundCloud Player */}
-      <motion.div className="w-full lg:sticky lg:top-24" variants={rightPanelVariants}>
+      <motion.div
+        className="w-full lg:sticky lg:top-24 lg:w-[520px] lg:max-w-[520px] lg:justify-self-end"
+        variants={rightPanelVariants}
+      >
         <div className="relative">
           <div className="absolute -top-2 -left-2 w-full h-full border-4 border-neo-border bg-neo-bg -z-10" />
 
-          <div className="border-4 border-neo-border bg-neo-surface shadow-[12px_12px_0px_0px_var(--neo-accent)] overflow-hidden min-w-[300px]">
+          <div className="border-4 border-neo-border bg-neo-surface shadow-[12px_12px_0px_0px_var(--neo-accent)] overflow-hidden w-full">
             {/* Header */}
             <div className="border-b-4 border-neo-border bg-neo-text text-neo-text-inverse p-4">
               <div className="flex items-center gap-3">
@@ -273,11 +282,38 @@ export const NeoSplitHero: React.FC = () => {
                   />
                   <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-neo-text/70">
                     <span>{formatTime(positionMs)}</span>
-                    <span className="hidden sm:inline-block">
-                      {isWaveformLoading
-                        ? tPlayer("status.waveformLoading")
-                        : tPlayer("status.waveformReady")}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 border-2 border-neo-border bg-neo-bg shadow-[3px_3px_0px_0px_var(--neo-shadow)] px-2 h-8">
+                        <button
+                          type="button"
+                          onClick={() => actions.setVolume(volume === 0 ? lastNonZeroVolume : 0)}
+                          aria-label={
+                            volume === 0 ? tPlayer("controls.unmute") : tPlayer("controls.mute")
+                          }
+                          className="h-6 w-6 flex items-center justify-center text-neo-text hover:-translate-y-0.5 transition-transform"
+                        >
+                          {volume === 0 ? (
+                            <VolumeX className="w-4 h-4" />
+                          ) : (
+                            <Volume2 className="w-4 h-4" />
+                          )}
+                        </button>
+                        <input
+                          type="range"
+                          min={0}
+                          max={100}
+                          value={volume}
+                          onChange={(e) => actions.setVolume(Number(e.target.value))}
+                          aria-label={tPlayer("controls.volume")}
+                          className="hidden md:block w-28 accent-neo-accent"
+                        />
+                      </div>
+                      <span className="hidden lg:inline-block text-neo-text/60">
+                        {isWaveformLoading
+                          ? tPlayer("status.waveformLoading")
+                          : tPlayer("status.waveformReady")}
+                      </span>
+                    </div>
                     <span>
                       -{formatTime(remainingMs)} / {formatTime(durationMs)}
                     </span>

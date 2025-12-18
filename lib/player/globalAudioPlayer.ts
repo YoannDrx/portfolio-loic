@@ -22,21 +22,27 @@ export type GlobalAudioPlayerState = {
   status: GlobalAudioPlayerStatus;
   mediaAllowed: boolean;
   hasStarted: boolean;
+  isDismissed: boolean;
   isPlaying: boolean;
   track: GlobalAudioTrack | null;
   positionMs: number;
   durationMs: number;
+  volume: number;
   error: string | null;
 };
+
+const VOLUME_STORAGE_KEY = "loic-player-volume-v1";
 
 const DEFAULT_STATE: GlobalAudioPlayerState = {
   status: "idle",
   mediaAllowed: false,
   hasStarted: false,
+  isDismissed: false,
   isPlaying: false,
   track: null,
   positionMs: 0,
   durationMs: 0,
+  volume: 80,
   error: null,
 };
 
@@ -71,6 +77,27 @@ const PENDING_ACTION_TTL_MS = 15000;
 let pendingAction: PendingAction = null;
 
 let widget: SoundCloudWidget | null = null;
+
+let hasHydratedVolume = false;
+
+const clampVolume = (value: number) => {
+  if (!Number.isFinite(value)) return DEFAULT_STATE.volume;
+  return Math.max(0, Math.min(100, Math.round(value)));
+};
+
+export const hydrateGlobalAudioPlayerVolume = () => {
+  if (hasHydratedVolume) return;
+  hasHydratedVolume = true;
+  try {
+    const raw = localStorage.getItem(VOLUME_STORAGE_KEY);
+    if (!raw) return;
+    const parsed = Number.parseInt(raw, 10);
+    if (!Number.isFinite(parsed)) return;
+    setState({ volume: clampVolume(parsed) });
+  } catch {
+    // localStorage not available
+  }
+};
 
 export const setGlobalAudioPlayerMediaAllowed = (mediaAllowed: boolean) => {
   setState(() => ({
@@ -116,11 +143,31 @@ export const setGlobalAudioPlayerPlaying = (isPlaying: boolean) => {
 };
 
 export const markGlobalAudioPlayerStarted = () => {
-  setState({ hasStarted: true });
+  setState({ hasStarted: true, isDismissed: false });
 };
 
 export const setGlobalAudioPlayerWidget = (nextWidget: SoundCloudWidget | null) => {
   widget = nextWidget;
+};
+
+export const setGlobalAudioPlayerDismissed = (isDismissed: boolean) => {
+  setState({ isDismissed, ...(isDismissed ? null : { hasStarted: true }) });
+};
+
+export const setGlobalAudioPlayerVolume = (volume: number) => {
+  const clamped = clampVolume(volume);
+  setState({ volume: clamped });
+  try {
+    localStorage.setItem(VOLUME_STORAGE_KEY, clamped.toString());
+  } catch {
+    // localStorage not available
+  }
+  if (!widget || !state.mediaAllowed) return;
+  try {
+    widget.setVolume(clamped);
+  } catch {
+    // noop
+  }
 };
 
 export const queueGlobalAudioPlayerAction = (type: PendingActionType) => {
@@ -159,6 +206,9 @@ export const globalAudioPlayerActions = {
     if (!canControlWidget()) return;
     widget?.pause();
   },
+  setVolume: (volume: number) => {
+    setGlobalAudioPlayerVolume(volume);
+  },
   toggle: () => {
     queueGlobalAudioPlayerAction("toggle");
     if (!canControlWidget()) return;
@@ -173,6 +223,18 @@ export const globalAudioPlayerActions = {
     markGlobalAudioPlayerStarted();
     if (!canControlWidget()) return;
     widget?.prev();
+  },
+  open: () => {
+    setGlobalAudioPlayerDismissed(false);
+  },
+  dismiss: () => {
+    setGlobalAudioPlayerDismissed(true);
+    setGlobalAudioPlayerPlaying(false);
+    try {
+      widget?.pause();
+    } catch {
+      // noop
+    }
   },
   seekTo: (milliseconds: number) => {
     markGlobalAudioPlayerStarted();

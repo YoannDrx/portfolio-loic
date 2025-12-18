@@ -5,6 +5,8 @@ import Script from "next/script";
 import { useConsent } from "../legal/ConsentProvider";
 import {
   SOUND_CLOUD_PLAYLIST_EMBED_URL,
+  getGlobalAudioPlayerState,
+  hydrateGlobalAudioPlayerVolume,
   setGlobalAudioPlayerError,
   setGlobalAudioPlayerMediaAllowed,
   setGlobalAudioPlayerPlaying,
@@ -42,6 +44,10 @@ export const GlobalAudioPlayerEngine = () => {
   const durationRef = useRef(0);
 
   const [scriptStatus, setScriptStatus] = useState<"idle" | "loaded" | "error">("idle");
+
+  useEffect(() => {
+    hydrateGlobalAudioPlayerVolume();
+  }, []);
 
   useEffect(() => {
     setGlobalAudioPlayerMediaAllowed(mediaAllowed);
@@ -133,6 +139,11 @@ export const GlobalAudioPlayerEngine = () => {
       clearReadyTimeout();
       setGlobalAudioPlayerStatus("ready");
       setGlobalAudioPlayerError(null);
+      try {
+        widget.setVolume(getGlobalAudioPlayerState().volume);
+      } catch {
+        // noop
+      }
       refreshSound();
       tryConsumePendingGlobalAudioPlayerAction();
     });

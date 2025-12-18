@@ -1340,8 +1340,15 @@
       "pause": "Pause",
       "previous": "Previous",
       "next": "Next",
+      "volume": "Volume",
+      "mute": "Mute",
+      "unmute": "Unmute",
       "openOnSoundcloud": "Open on SoundCloud",
-      "open": "Open"
+      "open": "Open",
+      "collapse": "Collapse",
+      "expand": "Expand",
+      "close": "Close player",
+      "showPlayer": "Show player"
     },
     "status": {
       "soundcloud": "SoundCloud",

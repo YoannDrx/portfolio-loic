@@ -1331,8 +1331,15 @@
       "pause": "Pause",
       "previous": "Précédent",
       "next": "Suivant",
+      "volume": "Volume",
+      "mute": "Couper le son",
+      "unmute": "Rétablir le son",
       "openOnSoundcloud": "Ouvrir sur SoundCloud",
-      "open": "Ouvrir"
+      "open": "Ouvrir",
+      "collapse": "Réduire",
+      "expand": "Agrandir",
+      "close": "Fermer le player",
+      "showPlayer": "Afficher le player"
     },
     "status": {
       "soundcloud": "SoundCloud",
