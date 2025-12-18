@@ -1333,5 +1333,30 @@
         "successDesc": "Service \"{title}\" was {action} successfully."
       }
     }
+  },
+  "musicPlayer": {
+    "controls": {
+      "play": "Play",
+      "pause": "Pause",
+      "previous": "Previous",
+      "next": "Next",
+      "openOnSoundcloud": "Open on SoundCloud",
+      "open": "Open"
+    },
+    "status": {
+      "soundcloud": "SoundCloud",
+      "noTrack": "No track loaded",
+      "mediaDisabled": "Media disabled",
+      "unavailable": "Player unavailable",
+      "loading": "Loading player",
+      "playing": "Now playing",
+      "paused": "Paused",
+      "waveformLoading": "Waveform loading",
+      "waveformReady": "Waveform",
+      "errorHint": "If the player doesn’t load, it may be blocked by an ad blocker."
+    },
+    "hints": {
+      "persistent": "Music keeps playing while you browse the site."
+    }
   }
 }

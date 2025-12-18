@@ -1324,5 +1324,30 @@
         "successDesc": "Le service \"{title}\" a été {action} avec succès."
       }
     }
+  },
+  "musicPlayer": {
+    "controls": {
+      "play": "Lecture",
+      "pause": "Pause",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "openOnSoundcloud": "Ouvrir sur SoundCloud",
+      "open": "Ouvrir"
+    },
+    "status": {
+      "soundcloud": "SoundCloud",
+      "noTrack": "Aucune piste",
+      "mediaDisabled": "Médias désactivés",
+      "unavailable": "Player indisponible",
+      "loading": "Chargement du player",
+      "playing": "Lecture en cours",
+      "paused": "En pause",
+      "waveformLoading": "Chargement waveform",
+      "waveformReady": "Waveform",
+      "errorHint": "Si le player ne charge pas, il est peut-être bloqué par un ad blocker."
+    },
+    "hints": {
+      "persistent": "La musique continue pendant votre navigation sur le site."
+    }
   }
 }
