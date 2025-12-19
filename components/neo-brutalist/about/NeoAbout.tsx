@@ -823,8 +823,15 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                   <NeoCard
                     hover="lift"
                     padding="none"
-                    className="h-full group overflow-hidden flex flex-col"
+                    className="h-full group overflow-hidden flex flex-col relative"
                   >
+                    {/* Year sticker - top right corner */}
+                    <div className="absolute top-3 right-3 z-10">
+                      <span className="bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono font-bold text-sm shadow-[2px_2px_0px_0px_var(--neo-border)] rotate-3 inline-block">
+                        {award.year}
+                      </span>
+                    </div>
+
                     {/* Image */}
                     <button
                       type="button"
@@ -852,13 +859,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                         {award.title}
                       </h3>
                       <p className="font-mono text-sm text-neo-accent mb-3">{award.subtitle}</p>
-                      <p className="text-sm opacity-70 mb-4 line-clamp-3">{award.description}</p>
-
-                      <div className="mt-auto pt-4 border-t-2 border-neo-text/10 flex items-center justify-end">
-                        <span className="bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono font-bold text-sm">
-                          {award.year}
-                        </span>
-                      </div>
+                      <p className="text-sm opacity-70 line-clamp-3">{award.description}</p>
                     </div>
                   </NeoCard>
                 </motion.div>
@@ -1001,72 +1002,94 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             >
               {labelPartners.map((partner) => (
                 <motion.div key={partner.name} variants={fadeInUp}>
-                  <NeoCard hover="lift" padding="lg" className="h-full group relative">
-                    {/* Logo */}
-                    <div className="w-16 h-16 bg-neo-bg flex items-center justify-center mb-6 border-2 border-neo-border overflow-hidden p-2">
-                      <Image
-                        src={partner.logo}
-                        alt={`${partner.name} logo`}
-                        width={56}
-                        height={56}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
+                  <NeoCard
+                    hover="lift"
+                    padding="lg"
+                    className="h-full group relative overflow-hidden"
+                  >
+                    {/* Main content - visible by default */}
+                    <div className="flex flex-col items-center text-center relative z-10">
+                      {/* Logo - 96px */}
+                      <div className="w-24 h-24 bg-neo-bg flex items-center justify-center mb-4 border-2 border-neo-border overflow-hidden p-3">
+                        <Image
+                          src={partner.logo}
+                          alt={`${partner.name} logo`}
+                          width={96}
+                          height={96}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
 
-                    {/* Label Name */}
-                    <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-neo-text">
-                      {partner.name}
-                    </h3>
+                      {/* Name */}
+                      <h3 className="text-lg font-black uppercase tracking-tight mb-4 text-neo-text">
+                        {partner.name}
+                      </h3>
 
-                    {/* Details */}
-                    <div className="space-y-4 font-mono text-sm mb-6">
-                      {partner.period && (
-                        <div>
-                          <span className="text-xs font-bold bg-neo-text text-neo-text-inverse px-2 py-1">
-                            {partner.period[localeKey]}
-                          </span>
+                      {/* Social Links */}
+                      {partner.links.length > 0 && (
+                        <div className="flex flex-wrap justify-center gap-2">
+                          {partner.links.map((link, idx) => (
+                            <a
+                              key={idx}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-8 h-8 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
+                              title={link.label}
+                            >
+                              <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
+                            </a>
+                          ))}
                         </div>
                       )}
+                    </div>
+
+                    {/* Overlay with details on hover */}
+                    <div className="absolute inset-0 bg-neo-accent text-neo-text-inverse p-5 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out flex flex-col justify-center z-20">
+                      {/* Period */}
+                      {partner.period && (
+                        <span className="inline-block bg-neo-text text-neo-text-inverse px-2 py-1 text-xs font-mono font-bold mb-3 self-start">
+                          {partner.period[localeKey]}
+                        </span>
+                      )}
+
+                      {/* Description */}
                       {partner.description && (
-                        <p className="opacity-70 leading-relaxed">
+                        <p className="text-sm leading-relaxed mb-3 opacity-90">
                           {partner.description[localeKey]}
                         </p>
                       )}
+
+                      {/* Metrics */}
                       {partner.metrics && partner.metrics.length > 0 && (
-                        <ul className="space-y-2">
+                        <ul className="text-xs font-mono space-y-1 mb-3">
                           {partner.metrics.map((metric, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start gap-2 opacity-70 leading-snug"
-                            >
-                              <span className="w-1.5 h-1.5 bg-neo-accent mt-2 flex-shrink-0" />
-                              <span>{metric[localeKey]}</span>
+                            <li key={idx} className="flex items-center gap-2">
+                              <span className="w-1 h-1 bg-neo-text" />
+                              {metric[localeKey]}
                             </li>
                           ))}
                         </ul>
                       )}
+
+                      {/* Links in overlay */}
+                      {partner.links.length > 0 && (
+                        <div className="flex gap-2 mt-auto pt-3">
+                          {partner.links.map((link, idx) => (
+                            <a
+                              key={idx}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-8 h-8 bg-neo-text/20 hover:bg-neo-text flex items-center justify-center transition-colors"
+                              title={link.label}
+                            >
+                              <link.icon className="w-4 h-4 text-neo-text-inverse" />
+                            </a>
+                          ))}
+                        </div>
+                      )}
                     </div>
-
-                    {/* Social Links */}
-                    {partner.links.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-4 border-t-2 border-neo-border">
-                        {partner.links.map((link, idx) => (
-                          <a
-                            key={idx}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-9 h-9 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
-                            title={link.label}
-                          >
-                            <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
-                          </a>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Decorative corner */}
-                    <div className="absolute bottom-0 right-0 w-8 h-8 bg-neo-accent opacity-20 group-hover:opacity-40 transition-opacity" />
                   </NeoCard>
                 </motion.div>
               ))}
@@ -1085,76 +1108,103 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             >
               {publisherPartners.map((publisher) => (
                 <motion.div key={publisher.name} variants={fadeInUp}>
-                  <NeoCard hover="lift" padding="lg" className="h-full group relative">
-                    <div className="w-16 h-16 bg-neo-bg flex items-center justify-center mb-6 border-2 border-neo-border overflow-hidden p-2">
-                      {publisher.logo ? (
-                        <Image
-                          src={publisher.logo}
-                          alt={`${publisher.name} logo`}
-                          width={56}
-                          height={56}
-                          className="w-full h-full object-contain"
-                        />
-                      ) : (
-                        <span className="text-2xl font-black text-neo-accent">
-                          {publisher.name
-                            .split(" ")
-                            .map((w) => w[0])
-                            .join("")}
-                        </span>
+                  <NeoCard
+                    hover="lift"
+                    padding="lg"
+                    className="h-full group relative overflow-hidden"
+                  >
+                    {/* Main content - visible by default */}
+                    <div className="flex flex-col items-center text-center relative z-10">
+                      {/* Logo - 96px */}
+                      <div className="w-24 h-24 bg-neo-bg flex items-center justify-center mb-4 border-2 border-neo-border overflow-hidden p-3">
+                        {publisher.logo ? (
+                          <Image
+                            src={publisher.logo}
+                            alt={`${publisher.name} logo`}
+                            width={96}
+                            height={96}
+                            className="w-full h-full object-contain"
+                          />
+                        ) : (
+                          <span className="text-2xl font-black text-neo-accent">
+                            {publisher.name
+                              .split(" ")
+                              .map((w) => w[0])
+                              .join("")}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Name */}
+                      <h3 className="text-lg font-black uppercase tracking-tight mb-4 text-neo-text">
+                        {publisher.name}
+                      </h3>
+
+                      {/* Social Links */}
+                      {publisher.links.length > 0 && (
+                        <div className="flex flex-wrap justify-center gap-2">
+                          {publisher.links.map((link, idx) => (
+                            <a
+                              key={idx}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-8 h-8 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
+                              title={link.label}
+                            >
+                              <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
+                            </a>
+                          ))}
+                        </div>
                       )}
                     </div>
 
-                    <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-neo-text">
-                      {publisher.name}
-                    </h3>
-
-                    <div className="space-y-4 font-mono text-sm">
+                    {/* Overlay with details on hover */}
+                    <div className="absolute inset-0 bg-neo-accent text-neo-text-inverse p-5 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out flex flex-col justify-center z-20">
+                      {/* Period */}
                       {publisher.period && (
-                        <div>
-                          <span className="text-xs font-bold bg-neo-text text-neo-text-inverse px-2 py-1">
-                            {publisher.period[localeKey]}
-                          </span>
-                        </div>
+                        <span className="inline-block bg-neo-text text-neo-text-inverse px-2 py-1 text-xs font-mono font-bold mb-3 self-start">
+                          {publisher.period[localeKey]}
+                        </span>
                       )}
+
+                      {/* Description */}
                       {publisher.description && (
-                        <p className="opacity-70 leading-relaxed">
+                        <p className="text-sm leading-relaxed mb-3 opacity-90">
                           {publisher.description[localeKey]}
                         </p>
                       )}
+
+                      {/* Metrics */}
                       {publisher.metrics && publisher.metrics.length > 0 && (
-                        <ul className="space-y-2">
+                        <ul className="text-xs font-mono space-y-1 mb-3">
                           {publisher.metrics.map((metric, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start gap-2 opacity-70 leading-snug"
-                            >
-                              <span className="w-1.5 h-1.5 bg-neo-accent mt-2 flex-shrink-0" />
-                              <span>{metric[localeKey]}</span>
+                            <li key={idx} className="flex items-center gap-2">
+                              <span className="w-1 h-1 bg-neo-text" />
+                              {metric[localeKey]}
                             </li>
                           ))}
                         </ul>
                       )}
+
+                      {/* Links in overlay */}
+                      {publisher.links.length > 0 && (
+                        <div className="flex gap-2 mt-auto pt-3">
+                          {publisher.links.map((link, idx) => (
+                            <a
+                              key={idx}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-8 h-8 bg-neo-text/20 hover:bg-neo-text flex items-center justify-center transition-colors"
+                              title={link.label}
+                            >
+                              <link.icon className="w-4 h-4 text-neo-text-inverse" />
+                            </a>
+                          ))}
+                        </div>
+                      )}
                     </div>
-
-                    {publisher.links.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-4 mt-6 border-t-2 border-neo-border">
-                        {publisher.links.map((link, idx) => (
-                          <a
-                            key={idx}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-9 h-9 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
-                            title={link.label}
-                          >
-                            <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
-                          </a>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="absolute bottom-0 right-0 w-8 h-8 bg-neo-accent opacity-20 group-hover:opacity-40 transition-opacity" />
                   </NeoCard>
                 </motion.div>
               ))}
