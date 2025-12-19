@@ -28,6 +28,7 @@ import {
   Piano,
   ChevronLeft,
   ChevronRight,
+  type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
 import { BrutalistButton } from "../ui/BrutalistButton";
@@ -301,7 +302,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     description?: LocalizedText;
     metrics?: LocalizedText[];
     period?: LocalizedText;
-    links: Array<{ icon: React.ElementType; url: string; label: string }>;
+    links: Array<{ icon: LucideIcon; url: string; label: string }>;
   }> = [
     {
       name: "Montmorency Music Agency",
@@ -439,7 +440,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     description?: LocalizedText;
     metrics?: LocalizedText[];
     period?: LocalizedText;
-    links: Array<{ icon: React.ElementType; url: string; label: string }>;
+    links: Array<{ icon: LucideIcon; url: string; label: string }>;
   }> = [
     {
       name: "Cezame Music Agency",

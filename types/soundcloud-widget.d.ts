@@ -27,6 +27,10 @@ type SoundCloudSound = {
   artwork_url?: string | null;
   waveform_url?: string | null;
   user?: SoundCloudUser;
+  created_at?: string;
+  display_date?: string;
+  release_date?: string;
+  last_modified?: string;
 };
 
 type SoundCloudWidget = {

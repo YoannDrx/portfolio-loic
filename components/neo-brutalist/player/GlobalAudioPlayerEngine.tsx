@@ -17,6 +17,7 @@ import {
   setGlobalAudioPlayerTrack,
   setGlobalAudioPlayerWidget,
   tryConsumePendingGlobalAudioPlayerAction,
+  fetchFullSoundCloudQueue,
 } from "@/lib/player/globalAudioPlayer";
 
 const READY_TIMEOUT_MS = 12000;
@@ -240,6 +241,11 @@ export const GlobalAudioPlayerEngine = () => {
       refreshQueue();
       refreshSound();
       tryConsumePendingGlobalAudioPlayerAction();
+
+      // Fetch full track list from API (widget only provides first 20)
+      fetchFullSoundCloudQueue().catch(() => {
+        // Silently fall back to widget queue
+      });
     });
 
     widget.bind(events.PLAY, () => {

@@ -147,6 +147,89 @@ export const setGlobalAudioPlayerQueue = (queue: GlobalAudioTrack[]) => {
   setState({ queue });
 };
 
+let hasFetchedFullQueue = false;
+let isFetchingQueue = false;
+
+type ApiTrack = {
+  id: number;
+  title: string;
+  artist?: string;
+  artworkUrl?: string | null;
+  waveformUrl?: string | null;
+  permalinkUrl?: string | null;
+  durationMs?: number;
+  widgetIndex?: number;
+};
+
+export const fetchFullSoundCloudQueue = async (): Promise<boolean> => {
+  if (hasFetchedFullQueue || isFetchingQueue) return hasFetchedFullQueue;
+
+  isFetchingQueue = true;
+  try {
+    const res = await fetch("/api/soundcloud/tracks");
+    if (!res.ok) {
+      isFetchingQueue = false;
+      return false;
+    }
+
+    const data = await res.json();
+    if (!data.tracks || !Array.isArray(data.tracks)) {
+      isFetchingQueue = false;
+      return false;
+    }
+
+    const currentState = getGlobalAudioPlayerState();
+    const widgetQueue = currentState.queue;
+
+    // Build a map of track ID to widget index for quick lookup
+    const widgetIndexMap = new Map<number, number>();
+    widgetQueue.forEach((wt) => {
+      if (typeof wt.widgetIndex === "number") {
+        widgetIndexMap.set(wt.id, wt.widgetIndex);
+      }
+    });
+
+    // Map API tracks and find widget indices by matching track IDs
+    const mappedTracks: GlobalAudioTrack[] = (data.tracks as ApiTrack[]).map((track) => {
+      const widgetIndex = widgetIndexMap.get(track.id);
+      return {
+        id: track.id,
+        title: track.title,
+        artist: track.artist,
+        artworkUrl: track.artworkUrl,
+        waveformUrl: track.waveformUrl,
+        permalinkUrl: track.permalinkUrl,
+        durationMs: track.durationMs,
+        // Only set widgetIndex if track is in widget's range (first 20)
+        widgetIndex: widgetIndex !== undefined ? widgetIndex : undefined,
+      };
+    });
+
+    setGlobalAudioPlayerQueue(mappedTracks);
+
+    // Update current index if we have a current track
+    const currentId = currentState.track?.id;
+    if (typeof currentId === "number") {
+      const idx = mappedTracks.findIndex((t) => t.id === currentId);
+      if (idx >= 0) setGlobalAudioPlayerCurrentIndex(idx);
+    }
+
+    hasFetchedFullQueue = true;
+    isFetchingQueue = false;
+    return true;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Failed to fetch SoundCloud tracks:", error);
+    isFetchingQueue = false;
+    return false;
+  }
+};
+
+export const resetFullQueueFetchState = () => {
+  hasFetchedFullQueue = false;
+  isFetchingQueue = false;
+};
+
 export const setGlobalAudioPlayerCurrentIndex = (currentIndex: number | null) => {
   setState({ currentIndex });
 };
@@ -293,12 +376,26 @@ export const globalAudioPlayerActions = {
     if (nextTrack) setGlobalAudioPlayerTrack(nextTrack);
     setGlobalAudioPlayerProgress(0);
 
-    const widgetIndex = nextTrack?.widgetIndex ?? boundedIndex;
-    queueGlobalAudioPlayerSelectTrack(widgetIndex);
-    if (!canControlWidget()) return;
+    const widgetIndex = nextTrack?.widgetIndex;
+    const isInWidgetRange = typeof widgetIndex === "number" && widgetIndex >= 0 && widgetIndex < 20;
+
+    if (!canControlWidget()) {
+      // Queue action for when widget becomes ready
+      if (isInWidgetRange && typeof widgetIndex === "number") {
+        queueGlobalAudioPlayerSelectTrack(widgetIndex);
+      }
+      return;
+    }
+
     try {
-      widget?.skip(widgetIndex);
-      widget?.play();
+      if (isInWidgetRange && typeof widgetIndex === "number") {
+        // Track is in widget's loaded range, use skip
+        widget?.skip(widgetIndex);
+        widget?.play();
+      } else if (nextTrack?.permalinkUrl) {
+        // Track is beyond widget range, load it directly
+        widget?.load(nextTrack.permalinkUrl, { auto_play: true });
+      }
     } catch {
       // noop
     }

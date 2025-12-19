@@ -58,7 +58,7 @@ export const GlobalAudioPlayerBar = () => {
     actions,
   } = useGlobalAudioPlayer();
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [lastNonZeroVolume, setLastNonZeroVolume] = useState(80);
 
   const [showOnHome, setShowOnHome] = useState(false);
