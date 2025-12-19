@@ -3,6 +3,8 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ConsentProvider } from "@/components/neo-brutalist/legal/ConsentProvider";
+import { GlobalAudioPlayerRootEngineMount } from "@/components/neo-brutalist/player/GlobalAudioPlayerRootEngineMount";
 import type { Metadata } from "next";
 import "../styles/globals.css";
 
@@ -58,8 +60,11 @@ export default async function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
-          {children}
-          <Toaster />
+          <ConsentProvider>
+            {children}
+            <GlobalAudioPlayerRootEngineMount />
+            <Toaster />
+          </ConsentProvider>
         </ThemeProvider>
       </body>
     </html>

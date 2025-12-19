@@ -2,18 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import {
-  Phone,
-  MapPin,
-  Music,
-  Youtube,
-  Share2,
-  Disc,
-  Headphones,
-  Radio,
-  Copyright,
-  Mail,
-} from "lucide-react";
+import { Phone, MapPin, Music, Youtube, Share2, Disc, Headphones, Radio, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { NeoLogo } from "./NeoLogo";
 import { Link } from "@/i18n/routing";
@@ -50,6 +39,11 @@ const listenLinks = [
     icon: Headphones,
   },
   { name: "SoundCloud", url: "https://soundcloud.com/loic-ghanem", icon: Radio },
+  {
+    name: "Qobuz",
+    url: "https://www.qobuz.com/fr-fr/interpreter/loic-ghanem/678944",
+    icon: Headphones,
+  },
 ];
 
 export const NeoFooter = () => {

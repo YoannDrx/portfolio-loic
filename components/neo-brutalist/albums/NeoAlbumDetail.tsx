@@ -170,7 +170,7 @@ export default function NeoAlbumDetail({
                       src={album.img}
                       alt={album.title}
                       fill
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority
                       sizes="(max-width: 640px) 320px, (max-width: 1024px) 360px, 400px"
                     />
@@ -440,14 +440,14 @@ export default function NeoAlbumDetail({
                             src={relatedAlbum.img}
                             alt={relatedAlbum.title}
                             fill
-                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           />
                         </div>
-                        <NeoTag variant="default" size="sm" className="mb-2">
+                        <NeoTag variant="accent" size="sm" className="mb-2">
                           {relatedAlbum.style}
                         </NeoTag>
-                        <h3 className="text-xl font-black uppercase truncate text-neo-text group-hover:text-neo-accent transition-colors">
+                        <h3 className="text-xl font-black uppercase truncate text-neo-text">
                           {relatedAlbum.title}
                         </h3>
                         <p className="font-mono text-sm text-neo-text/60 mt-1">
@@ -486,7 +486,7 @@ export default function NeoAlbumDetail({
                           src={prevAlbum.img}
                           alt={prevAlbum.title}
                           fill
-                          className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                          className="object-cover transition-transform duration-300"
                           sizes="80px"
                         />
                       </div>
@@ -524,7 +524,7 @@ export default function NeoAlbumDetail({
                           src={nextAlbum.img}
                           alt={nextAlbum.title}
                           fill
-                          className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                          className="object-cover transition-transform duration-300"
                           sizes="80px"
                         />
                       </div>

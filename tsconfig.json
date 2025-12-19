@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,30 +14,14 @@
     "jsx": "react-jsx",
     "incremental": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@/components/*": [
-        "./components/*"
-      ],
-      "@/app/*": [
-        "./app/*"
-      ],
-      "@/data/*": [
-        "./data/*"
-      ],
-      "@/types/*": [
-        "./types/*"
-      ],
-      "@/styles/*": [
-        "./styles/*"
-      ],
-      "@/lib/*": [
-        "./lib/*"
-      ],
-      "@/hooks/*": [
-        "./hooks/*"
-      ]
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/app/*": ["./app/*"],
+      "@/data/*": ["./data/*"],
+      "@/types/*": ["./types/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/hooks/*": ["./hooks/*"]
     },
     "plugins": [
       {
@@ -53,15 +33,12 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "types/**/*.d.ts",
     ".next/types/**/*.ts",
     "app/**/*",
     "components/**/*",
     "lib/**/*",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "out"
-  ]
+  "exclude": ["node_modules", ".next", "out"]
 }
