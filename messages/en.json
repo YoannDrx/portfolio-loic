@@ -146,7 +146,7 @@
     "bio": {
       "paragraph1": "I'm Loïc Ghanem, a Paris-based composer and music producer with a passion for soundscaping narratives. My journey into the world of music began at a young age, and for the past decade, it has been my purpose and profession.",
       "paragraph2": "From crafting original music pieces to creating compelling music for visual media and music publishing, I've lent my sonic signature to various projects, enriching them with depth and emotion. One of my strengths lies in my ability to take a raw idea and transform it into a full-blown auditory experience. My work doesn't just exist in the background; it amplifies the story, setting the tone and enriching the viewer's experience.",
-      "paragraph3": "I pride myself on delivering unique, contemporary, and engaging soundscapes that resonate and create lasting impressions. Leveraging my extensive understanding of the intricate mechanics of music production and sound design, I excel at delivering compositions that require minimal maintenance, yet perform impeccably over time.",
+      "paragraph3": "I pride myself on delivering unique, contemporary, and engaging soundscapes that resonate and create lasting impressions. Leveraging my extensive understanding of the intricate mechanics of music production, I excel at delivering compositions that require minimal maintenance, yet perform impeccably over time.",
       "paragraph4": "I invite you to explore my portfolio and immerse yourself in the diverse musical worlds I've had the pleasure of creating. I look forward to collaborating with you on your next project, elevating it with my music."
     },
     "contactInfo": {
@@ -160,9 +160,9 @@
     "achievements": {
       "title": "Achievements",
       "albums": "Albums Produced",
-      "projects": "Audiovisual Projects",
-      "years": "Years of Experience",
-      "collaborations": "Collaborations"
+      "labels": "Labels",
+      "publishers": "Publishers",
+      "years": "Years of Experience"
     },
     "contactSection": {
       "title": "Let's Work Together",
@@ -179,19 +179,23 @@
       "subtitle": "Technical Skills",
       "composition": {
         "title": "Composition",
-        "items": ["Metal", "Hip-Hop", "Ambient", "Electronic", "Orchestral"]
+        "items": ["Orchestral", "Electro", "Folk", "Hip-Hop", "Rock", "Ambient", "Metal"]
       },
       "production": {
         "title": "Production",
-        "items": ["Mixing", "Mastering", "Sound Design", "Arrangement"]
+        "items": ["Mixing", "Mastering", "Artist support", "Arrangement"]
+      },
+      "artistProduction": {
+        "title": "Artist production",
+        "items": ["Artistic direction", "Artist coaching", "Pre-production", "Project development"]
       },
       "vocalProduction": {
         "title": "Vocal Production",
-        "items": ["Direction", "Recording", "Editing", "Processing"]
+        "items": ["Direction", "Correction", "Editing", "Processing"]
       },
       "postProduction": {
         "title": "Post-Production",
-        "items": ["Film Scoring", "TV Music", "Ads", "Game Audio"]
+        "items": ["TV / Series Music", "Video Game Music", "Music for Web", "Film Scoring", "Ads"]
       }
     },
     "awards": {
@@ -213,24 +217,35 @@
       "pma2023": {
         "year": "2023",
         "title": "Production Music Awards",
-        "category": "Nomination - Electronic",
-        "work": "\"La Fontaine\" feat. Flovry",
-        "album": "Album: Electronic Chill",
-        "description": "Nominated in the Electronic category at the Production Music Awards 2023.",
-        "detail1": "\"La Fontaine\" feat. Flovry from the album Electronic Chill, released by Infinity Scores and published by Cezame Music Agency",
-        "detail2": "This nomination recognizes my innovative approach to electronic music, blending atmospheric textures with contemporary rhythms.",
-        "detail3": "This recognition validates my ability to create emotionally resonant electronic soundscapes that capture listeners while serving production music needs perfectly."
+        "category": "Nomination - Rock",
+        "work": "\"Forget My Name\" feat. Kaylee Ayers",
+        "album": "Catalog: MYMA",
+        "description": "Nominated in the Rock category at the Production Music Awards 2023.",
+        "detail1": "\"Forget My Name\" feat. Kaylee Ayers (MYMA).",
+        "detail2": "A nomination highlighting the melodic strength and impact of my Rock compositions for production music.",
+        "detail3": "This recognition validates my ability to deliver modern, punchy Rock tracks tailored for sync needs."
       },
       "mark": {
-        "year": "2017",
+        "year": "2023",
         "title": "Mark Awards",
-        "category": "Finalist - Original Music",
-        "work": "Live at Bataclan w/ Rise of the Northstar",
-        "album": "Live Performance",
-        "description": "Finalist at the Mark Awards for live performance at Bataclan with Rise of the Northstar.",
-        "detail1": "Memorable performance at the legendary Bataclan in Paris with Rise of the Northstar, merging metal intensity with hip-hop elements.",
-        "detail2": "This live performance showcased the raw energy and stage presence that define my approach to live music and performance.",
-        "detail3": "Being a finalist at the Mark Awards recognizes the impact and innovation of this live show, demonstrating my versatility as a musician and performer."
+        "category": "Hip-Hop — Winner",
+        "work": "\"Supervillain\" feat. Luigi Marletta & Devin Lea Moses",
+        "album": "MYMA",
+        "description": "Winner at the Mark Awards 2023 (Hip-Hop) with \"Supervillain\" feat. Luigi Marletta & Devin Lea Moses (MYMA).",
+        "detail1": "\"Supervillain\" feat. Luigi Marletta & Devin Lea Moses — MYMA catalog.",
+        "detail2": "A recognition of my composition and production work in the Hip-Hop realm.",
+        "detail3": "This award highlights my versatility and ability to deliver impactful tracks for sync."
+      },
+      "sacem2025": {
+        "year": "2025",
+        "title": "SACEM",
+        "category": "Professional member",
+        "work": "",
+        "album": "",
+        "description": "Promoted to professional member at SACEM in 2025.",
+        "detail1": "Recognition of my professional activity as a composer.",
+        "detail2": "A milestone that strengthens my ongoing commitment to the music ecosystem.",
+        "detail3": "More information available upon request."
       }
     },
     "timeline": {
@@ -290,19 +305,19 @@
         "description": "Current Project"
       },
       "earlySeasons": {
-        "period": "2008 - 2017",
+        "period": "2012 - 2016",
         "role": "Guitarist, Composer",
         "genre": "Metal / Metalcore",
         "description": "French Metal Band"
       },
       "confront": {
-        "period": "2010 - 2014",
+        "period": "2014 - 2016",
         "role": "Guitarist",
         "genre": "Hardcore / Metal",
         "description": "Paris Hardcore Band"
       },
       "riseOfTheNorthstar": {
-        "period": "2012 - 2017",
+        "period": "2008 - 2012",
         "role": "Live Guitarist",
         "genre": "Hip-Hop Metal",
         "description": "International Tours"
@@ -564,7 +579,7 @@
       "listen": "Listen",
       "viewMore": "View more"
     },
-    "noAlbums": "No albums found for this genre.",
+    "noAlbums": "No albums match your filters.",
     "detail": {
       "notFound": "Album not found",
       "listen": "Listen to album",

@@ -146,7 +146,7 @@
     "bio": {
       "paragraph1": "Je suis Loïc Ghanem, compositeur et producteur musical basé à Paris, passionné par la création de paysages sonores narratifs. Mon parcours dans le monde de la musique a commencé dès mon plus jeune âge, et depuis plus d'une décennie, c'est devenu ma vocation et ma profession.",
       "paragraph2": "De la création de morceaux originaux à la composition de musiques pour médias visuels et l'édition musicale, j'ai apporté ma signature sonore à divers projets, les enrichissant de profondeur et d'émotion. L'une de mes forces réside dans ma capacité à transformer une idée brute en une expérience auditive complète. Mon travail n'existe pas simplement en arrière-plan ; il amplifie l'histoire, définit le ton et enrichit l'expérience du spectateur.",
-      "paragraph3": "Je suis fier de livrer des paysages sonores uniques, contemporains et engageants qui résonnent et créent des impressions durables. En exploitant ma compréhension approfondie des mécanismes complexes de la production musicale et du sound design, j'excelle à créer des compositions qui nécessitent un entretien minimal, tout en offrant des performances impeccables dans le temps.",
+      "paragraph3": "Je suis fier de livrer des paysages sonores uniques, contemporains et engageants qui résonnent et créent des impressions durables. En exploitant ma compréhension approfondie des mécanismes complexes de la production musicale, j'excelle à créer des compositions qui nécessitent un entretien minimal, tout en offrant des performances impeccables dans le temps.",
       "paragraph4": "Je vous invite à explorer mon portfolio et à vous immerger dans les divers univers musicaux que j'ai eu le plaisir de créer. J'ai hâte de collaborer avec vous sur votre prochain projet, en l'élevant avec ma musique."
     },
     "contactInfo": {
@@ -160,9 +160,9 @@
     "achievements": {
       "title": "Réalisations",
       "albums": "Albums Produits",
-      "projects": "Projets Audiovisuels",
-      "years": "Années d'Expérience",
-      "collaborations": "Collaborations"
+      "labels": "Labels",
+      "publishers": "Éditeurs",
+      "years": "Années d'Expérience"
     },
     "contactSection": {
       "title": "Travaillons Ensemble",
@@ -179,19 +179,34 @@
       "subtitle": "Compétences Techniques",
       "composition": {
         "title": "Composition",
-        "items": ["Metal", "Hip-Hop", "Ambient", "Electronic", "Orchestral"]
+        "items": ["Orchestral", "Electro", "Folk", "Hip-Hop", "Rock", "Ambient", "Metal"]
       },
       "production": {
         "title": "Production",
-        "items": ["Mixing", "Mastering", "Sound Design", "Arrangement"]
+        "items": ["Mixing", "Mastering", "Accompagnement d'artiste", "Arrangement"]
+      },
+      "artistProduction": {
+        "title": "Production d'artiste",
+        "items": [
+          "Direction artistique",
+          "Coaching d'artiste",
+          "Pré-production",
+          "Développement de projet"
+        ]
       },
       "vocalProduction": {
         "title": "Production Vocale",
-        "items": ["Direction", "Enregistrement", "Editing", "Traitement"]
+        "items": ["Direction", "Correction", "Editing", "Traitement"]
       },
       "postProduction": {
         "title": "Post-Production",
-        "items": ["Musique de Film", "Musique TV", "Publicités", "Audio pour Jeux"]
+        "items": [
+          "Musique TV / Séries",
+          "Musique de jeux vidéo",
+          "Musique pour le web",
+          "Musique de Film",
+          "Publicités"
+        ]
       }
     },
     "awards": {
@@ -213,24 +228,35 @@
       "pma2023": {
         "year": "2023",
         "title": "Production Music Awards",
-        "category": "Nomination - Electronic",
-        "work": "\"La Fontaine\" feat. Flovry",
-        "album": "Album : Electronic Chill",
-        "description": "Nominé dans la catégorie Electronic aux Production Music Awards 2023.",
-        "detail1": "\"La Fontaine\" feat. Flovry de l'album Electronic Chill, sorti par Infinity Scores et publié par Cezame Music Agency",
-        "detail2": "Cette nomination reconnaît mon approche innovante de la musique électronique, fusionnant des textures atmosphériques avec des rythmes contemporains.",
-        "detail3": "Cette reconnaissance valide ma capacité à créer des paysages sonores électroniques émotionnellement résonnants qui captent les auditeurs tout en servant parfaitement les besoins de musique de production."
+        "category": "Nomination - Rock",
+        "work": "\"Forget My Name\" feat. Kaylee Ayers",
+        "album": "Catalogue : MYMA",
+        "description": "Nominé dans la catégorie Rock aux Production Music Awards 2023.",
+        "detail1": "\"Forget My Name\" feat. Kaylee Ayers (MYMA).",
+        "detail2": "Une nomination qui souligne la force mélodique et l'impact de mes compositions Rock pour la musique de production.",
+        "detail3": "Cette reconnaissance valide ma capacité à composer des titres Rock efficaces, modernes et adaptés aux besoins de synchronisation."
       },
       "mark": {
-        "year": "2017",
+        "year": "2023",
         "title": "Mark Awards",
-        "category": "Finaliste - Original Music",
-        "work": "Live at Bataclan w/ Rise of the Northstar",
-        "album": "Performance Live",
-        "description": "Finaliste aux Mark Awards pour la performance live au Bataclan avec Rise of the Northstar.",
-        "detail1": "Performance mémorable au mythique Bataclan de Paris avec Rise of the Northstar, fusionnant l'intensité du metal avec des éléments hip-hop.",
-        "detail2": "Cette performance live a présenté l'énergie brute et la présence scénique qui définissent mon approche de la musique live et de la performance.",
-        "detail3": "Être finaliste aux Mark Awards reconnaît l'impact et l'innovation de ce spectacle live, démontrant ma polyvalence en tant que musicien et performeur."
+        "category": "Hip-Hop — Lauréat",
+        "work": "\"Supervillain\" feat. Luigi Marletta & Devin Lea Moses",
+        "album": "MYMA",
+        "description": "Lauréat des Mark Awards 2023 (Hip-Hop) avec \"Supervillain\" feat. Luigi Marletta & Devin Lea Moses (MYMA).",
+        "detail1": "\"Supervillain\" feat. Luigi Marletta & Devin Lea Moses — catalogue MYMA.",
+        "detail2": "Une reconnaissance de mon travail de composition et de production dans l'univers Hip-Hop.",
+        "detail3": "Ce prix met en avant ma polyvalence stylistique et ma capacité à livrer des titres percutants pour la synchro."
+      },
+      "sacem2025": {
+        "year": "2025",
+        "title": "SACEM",
+        "category": "Sociétaire professionnel",
+        "work": "",
+        "album": "",
+        "description": "Promu sociétaire professionnel à la SACEM en 2025.",
+        "detail1": "Reconnaissance de mon activité professionnelle en tant que compositeur.",
+        "detail2": "Un statut qui renforce mon engagement et mon parcours au sein de l'écosystème musical.",
+        "detail3": "Plus d'informations disponibles sur demande."
       }
     },
     "timeline": {
@@ -284,25 +310,25 @@
       "subtitle": "Mon parcours à travers différents projets musicaux et groupes au fil des années.",
       "listenHere": "Écouter ici",
       "voyager1": {
-        "period": "2017 - Présent",
+        "period": "2017 - Aujourd'hui",
         "role": "Producteur",
         "genre": "Hip-Hop et Bass Music",
         "description": "Projet Actuel"
       },
       "earlySeasons": {
-        "period": "2008 - 2017",
+        "period": "2012 - 2016",
         "role": "Guitariste, Compositeur",
         "genre": "Metal / Metalcore",
         "description": "Formation Metal Française"
       },
       "confront": {
-        "period": "2010 - 2014",
+        "period": "2014 - 2016",
         "role": "Guitariste",
         "genre": "Hardcore / Metal",
         "description": "Groupe Hardcore Parisien"
       },
       "riseOfTheNorthstar": {
-        "period": "2012 - 2017",
+        "period": "2008 - 2012",
         "role": "Guitariste Live",
         "genre": "Hip-Hop Metal",
         "description": "Tournées Internationales"
@@ -564,7 +590,7 @@
       "listen": "Écouter",
       "viewMore": "Voir plus"
     },
-    "noAlbums": "Aucun album trouvé pour ce genre.",
+    "noAlbums": "Aucun album ne correspond à vos filtres.",
     "detail": {
       "notFound": "Album non trouvé",
       "listen": "Écouter l'album",

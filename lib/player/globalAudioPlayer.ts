@@ -2,10 +2,13 @@
 
 import { useMemo, useSyncExternalStore } from "react";
 
-export const SOUND_CLOUD_PLAYLIST_EMBED_URL =
-  "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1342377886%3Fsecret_token%3Ds-0WB6x1mRFeB&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false";
-
 export const SOUND_CLOUD_PROFILE_URL = "https://soundcloud.com/loic-ghanem";
+export const SOUND_CLOUD_TRACKS_URL = `${SOUND_CLOUD_PROFILE_URL}/tracks`;
+
+// Embed the full public catalogue (tracks page) instead of a limited playlist.
+export const SOUND_CLOUD_PLAYLIST_EMBED_URL = `https://w.soundcloud.com/player/?url=${encodeURIComponent(
+  SOUND_CLOUD_TRACKS_URL
+)}&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`;
 
 export type GlobalAudioPlayerStatus = "idle" | "loading" | "ready" | "error";
 
@@ -17,6 +20,7 @@ export type GlobalAudioTrack = {
   waveformUrl?: string | null;
   permalinkUrl?: string | null;
   durationMs?: number;
+  widgetIndex?: number;
 };
 
 export type GlobalAudioPlayerState = {
@@ -78,7 +82,7 @@ export const subscribeGlobalAudioPlayer = (listener: () => void) => {
 type PendingActionType = "play" | "toggle";
 type PendingAction =
   | { type: PendingActionType; requestedAt: number }
-  | { type: "select"; requestedAt: number; index: number }
+  | { type: "select"; requestedAt: number; widgetIndex: number }
   | null;
 
 const PENDING_ACTION_TTL_MS = 15000;
@@ -191,10 +195,10 @@ export const queueGlobalAudioPlayerAction = (type: PendingActionType) => {
   markGlobalAudioPlayerStarted();
 };
 
-export const queueGlobalAudioPlayerSelectTrack = (index: number) => {
+export const queueGlobalAudioPlayerSelectTrack = (widgetIndex: number) => {
   pendingAction = {
     type: "select",
-    index: Math.max(0, Math.floor(index)),
+    widgetIndex: Math.max(0, Math.floor(widgetIndex)),
     requestedAt: Date.now(),
   };
   markGlobalAudioPlayerStarted();
@@ -210,7 +214,7 @@ export const tryConsumePendingGlobalAudioPlayerAction = () => {
 
   if (action.type === "select") {
     try {
-      widget.skip(action.index);
+      widget.skip(action.widgetIndex);
       widget.play();
       return true;
     } catch {
@@ -230,6 +234,14 @@ export const tryConsumePendingGlobalAudioPlayerAction = () => {
 };
 
 const canControlWidget = () => !!widget && state.status === "ready" && state.mediaAllowed;
+
+const resolveCurrentIndex = () => {
+  if (typeof state.currentIndex === "number") return state.currentIndex;
+  const currentId = state.track?.id;
+  if (typeof currentId !== "number") return null;
+  const idx = state.queue.findIndex((t) => t.id === currentId);
+  return idx >= 0 ? idx : null;
+};
 
 export const globalAudioPlayerActions = {
   play: () => {
@@ -251,26 +263,41 @@ export const globalAudioPlayerActions = {
   },
   next: () => {
     markGlobalAudioPlayerStarted();
+    const { queue } = state;
+    const idx = resolveCurrentIndex();
+    if (queue.length && typeof idx === "number") {
+      globalAudioPlayerActions.selectTrack((idx + 1) % queue.length);
+      return;
+    }
     if (!canControlWidget()) return;
     widget?.next();
   },
   previous: () => {
     markGlobalAudioPlayerStarted();
+    const { queue } = state;
+    const idx = resolveCurrentIndex();
+    if (queue.length && typeof idx === "number") {
+      globalAudioPlayerActions.selectTrack((idx - 1 + queue.length) % queue.length);
+      return;
+    }
     if (!canControlWidget()) return;
     widget?.prev();
   },
   selectTrack: (index: number) => {
     const safeIndex = Math.max(0, Math.floor(index));
+    const boundedIndex =
+      state.queue.length > 0 ? Math.min(safeIndex, state.queue.length - 1) : safeIndex;
     markGlobalAudioPlayerStarted();
-    setGlobalAudioPlayerCurrentIndex(safeIndex);
-    const nextTrack = state.queue[safeIndex];
+    setGlobalAudioPlayerCurrentIndex(boundedIndex);
+    const nextTrack = state.queue[boundedIndex];
     if (nextTrack) setGlobalAudioPlayerTrack(nextTrack);
     setGlobalAudioPlayerProgress(0);
 
-    queueGlobalAudioPlayerSelectTrack(safeIndex);
+    const widgetIndex = nextTrack?.widgetIndex ?? boundedIndex;
+    queueGlobalAudioPlayerSelectTrack(widgetIndex);
     if (!canControlWidget()) return;
     try {
-      widget?.skip(safeIndex);
+      widget?.skip(widgetIndex);
       widget?.play();
     } catch {
       // noop

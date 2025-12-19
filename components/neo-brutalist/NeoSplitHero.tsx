@@ -166,7 +166,10 @@ export const NeoSplitHero: React.FC = () => {
         <div className="relative">
           <div className="absolute -top-2 -left-2 w-full h-full border-4 border-neo-border bg-neo-bg -z-10" />
 
-          <div className="border-4 border-neo-border bg-neo-surface shadow-[12px_12px_0px_0px_var(--neo-accent)] overflow-hidden w-full">
+          <div
+            data-hero-audio-player="true"
+            className="border-4 border-neo-border bg-neo-surface shadow-[12px_12px_0px_0px_var(--neo-accent)] overflow-hidden w-full"
+          >
             {/* Header */}
             <div className="border-b-4 border-neo-border bg-neo-text text-neo-text-inverse p-4">
               <div className="flex items-center gap-3">

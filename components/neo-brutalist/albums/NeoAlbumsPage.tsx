@@ -26,6 +26,56 @@ interface NeoAlbumsPageProps {
   albums: Album[];
 }
 
+const normalizeGenre = (style: string | null) => {
+  if (!style) return null;
+
+  const normalized = style
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (normalized.includes("metal") || normalized.includes("hardcore")) return "Metal";
+  if (
+    normalized.includes("hip-hop") ||
+    normalized.includes("hip hop") ||
+    normalized.includes("rnb") ||
+    normalized.includes("trap")
+  )
+    return "Hip-Hop";
+  if (normalized.includes("ambient")) return "Ambient";
+  if (normalized.includes("synthwave")) return "Synthwave";
+  if (normalized.includes("cyberpunk")) return "Cyberpunk";
+  if (normalized.includes("bass")) return "Bass Music";
+  if (normalized.includes("pop punk") || normalized.includes("punk")) return "Pop Punk";
+  if (normalized.includes("all music genres")) return "Various";
+
+  return style;
+};
+
+const sortGenres = (genres: string[]) => {
+  const order = [
+    "Metal",
+    "Hip-Hop",
+    "Ambient",
+    "Bass Music",
+    "Synthwave",
+    "Cyberpunk",
+    "Pop Punk",
+    "Various",
+  ];
+
+  const orderIndex = (genre: string) => {
+    const index = order.indexOf(genre);
+    return index === -1 ? Number.POSITIVE_INFINITY : index;
+  };
+
+  return [...genres].sort((a, b) => {
+    const byOrder = orderIndex(a) - orderIndex(b);
+    if (byOrder !== 0) return byOrder;
+    return a.localeCompare(b);
+  });
+};
+
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -44,19 +94,30 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
   const t = useTranslations("albums");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
 
+  const genreCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const album of albums) {
+      const genre = normalizeGenre(album.style);
+      if (!genre) continue;
+      counts.set(genre, (counts.get(genre) ?? 0) + 1);
+    }
+    return counts;
+  }, [albums]);
+
   // Extract unique genres
   const genres = useMemo(() => {
-    const genreSet = new Set<string>();
-    albums.forEach((album) => {
-      if (album.style) genreSet.add(album.style);
-    });
-    return Array.from(genreSet).sort();
-  }, [albums]);
+    return sortGenres(Array.from(genreCounts.keys()));
+  }, [genreCounts]);
 
   // Filter albums by genre
   const filteredAlbums = useMemo(() => {
-    if (!selectedGenre) return albums;
-    return albums.filter((album) => album.style === selectedGenre);
+    return albums.filter((album) => {
+      const albumGenre = normalizeGenre(album.style);
+
+      const matchesGenre = !selectedGenre || albumGenre === selectedGenre;
+      if (!matchesGenre) return false;
+      return true;
+    });
   }, [albums, selectedGenre]);
 
   // Stats
@@ -149,7 +210,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                       : "bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse hover:border-neo-accent"
                   }`}
                 >
-                  {genre} ({albums.filter((a) => a.style === genre).length})
+                  {genre} ({genreCounts.get(genre) ?? 0})
                 </button>
               ))}
             </div>
@@ -181,9 +242,9 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                         className="block"
                       >
                         {/* Cover */}
-                        <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative mb-6 overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-shadow)] group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
+                        <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative mb-6 overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-accent)] group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
                           <div
-                            className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
+                            className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                             style={{ backgroundImage: album.img ? `url(${album.img})` : undefined }}
                           />
                           {!album.img && (
@@ -202,11 +263,11 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                         {/* Info */}
                         <div className="flex items-start justify-between gap-4">
                           <div className="min-w-0">
-                            <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text group-hover:text-neo-accent transition-colors">
+                            <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text">
                               {album.title}
                             </h3>
-                            <NeoTag variant="default" size="sm">
-                              {album.style || "Genre"}
+                            <NeoTag variant="accent" size="sm">
+                              {normalizeGenre(album.style) || "Genre"}
                             </NeoTag>
                           </div>
                           <span className="font-mono text-sm font-bold border-2 border-neo-border px-2 py-1 flex-shrink-0">

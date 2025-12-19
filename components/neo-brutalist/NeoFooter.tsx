@@ -2,18 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import {
-  Phone,
-  MapPin,
-  Music,
-  Youtube,
-  Share2,
-  Disc,
-  Headphones,
-  Radio,
-  Copyright,
-  Mail,
-} from "lucide-react";
+import { Phone, MapPin, Music, Youtube, Share2, Disc, Headphones, Radio, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { NeoLogo } from "./NeoLogo";
 import { Link } from "@/i18n/routing";

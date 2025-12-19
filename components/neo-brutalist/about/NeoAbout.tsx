@@ -12,8 +12,8 @@ import {
   Mic2,
   Sliders,
   Globe,
-  Building2,
-  BookOpen,
+  BadgeCheck,
+  Users,
   Instagram,
   Linkedin,
   Youtube,
@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { BrutalistButton } from "../ui/BrutalistButton";
+import { ImageModal } from "../ui/ImageModal";
 import { SectionHeader } from "../ui/SectionHeader";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
@@ -254,6 +255,7 @@ const TestimonialsCarousel = ({
 
 export const NeoAbout = ({ locale }: { locale: string }) => {
   const t = useTranslations("about");
+  const [imageModal, setImageModal] = useState<{ src: string; title: string } | null>(null);
 
   const skills = [
     {
@@ -265,6 +267,11 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       title: t("skills.production.title"),
       icon: Headphones,
       items: t.raw("skills.production.items") as string[],
+    },
+    {
+      title: t("skills.artistProduction.title"),
+      icon: Users,
+      items: t.raw("skills.artistProduction.items") as string[],
     },
     {
       title: t("skills.vocalProduction.title"),
@@ -279,19 +286,55 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
   ];
 
   const stats = [
-    { val: "16", label: t("achievements.albums") },
-    { val: "34", label: t("achievements.projects") },
-    { val: "50+", label: t("achievements.collaborations") },
-    { val: "15+", label: t("achievements.years") },
+    { val: "24", label: t("achievements.albums") },
+    { val: "8", label: t("achievements.labels") },
+    { val: "4", label: t("achievements.publishers") },
+    { val: "14", label: t("achievements.years") },
   ];
 
-  const labels = [
+  type LocalizedText = { fr: string; en: string };
+  const localeKey: keyof LocalizedText = locale === "fr" ? "fr" : "en";
+
+  const labelPartners: Array<{
+    name: string;
+    logo: string;
+    description?: LocalizedText;
+    metrics?: LocalizedText[];
+    period?: LocalizedText;
+    links: Array<{ icon: React.ElementType; url: string; label: string }>;
+  }> = [
+    {
+      name: "Montmorency Music Agency",
+      logo: "/img/about/partners/montmorency-music-agency.png",
+      description: {
+        fr: "Sync TV, films & séries (Netflix, Spotify, HBO, ESPN, CNN, BBC, France Télévision, Amazon Prime Video, MLB, NHL, Burger King...)",
+        en: "TV, movie & series sync (Netflix, Spotify, HBO, ESPN, CNN, BBC, France Télévision, Amazon Prime Video, MLB, NHL, Burger King...)",
+      },
+      metrics: [
+        { fr: "≈ 14 albums produits", en: "≈ 14 albums produced" },
+        { fr: "≈ 8 singles produits", en: "≈ 8 singles produced" },
+      ],
+      period: { fr: "juil. 2018 - aujourd'hui", en: "Jul 2018 - today" },
+      links: [
+        { icon: ExternalLink, url: "https://www.myma-music.com/", label: "Website" },
+        { icon: Linkedin, url: "https://www.linkedin.com/company/mymasync/", label: "LinkedIn" },
+        { icon: Instagram, url: "https://www.instagram.com/myma_music/", label: "Instagram" },
+        {
+          icon: Youtube,
+          url: "https://www.youtube.com/channel/UCYDtNY3_1G30BVuTK_qbLuQ",
+          label: "YouTube",
+        },
+      ],
+    },
     {
       name: "Infinity Scores",
-      publisher: "Cezame Music Agency",
-      since: "2019",
-      tracks: "45+",
-      type: "Label",
+      logo: "/img/about/partners/infinity-scores.jpeg",
+      description: {
+        fr: "Titres disponibles sur Cezame Music Agency.",
+        en: "All songs available on Cezame Music Agency.",
+      },
+      metrics: [{ fr: "≈ 2 albums produits", en: "≈ 2 albums produced" }],
+      period: { fr: "avr. 2024 - aujourd'hui", en: "Apr 2024 - today" },
       links: [
         {
           icon: ExternalLink,
@@ -312,28 +355,10 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       ],
     },
     {
-      name: "Montmorency Music",
-      publisher: "MYMA",
-      since: "2020",
-      tracks: "28+",
-      type: "Label",
-      links: [
-        { icon: ExternalLink, url: "https://www.myma-music.com/", label: "Website" },
-        { icon: Linkedin, url: "https://www.linkedin.com/company/mymasync/", label: "LinkedIn" },
-        { icon: Instagram, url: "https://www.instagram.com/myma_music/", label: "Instagram" },
-        {
-          icon: Youtube,
-          url: "https://www.youtube.com/channel/UCYDtNY3_1G30BVuTK_qbLuQ",
-          label: "YouTube",
-        },
-      ],
-    },
-    {
       name: "Justement Music",
-      publisher: "Self-published",
-      since: "2018",
-      tracks: "60+",
-      type: "Label",
+      logo: "/img/about/partners/justement-music.jpg",
+      description: { fr: "Label.", en: "Label." },
+      period: { fr: "2018 - aujourd'hui", en: "2018 - today" },
       links: [
         {
           icon: Youtube,
@@ -342,9 +367,142 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
         },
       ],
     },
+    {
+      name: "Stereoscopic",
+      logo: "/img/about/partners/stereoscopic.png",
+      description: { fr: "Label (MYMA).", en: "Label (MYMA)." },
+      period: { fr: "2019 - aujourd'hui", en: "2019 - today" },
+      links: [],
+    },
+    {
+      name: "Superama Records",
+      logo: "/img/about/partners/superama-records.jpg",
+      description: { fr: "Label (MYMA).", en: "Label (MYMA)." },
+      period: { fr: "2018 - aujourd'hui", en: "2018 - today" },
+      links: [
+        {
+          icon: ExternalLink,
+          url: "https://www.superama-records.com/about",
+          label: "About",
+        },
+      ],
+    },
+    {
+      name: "SuperPitch",
+      logo: "/img/about/partners/superpitch.jpeg",
+      description: {
+        fr: "Sync TV, films & séries (Netflix, documentaires, etc.)",
+        en: "TV, movie & series sync (Netflix, documentaries, etc.)",
+      },
+      metrics: [
+        { fr: "≈ 2 albums produits", en: "≈ 2 albums produced" },
+        { fr: "≈ 3 singles produits", en: "≈ 3 singles produced" },
+        {
+          fr: "Tous les titres sont chez BMG Production Music",
+          en: "All songs on BMG Production Music",
+        },
+      ],
+      period: { fr: "nov. 2019 - janv. 2022", en: "Nov 2019 - Jan 2022" },
+      links: [
+        {
+          icon: Linkedin,
+          url: "https://www.linkedin.com/company/superpitch/",
+          label: "LinkedIn",
+        },
+      ],
+    },
+    {
+      name: "GUM",
+      logo: "/img/about/partners/gum.jpeg",
+      description: {
+        fr: "Sync TV & publicité worldwide (Netflix, ABC, ESPN, M6, NBA, Arte...)",
+        en: "TV & advertising sync worldwide (Netflix, ABC, ESPN, M6, NBA, Arte...)",
+      },
+      metrics: [
+        { fr: "≈ 1 album produit", en: "≈ 1 album produced" },
+        { fr: "≈ 17 singles produits", en: "≈ 17 singles produced" },
+      ],
+      period: { fr: "nov. 2017 - nov. 2019", en: "Nov 2017 - Nov 2019" },
+      links: [
+        {
+          icon: Linkedin,
+          url: "https://www.linkedin.com/company/greenunitedmusic/",
+          label: "LinkedIn",
+        },
+      ],
+    },
+  ];
+
+  const publisherPartners: Array<{
+    name: string;
+    logo?: string;
+    description?: LocalizedText;
+    metrics?: LocalizedText[];
+    period?: LocalizedText;
+    links: Array<{ icon: React.ElementType; url: string; label: string }>;
+  }> = [
+    {
+      name: "Cezame Music Agency",
+      logo: "/img/about/partners/cezame.png",
+      description: {
+        fr: "Éditeur / catalogue production music.",
+        en: "Publisher / production music catalog.",
+      },
+      links: [{ icon: ExternalLink, url: "https://www.cezamemusic.com/", label: "Website" }],
+    },
+    {
+      name: "MYMA",
+      logo: "/img/about/partners/myma.jpeg",
+      description: { fr: "Éditeur.", en: "Publisher." },
+      links: [{ icon: ExternalLink, url: "https://www.myma-music.com/", label: "Website" }],
+    },
+    {
+      name: "Universal Music Publishing Group",
+      logo: "/img/about/partners/universal.jpeg",
+      description: {
+        fr: "Sync TV, documentaire & radio (France3, WE, NHL, Canal+, ABC Family...)",
+        en: "TV, documentary & radio sync (France3, WE, NHL, Canal+, ABC Family...)",
+      },
+      metrics: [
+        { fr: "≈ 5 singles produits", en: "≈ 5 singles produced" },
+        {
+          fr: "Titres au catalogue Universal Music Publishing",
+          en: "Songs on Universal Music Publishing catalog",
+        },
+      ],
+      period: { fr: "oct. 2019 - janv. 2023", en: "Oct 2019 - Jan 2023" },
+      links: [
+        {
+          icon: Linkedin,
+          url: "https://www.linkedin.com/company/universal-music-publishing-group/",
+          label: "LinkedIn",
+        },
+      ],
+    },
+    {
+      name: "BMG Production Music",
+      logo: "/img/about/partners/bmg-production.png",
+      description: { fr: "Éditeur (production music).", en: "Publisher (production music)." },
+      links: [
+        {
+          icon: ExternalLink,
+          url: "https://bmgproductionmusic.com/en-us",
+          label: "Website",
+        },
+      ],
+    },
   ];
 
   const awards = [
+    {
+      title: t("awards.mark.title"),
+      subtitle: t("awards.mark.category"),
+      description: t("awards.mark.description"),
+      image: "/img/about/Marks-Awards.jpg",
+      link: "https://markawards.com/",
+      year: t("awards.mark.year"),
+      icon: Trophy,
+    },
     {
       title: t("awards.pma2024.title"),
       subtitle: t("awards.pma2024.category"),
@@ -352,7 +510,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       image: "/img/about/PMA-2024-Metal-nomination.jpg",
       link: "https://www.productionmusicawards.com/",
       year: t("awards.pma2024.year"),
-      icon: Trophy,
+      icon: Award,
     },
     {
       title: t("awards.pma2023.title"),
@@ -364,13 +522,13 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       icon: Award,
     },
     {
-      title: t("awards.mark.title"),
-      subtitle: t("awards.mark.category"),
-      description: t("awards.mark.description"),
-      image: "/img/about/Marks-Awards.jpg",
-      link: "https://markawards.com/",
-      year: t("awards.mark.year"),
-      icon: Award,
+      title: t("awards.sacem2025.title"),
+      subtitle: t("awards.sacem2025.category"),
+      description: t("awards.sacem2025.description"),
+      image: "/img/about/partners/sacem.jpeg",
+      link: "https://www.sacem.fr/",
+      year: t("awards.sacem2025.year"),
+      icon: BadgeCheck,
     },
   ];
 
@@ -417,6 +575,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     instruments: [
       { name: "Piano", icon: Piano },
       { name: "Guitar", icon: Guitar },
+      { name: "Banjo", icon: Guitar },
+      { name: "Ukulele", icon: Guitar },
     ],
     interests: [
       { name: locale === "fr" ? "Musique" : "Music", icon: Music },
@@ -544,7 +704,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                       src="/img/slider/loic-studio-front.jpg"
                       alt="Loïc Ghanem"
                       fill
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
                       sizes="(max-width: 768px) 100vw, 400px"
                       priority
                     />
@@ -612,7 +772,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6"
           >
             {skills.map((skill, i) => (
               <motion.div key={i} variants={fadeInUp}>
@@ -659,41 +819,45 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             >
               {awards.map((award, i) => (
                 <motion.div key={i} variants={fadeInUp}>
-                  <NeoCard hover="lift" padding="none" className="h-full group overflow-hidden">
+                  <NeoCard
+                    hover="lift"
+                    padding="none"
+                    className="h-full group overflow-hidden flex flex-col"
+                  >
                     {/* Image */}
-                    <div className="relative h-64 overflow-hidden bg-neo-text/5">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setImageModal({
+                          src: award.image,
+                          title: `${award.title} — ${award.year}`,
+                        })
+                      }
+                      className="relative h-64 overflow-hidden bg-neo-text/5 w-full text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neo-accent"
+                      aria-label={locale === "fr" ? "Agrandir l'image" : "Enlarge image"}
+                    >
                       <Image
                         src={award.image}
                         alt={award.title}
                         fill
-                        className="object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                       />
-                      {/* Year badge */}
-                      <div className="absolute top-4 left-4 bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono font-bold text-sm">
-                        {award.year}
-                      </div>
-                      {/* Icon overlay */}
-                      <div className="absolute bottom-4 right-4 w-12 h-12 bg-neo-text flex items-center justify-center">
-                        <award.icon className="w-6 h-6 text-neo-accent" />
-                      </div>
-                    </div>
+                    </button>
 
                     {/* Content */}
-                    <div className="p-6">
-                      <h3 className="text-xl font-black uppercase tracking-tight mb-2 text-neo-text">
+                    <div className="p-6 flex flex-col flex-1">
+                      <h3 className="flex items-center gap-2 text-xl font-black uppercase tracking-tight mb-2 text-neo-text">
+                        <award.icon className="w-5 h-5 text-neo-accent" />
                         {award.title}
                       </h3>
                       <p className="font-mono text-sm text-neo-accent mb-3">{award.subtitle}</p>
                       <p className="text-sm opacity-70 mb-4 line-clamp-3">{award.description}</p>
-                      <a
-                        href={award.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 font-mono text-sm font-bold text-neo-text hover:text-neo-accent transition-colors"
-                      >
-                        {t("awards.learnMore")}
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
+
+                      <div className="mt-auto pt-4 border-t-2 border-neo-text/10 flex items-center justify-end">
+                        <span className="bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono font-bold text-sm">
+                          {award.year}
+                        </span>
+                      </div>
                     </div>
                   </NeoCard>
                 </motion.div>
@@ -701,6 +865,13 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             </motion.div>
           </div>
         </section>
+        <ImageModal
+          isOpen={imageModal !== null}
+          onClose={() => setImageModal(null)}
+          src={imageModal?.src ?? ""}
+          alt={imageModal?.title ?? (locale === "fr" ? "Image" : "Image")}
+          title={imageModal?.title}
+        />
 
         {/* MUSICIAN EXPERIENCE */}
         <section className="container mx-auto px-4 md:px-6 py-24">
@@ -719,14 +890,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           >
             {musicianExperience.map((project, i) => (
               <motion.div key={i} variants={fadeInUp}>
-                <NeoCard hover="lift" padding="lg" className="h-full group relative">
-                  {/* Current badge */}
-                  {project.isCurrent && (
-                    <div className="absolute -top-3 -right-3 bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono text-xs font-bold border-2 border-neo-border">
-                      {locale === "fr" ? "ACTUEL" : "CURRENT"}
-                    </div>
-                  )}
-
+                <NeoCard hover="lift" padding="lg" className="h-full group">
                   {/* Period */}
                   <div className="font-mono text-xs text-neo-accent mb-2">{project.period}</div>
 
@@ -823,65 +987,172 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               subtitle={t("labelsPublishers.subtitle")}
             />
 
+            <h3 className="font-mono text-sm text-neo-accent mb-6 uppercase tracking-widest">
+              {t("labelsPublishers.labels")}
+            </h3>
+
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
-              {labels.map((label) => (
-                <motion.div key={label.name} variants={fadeInUp}>
-                  <NeoCard hover="lift" padding="lg" className="h-full group">
-                    {/* Label Initials */}
-                    <div className="w-16 h-16 bg-neo-accent flex items-center justify-center mb-6 border-2 border-neo-border">
-                      <span className="text-2xl font-black text-neo-text-inverse">
-                        {label.name
-                          .split(" ")
-                          .map((w) => w[0])
-                          .join("")}
-                      </span>
+              {labelPartners.map((partner) => (
+                <motion.div key={partner.name} variants={fadeInUp}>
+                  <NeoCard hover="lift" padding="lg" className="h-full group relative">
+                    {/* Logo */}
+                    <div className="w-16 h-16 bg-neo-bg flex items-center justify-center mb-6 border-2 border-neo-border overflow-hidden p-2">
+                      <Image
+                        src={partner.logo}
+                        alt={`${partner.name} logo`}
+                        width={56}
+                        height={56}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
 
                     {/* Label Name */}
                     <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-neo-text">
-                      {label.name}
+                      {partner.name}
                     </h3>
 
                     {/* Details */}
-                    <div className="space-y-3 font-mono text-sm mb-6">
-                      <div className="flex items-center gap-3">
-                        <Building2 className="w-4 h-4 text-neo-accent" />
-                        <span className="opacity-70">{label.publisher}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <BookOpen className="w-4 h-4 text-neo-accent" />
-                        <span className="opacity-70">{label.tracks} tracks</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-xs font-bold bg-neo-text text-neo-text-inverse px-2 py-1">
-                          Since {label.since}
-                        </span>
-                      </div>
+                    <div className="space-y-4 font-mono text-sm mb-6">
+                      {partner.period && (
+                        <div>
+                          <span className="text-xs font-bold bg-neo-text text-neo-text-inverse px-2 py-1">
+                            {partner.period[localeKey]}
+                          </span>
+                        </div>
+                      )}
+                      {partner.description && (
+                        <p className="opacity-70 leading-relaxed">
+                          {partner.description[localeKey]}
+                        </p>
+                      )}
+                      {partner.metrics && partner.metrics.length > 0 && (
+                        <ul className="space-y-2">
+                          {partner.metrics.map((metric, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-2 opacity-70 leading-snug"
+                            >
+                              <span className="w-1.5 h-1.5 bg-neo-accent mt-2 flex-shrink-0" />
+                              <span>{metric[localeKey]}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
 
                     {/* Social Links */}
-                    <div className="flex flex-wrap gap-2 pt-4 border-t-2 border-neo-border">
-                      {label.links.map((link, idx) => (
-                        <a
-                          key={idx}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-9 h-9 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
-                          title={link.label}
-                        >
-                          <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
-                        </a>
-                      ))}
-                    </div>
+                    {partner.links.length > 0 && (
+                      <div className="flex flex-wrap gap-2 pt-4 border-t-2 border-neo-border">
+                        {partner.links.map((link, idx) => (
+                          <a
+                            key={idx}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-9 h-9 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
+                            title={link.label}
+                          >
+                            <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
+                          </a>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Decorative corner */}
+                    <div className="absolute bottom-0 right-0 w-8 h-8 bg-neo-accent opacity-20 group-hover:opacity-40 transition-opacity" />
+                  </NeoCard>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <h3 className="font-mono text-sm text-neo-accent mt-14 mb-6 uppercase tracking-widest">
+              {t("labelsPublishers.publishers")}
+            </h3>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              {publisherPartners.map((publisher) => (
+                <motion.div key={publisher.name} variants={fadeInUp}>
+                  <NeoCard hover="lift" padding="lg" className="h-full group relative">
+                    <div className="w-16 h-16 bg-neo-bg flex items-center justify-center mb-6 border-2 border-neo-border overflow-hidden p-2">
+                      {publisher.logo ? (
+                        <Image
+                          src={publisher.logo}
+                          alt={`${publisher.name} logo`}
+                          width={56}
+                          height={56}
+                          className="w-full h-full object-contain"
+                        />
+                      ) : (
+                        <span className="text-2xl font-black text-neo-accent">
+                          {publisher.name
+                            .split(" ")
+                            .map((w) => w[0])
+                            .join("")}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-neo-text">
+                      {publisher.name}
+                    </h3>
+
+                    <div className="space-y-4 font-mono text-sm">
+                      {publisher.period && (
+                        <div>
+                          <span className="text-xs font-bold bg-neo-text text-neo-text-inverse px-2 py-1">
+                            {publisher.period[localeKey]}
+                          </span>
+                        </div>
+                      )}
+                      {publisher.description && (
+                        <p className="opacity-70 leading-relaxed">
+                          {publisher.description[localeKey]}
+                        </p>
+                      )}
+                      {publisher.metrics && publisher.metrics.length > 0 && (
+                        <ul className="space-y-2">
+                          {publisher.metrics.map((metric, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-2 opacity-70 leading-snug"
+                            >
+                              <span className="w-1.5 h-1.5 bg-neo-accent mt-2 flex-shrink-0" />
+                              <span>{metric[localeKey]}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+
+                    {publisher.links.length > 0 && (
+                      <div className="flex flex-wrap gap-2 pt-4 mt-6 border-t-2 border-neo-border">
+                        {publisher.links.map((link, idx) => (
+                          <a
+                            key={idx}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-9 h-9 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
+                            title={link.label}
+                          >
+                            <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
                     <div className="absolute bottom-0 right-0 w-8 h-8 bg-neo-accent opacity-20 group-hover:opacity-40 transition-opacity" />
                   </NeoCard>
                 </motion.div>

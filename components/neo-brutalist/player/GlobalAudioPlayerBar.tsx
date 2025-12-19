@@ -69,25 +69,68 @@ export const GlobalAudioPlayerBar = () => {
       return;
     }
 
+    const heroSelector = '[data-hero-audio-player="true"]';
+    const showThreshold = 0.15;
+
     let raf = 0;
-    const update = () => {
-      const threshold = Math.max(240, Math.floor(window.innerHeight * 0.4));
-      setShowOnHome(window.scrollY > threshold);
+    let rafScroll = 0;
+    let observer: IntersectionObserver | null = null;
+    let detachScrollFallback: (() => void) | null = null;
+
+    const installScrollFallback = () => {
+      const update = () => {
+        const threshold = Math.max(520, Math.floor(window.innerHeight * 0.9));
+        setShowOnHome(window.scrollY > threshold);
+      };
+
+      const onScroll = () => {
+        if (rafScroll) return;
+        rafScroll = window.requestAnimationFrame(() => {
+          rafScroll = 0;
+          update();
+        });
+      };
+
+      update();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll, { passive: true });
+      detachScrollFallback = () => {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+        if (rafScroll) window.cancelAnimationFrame(rafScroll);
+      };
     };
 
-    const onScroll = () => {
-      if (raf) return;
-      raf = window.requestAnimationFrame(() => {
-        raf = 0;
-        update();
-      });
+    const attachObserver = () => {
+      const heroEl = document.querySelector(heroSelector);
+      if (!heroEl) {
+        raf = window.requestAnimationFrame(attachObserver);
+        return;
+      }
+
+      if (typeof IntersectionObserver === "undefined") {
+        installScrollFallback();
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          if (!entry) return;
+          setShowOnHome(!entry.isIntersecting || entry.intersectionRatio < showThreshold);
+        },
+        { threshold: [0, 0.05, showThreshold, 0.25, 0.5, 0.75, 1] }
+      );
+
+      observer.observe(heroEl);
     };
 
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    attachObserver();
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
       if (raf) window.cancelAnimationFrame(raf);
+      detachScrollFallback?.();
+      observer?.disconnect();
     };
   }, [isHome]);
 
@@ -179,9 +222,9 @@ export const GlobalAudioPlayerBar = () => {
                   ref={barMeasureRef}
                   className="border-4 border-neo-border bg-neo-surface shadow-[10px_10px_0px_0px_var(--neo-accent)] overflow-hidden"
                 >
-                  <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-4 p-3 md:p-4">
                     {/* Track info */}
-                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                    <div className="flex items-center gap-3 min-w-0 flex-1 w-full">
                       <div className="h-11 w-11 md:h-12 md:w-12 border-2 border-neo-border bg-neo-surface shadow-[3px_3px_0px_0px_var(--neo-shadow)] overflow-hidden flex-shrink-0">
                         {artworkUrl ? (
                           <Image
@@ -203,24 +246,24 @@ export const GlobalAudioPlayerBar = () => {
                         <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-neo-accent">
                           {statusLabel}
                         </div>
-                        <div className="font-black uppercase tracking-tight text-neo-text truncate">
+                        <div className="font-black uppercase tracking-tight text-neo-text line-clamp-2 sm:line-clamp-1">
                           {displayTitle}
                         </div>
-                        <div className="font-mono text-xs text-neo-text/60 truncate">
+                        <div className="font-mono text-xs text-neo-text/60 line-clamp-1">
                           {displayArtist}
                         </div>
                       </div>
                     </div>
 
                     {/* Controls */}
-                    <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                    <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 w-full sm:w-auto flex-wrap sm:flex-nowrap justify-between sm:justify-start">
                       <button
                         type="button"
                         onClick={() => actions.previous()}
                         disabled={controlsDisabled}
                         aria-label={t("controls.previous")}
                         className={cn(
-                          "h-10 w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
                           "hover:-translate-y-0.5 transition-transform",
                           "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
                         )}
@@ -239,7 +282,7 @@ export const GlobalAudioPlayerBar = () => {
                         }}
                         aria-label={isPlaying ? t("controls.pause") : t("controls.play")}
                         className={cn(
-                          "h-12 w-12 border-3 border-neo-border bg-neo-accent text-neo-text-inverse",
+                          "h-11 w-11 sm:h-12 sm:w-12 border-3 border-neo-border bg-neo-accent text-neo-text-inverse",
                           "shadow-[4px_4px_0px_0px_var(--neo-border)] hover:-translate-y-0.5 transition-transform",
                           !mediaAllowed && "bg-neo-text text-neo-text-inverse"
                         )}
@@ -257,7 +300,7 @@ export const GlobalAudioPlayerBar = () => {
                         disabled={controlsDisabled}
                         aria-label={t("controls.next")}
                         className={cn(
-                          "h-10 w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
                           "hover:-translate-y-0.5 transition-transform",
                           "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
                         )}
@@ -278,7 +321,7 @@ export const GlobalAudioPlayerBar = () => {
                         disabled={!mediaAllowed}
                         aria-label={volume === 0 ? t("controls.unmute") : t("controls.mute")}
                         className={cn(
-                          "md:hidden h-10 w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "md:hidden h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
                           "hover:-translate-y-0.5 transition-transform",
                           "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
                         )}
@@ -349,7 +392,7 @@ export const GlobalAudioPlayerBar = () => {
                         onClick={() => setIsCollapsed((prev) => !prev)}
                         aria-label={isCollapsed ? t("controls.expand") : t("controls.collapse")}
                         className={cn(
-                          "h-10 w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
                           "hover:-translate-y-0.5 transition-transform"
                         )}
                       >
@@ -365,7 +408,7 @@ export const GlobalAudioPlayerBar = () => {
                         onClick={() => actions.dismiss()}
                         aria-label={t("controls.close")}
                         className={cn(
-                          "h-10 w-10 border-2 border-neo-border bg-neo-text text-neo-text-inverse shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-text text-neo-text-inverse shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
                           "hover:-translate-y-0.5 transition-transform"
                         )}
                       >
@@ -378,7 +421,7 @@ export const GlobalAudioPlayerBar = () => {
                         rel="noopener noreferrer"
                         aria-label={t("controls.openOnSoundcloud")}
                         className={cn(
-                          "sm:hidden h-10 w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "sm:hidden h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
                           "hover:-translate-y-0.5 transition-transform"
                         )}
                       >

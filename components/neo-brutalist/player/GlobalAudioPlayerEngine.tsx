@@ -22,6 +22,41 @@ import {
 const READY_TIMEOUT_MS = 12000;
 const PROGRESS_THROTTLE_MS = 200;
 
+const parseSoundCloudDateMs = (value: string | null | undefined) => {
+  if (!value) return null;
+
+  const direct = Date.parse(value);
+  if (Number.isFinite(direct)) return direct;
+
+  const match = value.match(
+    /^(\d{4})[/-](\d{2})[/-](\d{2})(?:[ T](\d{2}:\d{2}:\d{2}))?(?:\s*(Z|[+-]\d{4}))?$/
+  );
+  if (!match) return null;
+
+  const [, year, month, day, timeRaw, tzRaw] = match;
+  const time = timeRaw ?? "00:00:00";
+  const tz =
+    tzRaw === "Z"
+      ? "Z"
+      : typeof tzRaw === "string" && /^[+-]\d{4}$/.test(tzRaw)
+        ? `${tzRaw.slice(0, 3)}:${tzRaw.slice(3)}`
+        : "Z";
+
+  const iso = `${year}-${month}-${day}T${time}${tz}`;
+  const normalized = Date.parse(iso);
+  return Number.isFinite(normalized) ? normalized : null;
+};
+
+const getSoundSortDateMs = (sound: SoundCloudSound) => {
+  return (
+    parseSoundCloudDateMs(sound.release_date) ??
+    parseSoundCloudDateMs(sound.display_date) ??
+    parseSoundCloudDateMs(sound.created_at) ??
+    parseSoundCloudDateMs(sound.last_modified) ??
+    null
+  );
+};
+
 const mapSound = (sound: SoundCloudSound | null | undefined) => {
   if (!sound?.id || !sound.title) return null;
   return {
@@ -154,8 +189,22 @@ export const GlobalAudioPlayerEngine = () => {
         widget.getSounds((sounds: SoundCloudSound[]) => {
           if (!Array.isArray(sounds) || sounds.length === 0) return;
           const queue = sounds
-            .map((sound) => mapSound(sound))
-            .filter((track): track is NonNullable<typeof track> => !!track);
+            .map((sound, widgetIndex) => {
+              const track = mapSound(sound);
+              if (!track) return null;
+              return {
+                track,
+                widgetIndex,
+                sortMs: getSoundSortDateMs(sound) ?? 0,
+              };
+            })
+            .filter((item): item is NonNullable<typeof item> => !!item)
+            .sort((a, b) => {
+              const dateDiff = b.sortMs - a.sortMs;
+              if (dateDiff) return dateDiff;
+              return b.track.id - a.track.id;
+            })
+            .map(({ track, widgetIndex }) => ({ ...track, widgetIndex }));
           setGlobalAudioPlayerQueue(queue);
           const currentId = getGlobalAudioPlayerState().track?.id;
           if (typeof currentId === "number") {
@@ -165,7 +214,9 @@ export const GlobalAudioPlayerEngine = () => {
             try {
               widget.getCurrentSoundIndex((idx: number) => {
                 if (!Number.isFinite(idx)) return;
-                setGlobalAudioPlayerCurrentIndex(Math.max(0, Math.floor(idx)));
+                const safeWidgetIndex = Math.max(0, Math.floor(idx));
+                const queueIndex = queue.findIndex((t) => t.widgetIndex === safeWidgetIndex);
+                if (queueIndex >= 0) setGlobalAudioPlayerCurrentIndex(queueIndex);
               });
             } catch {
               // noop
