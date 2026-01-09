@@ -2,25 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Clock, ExternalLink, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NeoCard } from "../ui/NeoCard";
-import { NeoTag } from "../ui/NeoTag";
 
 interface NeoContactInfoProps {
   className?: string;
 }
-
-const socialLinks = [
-  { name: "SoundCloud", url: "https://soundcloud.com/loicghanem", icon: "🎵" },
-  {
-    name: "Spotify",
-    url: "https://open.spotify.com/intl-fr/artist/3PPQlrmOzl6QUBSP3gcyLA",
-    icon: "🎧",
-  },
-  { name: "Instagram", url: "https://instagram.com/loicghanem", icon: "📸" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/loicghanem", icon: "💼" },
-];
 
 export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
   const t = useTranslations("contact");
@@ -42,11 +30,6 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       icon: <MapPin className="w-5 h-5" />,
       label: t("info.location"),
       value: "Paris, France",
-    },
-    {
-      icon: <Clock className="w-5 h-5" />,
-      label: t("stats.responseTime"),
-      value: "< 24h",
     },
   ];
 
@@ -87,61 +70,6 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
             </div>
           </NeoCard>
         ))}
-      </div>
-
-      {/* Stats */}
-      <NeoCard
-        variant="inverted"
-        hover="none"
-        padding="lg"
-        className="group cursor-pointer hover:bg-neo-accent hover:border-neo-accent transition-all duration-300"
-      >
-        <div className="grid grid-cols-2 gap-6">
-          <div className="text-center">
-            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">
-              98%
-            </p>
-            <p className="font-mono text-xs uppercase text-neo-text-inverse/60 group-hover:text-neo-text/60 mt-1 transition-colors duration-300">
-              {t("stats.satisfaction")}
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="text-4xl font-black text-neo-accent group-hover:text-neo-text transition-colors duration-300">
-              150+
-            </p>
-            <p className="font-mono text-xs uppercase text-neo-text-inverse/60 group-hover:text-neo-text/60 mt-1 transition-colors duration-300">
-              {t("stats.projects")}
-            </p>
-          </div>
-        </div>
-      </NeoCard>
-
-      {/* Social Links */}
-      <div>
-        <h3 className="font-mono text-xs uppercase tracking-wider text-neo-text/60 mb-4">
-          {t("info.findMe")}
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {socialLinks.map((social) => (
-            <a
-              key={social.name}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group"
-            >
-              <NeoTag
-                variant="outline"
-                size="md"
-                icon={<span>{social.icon}</span>}
-                className="group-hover:bg-neo-accent group-hover:text-neo-text-inverse group-hover:border-neo-accent transition-all"
-              >
-                {social.name}
-                <ExternalLink className="w-3 h-3 ml-1 opacity-50" />
-              </NeoTag>
-            </a>
-          ))}
-        </div>
       </div>
 
       {/* Availability Note */}
