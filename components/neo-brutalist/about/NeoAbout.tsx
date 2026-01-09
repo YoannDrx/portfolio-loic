@@ -309,7 +309,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
   ];
 
   const stats = [
-    { val: "24", label: t("achievements.albums") },
+    { val: "20", label: t("achievements.albums") },
     { val: "8", label: t("achievements.labels") },
     { val: "4", label: t("achievements.publishers") },
     { val: "14", label: t("achievements.years") },
