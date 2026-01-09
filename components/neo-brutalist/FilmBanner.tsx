@@ -57,7 +57,7 @@ export const FilmBanner: React.FC<FilmBannerProps> = ({
     ));
 
   return (
-    <section className="relative overflow-hidden bg-neo-bg border-y-4 border-neo-border">
+    <section className="overflow-hidden bg-neo-bg border-y-4 border-neo-border">
       <div className={pauseOnHover ? "group" : ""}>
         <div className="flex">
           {/* First set */}

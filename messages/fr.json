@@ -116,6 +116,10 @@
       "spotify": "Écouter sur Spotify",
       "description": "Retrouvez toutes mes productions sur les plateformes de streaming. De la composition orchestrale au Metal en passant par l'Electronic et l'Ambient."
     },
+    "banners": {
+      "partners": "Ils m'ont fait confiance",
+      "productions": "Mes productions"
+    },
     "splitHero": {
       "basedIn": "BASÉ À PARIS",
       "title": {

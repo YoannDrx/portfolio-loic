@@ -116,6 +116,10 @@
       "spotify": "Listen on Spotify",
       "description": "Find all my productions on streaming platforms. From orchestral composition to Metal through Electronic and Ambient."
     },
+    "banners": {
+      "partners": "They trusted me",
+      "productions": "My productions"
+    },
     "splitHero": {
       "basedIn": "BASED IN PARIS",
       "title": {
