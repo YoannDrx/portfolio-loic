@@ -18,14 +18,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AlbumsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: _locale } = await params;
 
-  // Récupérer tous les albums publiés, triés par date décroissante
+  // Récupérer tous les albums publiés, triés par order puis date décroissante
+  // order permet d'épingler certains albums en premier (Terra=0, Cyberpunk=1, Bass With Attitude=2)
   const albums = await prisma.album.findMany({
     where: {
       published: true,
     },
-    orderBy: {
-      sortedDate: "desc",
-    },
+    orderBy: [{ order: "asc" }, { sortedDate: "desc" }],
     select: {
       id: true,
       title: true,
