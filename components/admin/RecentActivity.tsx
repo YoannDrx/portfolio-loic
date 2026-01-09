@@ -11,7 +11,7 @@ interface RecentItem {
   title: string;
   type: "album" | "video" | "service";
   published: boolean;
-  img?: string;
+  img?: string | null;
   updatedAt: string;
 }
 
@@ -95,9 +95,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
             <div className="w-16 h-16 flex items-center justify-center border-2 border-neo-border bg-neo-surface mb-4">
               <ImageIcon className="h-8 w-8 text-neo-text/30" />
             </div>
-            <p className="font-mono text-sm text-neo-text/60">
-              Aucune activité récente
-            </p>
+            <p className="font-mono text-sm text-neo-text/60">Aucune activité récente</p>
           </div>
         ) : (
           items.map((item) => {
@@ -133,9 +131,7 @@ export function RecentActivity({ items, locale }: RecentActivityProps) {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-neo-text truncate uppercase">
-                    {item.title}
-                  </p>
+                  <p className="text-sm font-bold text-neo-text truncate uppercase">{item.title}</p>
                   <div className="flex items-center gap-2 mt-1 font-mono text-xs text-neo-text/60">
                     <Icon className={cn("h-3 w-3", config.color)} />
                     <span>{config.label}</span>

@@ -580,6 +580,7 @@
       "viewMore": "View more"
     },
     "noAlbums": "No albums match your filters.",
+    "featured": "Featured",
     "detail": {
       "notFound": "Album not found",
       "listen": "Listen to album",
@@ -695,7 +696,7 @@
       "location": "Location",
       "locationValue": "Paris, France",
       "social": "Social Media",
-      "availability": "I usually respond within 24-48 hours. For urgent projects, feel free to contact me by phone.",
+      "availability": "For urgent projects, feel free to contact me by phone.",
       "findMe": "Find me"
     },
     "cta": {

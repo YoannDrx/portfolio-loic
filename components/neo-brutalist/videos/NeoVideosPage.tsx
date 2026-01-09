@@ -42,36 +42,70 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
   const t = useTranslations("videos");
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
-  // Extract unique types
+  // Ordre des catégories souhaité
+  const categoryOrder = ["Sync", "MusicToPicture", "OriginalMusic"];
+
+  // Extract unique types dans l'ordre souhaité
   const types = useMemo(() => {
     const typeSet = new Set<string>();
     videos.forEach((video) => {
       if (video.type) typeSet.add(video.type);
     });
-    return Array.from(typeSet).sort();
+    // Trier selon l'ordre défini
+    return Array.from(typeSet).sort((a, b) => {
+      const indexA = categoryOrder.indexOf(a);
+      const indexB = categoryOrder.indexOf(b);
+      if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+      if (indexA === -1) return 1;
+      if (indexB === -1) return -1;
+      return indexA - indexB;
+    });
+  }, [videos]);
+
+  // Fonction pour parser les dates au format DD/MM/YYYY
+  const parseDate = (dateStr: string) => {
+    const [day, month, year] = dateStr.split("/").map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  // Grouper les vidéos par catégorie et trier par date
+  const groupedVideos = useMemo(() => {
+    const groups: Record<string, VideoItem[]> = {};
+
+    categoryOrder.forEach((cat) => {
+      groups[cat] = videos
+        .filter((v) => v.type === cat)
+        .sort((a, b) => {
+          const dateA = parseDate(a.date);
+          const dateB = parseDate(b.date);
+          return dateB.getTime() - dateA.getTime();
+        });
+    });
+
+    return groups;
   }, [videos]);
 
   // Filter videos by type
   const filteredVideos = useMemo(() => {
-    if (!selectedType) return videos;
-    return videos.filter((video) => video.type === selectedType);
+    if (!selectedType) return null; // null = afficher par catégories
+    return videos
+      .filter((video) => video.type === selectedType)
+      .sort((a, b) => {
+        const dateA = parseDate(a.date);
+        const dateB = parseDate(b.date);
+        return dateB.getTime() - dateA.getTime();
+      });
   }, [videos, selectedType]);
-
-  // Stats
-  const stats = useMemo(
-    () => ({
-      total: videos.length,
-      categories: types.length,
-      syncPlacements: videos.filter((v) => v.type?.toLowerCase().includes("sync")).length,
-    }),
-    [videos, types]
-  );
 
   const getTypeLabel = (type: string) => {
     const lowerType = type.toLowerCase();
     if (lowerType.includes("original")) return t("filterOriginalMusic");
     if (lowerType.includes("sync")) return t("filterSync");
-    if (lowerType.includes("music to picture") || lowerType.includes("m2p"))
+    if (
+      lowerType.includes("musictopicture") ||
+      lowerType.includes("music to picture") ||
+      lowerType.includes("m2p")
+    )
       return t("filterMusicToPicture");
     return type;
   };
@@ -139,29 +173,6 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
           </div>
         </section>
 
-        {/* Stats Bar */}
-        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-12">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { val: stats.total.toString(), label: t("stats.total") },
-                { val: stats.categories.toString(), label: t("stats.categories") },
-                { val: stats.syncPlacements.toString(), label: t("stats.syncPlacements") },
-                { val: "20+", label: t("stats.brands") },
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl font-black text-neo-accent tracking-tighter">
-                    {stat.val}
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-widest mt-2 opacity-60">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Filters */}
         <section className="py-8 border-b-2 border-neo-border sticky top-[72px] bg-neo-bg z-30">
           <div className="container mx-auto px-4 md:px-6">
@@ -197,27 +208,72 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
         <section id="videos-grid" className="py-16 bg-neo-bg">
           <div className="container mx-auto px-4 md:px-6">
             <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedType || "all"}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={staggerContainer}
-                className="grid grid-cols-1 md:grid-cols-2 gap-8"
-              >
-                {filteredVideos.length > 0 ? (
-                  filteredVideos.map((video) => (
-                    <motion.div key={video.id} variants={fadeInUp} layout>
-                      <NeoVideoCard video={video} />
+              {/* Affichage filtré par catégorie unique */}
+              {filteredVideos ? (
+                <motion.div
+                  key={selectedType || "filtered"}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={staggerContainer}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                  {filteredVideos.length > 0 ? (
+                    filteredVideos.map((video) => (
+                      <motion.div key={video.id} variants={fadeInUp} layout className="h-full">
+                        <NeoVideoCard video={video} />
+                      </motion.div>
+                    ))
+                  ) : (
+                    <motion.div variants={fadeInUp} className="col-span-full text-center py-16">
+                      <Film className="w-16 h-16 mx-auto mb-4 text-neo-text/20" />
+                      <p className="font-mono text-lg text-neo-text/60">{t("noVideos")}</p>
                     </motion.div>
-                  ))
-                ) : (
-                  <motion.div variants={fadeInUp} className="col-span-full text-center py-16">
-                    <Film className="w-16 h-16 mx-auto mb-4 text-neo-text/20" />
-                    <p className="font-mono text-lg text-neo-text/60">{t("noVideos")}</p>
-                  </motion.div>
-                )}
-              </motion.div>
+                  )}
+                </motion.div>
+              ) : (
+                /* Affichage groupé par catégories */
+                <motion.div
+                  key="grouped"
+                  initial="hidden"
+                  animate="visible"
+                  variants={staggerContainer}
+                  className="space-y-16"
+                >
+                  {categoryOrder.map((category) => {
+                    const categoryVideos = groupedVideos[category];
+                    if (!categoryVideos || categoryVideos.length === 0) return null;
+
+                    return (
+                      <motion.div key={category} variants={fadeInUp}>
+                        {/* Titre de catégorie */}
+                        <div className="flex items-center gap-4 mb-8">
+                          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neo-text">
+                            {getTypeLabel(category)}
+                          </h2>
+                          <span className="font-mono text-sm bg-neo-accent text-neo-text-inverse px-2 py-1">
+                            {categoryVideos.length}
+                          </span>
+                        </div>
+
+                        {/* Grille de vidéos */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {categoryVideos.map((video) => (
+                            <motion.div
+                              key={video.id}
+                              variants={fadeInUp}
+                              layout
+                              className="h-full"
+                            >
+                              <NeoVideoCard video={video} />
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              )}
             </AnimatePresence>
           </div>
         </section>

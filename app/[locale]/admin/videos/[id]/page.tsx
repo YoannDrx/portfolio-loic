@@ -24,10 +24,14 @@ export default async function EditVideoPage({
         <p className="text-muted-foreground dark:text-muted-foreground">{video.title}</p>
       </div>
 
-      <VideoForm locale={locale} initialData={{
-        ...video,
-        type: video.type as "OriginalMusic" | "Sync" | "MusicToPicture"
-      }} />
+      <VideoForm
+        locale={locale}
+        initialData={{
+          ...video,
+          img: video.img ?? "",
+          type: video.type as "OriginalMusic" | "Sync" | "MusicToPicture",
+        }}
+      />
     </div>
   );
 }

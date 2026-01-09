@@ -98,30 +98,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
           </div>
         </NeoHeroSection>
 
-        {/* Stats Bar */}
-        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-12">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { val: services.length.toString(), label: t("stats.services") },
-                { val: "15+", label: t("stats.experience") },
-                { val: "150+", label: t("stats.projects") },
-                { val: "98%", label: t("stats.satisfaction") },
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl font-black text-neo-accent tracking-tighter">
-                    {stat.val}
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-widest mt-2 opacity-60">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Services List */}
+        {/* Services Grid */}
         <section id="services-list" className="py-24">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
@@ -129,53 +106,48 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
-              className="space-y-16"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {services.map((service, i) => {
                 const IconComponent = getIconForService(service.title);
                 return (
-                  <motion.div
-                    key={service.id}
-                    variants={fadeInUp}
-                    className="border-b-4 border-neo-border pb-16 last:border-b-0"
-                  >
-                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
-                      {/* Number & Icon */}
-                      <div className="flex lg:flex-col items-center lg:items-start gap-6 lg:w-48 shrink-0">
-                        <span
-                          className="text-6xl lg:text-8xl font-black text-transparent"
-                          style={{ WebkitTextStroke: "2px var(--neo-text)" }}
-                        >
-                          0{i + 1}
-                        </span>
-                        <div className="w-16 h-16 bg-neo-accent border-2 border-neo-border flex items-center justify-center shadow-[4px_4px_0px_0px_var(--neo-shadow)]">
-                          <IconComponent size={32} className="text-neo-text-inverse" />
+                  <motion.div key={service.id} variants={fadeInUp}>
+                    <Link
+                      href={{ pathname: "/services/[id]", params: { id: service.id } }}
+                      className="block h-full"
+                    >
+                      <div className="h-full border-2 border-neo-border p-8 bg-neo-surface hover:bg-neo-text hover:text-neo-text-inverse transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] group">
+                        {/* Header : Icon + Number */}
+                        <div className="flex justify-between items-start mb-8">
+                          <div className="p-3 bg-neo-bg border-2 border-neo-border group-hover:bg-neo-surface group-hover:border-neo-text-inverse transition-colors">
+                            <IconComponent
+                              size={28}
+                              className="text-neo-accent group-hover:text-neo-accent"
+                            />
+                          </div>
+                          <span className="font-mono font-bold text-2xl text-neo-accent">
+                            /{String(i + 1).padStart(2, "0")}
+                          </span>
                         </div>
-                      </div>
 
-                      {/* Content */}
-                      <div className="flex-1">
-                        <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tight mb-6 text-neo-text">
+                        {/* Title */}
+                        <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight mb-4 text-neo-text group-hover:text-neo-text-inverse transition-colors">
                           {service.title}
-                        </h2>
+                        </h3>
+
+                        {/* Description */}
                         <div
-                          className="font-mono text-lg leading-relaxed max-w-3xl border-l-4 border-neo-accent pl-6 opacity-80"
+                          className="font-mono text-sm leading-relaxed mb-6 text-neo-text/80 group-hover:text-neo-text-inverse/80 transition-colors line-clamp-3"
                           dangerouslySetInnerHTML={{ __html: getDescription(service) }}
                         />
-                        <Link
-                          href={{ pathname: "/services/[id]", params: { id: service.id } }}
-                          className="inline-block mt-6"
-                        >
-                          <BrutalistButton
-                            variant="ghost"
-                            size="sm"
-                            icon={<ArrowRight className="w-4 h-4" />}
-                          >
-                            {t("seeMore")}
-                          </BrutalistButton>
-                        </Link>
+
+                        {/* CTA */}
+                        <div className="flex items-center gap-2 font-mono text-xs uppercase font-bold text-neo-accent group-hover:text-neo-accent transition-colors mt-auto">
+                          <span>{t("seeMore")}</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </motion.div>
                 );
               })}

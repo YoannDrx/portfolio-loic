@@ -22,6 +22,19 @@ export const NeoContact = () => {
         {/* Hero Split Screen */}
         <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] pt-8 pb-12 md:py-16 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
+            {/* Badge au-dessus de la grille */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-8 flex items-center gap-3"
+            >
+              <span className="font-mono text-sm font-bold bg-neo-text text-neo-accent px-2 py-1">
+                06
+              </span>
+              <NeoTag>{t("hero.badge")}</NeoTag>
+            </motion.div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* LEFT - Accroche + Illustration */}
               <motion.div
@@ -29,25 +42,12 @@ export const NeoContact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                {/* Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="mb-6 flex items-center gap-3"
-                >
-                  <span className="font-mono text-sm font-bold bg-neo-text text-neo-accent px-2 py-1">
-                    06
-                  </span>
-                  <NeoTag>{t("hero.badge")}</NeoTag>
-                </motion.div>
-
                 {/* Titre */}
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-[12vw] md:text-[8vw] lg:text-[6vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text"
+                  className="text-[12vw] md:text-[8vw] lg:text-[5.5vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text"
                 >
                   {t("hero.title")}
                 </motion.h1>
@@ -57,7 +57,7 @@ export const NeoContact = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="mt-6 text-lg max-w-2xl text-neo-text/70"
+                  className="mt-6 text-lg max-w-md text-neo-text/70"
                 >
                   {t("hero.description")}
                 </motion.p>

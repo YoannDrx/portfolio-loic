@@ -11,17 +11,14 @@ export interface SidebarItem {
 /**
  * Video categories for filtering
  */
-export type VideoType =
-  | 'OriginalMusic'
-  | 'Sync'
-  | 'MusicToPicture';
+export type VideoType = "OriginalMusic" | "Sync" | "MusicToPicture";
 
 /**
  * Video project item
  */
 export interface Video {
   id: string;
-  img: string;
+  img: string | null;
   type: string;
   videoId: string; // YouTube video ID
   title: string;

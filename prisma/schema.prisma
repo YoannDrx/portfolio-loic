@@ -102,7 +102,7 @@ model Album {
 
 model Video {
   id          String   @id @default(cuid())
-  img         String
+  img         String?
   type        String
   videoId     String
   title       String

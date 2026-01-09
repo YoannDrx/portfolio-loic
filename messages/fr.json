@@ -591,6 +591,7 @@
       "viewMore": "Voir plus"
     },
     "noAlbums": "Aucun album ne correspond à vos filtres.",
+    "featured": "Favori",
     "detail": {
       "notFound": "Album non trouvé",
       "listen": "Écouter l'album",
@@ -706,7 +707,7 @@
       "location": "Localisation",
       "locationValue": "Paris, France",
       "social": "Réseaux Sociaux",
-      "availability": "Je réponds généralement sous 24-48 heures. Pour les projets urgents, n'hésitez pas à me contacter par téléphone.",
+      "availability": "Pour les projets urgents, n'hésitez pas à me contacter par téléphone.",
       "findMe": "Retrouvez-moi"
     },
     "cta": {

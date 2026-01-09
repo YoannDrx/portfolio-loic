@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
-  Download,
   Mail,
   MapPin,
   Music,
@@ -303,10 +302,12 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     metrics?: LocalizedText[];
     period?: LocalizedText;
     links: Array<{ icon: LucideIcon; url: string; label: string }>;
+    isMymaLabel?: boolean;
   }> = [
+    // === LABELS MYMA ===
     {
       name: "Montmorency Music Agency",
-      logo: "/img/about/partners/montmorency-music-agency.png",
+      logo: "/img/about/partners/myma.jpeg",
       description: {
         fr: "Sync TV, films & séries (Netflix, Spotify, HBO, ESPN, CNN, BBC, France Télévision, Amazon Prime Video, MLB, NHL, Burger King...)",
         en: "TV, movie & series sync (Netflix, Spotify, HBO, ESPN, CNN, BBC, France Télévision, Amazon Prime Video, MLB, NHL, Burger King...)",
@@ -326,7 +327,45 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           label: "YouTube",
         },
       ],
+      isMymaLabel: true,
     },
+    {
+      name: "Justement Music",
+      logo: "/img/about/partners/justement-music.jpg",
+      description: { fr: "Label de production music.", en: "Production music label." },
+      period: { fr: "2018 - aujourd'hui", en: "2018 - today" },
+      links: [
+        {
+          icon: Youtube,
+          url: "https://www.youtube.com/playlist?list=PLJlRZETQILeOzFn01l_GqRtPoDWGtGdcg",
+          label: "YouTube",
+        },
+      ],
+      isMymaLabel: true,
+    },
+    {
+      name: "Stereoscopic",
+      logo: "/img/about/partners/stereoscopic.png",
+      description: { fr: "Label de production music.", en: "Production music label." },
+      period: { fr: "2019 - aujourd'hui", en: "2019 - today" },
+      links: [{ icon: ExternalLink, url: "https://www.myma-music.com/", label: "MYMA" }],
+      isMymaLabel: true,
+    },
+    {
+      name: "Superama Records",
+      logo: "/img/about/partners/superama-records.jpg",
+      description: { fr: "Label de production music.", en: "Production music label." },
+      period: { fr: "2026 - aujourd'hui", en: "2026 - today" },
+      links: [
+        {
+          icon: ExternalLink,
+          url: "https://www.superama-records.com/about",
+          label: "About",
+        },
+      ],
+      isMymaLabel: true,
+    },
+    // === AUTRES LABELS ===
     {
       name: "Infinity Scores",
       logo: "/img/about/partners/infinity-scores.jpeg",
@@ -356,39 +395,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       ],
     },
     {
-      name: "Justement Music",
-      logo: "/img/about/partners/justement-music.jpg",
-      description: { fr: "Label.", en: "Label." },
-      period: { fr: "2018 - aujourd'hui", en: "2018 - today" },
-      links: [
-        {
-          icon: Youtube,
-          url: "https://www.youtube.com/playlist?list=PLJlRZETQILeOzFn01l_GqRtPoDWGtGdcg",
-          label: "YouTube",
-        },
-      ],
-    },
-    {
-      name: "Stereoscopic",
-      logo: "/img/about/partners/stereoscopic.png",
-      description: { fr: "Label (MYMA).", en: "Label (MYMA)." },
-      period: { fr: "2019 - aujourd'hui", en: "2019 - today" },
-      links: [],
-    },
-    {
-      name: "Superama Records",
-      logo: "/img/about/partners/superama-records.jpg",
-      description: { fr: "Label (MYMA).", en: "Label (MYMA)." },
-      period: { fr: "2018 - aujourd'hui", en: "2018 - today" },
-      links: [
-        {
-          icon: ExternalLink,
-          url: "https://www.superama-records.com/about",
-          label: "About",
-        },
-      ],
-    },
-    {
       name: "SuperPitch",
       logo: "/img/about/partners/superpitch.jpeg",
       description: {
@@ -405,6 +411,11 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       ],
       period: { fr: "nov. 2019 - janv. 2022", en: "Nov 2019 - Jan 2022" },
       links: [
+        {
+          icon: ExternalLink,
+          url: "https://bmgproductionmusic.com/en-fr/search/tracks?searchTerm=LOIC%20GHANEM&typed=loic&typed=ghanem",
+          label: "BMG Catalog",
+        },
         {
           icon: Linkedin,
           url: "https://www.linkedin.com/company/superpitch/",
@@ -426,36 +437,16 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       period: { fr: "nov. 2017 - nov. 2019", en: "Nov 2017 - Nov 2019" },
       links: [
         {
+          icon: ExternalLink,
+          url: "https://www.kaptainmusic.com/search?artists=%5B%5B%22639ca27d08f94f103957570b%22%2C%22Loic%20Ghanem%22%5D%5D",
+          label: "Kaptain Music",
+        },
+        {
           icon: Linkedin,
           url: "https://www.linkedin.com/company/greenunitedmusic/",
           label: "LinkedIn",
         },
       ],
-    },
-  ];
-
-  const publisherPartners: Array<{
-    name: string;
-    logo?: string;
-    description?: LocalizedText;
-    metrics?: LocalizedText[];
-    period?: LocalizedText;
-    links: Array<{ icon: LucideIcon; url: string; label: string }>;
-  }> = [
-    {
-      name: "Cezame Music Agency",
-      logo: "/img/about/partners/cezame.png",
-      description: {
-        fr: "Éditeur / catalogue production music.",
-        en: "Publisher / production music catalog.",
-      },
-      links: [{ icon: ExternalLink, url: "https://www.cezamemusic.com/", label: "Website" }],
-    },
-    {
-      name: "MYMA",
-      logo: "/img/about/partners/myma.jpeg",
-      description: { fr: "Éditeur.", en: "Publisher." },
-      links: [{ icon: ExternalLink, url: "https://www.myma-music.com/", label: "Website" }],
     },
     {
       name: "Universal Music Publishing Group",
@@ -477,18 +468,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
           icon: Linkedin,
           url: "https://www.linkedin.com/company/universal-music-publishing-group/",
           label: "LinkedIn",
-        },
-      ],
-    },
-    {
-      name: "BMG Production Music",
-      logo: "/img/about/partners/bmg-production.png",
-      description: { fr: "Éditeur (production music).", en: "Publisher (production music)." },
-      links: [
-        {
-          icon: ExternalLink,
-          url: "https://bmgproductionmusic.com/en-us",
-          label: "Website",
         },
       ],
     },
@@ -678,17 +657,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
-                <a
-                  href={`/api/cv/download?locale=${locale}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <BrutalistButton variant="primary" size="lg" icon={<Download size={18} />}>
-                    {t("cta.downloadCV")}
-                  </BrutalistButton>
-                </a>
                 <Link href="/contact">
-                  <BrutalistButton variant="secondary" size="lg" icon={<Mail size={18} />}>
+                  <BrutalistButton variant="primary" size="lg" icon={<Mail size={18} />}>
                     {t("cta.contactMe")}
                   </BrutalistButton>
                 </Link>
@@ -989,10 +959,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               subtitle={t("labelsPublishers.subtitle")}
             />
 
-            <h3 className="font-mono text-sm text-neo-accent mb-6 uppercase tracking-widest">
-              {t("labelsPublishers.labels")}
-            </h3>
-
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -1004,146 +970,70 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                 <motion.div key={partner.name} variants={fadeInUp}>
                   <NeoCard
                     hover="lift"
-                    padding="lg"
-                    className="h-full group relative overflow-hidden"
+                    padding="none"
+                    className="h-full flex flex-col overflow-hidden"
                   >
-                    {/* Main content - visible by default */}
-                    <div className="flex flex-col items-center text-center relative z-10">
-                      {/* Logo - 96px */}
-                      <div className="w-24 h-24 bg-neo-bg flex items-center justify-center mb-4 border-2 border-neo-border overflow-hidden p-3">
+                    {/* Header with Logo and Tag */}
+                    <div className="relative bg-neo-bg p-6 border-b-2 border-neo-border">
+                      {/* MYMA Label Tag */}
+                      {partner.isMymaLabel && (
+                        <span className="absolute top-3 right-3 bg-neo-accent text-neo-text-inverse text-[10px] font-mono font-bold px-2 py-1 uppercase tracking-wider">
+                          Label MYMA
+                        </span>
+                      )}
+
+                      {/* Logo */}
+                      <div className="w-20 h-20 mx-auto bg-white border-2 border-neo-border p-2 flex items-center justify-center">
                         <Image
                           src={partner.logo}
                           alt={`${partner.name} logo`}
-                          width={96}
-                          height={96}
+                          width={72}
+                          height={72}
                           className="w-full h-full object-contain"
                         />
                       </div>
+                    </div>
 
+                    {/* Content */}
+                    <div className="flex flex-col flex-1 p-5">
                       {/* Name */}
-                      <h3 className="text-lg font-black uppercase tracking-tight mb-4 text-neo-text">
+                      <h3 className="text-base font-black uppercase tracking-tight text-neo-text mb-2 text-center">
                         {partner.name}
                       </h3>
 
-                      {/* Social Links */}
-                      {partner.links.length > 0 && (
-                        <div className="flex flex-wrap justify-center gap-2">
-                          {partner.links.map((link, idx) => (
-                            <a
-                              key={idx}
-                              href={link.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="w-8 h-8 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
-                              title={link.label}
-                            >
-                              <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Overlay with details on hover */}
-                    <div className="absolute inset-0 bg-neo-accent text-neo-text-inverse p-5 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out flex flex-col justify-center z-20">
-                      {/* Period */}
+                      {/* Period Badge */}
                       {partner.period && (
-                        <span className="inline-block bg-neo-text text-neo-text-inverse px-2 py-1 text-xs font-mono font-bold mb-3 self-start">
+                        <span className="inline-block bg-neo-text text-neo-text-inverse text-[10px] font-mono font-bold px-2 py-1 mb-3 self-center">
                           {partner.period[localeKey]}
                         </span>
                       )}
 
                       {/* Description */}
                       {partner.description && (
-                        <p className="text-sm leading-relaxed mb-3 opacity-90">
+                        <p className="text-xs text-neo-text/70 leading-relaxed mb-3 text-center line-clamp-2">
                           {partner.description[localeKey]}
                         </p>
                       )}
 
                       {/* Metrics */}
                       {partner.metrics && partner.metrics.length > 0 && (
-                        <ul className="text-xs font-mono space-y-1 mb-3">
-                          {partner.metrics.map((metric, idx) => (
+                        <ul className="text-[11px] font-mono text-neo-text/60 space-y-1 mb-4">
+                          {partner.metrics.slice(0, 2).map((metric, idx) => (
                             <li key={idx} className="flex items-center gap-2">
-                              <span className="w-1 h-1 bg-neo-text" />
-                              {metric[localeKey]}
+                              <span className="w-1 h-1 bg-neo-accent flex-shrink-0" />
+                              <span className="truncate">{metric[localeKey]}</span>
                             </li>
                           ))}
                         </ul>
                       )}
 
-                      {/* Links in overlay */}
+                      {/* Spacer to push links to bottom */}
+                      <div className="flex-1" />
+
+                      {/* Links */}
                       {partner.links.length > 0 && (
-                        <div className="flex gap-2 mt-auto pt-3">
+                        <div className="flex flex-wrap justify-center gap-2 pt-3 border-t border-neo-border/30">
                           {partner.links.map((link, idx) => (
-                            <a
-                              key={idx}
-                              href={link.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="w-8 h-8 bg-neo-text/20 hover:bg-neo-text flex items-center justify-center transition-colors"
-                              title={link.label}
-                            >
-                              <link.icon className="w-4 h-4 text-neo-text-inverse" />
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </NeoCard>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <h3 className="font-mono text-sm text-neo-accent mt-14 mb-6 uppercase tracking-widest">
-              {t("labelsPublishers.publishers")}
-            </h3>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
-              {publisherPartners.map((publisher) => (
-                <motion.div key={publisher.name} variants={fadeInUp}>
-                  <NeoCard
-                    hover="lift"
-                    padding="lg"
-                    className="h-full group relative overflow-hidden"
-                  >
-                    {/* Main content - visible by default */}
-                    <div className="flex flex-col items-center text-center relative z-10">
-                      {/* Logo - 96px */}
-                      <div className="w-24 h-24 bg-neo-bg flex items-center justify-center mb-4 border-2 border-neo-border overflow-hidden p-3">
-                        {publisher.logo ? (
-                          <Image
-                            src={publisher.logo}
-                            alt={`${publisher.name} logo`}
-                            width={96}
-                            height={96}
-                            className="w-full h-full object-contain"
-                          />
-                        ) : (
-                          <span className="text-2xl font-black text-neo-accent">
-                            {publisher.name
-                              .split(" ")
-                              .map((w) => w[0])
-                              .join("")}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Name */}
-                      <h3 className="text-lg font-black uppercase tracking-tight mb-4 text-neo-text">
-                        {publisher.name}
-                      </h3>
-
-                      {/* Social Links */}
-                      {publisher.links.length > 0 && (
-                        <div className="flex flex-wrap justify-center gap-2">
-                          {publisher.links.map((link, idx) => (
                             <a
                               key={idx}
                               href={link.url}
@@ -1152,54 +1042,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                               className="w-8 h-8 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
                               title={link.label}
                             >
-                              <link.icon className="w-4 h-4 text-neo-accent group-hover/link:text-neo-text-inverse transition-colors" />
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Overlay with details on hover */}
-                    <div className="absolute inset-0 bg-neo-accent text-neo-text-inverse p-5 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out flex flex-col justify-center z-20">
-                      {/* Period */}
-                      {publisher.period && (
-                        <span className="inline-block bg-neo-text text-neo-text-inverse px-2 py-1 text-xs font-mono font-bold mb-3 self-start">
-                          {publisher.period[localeKey]}
-                        </span>
-                      )}
-
-                      {/* Description */}
-                      {publisher.description && (
-                        <p className="text-sm leading-relaxed mb-3 opacity-90">
-                          {publisher.description[localeKey]}
-                        </p>
-                      )}
-
-                      {/* Metrics */}
-                      {publisher.metrics && publisher.metrics.length > 0 && (
-                        <ul className="text-xs font-mono space-y-1 mb-3">
-                          {publisher.metrics.map((metric, idx) => (
-                            <li key={idx} className="flex items-center gap-2">
-                              <span className="w-1 h-1 bg-neo-text" />
-                              {metric[localeKey]}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      {/* Links in overlay */}
-                      {publisher.links.length > 0 && (
-                        <div className="flex gap-2 mt-auto pt-3">
-                          {publisher.links.map((link, idx) => (
-                            <a
-                              key={idx}
-                              href={link.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="w-8 h-8 bg-neo-text/20 hover:bg-neo-text flex items-center justify-center transition-colors"
-                              title={link.label}
-                            >
-                              <link.icon className="w-4 h-4 text-neo-text-inverse" />
+                              <link.icon className="w-4 h-4 text-neo-bg group-hover/link:text-neo-text-inverse transition-colors" />
                             </a>
                           ))}
                         </div>
@@ -1235,15 +1078,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                       {t("cta.contactMe")}
                     </BrutalistButton>
                   </Link>
-                  <a
-                    href={`/api/cv/download?locale=${locale}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <BrutalistButton variant="dark" size="lg" icon={<Download size={18} />}>
-                      {t("cta.downloadCV")}
-                    </BrutalistButton>
-                  </a>
                 </div>
               </NeoCard>
             </motion.div>

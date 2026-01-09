@@ -19,6 +19,8 @@ const partnerLogos = [
     alt: "Universal Production Music",
     size: "large" as const,
   },
+  { src: "/img/partners/infinity-scores.jpeg", alt: "Infinity Scores", size: "normal" as const },
+  { src: "/img/partners/superama-records.jpg", alt: "Superama Records", size: "normal" as const },
 ];
 
 export default function NeoHome() {
