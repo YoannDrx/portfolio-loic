@@ -14,8 +14,6 @@ import {
   ChevronRight,
   ChevronLeft,
   Sparkles,
-  Clock,
-  Target,
   Headphones,
   MessageSquare,
   Send,
@@ -162,7 +160,7 @@ export default function NeoServiceDetail({
                         src={service.largeImg}
                         alt={service.title}
                         fill
-                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        className="object-cover transition-all duration-700 group-hover:scale-105"
                         priority
                         sizes="(max-width: 640px) 320px, (max-width: 1024px) 360px, 400px"
                       />
@@ -199,24 +197,6 @@ export default function NeoServiceDetail({
                 <p className="text-lg md:text-xl font-medium text-neo-text/80 max-w-2xl">
                   {service.text}
                 </p>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y-4 border-neo-border">
-                  {[
-                    { value: "15+", label: t("stats.experience"), icon: Clock },
-                    { value: "150+", label: t("stats.projects"), icon: Target },
-                    { value: "98%", label: t("stats.satisfaction"), icon: Sparkles },
-                    { value: "24h", label: tDetail("responseTime"), icon: Zap },
-                  ].map((stat, i) => (
-                    <div key={i} className="text-center">
-                      <stat.icon className="w-5 h-5 mx-auto mb-2 text-neo-accent" />
-                      <p className="text-2xl font-black text-neo-text">{stat.value}</p>
-                      <p className="font-mono text-xs uppercase tracking-wider opacity-60">
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap gap-4">

@@ -98,29 +98,6 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
           </div>
         </NeoHeroSection>
 
-        {/* Stats Bar */}
-        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-12">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { val: services.length.toString(), label: t("stats.services") },
-                { val: "15+", label: t("stats.experience") },
-                { val: "150+", label: t("stats.projects") },
-                { val: "98%", label: t("stats.satisfaction") },
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl font-black text-neo-accent tracking-tighter">
-                    {stat.val}
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-widest mt-2 opacity-60">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Services List */}
         <section id="services-list" className="py-24">
           <div className="container mx-auto px-4 md:px-6">
