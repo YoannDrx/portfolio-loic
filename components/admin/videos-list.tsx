@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Search, Pencil, Plus } from "lucide-react";
+import { Search, Pencil, Plus, Video as VideoIcon } from "lucide-react";
 import { DeleteVideoButton } from "@/components/admin/delete-video-button";
 import { ExportButton } from "@/components/admin/ExportButton";
 
@@ -22,7 +22,7 @@ interface Video {
   id: string;
   title: string;
   type: string;
-  img: string;
+  img: string | null;
   date: string;
   published: boolean;
 }
@@ -90,13 +90,13 @@ export function VideosList({ videos, locale }: VideosListProps) {
             >
               <div className="flex gap-3">
                 <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/10">
-                  <Image
-                    src={video.img}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="80px"
-                  />
+                  {video.img ? (
+                    <Image src={video.img} alt="" fill className="object-cover" sizes="80px" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-muted">
+                      <VideoIcon className="h-6 w-6 text-muted-foreground" />
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-foreground text-sm truncate">{video.title}</h3>
@@ -130,10 +130,7 @@ export function VideosList({ videos, locale }: VideosListProps) {
                     <Pencil className="h-4 w-4" />
                   </Link>
                 </Button>
-                <DeleteVideoButton
-                  videoId={video.id}
-                  videoTitle={video.title}
-                />
+                <DeleteVideoButton videoId={video.id} videoTitle={video.title} />
               </div>
             </div>
           ))
@@ -146,21 +143,30 @@ export function VideosList({ videos, locale }: VideosListProps) {
           <Table>
             <TableHeader className="sticky top-0 bg-[var(--glass-subtle)] backdrop-blur-md z-10 border-b border-[var(--glass-border)] transition-colors duration-300">
               <TableRow className="hover:bg-[var(--glass-subtle)] border-[var(--glass-border)]">
-                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Aperçu</TableHead>
-                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Titre</TableHead>
-                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Type</TableHead>
-                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Date</TableHead>
-                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Statut</TableHead>
-                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">Actions</TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">
+                  Aperçu
+                </TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">
+                  Titre
+                </TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">
+                  Type
+                </TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">
+                  Date
+                </TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">
+                  Statut
+                </TableHead>
+                <TableHead className="font-bold text-[var(--admin-neon-cyan)] uppercase text-xs tracking-wider">
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredVideos.length === 0 ? (
                 <TableRow>
-                  <TableCell
-                    colSpan={6}
-                    className="h-24 text-center text-muted-foreground"
-                  >
+                  <TableCell colSpan={6} className="h-24 text-center text-muted-foreground">
                     Aucune vidéo trouvée
                   </TableCell>
                 </TableRow>
@@ -170,66 +176,69 @@ export function VideosList({ videos, locale }: VideosListProps) {
                     key={video.id}
                     className="group hover:bg-[var(--glass-subtle)] transition-colors duration-150 border-b border-[var(--glass-border-subtle)] last:border-b-0"
                   >
-                  <TableCell>
-                    <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200">
-                      <Image
-                        src={video.img}
-                        alt=""
-                        fill
-                        className="object-cover"
-                        sizes="96px"
-                      />
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <span className="font-bold text-foreground">{video.title}</span>
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant="outline"
-                      className="capitalize border-[var(--admin-neon-magenta)]/30 bg-[var(--admin-neon-magenta)]/10 text-[var(--admin-neon-magenta)] font-medium"
-                    >
-                      {video.type}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-muted-foreground text-sm font-mono">{video.date}</span>
-                  </TableCell>
-                  <TableCell>
-                    {video.published ? (
-                      <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
-                        <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
-                        Publié
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
-                        Brouillon
-                      </span>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        asChild
-                        className="h-9 w-9 p-0 text-muted-foreground hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
+                    <TableCell>
+                      <div className="relative h-14 w-24 overflow-hidden rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                        {video.img ? (
+                          <Image
+                            src={video.img}
+                            alt=""
+                            fill
+                            className="object-cover"
+                            sizes="96px"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-muted">
+                            <VideoIcon className="h-6 w-6 text-muted-foreground" />
+                          </div>
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <span className="font-bold text-foreground">{video.title}</span>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant="outline"
+                        className="capitalize border-[var(--admin-neon-magenta)]/30 bg-[var(--admin-neon-magenta)]/10 text-[var(--admin-neon-magenta)] font-medium"
                       >
-                        <Link href={`/${locale}/admin/videos/${video.id}`}>
-                          <Pencil className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                      <DeleteVideoButton
-                        videoId={video.id}
-                        videoTitle={video.title}
-                      />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
+                        {video.type}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-muted-foreground text-sm font-mono">{video.date}</span>
+                    </TableCell>
+                    <TableCell>
+                      {video.published ? (
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-neon-green/10 text-neon-green border border-neon-green/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
+                          Publié
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-bold bg-[var(--glass-subtle)] text-muted-foreground border border-[var(--glass-border)]">
+                          Brouillon
+                        </span>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          asChild
+                          className="h-9 w-9 p-0 text-muted-foreground hover:text-[var(--admin-neon-lime)] hover:bg-[var(--admin-neon-lime)]/10 transition-all duration-200"
+                        >
+                          <Link href={`/${locale}/admin/videos/${video.id}`}>
+                            <Pencil className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                        <DeleteVideoButton videoId={video.id} videoTitle={video.title} />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
         </div>
       </div>
 
