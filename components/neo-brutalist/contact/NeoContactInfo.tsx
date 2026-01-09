@@ -1,12 +1,11 @@
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Clock, ExternalLink, Phone, Download } from "lucide-react";
+import { Mail, MapPin, Clock, ExternalLink, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NeoCard } from "../ui/NeoCard";
 import { NeoTag } from "../ui/NeoTag";
-import { BrutalistButton } from "../ui/BrutalistButton";
 
 interface NeoContactInfoProps {
   className?: string;
@@ -25,7 +24,6 @@ const socialLinks = [
 
 export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
   const t = useTranslations("contact");
-  const locale = useLocale();
 
   const infoItems = [
     {
@@ -90,23 +88,6 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
           </NeoCard>
         ))}
       </div>
-
-      {/* Download CV Button */}
-      <a
-        href={`/api/cv/download?locale=${locale}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block"
-      >
-        <BrutalistButton
-          variant="primary"
-          size="lg"
-          icon={<Download className="w-5 h-5" />}
-          className="w-full justify-center"
-        >
-          {t("downloadCV")}
-        </BrutalistButton>
-      </a>
 
       {/* Stats */}
       <NeoCard

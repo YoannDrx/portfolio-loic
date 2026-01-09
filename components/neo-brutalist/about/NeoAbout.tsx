@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
-  Download,
   Mail,
   MapPin,
   Music,
@@ -678,17 +677,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
-                <a
-                  href={`/api/cv/download?locale=${locale}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <BrutalistButton variant="primary" size="lg" icon={<Download size={18} />}>
-                    {t("cta.downloadCV")}
-                  </BrutalistButton>
-                </a>
                 <Link href="/contact">
-                  <BrutalistButton variant="secondary" size="lg" icon={<Mail size={18} />}>
+                  <BrutalistButton variant="primary" size="lg" icon={<Mail size={18} />}>
                     {t("cta.contactMe")}
                   </BrutalistButton>
                 </Link>
@@ -1235,15 +1225,6 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
                       {t("cta.contactMe")}
                     </BrutalistButton>
                   </Link>
-                  <a
-                    href={`/api/cv/download?locale=${locale}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <BrutalistButton variant="dark" size="lg" icon={<Download size={18} />}>
-                      {t("cta.downloadCV")}
-                    </BrutalistButton>
-                  </a>
                 </div>
               </NeoCard>
             </motion.div>
