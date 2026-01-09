@@ -4,6 +4,7 @@ import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { CustomCursor } from "./ui/CustomCursor";
 import { Marquee } from "./ui/Marquee";
+import { FilmBanner } from "./FilmBanner";
 import { NeoNavbar } from "./NeoNavbar";
 import { NeoSplitHero } from "./NeoSplitHero";
 import { NeoFooter } from "./NeoFooter";
@@ -52,6 +53,7 @@ export default function NeoHome() {
       <main className="relative z-10 pt-16 md:pt-20">
         <NeoSplitHero />
         <Marquee logos={partnerLogos} />
+        <FilmBanner />
         <NeoFooter />
       </main>
     </div>
