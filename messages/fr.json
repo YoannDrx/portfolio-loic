@@ -591,6 +591,7 @@
       "viewMore": "Voir plus"
     },
     "noAlbums": "Aucun album ne correspond à vos filtres.",
+    "featured": "Favori",
     "detail": {
       "notFound": "Album non trouvé",
       "listen": "Écouter l'album",

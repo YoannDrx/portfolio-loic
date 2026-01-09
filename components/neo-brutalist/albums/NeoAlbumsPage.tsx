@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, ArrowRight, Disc } from "lucide-react";
+import { Music, ArrowRight, Disc, Star } from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
@@ -20,6 +20,7 @@ interface Album {
   date: string;
   listenLink: string | null;
   collabName?: string | null;
+  order?: number;
 }
 
 interface NeoAlbumsPageProps {
@@ -258,6 +259,13 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                               <ArrowRight size={32} className="text-neo-text-inverse" />
                             </div>
                           </div>
+                          {/* Badge Favori pour les albums épinglés */}
+                          {album.order !== undefined && album.order < 100 && (
+                            <div className="absolute top-3 right-3 bg-neo-accent text-neo-text-inverse px-3 py-1 border-2 border-neo-border flex items-center gap-1.5 font-mono text-xs font-bold uppercase shadow-[3px_3px_0px_0px_var(--neo-border)]">
+                              <Star size={12} className="fill-current" />
+                              {t("featured")}
+                            </div>
+                          )}
                         </div>
 
                         {/* Info */}

@@ -580,6 +580,7 @@
       "viewMore": "View more"
     },
     "noAlbums": "No albums match your filters.",
+    "featured": "Featured",
     "detail": {
       "notFound": "Album not found",
       "listen": "Listen to album",

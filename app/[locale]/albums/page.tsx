@@ -38,6 +38,7 @@ export default async function AlbumsPage({ params }: { params: Promise<{ locale:
       collabLink: true,
       descriptionsFr: true,
       descriptionsEn: true,
+      order: true,
     },
   });
 
