@@ -36,7 +36,8 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
     }
   };
 
-  const thumbnailUrl = video.img || `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`;
+  // hqdefault.jpg est toujours disponible, contrairement à maxresdefault.jpg
+  const thumbnailUrl = video.img || `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
 
   return (
     <NeoCard
