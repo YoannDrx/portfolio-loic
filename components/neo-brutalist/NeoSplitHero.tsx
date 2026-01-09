@@ -113,7 +113,7 @@ export const NeoSplitHero: React.FC = () => {
 
   return (
     <motion.section
-      className="container mx-auto px-4 md:px-6 mb-16 min-h-[calc(100vh-8rem)] flex flex-col lg:grid lg:grid-cols-[60fr_40fr] gap-8 lg:gap-12 items-center"
+      className="container mx-auto px-4 md:px-6 mb-16 min-h-[calc(100vh-8rem)] flex flex-col xl:grid xl:grid-cols-[60fr_40fr] gap-8 xl:gap-12 items-center"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -160,7 +160,7 @@ export const NeoSplitHero: React.FC = () => {
 
       {/* Right Panel - Persistent SoundCloud Player */}
       <motion.div
-        className="w-full lg:sticky lg:top-24 lg:w-[520px] lg:max-w-[520px] lg:justify-self-end"
+        className="w-full xl:sticky xl:top-24 xl:w-[520px] xl:max-w-[520px] xl:justify-self-end"
         variants={rightPanelVariants}
       >
         <div className="relative">

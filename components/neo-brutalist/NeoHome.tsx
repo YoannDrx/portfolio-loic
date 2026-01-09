@@ -4,6 +4,7 @@ import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { CustomCursor } from "./ui/CustomCursor";
 import { Marquee } from "./ui/Marquee";
+import { FilmBanner } from "./FilmBanner";
 import { NeoNavbar } from "./NeoNavbar";
 import { NeoSplitHero } from "./NeoSplitHero";
 import { NeoFooter } from "./NeoFooter";
@@ -12,15 +13,19 @@ import { NeoFooter } from "./NeoFooter";
 const partnerLogos = [
   { src: "/img/partners/cezame-logo.png", alt: "Cezame Music Agency", size: "large" as const },
   { src: "/img/partners/gum-logo.png", alt: "GUM", size: "large" as const },
-  { src: "/img/partners/myma-logo.png", alt: "MYMA", size: "normal" as const },
+  { src: "/img/partners/myma-bw.webp", alt: "MYMA", size: "normal" as const },
   { src: "/img/partners/superpitch-logo.png", alt: "Superpitch", size: "normal" as const },
   {
     src: "/img/partners/universal-production.png",
     alt: "Universal Production Music",
     size: "large" as const,
   },
-  { src: "/img/partners/infinity-scores.jpeg", alt: "Infinity Scores", size: "normal" as const },
-  { src: "/img/partners/superama-records.jpg", alt: "Superama Records", size: "normal" as const },
+  { src: "/img/partners/infinity-scores-bw.jpg", alt: "Infinity Scores", size: "large" as const },
+  {
+    src: "/img/partners/superama-records-bw.webp",
+    alt: "Superama Records",
+    size: "large" as const,
+  },
 ];
 
 export default function NeoHome() {
@@ -51,7 +56,17 @@ export default function NeoHome() {
 
       <main className="relative z-10 pt-16 md:pt-20">
         <NeoSplitHero />
-        <Marquee logos={partnerLogos} />
+
+        {/* Partners Section */}
+        <section>
+          <Marquee logos={partnerLogos} />
+        </section>
+
+        {/* Films Section */}
+        <section>
+          <FilmBanner />
+        </section>
+
         <NeoFooter />
       </main>
     </div>
