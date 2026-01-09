@@ -466,5 +466,70 @@
     "createdAt": "2025-11-21T16:49:51.623Z",
     "updatedAt": "2025-11-21T16:49:51.623Z",
     "createdById": null
+  },
+  {
+    "id": "sync2025cod001",
+    "img": null,
+    "type": "Sync",
+    "videoId": "gjaKA57mnu8",
+    "title": "COD x Beavis & Butt-Head | Call of Duty: Warzone & Black Ops 6",
+    "date": "01/07/2025",
+    "published": true,
+    "order": 36,
+    "createdAt": "2026-01-09T12:00:00.000Z",
+    "updatedAt": "2026-01-09T12:00:00.000Z",
+    "createdById": null
+  },
+  {
+    "id": "sync2025casio002",
+    "img": null,
+    "type": "Sync",
+    "videoId": "neef9dJxXe8",
+    "title": "CASIO G-SHOCK GA-2100",
+    "date": "18/06/2025",
+    "published": true,
+    "order": 37,
+    "createdAt": "2026-01-09T12:00:00.000Z",
+    "updatedAt": "2026-01-09T12:00:00.000Z",
+    "createdById": null
+  },
+  {
+    "id": "sync2024forum003",
+    "img": null,
+    "type": "Sync",
+    "videoId": "GnnYhx3Bg_I",
+    "title": "TV spot for \"Le forum des images\"",
+    "date": "11/07/2024",
+    "published": true,
+    "order": 38,
+    "createdAt": "2026-01-09T12:00:00.000Z",
+    "updatedAt": "2026-01-09T12:00:00.000Z",
+    "createdById": null
+  },
+  {
+    "id": "sync2024nimmo004",
+    "img": null,
+    "type": "Sync",
+    "videoId": "NrnNvh6tVEQ",
+    "title": "Nimmo Top 10 Left Fielders Trailer",
+    "date": "30/01/2024",
+    "published": true,
+    "order": 39,
+    "createdAt": "2026-01-09T12:00:00.000Z",
+    "updatedAt": "2026-01-09T12:00:00.000Z",
+    "createdById": null
+  },
+  {
+    "id": "sync2023syracuse005",
+    "img": null,
+    "type": "Sync",
+    "videoId": "6akPZenVSUY",
+    "title": "Syracuse vs. Pittsburgh at Yankee Stadium Promo",
+    "date": "26/06/2023",
+    "published": true,
+    "order": 40,
+    "createdAt": "2026-01-09T12:00:00.000Z",
+    "updatedAt": "2026-01-09T12:00:00.000Z",
+    "createdById": null
   }
 ]

@@ -42,7 +42,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
     <NeoCard
       hover="lift"
       padding="md"
-      className="hover:border-neo-accent transition-colors duration-300"
+      className="hover:border-neo-accent transition-colors duration-300 h-full flex flex-col"
     >
       {/* Container Video/Thumbnail */}
       <div className="aspect-video bg-neo-text relative overflow-hidden mb-6 border-2 border-neo-border">
@@ -60,7 +60,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
           // Thumbnail avec bouton play
           <>
             <div
-              className="absolute inset-0 bg-cover bg-center grayscale hover:grayscale-0 transition-all duration-300"
+              className="absolute inset-0 bg-cover bg-center transition-all duration-300"
               style={{ backgroundImage: `url(${thumbnailUrl})` }}
             />
             <button
@@ -144,18 +144,18 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
       </div>
 
       {/* Info */}
-      <div className="flex justify-between items-start gap-4">
+      <div className="flex justify-between items-start gap-4 flex-grow">
         <div className="min-w-0">
-          <NeoTag variant="default" size="sm" className="mb-2">
+          <NeoTag variant="default" size="sm" className="mb-2 inline-block">
             {video.type}
           </NeoTag>
-          <h3 className="text-2xl md:text-3xl font-black uppercase leading-tight text-neo-text">
+          <h3 className="text-lg md:text-xl font-black uppercase leading-tight text-neo-text line-clamp-2">
             {video.title}
           </h3>
         </div>
-        {video.date && !isNaN(new Date(video.date).getTime()) && (
+        {video.date && (
           <span className="font-mono text-xs text-neo-text/50 border-2 border-neo-border px-2 py-1 flex-shrink-0">
-            {new Date(video.date).getFullYear()}
+            {video.date.split("/")[2]}
           </span>
         )}
       </div>
