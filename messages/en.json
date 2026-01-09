@@ -411,6 +411,10 @@
       "cta": "Explore my services",
       "ctaSecondary": "Contact me"
     },
+    "grid": {
+      "title": "My Services",
+      "subtitle": "EXPERTISE"
+    },
     "stats": {
       "services": "Services",
       "experience": "Years of experience",

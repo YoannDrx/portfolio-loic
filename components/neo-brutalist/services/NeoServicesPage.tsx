@@ -7,6 +7,7 @@ import { Music4, Disc, Sliders, Mic2, Radio, ArrowRight, CheckCircle } from "luc
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
+import { SectionHeader } from "../ui/SectionHeader";
 import { NeoCard } from "../ui/NeoCard";
 import { BrutalistButton } from "../ui/BrutalistButton";
 import { NeoTag } from "../ui/NeoTag";
@@ -101,6 +102,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
         {/* Services Grid */}
         <section id="services-list" className="py-24">
           <div className="container mx-auto px-4 md:px-6">
+            <SectionHeader number="03.1" title={t("grid.title")} subtitle={t("grid.subtitle")} />
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -158,12 +160,11 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
         {/* Process Section */}
         <section className="py-24 bg-neo-bg-alt border-y-2 border-neo-border">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="flex items-center gap-3 mb-8">
-              <NeoTag variant="default">{t("process.subtitle")}</NeoTag>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-16 text-neo-text">
-              {t("process.title")}
-            </h2>
+            <SectionHeader
+              number="03.2"
+              title={t("process.title")}
+              subtitle={t("process.subtitle")}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
               {processSteps.map((step, i) => (

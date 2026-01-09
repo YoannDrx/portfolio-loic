@@ -422,6 +422,10 @@
       "cta": "Explorer mes services",
       "ctaSecondary": "Me contacter"
     },
+    "grid": {
+      "title": "Mes Services",
+      "subtitle": "EXPERTISE"
+    },
     "stats": {
       "services": "Services",
       "experience": "Années d'expérience",

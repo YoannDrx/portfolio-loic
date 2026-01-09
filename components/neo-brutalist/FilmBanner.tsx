@@ -36,7 +36,7 @@ const filmCollages: FilmImage[] = [
 
 export const FilmBanner: React.FC<FilmBannerProps> = ({
   images = filmCollages,
-  speed = 30,
+  speed = 18,
   pauseOnHover = true,
 }) => {
   const renderImages = (keyPrefix: string, showAlt: boolean = true) =>

@@ -41,13 +41,14 @@ export const NeoContact = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
+                className="overflow-hidden"
               >
                 {/* Titre */}
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-[12vw] md:text-[8vw] lg:text-[5.5vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text"
+                  className="text-[12vw] md:text-[8vw] lg:text-[4.5vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text break-words"
                 >
                   {t("hero.title")}
                 </motion.h1>

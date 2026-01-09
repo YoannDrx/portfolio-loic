@@ -168,7 +168,7 @@ const TestimonialsCarousel = ({
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
           <div>
             <div className="font-mono font-bold text-neo-accent mb-4 flex items-center gap-2">
-              <span className="bg-neo-text text-neo-accent px-2 py-1">05</span>
+              <span className="bg-neo-text text-neo-text-inverse px-2 py-1">SECT. 02.4</span>
               <span className="text-neo-text/60">
                 // {locale === "fr" ? "AVIS CLIENTS" : "CLIENT REVIEWS"}
               </span>
@@ -685,7 +685,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
               </motion.div>
 
               {/* Titre */}
-              <h1 className="text-[10vw] sm:text-[12vw] lg:text-[6vw] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-neo-text">
+              <h1 className="text-[12vw] md:text-[8vw] lg:text-[6vw] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-neo-text">
                 Loïc{" "}
                 <span
                   className="text-transparent block lg:inline"
@@ -784,7 +784,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
         {/* SKILLS GRID */}
         <section className="container mx-auto px-4 md:px-6 mb-32">
-          <SectionHeader number="02" title={t("skills.title")} subtitle={t("skills.subtitle")} />
+          <SectionHeader number="02.1" title={t("skills.title")} subtitle={t("skills.subtitle")} />
 
           <motion.div
             initial="hidden"
@@ -827,7 +827,11 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
         {/* LATEST ACHIEVEMENTS */}
         <section className="py-24 bg-neo-surface">
           <div className="container mx-auto px-4 md:px-6">
-            <SectionHeader number="03" title={t("awards.title")} subtitle={t("awards.subtitle")} />
+            <SectionHeader
+              number="02.2"
+              title={t("awards.title")}
+              subtitle={t("awards.subtitle")}
+            />
 
             <motion.div
               initial="hidden"
@@ -896,7 +900,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
         {/* MUSICIAN EXPERIENCE */}
         <section className="container mx-auto px-4 md:px-6 py-24">
           <SectionHeader
-            number="04"
+            number="02.3"
             title={t("musicianExperience.title")}
             subtitle={t("musicianExperience.subtitle")}
           />
@@ -1002,7 +1006,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
         <section className="py-24 bg-neo-surface">
           <div className="container mx-auto px-4 md:px-6">
             <SectionHeader
-              number="07"
+              number="02.5"
               title={t("labelsPublishers.title")}
               subtitle={t("labelsPublishers.subtitle")}
             />

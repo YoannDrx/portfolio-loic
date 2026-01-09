@@ -123,7 +123,8 @@ export const NeoSplitHero: React.FC = () => {
         className="flex flex-col justify-center w-full pt-8 md:pt-0"
         variants={leftPanelVariants}
       >
-        <div className="font-mono text-xs font-bold text-neo-accent flex items-center gap-2 mb-4">
+        <div className="font-mono text-xs font-bold text-neo-accent flex items-center gap-3 mb-4">
+          <span className="bg-neo-text text-neo-accent px-2 py-1 text-sm font-bold">01</span>
           <div className="w-2 h-2 bg-neo-accent animate-pulse" />
           {t("basedIn")}
         </div>
