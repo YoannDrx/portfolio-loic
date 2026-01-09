@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
   MapPin,
@@ -27,6 +27,7 @@ import {
   Piano,
   ChevronLeft,
   ChevronRight,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
@@ -256,6 +257,28 @@ const TestimonialsCarousel = ({
 export const NeoAbout = ({ locale }: { locale: string }) => {
   const t = useTranslations("about");
   const [imageModal, setImageModal] = useState<{ src: string; title: string } | null>(null);
+  const [descriptionModal, setDescriptionModal] = useState<{
+    name: string;
+    description: string;
+    logo: string;
+  } | null>(null);
+
+  // Handle Escape key and body scroll lock for description modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDescriptionModal(null);
+    };
+
+    if (descriptionModal) {
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
+    };
+  }, [descriptionModal]);
 
   const skills = [
     {
@@ -309,8 +332,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       name: "Montmorency Music Agency",
       logo: "/img/about/partners/myma.jpeg",
       description: {
-        fr: "Sync TV, films & séries (Netflix, Spotify, HBO, ESPN, CNN, BBC, France Télévision, Amazon Prime Video, MLB, NHL, Burger King...)",
-        en: "TV, movie & series sync (Netflix, Spotify, HBO, ESPN, CNN, BBC, France Télévision, Amazon Prime Video, MLB, NHL, Burger King...)",
+        fr: "1er acteur indépendant français d'illustration musicale, MYMA est une agence experte de la synchronisation au service des professionnels de l'audiovisuel, et depuis près de 65 ans exclusivement dédiée à la musique. Notre direction artistique reflète notre identité au travers de 3 labels (Justement Music, Montmorency Records, Stereoscopic). Avec + de 650.000 titres, 60 nouveaux albums chaque mois et une offre composée des plus emblématiques librairies musicales (KPM Music, Music House, Patchwork, 9 Lives Music...), notre catalogue est unique par son authenticité et son éclectisme. 100% centré service, notre cellule de supervision musicale vous accompagne pour tous vos briefs. Sync out of the box!",
+        en: "France's leading independent music library, MYMA is an expert sync agency serving audiovisual professionals, exclusively dedicated to music for nearly 65 years. Our artistic direction reflects our identity through 3 labels (Justement Music, Montmorency Records, Stereoscopic). With 650,000+ tracks, 60 new albums monthly and the most iconic music libraries (KPM Music, Music House, Patchwork, 9 Lives Music...), our catalog is unique in its authenticity and eclecticism. 100% service-focused, our music supervision team supports all your briefs. Sync out of the box!",
       },
       metrics: [
         { fr: "≈ 14 albums produits", en: "≈ 14 albums produced" },
@@ -332,9 +355,17 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     {
       name: "Justement Music",
       logo: "/img/about/partners/justement-music.jpg",
-      description: { fr: "Label de production music.", en: "Production music label." },
+      description: {
+        fr: "Indépendant, Français et Haut de gamme, Justement Music est un label réputé pour sa qualité, son originalité, son éclectisme et pour ses pépites rétros comme actuelles au service de la synchro. Présent dans plus de 70 pays, il mêle innovation et héritage. Alors tendez l'oreille !",
+        en: "Independent, French and Premium, Justement Music is a label renowned for its quality, originality, eclecticism and for its retro and contemporary gems serving sync. Present in over 70 countries, it blends innovation and heritage. So lend an ear!",
+      },
       period: { fr: "2018 - aujourd'hui", en: "2018 - today" },
       links: [
+        {
+          icon: ExternalLink,
+          url: "https://www.myma-music.com/labels/justement-music",
+          label: "Website",
+        },
         {
           icon: Youtube,
           url: "https://www.youtube.com/playlist?list=PLJlRZETQILeOzFn01l_GqRtPoDWGtGdcg",
@@ -346,21 +377,33 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
     {
       name: "Stereoscopic",
       logo: "/img/about/partners/stereoscopic.png",
-      description: { fr: "Label de production music.", en: "Production music label." },
+      description: {
+        fr: "Unique, frais et percutant, Stereoscopic se décline en 6 thèmes reconnaissables immédiatement grâce à ses pochettes identitaires : électronique/urbain, néoclassique/orchestral, pop/rock/folk, néo-vintage, musiques du monde et Songs. Le label est nourri du talent de compositeurs renommés et de musiciens live et studio de grande classe.",
+        en: "Unique, fresh and impactful, Stereoscopic comes in 6 instantly recognizable themes through its signature artwork: electronic/urban, neoclassical/orchestral, pop/rock/folk, neo-vintage, world music and Songs. The label is fueled by the talent of renowned composers and top-tier live and studio musicians.",
+      },
       period: { fr: "2019 - aujourd'hui", en: "2019 - today" },
-      links: [{ icon: ExternalLink, url: "https://www.myma-music.com/", label: "MYMA" }],
+      links: [
+        {
+          icon: ExternalLink,
+          url: "https://www.myma-music.com/labels/stereoscopic",
+          label: "Website",
+        },
+      ],
       isMymaLabel: true,
     },
     {
       name: "Superama Records",
       logo: "/img/about/partners/superama-records.jpg",
-      description: { fr: "Label de production music.", en: "Production music label." },
+      description: {
+        fr: "Label de musiques électroniques et Hip Hop, allant de l'Hyperpop déjantée à l'Hybrid Orchestra, en passant par des influences World ou vintage. Fortement inspirées par les briefs clients exigeants, nos productions restent néanmoins sync friendly et élégantes, alliant finesse et émotion.",
+        en: "Electronic and Hip Hop music label, ranging from wild Hyperpop to Hybrid Orchestra, through World or vintage influences. Strongly inspired by demanding client briefs, our productions remain sync friendly and elegant, combining finesse and emotion.",
+      },
       period: { fr: "2026 - aujourd'hui", en: "2026 - today" },
       links: [
         {
           icon: ExternalLink,
-          url: "https://www.superama-records.com/about",
-          label: "About",
+          url: "https://www.myma-music.com/labels/superama-records",
+          label: "Website",
         },
       ],
       isMymaLabel: true,
@@ -370,8 +413,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       name: "Infinity Scores",
       logo: "/img/about/partners/infinity-scores.jpeg",
       description: {
-        fr: "Titres disponibles sur Cezame Music Agency.",
-        en: "All songs available on Cezame Music Agency.",
+        fr: "Porté par le compositeur Gabriel Saban, fort de plus de 15 ans d'expérience dans la musique à l'image, Infinity Scores repousse les frontières du son cinématique avec des compositions immersives et innovantes. Entre sound design contemporain et mélodies soigneusement ciselées, le label donne vie à des paysages sonores puissants, à la fois sensibles et percutants. Chaque album est conçu comme une boîte à outils premium, offrant aux monteurs une palette sonore infiniment créative, infiniment cinématique.",
+        en: "Led by composer Gabriel Saban, with over 15 years of experience in music for media, Infinity Scores pushes the boundaries of cinematic sound with immersive and innovative compositions. Between contemporary sound design and carefully crafted melodies, the label brings powerful soundscapes to life, both sensitive and impactful. Each album is designed as a premium toolkit, offering editors an infinitely creative, infinitely cinematic sound palette.",
       },
       metrics: [{ fr: "≈ 2 albums produits", en: "≈ 2 albums produced" }],
       period: { fr: "avr. 2024 - aujourd'hui", en: "Apr 2024 - today" },
@@ -398,8 +441,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       name: "SuperPitch",
       logo: "/img/about/partners/superpitch.jpeg",
       description: {
-        fr: "Sync TV, films & séries (Netflix, documentaires, etc.)",
-        en: "TV, movie & series sync (Netflix, documentaries, etc.)",
+        fr: 'SuperPitch est une Music House indépendante avec une direction artistique solide et audacieuse portée par les fondateurs primés Thomas & Grégoire Couzinier. SuperPitch se concentre sur un artisanat de haute qualité et une vision créative forte pour chaque album, EP ou Artist Series. Nous encourageons les compositions transversales entre "musique commerciale" et "production music". Habitués à produire une vaste gamme de musiques originales pour la publicité et le cinéma, nous savons exactement ce dont les réalisateurs ont besoin. Le catalogue comprend aussi SuperPitch Drama (cues organiques et dramatiques), SuperPitch Entertainment (musique 100% feelgood), SuperPitch EP (réactivité et tendances) et SuperPitch Artist Series (albums artistiques ambitieux). Récompenses : Mark Awards/PMA 2015-2016, Library Music Award 2015, Production Music Award London 2016.',
+        en: 'SuperPitch is an independent Music House with a solid and edgy artistic direction by award-winning founders Thomas & Grégoire Couzinier. SuperPitch focuses on high-quality craft and a strong creative vision for each album, EP or Artist Series, encouraging cross-boundary compositions between "commercial music" and "production music". Used to producing original music for commercials and feature films, we know what filmmakers and art directors need. The catalog also includes SuperPitch Drama (organic and dramatic cues), SuperPitch Entertainment (100% feelgood music), SuperPitch EP (quick reactions and trends) and SuperPitch Artist Series (full-length artistic albums). Awards: Mark Awards/PMA 2015-2016, Library Music Award 2015, Production Music Award London 2016.',
       },
       metrics: [
         { fr: "≈ 2 albums produits", en: "≈ 2 albums produced" },
@@ -427,8 +470,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       name: "GUM",
       logo: "/img/about/partners/gum.jpeg",
       description: {
-        fr: "Sync TV & publicité worldwide (Netflix, ABC, ESPN, M6, NBA, Arte...)",
-        en: "TV & advertising sync worldwide (Netflix, ABC, ESPN, M6, NBA, Arte...)",
+        fr: "Gum est une maison de supervision musicale et de production sonore spécialisée dans la relation entre musique, son et image pour la publicité, le cinéma, la TV et le digital. Proposant une esthétique pop moderne, Gum Tapes s'est rapidement imposée en France et à l'international depuis 2017. Cette collection iconique explore tous les genres musicaux : du trailer orchestral à la musique du monde, en passant par des sons vintage ou électro. Un mélange de contemporain et de classique, d'efficacité et d'émotion.",
+        en: "Gum is a music supervision and sound production house specializing in the relationship between music, sound and picture for commercials, feature film, TV and the digital world. Offering a modern pop aesthetic, Gum Tapes has quickly established itself in France and internationally since 2017. This iconic collection explores all musical genres: from orchestral trailers to world music, through vintage sounds or electro. A blend of contemporary and classic, efficiency and emotion.",
       },
       metrics: [
         { fr: "≈ 1 album produit", en: "≈ 1 album produced" },
@@ -436,6 +479,11 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       ],
       period: { fr: "nov. 2017 - nov. 2019", en: "Nov 2017 - Nov 2019" },
       links: [
+        {
+          icon: ExternalLink,
+          url: "https://www.gum.paris/",
+          label: "Website",
+        },
         {
           icon: ExternalLink,
           url: "https://www.kaptainmusic.com/search?artists=%5B%5B%22639ca27d08f94f103957570b%22%2C%22Loic%20Ghanem%22%5D%5D",
@@ -452,8 +500,8 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
       name: "Universal Music Publishing Group",
       logo: "/img/about/partners/universal.jpeg",
       description: {
-        fr: "Sync TV, documentaire & radio (France3, WE, NHL, Canal+, ABC Family...)",
-        en: "TV, documentary & radio sync (France3, WE, NHL, Canal+, ABC Family...)",
+        fr: "Universal Music Publishing Group (UMPG), division éditoriale mondiale d'Universal Music Group, représente un catalogue de chansons de classe mondiale couvrant tous les genres. Basé à Los Angeles avec 48 bureaux dans 41 pays, UMPG représente les auteurs-compositeurs les plus importants au monde : ABBA, Adele, Billie Eilish, Coldplay, Drake, Eminem, Kendrick Lamar, Taylor Swift, The Weeknd et bien d'autres. UMPG est également leader mondial en musique Classique & Cinéma, Gospel et Production Music, fournissant services créatifs et licences sync pour Universal Pictures, Warner Bros., Paramount, Disney, Amazon, HBO, Netflix et de nombreux autres studios.",
+        en: "Universal Music Publishing Group (UMPG), the global publishing division of Universal Music Group, represents a world-class catalogue of songs inclusive of every genre. Headquartered in Los Angeles with 48 offices in 41 countries, UMPG represents some of the world's most important songwriters: ABBA, Adele, Billie Eilish, Coldplay, Drake, Eminem, Kendrick Lamar, Taylor Swift, The Weeknd and many more. UMPG is also a global leader in Classical & Screen, Gospel and Production Music, providing creative, sync licensing and administration services for Universal Pictures, Warner Bros., Paramount, Disney, Amazon, HBO, Netflix and many other studios.",
       },
       metrics: [
         { fr: "≈ 5 singles produits", en: "≈ 5 singles produced" },
@@ -1010,9 +1058,25 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
                       {/* Description */}
                       {partner.description && (
-                        <p className="text-xs text-neo-text/70 leading-relaxed mb-3 text-center line-clamp-2">
-                          {partner.description[localeKey]}
-                        </p>
+                        <div className="mb-3">
+                          <p className="text-xs text-neo-text/70 leading-relaxed text-center line-clamp-2">
+                            {partner.description[localeKey]}
+                          </p>
+                          {partner.description[localeKey].length > 120 && (
+                            <button
+                              onClick={() =>
+                                setDescriptionModal({
+                                  name: partner.name,
+                                  description: partner.description![localeKey],
+                                  logo: partner.logo,
+                                })
+                              }
+                              className="mt-2 w-full text-center text-[10px] font-mono font-bold text-neo-accent hover:text-neo-text transition-colors uppercase tracking-wider"
+                            >
+                              {locale === "fr" ? "Voir plus →" : "Read more →"}
+                            </button>
+                          )}
+                        </div>
                       )}
 
                       {/* Metrics */}
@@ -1054,6 +1118,62 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
             </motion.div>
           </div>
         </section>
+
+        {/* Description Modal */}
+        <AnimatePresence>
+          {descriptionModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+              onClick={() => setDescriptionModal(null)}
+            >
+              <div className="absolute inset-0 bg-neo-text/90 backdrop-blur-sm" />
+
+              <motion.div
+                initial={{ scale: 0.96, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.96, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative w-full max-w-lg bg-neo-bg border-4 border-neo-border shadow-[8px_8px_0px_0px_var(--neo-accent)]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between p-4 border-b-4 border-neo-border">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white border-2 border-neo-border p-1 flex items-center justify-center">
+                      <Image
+                        src={descriptionModal.logo}
+                        alt={descriptionModal.name}
+                        width={32}
+                        height={32}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <h3 className="font-mono font-bold text-sm uppercase tracking-wider text-neo-text">
+                      {descriptionModal.name}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => setDescriptionModal(null)}
+                    className="p-2 border-2 border-neo-border hover:bg-neo-text hover:text-neo-text-inverse hover:border-neo-text transition-colors"
+                    aria-label={locale === "fr" ? "Fermer" : "Close"}
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 max-h-[60vh] overflow-y-auto">
+                  <p className="text-sm text-neo-text/80 leading-relaxed">
+                    {descriptionModal.description}
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* CONTACT CTA */}
         <section className="py-24 bg-neo-text">
