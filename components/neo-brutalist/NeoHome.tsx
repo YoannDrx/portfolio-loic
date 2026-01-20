@@ -8,6 +8,7 @@ import { FilmBanner } from "./FilmBanner";
 import { NeoNavbar } from "./NeoNavbar";
 import { NeoSplitHero } from "./NeoSplitHero";
 import { NeoFooter } from "./NeoFooter";
+import { GridBackground } from "./ui/GridBackground";
 
 // Partner logos for the marquee
 const partnerLogos = [
@@ -43,14 +44,7 @@ export default function NeoHome() {
       />
 
       {/* Grid Overlay */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--neo-border) 1px, transparent 1px), linear-gradient(90deg, var(--neo-border) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+      <GridBackground />
 
       <NeoNavbar />
 
@@ -59,7 +53,7 @@ export default function NeoHome() {
 
         {/* Partners Section */}
         <section>
-          <Marquee logos={partnerLogos} />
+          <Marquee logos={partnerLogos} direction={-1} />
         </section>
 
         {/* Films Section */}

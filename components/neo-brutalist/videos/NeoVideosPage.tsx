@@ -9,6 +9,7 @@ import { NeoFooter } from "../NeoFooter";
 import { BrutalistButton } from "../ui/BrutalistButton";
 import { NeoTag } from "../ui/NeoTag";
 import { NeoVideoCard } from "./NeoVideoCard";
+import { GridBackground } from "../ui/GridBackground";
 import { Link } from "@/i18n/routing";
 
 interface VideoItem {
@@ -18,6 +19,7 @@ interface VideoItem {
   type: string;
   date: string;
   img?: string | null;
+  order?: number | null;
 }
 
 interface NeoVideosPageProps {
@@ -68,18 +70,36 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
     return new Date(year, month - 1, day);
   };
 
-  // Grouper les vidéos par catégorie et trier par date
+  // Seuil de priorité : order < 100 = prioritaire, order >= 100 = tri par date
+  const PRIORITY_THRESHOLD = 100;
+
+  // Fonction de tri hybride : prioritaires d'abord (par order), puis normales (par date DESC)
+  const hybridSort = (a: VideoItem, b: VideoItem) => {
+    const orderA = a.order ?? 999;
+    const orderB = b.order ?? 999;
+
+    const aPriority = orderA < PRIORITY_THRESHOLD;
+    const bPriority = orderB < PRIORITY_THRESHOLD;
+
+    // 1. Prioritaires d'abord (triés par order ASC)
+    if (aPriority && bPriority) {
+      return orderA - orderB;
+    }
+    if (aPriority) return -1;
+    if (bPriority) return 1;
+
+    // 2. Non-prioritaires : tri par année DESC
+    const dateA = parseDate(a.date);
+    const dateB = parseDate(b.date);
+    return dateB.getTime() - dateA.getTime();
+  };
+
+  // Grouper les vidéos par catégorie et trier avec le tri hybride
   const groupedVideos = useMemo(() => {
     const groups: Record<string, VideoItem[]> = {};
 
     categoryOrder.forEach((cat) => {
-      groups[cat] = videos
-        .filter((v) => v.type === cat)
-        .sort((a, b) => {
-          const dateA = parseDate(a.date);
-          const dateB = parseDate(b.date);
-          return dateB.getTime() - dateA.getTime();
-        });
+      groups[cat] = videos.filter((v) => v.type === cat).sort(hybridSort);
     });
 
     return groups;
@@ -88,13 +108,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
   // Filter videos by type
   const filteredVideos = useMemo(() => {
     if (!selectedType) return null; // null = afficher par catégories
-    return videos
-      .filter((video) => video.type === selectedType)
-      .sort((a, b) => {
-        const dateA = parseDate(a.date);
-        const dateB = parseDate(b.date);
-        return dateB.getTime() - dateA.getTime();
-      });
+    return videos.filter((video) => video.type === selectedType).sort(hybridSort);
   }, [videos, selectedType]);
 
   const getTypeLabel = (type: string) => {
@@ -112,11 +126,12 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
+      <GridBackground withAccentGlow />
       <NeoNavbar />
 
       <main className="relative z-10 pt-16 md:pt-20">
         {/* Hero - Light variant */}
-        <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8 bg-neo-bg">
+        <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -205,7 +220,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
         </section>
 
         {/* Videos Grid */}
-        <section id="videos-grid" className="py-16 bg-neo-bg">
+        <section id="videos-grid" className="py-16">
           <div className="container mx-auto px-4 md:px-6">
             <AnimatePresence mode="wait">
               {/* Affichage filtré par catégorie unique */}

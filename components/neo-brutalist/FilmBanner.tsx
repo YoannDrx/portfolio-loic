@@ -9,7 +9,6 @@ interface FilmImage {
 }
 
 interface FilmBannerProps {
-  images?: FilmImage[];
   speed?: number;
   pauseOnHover?: boolean;
 }
@@ -34,59 +33,54 @@ const filmCollages: FilmImage[] = [
   },
 ];
 
-export const FilmBanner: React.FC<FilmBannerProps> = ({
-  images = filmCollages,
-  speed = 18,
-  pauseOnHover = true,
-}) => {
-  const renderImages = (keyPrefix: string, showAlt: boolean = true) =>
-    images.map((img, idx) => (
-      <div
-        key={`${keyPrefix}-${idx}`}
-        className="h-[180px] md:h-[280px] lg:h-[350px] flex-shrink-0"
-      >
-        <Image
-          src={img.src}
-          alt={showAlt ? img.alt : ""}
-          width={900}
-          height={350}
-          className="h-full w-auto object-cover"
-          priority={idx < 2 && showAlt}
-        />
-      </div>
-    ));
+export const FilmBanner: React.FC<FilmBannerProps> = ({ speed = 40, pauseOnHover = true }) => {
+  // On triple les images pour assurer une boucle parfaite
+  const allImages = [...filmCollages, ...filmCollages, ...filmCollages];
 
   return (
     <section className="overflow-hidden bg-neo-bg border-y-4 border-neo-border">
       <div className={pauseOnHover ? "group" : ""}>
-        <div className="flex">
-          {/* First set */}
-          <div
-            className={`flex animate-marquee ${
-              pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
-            }`}
-            style={{
-              animationDuration: `${speed}s`,
-              animationDirection: "reverse",
-            }}
-          >
-            {renderImages("first", true)}
-          </div>
-          {/* Duplicate for seamless loop */}
-          <div
-            className={`flex animate-marquee ${
-              pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
-            }`}
-            aria-hidden="true"
-            style={{
-              animationDuration: `${speed}s`,
-              animationDirection: "reverse",
-            }}
-          >
-            {renderImages("dup", false)}
-          </div>
+        {/* Single animated track */}
+        <div
+          className={`flex w-max ${pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""}`}
+          style={{
+            animation: `scroll ${speed}s linear infinite`,
+          }}
+        >
+          {allImages.map((img, idx) => {
+            const isFirstSet = idx < filmCollages.length;
+
+            return (
+              <div
+                key={`film-${idx}`}
+                className="relative flex-shrink-0 h-[200px] md:h-[320px] lg:h-[400px]"
+              >
+                <Image
+                  src={img.src}
+                  alt={isFirstSet ? img.alt : ""}
+                  width={900}
+                  height={400}
+                  className="h-full w-auto object-cover"
+                  priority={idx < 2}
+                  aria-hidden={!isFirstSet}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
+
+      {/* Inline keyframes for the animation - va vers la gauche */}
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-100% / 3));
+          }
+        }
+      `}</style>
     </section>
   );
 };

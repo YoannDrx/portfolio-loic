@@ -20,7 +20,7 @@ interface NeoHeroSectionProps {
 }
 
 const variantStyles = {
-  default: "bg-neo-bg text-neo-text",
+  default: "text-neo-text",
   dark: "bg-neo-text text-neo-text-inverse",
   accent: "bg-neo-accent text-neo-text-inverse",
 };

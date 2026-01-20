@@ -33,6 +33,7 @@ export default async function VideosPage({ params }: { params: Promise<{ locale:
       videoId: true,
       title: true,
       date: true,
+      order: true,
     },
   });
 
