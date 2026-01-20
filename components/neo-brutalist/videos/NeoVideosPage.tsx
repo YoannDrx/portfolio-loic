@@ -131,7 +131,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
 
       <main className="relative z-10 pt-16 md:pt-20">
         {/* Hero - Light variant */}
-        <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8 bg-neo-bg">
+        <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -220,7 +220,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
         </section>
 
         {/* Videos Grid */}
-        <section id="videos-grid" className="py-16 bg-neo-bg">
+        <section id="videos-grid" className="py-16">
           <div className="container mx-auto px-4 md:px-6">
             <AnimatePresence mode="wait">
               {/* Affichage filtré par catégorie unique */}
