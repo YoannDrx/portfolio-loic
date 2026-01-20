@@ -9,6 +9,7 @@ import { NeoContactInfo } from "./NeoContactInfo";
 import { GeometricIllustration } from "./GeometricIllustration";
 import { BrutalistButton } from "../ui/BrutalistButton";
 import { NeoTag } from "../ui/NeoTag";
+import { GridBackground } from "../ui/GridBackground";
 import { Link } from "@/i18n/routing";
 
 export const NeoContact = () => {
@@ -16,6 +17,7 @@ export const NeoContact = () => {
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text selection:bg-neo-text selection:text-neo-accent">
+      <GridBackground withAccentGlow />
       <NeoNavbar />
 
       <main className="pt-16 md:pt-20">

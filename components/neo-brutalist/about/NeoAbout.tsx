@@ -38,6 +38,7 @@ import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoCard } from "../ui/NeoCard";
 import { NeoTag } from "../ui/NeoTag";
+import { GridBackground } from "../ui/GridBackground";
 import { Link } from "@/i18n/routing";
 
 const staggerContainer = {
@@ -658,6 +659,7 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
+      <GridBackground withAccentGlow />
       <NeoNavbar />
 
       <main className="relative z-10 pt-16 md:pt-20">
