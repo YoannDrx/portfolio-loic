@@ -59,7 +59,7 @@ export default function NeoHome() {
 
         {/* Partners Section */}
         <section>
-          <Marquee logos={partnerLogos} />
+          <Marquee logos={partnerLogos} direction={-1} />
         </section>
 
         {/* Films Section */}
