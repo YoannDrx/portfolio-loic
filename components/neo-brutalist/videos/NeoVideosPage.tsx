@@ -18,6 +18,7 @@ interface VideoItem {
   type: string;
   date: string;
   img?: string | null;
+  order?: number | null;
 }
 
 interface NeoVideosPageProps {
@@ -68,18 +69,36 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
     return new Date(year, month - 1, day);
   };
 
-  // Grouper les vidéos par catégorie et trier par date
+  // Seuil de priorité : order < 100 = prioritaire, order >= 100 = tri par date
+  const PRIORITY_THRESHOLD = 100;
+
+  // Fonction de tri hybride : prioritaires d'abord (par order), puis normales (par date DESC)
+  const hybridSort = (a: VideoItem, b: VideoItem) => {
+    const orderA = a.order ?? 999;
+    const orderB = b.order ?? 999;
+
+    const aPriority = orderA < PRIORITY_THRESHOLD;
+    const bPriority = orderB < PRIORITY_THRESHOLD;
+
+    // 1. Prioritaires d'abord (triés par order ASC)
+    if (aPriority && bPriority) {
+      return orderA - orderB;
+    }
+    if (aPriority) return -1;
+    if (bPriority) return 1;
+
+    // 2. Non-prioritaires : tri par année DESC
+    const dateA = parseDate(a.date);
+    const dateB = parseDate(b.date);
+    return dateB.getTime() - dateA.getTime();
+  };
+
+  // Grouper les vidéos par catégorie et trier avec le tri hybride
   const groupedVideos = useMemo(() => {
     const groups: Record<string, VideoItem[]> = {};
 
     categoryOrder.forEach((cat) => {
-      groups[cat] = videos
-        .filter((v) => v.type === cat)
-        .sort((a, b) => {
-          const dateA = parseDate(a.date);
-          const dateB = parseDate(b.date);
-          return dateB.getTime() - dateA.getTime();
-        });
+      groups[cat] = videos.filter((v) => v.type === cat).sort(hybridSort);
     });
 
     return groups;
@@ -88,13 +107,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
   // Filter videos by type
   const filteredVideos = useMemo(() => {
     if (!selectedType) return null; // null = afficher par catégories
-    return videos
-      .filter((video) => video.type === selectedType)
-      .sort((a, b) => {
-        const dateA = parseDate(a.date);
-        const dateB = parseDate(b.date);
-        return dateB.getTime() - dateA.getTime();
-      });
+    return videos.filter((video) => video.type === selectedType).sort(hybridSort);
   }, [videos, selectedType]);
 
   const getTypeLabel = (type: string) => {
