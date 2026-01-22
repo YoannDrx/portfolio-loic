@@ -53,14 +53,14 @@ export const FilmBanner: React.FC<FilmBannerProps> = ({ speed = 40, pauseOnHover
             return (
               <div
                 key={`film-${idx}`}
-                className="relative flex-shrink-0 h-[200px] md:h-[320px] lg:h-[400px]"
+                className="relative flex-shrink-0 h-[200px] md:h-[320px] lg:h-[400px] aspect-[9/4]"
               >
                 <Image
                   src={img.src}
                   alt={isFirstSet ? img.alt : ""}
-                  width={900}
-                  height={400}
-                  className="h-full w-auto object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 450px, (max-width: 1024px) 720px, 900px"
                   priority={idx < 2}
                   aria-hidden={!isFirstSet}
                 />

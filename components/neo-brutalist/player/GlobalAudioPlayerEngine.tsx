@@ -18,6 +18,7 @@ import {
   setGlobalAudioPlayerWidget,
   tryConsumePendingGlobalAudioPlayerAction,
   fetchFullSoundCloudQueue,
+  resetFullQueueFetchState,
 } from "@/lib/player/globalAudioPlayer";
 
 const READY_TIMEOUT_MS = 12000;
@@ -88,6 +89,15 @@ export const GlobalAudioPlayerEngine = () => {
     hydrateGlobalAudioPlayerVolume();
   }, []);
 
+  // Fetch tracks from API as soon as media is allowed (don't wait for widget)
+  useEffect(() => {
+    if (!mediaAllowed) return;
+    // Fetch tracks immediately when consent is given
+    fetchFullSoundCloudQueue().catch(() => {
+      // Silently fail - widget will provide fallback queue
+    });
+  }, [mediaAllowed]);
+
   useEffect(() => {
     if (!mediaAllowed) return;
     if (scriptStatus !== "idle") return;
@@ -108,6 +118,7 @@ export const GlobalAudioPlayerEngine = () => {
       setGlobalAudioPlayerStatus("idle");
       setGlobalAudioPlayerPlaying(false);
       setGlobalAudioPlayerError(null);
+      resetFullQueueFetchState();
       durationRef.current = 0;
       soundIdRef.current = null;
       setScriptStatus("idle");
