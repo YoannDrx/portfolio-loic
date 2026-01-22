@@ -279,7 +279,6 @@ export const setGlobalAudioPlayerVolume = (volume: number) => {
 
 export const queueGlobalAudioPlayerAction = (type: PendingActionType) => {
   pendingAction = { type, requestedAt: Date.now() };
-  markGlobalAudioPlayerStarted();
 };
 
 export const queueGlobalAudioPlayerSelectTrack = (widgetIndex: number) => {
@@ -288,7 +287,6 @@ export const queueGlobalAudioPlayerSelectTrack = (widgetIndex: number) => {
     widgetIndex: Math.max(0, Math.floor(widgetIndex)),
     requestedAt: Date.now(),
   };
-  markGlobalAudioPlayerStarted();
 };
 
 export const tryConsumePendingGlobalAudioPlayerAction = () => {
@@ -349,7 +347,6 @@ export const globalAudioPlayerActions = {
     widget?.toggle();
   },
   next: () => {
-    markGlobalAudioPlayerStarted();
     const { queue } = state;
     const idx = resolveCurrentIndex();
     if (queue.length && typeof idx === "number") {
@@ -360,7 +357,6 @@ export const globalAudioPlayerActions = {
     widget?.next();
   },
   previous: () => {
-    markGlobalAudioPlayerStarted();
     const { queue } = state;
     const idx = resolveCurrentIndex();
     if (queue.length && typeof idx === "number") {
@@ -374,7 +370,6 @@ export const globalAudioPlayerActions = {
     const safeIndex = Math.max(0, Math.floor(index));
     const boundedIndex =
       state.queue.length > 0 ? Math.min(safeIndex, state.queue.length - 1) : safeIndex;
-    markGlobalAudioPlayerStarted();
     setGlobalAudioPlayerCurrentIndex(boundedIndex);
     const nextTrack = state.queue[boundedIndex];
     if (nextTrack) setGlobalAudioPlayerTrack(nextTrack);
@@ -417,7 +412,6 @@ export const globalAudioPlayerActions = {
     }
   },
   seekTo: (milliseconds: number) => {
-    markGlobalAudioPlayerStarted();
     if (!canControlWidget()) return;
     const clamped = Math.max(0, Math.floor(milliseconds));
     widget?.seekTo(clamped);
