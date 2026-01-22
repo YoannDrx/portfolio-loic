@@ -78,6 +78,16 @@ const processSteps = [
   { icon: Send, key: "delivery" },
 ];
 
+// Mapping service number to translation key
+const serviceTranslationKeys: Record<string, string> = {
+  "01": "composition",
+  "02": "production",
+  "03": "arranging",
+  "04": "vocalProducer",
+  "05": "mixing",
+  "06": "mastering",
+};
+
 export default function NeoServiceDetail({
   service,
   allServices,
@@ -87,6 +97,12 @@ export default function NeoServiceDetail({
   const t = useTranslations("services");
   const tDetail = useTranslations("services.detail");
   const tCommon = useTranslations("common");
+
+  // Get translated largeTitle based on service number
+  const translationKey = serviceTranslationKeys[service.no];
+  const translatedLargeTitle = translationKey
+    ? t(`${translationKey}.largeTitle`)
+    : service.largeTitle;
 
   const description =
     locale === "fr"
@@ -192,7 +208,7 @@ export default function NeoServiceDetail({
 
                 {/* Title */}
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-black uppercase tracking-tighter leading-[0.85] text-neo-text">
-                  {service.largeTitle || service.title}
+                  {translatedLargeTitle || service.title}
                 </h1>
 
                 {/* Tagline */}
@@ -239,7 +255,7 @@ export default function NeoServiceDetail({
                     prose-p:font-mono prose-p:leading-relaxed prose-p:text-sm
                     prose-strong:text-neo-accent prose-strong:font-bold
                     prose-a:text-neo-accent prose-a:no-underline hover:prose-a:underline
-                    prose-ul:text-sm prose-li:font-mono"
+                    prose-ul:text-sm prose-li:font-mono prose-li:marker:text-neo-accent"
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
               </NeoCard>
@@ -259,7 +275,6 @@ export default function NeoServiceDetail({
                     tDetail("whatYouGetItems.item2"),
                     tDetail("whatYouGetItems.item3"),
                     tDetail("whatYouGetItems.item4"),
-                    tDetail("whatYouGetItems.item5"),
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 group">
                       <span className="w-6 h-6 bg-neo-accent text-neo-text flex items-center justify-center font-mono text-xs font-bold flex-shrink-0 group-hover:scale-110 transition-transform">

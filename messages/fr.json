@@ -403,8 +403,7 @@
         "item1": "Musique originale 100% sur mesure",
         "item2": "Livraison rapide",
         "item3": "Révisions illimitées",
-        "item4": "Qualité professionnelle",
-        "item5": "Droits complets inclus"
+        "item4": "Qualité professionnelle"
       }
     },
     "pageTitle": "Services",
@@ -516,9 +515,9 @@
       }
     },
     "vocalProducer": {
-      "title": "Vocal Producer",
+      "title": "Préparation, correction et traitement vocal",
       "description": "Direction et production vocale pour des performances exceptionnelles.",
-      "largeTitle": "Production Vocale : Sublimer Vos Performances Vocales",
+      "largeTitle": "Préparation, Correction et Traitement Vocal",
       "fullDescription": "En tant que producteur vocal, je me spécialise dans l'extraction du meilleur d'une performance de chanteur. J'assiste les chanteurs avec leurs mélodies vocales, m'assurant qu'ils livrent la meilleure performance possible pour leurs enregistrements. J'offre des services spécialisés tels que la correction, le mixage et l'arrangement des voix. Je suis compétent en correction de hauteur, en comping vocal, et je peux améliorer les performances en utilisant des effets et des outils de traitement. Mon travail est de faire briller la voix, en m'assurant qu'elle s'intègre parfaitement dans le mix et contribue efficacement au ressenti et au message global de la chanson.",
       "details": {
         "intro": "En tant que **vocal producer**, je guide les artistes pour capturer les meilleures performances vocales. Mon rôle est d'extraire l'émotion et la puissance de chaque voix.",
@@ -674,7 +673,7 @@
     "hero": {
       "badge": "CONTACTEZ-MOI",
       "title": "Créons Ensemble",
-      "description": "Vous avez un projet musical en tête ? Je serais ravi d'en discuter avec vous et de donner vie à votre vision sonore.",
+      "description": "Vous avez un projet en tête ? Artiste émergent ou confirmé, tous styles musicaux : je vous accompagne pour des résultats pro, dans les temps.",
       "stats": {
         "response": "Réponse",
         "satisfaction": "Satisfaction"

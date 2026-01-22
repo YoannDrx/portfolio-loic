@@ -392,8 +392,7 @@
         "item1": "100% custom original music",
         "item2": "Fast delivery",
         "item3": "Unlimited revisions",
-        "item4": "Professional quality",
-        "item5": "Full rights included"
+        "item4": "Professional quality"
       }
     },
     "pageTitle": "Services",
@@ -505,9 +504,9 @@
       }
     },
     "vocalProducer": {
-      "title": "Vocal Producer",
+      "title": "Vocal Preparation, Correction & Processing",
       "description": "Vocal direction and production for exceptional performances.",
-      "largeTitle": "Vocal Production: Elevating Your Vocal Performances",
+      "largeTitle": "Vocal Preparation, Correction & Processing",
       "fullDescription": "As a vocal producer, I specialize in bringing out the best in a singer's performance. I assist singers with their vocal melodies, ensuring they deliver the best possible performance for their recordings. I offer specialized services such as correcting, mixing, and arranging vocals. I am skilled at pitch correction, vocal comping, and I can enhance performances using effects and processing tools. My job is to make the vocal shine, ensuring it fits perfectly within the mix and contributes effectively to the song's overall feel and message.",
       "details": {
         "intro": "As a **vocal producer**, I guide artists to capture the best vocal performances. My role is to extract the emotion and power from each voice.",
@@ -663,7 +662,7 @@
     "hero": {
       "badge": "GET IN TOUCH",
       "title": "Let's Create Together",
-      "description": "Have a musical project in mind? I'd love to discuss it with you and bring your sonic vision to life.",
+      "description": "Have a project in mind? Emerging or established artist, all musical styles: I'll guide you to professional results, on time.",
       "stats": {
         "response": "Response",
         "satisfaction": "Satisfaction"
