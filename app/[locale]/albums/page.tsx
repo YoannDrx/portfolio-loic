@@ -2,8 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { NeoAlbumsPage } from "@/components/neo-brutalist/albums/NeoAlbumsPage";
 import { getTranslations } from "next-intl/server";
 
-// Force dynamic rendering to avoid DB calls during static build
-export const dynamic = "force-dynamic";
+// ISR - revalidate every hour
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

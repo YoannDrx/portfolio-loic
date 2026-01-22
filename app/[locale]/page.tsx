@@ -1,7 +1,7 @@
 import NeoHome from "@/components/neo-brutalist/NeoHome";
 
-// Force dynamic rendering for useSearchParams
-export const dynamic = "force-dynamic";
+// ISR - revalidate every hour
+export const revalidate = 3600;
 
 export default async function HomePage() {
   return <NeoHome />;
