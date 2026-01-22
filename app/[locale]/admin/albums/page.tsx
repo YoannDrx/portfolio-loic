@@ -1,11 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { AlbumsContent } from "@/components/admin/AlbumsContent";
 
-export default async function AlbumsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
+
+export default async function AlbumsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
   // Fetch initial data (première page seulement)
