@@ -664,12 +664,12 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
 
       <main className="relative z-10 pt-16 md:pt-20">
         {/* HERO BIO - Split Layout */}
-        <section className="container mx-auto px-4 md:px-6 mb-32 pt-8 md:pt-0">
+        <section className="container mx-auto px-4 md:px-6 mb-16 flex items-center justify-center min-h-[calc(100vh-6rem)]">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-12 items-center min-h-[70vh]"
+            className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-12 items-center w-full"
           >
             {/* Colonne GAUCHE - Tout le contenu texte (3/5) */}
             <motion.div variants={fadeInUp} className="lg:col-span-3">
