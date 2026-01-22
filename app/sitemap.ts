@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
+
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://loicghanem.com";
 const locales = ["en", "fr"] as const;
 
@@ -23,11 +26,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  // Dynamic pages - Albums
-  const albums: AlbumEntry[] = await prisma.album.findMany({
-    where: { published: true },
-    select: { id: true, updatedAt: true },
-  });
+  // Dynamic pages - try to fetch from DB, fallback to empty array if unavailable
+  let albums: AlbumEntry[] = [];
+  let services: ServiceEntry[] = [];
+
+  try {
+    albums = await prisma.album.findMany({
+      where: { published: true },
+      select: { id: true, updatedAt: true },
+    });
+
+    services = await prisma.service.findMany({
+      where: { published: true },
+      select: { id: true, updatedAt: true },
+    });
+  } catch {
+    // DB not available (CI build) - return only static entries
+    return staticEntries;
+  }
 
   const albumEntries: MetadataRoute.Sitemap = albums.flatMap((album: AlbumEntry) =>
     locales.map((locale) => ({
@@ -42,12 +58,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
     }))
   );
-
-  // Dynamic pages - Services
-  const services: ServiceEntry[] = await prisma.service.findMany({
-    where: { published: true },
-    select: { id: true, updatedAt: true },
-  });
 
   const serviceEntries: MetadataRoute.Sitemap = services.flatMap((service: ServiceEntry) =>
     locales.map((locale) => ({
