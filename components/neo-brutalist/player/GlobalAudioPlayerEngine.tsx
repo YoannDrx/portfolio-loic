@@ -211,6 +211,10 @@ export const GlobalAudioPlayerEngine = () => {
           if (typeof currentId === "number") {
             const idx = queue.findIndex((t) => t.id === currentId);
             if (idx >= 0) setGlobalAudioPlayerCurrentIndex(idx);
+          } else if (queue.length > 0) {
+            // No track selected yet, set the first track from the queue
+            setGlobalAudioPlayerTrack(queue[0]);
+            setGlobalAudioPlayerCurrentIndex(0);
           } else {
             try {
               widget.getCurrentSoundIndex((idx: number) => {
@@ -238,9 +242,27 @@ export const GlobalAudioPlayerEngine = () => {
       } catch {
         // noop
       }
+
+      // Skip to first track to force loading metadata (without playing)
+      try {
+        widget.skip(0);
+      } catch {
+        // noop
+      }
+
       refreshQueue();
       refreshSound();
       tryConsumePendingGlobalAudioPlayerAction();
+
+      // Retry loading queue after a delay if it's still empty
+      // (widget may need time to load metadata after READY)
+      setTimeout(() => {
+        const state = getGlobalAudioPlayerState();
+        if (state.queue.length === 0 || !state.track) {
+          refreshQueue();
+          refreshSound();
+        }
+      }, 1000);
 
       // Fetch full track list from API (widget only provides first 20)
       fetchFullSoundCloudQueue().catch(() => {

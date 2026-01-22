@@ -212,6 +212,10 @@ export const fetchFullSoundCloudQueue = async (): Promise<boolean> => {
     if (typeof currentId === "number") {
       const idx = mappedTracks.findIndex((t) => t.id === currentId);
       if (idx >= 0) setGlobalAudioPlayerCurrentIndex(idx);
+    } else if (mappedTracks.length > 0) {
+      // No track selected yet, set the first track as the current one
+      setGlobalAudioPlayerTrack(mappedTracks[0]);
+      setGlobalAudioPlayerCurrentIndex(0);
     }
 
     hasFetchedFullQueue = true;
