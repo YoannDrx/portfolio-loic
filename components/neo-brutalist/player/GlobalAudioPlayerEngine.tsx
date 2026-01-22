@@ -254,16 +254,20 @@ export const GlobalAudioPlayerEngine = () => {
         // noop
       }
 
-      // Skip to first track to force loading metadata (without playing)
+      // Ensure player stays paused on init - user must click play explicitly
       try {
-        widget.skip(0);
+        widget.pause();
       } catch {
         // noop
       }
 
       refreshQueue();
       refreshSound();
-      tryConsumePendingGlobalAudioPlayerAction();
+
+      // Only consume pending actions if user explicitly requested playback
+      if (getGlobalAudioPlayerState().hasStarted) {
+        tryConsumePendingGlobalAudioPlayerAction();
+      }
 
       // Retry loading queue after a delay if it's still empty
       // (widget may need time to load metadata after READY)

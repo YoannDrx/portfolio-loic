@@ -246,7 +246,7 @@ export const setGlobalAudioPlayerProgress = (positionMs: number, durationMs?: nu
 };
 
 export const setGlobalAudioPlayerPlaying = (isPlaying: boolean) => {
-  setState({ isPlaying, hasStarted: state.hasStarted || isPlaying });
+  setState({ isPlaying });
 };
 
 export const markGlobalAudioPlayerStarted = () => {
@@ -330,6 +330,7 @@ const resolveCurrentIndex = () => {
 
 export const globalAudioPlayerActions = {
   play: () => {
+    markGlobalAudioPlayerStarted();
     queueGlobalAudioPlayerAction("play");
     if (!canControlWidget()) return;
     widget?.play();
@@ -342,6 +343,7 @@ export const globalAudioPlayerActions = {
     setGlobalAudioPlayerVolume(volume);
   },
   toggle: () => {
+    markGlobalAudioPlayerStarted();
     queueGlobalAudioPlayerAction("toggle");
     if (!canControlWidget()) return;
     widget?.toggle();
@@ -367,6 +369,7 @@ export const globalAudioPlayerActions = {
     widget?.prev();
   },
   selectTrack: (index: number) => {
+    markGlobalAudioPlayerStarted();
     const safeIndex = Math.max(0, Math.floor(index));
     const boundedIndex =
       state.queue.length > 0 ? Math.min(safeIndex, state.queue.length - 1) : safeIndex;

@@ -195,13 +195,7 @@ export const NeoSplitHero: React.FC = () => {
               </div>
             </div>
 
-            <ConsentGate
-              category="media"
-              variant="plain"
-              className="bg-neo-bg"
-              minHeight={360}
-              onAccept={() => actions.play()}
-            >
+            <ConsentGate category="media" variant="plain" className="bg-neo-bg" minHeight={360}>
               {isLoadingData ? (
                 /* Skeleton Loader */
                 <div className="p-4 md:p-6 space-y-5 animate-pulse">
