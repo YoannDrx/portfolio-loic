@@ -3,6 +3,9 @@ import { ResumeForm } from "@/components/admin/resume-form";
 import { notFound } from "next/navigation";
 import type { ResumeEntryCreateFormInput } from "@/lib/validations/schemas";
 
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
+
 type ResumeEntryType = ResumeEntryCreateFormInput["type"];
 
 export default async function EditResumeEntryPage({
@@ -40,7 +43,9 @@ export default async function EditResumeEntryPage({
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">Edit Resume Entry</h1>
+      <h1 className="text-3xl font-bold tracking-tight text-admin-text-primary">
+        Edit Resume Entry
+      </h1>
       <ResumeForm locale={locale} initialData={formData} isEditing />
     </div>
   );

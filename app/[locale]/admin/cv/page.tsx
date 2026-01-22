@@ -2,6 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { CVEditor } from "@/components/admin/cv/cv-editor";
 import type { CVData, CVTheme } from "@/types/cv";
 
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
+
 const defaultTheme: CVTheme = {
   primary: "#F73604", // Orange vif (accent unique)
   secondary: "#F73604", // Même accent

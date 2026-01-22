@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ServiceForm } from "@/components/admin/service-form";
 
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
+
 export default async function EditServicePage({
   params,
 }: {

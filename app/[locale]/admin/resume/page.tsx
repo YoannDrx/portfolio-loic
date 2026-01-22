@@ -1,6 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { CVBuilder } from "@/components/admin/CVBuilder";
 
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
+
 type Section = {
   id?: string;
   slug: string;
@@ -13,11 +16,7 @@ type Section = {
   published?: boolean;
 };
 
-export default async function ResumePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function ResumePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
   const safeFetch = async <T,>(promise: Promise<T>, fallback: T): Promise<T> => {
@@ -43,7 +42,7 @@ export default async function ResumePage({
     titleFr: s.titleFr ?? "",
     type: s.type,
     entryType: s.entryType ?? "",
-    entryIds: Array.isArray(s.entryIds) ? s.entryIds as string[] : undefined,
+    entryIds: Array.isArray(s.entryIds) ? (s.entryIds as string[]) : undefined,
     order: s.order,
     published: s.published,
   }));

@@ -32,7 +32,8 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = true;
-export const revalidate = 3600;
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: PageProps) {
   const { id, locale } = await params;

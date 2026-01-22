@@ -3,6 +3,9 @@ import { DashboardKPICards } from "@/components/admin/DashboardKPICards";
 import { RecentActivity } from "@/components/admin/RecentActivity";
 import { QuickActions } from "@/components/admin/QuickActions";
 
+// Force dynamic rendering to avoid DB calls at build time
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboardPage({
   params,
 }: {
@@ -88,20 +91,14 @@ export default async function AdminDashboardPage({
           updatedAt: item.updatedAt.toISOString(),
         })),
       ]
-        .sort(
-          (a, b) =>
-            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-        )
+        .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
         .slice(0, 5);
     }),
   ]);
 
   const totalContent = albumsCount + videosCount + servicesCount;
-  const totalPublished =
-    publishedAlbumsCount + publishedVideosCount + publishedServicesCount;
-  const publishRate = totalContent > 0
-    ? Math.round((totalPublished / totalContent) * 100)
-    : 0;
+  const totalPublished = publishedAlbumsCount + publishedVideosCount + publishedServicesCount;
+  const publishRate = totalContent > 0 ? Math.round((totalPublished / totalContent) * 100) : 0;
 
   const stats = {
     albumsCount,
