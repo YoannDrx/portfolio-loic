@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ExternalLink, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
@@ -19,44 +19,75 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.2,
     },
   },
 };
 
-const leftPanelVariants = {
-  hidden: { opacity: 0, x: -60 },
+const letterReveal = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+    rotateX: -90,
+  },
   visible: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] as const },
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   },
 };
 
-const rightPanelVariants = {
-  hidden: { opacity: 0, x: 60 },
+const lineReveal = {
+  hidden: { scaleX: 0, originX: 0 },
   visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] as const, delay: 0.2 },
+    scaleX: 1,
+    transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const, delay: 0.5 },
   },
 };
 
-const stampVariants = {
-  hidden: { opacity: 0, rotate: 10, scale: 1.2 },
-  visible: {
+const floatingShape = {
+  hidden: { opacity: 0, scale: 0 },
+  visible: (i: number) => ({
     opacity: 1,
-    rotate: -3,
     scale: 1,
     transition: {
       duration: 0.6,
-      delay: 0.5,
-      type: "spring" as const,
-      stiffness: 200,
-      damping: 15,
+      delay: 0.8 + i * 0.1,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
+  }),
+};
+
+const rightPanelVariants = {
+  hidden: { opacity: 0, x: 60, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] as const, delay: 0.6 },
   },
+};
+
+const taglineVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.8, delay: 1.2 },
+  },
+};
+
+const glitchKeyframes = {
+  "0%": { transform: "translate(0)" },
+  "20%": { transform: "translate(-2px, 2px)" },
+  "40%": { transform: "translate(-2px, -2px)" },
+  "60%": { transform: "translate(2px, 2px)" },
+  "80%": { transform: "translate(2px, -2px)" },
+  "100%": { transform: "translate(0)" },
 };
 
 const normalizeArtworkUrl = (url: string | null | undefined, size: "t200x200" | "t500x500") => {
@@ -112,51 +143,190 @@ export const NeoSplitHero: React.FC = () => {
     return isPlaying ? tPlayer("status.playing") : tPlayer("status.paused");
   }, [isPlayerUnavailable, isPlaying, mediaAllowed, status, tPlayer]);
 
+  // Split text into words for animation
+  const line1Words = t("title.line1").split(" ");
+  const line3Words = t("title.line3").split(" ");
+
   return (
     <motion.section
-      className="container mx-auto px-4 md:px-6 mb-16 min-h-[calc(100vh-8rem)] flex flex-col xl:grid xl:grid-cols-[60fr_40fr] gap-8 xl:gap-12 items-center"
+      className="container mx-auto px-4 md:px-6 mb-16 min-h-[calc(100vh-8rem)] flex flex-col xl:grid xl:grid-cols-[60fr_40fr] gap-8 xl:gap-12 items-center relative"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      {/* Left Panel - Text Content */}
-      <motion.div
-        className="flex flex-col justify-center w-full pt-8 md:pt-0"
-        variants={leftPanelVariants}
-      >
-        <div className="font-mono text-xs font-bold text-neo-accent flex items-center gap-3 mb-4">
-          <span className="bg-neo-text text-neo-accent px-2 py-1 text-sm font-bold">01</span>
-          <div className="w-2 h-2 bg-neo-accent animate-pulse" />
-          {t("basedIn")}
-        </div>
+      {/* Floating Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          custom={0}
+          variants={floatingShape}
+          initial="hidden"
+          animate="visible"
+          className="absolute top-[15%] left-[5%] w-16 h-16 border-4 border-neo-accent/30 rotate-12"
+          style={{ animation: "float 6s ease-in-out infinite" }}
+        />
+        <motion.div
+          custom={1}
+          variants={floatingShape}
+          initial="hidden"
+          animate="visible"
+          className="absolute top-[25%] right-[15%] w-8 h-8 bg-neo-accent/20 rotate-45 hidden xl:block"
+          style={{ animation: "float 8s ease-in-out infinite reverse" }}
+        />
+        <motion.div
+          custom={2}
+          variants={floatingShape}
+          initial="hidden"
+          animate="visible"
+          className="absolute bottom-[30%] left-[10%] w-12 h-12 border-2 border-neo-text/10 rounded-full hidden md:block"
+          style={{ animation: "float 7s ease-in-out infinite" }}
+        />
+        <motion.div
+          custom={3}
+          variants={floatingShape}
+          initial="hidden"
+          animate="visible"
+          className="absolute top-[60%] right-[5%] w-20 h-1 bg-neo-accent/40 -rotate-45 hidden xl:block"
+        />
+      </div>
 
-        <h1 className="text-[9vw] sm:text-[10vw] lg:text-[7vw] xl:text-[6vw] leading-[0.9] font-black tracking-tighter uppercase break-words mb-6 text-neo-text max-w-full">
-          {t("title.line1")} <br />
+      {/* Left Panel - Text Content */}
+      <motion.div className="flex flex-col justify-center w-full pt-8 md:pt-0 relative z-10">
+        {/* Animated Badge */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="font-mono text-xs font-bold text-neo-accent flex items-center gap-3 mb-6"
+        >
           <motion.span
-            variants={stampVariants}
-            className="inline-block relative px-3 md:px-4 py-1 md:py-2 bg-neo-accent text-neo-text-inverse border-4 border-neo-text shadow-[8px_8px_0px_0px_var(--neo-text)] my-2 whitespace-nowrap origin-center text-center"
-            style={{
-              fontStretch: "condensed",
-              letterSpacing: "-0.03em",
-            }}
+            className="bg-neo-text text-neo-accent px-3 py-1.5 text-sm font-bold relative overflow-hidden"
+            whileHover={{ scale: 1.05 }}
           >
-            {t("title.line2")}
-          </motion.span>{" "}
-          <br />
-          <span className={`inline-block whitespace-nowrap${isFrench ? " mt-1 sm:mt-0" : ""}`}>
-            {t("title.line3")}
+            <span className="relative z-10">01</span>
+            <motion.div
+              className="absolute inset-0 bg-neo-accent"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "100%" }}
+              transition={{ duration: 0.5 }}
+            />
+          </motion.span>
+          <motion.div
+            className="w-2 h-2 bg-neo-accent"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [1, 0.5, 1],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <span className="tracking-wider">{t("basedIn")}</span>
+        </motion.div>
+
+        {/* Animated Horizontal Line */}
+        <motion.div variants={lineReveal} className="h-1 bg-neo-accent mb-6 w-24" />
+
+        {/* Main Title with Word-by-Word Animation */}
+        <h1 className="text-[9vw] sm:text-[10vw] lg:text-[7vw] xl:text-[6vw] leading-[0.9] font-black tracking-tighter uppercase break-words mb-8 text-neo-text max-w-full perspective-[1000px]">
+          {/* Line 1 - Word by word reveal */}
+          <span className="block overflow-hidden">
+            {line1Words.map((word, i) => (
+              <motion.span
+                key={i}
+                variants={letterReveal}
+                className="inline-block mr-[0.25em]"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </span>
+
+          {/* Line 2 - Highlighted word with glitch effect */}
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              rotate: -2,
+              transition: {
+                duration: 0.8,
+                delay: 0.6,
+                type: "spring",
+                stiffness: 150,
+                damping: 12,
+              },
+            }}
+            whileHover={{
+              rotate: 3,
+              scale: 1.02,
+            }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className="inline-block relative px-3 md:px-5 py-2 md:py-3 bg-neo-accent text-neo-text-inverse border-4 border-neo-text shadow-[8px_8px_0px_0px_var(--neo-text)] my-3 whitespace-nowrap origin-center cursor-default group"
+          >
+            {/* Glitch layers */}
+            <span
+              className="absolute inset-0 bg-neo-accent opacity-0 group-hover:opacity-100"
+              style={{
+                clipPath: "polygon(0 0, 100% 0, 100% 45%, 0 45%)",
+                transform: "translate(-2px, 0)",
+                transition: "opacity 0.1s",
+              }}
+            />
+            <span className="relative z-10">{t("title.line2")}</span>
+            {/* Decorative corner */}
+            <motion.span
+              className="absolute -top-2 -right-2 w-4 h-4 bg-neo-text"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 1, duration: 0.3 }}
+            />
+          </motion.span>
+
+          {/* Line 3 - Staggered word reveal */}
+          <span className={`block overflow-hidden${isFrench ? " mt-2 sm:mt-1" : " mt-1"}`}>
+            {line3Words.map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.9 + i * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="inline-block mr-[0.25em]"
+              >
+                {word}
+              </motion.span>
+            ))}
           </span>
         </h1>
 
+        {/* Tagline with typewriter-like effect */}
         <motion.div
-          className="max-w-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
+          variants={taglineVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-lg relative"
         >
-          <p className="font-mono text-sm md:text-base font-medium border-l-4 border-neo-accent pl-4 md:pl-6 bg-neo-surface p-4 shadow-[4px_4px_0px_0px_var(--neo-shadow)] text-neo-text">
+          <motion.div
+            className="absolute -left-2 top-0 bottom-0 w-1 bg-neo-accent"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ duration: 0.5, delay: 1.1 }}
+            style={{ originY: 0 }}
+          />
+          <motion.p
+            className="font-mono text-sm md:text-base font-medium pl-6 pr-4 py-4 bg-neo-surface border-2 border-neo-border shadow-[6px_6px_0px_0px_var(--neo-shadow)] text-neo-text relative overflow-hidden"
+            whileHover={{ x: 4 }}
+            transition={{ duration: 0.2 }}
+          >
             {t("tagline")}
-          </p>
+            <motion.span
+              className="absolute bottom-2 right-4 w-2 h-4 bg-neo-accent"
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            />
+          </motion.p>
         </motion.div>
       </motion.div>
 
