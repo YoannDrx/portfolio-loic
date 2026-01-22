@@ -103,6 +103,7 @@ export const NeoSplitHero: React.FC = () => {
 
   const isPlayerUnavailable = status === "error" || !!error;
   const controlsDisabled = !mediaAllowed || status !== "ready" || isPlayerUnavailable;
+  const isLoadingData = mediaAllowed && !track && queue.length === 0 && status !== "error";
 
   const statusLabel = useMemo(() => {
     if (!mediaAllowed) return tPlayer("status.mediaDisabled");
@@ -201,159 +202,221 @@ export const NeoSplitHero: React.FC = () => {
               minHeight={360}
               onAccept={() => actions.play()}
             >
-              <div className="p-4 md:p-6 space-y-5">
-                {/* Track line */}
-                <div className="flex items-center gap-4">
-                  <div className="h-16 w-16 border-2 border-neo-border bg-neo-surface shadow-[4px_4px_0px_0px_var(--neo-shadow)] overflow-hidden flex-shrink-0">
-                    {artworkUrl ? (
-                      <Image
-                        src={artworkUrl}
-                        alt=""
-                        width={64}
-                        height={64}
-                        className="h-full w-full object-cover"
-                        draggable={false}
-                        referrerPolicy="no-referrer"
-                      />
-                    ) : (
-                      <div className="h-full w-full flex items-center justify-center bg-neo-text text-neo-text-inverse">
-                        <SoundCloudIcon className="w-7 h-7" />
+              {isLoadingData ? (
+                /* Skeleton Loader */
+                <div className="p-4 md:p-6 space-y-5 animate-pulse">
+                  {/* Track line skeleton */}
+                  <div className="flex items-center gap-4">
+                    <div className="h-16 w-16 border-2 border-neo-border bg-neo-border/30 shadow-[4px_4px_0px_0px_var(--neo-shadow)] flex-shrink-0" />
+                    <div className="min-w-0 flex-1 space-y-2">
+                      <div className="h-3 w-20 bg-neo-accent/30 rounded-sm" />
+                      <div className="h-5 w-40 bg-neo-border/40 rounded-sm" />
+                      <div className="h-3 w-24 bg-neo-border/30 rounded-sm" />
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="h-11 w-11 border-2 border-neo-border bg-neo-border/20" />
+                      <div className="h-14 w-14 border-3 border-neo-border bg-neo-accent/50" />
+                      <div className="h-11 w-11 border-2 border-neo-border bg-neo-border/20" />
+                    </div>
+                  </div>
+
+                  {/* Waveform skeleton */}
+                  <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] p-4">
+                    <div className="h-14 flex items-end justify-center gap-[2px]">
+                      {Array.from({ length: 48 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="w-1 bg-neo-border/30 rounded-sm"
+                          style={{
+                            height: `${20 + Math.sin(i * 0.3) * 15 + Math.random() * 20}%`,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <div className="mt-3 flex items-center justify-between">
+                      <div className="h-3 w-10 bg-neo-border/30 rounded-sm" />
+                      <div className="h-8 w-32 border-2 border-neo-border bg-neo-border/20" />
+                      <div className="h-3 w-20 bg-neo-border/30 rounded-sm" />
+                    </div>
+                  </div>
+
+                  {/* Track list skeleton */}
+                  <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] overflow-hidden">
+                    <div className="px-4 py-3 border-b-2 border-neo-border bg-neo-text text-neo-text-inverse flex items-center justify-between">
+                      <div className="h-3 w-16 bg-white/30 rounded-sm" />
+                      <div className="h-3 w-6 bg-white/20 rounded-sm" />
+                    </div>
+                    <div className="max-h-56 bg-neo-bg p-2 space-y-2">
+                      {Array.from({ length: 4 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center gap-3 p-2 border-2 border-neo-border/50"
+                        >
+                          <div className="h-4 w-6 bg-neo-border/30 rounded-sm" />
+                          <div className="h-4 flex-1 bg-neo-border/30 rounded-sm" />
+                          <div className="h-4 w-10 bg-neo-border/20 rounded-sm" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-4 md:p-6 space-y-5">
+                  {/* Track line */}
+                  <div className="flex items-center gap-4">
+                    <div className="h-16 w-16 border-2 border-neo-border bg-neo-surface shadow-[4px_4px_0px_0px_var(--neo-shadow)] overflow-hidden flex-shrink-0">
+                      {artworkUrl ? (
+                        <Image
+                          src={artworkUrl}
+                          alt=""
+                          width={64}
+                          height={64}
+                          className="h-full w-full object-cover"
+                          draggable={false}
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <div className="h-full w-full flex items-center justify-center bg-neo-text text-neo-text-inverse">
+                          <SoundCloudIcon className="w-7 h-7" />
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-neo-accent">
+                        {statusLabel}
+                      </div>
+                      <div className="font-black uppercase tracking-tight text-neo-text truncate">
+                        {track?.title || tPlayer("status.noTrack")}
+                      </div>
+                      <div className="font-mono text-xs text-neo-text/60 truncate">
+                        {track?.artist || tPlayer("status.soundcloud")}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => actions.previous()}
+                        disabled={controlsDisabled}
+                        aria-label={tPlayer("controls.previous")}
+                        className={cn(
+                          "h-11 w-11 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "hover:-translate-y-0.5 transition-transform",
+                          "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
+                        )}
+                      >
+                        <SkipBack className="w-5 h-5 mx-auto" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => actions.toggle()}
+                        aria-label={
+                          isPlaying ? tPlayer("controls.pause") : tPlayer("controls.play")
+                        }
+                        className={cn(
+                          "h-14 w-14 border-3 border-neo-border bg-neo-accent text-neo-text-inverse",
+                          "shadow-[5px_5px_0px_0px_var(--neo-border)] hover:-translate-y-0.5 transition-transform"
+                        )}
+                      >
+                        {isPlaying ? (
+                          <Pause className="w-7 h-7 mx-auto" />
+                        ) : (
+                          <Play className="w-7 h-7 mx-auto translate-x-[1px]" />
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => actions.next()}
+                        disabled={controlsDisabled}
+                        aria-label={tPlayer("controls.next")}
+                        className={cn(
+                          "h-11 w-11 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "hover:-translate-y-0.5 transition-transform",
+                          "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
+                        )}
+                      >
+                        <SkipForward className="w-5 h-5 mx-auto" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Waveform */}
+                  <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] p-4">
+                    <SoundCloudWaveform
+                      samples={samples}
+                      progress={progress}
+                      disabled={controlsDisabled || durationMs <= 0}
+                      onSeek={(ratio) => actions.seekToRatio(ratio)}
+                      className={cn(isWaveformLoading && "opacity-80")}
+                      height={56}
+                    />
+                    <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-neo-text/70">
+                      <span>{formatTime(positionMs)}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 border-2 border-neo-border bg-neo-bg shadow-[3px_3px_0px_0px_var(--neo-shadow)] px-2 h-8">
+                          <button
+                            type="button"
+                            onClick={() => actions.setVolume(volume === 0 ? lastNonZeroVolume : 0)}
+                            aria-label={
+                              volume === 0 ? tPlayer("controls.unmute") : tPlayer("controls.mute")
+                            }
+                            className="h-6 w-6 flex items-center justify-center text-neo-text hover:-translate-y-0.5 transition-transform"
+                          >
+                            {volume === 0 ? (
+                              <VolumeX className="w-4 h-4" />
+                            ) : (
+                              <Volume2 className="w-4 h-4" />
+                            )}
+                          </button>
+                          <input
+                            type="range"
+                            min={0}
+                            max={100}
+                            value={volume}
+                            onChange={(e) => actions.setVolume(Number(e.target.value))}
+                            aria-label={tPlayer("controls.volume")}
+                            className="hidden md:block w-28 accent-neo-accent"
+                          />
+                        </div>
+                      </div>
+                      <span>
+                        -{formatTime(remainingMs)} / {formatTime(durationMs)}
+                      </span>
+                    </div>
+
+                    {isPlayerUnavailable && (
+                      <div className="mt-3 font-mono text-xs text-neo-text/70">
+                        {tPlayer("status.errorHint")}
                       </div>
                     )}
                   </div>
 
-                  <div className="min-w-0 flex-1">
-                    <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-neo-accent">
-                      {statusLabel}
+                  {/* Track list */}
+                  <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] overflow-hidden">
+                    <div className="px-4 py-3 border-b-2 border-neo-border bg-neo-text text-neo-text-inverse flex items-center justify-between">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
+                        {tPlayer("tracklist.title")}
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
+                        {queue.length}
+                      </span>
                     </div>
-                    <div className="font-black uppercase tracking-tight text-neo-text truncate">
-                      {track?.title || tPlayer("status.noTrack")}
-                    </div>
-                    <div className="font-mono text-xs text-neo-text/60 truncate">
-                      {track?.artist || tPlayer("status.soundcloud")}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => actions.previous()}
-                      disabled={controlsDisabled}
-                      aria-label={tPlayer("controls.previous")}
-                      className={cn(
-                        "h-11 w-11 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
-                        "hover:-translate-y-0.5 transition-transform",
-                        "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
-                      )}
-                    >
-                      <SkipBack className="w-5 h-5 mx-auto" />
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => actions.toggle()}
-                      aria-label={isPlaying ? tPlayer("controls.pause") : tPlayer("controls.play")}
-                      className={cn(
-                        "h-14 w-14 border-3 border-neo-border bg-neo-accent text-neo-text-inverse",
-                        "shadow-[5px_5px_0px_0px_var(--neo-border)] hover:-translate-y-0.5 transition-transform"
-                      )}
-                    >
-                      {isPlaying ? (
-                        <Pause className="w-7 h-7 mx-auto" />
-                      ) : (
-                        <Play className="w-7 h-7 mx-auto translate-x-[1px]" />
-                      )}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => actions.next()}
-                      disabled={controlsDisabled}
-                      aria-label={tPlayer("controls.next")}
-                      className={cn(
-                        "h-11 w-11 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
-                        "hover:-translate-y-0.5 transition-transform",
-                        "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
-                      )}
-                    >
-                      <SkipForward className="w-5 h-5 mx-auto" />
-                    </button>
+                    <SoundCloudTrackList
+                      tracks={queue}
+                      currentTrackId={track?.id ?? null}
+                      currentIndex={currentIndex}
+                      isPlaying={isPlaying}
+                      isLoading={mediaAllowed && status === "loading"}
+                      disabled={isPlayerUnavailable}
+                      onSelect={(index) => actions.selectTrack(index)}
+                      className="max-h-56 bg-neo-bg"
+                    />
                   </div>
                 </div>
-
-                {/* Waveform */}
-                <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] p-4">
-                  <SoundCloudWaveform
-                    samples={samples}
-                    progress={progress}
-                    disabled={controlsDisabled || durationMs <= 0}
-                    onSeek={(ratio) => actions.seekToRatio(ratio)}
-                    className={cn(isWaveformLoading && "opacity-80")}
-                    height={56}
-                  />
-                  <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-neo-text/70">
-                    <span>{formatTime(positionMs)}</span>
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-2 border-2 border-neo-border bg-neo-bg shadow-[3px_3px_0px_0px_var(--neo-shadow)] px-2 h-8">
-                        <button
-                          type="button"
-                          onClick={() => actions.setVolume(volume === 0 ? lastNonZeroVolume : 0)}
-                          aria-label={
-                            volume === 0 ? tPlayer("controls.unmute") : tPlayer("controls.mute")
-                          }
-                          className="h-6 w-6 flex items-center justify-center text-neo-text hover:-translate-y-0.5 transition-transform"
-                        >
-                          {volume === 0 ? (
-                            <VolumeX className="w-4 h-4" />
-                          ) : (
-                            <Volume2 className="w-4 h-4" />
-                          )}
-                        </button>
-                        <input
-                          type="range"
-                          min={0}
-                          max={100}
-                          value={volume}
-                          onChange={(e) => actions.setVolume(Number(e.target.value))}
-                          aria-label={tPlayer("controls.volume")}
-                          className="hidden md:block w-28 accent-neo-accent"
-                        />
-                      </div>
-                    </div>
-                    <span>
-                      -{formatTime(remainingMs)} / {formatTime(durationMs)}
-                    </span>
-                  </div>
-
-                  {isPlayerUnavailable && (
-                    <div className="mt-3 font-mono text-xs text-neo-text/70">
-                      {tPlayer("status.errorHint")}
-                    </div>
-                  )}
-                </div>
-
-                {/* Track list */}
-                <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] overflow-hidden">
-                  <div className="px-4 py-3 border-b-2 border-neo-border bg-neo-text text-neo-text-inverse flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
-                      {tPlayer("tracklist.title")}
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
-                      {queue.length}
-                    </span>
-                  </div>
-                  <SoundCloudTrackList
-                    tracks={queue}
-                    currentTrackId={track?.id ?? null}
-                    currentIndex={currentIndex}
-                    isPlaying={isPlaying}
-                    isLoading={mediaAllowed && status === "loading"}
-                    disabled={isPlayerUnavailable}
-                    onSelect={(index) => actions.selectTrack(index)}
-                    className="max-h-56 bg-neo-bg"
-                  />
-                </div>
-              </div>
+              )}
             </ConsentGate>
           </div>
         </div>
