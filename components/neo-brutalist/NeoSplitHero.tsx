@@ -6,6 +6,7 @@ import { ExternalLink, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } fr
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { SOUND_CLOUD_PROFILE_URL, useGlobalAudioPlayer } from "@/lib/player/globalAudioPlayer";
+import { closeSpotifyOnSoundCloudPlay } from "@/lib/player/usePlayerConflictResolver";
 import { useSoundCloudWaveform } from "@/lib/hooks/useSoundCloudWaveform";
 import { ConsentGate } from "./legal/ConsentGate";
 import { SoundCloudIcon } from "./player/SoundCloudIcon";
@@ -475,7 +476,10 @@ export const NeoSplitHero: React.FC = () => {
 
                       <button
                         type="button"
-                        onClick={() => actions.toggle()}
+                        onClick={() => {
+                          closeSpotifyOnSoundCloudPlay();
+                          actions.toggle();
+                        }}
                         aria-label={
                           isPlaying ? tPlayer("controls.pause") : tPlayer("controls.play")
                         }
@@ -575,7 +579,10 @@ export const NeoSplitHero: React.FC = () => {
                       isPlaying={isPlaying}
                       isLoading={mediaAllowed && status === "loading"}
                       disabled={isPlayerUnavailable}
-                      onSelect={(index) => actions.selectTrack(index)}
+                      onSelect={(index) => {
+                        closeSpotifyOnSoundCloudPlay();
+                        actions.selectTrack(index);
+                      }}
                       className="max-h-56 bg-neo-bg"
                     />
                   </div>
