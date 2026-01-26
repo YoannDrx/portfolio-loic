@@ -3,8 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, ArrowRight, Disc, Star, Play, ExternalLink } from "lucide-react";
-import { spotifyPlayerActions } from "@/lib/player/spotifyPlayer";
+import { Music, ArrowRight, Disc, Star, ExternalLink } from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
@@ -94,20 +93,14 @@ const fadeInUp = {
   exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.3 } },
 };
 
-// Composant AlbumCard avec hover desktop + boutons visibles mobile
+// Composant AlbumCard avec hover desktop + bouton visible mobile
 interface AlbumCardProps {
   album: Album;
-  onPlayClick: (e: React.MouseEvent, album: Album) => void;
   normalizeGenre: (style: string | null) => string | null;
   featuredLabel: string;
 }
 
-const AlbumCard: React.FC<AlbumCardProps> = ({
-  album,
-  onPlayClick,
-  normalizeGenre,
-  featuredLabel,
-}) => {
+const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre, featuredLabel }) => {
   return (
     <motion.div variants={fadeInUp} layout className="group relative">
       {/* Cover */}
@@ -121,20 +114,11 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
             <Disc className="w-20 h-20 opacity-20" />
           </div>
         )}
-        {/* Overlay with actions - desktop only (hover) */}
-        <div className="hidden md:flex absolute inset-0 flex-col items-center justify-center gap-4 bg-neo-text/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {album.spotifyEmbed && (
-            <button
-              onClick={(e) => onPlayClick(e, album)}
-              className="w-16 h-16 bg-[#1DB954] rounded-full flex items-center justify-center border-4 border-neo-border hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_var(--neo-border)]"
-              title="Écouter sur Spotify"
-            >
-              <Play size={28} className="text-white ml-1" fill="white" />
-            </button>
-          )}
+        {/* Overlay with action - desktop only (hover) */}
+        <div className="hidden md:flex absolute inset-0 flex-col items-center justify-center bg-neo-text/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Link
             href={{ pathname: "/albums/[id]", params: { id: album.id } }}
-            className="flex items-center gap-2 px-4 py-2 bg-neo-bg text-neo-text font-mono text-sm font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse transition-colors shadow-[3px_3px_0px_0px_var(--neo-border)]"
+            className="flex items-center gap-2 px-5 py-3 bg-neo-bg text-neo-text font-mono text-sm font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse transition-colors shadow-[4px_4px_0px_0px_var(--neo-border)]"
           >
             <span>Voir album</span>
             <ExternalLink size={14} />
@@ -149,24 +133,13 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
         )}
       </div>
 
-      {/* Action buttons - mobile only (always visible) */}
-      <div className="flex md:hidden gap-2 mt-3 mb-3">
-        {album.spotifyEmbed ? (
-          <button
-            onClick={(e) => onPlayClick(e, album)}
-            className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#1DB954] text-white font-mono text-xs font-bold uppercase border-2 border-neo-border active:scale-95 transition-transform shadow-[3px_3px_0px_0px_var(--neo-border)]"
-          >
-            <Play size={16} fill="white" />
-            <span>Écouter</span>
-          </button>
-        ) : (
-          <div className="flex-1" />
-        )}
+      {/* Action button - mobile only (always visible) */}
+      <div className="flex md:hidden mt-3 mb-3">
         <Link
           href={{ pathname: "/albums/[id]", params: { id: album.id } }}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-neo-bg text-neo-text font-mono text-xs font-bold uppercase border-2 border-neo-border active:scale-95 transition-transform shadow-[3px_3px_0px_0px_var(--neo-border)]"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-neo-bg text-neo-text font-mono text-xs font-bold uppercase border-2 border-neo-border active:scale-95 transition-transform shadow-[3px_3px_0px_0px_var(--neo-border)]"
         >
-          <span>Détails</span>
+          <span>Voir album</span>
           <ExternalLink size={12} />
         </Link>
       </div>
@@ -197,19 +170,6 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
 export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
   const t = useTranslations("albums");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-
-  const handlePlayClick = (e: React.MouseEvent, album: Album) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (album.spotifyEmbed) {
-      spotifyPlayerActions.open({
-        id: album.id,
-        title: album.title,
-        img: album.img,
-        spotifyEmbed: album.spotifyEmbed,
-      });
-    }
-  };
 
   const genreCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -352,7 +312,6 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                     <AlbumCard
                       key={album.id}
                       album={album}
-                      onPlayClick={handlePlayClick}
                       normalizeGenre={normalizeGenre}
                       featuredLabel={t("featured")}
                     />
