@@ -620,7 +620,8 @@
       "nextAlbum": "Album suivant",
       "alsoAvailable": "Aussi disponible",
       "otherPlatformsDescription": "Retrouvez cet album sur toutes vos plateformes de streaming préférées : Spotify, Apple Music, Deezer, Tidal et plus encore.",
-      "allPlatforms": "Toutes les plateformes"
+      "allPlatforms": "Toutes les plateformes",
+      "availableOn": "Disponible sur"
     }
   },
   "videos": {
