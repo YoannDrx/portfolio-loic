@@ -39,6 +39,7 @@ export default async function AlbumsPage({ params }: { params: Promise<{ locale:
       descriptionsFr: true,
       descriptionsEn: true,
       order: true,
+      spotifyEmbed: true,
     },
   });
 

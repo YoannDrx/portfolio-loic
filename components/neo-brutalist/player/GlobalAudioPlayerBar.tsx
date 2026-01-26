@@ -20,6 +20,7 @@ import { usePathname } from "next/navigation";
 import { useConsent } from "../legal/ConsentProvider";
 import { useSoundCloudWaveform } from "@/lib/hooks/useSoundCloudWaveform";
 import { SOUND_CLOUD_PROFILE_URL, useGlobalAudioPlayer } from "@/lib/player/globalAudioPlayer";
+import { closeSpotifyOnSoundCloudPlay } from "@/lib/player/usePlayerConflictResolver";
 import { cn } from "@/lib/utils";
 import { SoundCloudIcon } from "./SoundCloudIcon";
 import { SoundCloudTrackList } from "./SoundCloudTrackList";
@@ -278,6 +279,7 @@ export const GlobalAudioPlayerBar = () => {
                             openManager();
                             return;
                           }
+                          closeSpotifyOnSoundCloudPlay();
                           actions.toggle();
                         }}
                         aria-label={isPlaying ? t("controls.pause") : t("controls.play")}
@@ -480,6 +482,7 @@ export const GlobalAudioPlayerBar = () => {
                             disabled={isPlayerUnavailable}
                             onSelect={(index) => {
                               if (!mediaAllowed) openManager();
+                              closeSpotifyOnSoundCloudPlay();
                               actions.selectTrack(index);
                             }}
                             className="max-h-40 bg-neo-bg"

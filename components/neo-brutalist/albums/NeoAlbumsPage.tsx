@@ -3,7 +3,8 @@
 import React, { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, ArrowRight, Disc, Star } from "lucide-react";
+import { Music, ArrowRight, Disc, Star, Play, ExternalLink } from "lucide-react";
+import { spotifyPlayerActions } from "@/lib/player/spotifyPlayer";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
@@ -22,6 +23,7 @@ interface Album {
   listenLink: string | null;
   collabName?: string | null;
   order?: number;
+  spotifyEmbed?: string | null;
 }
 
 interface NeoAlbumsPageProps {
@@ -95,6 +97,19 @@ const fadeInUp = {
 export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
   const t = useTranslations("albums");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+
+  const handlePlayClick = (e: React.MouseEvent, album: Album) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (album.spotifyEmbed) {
+      spotifyPlayerActions.open({
+        id: album.id,
+        title: album.title,
+        img: album.img,
+        spotifyEmbed: album.spotifyEmbed,
+      });
+    }
+  };
 
   const genreCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -240,40 +255,55 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                       layout
                       className="group relative"
                     >
+                      {/* Cover */}
+                      <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative mb-6 overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-accent)] group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
+                        <div
+                          className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                          style={{ backgroundImage: album.img ? `url(${album.img})` : undefined }}
+                        />
+                        {!album.img && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <Disc className="w-20 h-20 opacity-20" />
+                          </div>
+                        )}
+                        {/* Overlay with actions */}
+                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-neo-text/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          {/* Play button */}
+                          {album.spotifyEmbed && (
+                            <button
+                              onClick={(e) => handlePlayClick(e, album)}
+                              className="w-16 h-16 bg-[#1DB954] rounded-full flex items-center justify-center border-4 border-neo-border hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_var(--neo-border)]"
+                              title="Écouter sur Spotify"
+                            >
+                              <Play size={28} className="text-white ml-1" fill="white" />
+                            </button>
+                          )}
+                          {/* View album button */}
+                          <Link
+                            href={{ pathname: "/albums/[id]", params: { id: album.id } }}
+                            className="flex items-center gap-2 px-4 py-2 bg-neo-bg text-neo-text font-mono text-sm font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse transition-colors shadow-[3px_3px_0px_0px_var(--neo-border)]"
+                          >
+                            <span>Voir album</span>
+                            <ExternalLink size={14} />
+                          </Link>
+                        </div>
+                        {/* Badge Favori pour les albums épinglés */}
+                        {album.order !== undefined && album.order < 100 && (
+                          <div className="absolute top-3 right-3 bg-neo-accent text-neo-text-inverse px-3 py-1 border-2 border-neo-border flex items-center gap-1.5 font-mono text-xs font-bold uppercase shadow-[3px_3px_0px_0px_var(--neo-border)]">
+                            <Star size={12} className="fill-current" />
+                            {t("featured")}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Info */}
                       <Link
                         href={{ pathname: "/albums/[id]", params: { id: album.id } }}
                         className="block"
                       >
-                        {/* Cover */}
-                        <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative mb-6 overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-accent)] group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
-                          <div
-                            className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                            style={{ backgroundImage: album.img ? `url(${album.img})` : undefined }}
-                          />
-                          {!album.img && (
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <Disc className="w-20 h-20 opacity-20" />
-                            </div>
-                          )}
-                          {/* Overlay with arrow icon */}
-                          <div className="absolute inset-0 flex items-center justify-center bg-neo-text/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="w-20 h-20 bg-neo-accent rounded-full flex items-center justify-center border-4 border-neo-border">
-                              <ArrowRight size={32} className="text-neo-text-inverse" />
-                            </div>
-                          </div>
-                          {/* Badge Favori pour les albums épinglés */}
-                          {album.order !== undefined && album.order < 100 && (
-                            <div className="absolute top-3 right-3 bg-neo-accent text-neo-text-inverse px-3 py-1 border-2 border-neo-border flex items-center gap-1.5 font-mono text-xs font-bold uppercase shadow-[3px_3px_0px_0px_var(--neo-border)]">
-                              <Star size={12} className="fill-current" />
-                              {t("featured")}
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Info */}
                         <div className="flex items-start justify-between gap-4">
                           <div className="min-w-0">
-                            <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text">
+                            <h3 className="text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text hover:text-neo-accent transition-colors">
                               {album.title}
                             </h3>
                             <NeoTag variant="accent" size="sm">

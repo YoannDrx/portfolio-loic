@@ -7,11 +7,16 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { NeoCookieConsent } from "@/components/neo-brutalist/legal/NeoCookieConsent";
 import { GlobalAudioPlayerMount } from "@/components/neo-brutalist/player/GlobalAudioPlayerMount";
+import { SpotifyPlayerBar } from "@/components/neo-brutalist/player/SpotifyPlayerBar";
+import { usePlayerConflictResolver } from "@/lib/player/usePlayerConflictResolver";
 
 export function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const t = useTranslations("home.splitHero");
   const [scrollIndicatorProgress, setScrollIndicatorProgress] = useState(0);
+
+  // Initialise la gestion des conflits entre players SoundCloud et Spotify
+  usePlayerConflictResolver();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +46,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
     <>
       <main className="min-h-screen">{children}</main>
       <GlobalAudioPlayerMount />
+      <SpotifyPlayerBar />
       <motion.div
         initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1 - scrollIndicatorProgress }}
