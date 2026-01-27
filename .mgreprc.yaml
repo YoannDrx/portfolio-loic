@@ -1,0 +1,8 @@
+# Configuration mgrep pour portfolio-loic
+# Le store utilise automatiquement le nom du dossier: portfolio-loic
+
+# Taille maximale des fichiers (hérite de la config globale si non spécifié)
+# maxFileSize: 10485760
+
+# Nombre maximum de fichiers
+# maxFileCount: 10000
