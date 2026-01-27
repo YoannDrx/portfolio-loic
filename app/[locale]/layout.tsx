@@ -14,14 +14,14 @@ const seoContent = {
     description:
       "Award-winning music composer and producer based in Paris. Specializing in film, TV, ads, and games composition. Explore my portfolio of Metal, Hip-Hop, Ambient, and Electronic music.",
     ogDescription:
-      "Award-winning music composer and producer. Bringing your projects to life with unique soundscapes.",
+      "Award-winning music composer and producer based in Paris. Bringing your creative projects to life with unique and immersive soundscapes.",
   },
   fr: {
     title: "Loïc Ghanem | Compositeur & Producteur Musical",
     description:
       "Compositeur et producteur musical primé basé à Paris. Spécialisé dans la composition pour le cinéma, la TV, la publicité et les jeux vidéo. Découvrez mon portfolio Metal, Hip-Hop, Ambient et Électronique.",
     ogDescription:
-      "Compositeur et producteur musical primé. Donnez vie à vos projets avec des univers sonores uniques.",
+      "Compositeur et producteur musical primé basé à Paris. Donnez vie à vos projets créatifs avec des univers sonores uniques et immersifs.",
   },
 };
 
