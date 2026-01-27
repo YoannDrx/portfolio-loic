@@ -77,7 +77,7 @@ export async function generateMetadata({
       siteName: "Loïc Ghanem Portfolio",
       images: [
         {
-          url: "/img/og-loic.png",
+          url: "/img/og-loic.png?v=2",
           width: 1200,
           height: 630,
           alt: "Loïc Ghanem - Music Composer",
@@ -88,7 +88,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: content.title,
       description: content.ogDescription,
-      images: ["/img/og-loic.png"],
+      images: ["/img/og-loic.png?v=2"],
     },
     robots: {
       index: true,
