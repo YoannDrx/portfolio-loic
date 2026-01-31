@@ -2,12 +2,12 @@
 
 ---
 
-## ⚡ AUTO-START mgrep (à faire automatiquement)
+## ⚡ AUTO-START grepai (à faire automatiquement)
 
 **Dès que tu commences à travailler sur ce projet, lance cette commande en background :**
 
 ```bash
-mgrep watch --store "portfolio-loic" &
+~/.local/bin/grepai watch &
 ```
 
 > Lance cette commande UNE SEULE FOIS au début de la session. Ne la relance pas à chaque question.
@@ -18,17 +18,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
-## mgrep - Assistant de recherche de code
+## grepai - Recherche sémantique de code (100% local et gratuit)
 
-**mgrep est l'outil principal pour explorer ce codebase.** Il retourne une réponse en langage naturel + les sources pertinentes.
-
-### Store : `portfolio-loic`
+**grepai est l'outil principal pour explorer ce codebase.** Il utilise des embeddings locaux (Ollama) pour la recherche sémantique.
 
 ### Lancer le watch (à faire à chaque ouverture du projet)
 
 ```bash
 cd ~/Projets/portfolio-loic
-mgrep watch --store "portfolio-loic"
+~/.local/bin/grepai watch
 ```
 
 > Garde ce terminal ouvert : il surveille les modifications en temps réel.
@@ -36,16 +34,13 @@ mgrep watch --store "portfolio-loic"
 ### Commande de recherche
 
 ```bash
-mgrep "ta question en langage naturel" --store "portfolio-loic" -a -m <nombre>
+~/.local/bin/grepai search "ta question en langage naturel"<nombre>
 ```
 
 ### Paramètres
 
-| Paramètre                  | Description                                 |
-| -------------------------- | ------------------------------------------- |
-| `--store "portfolio-loic"` | **Obligatoire** - le store indexé du projet |
-| `-a`                       | Active la réponse en langage naturel        |
-| `-m <n>`                   | Nombre de résultats (minimum 10)            |
+| Paramètre | Description |
+| --------- | ----------- |
 
 ### Ajuster `-m` selon la complexité
 
@@ -57,18 +52,18 @@ mgrep "ta question en langage naturel" --store "portfolio-loic" -a -m <nombre>
 
 ### Stratégie pour requêtes complexes
 
-Lance plusieurs mgrep en parallèle plutôt qu'une seule requête surchargée :
+Lance plusieurs grepai en parallèle plutôt qu'une seule requête surchargée :
 
 ```bash
-mgrep "comment fonctionne la navigation et la sidebar" --store "portfolio-loic" -a -m 20
-mgrep "comment est intégré le lecteur SoundCloud" --store "portfolio-loic" -a -m 20
-mgrep "comment fonctionne la galerie photos avec PhotoSwipe" --store "portfolio-loic" -a -m 20
+~/.local/bin/grepai search "comment fonctionne la navigation et la sidebar"
+~/.local/bin/grepai search "comment est intégré le lecteur SoundCloud"
+~/.local/bin/grepai search "comment fonctionne la galerie photos avec PhotoSwipe"
 ```
 
 ### Règles
 
-- **OBLIGATOIRE** : Utilise mgrep pour TOUTE recherche de code. N'utilise JAMAIS grep, Grep tool, ou Glob.
-- **Langage naturel** : Parle à mgrep comme à un collègue
+- **OBLIGATOIRE** : Utilise grepai pour TOUTE recherche de code. N'utilise JAMAIS grep, Grep tool, ou Glob.
+- **Langage naturel** : Parle à grepai comme à un collègue
   - ❌ `"sidebar navigation soundcloud"` (mots-clés)
   - ✅ `"Comment fonctionne la sidebar avec le lecteur SoundCloud intégré ?"` (question naturelle)
 
@@ -78,7 +73,7 @@ mgrep "comment fonctionne la galerie photos avec PhotoSwipe" --store "portfolio-
 
 **Les subagents n'héritent PAS des instructions de ce fichier.**
 
-Quand tu lances un subagent, copie-colle cette section mgrep dans le prompt du subagent.
+Quand tu lances un subagent, copie-colle cette section grepai dans le prompt du subagent.
 
 ---
 
