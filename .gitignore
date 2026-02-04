@@ -39,3 +39,4 @@ yarn-error.log*
 # seed backups (horodatés, ne pas versionner)
 /seed/backups/
 tsconfig.tsbuildinfo
+.grepai/
