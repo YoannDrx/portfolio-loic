@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, ArrowRight, Disc, Star, ExternalLink } from "lucide-react";
+import { Music, ArrowRight, Disc, ExternalLink } from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
@@ -21,7 +21,6 @@ interface Album {
   date: string;
   listenLink: string | null;
   collabName?: string | null;
-  order?: number;
   spotifyEmbed?: string | null;
 }
 
@@ -45,6 +44,7 @@ const normalizeGenre = (style: string | null) => {
     normalized.includes("trap")
   )
     return "Hip-Hop";
+  if (normalized.includes("k-pop") || normalized.includes("kpop")) return "K-Pop";
   if (normalized.includes("ambient")) return "Ambient";
   if (normalized.includes("synthwave")) return "Synthwave";
   if (normalized.includes("cyberpunk")) return "Cyberpunk";
@@ -59,6 +59,7 @@ const sortGenres = (genres: string[]) => {
   const order = [
     "Metal",
     "Hip-Hop",
+    "K-Pop",
     "Ambient",
     "Bass Music",
     "Synthwave",
@@ -97,10 +98,9 @@ const fadeInUp = {
 interface AlbumCardProps {
   album: Album;
   normalizeGenre: (style: string | null) => string | null;
-  featuredLabel: string;
 }
 
-const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre, featuredLabel }) => {
+const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre }) => {
   return (
     <motion.div variants={fadeInUp} layout className="group relative">
       {/* Cover */}
@@ -124,13 +124,6 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre, featuredLa
             <ExternalLink size={14} />
           </Link>
         </div>
-        {/* Badge Favori */}
-        {album.order !== undefined && album.order < 100 && (
-          <div className="absolute top-3 right-3 bg-neo-accent text-neo-text-inverse px-3 py-1 border-2 border-neo-border flex items-center gap-1.5 font-mono text-xs font-bold uppercase shadow-[3px_3px_0px_0px_var(--neo-border)]">
-            <Star size={12} className="fill-current" />
-            {featuredLabel}
-          </div>
-        )}
       </div>
 
       {/* Action button - mobile only (always visible) */}
@@ -197,10 +190,10 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
     });
   }, [albums, selectedGenre]);
 
-  // Stats - valeurs fixes demandées par Loïc
+  // Stats
   const stats = useMemo(
     () => ({
-      total: 20,
+      total: albums.length,
       genres: "∞",
       collaborations: albums.filter((a) => a.collabName).length,
       years: "2018 - 2026",
@@ -309,12 +302,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
               >
                 {filteredAlbums.length > 0 ? (
                   filteredAlbums.map((album) => (
-                    <AlbumCard
-                      key={album.id}
-                      album={album}
-                      normalizeGenre={normalizeGenre}
-                      featuredLabel={t("featured")}
-                    />
+                    <AlbumCard key={album.id} album={album} normalizeGenre={normalizeGenre} />
                   ))
                 ) : (
                   <motion.div variants={fadeInUp} className="col-span-full text-center py-16">
