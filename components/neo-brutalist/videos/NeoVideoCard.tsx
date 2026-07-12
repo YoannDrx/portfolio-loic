@@ -43,11 +43,11 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
   return (
     <NeoCard
       hover="lift"
-      padding="md"
-      className="hover:border-neo-accent transition-colors duration-300 h-full flex flex-col"
+      padding="none"
+      className="group h-full overflow-hidden border-4 transition-all duration-500 hover:border-neo-border hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] flex flex-col"
     >
       {/* Container Video/Thumbnail */}
-      <div className="aspect-video bg-neo-text relative overflow-hidden mb-6 border-2 border-neo-border">
+      <div className="aspect-video bg-neo-text relative overflow-hidden border-b-4 border-neo-border">
         {isPlaying && allowMedia ? (
           // Iframe YouTube
           <iframe
@@ -67,7 +67,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
                 alt={`Aperçu de ${video.title}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-all duration-300"
+                className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:saturate-50"
               />
             )}
             <button
@@ -77,14 +77,14 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
                 }
                 setIsPlaying(true);
               }}
-              className="absolute inset-0 flex items-center justify-center group"
+              className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors duration-500 hover:bg-black/35 group/play"
               aria-label={t("card.play", { title: video.title })}
             >
-              <div className="w-20 h-20 border-4 border-neo-text-inverse rounded-full flex items-center justify-center bg-neo-text/50 group-hover:bg-neo-accent group-hover:border-neo-accent transition-all duration-300">
+              <div className="w-16 h-16 md:w-20 md:h-20 border-4 border-white flex items-center justify-center bg-black/45 shadow-[6px_6px_0px_0px_var(--neo-accent)] transition-all duration-500 group-hover/play:scale-110 group-hover/play:rotate-[-8deg] group-hover/play:bg-neo-accent group-hover/play:text-neo-on-accent">
                 <Play
                   size={32}
                   fill="currentColor"
-                  className="ml-1 text-neo-text-inverse group-hover:text-neo-text-inverse"
+                  className="ml-1 text-white group-hover/play:text-neo-on-accent"
                 />
               </div>
             </button>
@@ -120,7 +120,7 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
       </div>
 
       {/* Boutons d'action */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 px-5 pt-5 mb-4">
         {isPlaying && (
           <>
             <button
@@ -151,17 +151,17 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
       </div>
 
       {/* Info */}
-      <div className="flex justify-between items-start gap-4 flex-grow">
+      <div className="flex justify-between items-start gap-4 flex-grow px-5 pb-6">
         <div className="min-w-0">
           <NeoTag variant="default" size="sm" className="mb-2 inline-block">
             {video.type}
           </NeoTag>
-          <h3 className="text-lg md:text-xl font-black uppercase leading-tight text-neo-text line-clamp-2">
+          <h3 className="text-xl md:text-2xl font-black uppercase leading-[0.95] tracking-tight text-neo-text line-clamp-2 transition-colors group-hover:text-neo-accent">
             {video.title}
           </h3>
         </div>
         {video.date && (
-          <span className="font-mono text-xs text-neo-text/50 border-2 border-neo-border px-2 py-1 flex-shrink-0">
+          <span className="font-mono text-xs font-bold bg-neo-accent text-neo-on-accent border-2 border-neo-border px-2 py-1 flex-shrink-0 rotate-2">
             {video.date.split("/")[2]}
           </span>
         )}

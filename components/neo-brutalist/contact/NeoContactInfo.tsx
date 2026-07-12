@@ -2,9 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Mail, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { NeoCard } from "../ui/NeoCard";
 
 interface NeoContactInfoProps {
   className?: string;
@@ -35,35 +34,28 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       transition={{ duration: 0.5, delay: 0.3 }}
       className={cn("space-y-6", className)}
     >
-      {/* Contact Info Cards */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         {infoItems.map((item) => (
-          <NeoCard
+          <motion.a
             key={item.href}
-            variant="default"
-            hover="lift"
-            padding="md"
-            className="flex items-center gap-4 hover:border-neo-accent transition-colors"
+            href={item.href}
+            whileHover={{ x: -6, y: -6 }}
+            transition={{ type: "spring", stiffness: 320, damping: 22 }}
+            className="group relative flex min-h-36 items-end gap-5 overflow-hidden border-4 border-neo-border bg-neo-surface p-5 md:p-7 shadow-[8px_8px_0px_0px_var(--neo-shadow)] transition-colors duration-300 hover:bg-neo-text hover:shadow-[12px_12px_0px_0px_var(--neo-accent)]"
           >
-            <div className="w-12 h-12 bg-neo-text text-neo-accent flex items-center justify-center flex-shrink-0">
+            <div className="w-14 h-14 bg-neo-text text-neo-accent border-2 border-neo-border flex items-center justify-center flex-shrink-0 group-hover:bg-neo-accent group-hover:text-neo-on-accent group-hover:rotate-6 transition-all duration-300">
               {item.icon}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-mono text-xs uppercase text-neo-text/60 tracking-wider">
+              <p className="font-mono text-xs uppercase text-neo-text/60 tracking-wider group-hover:text-neo-text-inverse/60">
                 {item.label}
               </p>
-              {item.href ? (
-                <a
-                  href={item.href}
-                  className="font-bold text-neo-text hover:text-neo-accent transition-colors truncate block"
-                >
-                  {item.value}
-                </a>
-              ) : (
-                <p className="font-bold text-neo-text truncate">{item.value}</p>
-              )}
+              <p className="font-black text-base sm:text-lg md:text-xl text-neo-text group-hover:text-neo-text-inverse transition-colors break-all md:break-normal">
+                {item.value}
+              </p>
             </div>
-          </NeoCard>
+            <ArrowUpRight className="h-6 w-6 shrink-0 text-neo-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </motion.a>
         ))}
       </div>
 

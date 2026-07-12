@@ -39,6 +39,7 @@ import { NeoFooter } from "../NeoFooter";
 import { NeoCard } from "../ui/NeoCard";
 import { NeoTag } from "../ui/NeoTag";
 import { GridBackground } from "../ui/GridBackground";
+import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
 import { Link } from "@/i18n/routing";
 
 const staggerContainer = {
@@ -660,19 +661,20 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <GridBackground withAccentGlow />
+      <ImmersivePageAtmosphere />
       <NeoNavbar />
 
       <main className="relative z-10 pt-16 md:pt-20">
         {/* HERO BIO - Split Layout */}
-        <section className="container mx-auto px-4 md:px-6 mb-16 flex items-center justify-center min-h-[calc(100vh-6rem)]">
+        <section className="relative container mx-auto px-4 md:px-6 mb-20 flex items-center justify-center min-h-[78vh] py-12 md:py-20">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-12 items-center w-full"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full"
           >
             {/* Colonne GAUCHE - Tout le contenu texte (3/5) */}
-            <motion.div variants={fadeInUp} className="lg:col-span-3">
+            <motion.div variants={fadeInUp} className="lg:col-span-7">
               {/* Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -687,7 +689,7 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               </motion.div>
 
               {/* Titre */}
-              <h1 className="text-[12vw] md:text-[8vw] lg:text-[6vw] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-neo-text">
+              <h1 className="text-[14vw] md:text-[10vw] lg:text-[7.5vw] leading-[0.72] font-black uppercase tracking-[-0.08em] mb-10 text-neo-text">
                 Loïc{" "}
                 <span
                   className="text-transparent block lg:inline"
@@ -698,11 +700,13 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               </h1>
 
               {/* Bio */}
-              <div className="text-base md:text-lg font-medium leading-relaxed space-y-4 border-l-4 border-neo-accent pl-6 mb-8">
-                <p>{t("bio.paragraph1")}</p>
-                <p className="opacity-80">{t("bio.paragraph2")}</p>
-                <p className="opacity-80">{t("bio.paragraph3")}</p>
-                <p className="opacity-70">{t("bio.paragraph4")}</p>
+              <div className="mb-9 grid gap-5 border-l-4 border-neo-accent pl-6 text-base font-medium leading-relaxed md:grid-cols-2 md:text-lg">
+                <p className="md:col-span-2 text-xl md:text-2xl font-bold leading-snug">
+                  {t("bio.paragraph1")}
+                </p>
+                <p className="opacity-75">{t("bio.paragraph2")}</p>
+                <p className="opacity-75">{t("bio.paragraph3")}</p>
+                <p className="md:col-span-2 opacity-65">{t("bio.paragraph4")}</p>
               </div>
 
               {/* CTAs */}
@@ -716,16 +720,19 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
             </motion.div>
 
             {/* Colonne DROITE - Photo (2/5) */}
-            <motion.div variants={photoReveal} className="relative w-full lg:col-span-2">
-              <div className="relative max-w-xs lg:max-w-sm mx-auto lg:mx-0">
+            <motion.div
+              variants={photoReveal}
+              className="relative w-full lg:col-span-5 lg:self-stretch lg:flex lg:items-center"
+            >
+              <div className="relative w-full max-w-xs lg:max-w-sm mx-auto lg:mx-0">
                 {/* Card avec effet hover comme les cartes d'expertise */}
-                <div className="group border-2 border-neo-border bg-neo-surface overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] hover:border-black">
+                <div className="group border-4 border-neo-border bg-neo-surface overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:rotate-1 hover:shadow-[14px_14px_0px_0px_rgba(var(--neo-accent-rgb),1)]">
                   <div className="relative w-full" style={{ paddingBottom: "133%" }}>
                     <Image
                       src="/img/slider/loic-studio-front.jpg"
                       alt="Loïc Ghanem"
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                      className="object-cover grayscale-[0.35] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                       sizes="(max-width: 768px) 100vw, 400px"
                       priority
                     />
@@ -761,7 +768,7 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
         </section>
 
         {/* STATS */}
-        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-16 mb-32">
+        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-12 md:py-16 mb-24 md:mb-32 overflow-hidden">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
               initial="hidden"
@@ -772,7 +779,7 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
             >
               {stats.map((stat, i) => (
                 <motion.div key={i} variants={fadeInUp} className="flex flex-col items-center">
-                  <span className="text-6xl md:text-7xl font-black text-neo-accent tracking-tighter">
+                  <span className="text-6xl md:text-8xl font-black text-neo-accent tracking-[-0.08em] transition-transform duration-300 hover:scale-110">
                     {stat.val}
                   </span>
                   <span className="font-mono text-sm uppercase tracking-widest mt-2 opacity-60">
@@ -793,20 +800,27 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6"
           >
             {skills.map((skill, i) => (
-              <motion.div key={i} variants={fadeInUp}>
+              <motion.div
+                key={skill.title}
+                variants={fadeInUp}
+                className={i < 2 ? "lg:col-span-6" : "lg:col-span-4"}
+              >
                 <NeoCard
                   hover="lift"
                   padding="lg"
-                  className="h-full cursor-crosshair group hover:bg-neo-accent"
+                  className="relative h-full min-h-72 cursor-crosshair group overflow-hidden border-4 hover:bg-neo-text hover:shadow-[10px_10px_0px_0px_var(--neo-accent)]"
                 >
+                  <span className="absolute -bottom-8 -right-2 font-mono text-9xl font-black text-neo-text/[0.04] group-hover:text-neo-text-inverse/[0.06]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <skill.icon
                     size={40}
-                    className="mb-6 text-neo-accent group-hover:text-neo-text transition-colors"
+                    className="mb-10 text-neo-accent transition-all duration-300 group-hover:rotate-6 group-hover:scale-110"
                   />
-                  <h3 className="text-2xl font-black uppercase mb-4 text-neo-text group-hover:text-neo-text-inverse transition-colors">
+                  <h3 className="relative text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none mb-5 text-neo-text group-hover:text-neo-text-inverse transition-colors">
                     {skill.title}
                   </h3>
                   <ul className="font-mono text-sm space-y-2 opacity-80">
@@ -842,8 +856,8 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               variants={staggerContainer}
               className="grid grid-cols-1 lg:grid-cols-3 gap-8"
             >
-              {awards.map((award, i) => (
-                <motion.div key={i} variants={fadeInUp}>
+              {awards.map((award) => (
+                <motion.div key={`${award.title}-${award.year}`} variants={fadeInUp}>
                   <NeoCard
                     hover="lift"
                     padding="none"

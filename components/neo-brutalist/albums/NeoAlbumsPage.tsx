@@ -3,14 +3,14 @@
 import React, { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, ArrowRight, Disc, ExternalLink } from "lucide-react";
+import { Music, ArrowRight, Disc } from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
 import { NeoCard } from "../ui/NeoCard";
 import { BrutalistButton } from "../ui/BrutalistButton";
-import { NeoTag } from "../ui/NeoTag";
 import { GridBackground } from "../ui/GridBackground";
+import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
 
@@ -96,7 +96,6 @@ const fadeInUp = {
   exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.3 } },
 };
 
-// Composant AlbumCard avec hover desktop + bouton visible mobile
 interface AlbumCardProps {
   album: Album;
   normalizeGenre: (style: string | null) => string | null;
@@ -106,66 +105,50 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre }) => {
   const t = useTranslations("albums");
   const detailId = album.slug || album.id;
   return (
-    <motion.div variants={fadeInUp} layout className="group relative">
-      {/* Cover */}
-      <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-accent)] md:group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
-        {album.img && (
+    <motion.article variants={fadeInUp} layout className="group relative">
+      <Link
+        href={{ pathname: "/albums/[id]", params: { id: detailId } }}
+        className="relative block aspect-square overflow-hidden border-4 border-neo-border bg-neo-bg-alt shadow-[8px_8px_0px_0px_var(--neo-shadow)] transition-all duration-500 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neo-accent md:group-hover:-translate-y-2 md:group-hover:shadow-[14px_14px_0px_0px_var(--neo-accent)]"
+      >
+        {album.img ? (
           <Image
             src={album.img}
             alt={`${album.title} — pochette de l'album`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            className="object-cover md:group-hover:scale-105 transition-transform duration-500"
+            className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:saturate-[0.7]"
           />
-        )}
-        {!album.img && (
+        ) : (
           <div className="absolute inset-0 flex items-center justify-center">
             <Disc className="w-20 h-20 opacity-20" />
           </div>
         )}
-        {/* Overlay with action - desktop only (hover) */}
-        <div className="hidden md:flex absolute inset-0 flex-col items-center justify-center bg-neo-text/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Link
-            href={{ pathname: "/albums/[id]", params: { id: detailId } }}
-            className="flex items-center gap-2 px-5 py-3 bg-neo-bg text-neo-text font-mono text-sm font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse transition-colors shadow-[4px_4px_0px_0px_var(--neo-border)]"
-          >
-            <span>{t("viewAlbum")}</span>
-            <ExternalLink size={14} />
-          </Link>
-        </div>
-      </div>
 
-      {/* Action button - mobile only (always visible) */}
-      <div className="flex md:hidden mt-3 mb-3">
-        <Link
-          href={{ pathname: "/albums/[id]", params: { id: detailId } }}
-          className="w-full flex items-center justify-center gap-2 py-2.5 bg-neo-bg text-neo-text font-mono text-xs font-bold uppercase border-2 border-neo-border active:scale-95 transition-transform shadow-[3px_3px_0px_0px_var(--neo-border)]"
-        >
-          <span>{t("viewAlbum")}</span>
-          <ExternalLink size={12} />
-        </Link>
-      </div>
-
-      {/* Spacer for desktop */}
-      <div className="hidden md:block h-6" />
-
-      {/* Info */}
-      <Link href={{ pathname: "/albums/[id]", params: { id: detailId } }} className="block">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <h3 className="text-xl md:text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text md:hover:text-neo-accent transition-colors">
-              {album.title}
-            </h3>
-            <NeoTag variant="accent" size="sm">
-              {normalizeGenre(album.style) || "Genre"}
-            </NeoTag>
-          </div>
-          <span className="font-mono text-sm font-bold border-2 border-neo-border px-2 py-1 flex-shrink-0">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/15 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
+        <div className="absolute left-0 top-0 flex w-full items-start justify-between gap-4 p-4">
+          <span className="border-2 border-white/80 bg-black/50 px-2 py-1 font-mono text-xs font-bold text-white backdrop-blur-sm">
             {new Date(album.date).getFullYear()}
           </span>
+          <span className="-translate-y-[180%] bg-neo-accent px-3 py-2 font-mono text-[10px] font-bold uppercase text-neo-on-accent transition-transform duration-500 group-hover:translate-y-0">
+            {t("viewAlbum")}
+          </span>
+        </div>
+
+        <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+          <span className="mb-3 inline-flex border border-white/40 bg-black/35 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm">
+            {normalizeGenre(album.style) || "Genre"}
+          </span>
+          <div className="flex items-end justify-between gap-4">
+            <h3 className="max-w-[85%] text-2xl font-black uppercase leading-[0.88] tracking-tighter text-white md:text-3xl">
+              {album.title}
+            </h3>
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center border-2 border-white bg-white text-black transition-all duration-300 group-hover:-rotate-45 group-hover:bg-neo-accent group-hover:text-neo-on-accent">
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </span>
+          </div>
         </div>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 };
 
@@ -213,6 +196,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <GridBackground withAccentGlow />
+      <ImmersivePageAtmosphere />
       <NeoNavbar />
 
       <main className="relative z-10 pt-16 md:pt-20">
@@ -267,7 +251,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
         </section>
 
         {/* Filters */}
-        <section className="py-8 border-b-2 border-neo-border sticky top-[72px] bg-neo-bg z-30">
+        <section className="py-5 border-b-4 border-neo-border sticky top-0 bg-neo-bg/90 backdrop-blur-xl z-30">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-wrap gap-2">
               <button
@@ -298,7 +282,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
         </section>
 
         {/* Albums Grid */}
-        <section id="albums-grid" className="py-16">
+        <section id="albums-grid" className="py-20 md:py-28">
           <div className="container mx-auto px-4 md:px-6">
             <AnimatePresence mode="wait">
               <motion.div
@@ -307,7 +291,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
                 animate="visible"
                 exit="exit"
                 variants={staggerContainer}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-9"
               >
                 {filteredAlbums.length > 0 ? (
                   filteredAlbums.map((album) => (

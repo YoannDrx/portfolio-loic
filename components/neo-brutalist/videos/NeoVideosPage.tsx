@@ -10,6 +10,7 @@ import { BrutalistButton } from "../ui/BrutalistButton";
 import { NeoTag } from "../ui/NeoTag";
 import { NeoVideoCard } from "./NeoVideoCard";
 import { GridBackground } from "../ui/GridBackground";
+import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
 import { Link } from "@/i18n/routing";
 
 interface VideoItem {
@@ -127,12 +128,22 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <GridBackground withAccentGlow />
+      <ImmersivePageAtmosphere />
       <NeoNavbar />
 
       <main className="relative z-10 pt-16 md:pt-20">
         {/* Hero - Light variant */}
-        <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto w-full">
+        <section className="relative min-h-[72vh] md:min-h-[78vh] overflow-hidden border-b-4 border-neo-border flex flex-col justify-center pt-12 pb-20 md:py-28 px-4 md:px-8">
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, rotate: -18, scale: 0.8 }}
+            animate={{ opacity: 0.12, rotate: 8, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute -right-20 top-1/2 hidden h-[30rem] w-[30rem] -translate-y-1/2 items-center justify-center rounded-full border-[3rem] border-neo-accent lg:flex"
+          >
+            <Film className="h-40 w-40 text-neo-text" />
+          </motion.div>
+          <div className="max-w-7xl mx-auto w-full relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -149,7 +160,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[12vw] md:text-[8vw] lg:text-[6vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text"
+              className="max-w-5xl text-[13vw] md:text-[9vw] lg:text-[7vw] font-black leading-[0.78] tracking-[-0.07em] uppercase text-neo-text"
             >
               {t("hero.title")}
             </motion.h1>
@@ -158,7 +169,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-6 text-lg max-w-2xl text-neo-text/60"
+              className="mt-8 text-lg md:text-xl max-w-2xl border-l-4 border-neo-accent pl-5 text-neo-text/65"
             >
               {t("hero.description")}
             </motion.p>
@@ -189,7 +200,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
         </section>
 
         {/* Filters */}
-        <section className="py-8 border-b-2 border-neo-border sticky top-[72px] bg-neo-bg z-30">
+        <section className="py-5 border-b-4 border-neo-border sticky top-0 bg-neo-bg/90 backdrop-blur-xl z-30">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-wrap gap-2">
               <button
@@ -231,7 +242,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
                   animate="visible"
                   exit="exit"
                   variants={staggerContainer}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  className="grid grid-cols-1 lg:grid-cols-2 gap-7 md:gap-10"
                 >
                   {filteredVideos.length > 0 ? (
                     filteredVideos.map((video) => (
@@ -253,7 +264,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
                   initial="hidden"
                   animate="visible"
                   variants={staggerContainer}
-                  className="space-y-16"
+                  className="space-y-24"
                 >
                   {categoryOrder.map((category) => {
                     const categoryVideos = groupedVideos[category];
@@ -262,8 +273,11 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
                     return (
                       <motion.div key={category} variants={fadeInUp}>
                         {/* Titre de catégorie */}
-                        <div className="flex items-center gap-4 mb-8">
-                          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neo-text">
+                        <div className="flex items-end gap-4 mb-10 border-b-4 border-neo-border pb-5">
+                          <span className="font-mono text-sm text-neo-accent">
+                            /{String(categoryOrder.indexOf(category) + 1).padStart(2, "0")}
+                          </span>
+                          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none text-neo-text">
                             {getTypeLabel(category)}
                           </h2>
                           <span className="font-mono text-sm bg-neo-accent text-neo-text-inverse px-2 py-1">
@@ -272,7 +286,7 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
                         </div>
 
                         {/* Grille de vidéos */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 md:gap-10">
                           {categoryVideos.map((video) => (
                             <motion.div
                               key={video.id}
