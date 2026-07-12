@@ -22,11 +22,11 @@ export const NeoContact = () => {
 
       <main className="pt-16 md:pt-20">
         {/* Hero Split Screen */}
-        <section className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] pt-8 pb-12 md:py-16 px-4 md:px-8">
+        <section className="min-h-[60vh] pt-8 pb-12 md:py-16 px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             {/* Badge au-dessus de la grille */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="mb-8 flex items-center gap-3"
@@ -37,17 +37,17 @@ export const NeoContact = () => {
               <NeoTag>{t("hero.badge")}</NeoTag>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-center">
               {/* LEFT - Accroche + Illustration */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 className="overflow-hidden"
               >
                 {/* Titre */}
                 <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={false}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="text-[12vw] md:text-[8vw] lg:text-[4.5vw] font-black leading-[0.85] tracking-tighter uppercase text-neo-text break-words"
@@ -57,7 +57,7 @@ export const NeoContact = () => {
 
                 {/* Description */}
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={false}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="mt-6 text-lg max-w-md text-neo-text/70"
@@ -78,7 +78,7 @@ export const NeoContact = () => {
 
               {/* RIGHT - Infos Contact */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ShieldCheck, SlidersHorizontal, X, CheckCircle2 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useConsent } from "./ConsentProvider";
@@ -49,12 +49,23 @@ export const NeoCookieConsent = () => {
   const { state, isReady, isManagerOpen, closeManager, acceptAll, rejectAll, setCategory } =
     useConsent();
   const [showDetails, setShowDetails] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isManagerOpen) {
       setShowDetails(false);
+      requestAnimationFrame(() => dialogRef.current?.focus());
     }
   }, [isManagerOpen]);
+
+  useEffect(() => {
+    if (!isManagerOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") rejectAll();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isManagerOpen, rejectAll]);
 
   const categories = useMemo(
     () => [
@@ -86,13 +97,16 @@ export const NeoCookieConsent = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-neo-bg/80 backdrop-blur-md">
       <div className="w-full sm:max-w-4xl px-4">
-        <div className="relative border-4 border-neo-border bg-neo-text text-neo-text-inverse shadow-[12px_12px_0px_0px_var(--neo-accent)]">
+        <div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cookie-consent-title"
+          tabIndex={-1}
+          className="relative border-4 border-neo-border bg-neo-text text-neo-text-inverse shadow-[12px_12px_0px_0px_var(--neo-accent)]"
+        >
           <button
-            onClick={() => {
-              // Fermer sans enregistrer de choix pour reproposer plus tard
-              setShowDetails(false);
-              closeManager();
-            }}
+            onClick={rejectAll}
             aria-label={t("actions.close")}
             className="absolute -top-4 -right-4 p-3 border-2 border-neo-border bg-neo-text text-neo-text-inverse shadow-[6px_6px_0px_0px_var(--neo-accent)] hover:bg-neo-accent hover:text-neo-text transition-colors"
           >
@@ -105,7 +119,10 @@ export const NeoCookieConsent = () => {
                 <ShieldCheck className="w-4 h-4" />
                 {t("badge")}
               </div>
-              <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text-inverse">
+              <h3
+                id="cookie-consent-title"
+                className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text-inverse"
+              >
                 {t("title")}
               </h3>
               <p className="text-sm md:text-base text-neo-text-inverse/80 leading-relaxed">
@@ -134,7 +151,9 @@ export const NeoCookieConsent = () => {
               </div>
               <div className="flex items-center gap-2 text-[11px] uppercase font-mono tracking-[0.14em] text-neo-text-inverse/70">
                 <CheckCircle2 className="w-4 h-4" />
-                {t("lastUpdatedLabel", { date: t("lastUpdated") })}
+                {t("lastUpdatedLabel", {
+                  date: t("lastUpdated", { year: new Date().getFullYear() }),
+                })}
                 <span className="opacity-50">|</span>
                 <span>{locale.toUpperCase()}</span>
               </div>

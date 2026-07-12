@@ -17,6 +17,7 @@ import { createVersion } from "@/lib/versioning";
 import { notifyNewContent } from "@/lib/notifications";
 import { logCrud } from "@/lib/activity-logger";
 import type { Prisma } from "@prisma/client";
+import { revalidateTag } from "next/cache";
 
 // ============================================
 // GET /api/admin/videos
@@ -112,6 +113,7 @@ export const POST = withAuthAndValidation(
       // Logger l'action
       await logCrud("create", "video", video.id, video.title, user.id);
 
+      revalidateTag("videos", "max");
       return createdResponse(video);
     } catch (error) {
       return handleApiError(error);

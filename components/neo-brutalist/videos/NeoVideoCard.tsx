@@ -6,6 +6,7 @@ import { Play, X, ExternalLink, Maximize2 } from "lucide-react";
 import { NeoCard } from "../ui/NeoCard";
 import { NeoTag } from "../ui/NeoTag";
 import { useConsent } from "../legal/ConsentProvider";
+import Image from "next/image";
 
 interface VideoItem {
   id: string;
@@ -60,10 +61,15 @@ export const NeoVideoCard: React.FC<NeoVideoCardProps> = ({ video }) => {
         ) : (
           // Thumbnail avec bouton play
           <>
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-all duration-300"
-              style={{ backgroundImage: `url(${thumbnailUrl})` }}
-            />
+            {(thumbnailUrl.startsWith("/") || allowMedia) && (
+              <Image
+                src={thumbnailUrl}
+                alt={`Aperçu de ${video.title}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-all duration-300"
+              />
+            )}
             <button
               onClick={() => {
                 if (!allowMedia) {

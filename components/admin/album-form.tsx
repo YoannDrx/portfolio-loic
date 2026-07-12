@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -25,7 +25,7 @@ import {
 import { RichTextEditor } from "@/components/admin/rich-text-editor";
 import { ImageUpload } from "@/components/admin/ImageUpload";
 import { VersionHistory } from "@/components/admin/VersionHistory";
-import { Loader2, AlertCircle, Eye } from "lucide-react";
+import { Loader2, AlertCircle, Eye, Plus, Trash2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { albumCreateSchema, type AlbumCreateFormInput } from "@/lib/validations/schemas";
@@ -36,14 +36,6 @@ interface AlbumFormProps {
   initialData?: AlbumCreateFormInput & { id?: string };
   locale: string;
 }
-
-const STYLES = [
-  { value: "film", label: "Film" },
-  { value: "music-video", label: "Music Video" },
-  { value: "concert", label: "Concert" },
-  { value: "session", label: "Session" },
-  { value: "other", label: "Other" },
-];
 
 export function AlbumForm({ initialData, locale }: AlbumFormProps) {
   const t = useTranslations("admin");
@@ -58,7 +50,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
       poster: "",
       date: "",
       sortedDate: "",
-      style: "film",
+      style: "",
       listenLink: "",
       spotifyEmbed: "",
       youtubeEmbed: "",
@@ -66,6 +58,17 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
       collabLink: "",
       descriptionsFr: "",
       descriptionsEn: "",
+      slug: "",
+      releaseDate: "",
+      releaseType: "Album",
+      label: "",
+      publisher: "",
+      roleFr: "",
+      roleEn: "",
+      creditsFr: "",
+      creditsEn: "",
+      tracklistSourceUrl: "",
+      tracks: [],
       published: false,
       order: 0,
     },
@@ -73,14 +76,18 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
   });
 
   const {
+    fields: trackFields,
+    append: appendTrack,
+    remove: removeTrack,
+  } = useFieldArray({ control: form.control, name: "tracks" });
+
+  const {
     formState: { isSubmitting, isDirty, errors: _errors },
   } = form;
 
   async function onSubmit(data: AlbumCreateFormInput) {
     try {
-      const url = isEditing
-        ? `/api/admin/albums/${initialData.id}`
-        : "/api/admin/albums";
+      const url = isEditing ? `/api/admin/albums/${initialData.id}` : "/api/admin/albums";
 
       // Ensure defaults for optional fields
       const payload = {
@@ -117,8 +124,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
       toast({
         variant: "destructive",
         title: t("common.error"),
-        description:
-          error instanceof Error ? error.message : t("common.error"),
+        description: error instanceof Error ? error.message : t("common.error"),
       });
     }
   }
@@ -133,9 +139,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
         {showDirtyWarning && (
           <Alert>
             <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              {t("common.dirtyWarning")}
-            </AlertDescription>
+            <AlertDescription>{t("common.dirtyWarning")}</AlertDescription>
           </Alert>
         )}
 
@@ -166,23 +170,9 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t("albums.form.style")} *</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {STYLES.map((style) => (
-                          <SelectItem key={style.value} value={style.value}>
-                            {style.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <Input {...field} placeholder="K-Pop, Ambient, Metal…" />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -199,9 +189,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                     <FormControl>
                       <Input {...field} placeholder={t("albums.form.datePlaceholder")} />
                     </FormControl>
-                    <FormDescription>
-                      Format libre
-                    </FormDescription>
+                    <FormDescription>Format libre</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -268,15 +256,9 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 <FormItem>
                   <FormLabel>{t("albums.form.listenLink")} *</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="url"
-                      placeholder="https://fanlink.tv/..."
-                    />
+                    <Input {...field} type="url" placeholder="https://fanlink.tv/..." />
                   </FormControl>
-                  <FormDescription>
-                    Lien principal (Fanlink, Linktree, etc.)
-                  </FormDescription>
+                  <FormDescription>Lien principal (Fanlink, Linktree, etc.)</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -296,9 +278,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                         placeholder="https://open.spotify.com/embed/..."
                       />
                     </FormControl>
-                    <FormDescription>
-                      URL d'intégration Spotify (optionnel)
-                    </FormDescription>
+                    <FormDescription>URL d'intégration Spotify (optionnel)</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -317,9 +297,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                         placeholder="https://www.youtube.com/embed/..."
                       />
                     </FormControl>
-                    <FormDescription>
-                      URL d'intégration YouTube (optionnel)
-                    </FormDescription>
+                    <FormDescription>URL d'intégration YouTube (optionnel)</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -457,6 +435,184 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
           </CardContent>
         </Card>
 
+        <Card>
+          <CardHeader>
+            <CardTitle>Référencement et crédits</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4 md:grid-cols-2">
+            {(
+              [
+                "slug",
+                "releaseDate",
+                "releaseType",
+                "label",
+                "publisher",
+                "tracklistSourceUrl",
+              ] as const
+            ).map((name) => (
+              <FormField
+                key={name}
+                control={form.control}
+                name={name}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{name}</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        value={field.value || ""}
+                        type={
+                          name === "releaseDate"
+                            ? "date"
+                            : name === "tracklistSourceUrl"
+                              ? "url"
+                              : "text"
+                        }
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
+            {(["roleFr", "roleEn", "creditsFr", "creditsEn"] as const).map((name) => (
+              <FormField
+                key={name}
+                control={form.control}
+                name={name}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{name}</FormLabel>
+                    <FormControl>
+                      <Input {...field} value={field.value || ""} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex-row items-center justify-between">
+            <CardTitle>Tracklist structurée</CardTitle>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() =>
+                appendTrack({
+                  position: trackFields.length + 1,
+                  discNumber: 1,
+                  title: "",
+                  artists: "",
+                  durationSeconds: null,
+                  explicit: false,
+                })
+              }
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Ajouter une piste
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {trackFields.length === 0 && (
+              <p className="text-sm text-muted-foreground">Aucune piste renseignée.</p>
+            )}
+            {trackFields.map((track, index) => (
+              <div
+                key={track.id}
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[70px_70px_1fr_1fr_110px_44px] gap-2 items-end border p-3"
+              >
+                <FormField
+                  control={form.control}
+                  name={`tracks.${index}.position`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>N°</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          {...field}
+                          onChange={(event) => field.onChange(Number(event.target.value))}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`tracks.${index}.discNumber`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Disque</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          {...field}
+                          onChange={(event) => field.onChange(Number(event.target.value))}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`tracks.${index}.title`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Titre</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`tracks.${index}.artists`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Artistes</FormLabel>
+                      <FormControl>
+                        <Input {...field} value={field.value || ""} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`tracks.${index}.durationSeconds`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Secondes</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          {...field}
+                          value={field.value || ""}
+                          onChange={(event) =>
+                            field.onChange(event.target.value ? Number(event.target.value) : null)
+                          }
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Supprimer la piste"
+                  onClick={() => removeTrack(index)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
         {/* Actions */}
         <div className="flex items-center gap-4">
           <Button type="submit" disabled={isSubmitting}>
@@ -467,19 +623,13 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
           {isEditing && (
             <>
               <Button type="button" variant="outline" asChild>
-                <Link
-                  href={`/${locale}/albums/${initialData.id}?preview=true`}
-                  target="_blank"
-                >
+                <Link href={`/${locale}/albums/${initialData.id}?preview=true`} target="_blank">
                   <Eye className="mr-2 h-4 w-4" />
                   {t("common.preview")}
                 </Link>
               </Button>
 
-              <VersionHistory
-                contentType="album"
-                contentId={initialData.id as string}
-              />
+              <VersionHistory contentType="album" contentId={initialData.id as string} />
             </>
           )}
 
@@ -488,9 +638,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
             variant="outline"
             onClick={() => {
               if (isDirty) {
-                const confirm = window.confirm(
-                  t("common.dirtyWarning")
-                );
+                const confirm = window.confirm(t("common.dirtyWarning"));
                 if (!confirm) return;
               }
               router.push(`/${locale}/admin/albums`);
@@ -500,9 +648,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
           </Button>
 
           {isDirty && (
-            <span className="text-sm text-muted-foreground">
-              {t("common.dirtyWarning")}
-            </span>
+            <span className="text-sm text-muted-foreground">{t("common.dirtyWarning")}</span>
           )}
         </div>
       </form>

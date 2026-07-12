@@ -13,16 +13,20 @@ const htmlContentSchema = z.string().min(10, "Contenu trop court (minimum 10 car
 // ============================================
 
 export const albumCreateSchema = z.object({
-  title: z
-    .string()
-    .min(1, "Titre requis")
-    .max(200, "Titre trop long (maximum 200 caractères)"),
+  slug: z
+    .union([
+      z
+        .string()
+        .trim()
+        .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug invalide"),
+      z.literal(""),
+    ])
+    .optional(),
+  title: z.string().min(1, "Titre requis").max(200, "Titre trop long (maximum 200 caractères)"),
   img: urlSchema,
   poster: z.string().min(1, "Nom de l'artiste requis"),
   date: z.string().min(1, "Date d'affichage requise"),
-  sortedDate: z
-    .string()
-    .regex(/^\d{2}-\d{4}$/, "Format de date invalide (attendu: MM-YYYY)"),
+  sortedDate: z.string().regex(/^\d{4}-\d{2}$/, "Format de date invalide (attendu: YYYY-MM)"),
   style: z.string().min(1, "Style requis"),
   listenLink: urlSchema,
   spotifyEmbed: z.union([urlSchema, z.literal("")]).optional(),
@@ -31,6 +35,28 @@ export const albumCreateSchema = z.object({
   collabLink: z.union([urlSchema, z.literal("")]).optional(),
   descriptionsFr: htmlContentSchema,
   descriptionsEn: htmlContentSchema,
+  releaseDate: z.union([z.string().date(), z.literal("")]).optional(),
+  releaseType: z.string().max(50).optional(),
+  label: z.string().max(200).optional(),
+  publisher: z.string().max(200).optional(),
+  roleFr: z.string().max(1000).optional(),
+  roleEn: z.string().max(1000).optional(),
+  creditsFr: z.string().max(2000).optional(),
+  creditsEn: z.string().max(2000).optional(),
+  tracklistSourceUrl: z.union([urlSchema, z.literal("")]).optional(),
+  tracks: z
+    .array(
+      z.object({
+        id: z.string().optional(),
+        position: z.number().int().positive(),
+        discNumber: z.number().int().positive().default(1),
+        title: z.string().min(1).max(300),
+        artists: z.string().max(500).optional().nullable(),
+        durationSeconds: z.number().int().positive().optional().nullable(),
+        explicit: z.boolean().default(false),
+      })
+    )
+    .default([]),
   published: z.boolean().default(false),
   order: z.number().int().min(0).default(0),
 });
@@ -40,6 +66,23 @@ export const albumUpdateSchema = albumCreateSchema.partial();
 export type AlbumCreateInput = z.infer<typeof albumCreateSchema>;
 export type AlbumCreateFormInput = z.input<typeof albumCreateSchema>;
 export type AlbumUpdateInput = z.infer<typeof albumUpdateSchema>;
+
+export const contactMessageSchema = z.object({
+  name: z.string().trim().min(2).max(100),
+  email: z.string().trim().email().max(200),
+  company: z.string().trim().max(150).optional().default(""),
+  projectType: z.string().trim().min(2).max(100),
+  projectFormat: z.string().trim().max(150).optional().default(""),
+  deadline: z.string().trim().max(100).optional().default(""),
+  budget: z.string().trim().max(100).optional().default(""),
+  references: z.string().trim().max(1000).optional().default(""),
+  subject: z.string().trim().max(200).optional().default(""),
+  message: z.string().trim().min(20).max(5000),
+  locale: z.enum(["fr", "en"]).default("fr"),
+  website: z.string().max(0).optional().default(""),
+});
+
+export type ContactMessageInput = z.infer<typeof contactMessageSchema>;
 
 // ============================================
 // VIDEO SCHEMAS
@@ -56,13 +99,8 @@ export const videoCreateSchema = z.object({
     .string()
     .min(1, "ID YouTube requis")
     .regex(/^[a-zA-Z0-9_-]{11}$/, "ID YouTube invalide (11 caractères)"),
-  title: z
-    .string()
-    .min(1, "Titre requis")
-    .max(200, "Titre trop long (maximum 200 caractères)"),
-  date: z
-    .string()
-    .regex(/^\d{2}\/\d{2}\/\d{4}$/, "Format de date invalide (attendu: DD/MM/YYYY)"),
+  title: z.string().min(1, "Titre requis").max(200, "Titre trop long (maximum 200 caractères)"),
+  date: z.string().regex(/^\d{2}\/\d{2}\/\d{4}$/, "Format de date invalide (attendu: DD/MM/YYYY)"),
   published: z.boolean().default(false),
   order: z.number().int().min(0).default(0),
 });
@@ -78,13 +116,8 @@ export type VideoUpdateInput = z.infer<typeof videoUpdateSchema>;
 // ============================================
 
 export const serviceCreateSchema = z.object({
-  no: z
-    .string()
-    .regex(/^\d{2}$/, "Numéro invalide (attendu: 01, 02, etc.)"),
-  title: z
-    .string()
-    .min(1, "Titre requis")
-    .max(200, "Titre trop long (maximum 200 caractères)"),
+  no: z.string().regex(/^\d{2}$/, "Numéro invalide (attendu: 01, 02, etc.)"),
+  title: z.string().min(1, "Titre requis").max(200, "Titre trop long (maximum 200 caractères)"),
   text: z
     .string()
     .min(10, "Description courte trop courte (minimum 10 caractères)")
@@ -94,9 +127,7 @@ export const serviceCreateSchema = z.object({
   poster: z.string().min(1, "Poster requis"),
   date: dateStringSchema,
   author: z.string().min(1, "Auteur requis"),
-  fullDescription: z
-    .string()
-    .min(10, "Description complète trop courte (minimum 10 caractères)"),
+  fullDescription: z.string().min(10, "Description complète trop courte (minimum 10 caractères)"),
   descriptionsFr: htmlContentSchema,
   descriptionsEn: htmlContentSchema,
   published: z.boolean().default(false),
@@ -114,12 +145,7 @@ export type ServiceUpdateInput = z.infer<typeof serviceUpdateSchema>;
 // ============================================
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const uploadFileSchema = z.object({
   file: z
@@ -176,7 +202,16 @@ export type ServicesQueryParams = z.infer<typeof servicesQuerySchema>;
 // ============================================
 
 export const resumeEntryCreateSchema = z.object({
-  type: z.enum(["EXPERIENCE", "EDUCATION", "SKILL", "LANGUAGE", "INTEREST", "KNOWLEDGE", "AWARD", "CLIENT"]),
+  type: z.enum([
+    "EXPERIENCE",
+    "EDUCATION",
+    "SKILL",
+    "LANGUAGE",
+    "INTEREST",
+    "KNOWLEDGE",
+    "AWARD",
+    "CLIENT",
+  ]),
   titleEn: z.string().min(1, "Titre (EN) requis"),
   titleFr: z.string().min(1, "Titre (FR) requis"),
   subtitleEn: z.string().optional(),
@@ -259,4 +294,3 @@ export const resumeSectionUpdateSchema = resumeSectionCreateSchema.partial();
 
 export type ResumeSectionCreateInput = z.infer<typeof resumeSectionCreateSchema>;
 export type ResumeSectionUpdateInput = z.infer<typeof resumeSectionUpdateSchema>;
-

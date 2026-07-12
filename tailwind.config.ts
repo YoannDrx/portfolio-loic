@@ -26,6 +26,7 @@ const config: Config = {
         "neo-text-inverse": "var(--neo-text-inverse)",
         "neo-accent": "var(--neo-accent)",
         "neo-accent-hover": "var(--neo-accent-hover)",
+        "neo-on-accent": "var(--neo-on-accent)",
         "neo-orange": "var(--neo-accent)", // Alias for compatibility
         "neo-shadow": "var(--neo-shadow)",
         "neo-border": "var(--neo-border)",

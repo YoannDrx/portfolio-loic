@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ExternalLink, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
@@ -82,15 +82,6 @@ const taglineVariants = {
   },
 };
 
-const glitchKeyframes = {
-  "0%": { transform: "translate(0)" },
-  "20%": { transform: "translate(-2px, 2px)" },
-  "40%": { transform: "translate(-2px, -2px)" },
-  "60%": { transform: "translate(2px, 2px)" },
-  "80%": { transform: "translate(2px, -2px)" },
-  "100%": { transform: "translate(0)" },
-};
-
 const normalizeArtworkUrl = (url: string | null | undefined, size: "t200x200" | "t500x500") => {
   if (!url) return null;
   return url.replace("-large", `-${size}`);
@@ -152,7 +143,7 @@ export const NeoSplitHero: React.FC = () => {
     <motion.section
       className="container mx-auto px-4 md:px-6 mb-16 min-h-[calc(100vh-8rem)] flex flex-col xl:grid xl:grid-cols-[60fr_40fr] gap-8 xl:gap-12 items-center relative"
       variants={containerVariants}
-      initial="hidden"
+      initial={false}
       animate="visible"
     >
       {/* Floating Decorative Elements */}
@@ -194,7 +185,7 @@ export const NeoSplitHero: React.FC = () => {
       <motion.div className="flex flex-col justify-center w-full pt-8 md:pt-0 relative z-10">
         {/* Animated Badge */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={false}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-mono text-xs font-bold text-neo-accent flex items-center gap-3 mb-6"
@@ -236,14 +227,14 @@ export const NeoSplitHero: React.FC = () => {
                 className="inline-block mr-[0.25em]"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                {word}
+                {word}{" "}
               </motion.span>
             ))}
           </span>
 
           {/* Line 2 - Highlighted word with glitch effect */}
           <motion.span
-            initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
+            initial={false}
             animate={{
               opacity: 1,
               scale: 1,
@@ -272,7 +263,7 @@ export const NeoSplitHero: React.FC = () => {
                 transition: "opacity 0.1s",
               }}
             />
-            <span className="relative z-10">{t("title.line2")}</span>
+            <span className="relative z-10">{t("title.line2")} </span>
             {/* Decorative corner */}
             <motion.span
               className="absolute -top-2 -right-2 w-4 h-4 bg-neo-text"
@@ -287,7 +278,7 @@ export const NeoSplitHero: React.FC = () => {
             {line3Words.map((word, i) => (
               <motion.span
                 key={i}
-                initial={{ opacity: 0, y: 60 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.7,
@@ -296,7 +287,7 @@ export const NeoSplitHero: React.FC = () => {
                 }}
                 className="inline-block mr-[0.25em]"
               >
-                {word}
+                {word}{" "}
               </motion.span>
             ))}
           </span>
@@ -305,7 +296,7 @@ export const NeoSplitHero: React.FC = () => {
         {/* Tagline with typewriter-like effect */}
         <motion.div
           variants={taglineVariants}
-          initial="hidden"
+          initial={false}
           animate="visible"
           className="max-w-lg relative"
         >
@@ -333,6 +324,7 @@ export const NeoSplitHero: React.FC = () => {
 
       {/* Right Panel - Persistent SoundCloud Player */}
       <motion.div
+        id="showreel"
         className="w-full xl:sticky xl:top-24 xl:w-[520px] xl:max-w-[520px] xl:justify-self-end"
         variants={rightPanelVariants}
       >

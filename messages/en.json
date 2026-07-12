@@ -10,7 +10,9 @@
     "admin": "Admin",
     "dashboard": "Dashboard",
     "logout": "Logout",
-    "close": "Close"
+    "close": "Close",
+    "navigation": "Main navigation",
+    "toggleMenu": "Open or close menu"
   },
   "home": {
     "title": "Loïc Ghanem",
@@ -118,7 +120,9 @@
     },
     "banners": {
       "partners": "They trusted me",
-      "productions": "My productions"
+      "productions": "My productions",
+      "pause": "Pause the production banner",
+      "resume": "Resume the production banner"
     },
     "splitHero": {
       "basedIn": "BASED IN PARIS",
@@ -127,7 +131,7 @@
         "line2": "Composer",
         "line3": "& Producer"
       },
-      "tagline": "Award-winning composer. I create immersive sonic universes for audiovisual, artists and music library.",
+      "tagline": "Award-winning composer and producer, I create original music for film, television, advertising, video games and artists — from composition to mixing and mastering.",
       "scrollDown": "Scroll Down",
       "player": {
         "title": "LOÏC GHANEM PRODUCTIONS",
@@ -143,7 +147,7 @@
     }
   },
   "about": {
-    "pageTitle": "About",
+    "pageTitle": "Loïc Ghanem, music composer and producer",
     "pageDescription": "Passionate music composer and producer, creating unique sonic universes for your audiovisual projects for over 15 years.",
     "title": "About",
     "intro": "Hello!",
@@ -395,7 +399,7 @@
         "item4": "Professional quality"
       }
     },
-    "pageTitle": "Services",
+    "pageTitle": "Music composition, production, mixing & mastering",
     "pageDescription": "From composition to post-production, I support you at every stage of your musical project with expertise and passion.",
     "noServices": "No services available at the moment",
     "totalServices": "Services",
@@ -405,7 +409,7 @@
     "writtenBy": "Written by",
     "hero": {
       "badge": "SONIC EXPERTISE",
-      "title": "The Universe of Musical Creation",
+      "title": "Composition, Production, Mixing & Mastering",
       "description": "From composition to post-production, explore my services to bring your audiovisual projects to life with creativity and professionalism.",
       "cta": "Explore my services",
       "ctaSecondary": "Contact me"
@@ -553,7 +557,8 @@
     }
   },
   "albums": {
-    "pageTitle": "Albums & Projects",
+    "viewAlbum": "View album",
+    "pageTitle": "Discography: albums, EPs and production music",
     "pageDescription": "Discover my complete discography, from Metal and Metalcore productions to Hip-Hop, Electronic, and Ambient creations.",
     "filterAll": "All Albums",
     "sortBy": "Sort by",
@@ -565,7 +570,7 @@
     "genre": "Genre",
     "hero": {
       "badge": "DISCOGRAPHY",
-      "title": "My Musical Creations",
+      "title": "Discography: Albums, EPs & Production Music",
       "description": "Explore my complete discography: Metal, Hip-Hop, Ambient, Electronic productions and more. Each album tells a unique story.",
       "cta": "Explore albums",
       "ctaSecondary": "Contact me"
@@ -589,6 +594,8 @@
     "noAlbums": "No albums match your filters.",
     "featured": "Featured",
     "detail": {
+      "tracklist": "Tracklist",
+      "tracks": "tracks",
       "notFound": "Album not found",
       "listen": "Listen to album",
       "about": "About the album",
@@ -614,7 +621,7 @@
     }
   },
   "videos": {
-    "pageTitle": "Video Projects",
+    "pageTitle": "Music for picture, sync placements & showreels",
     "pageDescription": "Explore my music in action through audiovisual projects, synchronizations, and original compositions.",
     "filterAll": "All types",
     "filterOriginalMusic": "Original Music",
@@ -627,7 +634,7 @@
     "noVideos": "No videos available at the moment",
     "hero": {
       "badge": "AUDIOVISUAL PROJECTS",
-      "title": "My Music in Motion",
+      "title": "Music for Picture, Sync Placements & Showreels",
       "description": "Discover my compositions in action: TV synchronizations, commercials, music videos, and original productions for visual media.",
       "cta": "Explore videos",
       "ctaSecondary": "Contact me"
@@ -662,8 +669,8 @@
     "downloadCV": "Download CV",
     "hero": {
       "badge": "GET IN TOUCH",
-      "title": "Let's Create Together",
-      "description": "Have a project in mind? Emerging or established artist, all musical styles: I'll guide you to professional results, on time.",
+      "title": "Let's Talk About Your Music Project",
+      "description": "To discuss a project, contact me directly by phone or email.",
       "stats": {
         "response": "Response",
         "satisfaction": "Satisfaction"
@@ -688,6 +695,18 @@
       "namePlaceholder": "Your name",
       "email": "Email",
       "emailPlaceholder": "your@email.com",
+      "company": "Company (optional)",
+      "companyPlaceholder": "Your company",
+      "projectType": "Project type",
+      "projectTypePlaceholder": "Film, commercial, artist, video game…",
+      "projectFormat": "Format",
+      "projectFormatPlaceholder": "Duration, number of tracks, platforms…",
+      "deadline": "Deadline",
+      "deadlinePlaceholder": "Target date",
+      "budget": "Estimated budget (optional)",
+      "budgetPlaceholder": "Range or available budget",
+      "references": "Musical references",
+      "referencesPlaceholder": "Artists, tracks or reference links",
       "subject": "Subject",
       "subjectPlaceholder": "Subject of your message",
       "message": "Message",
@@ -713,6 +732,7 @@
     }
   },
   "footer": {
+    "emailMe": "Email me",
     "copyright": "© {year} Loïc Ghanem. All rights reserved.",
     "quickLinks": "Quick Links",
     "followMe": "Let's talk",
@@ -749,14 +769,14 @@
     "privacy": {
       "pageTitle": "Privacy Policy",
       "pageDescription": "How your data is collected, used, and protected when you browse this site or contact me.",
-      "lastUpdated": "December 10, 2025",
+      "lastUpdated": "{year}",
       "hero": {
         "badge": "Privacy",
         "title": "Privacy Policy",
         "description": "I only collect what I need to reply to you and handle your requests transparently."
       },
       "summary": [
-        "Data is limited to the contact form, our exchanges, and anonymized audience analytics.",
+        "Data is limited to phone or email exchanges and anonymized audience analytics.",
         "No sale or commercial transfer of your data: it is used solely to discuss and deliver your projects.",
         "You can exercise your rights (access, rectification, deletion, objection) at any time by request."
       ],
@@ -781,14 +801,14 @@
           "bullets": [
             "Webmaster / publisher: Yoann Andrieux - Yodev.",
             "Dedicated contact for technical or legal questions: yoann.andrieux@gmail.com.",
-            "Data sent through the form is handled by Loïc Ghanem to respond to service-related requests."
+            "Data shared directly by email or phone is handled by Loïc Ghanem to respond to service-related requests."
           ]
         },
         {
           "title": "Data collected",
           "description": "I only collect what is needed to respond to you or keep the site safe.",
           "bullets": [
-            "Contact details and message content sent through the form (name, email, subject, message).",
+            "Contact details and content shared directly by email or phone.",
             "Minimal technical data for security (server logs, truncated IP addresses, browser/device).",
             "Aggregated and anonymized analytics (pages viewed, traffic source, device type)."
           ]
@@ -873,7 +893,7 @@
     "terms": {
       "pageTitle": "Terms of Use",
       "pageDescription": "Rules for accessing the site, using its content, and the framework for collaborations with Loïc Ghanem.",
-      "lastUpdated": "December 10, 2025",
+      "lastUpdated": "{year}",
       "hero": {
         "badge": "Legal",
         "title": "Terms of Use",
@@ -914,7 +934,7 @@
           "bullets": [
             "Showcase of composition, production, mixing/mastering, and music supervision services.",
             "Examples (albums, videos, references) to illustrate my work.",
-            "Contact form to request information or a quote."
+            "Direct phone and email details to request information or a quote."
           ]
         },
         {
@@ -1021,7 +1041,7 @@
     "badge": "Privacy",
     "title": "Cookie & media consent",
     "description": "I use cookies and third-party services to run the site, play external media (YouTube players) and, if you allow, measure audience.",
-    "lastUpdated": "December 10, 2025",
+    "lastUpdated": "{year}",
     "lastUpdatedLabel": "Updated: {date}",
     "categoriesTitle": "Category choices",
     "manageCookies": "Manage cookies",
@@ -1273,7 +1293,7 @@
         "date": "Display Date",
         "datePlaceholder": "Ex: September 2024",
         "sortedDate": "Sort Date",
-        "sortedDatePlaceholder": "MM-YYYY",
+        "sortedDatePlaceholder": "YYYY-MM",
         "coverImage": "Cover Image",
         "poster": "Poster",
         "listenLink": "Listen Link",

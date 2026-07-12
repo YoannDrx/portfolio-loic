@@ -10,7 +10,9 @@
     "admin": "Admin",
     "dashboard": "Tableau de bord",
     "logout": "Déconnexion",
-    "close": "Fermer"
+    "close": "Fermer",
+    "navigation": "Navigation principale",
+    "toggleMenu": "Ouvrir ou fermer le menu"
   },
   "home": {
     "title": "Loïc Ghanem",
@@ -72,7 +74,7 @@
       "music": "Compositeur",
       "producer": "Musical",
       "composer": "& Producteur",
-      "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour l'audio visuel, les artistes et la librairie musicale.",
+      "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour l’audiovisuel, les artistes et la librairie musicale.",
       "showreel": "Showreel",
       "downloadCV": "CV (PDF)",
       "scrollDown": "Défiler"
@@ -118,7 +120,9 @@
     },
     "banners": {
       "partners": "Ils m'ont fait confiance",
-      "productions": "Mes productions"
+      "productions": "Mes productions",
+      "pause": "Mettre le bandeau en pause",
+      "resume": "Reprendre le bandeau"
     },
     "splitHero": {
       "basedIn": "BASÉ À PARIS",
@@ -127,7 +131,7 @@
         "line2": "& Producteur",
         "line3": "Musical"
       },
-      "tagline": "Compositeur primé. Je crée des univers sonores immersifs pour l'audio visuel, les artistes et la librairie musicale.",
+      "tagline": "Compositeur et producteur primé, j’imagine et produis des musiques originales pour le cinéma, la télévision, la publicité, les jeux vidéo et les artistes — de la composition au mixage et au mastering.",
       "scrollDown": "Défiler",
       "player": {
         "title": "LOÏC GHANEM PRODUCTIONS",
@@ -143,7 +147,7 @@
     }
   },
   "about": {
-    "pageTitle": "À Propos",
+    "pageTitle": "Loïc Ghanem, compositeur et producteur musical",
     "pageDescription": "Compositeur et producteur musical passionné, créant des univers sonores uniques pour vos projets audiovisuels depuis plus de 15 ans.",
     "title": "À propos",
     "intro": "Hello !",
@@ -406,7 +410,7 @@
         "item4": "Qualité professionnelle"
       }
     },
-    "pageTitle": "Services",
+    "pageTitle": "Composition musicale, production, mixage & mastering",
     "pageDescription": "De la composition à la post-production, je vous accompagne à chaque étape de votre projet musical avec expertise et passion.",
     "noServices": "Aucun service disponible pour le moment",
     "totalServices": "Services",
@@ -416,7 +420,7 @@
     "writtenBy": "Écrit par",
     "hero": {
       "badge": "EXPERTISE SONORE",
-      "title": "L'Univers de la Création Musicale",
+      "title": "Composition, Production, Mixage & Mastering",
       "description": "De la composition à la post-production, explorez mes services pour donner vie à vos projets audiovisuels avec créativité et professionnalisme.",
       "cta": "Explorer mes services",
       "ctaSecondary": "Me contacter"
@@ -564,7 +568,8 @@
     }
   },
   "albums": {
-    "pageTitle": "Albums & Projets",
+    "viewAlbum": "Voir l'album",
+    "pageTitle": "Discographie : albums, EP et musique de production",
     "pageDescription": "Découvrez ma discographie complète, des productions Metal et Metalcore aux créations Hip-Hop, Electronic et Ambient.",
     "filterAll": "Tous les Albums",
     "sortBy": "Trier par",
@@ -576,7 +581,7 @@
     "genre": "Genre",
     "hero": {
       "badge": "DISCOGRAPHIE",
-      "title": "Mes Créations Musicales",
+      "title": "Discographie : Albums, EP & Musique de Production",
       "description": "Explorez ma discographie complète : productions Metal, Hip-Hop, Ambient, Electronic et bien plus. Chaque album raconte une histoire unique.",
       "cta": "Explorer les albums",
       "ctaSecondary": "Me contacter"
@@ -600,6 +605,8 @@
     "noAlbums": "Aucun album ne correspond à vos filtres.",
     "featured": "Favori",
     "detail": {
+      "tracklist": "Tracklist",
+      "tracks": "titres",
       "notFound": "Album non trouvé",
       "listen": "Écouter l'album",
       "about": "À propos de l'album",
@@ -625,12 +632,12 @@
     }
   },
   "videos": {
-    "pageTitle": "Projets Vidéo",
+    "pageTitle": "Musique à l'image, synchronisations & showreels",
     "pageDescription": "Explorez ma musique en action à travers des projets audiovisuels, synchronisations et compositions originales.",
     "filterAll": "Tous les types",
     "filterOriginalMusic": "Musique Originale",
     "filterSync": "Synchronisation",
-    "filterMusicToPicture": "Music to Picture",
+    "filterMusicToPicture": "Musique à l'image",
     "watchOn": "Voir sur",
     "date": "Date",
     "categories": "Catégories",
@@ -638,7 +645,7 @@
     "noVideos": "Aucune vidéo disponible pour le moment",
     "hero": {
       "badge": "PROJETS AUDIOVISUELS",
-      "title": "Ma Musique en Images",
+      "title": "Musique à l'Image, Synchronisations & Showreels",
       "description": "Découvrez mes compositions en action : synchronisations TV, publicités, clips musicaux et productions originales pour l'image.",
       "cta": "Explorer les vidéos",
       "ctaSecondary": "Me contacter"
@@ -673,8 +680,8 @@
     "downloadCV": "Télécharger CV",
     "hero": {
       "badge": "CONTACTEZ-MOI",
-      "title": "Créons Ensemble",
-      "description": "Vous avez un projet en tête ? Artiste émergent ou confirmé, tous styles musicaux : je vous accompagne pour des résultats pro, dans les temps.",
+      "title": "Parlons de Votre Projet Musical",
+      "description": "Pour parler d’un projet, contactez-moi directement par téléphone ou par email.",
       "stats": {
         "response": "Réponse",
         "satisfaction": "Satisfaction"
@@ -699,6 +706,18 @@
       "namePlaceholder": "Votre nom",
       "email": "Email",
       "emailPlaceholder": "votre@email.com",
+      "company": "Société (facultatif)",
+      "companyPlaceholder": "Votre société",
+      "projectType": "Type de projet",
+      "projectTypePlaceholder": "Film, publicité, artiste, jeu vidéo…",
+      "projectFormat": "Format",
+      "projectFormatPlaceholder": "Durée, nombre de titres, supports…",
+      "deadline": "Échéance",
+      "deadlinePlaceholder": "Date souhaitée",
+      "budget": "Budget indicatif (facultatif)",
+      "budgetPlaceholder": "Fourchette ou budget disponible",
+      "references": "Références musicales",
+      "referencesPlaceholder": "Artistes, morceaux ou liens de référence",
       "subject": "Sujet",
       "subjectPlaceholder": "Sujet de votre message",
       "message": "Message",
@@ -724,6 +743,7 @@
     }
   },
   "footer": {
+    "emailMe": "M'écrire",
     "copyright": "© {year} Loïc Ghanem. Tous droits réservés.",
     "quickLinks": "Liens Rapides",
     "followMe": "Parlons de votre projet",
@@ -760,14 +780,14 @@
     "privacy": {
       "pageTitle": "Politique de confidentialité",
       "pageDescription": "Comment vos données sont collectées, utilisées et protégées lorsque vous utilisez ce site ou me contactez.",
-      "lastUpdated": "10 décembre 2025",
+      "lastUpdated": "{year}",
       "hero": {
         "badge": "Confidentialité",
         "title": "Politique de confidentialité",
         "description": "Je ne collecte que ce qui est nécessaire pour répondre à vos demandes et je traite vos données avec transparence."
       },
       "summary": [
-        "Données limitées au formulaire de contact, aux échanges et à des statistiques d'audience anonymisées.",
+        "Données limitées aux échanges par téléphone ou email et à des statistiques d'audience anonymisées.",
         "Aucune vente ni cession commerciale de vos données : elles servent uniquement à l'échange autour de vos projets.",
         "Vos droits (accès, rectification, suppression, opposition) sont activables à tout moment par simple demande."
       ],
@@ -792,14 +812,14 @@
           "bullets": [
             "Webmaster / responsable de la publication : Yoann Andrieux - Yodev.",
             "Contact dédié pour les questions techniques ou légales : yoann.andrieux@gmail.com.",
-            "Les données envoyées via le formulaire sont traitées par Loïc Ghanem pour répondre aux demandes liées aux prestations."
+            "Les données communiquées directement par email ou téléphone sont traitées par Loïc Ghanem pour répondre aux demandes liées aux prestations."
           ]
         },
         {
           "title": "Données collectées",
           "description": "Je recueille uniquement ce dont j'ai besoin pour vous répondre ou maintenir le site en sécurité.",
           "bullets": [
-            "Coordonnées et contenu des messages envoyés via le formulaire (nom, email, sujet, message).",
+            "Coordonnées et contenu des échanges transmis directement par email ou téléphone.",
             "Données techniques minimales pour la sécurité (journaux serveur, adresses IP tronquées, navigateur/appareil).",
             "Statistiques de consultation agrégées et anonymisées (pages vues, origine de trafic, type d'appareil)."
           ]
@@ -875,7 +895,7 @@
     "terms": {
       "pageTitle": "Conditions d'utilisation",
       "pageDescription": "Les règles d'accès au site, d'utilisation des contenus et le cadre des collaborations proposées par Loïc Ghanem.",
-      "lastUpdated": "10 décembre 2025",
+      "lastUpdated": "{year}",
       "hero": {
         "badge": "Légal",
         "title": "Conditions d'utilisation",
@@ -916,7 +936,7 @@
           "bullets": [
             "Présentation des services de composition, production, mix/mastering et supervision musicale.",
             "Mise à disposition d'exemples (albums, vidéos, références) pour illustrer mon travail.",
-            "Formulaire de contact pour obtenir des informations ou un devis."
+            "Coordonnées directes par téléphone et email pour obtenir des informations ou un devis."
           ]
         },
         {
@@ -1023,7 +1043,7 @@
     "badge": "Confidentialité",
     "title": "Gestion des cookies",
     "description": "J'utilise des cookies et services tiers pour faire fonctionner le site, lire les médias externes (YouTube, players) et, si vous l'autorisez, mesurer l'audience.",
-    "lastUpdated": "10 décembre 2025",
+    "lastUpdated": "{year}",
     "lastUpdatedLabel": "Mise à jour : {date}",
     "categoriesTitle": "Choix par catégorie",
     "manageCookies": "Gérer les cookies",
@@ -1275,7 +1295,7 @@
         "date": "Date affichée",
         "datePlaceholder": "Ex: Septembre 2024",
         "sortedDate": "Date de tri",
-        "sortedDatePlaceholder": "MM-YYYY",
+        "sortedDatePlaceholder": "AAAA-MM",
         "coverImage": "Image de couverture",
         "poster": "Poster",
         "listenLink": "Lien d'écoute",

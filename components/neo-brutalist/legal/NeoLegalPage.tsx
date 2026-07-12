@@ -33,7 +33,7 @@ export const NeoLegalPage: React.FC<{ type: LegalPageType }> = ({ type }) => {
   const sections = (t.raw("sections") as LegalSection[]) || [];
   const highlights = (t.raw("highlights") as Highlight[]) || [];
   const contactChannels = (t.raw("contactChannels") as ContactChannel[]) || [];
-  const lastUpdated = t("lastUpdated");
+  const lastUpdated = t("lastUpdated", { year: new Date().getFullYear() });
 
   const highlightIcons = [type === "privacy" ? ShieldCheck : ScrollText, Lock, Scale];
 

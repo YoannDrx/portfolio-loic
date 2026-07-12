@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import { Palette, Sun, Moon, X } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -49,13 +49,6 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
     document.documentElement.setAttribute("data-palette", saved);
   }, []);
 
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("neo-palette") || "orange";
-    setCurrentPalette(saved);
-    document.documentElement.setAttribute("data-palette", saved);
-  }, []);
-
   const handleSelect = (paletteId: string) => {
     setCurrentPalette(paletteId);
     localStorage.setItem("neo-palette", paletteId);
@@ -65,6 +58,15 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
   const handleThemeToggle = (newTheme: "light" | "dark") => {
     setTheme(newTheme);
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [isOpen]);
 
   if (!mounted) {
     return (
@@ -85,17 +87,25 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
       <div ref={dropdownRef} className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
+          style={{ "--palette-trigger": current?.color } as CSSProperties}
           className={cn(
-            "w-9 h-9 flex items-center justify-center border-2 border-neo-border",
+            "group w-9 h-9 flex items-center justify-center border-2 border-neo-border",
             "transition-colors duration-150",
             isOpen
-              ? "bg-neo-accent"
+              ? "bg-neo-accent text-neo-on-accent"
               : "bg-neo-surface hover:bg-neo-accent hover:text-neo-text-inverse",
             className
           )}
           aria-label="Choisir une palette de couleurs"
         >
-          <Palette className="w-4 h-4" style={{ color: isOpen ? "white" : current?.color }} />
+          <Palette
+            className={cn(
+              "w-4 h-4 transition-colors",
+              isOpen
+                ? "text-neo-on-accent"
+                : "text-[var(--palette-trigger)] group-hover:text-neo-on-accent"
+            )}
+          />
         </button>
       </div>
 
@@ -114,6 +124,9 @@ export const PaletteSelector = ({ className }: PaletteSelectorProps) => {
               >
                 {/* Modal centered */}
                 <motion.div
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Préférences d'affichage"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}

@@ -44,7 +44,15 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
   // Pages Neo-Brutalist - elles incluent leur propre NeoNavbar et NeoFooter
   return (
     <>
-      <main className="min-h-screen">{children}</main>
+      <a
+        href="#main-content"
+        className="fixed left-4 top-2 z-[200] -translate-y-20 bg-neo-accent text-neo-text-inverse border-2 border-neo-border px-4 py-2 font-mono font-bold focus:translate-y-0"
+      >
+        {pathname?.startsWith("/en") ? "Skip to content" : "Aller au contenu"}
+      </a>
+      <div id="main-content" tabIndex={-1} className="min-h-screen">
+        {children}
+      </div>
       <GlobalAudioPlayerMount />
       <SpotifyPlayerBar />
       <motion.div

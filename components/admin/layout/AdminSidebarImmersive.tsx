@@ -21,6 +21,7 @@ import {
   Command,
   Search,
   ClipboardList,
+  Mail,
 } from "lucide-react";
 import { adminSidebarItem, staggerContainer, staggerItem } from "@/lib/animations";
 
@@ -81,6 +82,13 @@ const menuItems: MenuItem[] = [
     href: "/admin/cv",
     color: "text-neon-orange",
     glowColor: "var(--admin-glow-orange-md)",
+  },
+  {
+    icon: Mail,
+    label: "Contacts",
+    href: "/admin/contact",
+    color: "text-[var(--admin-neon-cyan)]",
+    glowColor: "var(--admin-glow-cyan-md)",
   },
   {
     icon: ClipboardList,

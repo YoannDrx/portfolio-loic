@@ -7,6 +7,7 @@ import { ConsentProvider } from "@/components/neo-brutalist/legal/ConsentProvide
 import { GlobalAudioPlayerRootEngineMount } from "@/components/neo-brutalist/player/GlobalAudioPlayerRootEngineMount";
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -69,6 +70,7 @@ export default async function RootLayout({
             {children}
             <GlobalAudioPlayerRootEngineMount />
             <Toaster />
+            <SpeedInsights />
           </ConsentProvider>
         </ThemeProvider>
       </body>

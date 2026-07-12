@@ -30,6 +30,7 @@ import { GridBackground } from "../ui/GridBackground";
 
 interface Service {
   id: string;
+  slug?: string | null;
   no: string;
   title: string;
   text: string;
@@ -447,7 +448,10 @@ export default function NeoServiceDetail({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {/* Previous Service */}
               <Link
-                href={{ pathname: "/services/[id]", params: { id: prevService.id } }}
+                href={{
+                  pathname: "/services/[id]",
+                  params: { id: prevService.slug || prevService.id },
+                }}
                 className="group"
               >
                 <NeoCard hover="lift" padding="none" className="h-full border-4 overflow-hidden">
@@ -479,7 +483,10 @@ export default function NeoServiceDetail({
 
               {/* Next Service */}
               <Link
-                href={{ pathname: "/services/[id]", params: { id: nextService.id } }}
+                href={{
+                  pathname: "/services/[id]",
+                  params: { id: nextService.slug || nextService.id },
+                }}
                 className="group"
               >
                 <NeoCard hover="lift" padding="none" className="h-full border-4 overflow-hidden">

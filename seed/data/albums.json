@@ -2,7 +2,7 @@
   {
     "id": "cmi93hkby0000sks6h3gh5j7i",
     "title": "The Queens",
-    "img": "/img/albums/the-queens.jpg",
+    "img": "/img/albums/the-queens.webp",
     "poster": "Loïc Ghanem",
     "date": "June 2023",
     "sortedDate": "2023-06",
@@ -12,18 +12,104 @@
     "youtubeEmbed": "https://www.youtube.com/watch?v=L9pJGVMe03o&list=OLAK5uy_l7VHchdfnphID3o0-TpLyeBgzuBkPbqsU",
     "collabName": "Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala ",
     "collabLink": null,
-    "descriptionsFr": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> est un album ambitieux et contemporain. Conçu par Loïc Ghanem en juin 2023, il propose une exploration audacieuse de genres musicaux intemporels. Entrelaçant harmonieusement des éléments de punk rock avec les rythmes pulsants de la drill music, l&#x27;album marque une rupture audacieuse avec la norme. Ce chef-d&#x27;œuvre sonore éclectique a été créé avec la collaboration d&#x27;artistes internationaux notables - <span class=\"hover-green\">Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala</span>, apportant leurs touches uniques au mélange.</p><p class=\"bigger\">La pochette visuellement frappante, ornée de l&#x27;image des reines, donne un aperçu de la musique puissante qu&#x27;elle contient. Chaque morceau témoigne de la polyvalence de la musique, repoussant les frontières tout en rendant hommage à différents styles musicaux. L&#x27;album est non seulement un témoignage de la polyvalence de Loïc en tant qu&#x27;artiste, mais aussi des possibilités illimitées de la collaboration et de la transformation musicales.</p><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> constitue un voyage captivant à travers le paysage varié de la musique, laissant les auditeurs impatients de découvrir le prochain rebondissement. Ce n&#x27;est pas seulement un album ; c&#x27;est un voyage audacieux au cœur de ce qui rend la musique intemporelle et continuellement fascinante. Écoutez &quot;The Queens&quot; et laissez-vous emporter par son mélange révolutionnaire de punk rock, de drill music et d&#x27;autres genres. L&#x27;album est sorti sous le label <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p><p class=\"bigger tracklist-title\">Tracklist :</p><ul class=\" bigger tracklist\"><li>1. Mother - Novine - 04:28</li><li>2. Like A Lightning - Kinnie Lane - 02:44</li><li>3. Supervillain - Voyager1, Lou.C, Devmo - 03:29</li><li>4. Paper Plane - Voyager1, Meganne - 03:37</li><li>5. Nature - Lina Stalyte - 04:31</li><li>6. Forget My Name - London Mars - 02:31</li><li>7. I&#x27;ll Be Fine - Extra Special - 03:29</li><li>8. Watch Me Dance - Emy Smith - 02:22</li><li>9. Sky Is The Limit - Yulia - 02:55</li><li>10. Don&#x27;t Like This Game - Magdala - 04:37</li></ul></div>",
-    "descriptionsEn": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> is an ambitious and contemporary album. Crafted by Loïc Ghanem in June 2023, it bears an audacious exploration of timeless music genres. Seamlessly intertwining elements of punk rock with the pulsating beats of drill music, the album marks a bold departure from the norm. This eclectic sonic masterpiece was brought to life with the collaboration of notable international artists - <span class=\"hover-green\">Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala</span>, adding their unique flavors to the mix.</p><p class=\"bigger\">The visually striking album cover, emblazoned with the image of the queens, gives a hint to the powerful music contained within. Every track is a testament to the versatility of music, breaking boundaries while paying homage to different music styles. The album is not just a testament to Loïc&#x27;s versatility as an artist, but also to the limitless possibilities of musical collaboration and transformation.</p><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> serves as a captivating journey through the varied landscape of music, leaving listeners eager for the next twist or turn. It&#x27;s not just an album; it&#x27;s an audacious voyage into the heart of what makes music timeless and continually fascinating. Listen to &quot;The Queens&quot; and allow its revolutionary blend of punk rock, drill music, and other genres to sweep you off your feet. The album was released under the label <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p><p class=\"bigger tracklist-title\">Tracklist:</p><ul class=\" bigger tracklist\"><li>1. Mother - Novine - 04:28</li><li>2. Like A Lightning - Kinnie Lane - 02:44</li><li>3. Supervillain - Voyager1, Lou.C, Devmo - 03:29</li><li>4. Paper Plane - Voyager1, Meganne - 03:37</li><li>5. Nature - Lina Stalyte - 04:31</li><li>6. Forget My Name - London Mars - 02:31</li><li>7. I&#x27;ll Be Fine - Extra Special - 03:29</li><li>8. Watch Me Dance - Emy Smith - 02:22</li><li>9. Sky Is The Limit - Yulia - 02:55</li><li>10. Don&#x27;t Like This Game - Magdala - 04:37</li></ul></div>",
+    "descriptionsFr": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> est un album ambitieux et contemporain. Conçu par Loïc Ghanem en juin 2023, il propose une exploration audacieuse de genres musicaux intemporels. Entrelaçant harmonieusement des éléments de punk rock avec les rythmes pulsants de la drill music, l&#x27;album marque une rupture audacieuse avec la norme. Ce chef-d&#x27;œuvre sonore éclectique a été créé avec la collaboration d&#x27;artistes internationaux notables - <span class=\"hover-green\">Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala</span>, apportant leurs touches uniques au mélange.</p><p class=\"bigger\">La pochette visuellement frappante, ornée de l&#x27;image des reines, donne un aperçu de la musique puissante qu&#x27;elle contient. Chaque morceau témoigne de la polyvalence de la musique, repoussant les frontières tout en rendant hommage à différents styles musicaux. L&#x27;album est non seulement un témoignage de la polyvalence de Loïc en tant qu&#x27;artiste, mais aussi des possibilités illimitées de la collaboration et de la transformation musicales.</p><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> constitue un voyage captivant à travers le paysage varié de la musique, laissant les auditeurs impatients de découvrir le prochain rebondissement. Ce n&#x27;est pas seulement un album ; c&#x27;est un voyage audacieux au cœur de ce qui rend la musique intemporelle et continuellement fascinante. Écoutez &quot;The Queens&quot; et laissez-vous emporter par son mélange révolutionnaire de punk rock, de drill music et d&#x27;autres genres. L&#x27;album est sorti sous le label <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p></div>",
+    "descriptionsEn": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> is an ambitious and contemporary album. Crafted by Loïc Ghanem in June 2023, it bears an audacious exploration of timeless music genres. Seamlessly intertwining elements of punk rock with the pulsating beats of drill music, the album marks a bold departure from the norm. This eclectic sonic masterpiece was brought to life with the collaboration of notable international artists - <span class=\"hover-green\">Novine, Kinnie Lane, Voyager1, Lou.C, Devmo, Meganne, Lina Stalyte, London Mars, Extra Special, Emy Smith, Yulia, Magdala</span>, adding their unique flavors to the mix.</p><p class=\"bigger\">The visually striking album cover, emblazoned with the image of the queens, gives a hint to the powerful music contained within. Every track is a testament to the versatility of music, breaking boundaries while paying homage to different music styles. The album is not just a testament to Loïc&#x27;s versatility as an artist, but also to the limitless possibilities of musical collaboration and transformation.</p><p class=\"bigger\"><em>&#x27;The Queens&#x27;</em> serves as a captivating journey through the varied landscape of music, leaving listeners eager for the next twist or turn. It&#x27;s not just an album; it&#x27;s an audacious voyage into the heart of what makes music timeless and continually fascinating. Listen to &quot;The Queens&quot; and allow its revolutionary blend of punk rock, drill music, and other genres to sweep you off your feet. The album was released under the label <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p></div>",
     "published": true,
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.094Z",
     "updatedAt": "2025-12-06T12:59:57.794Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "the-queens",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/0DCSvAbAhyTCKTgNZ3zCxw",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Mother",
+        "artists": "Loic Ghanem, Novine",
+        "durationSeconds": 268,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Like A Lightning",
+        "artists": "Loic Ghanem, Kinnie Lane",
+        "durationSeconds": 164,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Supervillain",
+        "artists": "Voyager1, Lou.C, DEVMO",
+        "durationSeconds": 209,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Paper Plane",
+        "artists": "Voyager1, Meganne",
+        "durationSeconds": 217,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Nature",
+        "artists": "Loic Ghanem, Lina Stalyte",
+        "durationSeconds": 271,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Forget My Name",
+        "artists": "Loic Ghanem, London Mars",
+        "durationSeconds": 151,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "I'll Be Fine",
+        "artists": "Loic Ghanem, Extra Special",
+        "durationSeconds": 209,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Watch Me Dance",
+        "artists": "Loic Ghanem, Emy Smith",
+        "durationSeconds": 142,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Sky Is The Limit",
+        "artists": "Loic Ghanem, Yulia",
+        "durationSeconds": 175,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Don't Like This Game",
+        "artists": "Loic Ghanem, Magdala",
+        "durationSeconds": 277,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkdl0001sks60q2p3p1a",
     "title": "Make Me Feel",
-    "img": "/img/albums/mmf.jpg",
+    "img": "/img/albums/make-me-feel.webp",
     "poster": "Loïc Ghanem",
     "date": "May 2022",
     "sortedDate": "2022-05",
@@ -39,12 +125,98 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.154Z",
     "updatedAt": "2025-12-06T12:59:57.849Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "make-me-feel",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/7hkptVcciF5myHxpRZwHmp",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Make Me Feel",
+        "artists": "Voyager1, Novine",
+        "durationSeconds": 170,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Desire",
+        "artists": "Voyager1, Tim Moyo",
+        "durationSeconds": 205,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Honesty",
+        "artists": "Voyager1, Yulia",
+        "durationSeconds": 166,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Welcome To My Zone",
+        "artists": "Voyager1, Lou.C, Tim Moyo",
+        "durationSeconds": 195,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Give Me A Sign",
+        "artists": "Voyager1, Yulia",
+        "durationSeconds": 165,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "We're Both Toxic",
+        "artists": "Voyager1, Quincy Thompson",
+        "durationSeconds": 196,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "No More Drama",
+        "artists": "Voyager1, Novine",
+        "durationSeconds": 171,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Drunk Call Me",
+        "artists": "Voyager1, Tim Moyo",
+        "durationSeconds": 207,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Rooftop",
+        "artists": "Voyager1, Novine",
+        "durationSeconds": 201,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Build Me Up",
+        "artists": "EVoyager1, Quincy Thompson",
+        "durationSeconds": 224,
+        "explicit": true
+      }
+    ]
   },
   {
     "id": "cmi93hken0002sks62szjvodb",
     "title": "Ambient Guitar",
-    "img": "/img/albums/1.jpg",
+    "img": "/img/albums/ambient-guitar.webp",
     "poster": "Loïc Ghanem",
     "date": "Sept 2020",
     "sortedDate": "2020-09",
@@ -60,12 +232,130 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.191Z",
     "updatedAt": "2025-12-06T12:59:58.063Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "ambient-guitar",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/4gVmjCmEDeGyGKf08xuaRz",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Water Lily Leaf",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 131,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Light House",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 186,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Time Is Dreaming",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 129,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Catch the Coast",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 192,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Rain on the Wipers",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 129,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Birth of a Star",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 130,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Nautilus",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 163,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Spring Birds",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 131,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Stay Forever",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 155,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "The Old Castle",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 135,
+        "explicit": false
+      },
+      {
+        "position": 11,
+        "discNumber": 1,
+        "title": "Colorful",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 194,
+        "explicit": false
+      },
+      {
+        "position": 12,
+        "discNumber": 1,
+        "title": "Empty Streets",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 128,
+        "explicit": false
+      },
+      {
+        "position": 13,
+        "discNumber": 1,
+        "title": "Over Dramatic",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 141,
+        "explicit": false
+      },
+      {
+        "position": 14,
+        "discNumber": 1,
+        "title": "After the Rain",
+        "artists": "Michel-Yves Kochmann",
+        "durationSeconds": 124,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkfj0003sks6dd8tcer9",
     "title": "Bass Music",
-    "img": "/img/albums/2.jpg",
+    "img": "/img/albums/bass-music.webp",
     "poster": "Loïc Ghanem",
     "date": "Jan 2022",
     "sortedDate": "2022-01",
@@ -81,12 +371,114 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.223Z",
     "updatedAt": "2025-12-06T12:59:57.903Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "bass-music",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/0CwfMyJsdjWrQlRf5nCJq9",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Whisky And Coke",
+        "artists": "EVoyager1, Lou.C",
+        "durationSeconds": 189,
+        "explicit": true
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Infected",
+        "artists": "Voyager1, Twild",
+        "durationSeconds": 229,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Scarecrow",
+        "artists": "Voyager1",
+        "durationSeconds": 138,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Canyon",
+        "artists": "Voyager1, Magdala",
+        "durationSeconds": 266,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "A Brand New Point Of View",
+        "artists": "Voyager1, Marty Degenne",
+        "durationSeconds": 251,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Bright",
+        "artists": "Voyager1, Lou.C",
+        "durationSeconds": 207,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "In The Club",
+        "artists": "Voyager1",
+        "durationSeconds": 171,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Weapon",
+        "artists": "Voyager1",
+        "durationSeconds": 206,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "VIP",
+        "artists": "Voyager1",
+        "durationSeconds": 225,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "The Night Is Dark And Full Of Terror",
+        "artists": "Voyager1",
+        "durationSeconds": 174,
+        "explicit": false
+      },
+      {
+        "position": 11,
+        "discNumber": 1,
+        "title": "QR Code",
+        "artists": "Voyager1",
+        "durationSeconds": 139,
+        "explicit": false
+      },
+      {
+        "position": 12,
+        "discNumber": 1,
+        "title": "Overdose",
+        "artists": "Voyager1, Olynda",
+        "durationSeconds": 279,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkgh0004sks6x93mbylb",
     "title": "Cyberpunk",
-    "img": "/img/albums/3.jpg",
+    "img": "/img/albums/cyberpunk.webp",
     "poster": "Loïc Ghanem",
     "date": "Apr 2020",
     "sortedDate": "2020-04",
@@ -102,12 +494,98 @@
     "order": 1,
     "createdAt": "2025-11-21T16:49:06.258Z",
     "updatedAt": "2025-12-06T12:59:58.288Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "cyberpunk",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/4txNdqxUgZHaRNPIW0Hr2a",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Infinity",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 187,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Machina of God",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 153,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Nano Tech",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 172,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Spectral",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 159,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Deep Diving",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 198,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Jupiter",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 200,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Living Data",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 184,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Pursuit",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 120,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Skinner",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 125,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Dark Industry",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 152,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkhd0005sks62rv29ex3",
     "title": "Get Trapped",
-    "img": "/img/albums/4.jpg",
+    "img": "/img/albums/get-trapped.webp",
     "poster": "Loïc Ghanem",
     "date": "May 2021",
     "sortedDate": "2021-05",
@@ -123,12 +601,98 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.289Z",
     "updatedAt": "2025-12-06T12:59:57.954Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "get-trapped",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/0w0Krpzd7BCnRoy4pkw2cX",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Mind Free",
+        "artists": "Voyager1, Novine",
+        "durationSeconds": 176,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Atlanta",
+        "artists": "EVoyager1, Lou.C",
+        "durationSeconds": 141,
+        "explicit": true
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Get Trapped",
+        "artists": "EVoyager1, Lou.C",
+        "durationSeconds": 126,
+        "explicit": true
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "On the Run",
+        "artists": "Voyager1, Lou.C, Lowner",
+        "durationSeconds": 194,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "I Go Hard",
+        "artists": "EVoyager1, Stige",
+        "durationSeconds": 166,
+        "explicit": true
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Same Boy",
+        "artists": "EVoyager1, Lou.C",
+        "durationSeconds": 207,
+        "explicit": true
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Put in Motion",
+        "artists": "Voyager1, Lou.C, Stige",
+        "durationSeconds": 172,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "What Do You Know About Love",
+        "artists": "Voyager1, Lou.C, Novine",
+        "durationSeconds": 197,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "You Know",
+        "artists": "EVoyager1, Lou.C",
+        "durationSeconds": 186,
+        "explicit": true
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Head Up",
+        "artists": "Voyager1, Lou.C, Lowner",
+        "durationSeconds": 136,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkia0006sks684oz0gwp",
     "title": "Pop Punk",
-    "img": "/img/albums/5.jpg",
+    "img": "/img/albums/pop-punk.webp",
     "poster": "Loïc Ghanem",
     "date": "Apr 2021",
     "sortedDate": "2021-04",
@@ -144,12 +708,114 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.322Z",
     "updatedAt": "2025-12-06T12:59:58.007Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "pop-punk",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/7zLSo513JHEKYGF7DCe5vr",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Time Is Running Out",
+        "artists": "Loic Ghanem, Dory-Loup",
+        "durationSeconds": 153,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "I ll Set You Free",
+        "artists": "Loic Ghanem, Dory-Loup",
+        "durationSeconds": 140,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Never Let You Go",
+        "artists": "ELoic Ghanem, Fran Darras",
+        "durationSeconds": 191,
+        "explicit": true
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Blindside",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 162,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Dropping Out",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 158,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Carve It Up",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 146,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "So Many Rules",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 140,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Party Next Door",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 96,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Local Spot",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 173,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "I ll Meet You There",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 205,
+        "explicit": false
+      },
+      {
+        "position": 11,
+        "discNumber": 1,
+        "title": "Act Your Age",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 145,
+        "explicit": false
+      },
+      {
+        "position": 12,
+        "discNumber": 1,
+        "title": "She Stole Every Thing from Me",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 207,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkj60007sks69bmpq0pl",
     "title": "Hardcore",
-    "img": "/img/albums/hardcore.png",
+    "img": "/img/albums/hardcore.webp",
     "poster": "Loïc Ghanem",
     "date": "July 2020",
     "sortedDate": "2020-07",
@@ -165,12 +831,98 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.354Z",
     "updatedAt": "2025-12-06T12:59:58.123Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "hardcore",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/2SVJjtR2St1Qe7pRvzirHg",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Trigger",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 103,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Keep Your Distance",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 121,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Together One Voice",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 100,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Brace Yourself",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 125,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Picked Myself Back Up",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 127,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Fake People",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 130,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "In Your Face",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 141,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Disgrace",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 147,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "The Loudest",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 114,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Down And Out",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 130,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkk20008sks6h1c27y3w",
     "title": "Synthwave",
-    "img": "/img/albums/synthwave.png",
+    "img": "/img/albums/synthwave.webp",
     "poster": "Loïc Ghanem",
     "date": "Oct 2019",
     "sortedDate": "2019-10",
@@ -186,12 +938,98 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.387Z",
     "updatedAt": "2025-12-06T12:59:58.340Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "synthwave",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/0eky0GaIAnjtivL1HSS7HY",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Hold Me",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 153,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Midnight Riders",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 168,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Overseas Highway",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 154,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Like A East Shore Wave",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 181,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Sunrise Leavers",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 148,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "We Where Young Once",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 165,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Lazer Cops",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 205,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Beating Hearts",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 143,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "She Don't Look Back",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 153,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "City Of Lights",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 166,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkkz0009sks6h2h1zpnl",
     "title": "Fast Metal",
-    "img": "/img/albums/8.jpg",
+    "img": "/img/albums/fast-metal.webp",
     "poster": "Loïc Ghanem",
     "date": "July 2020",
     "sortedDate": "2020-07",
@@ -207,12 +1045,114 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.420Z",
     "updatedAt": "2025-12-06T12:59:58.186Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "fast-metal",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/4dHeAUJfUwtb1KW9BLnh46",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Last Men Standing",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 169,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "No Matter What",
+        "artists": "Sham Makdessi",
+        "durationSeconds": 180,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Death by Fire",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 161,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Speed Metal Overture",
+        "artists": "Sham Makdessi",
+        "durationSeconds": 167,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Dark Fever",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 159,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Pandemic War",
+        "artists": "Sham Makdessi",
+        "durationSeconds": 177,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Out of My Way",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 124,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Strenght Serum",
+        "artists": "Sham Makdessi",
+        "durationSeconds": 189,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "This Is the Way",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 123,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Push Harder",
+        "artists": "Sham Makdessi",
+        "durationSeconds": 208,
+        "explicit": false
+      },
+      {
+        "position": 11,
+        "discNumber": 1,
+        "title": "Terrorizing",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 135,
+        "explicit": false
+      },
+      {
+        "position": 12,
+        "discNumber": 1,
+        "title": "Cyborg Workout",
+        "artists": "Sham Makdessi",
+        "durationSeconds": 191,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hklx000asks6an4mwk9h",
     "title": "Kick-ass Metal Jacket",
-    "img": "/img/albums/9.jpg",
+    "img": "/img/albums/kick-ass-metal-jacket.webp",
     "poster": "Loïc Ghanem",
     "date": "June 2020",
     "sortedDate": "2020-06",
@@ -228,12 +1168,98 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.454Z",
     "updatedAt": "2025-12-06T12:59:58.238Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "kick-ass-metal-jacket",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/4G2MR7rVamxNIjWVi1pQQ3",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Furious Fragment",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 161,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Broken Sight",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 101,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Fast Paced Guitars",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 161,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Heavy Adrenaline",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 136,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Uncompromising",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 183,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Heavy Cut",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 102,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Monster Mirrors",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 138,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Wall of Guitars",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 193,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Wild and Crazy",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 128,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Wolf Pack",
+        "artists": "Loic Ghanem, Terence Langlois",
+        "durationSeconds": 109,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkmu000bsks6ggd84t4o",
     "title": "Metalcore",
-    "img": "/img/albums/12.jpg",
+    "img": "/img/albums/metalcore.webp",
     "poster": "Loïc Ghanem",
     "date": "Mar 2018",
     "sortedDate": "2018-03",
@@ -249,12 +1275,114 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.487Z",
     "updatedAt": "2025-12-06T12:59:58.395Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "metalcore",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/62QpeUfrSIgmuMq0OqjLBT",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "28 Days Before",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 160,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Better Than You Know",
+        "artists": "Loic Ghanem, Térence Langlois",
+        "durationSeconds": 163,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Throw up Your Gloves",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 162,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "It's Already Over",
+        "artists": "Loic Ghanem, Térence Langlois",
+        "durationSeconds": 171,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Snake Eyes",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 175,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Sold Your Soul",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 167,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Gods of Egypte",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 129,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Never the Same",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 182,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Down",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 146,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Let's Dgent",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 162,
+        "explicit": false
+      },
+      {
+        "position": 11,
+        "discNumber": 1,
+        "title": "Spring Lights",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 173,
+        "explicit": false
+      },
+      {
+        "position": 12,
+        "discNumber": 1,
+        "title": "It's Your Time to Shine",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 178,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hknr000csks68pl8kwc1",
     "title": "Death Metal",
-    "img": "/img/albums/11.jpg",
+    "img": "/img/albums/death-metal.webp",
     "poster": "Loïc Ghanem",
     "date": "Mar 2019",
     "sortedDate": "2019-03",
@@ -270,12 +1398,114 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.520Z",
     "updatedAt": "2025-12-06T12:59:58.448Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "death-metal",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/7IWvyAINGM912ZI1vkshmn",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Homicide",
+        "artists": "ELoic Ghanem",
+        "durationSeconds": 131,
+        "explicit": true
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Impeding Doom",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 157,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Hell on Earth",
+        "artists": "ELoic Ghanem",
+        "durationSeconds": 128,
+        "explicit": true
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Red River",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 148,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Human Suffering",
+        "artists": "ELoic Ghanem",
+        "durationSeconds": 173,
+        "explicit": true
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Suicide",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 135,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Crowd Brawl",
+        "artists": "ELoic Ghanem",
+        "durationSeconds": 171,
+        "explicit": true
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Bloody Eyes",
+        "artists": "ELoic Ghanem",
+        "durationSeconds": 149,
+        "explicit": true
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Tonight's the Night",
+        "artists": "ELoic Ghanem",
+        "durationSeconds": 168,
+        "explicit": true
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Twisted Mind",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 184,
+        "explicit": false
+      },
+      {
+        "position": 11,
+        "discNumber": 1,
+        "title": "You Can Not Hide",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 135,
+        "explicit": false
+      },
+      {
+        "position": 12,
+        "discNumber": 1,
+        "title": "Evil Depths",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 173,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkop000dsks6v26fzp8h",
     "title": "Metalcore II",
-    "img": "/img/albums/metalcore2.jpg",
+    "img": "/img/albums/metalcore-ii.webp",
     "poster": "Loïc Ghanem",
     "date": "Feb 2024",
     "sortedDate": "2024-02",
@@ -291,12 +1521,114 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.553Z",
     "updatedAt": "2025-12-06T12:59:57.741Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "metalcore-ii",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/5jmP27CdeFXEihU6VRNVDm",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Victory",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 243,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Omniscient",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 264,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Face Your Fear",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 246,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Revenge",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 137,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Anarchy",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 160,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Shibuya",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 155,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Drive Fast Die Young",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 175,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "No Gun No Fun",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 122,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Race Of Your Life",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 221,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Love And Blood",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 221,
+        "explicit": false
+      },
+      {
+        "position": 11,
+        "discNumber": 1,
+        "title": "Let's Go Anthem",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 182,
+        "explicit": false
+      },
+      {
+        "position": 12,
+        "discNumber": 1,
+        "title": "Here Comes A New Challenger",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 189,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkpo000esks6rqaefx95",
     "title": "Dystopia",
-    "img": "/img/albums/dystopia.png",
+    "img": "/img/albums/dystopia.webp",
     "poster": "Loïc Ghanem",
     "date": "Jun 2024",
     "sortedDate": "2024-06",
@@ -312,12 +1644,98 @@
     "order": 100,
     "createdAt": "2025-11-21T16:49:06.588Z",
     "updatedAt": "2025-12-06T12:59:57.688Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "dystopia",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/2UljGjXIIjJztw9qQeqYDN",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Dangerous is my Name",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 267,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Master the Unknown",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 234,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Seasonal Nostalgia",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 327,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Sparkle in the Dark",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 190,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Strikeback",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 176,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Dystopia",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 114,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Vicious Circle",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 219,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Inspired by Chaos",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 213,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Arch Nemesis",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 179,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "The Night Comes For Us",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 269,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "cmi93hkqk000fsks6hiixsjzm",
     "title": "Terra",
-    "img": "/img/albums/terra.png",
+    "img": "/img/albums/terra.webp",
     "poster": "Loïc Ghanem",
     "date": "Jan 2025",
     "sortedDate": "2025-01",
@@ -333,12 +1751,98 @@
     "order": 0,
     "createdAt": "2025-11-21T16:49:06.621Z",
     "updatedAt": "2025-12-06T12:59:56.996Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "terra",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/0hPOMMDq8xNKFvzdvTnP1S",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Eternal Cycle",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 272,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Emerald Rainforest",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 242,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Echoes of the Wild",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 198,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Lost Biome",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 298,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Ephemeral Spring",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 298,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Coral Ballet",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 234,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Boreal Canopy",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 192,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Veins of the Earth",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 218,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Savanna Dreams",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 208,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Tidal Currents",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 278,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "new_bass_with_attitude_2025",
     "title": "Bass With Attitude",
-    "img": "/img/albums/bass-with-attitude.png",
+    "img": "/img/albums/bass-with-attitude.webp",
     "poster": "Loïc Ghanem",
     "date": "2025",
     "sortedDate": "2025-01",
@@ -354,12 +1858,98 @@
     "order": 2,
     "createdAt": "2025-01-09T12:00:00.000Z",
     "updatedAt": "2025-01-09T12:00:00.000Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "bass-with-attitude",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/4YzsB5wlIfXJD2BLqzLmYJ",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "EVERYTHING",
+        "artists": "Voyager1",
+        "durationSeconds": 267,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "BRINGING THE HEAT",
+        "artists": "Voyager1",
+        "durationSeconds": 260,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "HEAVEN",
+        "artists": "Voyager1",
+        "durationSeconds": 245,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "BRAIN DANCE",
+        "artists": "Voyager1",
+        "durationSeconds": 210,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "GLORY",
+        "artists": "Voyager1",
+        "durationSeconds": 184,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "NEW KING",
+        "artists": "Voyager1",
+        "durationSeconds": 184,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "HOUSE PARTY",
+        "artists": "Voyager1",
+        "durationSeconds": 176,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "MONEY RULES",
+        "artists": "Voyager1",
+        "durationSeconds": 174,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "BUNKER",
+        "artists": "Voyager1",
+        "durationSeconds": 212,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "FAME",
+        "artists": "Voyager1",
+        "durationSeconds": 190,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "new_faster_and_faster_2025",
     "title": "Faster & Faster",
-    "img": "/img/albums/faster-and-faster.png",
+    "img": "/img/albums/faster-and-faster.webp",
     "poster": "Loïc Ghanem",
     "date": "2025",
     "sortedDate": "2025-01",
@@ -375,12 +1965,58 @@
     "order": 100,
     "createdAt": "2025-01-09T12:00:00.000Z",
     "updatedAt": "2025-01-09T12:00:00.000Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "faster-and-faster",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/7CEXmOz5PsEBHJC9reiIXQ",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Children Of The Atom",
+        "artists": "Voyager1",
+        "durationSeconds": 191,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Savage",
+        "artists": "Voyager1",
+        "durationSeconds": 160,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Starscream",
+        "artists": "Voyager1",
+        "durationSeconds": 169,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Come And Get Me",
+        "artists": "Voyager1",
+        "durationSeconds": 136,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Inspiration",
+        "artists": "Voyager1",
+        "durationSeconds": 152,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "new_infinity_bass_2025",
     "title": "Infinity Bass",
-    "img": "/img/albums/infinity-bass.png",
+    "img": "/img/albums/infinity-bass.webp",
     "poster": "Loïc Ghanem",
     "date": "2025",
     "sortedDate": "2025-01",
@@ -396,12 +2032,98 @@
     "order": 100,
     "createdAt": "2025-01-09T12:00:00.000Z",
     "updatedAt": "2025-01-09T12:00:00.000Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "infinity-bass",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/149bsk3fofO2geu2Leclh9",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Drop the Night",
+        "artists": "Voyager1",
+        "durationSeconds": 190,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Wub Dimension",
+        "artists": "Voyager1",
+        "durationSeconds": 188,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Lethal Bass",
+        "artists": "Voyager1",
+        "durationSeconds": 180,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "In Dub We Trust",
+        "artists": "Voyager1",
+        "durationSeconds": 195,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Jump Nation",
+        "artists": "Voyager1",
+        "durationSeconds": 200,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Take the Floor",
+        "artists": "Voyager1",
+        "durationSeconds": 223,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Remember the Feeling",
+        "artists": "Voyager1, Terence Langlois, Mehdi Major",
+        "durationSeconds": 198,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Strobe Attack",
+        "artists": "Voyager1",
+        "durationSeconds": 119,
+        "explicit": false
+      },
+      {
+        "position": 9,
+        "discNumber": 1,
+        "title": "Dance Voltage",
+        "artists": "Voyager1",
+        "durationSeconds": 198,
+        "explicit": false
+      },
+      {
+        "position": 10,
+        "discNumber": 1,
+        "title": "Cloud 9",
+        "artists": "Voyager1",
+        "durationSeconds": 219,
+        "explicit": false
+      }
+    ]
   },
   {
     "id": "new_k_style_2026",
     "title": "K-STYLE",
-    "img": "/img/albums/k-style.png",
+    "img": "/img/albums/k-style.webp",
     "poster": "Loïc Ghanem",
     "date": "Jun 2026",
     "sortedDate": "2026-06",
@@ -409,20 +2131,93 @@
     "listenLink": "https://fanlink.tv/K-Style",
     "spotifyEmbed": "https://open.spotify.com/album/6hV2opXqm4FRtuA4qVmBAg",
     "youtubeEmbed": "https://www.youtube.com/watch?v=fZovfCCBc0k&list=OLAK5uy_k27-CgowZUPfn4hwUfA9IfAexlXz0CcDs&index=2",
-    "collabName": "Thomas Frinking, Olivier Bibeau, Laurent Cuenca, NIKA, Devmo",
+    "collabName": "NIKA, DEVMO",
     "collabLink": null,
-    "descriptionsFr": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;K-STYLE&#x27;</em> est un album de K-pop sorti le 25 juin 2026 chez <span class=\"hover-green\">Justement Music</span> et publié par <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>. À travers huit titres, le projet revisite les codes de la K-pop en mêlant rap, R&amp;B, chiptune, électro, hyperpop et UK garage dans une production colorée et contemporaine.</p><p class=\"bigger\">Composé par <strong>Loïc Ghanem</strong>, Thomas Frinking, Olivier Bibeau et Laurent Cuenca, l&#x27;album accueille également NIKA et Devmo. Le mastering a été réalisé par Florent Sabaton et la pochette par Sally Hayles.</p><p class=\"bigger tracklist-title\">Tracklist :</p><ul class=\"bigger tracklist\"><li>1. Cosmo 101 - 02:58</li><li>2. Keep Me Around - 03:12</li><li>3. We&#x27;re On A Roll - 02:58</li><li>4. Happy Candy Hour - 02:45</li><li>5. Dance Studio (feat. NIKA) - 02:46</li><li>6. Me And My Girls (feat. Devmo) - 02:38</li><li>7. Adrenaline - 03:13</li><li>8. Cocktail - 02:18</li></ul></div>",
-    "descriptionsEn": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;K-STYLE&#x27;</em> is a K-pop album released on June 25, 2026 by <span class=\"hover-green\">Justement Music</span> and published by <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>. Across eight tracks, the project puts a fresh spin on K-pop by blending rap, R&amp;B, chiptune, electro, hyperpop and UK garage into a colorful, contemporary production.</p><p class=\"bigger\">Composed by <strong>Loïc Ghanem</strong>, Thomas Frinking, Olivier Bibeau and Laurent Cuenca, the album also features NIKA and Devmo. It was mastered by Florent Sabaton, with artwork by Sally Hayles.</p><p class=\"bigger tracklist-title\">Tracklist:</p><ul class=\"bigger tracklist\"><li>1. Cosmo 101 - 02:58</li><li>2. Keep Me Around - 03:12</li><li>3. We&#x27;re On A Roll - 02:58</li><li>4. Happy Candy Hour - 02:45</li><li>5. Dance Studio (feat. NIKA) - 02:46</li><li>6. Me And My Girls (feat. Devmo) - 02:38</li><li>7. Adrenaline - 03:13</li><li>8. Cocktail - 02:18</li></ul></div>",
+    "descriptionsFr": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;K-STYLE&#x27;</em> est un album de K-pop sorti le 25 juin 2026 chez <span class=\"hover-green\">Justement Music</span> et publié par <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>. À travers huit titres, le projet revisite les codes de la K-pop en mêlant rap, R&amp;B, chiptune, électro, hyperpop et UK garage dans une production colorée et contemporaine.</p><p class=\"bigger\">Les crédits artistes publiés avec l&#x27;album mentionnent également NIKA sur <em>Dance Studio</em> et DEVMO sur <em>Me And My Girls</em>.</p></div>",
+    "descriptionsEn": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;K-STYLE&#x27;</em> is a K-pop album released on June 25, 2026 by <span class=\"hover-green\">Justement Music</span> and published by <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>. Across eight tracks, the project puts a fresh spin on K-pop by blending rap, R&amp;B, chiptune, electro, hyperpop and UK garage into a colorful, contemporary production.</p><p class=\"bigger\">The artist credits published with the album also list NIKA on <em>Dance Studio</em> and DEVMO on <em>Me And My Girls</em>.</p></div>",
     "published": true,
     "order": 100,
     "createdAt": "2026-07-10T17:13:00.000Z",
     "updatedAt": "2026-07-10T17:13:00.000Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "k-style",
+    "releaseType": "Album",
+    "tracklistSourceUrl": "https://open.spotify.com/album/6hV2opXqm4FRtuA4qVmBAg",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Cosmo 101",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 178,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Keep Me Around",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 191,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "We're On A Roll",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 177,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Happy Candy Hour",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 164,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Dance Studio",
+        "artists": "Voyager1, NIKA",
+        "durationSeconds": 166,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Me And My Girls",
+        "artists": "Loic Ghanem, DEVMO",
+        "durationSeconds": 157,
+        "explicit": false
+      },
+      {
+        "position": 7,
+        "discNumber": 1,
+        "title": "Adrenaline",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 192,
+        "explicit": false
+      },
+      {
+        "position": 8,
+        "discNumber": 1,
+        "title": "Cocktail",
+        "artists": "Loic Ghanem",
+        "durationSeconds": 138,
+        "explicit": false
+      }
+    ],
+    "releaseDate": "2026-06-25T00:00:00.000Z",
+    "label": "Justement Music",
+    "publisher": "Montmorency Music Agency (MYMA)"
   },
   {
     "id": "new_obsession_2026",
     "title": "Obsession",
-    "img": "/img/albums/obsession.png",
+    "img": "/img/albums/obsession.webp",
     "poster": "Loïc Ghanem",
     "date": "May 2026",
     "sortedDate": "2026-05",
@@ -432,12 +2227,69 @@
     "youtubeEmbed": "https://www.youtube.com/watch?v=A9MI2tIOwBA&list=OLAK5uy_kyrHUntroyVhAv6hykNW5VcUZlUO4jM1o",
     "collabName": null,
     "collabLink": null,
-    "descriptionsFr": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;Obsession&#x27;</em> est un EP de six titres signé <strong>Voyager1</strong>, le projet électronique de Loïc Ghanem, sorti le 22 mai 2026 chez <span class=\"hover-green\">Superama Records</span> et publié par <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p><p class=\"bigger\">Entre rythmiques syncopées de Jersey club, pulsations UK garage et textures ambient, l&#x27;album construit un univers électronique à la fois énergique, mélodique et atmosphérique.</p><p class=\"bigger tracklist-title\">Tracklist :</p><ul class=\"bigger tracklist\"><li>1. Obsession - 03:45</li><li>2. Promises - 03:18</li><li>3. Raindrop - 03:27</li><li>4. Fate - 03:34</li><li>5. Heartbeat - 03:50</li><li>6. Creation of Time - 03:36</li></ul></div>",
-    "descriptionsEn": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;Obsession&#x27;</em> is a six-track EP by <strong>Voyager1</strong>, Loïc Ghanem&#x27;s electronic project, released on May 22, 2026 by <span class=\"hover-green\">Superama Records</span> and published by <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p><p class=\"bigger\">Blending the syncopated rhythms of Jersey club, UK garage grooves and ambient textures, the record creates an electronic world that feels energetic, melodic and atmospheric.</p><p class=\"bigger tracklist-title\">Tracklist:</p><ul class=\"bigger tracklist\"><li>1. Obsession - 03:45</li><li>2. Promises - 03:18</li><li>3. Raindrop - 03:27</li><li>4. Fate - 03:34</li><li>5. Heartbeat - 03:50</li><li>6. Creation of Time - 03:36</li></ul></div>",
+    "descriptionsFr": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;Obsession&#x27;</em> est un EP de six titres signé <strong>Voyager1</strong>, le projet électronique de Loïc Ghanem, sorti le 22 mai 2026 chez <span class=\"hover-green\">Superama Records</span> et publié par <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p><p class=\"bigger\">Entre rythmiques syncopées de Jersey club, pulsations UK garage et textures ambient, l&#x27;album construit un univers électronique à la fois énergique, mélodique et atmosphérique.</p></div>",
+    "descriptionsEn": "<div class=\"descriptions\"><p class=\"bigger\"><em>&#x27;Obsession&#x27;</em> is a six-track EP by <strong>Voyager1</strong>, Loïc Ghanem&#x27;s electronic project, released on May 22, 2026 by <span class=\"hover-green\">Superama Records</span> and published by <a href=\"https://myma-music.com/\">Montmorency Music Agency, MYMA</a>.</p><p class=\"bigger\">Blending the syncopated rhythms of Jersey club, UK garage grooves and ambient textures, the record creates an electronic world that feels energetic, melodic and atmospheric.</p></div>",
     "published": true,
     "order": 100,
     "createdAt": "2026-07-10T17:13:00.000Z",
     "updatedAt": "2026-07-10T17:13:00.000Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "obsession",
+    "releaseType": "EP",
+    "tracklistSourceUrl": "https://open.spotify.com/album/00nfh6z6vw7Mu8ar2vXHo2",
+    "tracklistVerifiedAt": "2026-07-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "position": 1,
+        "discNumber": 1,
+        "title": "Obsession",
+        "artists": "Voyager1, Superama Records",
+        "durationSeconds": 225,
+        "explicit": false
+      },
+      {
+        "position": 2,
+        "discNumber": 1,
+        "title": "Promises",
+        "artists": "Voyager1, Superama Records",
+        "durationSeconds": 198,
+        "explicit": false
+      },
+      {
+        "position": 3,
+        "discNumber": 1,
+        "title": "Raindrop",
+        "artists": "Voyager1, Superama Records",
+        "durationSeconds": 207,
+        "explicit": false
+      },
+      {
+        "position": 4,
+        "discNumber": 1,
+        "title": "Fate",
+        "artists": "Voyager1, Superama Records",
+        "durationSeconds": 214,
+        "explicit": false
+      },
+      {
+        "position": 5,
+        "discNumber": 1,
+        "title": "Heartbeat",
+        "artists": "Voyager1, Superama Records",
+        "durationSeconds": 230,
+        "explicit": false
+      },
+      {
+        "position": 6,
+        "discNumber": 1,
+        "title": "Creation of Time",
+        "artists": "Voyager1, Superama Records",
+        "durationSeconds": 216,
+        "explicit": false
+      }
+    ],
+    "releaseDate": "2026-05-22T00:00:00.000Z",
+    "label": "Superama Records",
+    "publisher": "Montmorency Music Agency (MYMA)"
   }
 ]

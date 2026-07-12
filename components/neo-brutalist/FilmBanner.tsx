@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { Pause, Play } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface FilmImage {
   src: string;
@@ -34,17 +36,30 @@ const filmCollages: FilmImage[] = [
 ];
 
 export const FilmBanner: React.FC<FilmBannerProps> = ({ speed = 40, pauseOnHover = true }) => {
-  // On triple les images pour assurer une boucle parfaite
-  const allImages = [...filmCollages, ...filmCollages, ...filmCollages];
+  const [isPaused, setIsPaused] = useState(false);
+  const t = useTranslations("home.banners");
+  const allImages = [...filmCollages, ...filmCollages];
 
   return (
-    <section className="overflow-hidden bg-neo-bg border-y-4 border-neo-border">
+    <section
+      className="relative overflow-hidden bg-neo-bg border-y-4 border-neo-border"
+      aria-label={t("productions")}
+    >
+      <button
+        type="button"
+        onClick={() => setIsPaused((paused) => !paused)}
+        className="absolute top-3 right-3 z-10 p-2 bg-neo-surface text-neo-text border-2 border-neo-border shadow-[3px_3px_0px_0px_var(--neo-shadow)]"
+        aria-label={isPaused ? t("resume") : t("pause")}
+      >
+        {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+      </button>
       <div className={pauseOnHover ? "group" : ""}>
         {/* Single animated track */}
         <div
           className={`flex w-max ${pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""}`}
           style={{
             animation: `scroll ${speed}s linear infinite`,
+            animationPlayState: isPaused ? "paused" : "running",
           }}
         >
           {allImages.map((img, idx) => {
@@ -61,7 +76,6 @@ export const FilmBanner: React.FC<FilmBannerProps> = ({ speed = 40, pauseOnHover
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 450px, (max-width: 1024px) 720px, 900px"
-                  priority={idx < 2}
                   aria-hidden={!isFirstSet}
                 />
               </div>
@@ -77,7 +91,7 @@ export const FilmBanner: React.FC<FilmBannerProps> = ({ speed = 40, pauseOnHover
             transform: translateX(0);
           }
           100% {
-            transform: translateX(calc(-100% / 3));
+            transform: translateX(-50%);
           }
         }
       `}</style>

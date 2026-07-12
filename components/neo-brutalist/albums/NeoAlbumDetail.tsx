@@ -15,12 +15,23 @@ import {
   Play,
   ChevronLeft,
   ChevronRight,
+  Clock,
 } from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoCard } from "../ui/NeoCard";
 import { NeoTag } from "../ui/NeoTag";
 import { GridBackground } from "../ui/GridBackground";
+
+interface AlbumTrack {
+  id: string;
+  position: number;
+  discNumber: number;
+  title: string;
+  artists: string | null;
+  durationSeconds: number | null;
+  explicit: boolean;
+}
 
 // Type pour les props des icônes
 interface IconProps {
@@ -91,6 +102,7 @@ const streamingPlatforms = [
 
 interface Album {
   id: string;
+  slug?: string | null;
   title: string;
   img: string;
   poster: string;
@@ -99,12 +111,20 @@ interface Album {
   style: string;
   listenLink: string;
   spotifyEmbed: string | null;
-  youtubeEmbed: string | null;
+  youtubeEmbed?: string | null;
   collabName: string | null;
   collabLink: string | null;
   descriptionsFr: string;
   descriptionsEn: string;
-  published: boolean;
+  published?: boolean;
+  releaseType?: string | null;
+  label?: string | null;
+  publisher?: string | null;
+  roleFr?: string | null;
+  roleEn?: string | null;
+  creditsFr?: string | null;
+  creditsEn?: string | null;
+  tracks?: AlbumTrack[];
 }
 
 interface NeoAlbumDetailProps {
@@ -141,6 +161,10 @@ export default function NeoAlbumDetail({
     currentIndex > 0 ? allAlbums[currentIndex - 1] : allAlbums[allAlbums.length - 1];
   const nextAlbum =
     currentIndex < allAlbums.length - 1 ? allAlbums[currentIndex + 1] : allAlbums[0];
+  const formatDuration = (seconds: number | null) => {
+    if (!seconds) return null;
+    return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+  };
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
@@ -162,11 +186,7 @@ export default function NeoAlbumDetail({
 
         <div className="container mx-auto px-4 md:px-6">
           {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="mb-8"
-          >
+          <motion.div initial={false} animate={{ opacity: 1, x: 0 }} className="mb-8">
             <Link
               href="/albums"
               className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase hover:text-neo-accent transition-colors group"
@@ -178,7 +198,7 @@ export default function NeoAlbumDetail({
 
           {/* ==================== MAIN HERO SECTION ==================== */}
           <motion.section
-            initial="hidden"
+            initial={false}
             animate="visible"
             variants={staggerContainer}
             className="mb-12 lg:mb-16"
@@ -241,6 +261,12 @@ export default function NeoAlbumDetail({
                         </span>
                       </div>
                     )}
+                    {album.label && (
+                      <div className="flex items-center gap-2">
+                        <Disc className="w-4 h-4 text-neo-accent" />
+                        <span className="font-mono text-sm">{album.label}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -254,11 +280,30 @@ export default function NeoAlbumDetail({
                       prose-p:font-mono prose-p:leading-relaxed prose-p:text-sm prose-p:mb-2
                       prose-strong:text-neo-accent prose-strong:font-bold
                       prose-a:text-neo-accent prose-a:no-underline hover:prose-a:underline
-                      line-clamp-6 lg:line-clamp-none"
+                      "
                     dangerouslySetInnerHTML={{
                       __html: locale === "fr" ? album.descriptionsFr : album.descriptionsEn,
                     }}
                   />
+                  {(locale === "fr"
+                    ? album.roleFr || album.creditsFr
+                    : album.roleEn || album.creditsEn) && (
+                    <div className="mt-5 pt-4 border-t-2 border-neo-border">
+                      <h2 className="font-mono text-xs uppercase text-neo-text/50 mb-2">
+                        {locale === "fr" ? "Contribution & crédits" : "Contribution & credits"}
+                      </h2>
+                      {(locale === "fr" ? album.roleFr : album.roleEn) && (
+                        <p className="font-mono text-sm leading-relaxed">
+                          {locale === "fr" ? album.roleFr : album.roleEn}
+                        </p>
+                      )}
+                      {(locale === "fr" ? album.creditsFr : album.creditsEn) && (
+                        <p className="font-mono text-sm leading-relaxed text-neo-text/70 mt-2">
+                          {locale === "fr" ? album.creditsFr : album.creditsEn}
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </motion.div>
 
@@ -344,6 +389,50 @@ export default function NeoAlbumDetail({
             </div>
           </motion.section>
 
+          {album.tracks && album.tracks.length > 0 && (
+            <section className="mb-10 lg:mb-12" aria-labelledby="tracklist-title">
+              <NeoCard padding="none" className="border-4 overflow-hidden">
+                <div className="bg-neo-text text-neo-text-inverse px-4 py-3 border-b-4 border-neo-border flex items-center justify-between gap-4">
+                  <h2
+                    id="tracklist-title"
+                    className="text-lg md:text-xl font-black uppercase tracking-tight"
+                  >
+                    {t("tracklist")}
+                  </h2>
+                  <span className="font-mono text-xs uppercase text-neo-text-inverse/70">
+                    {album.tracks.length} {t("tracks")}
+                  </span>
+                </div>
+                <ol className="grid grid-cols-1 md:grid-cols-2">
+                  {album.tracks.map((track) => (
+                    <li
+                      key={track.id}
+                      className="grid grid-cols-[2rem_1fr_auto] gap-2 items-center px-3 md:px-4 py-2 border-b border-neo-border/25 md:odd:border-r last:border-b-0 md:[&:nth-last-child(-n+2)]:border-b-0 hover:bg-neo-accent/10 transition-colors"
+                    >
+                      <span className="font-mono text-xs text-neo-text/50 tabular-nums">
+                        {String(track.position).padStart(2, "0")}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-bold text-sm truncate">{track.title}</p>
+                        {track.artists && (
+                          <p className="font-mono text-[11px] leading-tight text-neo-text/60 truncate">
+                            {track.artists}
+                          </p>
+                        )}
+                      </div>
+                      {formatDuration(track.durationSeconds) && (
+                        <span className="font-mono text-[11px] flex items-center gap-1 text-neo-text/60 tabular-nums">
+                          <Clock className="w-2.5 h-2.5" aria-hidden="true" />
+                          {formatDuration(track.durationSeconds)}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </NeoCard>
+            </section>
+          )}
+
           {/* ==================== ALBUM NAVIGATION ==================== */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
@@ -353,7 +442,7 @@ export default function NeoAlbumDetail({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {/* Previous Album */}
               <Link
-                href={{ pathname: "/albums/[id]", params: { id: prevAlbum.id } }}
+                href={{ pathname: "/albums/[id]", params: { id: prevAlbum.slug || prevAlbum.id } }}
                 className="group"
               >
                 <NeoCard hover="lift" padding="none" className="h-full border-4 overflow-hidden">
@@ -391,7 +480,7 @@ export default function NeoAlbumDetail({
 
               {/* Next Album */}
               <Link
-                href={{ pathname: "/albums/[id]", params: { id: nextAlbum.id } }}
+                href={{ pathname: "/albums/[id]", params: { id: nextAlbum.slug || nextAlbum.id } }}
                 className="group"
               >
                 <NeoCard hover="lift" padding="none" className="h-full border-4 overflow-hidden">

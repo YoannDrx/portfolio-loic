@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import AdminLayoutClient from "./AdminLayoutClient";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   robots: {
@@ -23,6 +25,7 @@ export default async function AdminLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const messages = await getMessages();
 
   // Vérifier l'authentification côté serveur
   const session = await auth.api.getSession({
@@ -43,8 +46,10 @@ export default async function AdminLayout({
   };
 
   return (
-    <AdminLayoutClient locale={locale} user={userData}>
-      {children}
-    </AdminLayoutClient>
+    <NextIntlClientProvider messages={messages}>
+      <AdminLayoutClient locale={locale} user={userData}>
+        {children}
+      </AdminLayoutClient>
+    </NextIntlClientProvider>
   );
 }

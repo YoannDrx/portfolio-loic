@@ -7,13 +7,11 @@ import {
   noContentResponse,
   ApiError,
 } from "@/lib/api/middleware";
-import {
-  serviceUpdateSchema,
-  type ServiceUpdateInput,
-} from "@/lib/validations/schemas";
+import { serviceUpdateSchema, type ServiceUpdateInput } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
 import { logCrud } from "@/lib/activity-logger";
+import { revalidateTag } from "next/cache";
 
 // ============================================
 // GET /api/admin/services/[id]
@@ -101,6 +99,7 @@ export const PATCH = withAuthAndValidation(
         updatedFields: Object.keys(data),
       });
 
+      revalidateTag("services", "max");
       return successResponse(service);
     } catch (error) {
       return handleApiError(error);
@@ -134,6 +133,7 @@ export const DELETE = withAuth(async (_req, context, user) => {
     // Logger l'action (avec le titre sauvegardé avant suppression)
     await logCrud("delete", "service", id, existingService.title, user.id);
 
+    revalidateTag("services", "max");
     return noContentResponse();
   } catch (error) {
     return handleApiError(error);

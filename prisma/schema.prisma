@@ -74,30 +74,60 @@ model Verification {
 }
 
 model Album {
-  id             String   @id @default(cuid())
-  title          String
-  img            String
-  poster         String
-  date           String
-  sortedDate     String
-  style          String
-  listenLink     String
-  spotifyEmbed   String?
-  youtubeEmbed   String?
-  collabName     String?
-  collabLink     String?
-  descriptionsFr String
-  descriptionsEn String
-  published      Boolean  @default(true)
-  order          Int      @default(0)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  createdById    String?
-  createdBy      User?    @relation(fields: [createdById], references: [id])
+  id                  String       @id @default(cuid())
+  slug                String?      @unique
+  title               String
+  img                 String
+  poster              String
+  date                String
+  sortedDate          String
+  style               String
+  listenLink          String
+  spotifyEmbed        String?
+  youtubeEmbed        String?
+  collabName          String?
+  collabLink          String?
+  descriptionsFr      String
+  descriptionsEn      String
+  releaseDate         DateTime?
+  releaseType         String?
+  label               String?
+  publisher           String?
+  roleFr              String?
+  roleEn              String?
+  creditsFr           String?
+  creditsEn           String?
+  tracklistSourceUrl  String?
+  tracklistVerifiedAt DateTime?
+  published           Boolean      @default(true)
+  order               Int          @default(0)
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  createdById         String?
+  createdBy           User?        @relation(fields: [createdById], references: [id])
+  tracks              AlbumTrack[]
 
   @@index([published, sortedDate])
   @@index([style])
   @@map("albums")
+}
+
+model AlbumTrack {
+  id              String   @id @default(cuid())
+  albumId         String
+  position        Int
+  discNumber      Int      @default(1)
+  title           String
+  artists         String?
+  durationSeconds Int?
+  explicit        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  album           Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+
+  @@unique([albumId, discNumber, position])
+  @@index([albumId, discNumber, position])
+  @@map("album_tracks")
 }
 
 model Video {
@@ -121,6 +151,7 @@ model Video {
 
 model Service {
   id              String   @id @default(cuid())
+  slug            String?  @unique
   no              String
   title           String
   text            String
@@ -141,6 +172,34 @@ model Service {
 
   @@index([published, order])
   @@map("services")
+}
+
+model ContactMessage {
+  id            String    @id @default(cuid())
+  name          String
+  email         String
+  company       String?
+  projectType   String
+  projectFormat String?
+  deadline      String?
+  budget        String?
+  references    String?
+  subject       String?
+  message       String
+  locale        String    @default("fr")
+  status        String    @default("new")
+  emailStatus   String    @default("pending")
+  emailError    String?
+  rateLimitKey  String
+  processedAt   DateTime?
+  expiresAt     DateTime
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+  @@index([rateLimitKey, createdAt(sort: Desc)])
+  @@index([expiresAt])
+  @@map("contact_messages")
 }
 
 model ContentVersion {

@@ -7,13 +7,11 @@ import {
   noContentResponse,
   ApiError,
 } from "@/lib/api/middleware";
-import {
-  albumUpdateSchema,
-  type AlbumUpdateInput,
-} from "@/lib/validations/schemas";
+import { albumUpdateSchema, type AlbumUpdateInput } from "@/lib/validations/schemas";
 import { sanitizeDescription } from "@/lib/sanitize";
 import { createVersion } from "@/lib/versioning";
 import { logCrud } from "@/lib/activity-logger";
+import { revalidateTag } from "next/cache";
 
 // ============================================
 // GET /api/admin/albums/[id]
@@ -68,7 +66,30 @@ export const PATCH = withAuthAndValidation(
       }
 
       // Préparer les données de mise à jour
-      const updateData: Partial<AlbumUpdateInput> = { ...data };
+      const { tracks, releaseDate, ...albumInput } = data;
+      const updateData: Record<string, unknown> = {
+        ...albumInput,
+        ...(albumInput.slug !== undefined ? { slug: albumInput.slug || null } : {}),
+        ...(albumInput.releaseType !== undefined
+          ? { releaseType: albumInput.releaseType || null }
+          : {}),
+        ...(albumInput.label !== undefined ? { label: albumInput.label || null } : {}),
+        ...(albumInput.publisher !== undefined ? { publisher: albumInput.publisher || null } : {}),
+        ...(albumInput.roleFr !== undefined ? { roleFr: albumInput.roleFr || null } : {}),
+        ...(albumInput.roleEn !== undefined ? { roleEn: albumInput.roleEn || null } : {}),
+        ...(albumInput.creditsFr !== undefined ? { creditsFr: albumInput.creditsFr || null } : {}),
+        ...(albumInput.creditsEn !== undefined ? { creditsEn: albumInput.creditsEn || null } : {}),
+        ...(albumInput.tracklistSourceUrl !== undefined
+          ? { tracklistSourceUrl: albumInput.tracklistSourceUrl || null }
+          : {}),
+        ...(releaseDate !== undefined
+          ? { releaseDate: releaseDate ? new Date(releaseDate) : null }
+          : {}),
+        ...(tracks
+          ? { tracks: { deleteMany: {}, create: tracks.map(({ id: _id, ...track }) => track) } }
+          : {}),
+        ...(tracks && albumInput.tracklistSourceUrl ? { tracklistVerifiedAt: new Date() } : {}),
+      };
 
       // Sanitizer les descriptions si elles sont fournies
       if (data.descriptionsFr) {
@@ -101,6 +122,7 @@ export const PATCH = withAuthAndValidation(
         updatedFields: Object.keys(data),
       });
 
+      revalidateTag("albums", "max");
       return successResponse(album);
     } catch (error) {
       return handleApiError(error);
@@ -134,6 +156,7 @@ export const DELETE = withAuth(async (_req, context, user) => {
     // Logger l'action (avec le titre sauvegardé avant suppression)
     await logCrud("delete", "album", id, existingAlbum.title, user.id);
 
+    revalidateTag("albums", "max");
     return noContentResponse();
   } catch (error) {
     return handleApiError(error);

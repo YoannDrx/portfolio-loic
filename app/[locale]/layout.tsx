@@ -6,7 +6,7 @@ import { routing } from "@/i18n/routing";
 import { Providers } from "../providers";
 import { LayoutContent } from "./layout-content";
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://loicghanem.com";
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.loic-ghanem.com";
 
 const seoContent = {
   en: {
@@ -128,9 +128,12 @@ export default async function LocaleLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
+  const publicMessages = Object.fromEntries(
+    Object.entries(messages).filter(([namespace]) => namespace !== "admin")
+  );
 
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider messages={publicMessages}>
       <Providers>
         <LayoutContent>{children}</LayoutContent>
       </Providers>

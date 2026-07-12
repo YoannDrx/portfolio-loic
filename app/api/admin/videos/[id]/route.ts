@@ -7,12 +7,10 @@ import {
   noContentResponse,
   ApiError,
 } from "@/lib/api/middleware";
-import {
-  videoUpdateSchema,
-  type VideoUpdateInput,
-} from "@/lib/validations/schemas";
+import { videoUpdateSchema, type VideoUpdateInput } from "@/lib/validations/schemas";
 import { createVersion } from "@/lib/versioning";
 import { logCrud } from "@/lib/activity-logger";
+import { revalidateTag } from "next/cache";
 
 // ============================================
 // GET /api/admin/videos/[id]
@@ -89,6 +87,7 @@ export const PATCH = withAuthAndValidation(
         updatedFields: Object.keys(data),
       });
 
+      revalidateTag("videos", "max");
       return successResponse(video);
     } catch (error) {
       return handleApiError(error);
@@ -122,6 +121,7 @@ export const DELETE = withAuth(async (_req, context, user) => {
     // Logger l'action (avec le titre sauvegardé avant suppression)
     await logCrud("delete", "video", id, existingVideo.title, user.id);
 
+    revalidateTag("videos", "max");
     return noContentResponse();
   } catch (error) {
     return handleApiError(error);

@@ -182,7 +182,7 @@ export const NeoFooter = () => {
                   </div>
 
                   <span className="truncate group-hover:translate-x-1 transition-transform">
-                    Email Me
+                    {t("emailMe")}
                   </span>
                 </a>
 

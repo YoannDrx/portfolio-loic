@@ -255,7 +255,7 @@ const TestimonialsCarousel = ({
   );
 };
 
-export const NeoAbout = ({ locale }: { locale: string }) => {
+export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: number }) => {
   const t = useTranslations("about");
   const [imageModal, setImageModal] = useState<{ src: string; title: string } | null>(null);
   const [descriptionModal, setDescriptionModal] = useState<{
@@ -310,10 +310,10 @@ export const NeoAbout = ({ locale }: { locale: string }) => {
   ];
 
   const stats = [
-    { val: "20", label: t("achievements.albums") },
+    { val: String(albumCount), label: t("achievements.albums") },
     { val: "8", label: t("achievements.labels") },
     { val: "4", label: t("achievements.publishers") },
-    { val: "14", label: t("achievements.years") },
+    { val: String(new Date().getFullYear() - 2011), label: t("achievements.years") },
   ];
 
   type LocalizedText = { fr: string; en: string };

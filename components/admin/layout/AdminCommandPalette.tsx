@@ -17,6 +17,7 @@ import {
   Command,
   ArrowRight,
   Clock,
+  Mail,
 } from "lucide-react";
 import { adminCommandBackdrop, adminCommandContent, adminCommandItem } from "@/lib/animations";
 
@@ -83,6 +84,15 @@ const getCommandItems = (locale: string, _router: ReturnType<typeof useRouter>):
     icon: Briefcase,
     href: `/${locale}/admin/services`,
     color: "text-[var(--admin-neon-purple)]",
+  },
+  {
+    id: "nav-contact-messages",
+    label: "Contacts",
+    description: "Gérer les demandes reçues",
+    category: "navigation",
+    icon: Mail,
+    href: `/${locale}/admin/contact`,
+    color: "text-[var(--admin-neon-cyan)]",
   },
   {
     id: "nav-cv",

@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   Image,
@@ -16,8 +16,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Command,
+  Mail,
   type LucideIcon,
-} from 'lucide-react';
+} from "lucide-react";
 
 /* ============================================
    TYPES
@@ -43,39 +44,45 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   {
     icon: LayoutDashboard,
-    label: 'Dashboard',
-    href: '/admin',
-    accentColor: '#00F0FF',
+    label: "Dashboard",
+    href: "/admin",
+    accentColor: "#00F0FF",
   },
   {
     icon: Image,
-    label: 'Albums',
-    href: '/admin/albums',
-    accentColor: '#D5FF0A',
+    label: "Albums",
+    href: "/admin/albums",
+    accentColor: "#D5FF0A",
   },
   {
     icon: Video,
-    label: 'Vidéos',
-    href: '/admin/videos',
-    accentColor: '#FF006E',
+    label: "Vidéos",
+    href: "/admin/videos",
+    accentColor: "#FF006E",
   },
   {
     icon: Briefcase,
-    label: 'Services',
-    href: '/admin/services',
-    accentColor: '#8B5CF6',
+    label: "Services",
+    href: "/admin/services",
+    accentColor: "#8B5CF6",
+  },
+  {
+    icon: Mail,
+    label: "Contacts",
+    href: "/admin/contact",
+    accentColor: "#00F0FF",
   },
   {
     icon: FileText,
-    label: 'CV / Resume',
-    href: '/admin/cv',
-    accentColor: '#FF3300',
+    label: "CV / Resume",
+    href: "/admin/cv",
+    accentColor: "#FF3300",
   },
   {
     icon: Settings,
-    label: 'Paramètres',
-    href: '/admin/settings',
-    accentColor: '#64748B',
+    label: "Paramètres",
+    href: "/admin/settings",
+    accentColor: "#64748B",
   },
 ];
 
@@ -91,11 +98,11 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
     <motion.aside
       initial={false}
       animate={{ width: isCollapsed ? 80 : 280 }}
-      transition={{ duration: 0.2, ease: 'easeInOut' }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
       className={cn(
-        'hidden lg:flex flex-col h-screen',
-        'bg-neo-bg border-r-4 border-neo-border',
-        'relative z-20'
+        "hidden lg:flex flex-col h-screen",
+        "bg-neo-bg border-r-4 border-neo-border",
+        "relative z-20"
       )}
     >
       {/* Logo Section */}
@@ -131,14 +138,14 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
           <button
             onClick={onOpenCommandPalette}
             className={cn(
-              'w-full flex items-center gap-2 px-3 py-2',
-              'bg-neo-surface border-2 border-neo-border',
-              'text-neo-text/60 hover:text-neo-text hover:bg-neo-bg-alt',
-              'font-mono text-xs uppercase tracking-wider',
-              'transition-all duration-200',
-              'shadow-[2px_2px_0px_0px_var(--neo-shadow)]',
-              'hover:shadow-[3px_3px_0px_0px_var(--neo-shadow)]',
-              isCollapsed ? 'justify-center' : 'justify-between'
+              "w-full flex items-center gap-2 px-3 py-2",
+              "bg-neo-surface border-2 border-neo-border",
+              "text-neo-text/60 hover:text-neo-text hover:bg-neo-bg-alt",
+              "font-mono text-xs uppercase tracking-wider",
+              "transition-all duration-200",
+              "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+              "hover:shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+              isCollapsed ? "justify-center" : "justify-between"
             )}
           >
             <div className="flex items-center gap-2">
@@ -172,7 +179,7 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
         {menuItems.map((item) => {
           const isActive =
             pathname === `/${locale}${item.href}` ||
-            (item.href !== '/admin' && pathname.startsWith(`/${locale}${item.href}`));
+            (item.href !== "/admin" && pathname.startsWith(`/${locale}${item.href}`));
           const Icon = item.icon;
 
           return (
@@ -180,14 +187,14 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
               key={item.href}
               href={`/${locale}${item.href}`}
               className={cn(
-                'group flex items-center gap-3 px-3 py-3',
-                'font-mono text-sm font-bold uppercase tracking-wide',
-                'transition-all duration-200 relative',
-                'border-2',
+                "group flex items-center gap-3 px-3 py-3",
+                "font-mono text-sm font-bold uppercase tracking-wide",
+                "transition-all duration-200 relative",
+                "border-2",
                 isActive
-                  ? 'bg-neo-text text-neo-bg border-neo-border shadow-[4px_4px_0px_0px_var(--neo-shadow)]'
-                  : 'bg-transparent text-neo-text/70 border-transparent hover:bg-neo-surface hover:border-neo-border hover:shadow-[2px_2px_0px_0px_var(--neo-shadow)]',
-                isCollapsed ? 'justify-center' : ''
+                  ? "bg-neo-text text-neo-bg border-neo-border shadow-[4px_4px_0px_0px_var(--neo-shadow)]"
+                  : "bg-transparent text-neo-text/70 border-transparent hover:bg-neo-surface hover:border-neo-border hover:shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+                isCollapsed ? "justify-center" : ""
               )}
             >
               {/* Active indicator */}
@@ -200,8 +207,8 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
 
               <Icon
                 className={cn(
-                  'h-5 w-5 transition-colors shrink-0',
-                  isActive ? 'text-neo-accent' : ''
+                  "h-5 w-5 transition-colors shrink-0",
+                  isActive ? "text-neo-accent" : ""
                 )}
                 style={isActive ? { color: item.accentColor } : {}}
               />
@@ -233,17 +240,16 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
 
       {/* Footer */}
       <div className="px-3 py-4 border-t-4 border-neo-border bg-neo-surface">
-        <div className={cn(
-          'flex items-center',
-          isCollapsed ? 'justify-center' : 'justify-between'
-        )}>
+        <div
+          className={cn("flex items-center", isCollapsed ? "justify-center" : "justify-between")}
+        >
           <Link
             href={`/${locale}`}
             className={cn(
-              'flex items-center gap-2 px-3 py-2',
-              'text-xs font-mono font-bold text-neo-text/60 uppercase tracking-widest',
-              'hover:text-neo-accent transition-colors group',
-              isCollapsed && 'px-2'
+              "flex items-center gap-2 px-3 py-2",
+              "text-xs font-mono font-bold text-neo-text/60 uppercase tracking-widest",
+              "hover:text-neo-accent transition-colors group",
+              isCollapsed && "px-2"
             )}
           >
             <Home className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -256,19 +262,15 @@ export function NeoAdminSidebar({ locale, onOpenCommandPalette }: NeoAdminSideba
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
         className={cn(
-          'absolute top-1/2 -translate-y-1/2 -right-4',
-          'w-8 h-8 flex items-center justify-center',
-          'bg-neo-bg border-2 border-neo-border',
-          'text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse',
-          'shadow-[2px_2px_0px_0px_var(--neo-shadow)]',
-          'transition-all duration-200'
+          "absolute top-1/2 -translate-y-1/2 -right-4",
+          "w-8 h-8 flex items-center justify-center",
+          "bg-neo-bg border-2 border-neo-border",
+          "text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse",
+          "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+          "transition-all duration-200"
         )}
       >
-        {isCollapsed ? (
-          <ChevronRight className="h-4 w-4" />
-        ) : (
-          <ChevronLeft className="h-4 w-4" />
-        )}
+        {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
       </button>
     </motion.aside>
   );

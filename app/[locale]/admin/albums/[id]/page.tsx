@@ -14,6 +14,7 @@ export default async function EditAlbumPage({
 
   const album = await prisma.album.findUnique({
     where: { id },
+    include: { tracks: { orderBy: [{ discNumber: "asc" }, { position: "asc" }] } },
   });
 
   if (!album) {
@@ -27,6 +28,16 @@ export default async function EditAlbumPage({
     youtubeEmbed: album.youtubeEmbed ?? undefined,
     collabName: album.collabName ?? undefined,
     collabLink: album.collabLink ?? undefined,
+    slug: album.slug ?? undefined,
+    releaseDate: album.releaseDate?.toISOString().slice(0, 10),
+    releaseType: album.releaseType ?? undefined,
+    label: album.label ?? undefined,
+    publisher: album.publisher ?? undefined,
+    roleFr: album.roleFr ?? undefined,
+    roleEn: album.roleEn ?? undefined,
+    creditsFr: album.creditsFr ?? undefined,
+    creditsEn: album.creditsEn ?? undefined,
+    tracklistSourceUrl: album.tracklistSourceUrl ?? undefined,
   };
 
   return (

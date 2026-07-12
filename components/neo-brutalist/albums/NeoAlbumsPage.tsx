@@ -12,9 +12,11 @@ import { BrutalistButton } from "../ui/BrutalistButton";
 import { NeoTag } from "../ui/NeoTag";
 import { GridBackground } from "../ui/GridBackground";
 import { Link } from "@/i18n/routing";
+import Image from "next/image";
 
 interface Album {
   id: string;
+  slug?: string | null;
   title: string;
   img: string | null;
   style: string | null;
@@ -101,14 +103,21 @@ interface AlbumCardProps {
 }
 
 const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre }) => {
+  const t = useTranslations("albums");
+  const detailId = album.slug || album.id;
   return (
     <motion.div variants={fadeInUp} layout className="group relative">
       {/* Cover */}
       <div className="aspect-square border-4 border-neo-border bg-neo-bg-alt relative overflow-hidden shadow-[8px_8px_0px_0px_var(--neo-accent)] md:group-hover:shadow-[12px_12px_0px_0px_var(--neo-accent)] transition-all duration-300">
-        <div
-          className="w-full h-full bg-cover bg-center md:group-hover:scale-105 transition-transform duration-500"
-          style={{ backgroundImage: album.img ? `url(${album.img})` : undefined }}
-        />
+        {album.img && (
+          <Image
+            src={album.img}
+            alt={`${album.title} — pochette de l'album`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover md:group-hover:scale-105 transition-transform duration-500"
+          />
+        )}
         {!album.img && (
           <div className="absolute inset-0 flex items-center justify-center">
             <Disc className="w-20 h-20 opacity-20" />
@@ -117,10 +126,10 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre }) => {
         {/* Overlay with action - desktop only (hover) */}
         <div className="hidden md:flex absolute inset-0 flex-col items-center justify-center bg-neo-text/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Link
-            href={{ pathname: "/albums/[id]", params: { id: album.id } }}
+            href={{ pathname: "/albums/[id]", params: { id: detailId } }}
             className="flex items-center gap-2 px-5 py-3 bg-neo-bg text-neo-text font-mono text-sm font-bold uppercase border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse transition-colors shadow-[4px_4px_0px_0px_var(--neo-border)]"
           >
-            <span>Voir album</span>
+            <span>{t("viewAlbum")}</span>
             <ExternalLink size={14} />
           </Link>
         </div>
@@ -129,10 +138,10 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre }) => {
       {/* Action button - mobile only (always visible) */}
       <div className="flex md:hidden mt-3 mb-3">
         <Link
-          href={{ pathname: "/albums/[id]", params: { id: album.id } }}
+          href={{ pathname: "/albums/[id]", params: { id: detailId } }}
           className="w-full flex items-center justify-center gap-2 py-2.5 bg-neo-bg text-neo-text font-mono text-xs font-bold uppercase border-2 border-neo-border active:scale-95 transition-transform shadow-[3px_3px_0px_0px_var(--neo-border)]"
         >
-          <span>Voir album</span>
+          <span>{t("viewAlbum")}</span>
           <ExternalLink size={12} />
         </Link>
       </div>
@@ -141,7 +150,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre }) => {
       <div className="hidden md:block h-6" />
 
       {/* Info */}
-      <Link href={{ pathname: "/albums/[id]", params: { id: album.id } }} className="block">
+      <Link href={{ pathname: "/albums/[id]", params: { id: detailId } }} className="block">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <h3 className="text-xl md:text-2xl font-black uppercase leading-tight mb-2 truncate text-neo-text md:hover:text-neo-accent transition-colors">
@@ -196,7 +205,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
       total: albums.length,
       genres: "∞",
       collaborations: albums.filter((a) => a.collabName).length,
-      years: "2018 - 2026",
+      years: `2018 - ${new Date().getFullYear()}`,
     }),
     [albums]
   );

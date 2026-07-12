@@ -63,22 +63,54 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
     let localCreated = 0;
 
     for (const item of transformed) {
-      const albumData = item as { id: string } & Record<string, unknown>;
+      const { tracks = [], ...albumData } = item as {
+        id: string;
+        tracks?: Prisma.AlbumTrackCreateWithoutAlbumInput[];
+      } & Record<string, unknown>;
       const existing = await prisma.album.findUnique({ where: { id: albumData.id } });
 
       if (!existing) {
         await prisma.album.create({
-          data: albumData as Parameters<typeof prisma.album.create>[0]["data"],
+          data: {
+            ...(albumData as Parameters<typeof prisma.album.create>[0]["data"]),
+            tracks: { create: tracks },
+          },
         });
         localCreated++;
         createdCount++;
       } else if (force) {
         await prisma.album.update({
           where: { id: albumData.id },
-          data: albumData as Parameters<typeof prisma.album.update>[0]["data"],
+          data: {
+            ...(albumData as Parameters<typeof prisma.album.update>[0]["data"]),
+            tracks: { deleteMany: {}, create: tracks },
+          },
         });
         updatedCount++;
       } else {
+        // Slugs and verified tracklists are safe additive enrichments and must
+        // also reach existing production albums without overwriting copy.
+        await prisma.album.update({
+          where: { id: albumData.id },
+          data: {
+            slug: albumData.slug as string | undefined,
+            img: albumData.img as string,
+            releaseDate: albumData.releaseDate as Date | undefined,
+            releaseType: albumData.releaseType as string | undefined,
+            label: albumData.label as string | undefined,
+            publisher: albumData.publisher as string | undefined,
+            tracklistSourceUrl: albumData.tracklistSourceUrl as string | undefined,
+            tracklistVerifiedAt: albumData.tracklistVerifiedAt as Date | undefined,
+            ...(albumData.id === "new_k_style_2026"
+              ? {
+                  collabName: albumData.collabName as string | undefined,
+                  descriptionsFr: albumData.descriptionsFr as string,
+                  descriptionsEn: albumData.descriptionsEn as string,
+                }
+              : {}),
+            tracks: { deleteMany: {}, create: tracks },
+          },
+        });
         skippedCount++;
       }
     }
@@ -139,6 +171,12 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
         });
         updatedCount++;
       } else {
+        if (serviceData.slug) {
+          await prisma.service.update({
+            where: { id: serviceData.id },
+            data: { slug: serviceData.slug as string },
+          });
+        }
         skippedCount++;
       }
     }

@@ -6,11 +6,10 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-
 import { Link, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { Settings, LogOut, User, Lock } from "lucide-react";
+import { Settings, LogOut, User } from "lucide-react";
 import { LanguageSwitcher } from "./ui/LanguageSwitcher";
 import { PaletteSelector } from "./ui/PaletteSelector";
 import { NeoLogo } from "./NeoLogo";
-import { NeoLoginModal } from "./auth/NeoLoginModal";
 import { useSession, signOut } from "@/lib/auth-client";
 
 interface NavItem {
@@ -58,7 +57,6 @@ const menuItemVariants = {
 
 export const NeoNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const { scrollY } = useScroll();
@@ -94,11 +92,19 @@ export const NeoNavbar = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
   return (
     <nav
       className={cn(
-        "fixed w-full z-40 bg-neo-bg border-b-2 border-neo-border transition-transform duration-300",
-        !isVisible && !isMenuOpen ? "-translate-y-full lg:translate-y-0" : "translate-y-0"
+        "fixed w-full z-40 bg-neo-bg border-b-2 border-neo-border transition-transform duration-300 will-change-transform",
+        !isVisible && !isMenuOpen ? "-translate-y-full" : "translate-y-0"
       )}
     >
       <div className="container mx-auto px-3 sm:px-4 py-3 lg:py-4 flex justify-between items-center">
@@ -171,14 +177,7 @@ export const NeoNavbar = () => {
                 </>
               )}
             </div>
-          ) : (
-            <button
-              onClick={() => setIsLoginModalOpen(true)}
-              className="hidden lg:flex w-9 h-9 items-center justify-center bg-neo-surface text-neo-text border-2 border-neo-border hover:bg-neo-accent hover:text-neo-text-inverse transition-colors duration-150"
-            >
-              <Lock className="w-4 h-4" />
-            </button>
-          )}
+          ) : null}
 
           <PaletteSelector />
           <LanguageSwitcher />
@@ -187,7 +186,9 @@ export const NeoNavbar = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden w-9 h-9 flex items-center justify-center bg-neo-text border-2 border-neo-border hover:bg-neo-accent transition-colors duration-150 relative z-[60] overflow-visible"
-            aria-label="Toggle menu"
+            aria-label={t("toggleMenu")}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             <div className="flex flex-col justify-center items-center gap-1">
               <div
@@ -265,6 +266,8 @@ export const NeoNavbar = () => {
               {/* Navigation content */}
               <div className="min-h-screen flex flex-col justify-start px-8 pt-4 pb-16">
                 <motion.nav
+                  id="mobile-navigation"
+                  aria-label={t("navigation")}
                   variants={menuContainerVariants}
                   initial="hidden"
                   animate="visible"
@@ -321,18 +324,7 @@ export const NeoNavbar = () => {
                           <LogOut className="w-4 h-4" />
                         </button>
                       </>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setIsMenuOpen(false);
-                          setIsLoginModalOpen(true);
-                        }}
-                        className="p-2 border-2 border-neo-border bg-neo-surface text-neo-text hover:bg-neo-accent hover:text-white transition-colors"
-                        aria-label={t("admin")}
-                      >
-                        <Lock className="w-4 h-4" />
-                      </button>
-                    )}
+                    ) : null}
                   </div>
                 </motion.div>
               </div>
@@ -340,9 +332,6 @@ export const NeoNavbar = () => {
           </AnimatePresence>,
           document.body
         )}
-
-      {/* Login Modal */}
-      <NeoLoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     </nav>
   );
 };

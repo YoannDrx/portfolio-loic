@@ -16,7 +16,8 @@
     "order": 0,
     "createdAt": "2025-11-21T16:50:42.431Z",
     "updatedAt": "2025-11-21T16:50:42.431Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "composition"
   },
   {
     "id": "cmi93jmpk0001sk1cit3eklif",
@@ -35,7 +36,8 @@
     "order": 1,
     "createdAt": "2025-11-21T16:50:42.488Z",
     "updatedAt": "2025-11-21T16:50:42.488Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "production"
   },
   {
     "id": "cmi93jmqh0002sk1cex8mjma6",
@@ -54,7 +56,8 @@
     "order": 2,
     "createdAt": "2025-11-21T16:50:42.522Z",
     "updatedAt": "2025-11-21T16:50:42.522Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "arranging"
   },
   {
     "id": "cmi93jmrd0003sk1cp5i19scd",
@@ -73,7 +76,8 @@
     "order": 3,
     "createdAt": "2025-11-21T16:50:42.554Z",
     "updatedAt": "2025-11-21T16:50:42.554Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "preparation-correction-et-traitement-vocal"
   },
   {
     "id": "cmi93jmsm0004sk1cga3m252d",
@@ -92,7 +96,8 @@
     "order": 4,
     "createdAt": "2025-11-21T16:50:42.598Z",
     "updatedAt": "2025-11-21T16:50:42.598Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "mixing"
   },
   {
     "id": "cmi93jmtl0005sk1c31jchbnx",
@@ -111,6 +116,7 @@
     "order": 5,
     "createdAt": "2025-11-21T16:50:42.633Z",
     "updatedAt": "2025-11-21T16:50:42.633Z",
-    "createdById": null
+    "createdById": null,
+    "slug": "mastering"
   }
 ]

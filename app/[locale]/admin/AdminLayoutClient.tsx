@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { NeoAdminSidebar, NeoAdminHeader } from '@/components/admin/neo';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { NeoAdminSidebar, NeoAdminHeader } from "@/components/admin/neo";
 import {
   AdminCommandPalette,
   useCommandPalette,
   ToastContainer,
   useToast,
   setGlobalToastHandler,
-} from '@/components/admin/layout';
-import { useAdminShortcuts } from '@/hooks/useAdminShortcuts';
-import { cn } from '@/lib/utils';
-import { X } from 'lucide-react';
+} from "@/components/admin/layout";
+import { useAdminShortcuts } from "@/hooks/useAdminShortcuts";
+import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 
 interface AdminLayoutClientProps {
   children: React.ReactNode;
@@ -25,11 +25,7 @@ interface AdminLayoutClientProps {
   };
 }
 
-export default function AdminLayoutClient({
-  children,
-  locale,
-  user,
-}: AdminLayoutClientProps) {
+export default function AdminLayoutClient({ children, locale, user }: AdminLayoutClientProps) {
   const commandPalette = useCommandPalette();
   const toastSystem = useToast();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -75,7 +71,7 @@ export default function AdminLayoutClient({
                 initial={{ x: -300 }}
                 animate={{ x: 0 }}
                 exit={{ x: -300 }}
-                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
                 className="fixed inset-y-0 left-0 z-50 w-72 lg:hidden"
               >
                 <div className="h-full bg-neo-bg border-r-4 border-neo-border flex flex-col">
@@ -84,11 +80,11 @@ export default function AdminLayoutClient({
                     <button
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
-                        'w-10 h-10 flex items-center justify-center',
-                        'border-2 border-neo-border bg-neo-surface',
-                        'text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse',
-                        'shadow-[2px_2px_0px_0px_var(--neo-shadow)]',
-                        'transition-all duration-200'
+                        "w-10 h-10 flex items-center justify-center",
+                        "border-2 border-neo-border bg-neo-surface",
+                        "text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse",
+                        "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+                        "transition-all duration-200"
                       )}
                     >
                       <X className="h-5 w-5" />
@@ -97,12 +93,41 @@ export default function AdminLayoutClient({
 
                   {/* Mobile Navigation (simplified) */}
                   <nav className="flex-1 p-4 space-y-2">
-                    <MobileNavLink href={`/${locale}/admin`} label="Dashboard" onClick={() => setIsMobileMenuOpen(false)} />
-                    <MobileNavLink href={`/${locale}/admin/albums`} label="Albums" onClick={() => setIsMobileMenuOpen(false)} />
-                    <MobileNavLink href={`/${locale}/admin/videos`} label="Vidéos" onClick={() => setIsMobileMenuOpen(false)} />
-                    <MobileNavLink href={`/${locale}/admin/services`} label="Services" onClick={() => setIsMobileMenuOpen(false)} />
-                    <MobileNavLink href={`/${locale}/admin/cv`} label="CV / Resume" onClick={() => setIsMobileMenuOpen(false)} />
-                    <MobileNavLink href={`/${locale}/admin/settings`} label="Paramètres" onClick={() => setIsMobileMenuOpen(false)} />
+                    <MobileNavLink
+                      href={`/${locale}/admin`}
+                      label="Dashboard"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                    <MobileNavLink
+                      href={`/${locale}/admin/albums`}
+                      label="Albums"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                    <MobileNavLink
+                      href={`/${locale}/admin/videos`}
+                      label="Vidéos"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                    <MobileNavLink
+                      href={`/${locale}/admin/services`}
+                      label="Services"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                    <MobileNavLink
+                      href={`/${locale}/admin/contact`}
+                      label="Contacts"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                    <MobileNavLink
+                      href={`/${locale}/admin/cv`}
+                      label="CV / Resume"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                    <MobileNavLink
+                      href={`/${locale}/admin/settings`}
+                      label="Paramètres"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    />
                   </nav>
                 </div>
               </motion.div>
@@ -152,18 +177,26 @@ export default function AdminLayoutClient({
 }
 
 /* Mobile Nav Link Component */
-function MobileNavLink({ href, label, onClick }: { href: string; label: string; onClick: () => void }) {
+function MobileNavLink({
+  href,
+  label,
+  onClick,
+}: {
+  href: string;
+  label: string;
+  onClick: () => void;
+}) {
   return (
     <a
       href={href}
       onClick={onClick}
       className={cn(
-        'block px-4 py-3',
-        'font-mono text-sm font-bold uppercase tracking-wide',
-        'border-2 border-neo-border bg-neo-surface',
-        'text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse',
-        'shadow-[2px_2px_0px_0px_var(--neo-shadow)]',
-        'transition-all duration-200'
+        "block px-4 py-3",
+        "font-mono text-sm font-bold uppercase tracking-wide",
+        "border-2 border-neo-border bg-neo-surface",
+        "text-neo-text hover:bg-neo-accent hover:text-neo-text-inverse",
+        "shadow-[2px_2px_0px_0px_var(--neo-shadow)]",
+        "transition-all duration-200"
       )}
     >
       {label}

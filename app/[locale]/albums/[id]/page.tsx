@@ -1,9 +1,12 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { getTranslations } from "next-intl/server";
 import NeoAlbumDetail from "@/components/neo-brutalist/albums/NeoAlbumDetail";
+import { buildLocalizedMetadata, plainText, SITE_URL } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getAlbumByIdentifier, getPublishedAlbums } from "@/lib/public-content";
 
 interface PageProps {
   params: Promise<{ id: string; locale: string }>;
@@ -14,7 +17,7 @@ export async function generateStaticParams() {
   try {
     const albums = await prisma.album.findMany({
       where: { published: true },
-      select: { id: true },
+      select: { id: true, slug: true },
     });
 
     const locales = ["fr", "en"];
@@ -22,7 +25,7 @@ export async function generateStaticParams() {
     return albums.flatMap((album) =>
       locales.map((locale) => ({
         locale,
-        id: album.id,
+        id: album.slug || album.id,
       }))
     );
   } catch {
@@ -40,14 +43,7 @@ export async function generateMetadata({ params }: PageProps) {
   const t = await getTranslations({ locale, namespace: "albums.detail" });
 
   try {
-    const album = await prisma.album.findUnique({
-      where: { id },
-      select: {
-        title: true,
-        style: true,
-        date: true,
-      },
-    });
+    const album = await getAlbumByIdentifier(id);
 
     if (!album) {
       return {
@@ -55,10 +51,15 @@ export async function generateMetadata({ params }: PageProps) {
       };
     }
 
-    return {
-      title: `${album.title} | Loïc Ghanem`,
-      description: `Album ${album.style} (${album.date})`,
-    };
+    const description = plainText(locale === "fr" ? album.descriptionsFr : album.descriptionsEn);
+    return buildLocalizedMetadata({
+      locale,
+      path: `/albums/${album.slug || id}`,
+      title: album.title,
+      description,
+      image: album.img,
+      type: "music.album",
+    });
   } catch {
     return {
       title: "Album | Loïc Ghanem",
@@ -88,9 +89,7 @@ export default async function AlbumDetailPage({ params, searchParams }: PageProp
   }
 
   // Fetch the album
-  const album = await prisma.album.findUnique({
-    where: { id },
-  });
+  const album = await getAlbumByIdentifier(id);
 
   if (!album) {
     notFound();
@@ -101,18 +100,63 @@ export default async function AlbumDetailPage({ params, searchParams }: PageProp
     notFound();
   }
 
+  if (!isPreview && album.slug && id !== album.slug) {
+    permanentRedirect(`/${locale}/albums/${album.slug}`);
+  }
+
   // Fetch all albums for related section
-  const allAlbums = await prisma.album.findMany({
-    where: { published: true },
-    orderBy: { sortedDate: "desc" },
-  });
+  const allAlbums = await getPublishedAlbums();
+
+  const description = plainText(locale === "fr" ? album.descriptionsFr : album.descriptionsEn, 500);
+  const albumUrl = `${SITE_URL}/${locale}/albums/${album.slug || album.id}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MusicAlbum",
+    name: album.title,
+    url: albumUrl,
+    image: album.img.startsWith("http") ? album.img : `${SITE_URL}${album.img}`,
+    description,
+    datePublished: album.releaseDate?.toISOString(),
+    albumProductionType: album.releaseType,
+    genre: album.style.split("/").map((genre) => genre.trim()),
+    byArtist: { "@type": "Person", name: album.poster || "Loïc Ghanem", url: SITE_URL },
+    track: album.tracks.map((track) => ({
+      "@type": "MusicRecording",
+      position: track.position,
+      name: track.title,
+      duration: track.durationSeconds
+        ? `PT${Math.floor(track.durationSeconds / 60)}M${track.durationSeconds % 60}S`
+        : undefined,
+      byArtist: track.artists ? { "@type": "MusicGroup", name: track.artists } : undefined,
+    })),
+  };
 
   return (
-    <NeoAlbumDetail
-      album={album}
-      allAlbums={allAlbums}
-      locale={locale}
-      isPreview={isPreview && isAdmin}
-    />
+    <>
+      <JsonLd
+        data={[
+          jsonLd,
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: locale === "fr" ? "Albums" : "Albums",
+                item: `${SITE_URL}/${locale}/albums`,
+              },
+              { "@type": "ListItem", position: 2, name: album.title, item: albumUrl },
+            ],
+          },
+        ]}
+      />
+      <NeoAlbumDetail
+        album={album}
+        allAlbums={allAlbums}
+        locale={locale}
+        isPreview={isPreview && isAdmin}
+      />
+    </>
   );
 }

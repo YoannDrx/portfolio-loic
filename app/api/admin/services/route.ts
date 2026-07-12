@@ -18,6 +18,7 @@ import { createVersion } from "@/lib/versioning";
 import { notifyNewContent } from "@/lib/notifications";
 import { logCrud } from "@/lib/activity-logger";
 import type { Prisma } from "@prisma/client";
+import { revalidateTag } from "next/cache";
 
 // ============================================
 // GET /api/admin/services
@@ -118,6 +119,7 @@ export const POST = withAuthAndValidation(
       // Logger l'action
       await logCrud("create", "service", service.id, service.title, user.id);
 
+      revalidateTag("services", "max");
       return createdResponse(service);
     } catch (error) {
       return handleApiError(error);

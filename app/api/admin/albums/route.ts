@@ -18,6 +18,7 @@ import { createVersion } from "@/lib/versioning";
 import { notifyNewContent } from "@/lib/notifications";
 import { logCrud } from "@/lib/activity-logger";
 import type { Prisma } from "@prisma/client";
+import { revalidateTag } from "next/cache";
 
 // ============================================
 // GET /api/admin/albums
@@ -91,13 +92,26 @@ export const POST = withAuthAndValidation(
   async (_req, _context, user, data: AlbumCreateInput) => {
     try {
       // Sanitizer les descriptions HTML
+      const { tracks, releaseDate, ...albumInput } = data;
       const sanitizedDescriptionsFr = sanitizeDescription(data.descriptionsFr);
       const sanitizedDescriptionsEn = sanitizeDescription(data.descriptionsEn);
 
       // Créer l'album
       const album = await prisma.album.create({
         data: {
-          ...data,
+          ...albumInput,
+          slug: albumInput.slug || null,
+          releaseType: albumInput.releaseType || null,
+          label: albumInput.label || null,
+          publisher: albumInput.publisher || null,
+          roleFr: albumInput.roleFr || null,
+          roleEn: albumInput.roleEn || null,
+          creditsFr: albumInput.creditsFr || null,
+          creditsEn: albumInput.creditsEn || null,
+          tracklistSourceUrl: albumInput.tracklistSourceUrl || null,
+          tracklistVerifiedAt: tracks.length && albumInput.tracklistSourceUrl ? new Date() : null,
+          releaseDate: releaseDate ? new Date(releaseDate) : null,
+          tracks: { create: tracks.map(({ id: _id, ...track }) => track) },
           descriptionsFr: sanitizedDescriptionsFr,
           descriptionsEn: sanitizedDescriptionsEn,
           createdById: user.id,
@@ -122,6 +136,7 @@ export const POST = withAuthAndValidation(
       // Logger l'action
       await logCrud("create", "album", album.id, album.title, user.id);
 
+      revalidateTag("albums", "max");
       return createdResponse(album);
     } catch (error) {
       return handleApiError(error);

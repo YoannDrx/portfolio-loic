@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NeoCard } from "../ui/NeoCard";
 
@@ -26,25 +26,20 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
       value: "loic.ghanem@outlook.com",
       href: "mailto:loic.ghanem@outlook.com",
     },
-    {
-      icon: <MapPin className="w-5 h-5" />,
-      label: t("info.location"),
-      value: "Paris, France",
-    },
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       className={cn("space-y-6", className)}
     >
       {/* Contact Info Cards */}
       <div className="space-y-4">
-        {infoItems.map((item, index) => (
+        {infoItems.map((item) => (
           <NeoCard
-            key={index}
+            key={item.href}
             variant="default"
             hover="lift"
             padding="md"

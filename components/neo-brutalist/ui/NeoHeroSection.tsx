@@ -41,7 +41,7 @@ export const NeoHeroSection = ({
   return (
     <section
       className={cn(
-        fullViewport ? "min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)]" : "min-h-[50vh]",
+        fullViewport ? "min-h-[55vh]" : "min-h-[45vh]",
         "flex flex-col justify-start md:justify-center pt-8 pb-16 md:py-32 px-4 md:px-8",
         variantStyles[variant],
         align === "center" && "items-center text-center",
@@ -57,7 +57,7 @@ export const NeoHeroSection = ({
         {/* Badge */}
         {(badge || badgeNumber) && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-6 flex items-center gap-3"
@@ -73,7 +73,7 @@ export const NeoHeroSection = ({
 
         {/* Title */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className={cn(
@@ -87,7 +87,7 @@ export const NeoHeroSection = ({
         {/* Subtitle */}
         {subtitle && (
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-4 text-xl md:text-2xl font-mono opacity-70"
@@ -99,7 +99,7 @@ export const NeoHeroSection = ({
         {/* Description */}
         {description && (
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className={cn(
@@ -114,7 +114,7 @@ export const NeoHeroSection = ({
         {/* Children (CTAs, etc.) */}
         {children && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-8"

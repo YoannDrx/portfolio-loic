@@ -10,12 +10,12 @@ import { NeoHeroSection } from "../ui/NeoHeroSection";
 import { SectionHeader } from "../ui/SectionHeader";
 import { NeoCard } from "../ui/NeoCard";
 import { BrutalistButton } from "../ui/BrutalistButton";
-import { NeoTag } from "../ui/NeoTag";
 import { GridBackground } from "../ui/GridBackground";
 import { Link } from "@/i18n/routing";
 
 interface Service {
   id: string;
+  slug?: string | null;
   title: string;
   text: string;
   fullDescription?: string;
@@ -117,7 +117,10 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
                 return (
                   <motion.div key={service.id} variants={fadeInUp}>
                     <Link
-                      href={{ pathname: "/services/[id]", params: { id: service.id } }}
+                      href={{
+                        pathname: "/services/[id]",
+                        params: { id: service.slug || service.id },
+                      }}
                       className="block h-full"
                     >
                       <div className="h-full border-2 border-neo-border p-8 bg-neo-surface hover:bg-neo-text hover:text-neo-text-inverse transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(var(--neo-accent-rgb),1)] group">
