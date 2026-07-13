@@ -11,6 +11,7 @@ import { NeoTag } from "../ui/NeoTag";
 import { NeoVideoCard } from "./NeoVideoCard";
 import { GridBackground } from "../ui/GridBackground";
 import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
+import { SectionTransition } from "../ui/SectionTransition";
 import { Link } from "@/i18n/routing";
 
 interface VideoItem {
@@ -307,8 +308,10 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
           </div>
         </section>
 
+        <SectionTransition inverted />
+
         {/* CTA */}
-        <section className="py-24 bg-neo-bg border-t-[10px] border-neo-accent">
+        <section className="py-24 bg-neo-text">
           <div className="container mx-auto px-4 md:px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -316,10 +319,10 @@ export const NeoVideosPage: React.FC<NeoVideosPageProps> = ({ videos }) => {
               viewport={{ once: true }}
             >
               <Video className="w-16 h-16 mx-auto mb-6 text-neo-accent" />
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text mb-4">
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text-inverse mb-4">
                 {t("videosCta.title")}
               </h2>
-              <p className="font-mono text-lg text-neo-text/60 max-w-2xl mx-auto mb-8">
+              <p className="font-mono text-lg text-neo-text-inverse/65 max-w-2xl mx-auto mb-8">
                 {t("videosCta.description")}
               </p>
               <div className="flex justify-center">

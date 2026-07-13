@@ -12,6 +12,7 @@ import { NeoCard } from "../ui/NeoCard";
 import { BrutalistButton } from "../ui/BrutalistButton";
 import { GridBackground } from "../ui/GridBackground";
 import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
+import { SectionTransition } from "../ui/SectionTransition";
 import { Link } from "@/i18n/routing";
 
 interface Service {
@@ -139,7 +140,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
                       className="block h-full"
                     >
                       <article className="relative h-full min-h-[22rem] overflow-hidden border-4 border-neo-border bg-neo-surface p-6 md:p-9 transition-all duration-500 group hover:-translate-y-2 hover:bg-neo-text hover:text-neo-text-inverse hover:shadow-[12px_12px_0px_0px_rgba(var(--neo-accent-rgb),1)]">
-                        <span className="pointer-events-none absolute -bottom-12 -right-3 font-mono text-[10rem] font-black leading-none text-neo-text/[0.035] transition-all duration-500 group-hover:-translate-y-5 group-hover:text-neo-text-inverse/[0.06] md:text-[13rem]">
+                        <span className="pointer-events-none absolute -bottom-12 -right-3 font-mono text-[10rem] font-black leading-none text-neo-text/[0.035] transition-all duration-500 group-hover:translate-y-8 group-hover:opacity-0 md:text-[13rem]">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <div className="absolute left-0 top-0 h-1.5 w-0 bg-neo-accent transition-all duration-500 group-hover:w-full" />
@@ -163,7 +164,7 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
 
                         {/* Description */}
                         <div
-                          className="relative z-10 max-w-2xl font-mono text-sm leading-relaxed mb-10 text-neo-text/70 group-hover:text-neo-text-inverse/75 transition-colors line-clamp-3"
+                          className="relative z-10 max-w-2xl font-mono text-sm leading-relaxed mb-10 text-neo-text/70 group-hover:text-neo-text-inverse/90 transition-colors line-clamp-3"
                           dangerouslySetInnerHTML={{ __html: getDescription(service) }}
                         />
 
@@ -225,8 +226,16 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
           </div>
         </section>
 
+        <SectionTransition />
+
         {/* CTA */}
-        <section className="py-24 bg-neo-text">
+        <section className="relative py-24 md:py-32 bg-neo-bg overflow-hidden">
+          <div
+            className="pointer-events-none absolute -right-16 top-1/2 -translate-y-1/2 font-mono text-[18rem] font-black leading-none text-neo-accent opacity-[0.06]"
+            aria-hidden="true"
+          >
+            GO
+          </div>
           <div className="container mx-auto px-4 md:px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -234,16 +243,16 @@ export const NeoServicesPage: React.FC<NeoServicesPageProps> = ({ services }) =>
               viewport={{ once: true }}
             >
               <CheckCircle className="w-16 h-16 mx-auto mb-6 text-neo-accent" />
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-neo-text-inverse mb-4">
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-neo-text mb-4">
                 {t("cta.title")}
               </h2>
-              <p className="font-mono text-lg text-neo-text-inverse/60 max-w-2xl mx-auto mb-8">
+              <p className="font-mono text-lg text-neo-text/65 max-w-2xl mx-auto mb-8">
                 {t("cta.description")}
               </p>
               <div className="flex justify-center">
                 <Link href="/contact">
                   <BrutalistButton
-                    variant="dark"
+                    variant="primary"
                     size="lg"
                     icon={<ArrowRight className="w-5 h-5" />}
                   >

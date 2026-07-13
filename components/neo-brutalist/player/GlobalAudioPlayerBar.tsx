@@ -193,7 +193,7 @@ export const GlobalAudioPlayerBar = () => {
     return () => ro.disconnect();
   }, [shouldShowBar]);
 
-  const fallbackHeightPx = isCollapsed ? 96 : 320;
+  const fallbackHeightPx = isCollapsed ? 80 : 340;
   const spacerHeightPx = (measuredHeightPx || fallbackHeightPx) + bottomOffsetPx + pageGapPx;
 
   return (
@@ -221,9 +221,18 @@ export const GlobalAudioPlayerBar = () => {
 
                 <div
                   ref={barMeasureRef}
-                  className="border-4 border-neo-border bg-neo-surface shadow-[10px_10px_0px_0px_var(--neo-accent)] overflow-hidden"
+                  className="relative border-4 border-neo-border bg-neo-surface shadow-[10px_10px_0px_0px_var(--neo-accent)] overflow-hidden"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-4 p-3 md:p-4">
+                  <div
+                    className="absolute inset-x-0 top-0 z-10 h-1 bg-neo-border/15"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="h-full origin-left bg-neo-accent transition-transform duration-200"
+                      style={{ transform: `scaleX(${progress})` }}
+                    />
+                  </div>
+                  <div className="flex items-center gap-2 p-2 pt-3 md:gap-4 md:p-4">
                     {/* Track info */}
                     <div className="flex items-center gap-3 min-w-0 flex-1 w-full">
                       <div className="h-11 w-11 md:h-12 md:w-12 border-2 border-neo-border bg-neo-surface shadow-[3px_3px_0px_0px_var(--neo-shadow)] overflow-hidden flex-shrink-0">
@@ -247,17 +256,17 @@ export const GlobalAudioPlayerBar = () => {
                         <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-neo-accent">
                           {statusLabel}
                         </div>
-                        <div className="font-black uppercase tracking-tight text-neo-text line-clamp-2 sm:line-clamp-1">
+                        <div className="font-black text-sm uppercase tracking-tight text-neo-text line-clamp-1 md:text-base">
                           {displayTitle}
                         </div>
-                        <div className="font-mono text-xs text-neo-text/60 line-clamp-1">
+                        <div className="hidden font-mono text-xs text-neo-text/60 line-clamp-1 sm:block">
                           {displayArtist}
                         </div>
                       </div>
                     </div>
 
                     {/* Controls */}
-                    <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 w-full sm:w-auto flex-wrap sm:flex-nowrap justify-between sm:justify-start">
+                    <div className="flex w-auto flex-shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
                       <button
                         type="button"
                         onClick={() => actions.previous()}
@@ -308,31 +317,6 @@ export const GlobalAudioPlayerBar = () => {
                         )}
                       >
                         <SkipForward className="w-5 h-5 mx-auto" />
-                      </button>
-
-                      {/* Volume */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (!mediaAllowed) {
-                            openManager();
-                            return;
-                          }
-                          actions.setVolume(volume === 0 ? lastNonZeroVolume : 0);
-                        }}
-                        disabled={!mediaAllowed}
-                        aria-label={volume === 0 ? t("controls.unmute") : t("controls.mute")}
-                        className={cn(
-                          "md:hidden h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
-                          "hover:-translate-y-0.5 transition-transform",
-                          "disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
-                        )}
-                      >
-                        {volume === 0 ? (
-                          <VolumeX className="w-5 h-5 mx-auto" />
-                        ) : (
-                          <Volume2 className="w-5 h-5 mx-auto" />
-                        )}
                       </button>
 
                       <div className="hidden md:flex items-center gap-2 border-2 border-neo-border bg-neo-bg shadow-[3px_3px_0px_0px_var(--neo-shadow)] px-2 h-10">
@@ -410,25 +394,12 @@ export const GlobalAudioPlayerBar = () => {
                         onClick={() => actions.dismiss()}
                         aria-label={t("controls.close")}
                         className={cn(
-                          "h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-text text-neo-text-inverse shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
+                          "hidden h-9 w-9 border-2 border-neo-border bg-neo-text text-neo-text-inverse shadow-[3px_3px_0px_0px_var(--neo-shadow)] sm:block sm:h-10 sm:w-10",
                           "hover:-translate-y-0.5 transition-transform"
                         )}
                       >
                         <X className="w-5 h-5 mx-auto" />
                       </button>
-
-                      <a
-                        href={externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={t("controls.openOnSoundcloud")}
-                        className={cn(
-                          "sm:hidden h-9 w-9 sm:h-10 sm:w-10 border-2 border-neo-border bg-neo-bg text-neo-text shadow-[3px_3px_0px_0px_var(--neo-shadow)]",
-                          "hover:-translate-y-0.5 transition-transform"
-                        )}
-                      >
-                        <ExternalLink className="w-5 h-5 mx-auto mt-2.5" />
-                      </a>
                     </div>
                   </div>
 

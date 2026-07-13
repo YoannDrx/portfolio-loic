@@ -136,6 +136,8 @@
       "player": {
         "title": "LOÏC GHANEM PRODUCTIONS",
         "soundcloud": "SoundCloud",
+        "showreel": "Showreel — selection",
+        "poweredBySoundcloud": "Playback via SoundCloud",
         "spotify": "Spotify",
         "appleMusic": "Apple Music",
         "deezer": "Deezer",
@@ -306,6 +308,11 @@
       "title": "Musician Experience",
       "subtitle": "My journey through different musical projects and bands over the years.",
       "listenHere": "Listen Here",
+      "videoPlayerEyebrow": "Video archive",
+      "videoPlayerTitle": "Music experience",
+      "videoPlayerDescription": "Playing a video from the {project} project.",
+      "videoPlayerHint": "The video plays here without leaving the portfolio.",
+      "closeVideo": "Close video",
       "voyager1": {
         "period": "2017 - Present",
         "role": "Producer",
@@ -686,6 +693,17 @@
     "directContact": {
       "title": "Direct Contact",
       "tagline": "No forms, no fuss. Just call me, let's chat, and create together!",
+      "ticker": "For urgent projects, phone is the fastest option — let’s discuss your brief directly and move forward efficiently.",
+      "specialties": {
+        "composition": "Composition",
+        "artDirection": "Art direction",
+        "coaching": "Coaching",
+        "musicProduction": "Music production",
+        "projectScoping": "Project scoping",
+        "mixing": "Mixing",
+        "mastering": "Mastering",
+        "soundDesign": "Music for picture"
+      },
       "callMe": "Call me directly",
       "emailMe": "Or email me",
       "footer": "I promise I'll pick up (unless I'm in the studio... but I'll call back quickly!)"
@@ -1409,7 +1427,9 @@
     "tracklist": {
       "title": "Tracks",
       "loading": "Loading tracks…",
-      "empty": "No tracks found."
+      "empty": "No tracks found.",
+      "explore": "Explore selection",
+      "showLess": "Show less"
     },
     "hints": {
       "persistent": "Music keeps playing while you browse the site."

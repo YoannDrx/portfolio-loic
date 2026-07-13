@@ -108,6 +108,7 @@ export const NeoSplitHero: React.FC = () => {
   } = useGlobalAudioPlayer();
 
   const [lastNonZeroVolume, setLastNonZeroVolume] = useState(80);
+  const [isQueueExpanded, setIsQueueExpanded] = useState(false);
 
   useEffect(() => {
     if (volume > 0) setLastNonZeroVolume(volume);
@@ -343,7 +344,10 @@ export const NeoSplitHero: React.FC = () => {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="font-black text-lg uppercase tracking-tight truncate">
-                    {t("player.soundcloud")}
+                    {t("player.showreel")}
+                  </div>
+                  <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/50">
+                    {t("player.poweredBySoundcloud")}
                   </div>
                 </div>
                 <a
@@ -421,7 +425,7 @@ export const NeoSplitHero: React.FC = () => {
                 <div className="p-4 md:p-6 space-y-5">
                   {/* Track line */}
                   <div className="flex items-center gap-4">
-                    <div className="h-16 w-16 border-2 border-neo-border bg-neo-surface shadow-[4px_4px_0px_0px_var(--neo-shadow)] overflow-hidden flex-shrink-0">
+                    <div className="h-20 w-20 border-2 border-neo-border bg-neo-surface shadow-[4px_4px_0px_0px_var(--neo-shadow)] overflow-hidden flex-shrink-0">
                       {artworkUrl ? (
                         <Image
                           src={artworkUrl}
@@ -556,16 +560,29 @@ export const NeoSplitHero: React.FC = () => {
 
                   {/* Track list */}
                   <div className="border-2 border-neo-border bg-neo-surface shadow-[6px_6px_0px_0px_var(--neo-shadow)] overflow-hidden">
-                    <div className="px-4 py-3 border-b-2 border-neo-border bg-neo-text text-neo-text-inverse flex items-center justify-between">
+                    <div className="px-4 py-3 border-b-2 border-neo-border bg-neo-text text-neo-text-inverse flex items-center justify-between gap-4">
                       <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
                         {tPlayer("tracklist.title")}
                       </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
-                        {queue.length}
-                      </span>
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
+                          {queue.length}
+                        </span>
+                        {queue.length > 3 && (
+                          <button
+                            type="button"
+                            onClick={() => setIsQueueExpanded((current) => !current)}
+                            className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-neo-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-accent"
+                          >
+                            {isQueueExpanded
+                              ? tPlayer("tracklist.showLess")
+                              : tPlayer("tracklist.explore")}
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <SoundCloudTrackList
-                      tracks={queue}
+                      tracks={isQueueExpanded ? queue : queue.slice(0, 3)}
                       currentTrackId={track?.id ?? null}
                       currentIndex={currentIndex}
                       isPlaying={isPlaying}
@@ -575,7 +592,7 @@ export const NeoSplitHero: React.FC = () => {
                         closeSpotifyOnSoundCloudPlay();
                         actions.selectTrack(index);
                       }}
-                      className="max-h-56 bg-neo-bg"
+                      className={cn(isQueueExpanded ? "max-h-72" : "max-h-40", "bg-neo-bg")}
                     />
                   </div>
                 </div>

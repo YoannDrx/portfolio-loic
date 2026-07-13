@@ -11,6 +11,7 @@ import { NeoCard } from "../ui/NeoCard";
 import { BrutalistButton } from "../ui/BrutalistButton";
 import { GridBackground } from "../ui/GridBackground";
 import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
+import { SectionTransition } from "../ui/SectionTransition";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
 
@@ -250,6 +251,8 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
           </div>
         </section>
 
+        <SectionTransition />
+
         {/* Filters */}
         <section className="py-5 border-b-4 border-neo-border sticky top-0 bg-neo-bg/90 backdrop-blur-xl z-30">
           <div className="container mx-auto px-4 md:px-6">
@@ -307,6 +310,8 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
             </AnimatePresence>
           </div>
         </section>
+
+        <SectionTransition inverted />
 
         {/* CTA */}
         <section className="py-24 bg-neo-text">

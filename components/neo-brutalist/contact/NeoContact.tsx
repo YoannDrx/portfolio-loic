@@ -2,7 +2,17 @@
 
 import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  AudioLines,
+  Clapperboard,
+  Compass,
+  Headphones,
+  Mic2,
+  SlidersHorizontal,
+  Sparkles,
+  WandSparkles,
+} from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoContactInfo } from "./NeoContactInfo";
@@ -16,6 +26,16 @@ import { Link } from "@/i18n/routing";
 export const NeoContact = () => {
   const t = useTranslations("contact");
   const reduceMotion = useReducedMotion();
+  const tickerItems = [
+    { label: t("directContact.specialties.composition"), icon: Sparkles },
+    { label: t("directContact.specialties.artDirection"), icon: Compass },
+    { label: t("directContact.specialties.coaching"), icon: Mic2 },
+    { label: t("directContact.specialties.musicProduction"), icon: AudioLines },
+    { label: t("directContact.specialties.projectScoping"), icon: Clapperboard },
+    { label: t("directContact.specialties.mixing"), icon: SlidersHorizontal },
+    { label: t("directContact.specialties.mastering"), icon: Headphones },
+    { label: t("directContact.specialties.soundDesign"), icon: WandSparkles },
+  ];
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text selection:bg-neo-text selection:text-neo-accent">
@@ -23,7 +43,7 @@ export const NeoContact = () => {
       <ImmersivePageAtmosphere />
       <NeoNavbar />
 
-      <main className="pt-16 md:pt-20">
+      <main className="relative z-10 pt-16 md:pt-20">
         {/* Hero Split Screen */}
         <section className="relative min-h-[78vh] overflow-hidden border-b-4 border-neo-border pt-12 pb-16 md:py-24 px-4 md:px-8 flex items-center">
           <div
@@ -101,20 +121,31 @@ export const NeoContact = () => {
           className="overflow-hidden border-b-4 border-neo-border bg-neo-accent py-3 text-neo-on-accent"
           aria-label={t("directContact.title")}
         >
-          <motion.p
+          <motion.div
             initial={{ x: 0 }}
             animate={reduceMotion ? undefined : { x: "-50%" }}
             transition={
-              reduceMotion ? undefined : { duration: 18, repeat: Infinity, ease: "linear" }
+              reduceMotion ? undefined : { duration: 48, repeat: Infinity, ease: "linear" }
             }
-            className="w-max whitespace-nowrap font-mono text-sm font-black uppercase tracking-[0.22em]"
+            className="flex w-max whitespace-nowrap font-mono text-sm font-black uppercase tracking-[0.18em]"
           >
-            {Array.from({ length: 6 }, (_, index) => (
-              <span key={index} className="mr-12">
-                {t("directContact.tagline")} <span aria-hidden="true">✦</span>
-              </span>
+            {(reduceMotion ? [0] : [0, 1]).map((group) => (
+              <div
+                key={group}
+                className="flex shrink-0 items-center"
+                aria-hidden={group === 1 ? "true" : undefined}
+              >
+                {tickerItems.map((item) => (
+                  <span key={item.label} className="flex shrink-0 items-center gap-7 px-5 md:px-8">
+                    <span>{item.label}</span>
+                    <span className="flex h-7 w-7 rotate-45 items-center justify-center border-2 border-neo-border bg-neo-text text-neo-accent shadow-[2px_2px_0px_0px_var(--neo-shadow)]">
+                      <item.icon className="h-3.5 w-3.5 -rotate-45" aria-hidden="true" />
+                    </span>
+                  </span>
+                ))}
+              </div>
             ))}
-          </motion.p>
+          </motion.div>
         </section>
 
         {/* CTA Section */}

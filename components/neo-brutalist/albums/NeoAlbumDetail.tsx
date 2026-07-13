@@ -22,6 +22,7 @@ import { NeoFooter } from "../NeoFooter";
 import { NeoCard } from "../ui/NeoCard";
 import { NeoTag } from "../ui/NeoTag";
 import { GridBackground } from "../ui/GridBackground";
+import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
 
 interface AlbumTrack {
   id: string;
@@ -100,6 +101,74 @@ const streamingPlatforms = [
   { name: "Amazon Music", icon: AmazonMusicIcon, color: "#00A8E1" },
 ];
 
+interface AlbumListenCardProps {
+  listenLink: string;
+  listenLabel: string;
+  availableLabel: string;
+  platformsLabel: string;
+}
+
+const AlbumListenCard = ({
+  listenLink,
+  listenLabel,
+  availableLabel,
+  platformsLabel,
+}: AlbumListenCardProps) => (
+  <div className="flex h-full w-full flex-col justify-between bg-neo-bg p-5 md:p-7">
+    <div className="text-center mb-4">
+      <div className="w-14 h-14 bg-neo-text mx-auto flex items-center justify-center rotate-3 mb-3 shadow-[4px_4px_0px_0px_var(--neo-accent)]">
+        <Headphones className="w-7 h-7 text-neo-accent" />
+      </div>
+      <h2 className="font-black text-xl uppercase tracking-tight text-neo-text">{listenLabel}</h2>
+    </div>
+
+    <div className="py-4 border-y-4 border-neo-border">
+      <p className="font-mono text-[10px] uppercase text-neo-text/50 mb-4 text-center">
+        {availableLabel}
+      </p>
+      <div className="grid grid-cols-4 gap-2">
+        {streamingPlatforms.map((platform) => (
+          <div
+            key={platform.name}
+            className="group relative aspect-square flex items-center justify-center bg-neo-bg border-2 border-neo-border shadow-[2px_2px_0px_0px_var(--neo-shadow)] hover:shadow-[3px_3px_0px_0px_var(--neo-accent)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all cursor-default overflow-hidden"
+          >
+            <platform.icon
+              className="w-5 h-5 group-hover:opacity-0 group-hover:scale-75 transition-all duration-150"
+              style={{ color: platform.color }}
+            />
+            <span
+              className="absolute font-mono text-[8px] font-bold uppercase leading-tight text-center px-1 opacity-0 scale-110 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150"
+              style={{ color: platform.color }}
+            >
+              {platform.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div className="mt-5 flex flex-col items-center gap-3">
+      <a
+        href={listenLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={platformsLabel}
+        className="group w-16 h-16 rounded-full bg-neo-text flex items-center justify-center border-4 border-neo-border shadow-[4px_4px_0px_0px_var(--neo-accent)] hover:bg-neo-accent hover:shadow-[5px_5px_0px_0px_var(--neo-shadow)] hover:-translate-y-1 transform transition-all duration-150"
+      >
+        <Play className="w-7 h-7 text-neo-accent group-hover:text-neo-on-accent fill-current ml-1" />
+      </a>
+      <a
+        href={listenLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-mono text-[10px] font-bold uppercase text-neo-text/70 hover:text-neo-accent transition-colors text-center leading-tight"
+      >
+        {platformsLabel}
+      </a>
+    </div>
+  </div>
+);
+
 interface Album {
   id: string;
   slug?: string | null;
@@ -169,6 +238,7 @@ export default function NeoAlbumDetail({
   return (
     <div className="min-h-screen bg-neo-bg text-neo-text font-sans selection:bg-neo-text selection:text-neo-accent overflow-x-hidden">
       <GridBackground withAccentGlow />
+      <ImmersivePageAtmosphere />
       <NeoNavbar />
 
       <main className="relative z-10 pt-24 pb-24">
@@ -203,10 +273,12 @@ export default function NeoAlbumDetail({
             variants={staggerContainer}
             className="mb-12 lg:mb-16"
           >
-            {/* Grid: Cover | Info | Listen Button */}
-            <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] xl:grid-cols-[320px_1fr_300px] gap-6 lg:gap-8 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-8 lg:gap-12 items-center">
               {/* Left Column - Album Cover */}
-              <motion.div variants={fadeInUp} className="relative mx-auto lg:mx-0">
+              <motion.div
+                variants={fadeInUp}
+                className="relative mx-auto w-full max-w-[380px] lg:mx-0"
+              >
                 <NeoCard
                   hover="lift"
                   padding="none"
@@ -306,131 +378,88 @@ export default function NeoAlbumDetail({
                   )}
                 </div>
               </motion.div>
-
-              {/* Right Column - Listen Card (Neo-brutalist style) */}
-              {album.listenLink && (
-                <motion.div variants={fadeInUp} className="flex">
-                  <div className="relative w-full">
-                    {/* Decorative background offset */}
-                    <div className="absolute inset-0 bg-neo-accent translate-x-2 translate-y-2" />
-
-                    {/* Main card */}
-                    <div className="relative bg-neo-bg border-4 border-neo-border p-5 flex flex-col justify-between h-full">
-                      {/* Header */}
-                      <div className="text-center mb-4">
-                        <div className="w-14 h-14 bg-neo-text mx-auto flex items-center justify-center rotate-3 mb-3 shadow-[4px_4px_0px_0px_var(--neo-accent)]">
-                          <Headphones className="w-7 h-7 text-neo-accent" />
-                        </div>
-                        <h3 className="font-black text-xl uppercase tracking-tight text-neo-text">
-                          {t("listen")}
-                        </h3>
-                      </div>
-
-                      {/* Platform Icons - Grid 4x2 */}
-                      <div className="py-4 border-y-4 border-neo-border">
-                        <p className="font-mono text-[10px] uppercase text-neo-text/50 mb-4 text-center">
-                          {t("availableOn")}
-                        </p>
-                        <div className="grid grid-cols-4 gap-2">
-                          {streamingPlatforms.map((platform) => (
-                            <div
-                              key={platform.name}
-                              className="group relative aspect-square flex items-center justify-center bg-neo-bg border-2 border-neo-border shadow-[2px_2px_0px_0px_var(--neo-shadow)] hover:shadow-[3px_3px_0px_0px_var(--neo-accent)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all cursor-default overflow-hidden"
-                            >
-                              {/* Icon - visible by default, hidden on hover */}
-                              <platform.icon
-                                className="w-5 h-5 group-hover:opacity-0 group-hover:scale-75 transition-all duration-150"
-                                style={{ color: platform.color }}
-                              />
-                              {/* Name - hidden by default, visible on hover */}
-                              <span
-                                className="absolute font-mono text-[8px] font-bold uppercase leading-tight text-center px-1 opacity-0 scale-110 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150"
-                                style={{ color: platform.color }}
-                              >
-                                {platform.name}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Big Play Button + CTA */}
-                      <div className="mt-4 flex flex-col items-center gap-3">
-                        {/* Big round Play button */}
-                        <a
-                          href={album.listenLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group w-16 h-16 rounded-full bg-neo-text flex items-center justify-center
-                            border-4 border-neo-border shadow-[4px_4px_0px_0px_var(--neo-accent)]
-                            hover:bg-neo-accent hover:shadow-[5px_5px_0px_0px_var(--neo-shadow)]
-                            hover:-translate-y-1 transform transition-all duration-150"
-                        >
-                          <Play className="w-7 h-7 text-neo-accent group-hover:text-neo-text-inverse fill-current ml-1" />
-                        </a>
-
-                        {/* Text label */}
-                        <a
-                          href={album.listenLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-[10px] font-bold uppercase text-neo-text/70 hover:text-neo-accent transition-colors text-center leading-tight"
-                        >
-                          {t("listenOnPlatforms")}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* If no listen link, show empty placeholder on desktop */}
-              {!album.listenLink && <div className="hidden lg:block" />}
             </div>
           </motion.section>
 
-          {album.tracks && album.tracks.length > 0 && (
-            <section className="mb-10 lg:mb-12" aria-labelledby="tracklist-title">
-              <NeoCard padding="none" className="border-4 overflow-hidden">
-                <div className="bg-neo-text text-neo-text-inverse px-4 py-3 border-b-4 border-neo-border flex items-center justify-between gap-4">
-                  <h2
-                    id="tracklist-title"
-                    className="text-lg md:text-xl font-black uppercase tracking-tight"
-                  >
-                    {t("tracklist")}
-                  </h2>
-                  <span className="font-mono text-xs uppercase text-neo-text-inverse/70">
-                    {album.tracks.length} {t("tracks")}
-                  </span>
-                </div>
-                <ol className="grid grid-cols-1 md:grid-cols-2">
-                  {album.tracks.map((track) => (
-                    <li
-                      key={track.id}
-                      className="grid grid-cols-[2rem_1fr_auto] gap-2 items-center px-3 md:px-4 py-2 border-b border-neo-border/25 md:odd:border-r last:border-b-0 md:[&:nth-last-child(-n+2)]:border-b-0 hover:bg-neo-accent/10 transition-colors"
-                    >
-                      <span className="font-mono text-xs text-neo-text/50 tabular-nums">
-                        {String(track.position).padStart(2, "0")}
-                      </span>
-                      <div className="min-w-0">
-                        <p className="font-bold text-sm truncate">{track.title}</p>
-                        {track.artists && (
-                          <p className="font-mono text-[11px] leading-tight text-neo-text/60 truncate">
-                            {track.artists}
-                          </p>
-                        )}
-                      </div>
-                      {formatDuration(track.durationSeconds) && (
-                        <span className="font-mono text-[11px] flex items-center gap-1 text-neo-text/60 tabular-nums">
-                          <Clock className="w-2.5 h-2.5" aria-hidden="true" />
-                          {formatDuration(track.durationSeconds)}
+          {(album.listenLink || (album.tracks && album.tracks.length > 0)) && (
+            <motion.section
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="mx-auto mb-12 max-w-6xl lg:mb-16"
+              aria-labelledby={album.tracks?.length ? "tracklist-title" : undefined}
+            >
+              <NeoCard
+                padding="none"
+                className="overflow-hidden border-4 shadow-[12px_12px_0px_0px_var(--neo-accent)]"
+              >
+                <div
+                  className={`grid items-stretch ${
+                    album.listenLink && album.tracks?.length
+                      ? "lg:grid-cols-[minmax(0,1.45fr)_minmax(280px,0.55fr)]"
+                      : "grid-cols-1"
+                  }`}
+                >
+                  {album.tracks && album.tracks.length > 0 && (
+                    <div className="flex min-w-0 flex-col lg:border-r-4 lg:border-neo-border">
+                      <div className="bg-neo-text text-neo-text-inverse px-4 py-3 border-b-4 border-neo-border flex items-center justify-between gap-4">
+                        <h2
+                          id="tracklist-title"
+                          className="text-lg md:text-xl font-black uppercase tracking-tight text-neo-text-inverse"
+                        >
+                          {t("tracklist")}
+                        </h2>
+                        <span className="font-mono text-xs uppercase text-neo-text-inverse/70">
+                          {album.tracks.length} {t("tracks")}
                         </span>
-                      )}
-                    </li>
-                  ))}
-                </ol>
+                      </div>
+                      <ol className="grid flex-1 content-center grid-cols-1 md:grid-cols-2">
+                        {album.tracks.map((track) => (
+                          <li
+                            key={track.id}
+                            className="grid grid-cols-[2rem_1fr_auto] gap-2 items-center px-3 md:px-4 py-2 border-b border-neo-border/25 md:odd:border-r last:border-b-0 md:[&:nth-last-child(-n+2)]:border-b-0 hover:bg-neo-accent/10 transition-colors"
+                          >
+                            <span className="font-mono text-xs text-neo-text/50 tabular-nums">
+                              {String(track.position).padStart(2, "0")}
+                            </span>
+                            <div className="min-w-0">
+                              <p className="font-bold text-sm truncate">{track.title}</p>
+                              {track.artists && (
+                                <p className="font-mono text-[11px] leading-tight text-neo-text/60 truncate">
+                                  {track.artists}
+                                </p>
+                              )}
+                            </div>
+                            {formatDuration(track.durationSeconds) && (
+                              <span className="font-mono text-[11px] flex items-center gap-1 text-neo-text/60 tabular-nums">
+                                <Clock className="w-2.5 h-2.5" aria-hidden="true" />
+                                {formatDuration(track.durationSeconds)}
+                              </span>
+                            )}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
+                  {album.listenLink && (
+                    <div
+                      className={
+                        album.tracks?.length ? "border-t-4 border-neo-border lg:border-t-0" : ""
+                      }
+                    >
+                      <AlbumListenCard
+                        listenLink={album.listenLink}
+                        listenLabel={t("listen")}
+                        availableLabel={t("availableOn")}
+                        platformsLabel={t("listenOnPlatforms")}
+                      />
+                    </div>
+                  )}
+                </div>
               </NeoCard>
-            </section>
+            </motion.section>
           )}
 
           {/* ==================== ALBUM NAVIGATION ==================== */}

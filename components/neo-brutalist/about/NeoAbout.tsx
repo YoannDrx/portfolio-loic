@@ -20,7 +20,6 @@ import {
   Award,
   Trophy,
   Guitar,
-  Play,
   Star,
   Gamepad2,
   Film,
@@ -40,6 +39,8 @@ import { NeoCard } from "../ui/NeoCard";
 import { NeoTag } from "../ui/NeoTag";
 import { GridBackground } from "../ui/GridBackground";
 import { ImmersivePageAtmosphere } from "../ui/ImmersivePageAtmosphere";
+import { SectionTransition } from "../ui/SectionTransition";
+import { YouTubeExperienceDialog } from "./YouTubeExperienceDialog";
 import { Link } from "@/i18n/routing";
 
 const staggerContainer = {
@@ -87,7 +88,6 @@ interface Testimonial {
   role: string;
   avatar: string;
   text: string;
-  date: string;
 }
 
 const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
@@ -112,12 +112,18 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
     {/* Author */}
     <div className="flex items-center gap-3 pt-4 border-t-2 border-neo-border">
       <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-neo-accent flex-shrink-0">
-        <Image src={testimonial.avatar} alt={testimonial.name} fill className="object-cover" />
+        <Image
+          src={testimonial.avatar}
+          alt={testimonial.name}
+          fill
+          sizes="48px"
+          className="object-cover"
+        />
       </div>
       <div className="min-w-0">
         <h4 className="font-bold text-neo-text truncate">{testimonial.name}</h4>
         <p className="font-mono text-xs text-neo-text/60 truncate">{testimonial.role}</p>
-        <p className="font-mono text-xs text-neo-accent">{testimonial.date}</p>
+        <p className="font-mono text-xs text-neo-accent">SoundBetter</p>
       </div>
     </div>
   </div>
@@ -133,9 +139,10 @@ const TestimonialsCarousel = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Duplicate array for infinite loop effect
-  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
-  const offset = testimonials.length; // Start from middle set
+  const visibleTestimonials = Array.from(
+    { length: Math.min(3, testimonials.length) },
+    (_, index) => testimonials[(currentIndex + index) % testimonials.length]
+  );
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -151,13 +158,6 @@ const TestimonialsCarousel = ({
     const interval = setInterval(nextSlide, 6000);
     return () => clearInterval(interval);
   }, [isPaused, nextSlide]);
-
-  // Calculate the translateX percentage
-  // Each card is ~33.33% width on desktop with gap
-  const getTranslateX = () => {
-    // We show 3 cards at a time, so each step moves by 1 card width (~33.33%)
-    return `calc(-${(currentIndex + offset) * 33.333}% - ${(currentIndex + offset) * 8}px)`;
-  };
 
   return (
     <section
@@ -204,17 +204,18 @@ const TestimonialsCarousel = ({
           </div>
         </div>
 
-        {/* Carousel - Sliding container */}
         <div className="relative overflow-hidden py-2 -my-2">
           <motion.div
-            className="flex gap-6 pt-2"
-            animate={{ x: getTranslateX() }}
-            transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+            key={currentIndex}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45, ease: [0.25, 0.4, 0.25, 1] }}
+            className="grid gap-6 pt-2 md:grid-cols-2 lg:grid-cols-3"
           >
-            {extendedTestimonials.map((testimonial, index) => (
+            {visibleTestimonials.map((testimonial, index) => (
               <div
-                key={`${testimonial.id}-${index}`}
-                className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0"
+                key={testimonial.id}
+                className={index === 1 ? "hidden md:block" : index === 2 ? "hidden lg:block" : ""}
               >
                 <TestimonialCard testimonial={testimonial} />
               </div>
@@ -622,7 +623,6 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
       role: "Topliner, Singer, Writer",
       avatar: "/img/testimonials/1.jpg",
       text: "Loïc is very easy and nice to work with! talented producer/songwriter. Hope to work with him again on other projects!",
-      date: "2 months ago",
     },
     {
       id: 2,
@@ -630,7 +630,6 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
       role: "Vocalist",
       avatar: "/img/testimonials/2.jpg",
       text: "Very fun working with Loïc. He knows exactly what he wants and together we made something awesome! He gave great feedback and was a very nice person. I hope to work together again!",
-      date: "4 months ago",
     },
     {
       id: 3,
@@ -638,7 +637,6 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
       role: "Topliner, Singer, Writer",
       avatar: "/img/testimonials/3.jpg",
       text: "I had a great experience working with Loic! His production is well-elaborated, current and rich in sound! He is really supportive when working with artists, the communication is great and the whole process is exceptionally professional! Looking forward to working on more projects together!",
-      date: "about a year ago",
     },
     {
       id: 4,
@@ -646,7 +644,6 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
       role: "Songwriter-Vocalist-Producer",
       avatar: "/img/testimonials/16.jpg",
       text: "Great producer even better collaborator 😎10",
-      date: "2 years ago",
     },
     {
       id: 5,
@@ -654,7 +651,6 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
       role: "Songwriter/Singer/R&B lover",
       avatar: "/img/testimonials/11.jpg",
       text: "AMAZING, patient, and super professional <3",
-      date: "2 years ago",
     },
   ];
 
@@ -666,7 +662,7 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
 
       <main className="relative z-10 pt-16 md:pt-20">
         {/* HERO BIO - Split Layout */}
-        <section className="relative container mx-auto px-4 md:px-6 mb-20 flex items-center justify-center min-h-[78vh] py-12 md:py-20">
+        <section className="relative container mx-auto px-4 md:px-6 flex items-center justify-center min-h-[calc(100svh-5rem)] py-8 md:py-10">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -689,7 +685,7 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               </motion.div>
 
               {/* Titre */}
-              <h1 className="text-[14vw] md:text-[10vw] lg:text-[7.5vw] leading-[0.72] font-black uppercase tracking-[-0.08em] mb-10 text-neo-text">
+              <h1 className="text-[14vw] md:text-[9vw] lg:text-[6.5vw] leading-[0.72] font-black uppercase tracking-[-0.08em] mb-8 text-neo-text">
                 Loïc{" "}
                 <span
                   className="text-transparent block lg:inline"
@@ -700,13 +696,10 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               </h1>
 
               {/* Bio */}
-              <div className="mb-9 grid gap-5 border-l-4 border-neo-accent pl-6 text-base font-medium leading-relaxed md:grid-cols-2 md:text-lg">
-                <p className="md:col-span-2 text-xl md:text-2xl font-bold leading-snug">
+              <div className="mb-8 max-w-3xl border-l-4 border-neo-accent pl-6">
+                <p className="text-lg md:text-xl lg:text-2xl font-bold leading-snug">
                   {t("bio.paragraph1")}
                 </p>
-                <p className="opacity-75">{t("bio.paragraph2")}</p>
-                <p className="opacity-75">{t("bio.paragraph3")}</p>
-                <p className="md:col-span-2 opacity-65">{t("bio.paragraph4")}</p>
               </div>
 
               {/* CTAs */}
@@ -724,10 +717,10 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               variants={photoReveal}
               className="relative w-full lg:col-span-5 lg:self-stretch lg:flex lg:items-center"
             >
-              <div className="relative w-full max-w-xs lg:max-w-sm mx-auto lg:mx-0">
+              <div className="relative w-full max-w-xs lg:max-w-md mx-auto lg:mx-0">
                 {/* Card avec effet hover comme les cartes d'expertise */}
                 <div className="group border-4 border-neo-border bg-neo-surface overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:rotate-1 hover:shadow-[14px_14px_0px_0px_rgba(var(--neo-accent-rgb),1)]">
-                  <div className="relative w-full" style={{ paddingBottom: "133%" }}>
+                  <div className="relative w-full h-[58vh] min-h-[28rem] max-h-[48rem] lg:h-[70vh]">
                     <Image
                       src="/img/slider/loic-studio-front.jpg"
                       alt="Loïc Ghanem"
@@ -767,8 +760,40 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
           </motion.div>
         </section>
 
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7 }}
+          className="container mx-auto px-4 md:px-6 py-20 md:py-28"
+        >
+          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-neo-accent">
+                02 — {locale === "fr" ? "Mon travail" : "My work"}
+              </span>
+              <h2 className="mt-4 text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.86]">
+                {locale === "fr" ? "Créer du son qui raconte" : "Creating sound that tells stories"}
+              </h2>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <p className="border-t-4 border-neo-accent pt-5 text-lg leading-relaxed md:col-span-2 md:text-2xl md:font-semibold">
+                {t("bio.paragraph2")}
+              </p>
+              <p className="border-2 border-neo-border bg-neo-surface p-6 text-base leading-relaxed shadow-[6px_6px_0px_0px_var(--neo-shadow)]">
+                {t("bio.paragraph3")}
+              </p>
+              <p className="border-2 border-neo-border bg-neo-text p-6 text-base leading-relaxed text-neo-text-inverse shadow-[6px_6px_0px_0px_var(--neo-accent)]">
+                {t("bio.paragraph4")}
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        <SectionTransition />
+
         {/* STATS */}
-        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-12 md:py-16 mb-24 md:mb-32 overflow-hidden">
+        <section className="bg-neo-text text-neo-text-inverse py-12 md:py-16 mb-24 md:mb-32 overflow-hidden">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
               initial="hidden"
@@ -777,8 +802,12 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               variants={staggerContainer}
               className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
             >
-              {stats.map((stat, i) => (
-                <motion.div key={i} variants={fadeInUp} className="flex flex-col items-center">
+              {stats.map((stat) => (
+                <motion.div
+                  key={stat.label}
+                  variants={fadeInUp}
+                  className="flex flex-col items-center"
+                >
                   <span className="text-6xl md:text-8xl font-black text-neo-accent tracking-[-0.08em] transition-transform duration-300 hover:scale-110">
                     {stat.val}
                   </span>
@@ -840,8 +869,10 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
           </motion.div>
         </section>
 
+        <SectionTransition />
+
         {/* LATEST ACHIEVEMENTS */}
-        <section className="py-24 bg-neo-surface">
+        <section className="py-24 md:py-32 bg-neo-surface">
           <div className="container mx-auto px-4 md:px-6">
             <SectionHeader
               number="02.2"
@@ -854,23 +885,28 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-7"
             >
-              {awards.map((award) => (
-                <motion.div key={`${award.title}-${award.year}`} variants={fadeInUp}>
+              {awards.map((award, index) => (
+                <motion.div
+                  key={`${award.title}-${award.year}`}
+                  variants={fadeInUp}
+                  className="lg:col-span-6"
+                >
                   <NeoCard
                     hover="lift"
                     padding="none"
-                    className="h-full group overflow-hidden flex flex-col relative"
+                    className="h-full group overflow-hidden flex flex-col relative border-4 transition-all duration-500 hover:bg-neo-text hover:shadow-[12px_12px_0px_0px_var(--neo-accent)]"
                   >
-                    {/* Year sticker - top right corner */}
-                    <div className="absolute top-3 right-3 z-10">
-                      <span className="bg-neo-accent text-neo-text-inverse px-3 py-1 font-mono font-bold text-sm shadow-[2px_2px_0px_0px_var(--neo-border)] rotate-3 inline-block">
+                    <span className="pointer-events-none absolute -right-3 -top-8 z-0 font-mono text-[8rem] font-black leading-none text-neo-text/[0.04] transition-colors group-hover:text-neo-text-inverse/[0.06]">
+                      /{String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="bg-neo-accent text-neo-on-accent border-2 border-neo-border px-3 py-1 font-mono font-bold text-sm shadow-[3px_3px_0px_0px_var(--neo-shadow)] rotate-3 inline-block">
                         {award.year}
                       </span>
                     </div>
 
-                    {/* Image */}
                     <button
                       type="button"
                       onClick={() =>
@@ -879,25 +915,29 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
                           title: `${award.title} — ${award.year}`,
                         })
                       }
-                      className="relative h-64 overflow-hidden bg-neo-text/5 w-full text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neo-accent"
+                      className="relative h-80 md:h-96 overflow-hidden bg-white w-full text-left border-b-4 border-neo-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neo-accent"
                       aria-label={locale === "fr" ? "Agrandir l'image" : "Enlarge image"}
                     >
                       <Image
                         src={award.image}
                         alt={award.title}
                         fill
-                        className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="object-contain p-5 md:p-8 transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                       />
                     </button>
 
-                    {/* Content */}
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="flex items-center gap-2 text-xl font-black uppercase tracking-tight mb-2 text-neo-text">
+                    <div className="relative z-10 p-6 flex flex-col flex-1">
+                      <h3
+                        className={`${index === 0 ? "text-3xl md:text-4xl" : "text-xl"} flex items-center gap-2 font-black uppercase tracking-tighter leading-none mb-3 text-neo-text transition-colors group-hover:text-neo-text-inverse`}
+                      >
                         <award.icon className="w-5 h-5 text-neo-accent" />
                         {award.title}
                       </h3>
                       <p className="font-mono text-sm text-neo-accent mb-3">{award.subtitle}</p>
-                      <p className="text-sm opacity-70 line-clamp-3">{award.description}</p>
+                      <p className="text-sm text-neo-text/70 transition-colors group-hover:text-neo-text-inverse/80 line-clamp-4">
+                        {award.description}
+                      </p>
                     </div>
                   </NeoCard>
                 </motion.div>
@@ -913,61 +953,66 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
           title={imageModal?.title}
         />
 
+        <SectionTransition />
+
         {/* MUSICIAN EXPERIENCE */}
-        <section className="container mx-auto px-4 md:px-6 py-24">
-          <SectionHeader
-            number="02.3"
-            title={t("musicianExperience.title")}
-            subtitle={t("musicianExperience.subtitle")}
-          />
+        <section className="bg-neo-bg py-24 md:py-32">
+          <div className="container mx-auto px-4 md:px-6">
+            <SectionHeader
+              number="02.3"
+              title={t("musicianExperience.title")}
+              subtitle={t("musicianExperience.subtitle")}
+            />
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {musicianExperience.map((project, i) => (
-              <motion.div key={i} variants={fadeInUp}>
-                <NeoCard hover="lift" padding="lg" className="h-full group">
-                  {/* Period */}
-                  <div className="font-mono text-xs text-neo-accent mb-2">{project.period}</div>
-
-                  {/* Project name */}
-                  <h3 className="text-xl font-black uppercase tracking-tight mb-2 text-neo-text group-hover:text-neo-accent transition-colors">
-                    {project.name}
-                  </h3>
-
-                  {/* Role */}
-                  <p className="font-mono text-sm text-neo-text/70 mb-1">{project.role}</p>
-
-                  {/* Genre badge */}
-                  <div className="inline-block bg-neo-text text-neo-text-inverse px-2 py-1 font-mono text-xs mb-4">
-                    {project.genre}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-7"
+            >
+              {musicianExperience.map((project, index) => (
+                <motion.article
+                  key={project.name}
+                  variants={fadeInUp}
+                  className="group relative min-h-80 overflow-hidden border-4 border-neo-border bg-neo-surface p-6 md:p-8 shadow-[8px_8px_0px_0px_var(--neo-shadow)] transition-all duration-500 hover:-translate-y-2 hover:bg-neo-text hover:shadow-[12px_12px_0px_0px_var(--neo-accent)]"
+                >
+                  <span className="absolute -bottom-12 right-0 font-mono text-[10rem] font-black leading-none text-neo-text/[0.04] transition-colors group-hover:text-neo-text-inverse/[0.06]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="relative z-10 flex h-full flex-col">
+                    <div className="mb-8 flex flex-wrap items-center justify-between gap-3 border-b-2 border-neo-border pb-4 group-hover:border-neo-text-inverse/25">
+                      <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-neo-accent">
+                        {project.period}
+                      </span>
+                      <span className="bg-neo-text px-3 py-1 font-mono text-xs text-neo-text-inverse group-hover:bg-neo-accent group-hover:text-neo-on-accent">
+                        {project.genre}
+                      </span>
+                    </div>
+                    <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.88] mb-3 text-neo-text transition-colors group-hover:text-neo-text-inverse">
+                      {project.name}
+                    </h3>
+                    <p className="font-mono text-sm text-neo-text/65 mb-5 transition-colors group-hover:text-neo-text-inverse/70">
+                      {project.role}
+                    </p>
+                    <p className="max-w-xl text-sm leading-relaxed text-neo-text/70 mb-8 transition-colors group-hover:text-neo-text-inverse/80">
+                      {project.description}
+                    </p>
+                    <YouTubeExperienceDialog
+                      project={{ name: project.name, link: project.link }}
+                      triggerLabel={t("musicianExperience.listenHere")}
+                    />
                   </div>
-
-                  {/* Description */}
-                  <p className="text-sm opacity-60 mb-4">{project.description}</p>
-
-                  {/* Listen link */}
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-sm font-bold text-neo-accent hover:text-neo-text transition-colors"
-                  >
-                    <Play className="w-4 h-4" />
-                    {t("musicianExperience.listenHere")}
-                  </a>
-                </NeoCard>
-              </motion.div>
-            ))}
-          </motion.div>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
         </section>
 
+        <SectionTransition inverted />
+
         {/* PERSONAL INFO - Instruments & Interests */}
-        <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-16">
+        <section className="bg-neo-text text-neo-text-inverse py-20 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
               initial="hidden"
@@ -981,15 +1026,16 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
                 <h3 className="font-mono text-sm text-neo-accent mb-4 uppercase tracking-widest">
                   {locale === "fr" ? "Instruments" : "Instruments"}
                 </h3>
-                <div className="flex flex-wrap gap-4">
-                  {personalInfo.instruments.map((instrument, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3 bg-neo-text-inverse/10 border-2 border-neo-text-inverse/20 px-4 py-3"
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {personalInfo.instruments.map((instrument) => (
+                    <motion.div
+                      key={instrument.name}
+                      whileHover={{ y: -4, rotate: -1 }}
+                      className="group flex min-h-24 items-center gap-4 bg-neo-text-inverse/5 border-2 border-neo-text-inverse/25 px-5 py-4 transition-colors hover:bg-neo-accent hover:text-neo-on-accent"
                     >
-                      <instrument.icon className="w-6 h-6 text-neo-accent" />
+                      <instrument.icon className="w-8 h-8 text-neo-accent group-hover:text-neo-on-accent" />
                       <span className="font-bold text-lg">{instrument.name}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -999,15 +1045,16 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
                 <h3 className="font-mono text-sm text-neo-accent mb-4 uppercase tracking-widest">
                   {locale === "fr" ? "Centres d'intérêt" : "Interests"}
                 </h3>
-                <div className="flex flex-wrap gap-4">
-                  {personalInfo.interests.map((interest, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3 bg-neo-text-inverse/10 border-2 border-neo-text-inverse/20 px-4 py-3"
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {personalInfo.interests.map((interest) => (
+                    <motion.div
+                      key={interest.name}
+                      whileHover={{ y: -4, rotate: 1 }}
+                      className="group flex min-h-24 items-center gap-4 bg-neo-text-inverse/5 border-2 border-neo-text-inverse/25 px-5 py-4 transition-colors hover:bg-neo-accent hover:text-neo-on-accent"
                     >
-                      <interest.icon className="w-6 h-6 text-neo-accent" />
+                      <interest.icon className="w-8 h-8 text-neo-accent group-hover:text-neo-on-accent" />
                       <span className="font-bold text-lg">{interest.name}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -1018,8 +1065,10 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
         {/* TESTIMONIALS - SoundBetter Carousel */}
         <TestimonialsCarousel testimonials={testimonials} locale={locale} />
 
+        <SectionTransition />
+
         {/* LABELS & PUBLISHERS - Enriched */}
-        <section className="py-24 bg-neo-surface">
+        <section className="py-24 md:py-32 bg-neo-surface">
           <div className="container mx-auto px-4 md:px-6">
             <SectionHeader
               number="02.5"
@@ -1032,54 +1081,47 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-7 md:gap-9"
             >
               {labelPartners.map((partner) => (
                 <motion.div key={partner.name} variants={fadeInUp}>
                   <NeoCard
                     hover="lift"
                     padding="none"
-                    className="h-full flex flex-col overflow-hidden"
+                    className="h-full group flex flex-col overflow-hidden border-4 transition-all duration-500 hover:bg-neo-text hover:shadow-[12px_12px_0px_0px_var(--neo-accent)]"
                   >
-                    {/* Header with Logo and Tag */}
-                    <div className="relative bg-neo-bg p-6 border-b-2 border-neo-border">
-                      {/* MYMA Label Tag */}
+                    <div className="relative h-56 md:h-64 bg-white p-6 border-b-4 border-neo-border overflow-hidden">
                       {partner.isMymaLabel && (
-                        <span className="absolute top-3 right-3 bg-neo-accent text-neo-text-inverse text-[10px] font-mono font-bold px-2 py-1 uppercase tracking-wider">
-                          Label MYMA
+                        <span className="absolute top-4 right-4 z-10 bg-neo-accent text-neo-on-accent border-2 border-neo-border text-[10px] font-mono font-bold px-3 py-1.5 uppercase tracking-wider shadow-[3px_3px_0px_0px_var(--neo-shadow)]">
+                          {locale === "fr" ? "Label MYMA" : "MYMA label"}
                         </span>
                       )}
 
-                      {/* Logo */}
-                      <div className="w-20 h-20 mx-auto bg-white border-2 border-neo-border p-2 flex items-center justify-center">
+                      <div className="relative h-full w-full transition-transform duration-700 group-hover:scale-110">
                         <Image
                           src={partner.logo}
                           alt={`${partner.name} logo`}
-                          width={72}
-                          height={72}
-                          className="w-full h-full object-contain"
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-contain p-5 md:p-7"
                         />
                       </div>
                     </div>
 
-                    {/* Content */}
-                    <div className="flex flex-col flex-1 p-5">
-                      {/* Name */}
-                      <h3 className="text-base font-black uppercase tracking-tight text-neo-text mb-2 text-center">
+                    <div className="flex flex-col flex-1 p-6 text-neo-text transition-colors group-hover:text-white md:p-8">
+                      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none text-current mb-3 text-center transition-colors">
                         {partner.name}
                       </h3>
 
-                      {/* Period Badge */}
                       {partner.period && (
-                        <span className="inline-block bg-neo-text text-neo-text-inverse text-[10px] font-mono font-bold px-2 py-1 mb-3 self-center">
+                        <span className="inline-block bg-neo-text text-neo-text-inverse text-[10px] font-mono font-bold px-3 py-1.5 mb-4 self-center group-hover:bg-neo-accent group-hover:text-neo-on-accent">
                           {partner.period[localeKey]}
                         </span>
                       )}
 
-                      {/* Description */}
                       {partner.description && (
-                        <div className="mb-3">
-                          <p className="text-xs text-neo-text/70 leading-relaxed text-center line-clamp-2">
+                        <div className="mb-5">
+                          <p className="text-sm text-current/70 leading-relaxed text-center line-clamp-3 transition-colors group-hover:text-white/80">
                             {partner.description[localeKey]}
                           </p>
                           {partner.description[localeKey].length > 120 && (
@@ -1091,7 +1133,7 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
                                   logo: partner.logo,
                                 })
                               }
-                              className="mt-2 w-full text-center text-[10px] font-mono font-bold text-neo-accent hover:text-neo-text transition-colors uppercase tracking-wider"
+                              className="mt-3 w-full text-center text-[10px] font-mono font-bold text-neo-accent transition-colors uppercase tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-accent"
                             >
                               {locale === "fr" ? "Voir plus →" : "Read more →"}
                             </button>
@@ -1099,11 +1141,10 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
                         </div>
                       )}
 
-                      {/* Metrics */}
                       {partner.metrics && partner.metrics.length > 0 && (
-                        <ul className="text-[11px] font-mono text-neo-text/60 space-y-1 mb-4">
-                          {partner.metrics.slice(0, 2).map((metric, idx) => (
-                            <li key={idx} className="flex items-center gap-2">
+                        <ul className="text-xs font-mono text-current/60 space-y-2 mb-5 transition-colors group-hover:text-white/70">
+                          {partner.metrics.slice(0, 2).map((metric) => (
+                            <li key={metric[localeKey]} className="flex items-center gap-2">
                               <span className="w-1 h-1 bg-neo-accent flex-shrink-0" />
                               <span className="truncate">{metric[localeKey]}</span>
                             </li>
@@ -1111,19 +1152,17 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
                         </ul>
                       )}
 
-                      {/* Spacer to push links to bottom */}
                       <div className="flex-1" />
 
-                      {/* Links */}
                       {partner.links.length > 0 && (
-                        <div className="flex flex-wrap justify-center gap-2 pt-3 border-t border-neo-border/30">
-                          {partner.links.map((link, idx) => (
+                        <div className="flex flex-wrap justify-center gap-2 pt-5 border-t border-neo-border/30 group-hover:border-white/25">
+                          {partner.links.map((link) => (
                             <a
-                              key={idx}
+                              key={`${partner.name}-${link.label}`}
                               href={link.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="w-8 h-8 bg-neo-text hover:bg-neo-accent flex items-center justify-center transition-colors group/link"
+                              className="w-10 h-10 bg-neo-text hover:bg-neo-accent border-2 border-transparent group-hover:border-neo-text-inverse/25 flex items-center justify-center transition-colors group/link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-accent"
                               title={link.label}
                             >
                               <link.icon className="w-4 h-4 text-neo-bg group-hover/link:text-neo-text-inverse transition-colors" />
@@ -1194,6 +1233,8 @@ export const NeoAbout = ({ locale, albumCount }: { locale: string; albumCount: n
             </motion.div>
           )}
         </AnimatePresence>
+
+        <SectionTransition inverted />
 
         {/* CONTACT CTA */}
         <section className="py-24 bg-neo-text">

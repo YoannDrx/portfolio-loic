@@ -7,6 +7,68 @@ import serviceSeed from "@/seed/data/services.json";
 type AlbumWithTracks = Prisma.AlbumGetPayload<{ include: { tracks: true } }>;
 type PublicService = Prisma.ServiceGetPayload<Record<string, never>>;
 
+const normalizeAlbumKey = (value: string | null | undefined) =>
+  value
+    ?.toLocaleLowerCase("fr")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const findSeedAlbum = (album: { id: string; slug?: string | null; title: string }) => {
+  const slug = normalizeAlbumKey(album.slug);
+  const title = normalizeAlbumKey(album.title);
+
+  return albumSeed.find(
+    (item) =>
+      item.id === album.id ||
+      (slug && normalizeAlbumKey(item.slug) === slug) ||
+      normalizeAlbumKey(item.title) === title
+  );
+};
+
+const stripLegacyTracklist = (html: string) =>
+  html
+    .replace(/<p\b[^>]*class=["'][^"']*tracklist-title[^"']*["'][^>]*>[\s\S]*?<\/p>/gi, "")
+    .replace(
+      /<(?:ul|ol)\b[^>]*class=["'][^"']*tracklist[^"']*["'][^>]*>[\s\S]*?<\/(?:ul|ol)>/gi,
+      ""
+    );
+
+const normalizeAlbumImage = <
+  T extends { id: string; slug?: string | null; title: string; img: string },
+>(
+  album: T
+): T => {
+  const seed = findSeedAlbum(album);
+  if (!seed || !album.img.startsWith("/img/albums/")) return album;
+
+  const currentName = album.img
+    .split("/")
+    .pop()
+    ?.replace(/\.[^.]+$/, "");
+  if (currentName === seed.slug) return album;
+
+  return { ...album, img: seed.img };
+};
+
+const normalizeAlbumDetail = <
+  T extends {
+    id: string;
+    slug?: string | null;
+    title: string;
+    img: string;
+    descriptionsFr: string;
+    descriptionsEn: string;
+  },
+>(
+  album: T
+): T => ({
+  ...normalizeAlbumImage(album),
+  descriptionsFr: stripLegacyTracklist(album.descriptionsFr),
+  descriptionsEn: stripLegacyTracklist(album.descriptionsEn),
+});
+
 export async function getServiceByIdentifier(identifier: string): Promise<PublicService | null> {
   try {
     return await prisma.service.findFirst({
@@ -27,10 +89,11 @@ export async function getServiceByIdentifier(identifier: string): Promise<Public
 
 export async function getAlbumByIdentifier(identifier: string): Promise<AlbumWithTracks | null> {
   try {
-    return await prisma.album.findFirst({
+    const album = await prisma.album.findFirst({
       where: { OR: [{ id: identifier }, { slug: identifier }] },
       include: { tracks: { orderBy: [{ discNumber: "asc" }, { position: "asc" }] } },
     });
+    return album ? normalizeAlbumDetail(album) : null;
   } catch {
     const seed = albumSeed.find((album) => album.id === identifier || album.slug === identifier);
     if (!seed) return null;
@@ -66,7 +129,7 @@ export async function getAlbumByIdentifier(identifier: string): Promise<AlbumWit
 export const getPublishedAlbums = unstable_cache(
   async () => {
     try {
-      return await prisma.album.findMany({
+      const albums = await prisma.album.findMany({
         where: { published: true },
         orderBy: { sortedDate: "desc" },
         select: {
@@ -86,6 +149,7 @@ export const getPublishedAlbums = unstable_cache(
           spotifyEmbed: true,
         },
       });
+      return albums.map(normalizeAlbumImage);
     } catch {
       const albums = await prisma.album.findMany({
         where: { published: true },
@@ -108,11 +172,15 @@ export const getPublishedAlbums = unstable_cache(
       });
       return albums.map((album) => {
         const seed = albumSeed.find((item) => item.id === album.id);
-        return { ...album, slug: seed?.slug || null, img: seed?.img || album.img };
+        return normalizeAlbumImage({
+          ...album,
+          slug: seed?.slug || null,
+          img: seed?.img || album.img,
+        });
       });
     }
   },
-  ["published-albums"],
+  ["published-albums-v2"],
   { tags: ["albums"], revalidate: 3600 }
 );
 

@@ -41,7 +41,7 @@ export const NeoContactInfo = ({ className }: NeoContactInfoProps) => {
             href={item.href}
             whileHover={{ x: -6, y: -6 }}
             transition={{ type: "spring", stiffness: 320, damping: 22 }}
-            className="group relative flex min-h-36 items-end gap-5 overflow-hidden border-4 border-neo-border bg-neo-surface p-5 md:p-7 shadow-[8px_8px_0px_0px_var(--neo-shadow)] transition-colors duration-300 hover:bg-neo-text hover:shadow-[12px_12px_0px_0px_var(--neo-accent)]"
+            className="group relative grid min-h-36 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-5 overflow-hidden border-4 border-neo-border bg-neo-surface p-5 md:p-7 shadow-[8px_8px_0px_0px_var(--neo-shadow)] transition-colors duration-300 hover:bg-neo-text hover:shadow-[12px_12px_0px_0px_var(--neo-accent)]"
           >
             <div className="w-14 h-14 bg-neo-text text-neo-accent border-2 border-neo-border flex items-center justify-center flex-shrink-0 group-hover:bg-neo-accent group-hover:text-neo-on-accent group-hover:rotate-6 transition-all duration-300">
               {item.icon}

@@ -136,6 +136,8 @@
       "player": {
         "title": "LOÏC GHANEM PRODUCTIONS",
         "soundcloud": "SoundCloud",
+        "showreel": "Showreel — sélection",
+        "poweredBySoundcloud": "Lecture via SoundCloud",
         "spotify": "Spotify",
         "appleMusic": "Apple Music",
         "deezer": "Deezer",
@@ -317,6 +319,11 @@
       "title": "Expérience Musicale en Groupe",
       "subtitle": "Mon parcours à travers différents projets musicaux et groupes au fil des années.",
       "listenHere": "Écouter ici",
+      "videoPlayerEyebrow": "Archive vidéo",
+      "videoPlayerTitle": "Expérience musicale",
+      "videoPlayerDescription": "Lecture de la vidéo du projet {project}.",
+      "videoPlayerHint": "La lecture s’ouvre ici sans quitter le portfolio.",
+      "closeVideo": "Fermer la vidéo",
       "voyager1": {
         "period": "2017 - Aujourd'hui",
         "role": "Producteur",
@@ -697,6 +704,17 @@
     "directContact": {
       "title": "Contact Direct",
       "tagline": "Pas de formulaire, pas de blabla. On s'appelle, on en parle, on crée !",
+      "ticker": "Pour les projets urgents, privilégiez le téléphone — échangeons directement pour cadrer votre projet et avancer rapidement.",
+      "specialties": {
+        "composition": "Composition",
+        "artDirection": "Direction artistique",
+        "coaching": "Coaching",
+        "musicProduction": "Production musicale",
+        "projectScoping": "Cadrage de projet",
+        "mixing": "Mixage",
+        "mastering": "Mastering",
+        "soundDesign": "Musique à l’image"
+      },
       "callMe": "Appelez-moi direct",
       "emailMe": "Ou par email",
       "footer": "Promis, je décroche (sauf si je suis en studio... mais je rappelle vite !)"
@@ -1411,7 +1429,9 @@
     "tracklist": {
       "title": "Titres",
       "loading": "Chargement des titres…",
-      "empty": "Aucun titre."
+      "empty": "Aucun titre.",
+      "explore": "Explorer la sélection",
+      "showLess": "Réduire"
     },
     "hints": {
       "persistent": "La musique continue pendant votre navigation sur le site."
