@@ -610,7 +610,13 @@
       "viewMore": "Voir plus"
     },
     "noAlbums": "Aucun album ne correspond à vos filtres.",
-    "featured": "Favori",
+    "featured": "Sélection",
+    "featuredEyebrow": "SÉLECTION — {count, plural, one {# PROJET} other {# PROJETS}}",
+    "featuredTitle": "Deux univers à découvrir en priorité",
+    "featuredDescription": "Une sélection pensée pour découvrir rapidement deux facettes fortes de mon travail pour l'image et les univers narratifs.",
+    "featuredCta": "Découvrir l'album",
+    "catalogTitle": "Le reste de la discographie",
+    "resultCount": "{count, plural, one {# album} other {# albums}}",
     "detail": {
       "tracklist": "Tracklist",
       "tracks": "titres",
@@ -1322,6 +1328,11 @@
         "collabLink": "Lien de la collaboration",
         "collabLinkPlaceholder": "https://...",
         "order": "Ordre d'affichage",
+        "featuredTitle": "Sélection éditoriale",
+        "featured": "Mettre cet album en avant",
+        "featuredDescription": "L'album apparaîtra dans la sélection prioritaire au-dessus du catalogue.",
+        "featuredOrder": "Position dans la sélection",
+        "featuredOrderDescription": "0 apparaît en premier, 1 en deuxième, et ainsi de suite.",
         "published": "Statut",
         "status": {
           "published": "Publié",

@@ -98,6 +98,8 @@ model Album {
   creditsEn           String?
   tracklistSourceUrl  String?
   tracklistVerifiedAt DateTime?
+  featured            Boolean      @default(false)
+  featuredOrder       Int?
   published           Boolean      @default(true)
   order               Int          @default(0)
   createdAt           DateTime     @default(now())
@@ -107,6 +109,7 @@ model Album {
   tracks              AlbumTrack[]
 
   @@index([published, sortedDate])
+  @@index([published, featured, featuredOrder])
   @@index([style])
   @@map("albums")
 }

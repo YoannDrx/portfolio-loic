@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, ArrowRight, Disc } from "lucide-react";
+import { Music, ArrowRight, ArrowUpRight, Disc, Sparkles } from "lucide-react";
 import { NeoNavbar } from "../NeoNavbar";
 import { NeoFooter } from "../NeoFooter";
 import { NeoHeroSection } from "../ui/NeoHeroSection";
@@ -25,6 +25,8 @@ interface Album {
   listenLink: string | null;
   collabName?: string | null;
   spotifyEmbed?: string | null;
+  featured?: boolean;
+  featuredOrder?: number | null;
 }
 
 interface NeoAlbumsPageProps {
@@ -153,9 +155,91 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, normalizeGenre }) => {
   );
 };
 
+interface FeaturedAlbumCardProps extends AlbumCardProps {
+  index: number;
+}
+
+const FeaturedAlbumCard = ({ album, index, normalizeGenre }: FeaturedAlbumCardProps) => {
+  const t = useTranslations("albums");
+  const detailId = album.slug || album.id;
+
+  return (
+    <motion.article variants={fadeInUp} className="group relative">
+      <Link
+        href={{ pathname: "/albums/[id]", params: { id: detailId } }}
+        className="relative block min-h-[30rem] overflow-hidden border-4 border-neo-border bg-neo-text shadow-[10px_10px_0px_0px_var(--neo-shadow)] transition-all duration-500 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neo-accent md:min-h-[38rem] md:group-hover:-translate-y-2 md:group-hover:shadow-[16px_16px_0px_0px_var(--neo-accent)]"
+      >
+        {album.img ? (
+          <Image
+            src={album.img}
+            alt={`${album.title} — pochette de l'album`}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-white">
+            <Disc className="h-24 w-24 opacity-20" />
+          </div>
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/20 transition-colors duration-500 group-hover:via-black/30" />
+        <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[linear-gradient(135deg,transparent_45%,rgba(var(--neo-accent-rgb),0.22)_100%)]" />
+
+        <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-6 p-5 md:p-7">
+          <span className="inline-flex items-center gap-2 border-2 border-neo-accent bg-neo-accent px-3 py-2 font-mono text-[10px] font-black uppercase tracking-[0.18em] text-neo-on-accent">
+            <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+            {t("featured")}
+          </span>
+          <span className="font-mono text-5xl font-black tracking-[-0.12em] text-white/35 md:text-7xl">
+            0{index + 1}
+          </span>
+        </div>
+
+        <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+          <div className="mb-4 flex flex-wrap items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">
+            <span className="border border-white/50 bg-black/35 px-2 py-1 backdrop-blur-sm">
+              {normalizeGenre(album.style) || "Genre"}
+            </span>
+            <span className="border border-white/50 bg-black/35 px-2 py-1 backdrop-blur-sm">
+              {new Date(album.date).getFullYear()}
+            </span>
+          </div>
+          <div className="flex items-end justify-between gap-5">
+            <div>
+              <h3 className="text-4xl font-black uppercase leading-[0.82] tracking-[-0.06em] text-white md:text-6xl lg:text-7xl">
+                {album.title}
+              </h3>
+              <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white transition-colors group-hover:text-neo-accent">
+                {t("featuredCta")}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </span>
+            </div>
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center border-2 border-white bg-white text-black transition-all duration-300 group-hover:-rotate-45 group-hover:border-neo-accent group-hover:bg-neo-accent group-hover:text-neo-on-accent md:h-14 md:w-14">
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            </span>
+          </div>
+        </div>
+      </Link>
+    </motion.article>
+  );
+};
+
 export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
   const t = useTranslations("albums");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+
+  const featuredAlbums = useMemo(
+    () =>
+      albums
+        .filter((album) => album.featured)
+        .sort(
+          (a, b) =>
+            (a.featuredOrder ?? Number.POSITIVE_INFINITY) -
+            (b.featuredOrder ?? Number.POSITIVE_INFINITY)
+        ),
+    [albums]
+  );
 
   const genreCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -179,7 +263,7 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
 
       const matchesGenre = !selectedGenre || albumGenre === selectedGenre;
       if (!matchesGenre) return false;
-      return true;
+      return selectedGenre ? true : !album.featured;
     });
   }, [albums, selectedGenre]);
 
@@ -227,6 +311,55 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
             </Link>
           </div>
         </NeoHeroSection>
+
+        <div id="albums-grid" className="scroll-mt-24" />
+
+        {featuredAlbums.length > 0 && (
+          <section className="relative overflow-hidden border-t-4 border-neo-border bg-neo-surface py-20 md:py-28">
+            <div className="pointer-events-none absolute -right-16 top-8 font-display text-[28vw] font-black leading-none tracking-[-0.12em] text-neo-text/[0.035] md:text-[18vw]">
+              {String(featuredAlbums.length).padStart(2, "0")}
+            </div>
+            <div className="container relative mx-auto px-4 md:px-6">
+              <motion.div
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 0.6 }}
+                className="mb-10 grid gap-6 border-b-4 border-neo-border pb-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end"
+              >
+                <div>
+                  <span className="inline-flex items-center gap-2 font-mono text-xs font-black uppercase tracking-[0.22em] text-neo-accent">
+                    <Sparkles className="h-4 w-4" aria-hidden="true" />
+                    {t("featuredEyebrow", { count: featuredAlbums.length })}
+                  </span>
+                  <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.86] tracking-[-0.055em] text-neo-text md:text-6xl lg:text-7xl">
+                    {t("featuredTitle")}
+                  </h2>
+                </div>
+                <p className="max-w-2xl border-l-4 border-neo-accent pl-5 text-base font-medium leading-relaxed text-neo-text/75 md:text-lg lg:justify-self-end">
+                  {t("featuredDescription")}
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.12 }}
+                variants={staggerContainer}
+                className="grid gap-8 lg:grid-cols-2 lg:gap-10"
+              >
+                {featuredAlbums.map((album, index) => (
+                  <FeaturedAlbumCard
+                    key={album.id}
+                    album={album}
+                    index={index}
+                    normalizeGenre={normalizeGenre}
+                  />
+                ))}
+              </motion.div>
+            </div>
+          </section>
+        )}
 
         {/* Stats Bar */}
         <section className="border-y-4 border-neo-border bg-neo-text text-neo-text-inverse py-12">
@@ -285,8 +418,21 @@ export const NeoAlbumsPage: React.FC<NeoAlbumsPageProps> = ({ albums }) => {
         </section>
 
         {/* Albums Grid */}
-        <section id="albums-grid" className="py-20 md:py-28">
+        <section className="py-20 md:py-28">
           <div className="container mx-auto px-4 md:px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              className="mb-10 flex items-end justify-between gap-6 border-b-4 border-neo-border pb-5"
+            >
+              <h2 className="text-3xl font-black uppercase tracking-[-0.04em] md:text-5xl">
+                {selectedGenre || t("catalogTitle")}
+              </h2>
+              <span className="shrink-0 font-mono text-xs font-bold uppercase tracking-[0.18em] text-neo-accent">
+                {t("resultCount", { count: filteredAlbums.length })}
+              </span>
+            </motion.div>
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedGenre || "all"}

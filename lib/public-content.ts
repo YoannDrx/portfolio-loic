@@ -147,6 +147,8 @@ export const getPublishedAlbums = unstable_cache(
           descriptionsFr: true,
           descriptionsEn: true,
           spotifyEmbed: true,
+          featured: true,
+          featuredOrder: true,
         },
       });
       return albums.map(normalizeAlbumImage);
@@ -176,11 +178,13 @@ export const getPublishedAlbums = unstable_cache(
           ...album,
           slug: seed?.slug || null,
           img: seed?.img || album.img,
+          featured: seed?.featured ?? false,
+          featuredOrder: seed?.featuredOrder ?? null,
         });
       });
     }
   },
-  ["published-albums-v2"],
+  ["published-albums-v3"],
   { tags: ["albums"], revalidate: 3600 }
 );
 

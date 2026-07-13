@@ -57,6 +57,8 @@ export const albumCreateSchema = z.object({
       })
     )
     .default([]),
+  featured: z.boolean().default(false),
+  featuredOrder: z.number().int().min(0).nullable().optional(),
   published: z.boolean().default(false),
   order: z.number().int().min(0).default(0),
 });

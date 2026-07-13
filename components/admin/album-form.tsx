@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -69,6 +70,8 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
       creditsEn: "",
       tracklistSourceUrl: "",
       tracks: [],
+      featured: false,
+      featuredOrder: null,
       published: false,
       order: 0,
     },
@@ -84,6 +87,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
   const {
     formState: { isSubmitting, isDirty, errors: _errors },
   } = form;
+  const isFeatured = form.watch("featured");
 
   async function onSubmit(data: AlbumCreateFormInput) {
     try {
@@ -92,6 +96,7 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
       // Ensure defaults for optional fields
       const payload = {
         ...data,
+        featuredOrder: data.featured ? (data.featuredOrder ?? 0) : null,
         published: data.published ?? false,
         order: data.order ?? 0,
       };
@@ -382,6 +387,57 @@ export function AlbumForm({ initialData, locale }: AlbumFormProps) {
                 )}
               />
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("albums.form.featuredTitle")}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <FormField
+              control={form.control}
+              name="featured"
+              render={({ field }) => (
+                <FormItem className="flex items-center justify-between gap-6 rounded-lg border p-4">
+                  <div className="space-y-1">
+                    <FormLabel>{t("albums.form.featured")}</FormLabel>
+                    <FormDescription>{t("albums.form.featuredDescription")}</FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            {isFeatured && (
+              <FormField
+                control={form.control}
+                name="featuredOrder"
+                render={({ field }) => (
+                  <FormItem className="max-w-xs">
+                    <FormLabel>{t("albums.form.featuredOrder")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        min={0}
+                        value={field.value ?? ""}
+                        onChange={(event) =>
+                          field.onChange(
+                            event.target.value === ""
+                              ? null
+                              : Number.parseInt(event.target.value, 10)
+                          )
+                        }
+                      />
+                    </FormControl>
+                    <FormDescription>{t("albums.form.featuredOrderDescription")}</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
           </CardContent>
         </Card>
 
