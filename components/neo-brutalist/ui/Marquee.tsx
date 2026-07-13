@@ -6,7 +6,8 @@ import Image from "next/image";
 interface LogoItem {
   src: string;
   alt: string;
-  size?: "normal" | "large";
+  width: number;
+  height: number;
 }
 
 interface MarqueeProps {
@@ -31,16 +32,14 @@ export const Marquee: React.FC<MarqueeProps> = ({ items, logos, direction = 1, s
           {/* First set of logos */}
           {logos.map((logo, index) => (
             <span key={`first-${logo.alt}-${index}`} className="flex items-center shrink-0">
-              <span className="mx-8 md:mx-16 flex items-center justify-center">
+              <span className="mx-5 flex h-24 w-52 items-center justify-center border-2 border-black bg-white px-4 py-2 shadow-[5px_5px_0px_0px_var(--neo-accent)] md:mx-8 md:h-32 md:w-72 md:py-3">
                 <Image
                   src={logo.src}
                   alt={logo.alt}
-                  width={logo.size === "large" ? 350 : 200}
-                  height={logo.size === "large" ? 175 : 100}
-                  className={`w-auto object-contain ${
-                    logo.size === "large" ? "h-28 md:h-44" : "h-16 md:h-24"
-                  }`}
-                  style={{ maxWidth: logo.size === "large" ? "350px" : "220px" }}
+                  width={logo.width}
+                  height={logo.height}
+                  className="h-full w-full object-contain"
+                  sizes="(min-width: 768px) 240px, 176px"
                 />
               </span>
               <span className="w-2 h-2 md:w-3 md:h-3 bg-neo-accent block rounded-full shrink-0" />
@@ -58,16 +57,14 @@ export const Marquee: React.FC<MarqueeProps> = ({ items, logos, direction = 1, s
         >
           {logos.map((logo, index) => (
             <span key={`second-${logo.alt}-${index}`} className="flex items-center shrink-0">
-              <span className="mx-8 md:mx-16 flex items-center justify-center">
+              <span className="mx-5 flex h-24 w-52 items-center justify-center border-2 border-black bg-white px-4 py-2 shadow-[5px_5px_0px_0px_var(--neo-accent)] md:mx-8 md:h-32 md:w-72 md:py-3">
                 <Image
                   src={logo.src}
                   alt={logo.alt}
-                  width={logo.size === "large" ? 350 : 200}
-                  height={logo.size === "large" ? 175 : 100}
-                  className={`w-auto object-contain ${
-                    logo.size === "large" ? "h-28 md:h-44" : "h-16 md:h-24"
-                  }`}
-                  style={{ maxWidth: logo.size === "large" ? "350px" : "220px" }}
+                  width={logo.width}
+                  height={logo.height}
+                  className="h-full w-full object-contain"
+                  sizes="(min-width: 768px) 240px, 176px"
                 />
               </span>
               <span className="w-2 h-2 md:w-3 md:h-3 bg-neo-accent block rounded-full shrink-0" />

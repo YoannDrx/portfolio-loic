@@ -572,7 +572,7 @@ export const NeoSplitHero: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => setIsQueueExpanded((current) => !current)}
-                            className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-neo-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-accent"
+                            className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-neo-accent hover:text-neo-text-inverse focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-accent"
                           >
                             {isQueueExpanded
                               ? tPlayer("tracklist.showLess")
