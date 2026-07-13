@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { createPrismaClient } from "../lib/prisma-client";
 
-const prisma = new PrismaClient();
+const prisma = createPrismaClient();
 
 async function main() {
   console.log("🌱 Seeding resume data...");
@@ -19,8 +19,10 @@ async function main() {
       name: "Loïc Ghanem",
       roleEn: "Music Composer & Producer",
       roleFr: "Compositeur & Producteur",
-      headlineEn: "Hybrid scores, trailer power, and emotive electronic textures for film, games, and brands.",
-      headlineFr: "Partitions hybrides, puissance trailer et textures électroniques pour films, jeux et marques.",
+      headlineEn:
+        "Hybrid scores, trailer power, and emotive electronic textures for film, games, and brands.",
+      headlineFr:
+        "Partitions hybrides, puissance trailer et textures électroniques pour films, jeux et marques.",
       email: "loic.ghanem@outlook.com",
       phone: "+33 6 00 00 00 00",
       location: "Paris, France",
@@ -89,8 +91,10 @@ async function main() {
       subtitleFr: "Live & Studio",
       dateRangeEn: "2011 - 2015",
       dateRangeFr: "2011 - 2015",
-      descriptionEn: "Rock/metal guitarist for studio sessions and touring acts; arrangement and recording.",
-      descriptionFr: "Guitariste rock/metal pour sessions studio et tournées; arrangement et enregistrement.",
+      descriptionEn:
+        "Rock/metal guitarist for studio sessions and touring acts; arrangement and recording.",
+      descriptionFr:
+        "Guitariste rock/metal pour sessions studio et tournées; arrangement et enregistrement.",
       order: 3,
       published: true,
     },
@@ -180,7 +184,13 @@ async function main() {
     },
     { type: "INTEREST", titleEn: "Cinema", titleFr: "Cinéma", order: 1, published: true },
     { type: "INTEREST", titleEn: "Video Games", titleFr: "Jeux vidéo", order: 2, published: true },
-    { type: "INTEREST", titleEn: "New Technologies", titleFr: "Nouvelles technologies", order: 3, published: true },
+    {
+      type: "INTEREST",
+      titleEn: "New Technologies",
+      titleFr: "Nouvelles technologies",
+      order: 3,
+      published: true,
+    },
     { type: "CLIENT", titleEn: "Porsche", titleFr: "Porsche", order: 1, published: true },
     { type: "CLIENT", titleEn: "Mercedes", titleFr: "Mercedes", order: 2, published: true },
     { type: "CLIENT", titleEn: "Burger King", titleFr: "Burger King", order: 3, published: true },
@@ -189,12 +199,60 @@ async function main() {
   ];
 
   const sections = [
-    { slug: "experience", titleEn: "Experience", titleFr: "Expérience", type: "TIMELINE", entryType: "EXPERIENCE", order: 1, published: true },
-    { slug: "awards", titleEn: "Awards", titleFr: "Récompenses", type: "TIMELINE", entryType: "AWARD", order: 2, published: true },
-    { slug: "skills", titleEn: "Skills", titleFr: "Compétences", type: "SKILL_BARS", entryType: "SKILL", order: 3, published: true },
-    { slug: "clients", titleEn: "Clients & Sync", titleFr: "Clients & Sync", type: "TAG_CLOUD", entryType: "CLIENT", order: 4, published: true },
-    { slug: "languages", titleEn: "Languages", titleFr: "Langues", type: "SIDEBAR_LIST", entryType: "LANGUAGE", order: 5, published: true },
-    { slug: "interests", titleEn: "Interests", titleFr: "Centres d'intérêt", type: "TAG_CLOUD", entryType: "INTEREST", order: 6, published: true },
+    {
+      slug: "experience",
+      titleEn: "Experience",
+      titleFr: "Expérience",
+      type: "TIMELINE",
+      entryType: "EXPERIENCE",
+      order: 1,
+      published: true,
+    },
+    {
+      slug: "awards",
+      titleEn: "Awards",
+      titleFr: "Récompenses",
+      type: "TIMELINE",
+      entryType: "AWARD",
+      order: 2,
+      published: true,
+    },
+    {
+      slug: "skills",
+      titleEn: "Skills",
+      titleFr: "Compétences",
+      type: "SKILL_BARS",
+      entryType: "SKILL",
+      order: 3,
+      published: true,
+    },
+    {
+      slug: "clients",
+      titleEn: "Clients & Sync",
+      titleFr: "Clients & Sync",
+      type: "TAG_CLOUD",
+      entryType: "CLIENT",
+      order: 4,
+      published: true,
+    },
+    {
+      slug: "languages",
+      titleEn: "Languages",
+      titleFr: "Langues",
+      type: "SIDEBAR_LIST",
+      entryType: "LANGUAGE",
+      order: 5,
+      published: true,
+    },
+    {
+      slug: "interests",
+      titleEn: "Interests",
+      titleFr: "Centres d'intérêt",
+      type: "TAG_CLOUD",
+      entryType: "INTEREST",
+      order: 6,
+      published: true,
+    },
   ];
 
   await prisma.resumeEntry.createMany({ data: entries });

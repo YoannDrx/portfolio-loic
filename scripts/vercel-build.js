@@ -8,7 +8,7 @@
  * Usage: yarn vercel-build (configuré dans package.json)
  */
 
-const { execSync } = require("child_process");
+import { execSync } from "node:child_process";
 
 const colors = {
   reset: "\x1b[0m",
@@ -81,7 +81,7 @@ if (process.env.SKIP_SEED === "true") {
   log("⏭️", "Skipping seed (SKIP_SEED=true)", colors.yellow);
 } else {
   // Le seed en mode additif ne crée que les entités manquantes
-  if (!run("yarn db:seed", "Seeding database (additive mode)")) {
+  if (!run("pnpm db:seed", "Seeding database (additive mode)")) {
     log("⚠️", "Seed failed but continuing with build...", colors.yellow);
     // On ne quitte pas - le seed peut échouer si les données existent déjà
   }
@@ -90,7 +90,7 @@ if (process.env.SKIP_SEED === "true") {
 console.log("");
 
 // Step 4: Build Next.js application
-if (!run("yarn build", "Building Next.js application")) {
+if (!run("pnpm build", "Building Next.js application")) {
   process.exit(1);
 }
 

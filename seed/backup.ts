@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import { createPrismaClient } from "../lib/prisma-client";
 import path from "path";
 import { logger, saveJSON, getTimestamp, BACKUPS_DIR, DATA_DIR } from "./utils";
 
-const prisma = new PrismaClient();
+const prisma = createPrismaClient();
 
 interface BackupOptions {
   timestamped?: boolean; // true = backup horodaté, false = écrase seed/data/

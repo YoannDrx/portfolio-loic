@@ -1,9 +1,9 @@
 import type { Prisma } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
+import { createPrismaClient } from "../lib/prisma-client";
 import type { SeedEntity } from "./utils";
 import { logger, loadJSON, transformDates, parseArgs, SEED_ORDER } from "./utils";
 
-const prisma = new PrismaClient();
+const prisma = createPrismaClient();
 
 // Compteurs globaux pour le rapport final
 let createdCount = 0;
@@ -101,7 +101,9 @@ const seeders: Record<SeedEntity, () => Promise<number>> = {
             publisher: albumData.publisher as string | undefined,
             tracklistSourceUrl: albumData.tracklistSourceUrl as string | undefined,
             tracklistVerifiedAt: albumData.tracklistVerifiedAt as Date | undefined,
-            ...(albumData.id === "new_k_style_2026"
+            ...(["new_k_style_2026", "new_obsession_2026", "cmi93hkby0000sks6h3gh5j7i"].includes(
+              albumData.id
+            )
               ? {
                   collabName: albumData.collabName as string | undefined,
                   descriptionsFr: albumData.descriptionsFr as string,

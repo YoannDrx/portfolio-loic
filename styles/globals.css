@@ -1,12 +1,10 @@
 /* ============================================
    IMPORTS
    ============================================ */
+@import "tailwindcss";
 @import "./tokens.css";
 @import "./admin-tokens.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../tailwind.config.ts";
 
 /* ============================================
    BASE LAYER - Typography, Reset & Scrollbar
@@ -133,7 +131,7 @@
 
   /* Glass Card with Neon Border */
   .glass-card-neon {
-    @apply glass-card;
+    @apply relative overflow-hidden rounded-2xl border backdrop-blur-xl;
     background: linear-gradient(135deg, rgba(213, 255, 10, 0.05), rgba(0, 193, 139, 0.05));
     border: 1px solid transparent;
     background-clip: padding-box;

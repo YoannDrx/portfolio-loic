@@ -5,6 +5,7 @@ import { prisma } from "./prisma";
 import { logAuth, logSettingsChange } from "./activity-logger";
 
 export const auth = betterAuth({
+  baseURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
@@ -25,9 +26,7 @@ export const auth = betterAuth({
       },
     },
   },
-  trustedOrigins: [
-    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-  ],
+  trustedOrigins: [process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"],
   hooks: {
     after: createAuthMiddleware(async (ctx) => {
       // Log des connexions réussies

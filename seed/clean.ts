@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import { createPrismaClient } from "../lib/prisma-client";
 import readline from "readline";
 import { logger, CLEAN_ORDER, parseArgs } from "./utils";
 
-const prisma = new PrismaClient();
+const prisma = createPrismaClient();
 
 async function confirmDestructiveAction(): Promise<boolean> {
   const rl = readline.createInterface({
